@@ -7,7 +7,7 @@
 <jsp:include page="WEB-INF/view/static.jsp"></jsp:include>
 <title>登录</title>
 </head>
-<body>
+<body style="background-image: url(<%=request.getContextPath()%>/static/images/admin-login-bg.jpg)">
 
 		<div class="navbar navbar-default" id="navbar">
 
@@ -59,9 +59,13 @@
                             </div>
                         </div>
                     </form>
+                                </br><hr>
+            <p>You never konw what you can do till you try.</p>
+            <p>除非你亲自尝试一下，否则你永远不知道你能做什么。</p>
                 </div>
             </section>
             <!-- :form -->
+
         </div>
     </div>
     

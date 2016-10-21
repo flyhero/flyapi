@@ -8,7 +8,7 @@
 <jsp:include page="static.jsp"></jsp:include>
 <title>注册</title>
 </head>
-<body>
+<body style="background-image: url(<%=request.getContextPath()%>/static/images/admin-login-bg.jpg)">
 		<div class="navbar navbar-default" id="navbar">
 
 			<div class="navbar-container" id="navbar-container">
