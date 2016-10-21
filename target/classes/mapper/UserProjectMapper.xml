@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.flyhero.flyapi.dao.UserProjectMapper">
+  <resultMap id="BaseResultMap" type="com.flyhero.flyapi.entity.UserProject">
+    <id column="r1_id" jdbcType="INTEGER" property="r1Id" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="project_id" jdbcType="INTEGER" property="projectId" />
+    <result column="is_edit" jdbcType="INTEGER" property="isEdit" />
+    <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
+  </resultMap>
+   <resultMap id="AllResultMap" type="com.flyhero.flyapi.entity.UserProject">
+   		<id column="r1_id" jdbcType="INTEGER" property="r1Id" />
+	   	<result column="is_edit" jdbcType="INTEGER" property="isEdit" />
+	    <collection property="project" ofType="com.flyhero.flyapi.entity.Project">
+	        <id column="project_id" jdbcType="INTEGER" property="projectId" />
+		    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+		    <result column="project_name" jdbcType="VARCHAR" property="projectName" />
+		    <result column="description" jdbcType="VARCHAR" property="description" />
+		    <result column="project_version" jdbcType="VARCHAR" property="projectVersion" />
+		    <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
+	    </collection>
+  </resultMap>
+  <sql id="Base_Column_List">
+    r1_id, create_time, user_id, project_id, is_edit, is_delete
+  </sql>
+  
+  <select id="selectMyProject" parameterType="java.lang.Integer" resultMap="AllResultMap">
+	SELECT d3.*,r1.is_edit,r1.r1_id
+	FROM r1_user_project r1,d3_project d3
+	WHERE r1.project_id=d3.project_id and r1.is_delete=0 and d3.is_delete=0 and r1.user_id=#{userId}
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from r1_user_project
+    where r1_id = #{r1Id,jdbcType=INTEGER}
+  </select>
+  <select id="selectByIdAndPro" parameterType="com.flyhero.flyapi.entity.UserProject" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from r1_user_project
+    where project_id = #{projectId} and user_id=#{userId}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from r1_user_project
+    where r1_id = #{r1Id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.flyhero.flyapi.entity.UserProject">
+    insert into r1_user_project (r1_id, create_time, user_id, 
+      project_id, is_edit, is_delete
+      )
+    values (#{r1Id,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{userId,jdbcType=INTEGER}, 
+      #{projectId,jdbcType=INTEGER}, #{isEdit,jdbcType=INTEGER}, #{isDelete,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.flyhero.flyapi.entity.UserProject">
+    insert into r1_user_project
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="r1Id != null">
+        r1_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="projectId != null">
+        project_id,
+      </if>
+      <if test="isEdit != null">
+        is_edit,
+      </if>
+      <if test="isDelete != null">
+        is_delete,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="r1Id != null">
+        #{r1Id,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="projectId != null">
+        #{projectId,jdbcType=INTEGER},
+      </if>
+      <if test="isEdit != null">
+        #{isEdit,jdbcType=INTEGER},
+      </if>
+      <if test="isDelete != null">
+        #{isDelete,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.flyhero.flyapi.entity.UserProject">
+    update r1_user_project
+    <set>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="projectId != null">
+        project_id = #{projectId,jdbcType=INTEGER},
+      </if>
+      <if test="isEdit != null">
+        is_edit = #{isEdit,jdbcType=INTEGER},
+      </if>
+      <if test="isDelete != null">
+        is_delete = #{isDelete,jdbcType=INTEGER},
+      </if>
+    </set>
+    where r1_id = #{r1Id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.flyhero.flyapi.entity.UserProject">
+    update r1_user_project
+    set create_time = #{createTime,jdbcType=TIMESTAMP},
+      user_id = #{userId,jdbcType=INTEGER},
+      project_id = #{projectId,jdbcType=INTEGER},
+      is_edit = #{isEdit,jdbcType=INTEGER},
+      is_delete = #{isDelete,jdbcType=INTEGER}
+    where r1_id = #{r1Id,jdbcType=INTEGER}
+  </update>
+</mapper>
