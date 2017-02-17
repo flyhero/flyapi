@@ -4,13 +4,13 @@ Navicat MySQL Data Transfer
 Source Server         : 192.168.1.22
 Source Server Version : 50513
 Source Host           : localhost:3306
-Source Database       : flyapi_v2.2
+Source Database       : flyapi_v2.2.1
 
 Target Server Type    : MYSQL
 Target Server Version : 50513
 File Encoding         : 65001
 
-Date: 2016-12-29 18:00:06
+Date: 2017-02-17 15:12:46
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -28,7 +28,7 @@ CREATE TABLE `fly_comments` (
   `create_time` datetime NOT NULL,
   `is_delete` int(2) NOT NULL DEFAULT '0',
   PRIMARY KEY (`comment_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='评论表';
 
 -- ----------------------------
 -- Records of fly_comments
@@ -64,25 +64,6 @@ INSERT INTO `fly_data_base` VALUES ('1', '2', 'jdbc:mysql://localhost:3306', 'fl
 INSERT INTO `fly_data_base` VALUES ('2', '2', 'jdbc:mysql://localhost:3306', 'flyapi_v2.0', 'admin', '123456', 'oracle.jdbc.driver.OracleDriver', '2', '1', 'TUES', '13:10', '2016-11-28 11:16:43', '2016-11-28 13:10:39', '0', '0');
 
 -- ----------------------------
--- Table structure for fly_flyapi_version
--- ----------------------------
-DROP TABLE IF EXISTS `fly_flyapi_version`;
-CREATE TABLE `fly_flyapi_version` (
-  `version_id` int(11) NOT NULL AUTO_INCREMENT,
-  `version_num` varchar(255) NOT NULL,
-  `version_des` tinytext NOT NULL,
-  `create_time` datetime NOT NULL,
-  `update_time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-  `is_delete` tinyint(4) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`version_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of fly_flyapi_version
--- ----------------------------
-INSERT INTO `fly_flyapi_version` VALUES ('1', 'V1.0', '基本功能', '2016-12-19 13:33:40', null, '0');
-
--- ----------------------------
 -- Table structure for fly_interfaces
 -- ----------------------------
 DROP TABLE IF EXISTS `fly_interfaces`;
@@ -105,7 +86,7 @@ CREATE TABLE `fly_interfaces` (
   `content` text,
   `is_delete` int(1) NOT NULL DEFAULT '0' COMMENT '0显示1不显示',
   PRIMARY KEY (`interface_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COMMENT='接口表';
 
 -- ----------------------------
 -- Records of fly_interfaces
@@ -128,6 +109,44 @@ INSERT INTO `fly_interfaces` VALUES ('15', '订单支付', '用户购买涂料�
 INSERT INTO `fly_interfaces` VALUES ('16', '新建项目', '这是我的接口描述', '0', 'http://localhost:8080/flyapi/forward/new_interfaces.html', 'POST', '[{\"name\":\"id\",\"isTrue\":\"true\",\"interType\":\"int\",\"des\":\"描述\",\"state\":true}]', '{\"id\":4}', 'msg是成功或失败\n    status是状态码\n    data存放数据', '{\n	\"msg\":\"success\",\n	\"status\":200,\n	\"data\":\"\",\n}', '{\n		\"msg\":\"error\",\n		\"status\":404,\n		\"data\":\"\",\n	}', '2016-11-24 15:41:10', null, '3', '2', '#新建项目\n[TOCM]\n\n[TOC]\n###功能说明\n####接口名称\n新建项目\n####接口描述\n这是我的接口描述\n####接口状态\n可用\n###调用说明\n####调用地址\nhttp://localhost:8080/flyapi/forward/new_interfaces.html\n####请求方式 \nPOST\n####请求参数\n | 名称   | 是否必须   |  类型  |说明 | \n | ---------- | --------- | --------- | --------- |\n  |id|true|int|描述|\n\n####请求示例\n\"{\\\"id\\\":4}\"\n####返回参数说明\n    msg是成功或失败\n    status是状态码\n    data存放数据\n####成功示例\n{\n	\"msg\":\"success\",\n	\"status\":200,\n	\"data\":\"\",\n}\n####失败示例{\n		\"msg\":\"error\",\n		\"status\":404,\n		\"data\":\"\",\n	}', '0');
 INSERT INTO `fly_interfaces` VALUES ('17', '获取日志', '操作的日志详情', '0', 'http://localhost:8080/flyapi/forward/new_interfaces.html', 'POST', '[{\"name\":\"id\",\"isTrue\":\"true\",\"interType\":\"int\",\"des\":\"描述\",\"state\":true}]', '\"{\\\"id\\\":5}\"', 'msg是成功或失败\n    status是状态码\n    data存放数据', '{\n	\"msg\":\"success\",\n	\"status\":200,\n	\"data\":\"\",\n}', '{\n		\"msg\":\"error\",\n		\"status\":404,\n		\"data\":\"\",\n	}', '2016-11-24 15:47:14', null, '3', '2', '#获取日志\n[TOCM]\n\n[TOC]\n###功能说明\n####接口名称\n获取日志\n####接口描述\n操作的日志详情\n####接口状态\n可用\n###调用说明\n####调用地址\nhttp://localhost:8080/flyapi/forward/new_interfaces.html\n####请求方式 \nPOST\n####请求参数\n | 名称   | 是否必须   |  类型  |说明 | \n | ---------- | --------- | --------- | --------- |\n  |id|true|int|描述|\n\n####请求示例\n\"{\\\"id\\\":5}\"\n####返回参数说明\n    msg是成功或失败\n    status是状态码\n    data存放数据\n####成功示例\n{\n	\"msg\":\"success\",\n	\"status\":200,\n	\"data\":\"\",\n}\n####失败示例{\n		\"msg\":\"error\",\n		\"status\":404,\n		\"data\":\"\",\n	}', '0');
 INSERT INTO `fly_interfaces` VALUES ('18', '今日登陆人数', '用户数据统计', '0', 'http://localhost:8080/flyapi/forward/new_interfaces.html', 'POST', '[{\"name\":\"id\",\"isTrue\":\"true\",\"interType\":\"int\",\"des\":\"描述\",\"state\":true}]', '{\"id\":8}', '{\"id\":8}', '{\"id\":8}', '{\"id\":8}', '2016-11-24 16:23:22', '2016-11-24 16:27:48', '3', '2', '#今日登陆人数\n[TOCM]\n\n[TOC]\n###功能说明\n####接口名称\n今日登陆人数\n####接口描述\n用户数据统计\n#### **接口状态**\n可用\n###调用说明\n####调用地址\nhttp://localhost:8080/flyapi/forward/new_interfaces.html\n####请求方式 \nPOST\n####请求参数\n | 名称   | 是否必须   |  类型  |说明 | \n | ---------- | --------- | --------- | --------- |\n  |id|true|int|描述|\n\n####请求示例\n{\n    \"id\": 8\n}\n####返回参数说明\n{\"id\":8}\n####成功示例\n{\n    \"id\": 8\n}\n####失败示例{\n    \"id\": 8\n}', '0');
+INSERT INTO `fly_interfaces` VALUES ('19', '获取手机验证码', '获取手机验证码', '0', 'http://192.168.1.64:8080/minsu_s/user/getMsgCode', 'POST', '[{\"name\":\"mobile\",\"isTrue\":\"true\",\"interType\":\"String\",\"des\":\"手机号\",\"state\":true}]', '{\"mobile\":\"18365282216\"}', 'msg:成功或失败\ndes:文字说明\nresult:返回结果', '{\"msg\":\"ok\"}', '{\"msg\":\"error\"}', '2017-01-05 12:55:09', '2017-01-05 13:36:15', '5', '1', '#获取手机验证码\n[TOCM]\n\n[TOC]\n###功能说明\n####**接口名称**\n获取手机验证码\n####**接口描述**\n获取手机验证码\n####**接口状态**\n可用\n###调用说明\n####**调用地址**\nhttp://192.168.1.64:8080/minsu_s/user/getMsgCode\n####**请求方式 **\nPOST\n####**请求参数**\n | 名称   | 是否必须   |  类型  |说明 | \n | ---------- | --------- | --------- | --------- |\n  |mobile|true|String|手机号|\n\n####**请求示例**\n```\n{\n    \"mobile\": \"18365282216\"\n}\n```\n####**返回参数说明**\nmsg:成功或失败\ndes:文字说明\nresult:返回结果\n####**成功示例**\n```\n{\n    \"msg\": \"ok\"\n}\n```\n####**失败示例**\n```\n{\n    \"msg\": \"error\"\n}\n```', '0');
+
+-- ----------------------------
+-- Table structure for fly_live
+-- ----------------------------
+DROP TABLE IF EXISTS `fly_live`;
+CREATE TABLE `fly_live` (
+  `live_id` int(11) NOT NULL AUTO_INCREMENT,
+  `live_title` varchar(255) NOT NULL COMMENT '直播标题',
+  `live_content` text COMMENT '直播内容',
+  `user_id` int(11) NOT NULL,
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `live_type` tinyint(4) NOT NULL DEFAULT '1' COMMENT '1.纯文字2.markdown',
+  `live_status` tinyint(4) NOT NULL DEFAULT '1' COMMENT '1.正在直播2.结束',
+  `is_delete` tinyint(4) NOT NULL DEFAULT '0' COMMENT '0.未删除1.已删除',
+  PRIMARY KEY (`live_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='直播表';
+
+-- ----------------------------
+-- Records of fly_live
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for fly_live_viewer
+-- ----------------------------
+DROP TABLE IF EXISTS `fly_live_viewer`;
+CREATE TABLE `fly_live_viewer` (
+  `live_view_id` int(11) NOT NULL AUTO_INCREMENT,
+  `live_id` int(11) NOT NULL COMMENT '直播间号',
+  `user_id` int(11) NOT NULL,
+  `view_status` tinyint(4) NOT NULL DEFAULT '1' COMMENT '1正在观看 0离开',
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`live_view_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='直播访问者表';
+
+-- ----------------------------
+-- Records of fly_live_viewer
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for fly_module
@@ -142,7 +161,7 @@ CREATE TABLE `fly_module` (
   `update_time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `is_detele` int(2) NOT NULL DEFAULT '0' COMMENT '0可用1不可用',
   PRIMARY KEY (`module_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='模块表';
 
 -- ----------------------------
 -- Records of fly_module
@@ -150,6 +169,9 @@ CREATE TABLE `fly_module` (
 INSERT INTO `fly_module` VALUES ('1', '首页', '推荐一些活动的主页', '11', '2016-11-15 13:10:52', null, '0');
 INSERT INTO `fly_module` VALUES ('2', '发现', '发现新鲜事物2', '11', '2016-11-16 10:57:23', '2016-12-12 17:47:28', '0');
 INSERT INTO `fly_module` VALUES ('3', '测试模块', '这是测试的', '15', '2016-11-22 16:51:54', null, '0');
+INSERT INTO `fly_module` VALUES ('4', '订单', '用户进行租房产生订单。', '17', '2017-01-05 12:47:19', null, '0');
+INSERT INTO `fly_module` VALUES ('5', '我的', '用户或房东信息相关。', '17', '2017-01-05 12:47:47', null, '0');
+INSERT INTO `fly_module` VALUES ('6', '房源', '发布的房屋出租信息', '17', '2017-01-05 12:49:56', null, '0');
 
 -- ----------------------------
 -- Table structure for fly_operate_log
@@ -169,7 +191,7 @@ CREATE TABLE `fly_operate_log` (
   `is_delete` int(2) NOT NULL DEFAULT '0' COMMENT '0可用1不可用',
   PRIMARY KEY (`log_id`),
   KEY `u_index` (`user_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=705 DEFAULT CHARSET=utf8 COMMENT='操作日志表';
+) ENGINE=InnoDB AUTO_INCREMENT=717 DEFAULT CHARSET=utf8 COMMENT='操作日志表';
 
 -- ----------------------------
 -- Records of fly_operate_log
@@ -878,6 +900,18 @@ INSERT INTO `fly_operate_log` VALUES ('701', '2', '0', 'admin', 'INSERT', 'proje
 INSERT INTO `fly_operate_log` VALUES ('702', '2', '0', 'admin', 'SELECT', 'project', '项目', '查询：admin参与的项目', '{\"pageNumber\":1,\"pageSize\":10,\"userId\":2}', '2016-12-29 13:14:57', '0');
 INSERT INTO `fly_operate_log` VALUES ('703', '2', '0', 'admin', 'SELECT', 'project', '项目', '查询：admin创建的项目', '{\"pageNumber\":1,\"pageSize\":10,\"userId\":2}', '2016-12-29 13:15:01', '0');
 INSERT INTO `fly_operate_log` VALUES ('704', '2', '0', 'admin', 'SELECT', 'project', '项目', '查询：admin创建的项目', '{\"pageNumber\":1,\"pageSize\":10,\"userId\":2}', '2016-12-29 13:15:22', '0');
+INSERT INTO `fly_operate_log` VALUES ('705', '1', '1', 'flyhero', 'SELECT', 'team', '成员', '查询：项目成员', '{\"pageNumber\":1,\"pageSize\":10,\"projectId\":1,\"userId\":1}', '2017-01-04 10:17:30', '0');
+INSERT INTO `fly_operate_log` VALUES ('706', '1', '0', 'flyhero', 'INSERT', 'project', '项目', '创建：印屋-民宿项目', '{\"pageNumber\":1,\"pageSize\":10,\"proDes\":\"面向短租市场的app。\",\"proName\":\"印屋-民宿\",\"proVersion\":\"V1.0\",\"projectId\":17,\"targetCount\":200}', '2017-01-05 12:46:33', '0');
+INSERT INTO `fly_operate_log` VALUES ('707', '1', '17', 'flyhero', 'SELECT', 'team', '成员', '查询：项目成员', '{\"pageNumber\":1,\"pageSize\":10,\"projectId\":17,\"userId\":1}', '2017-01-05 12:46:51', '0');
+INSERT INTO `fly_operate_log` VALUES ('708', '1', '17', 'flyhero', 'INSERT', 'module', '模块', '新建：订单模块', '{\"moduleDes\":\"用户进行租房产生订单。\",\"moduleName\":\"订单\",\"pageNumber\":1,\"pageSize\":10,\"projectId\":17}', '2017-01-05 12:47:19', '0');
+INSERT INTO `fly_operate_log` VALUES ('709', '1', '17', 'flyhero', 'SELECT', 'team', '成员', '查询：项目成员', '{\"pageNumber\":1,\"pageSize\":10,\"projectId\":17,\"userId\":1}', '2017-01-05 12:47:25', '0');
+INSERT INTO `fly_operate_log` VALUES ('710', '1', '17', 'flyhero', 'INSERT', 'module', '模块', '新建：我的模块', '{\"moduleDes\":\"用户或房东信息相关。\",\"moduleName\":\"我的\",\"pageNumber\":1,\"pageSize\":10,\"projectId\":17}', '2017-01-05 12:47:47', '0');
+INSERT INTO `fly_operate_log` VALUES ('711', '1', '17', 'flyhero', 'SELECT', 'team', '成员', '查询：项目成员', '{\"pageNumber\":1,\"pageSize\":10,\"projectId\":17,\"userId\":1}', '2017-01-05 12:47:52', '0');
+INSERT INTO `fly_operate_log` VALUES ('712', '1', '17', 'flyhero', 'INSERT', 'module', '模块', '新建：房源模块', '{\"moduleDes\":\"发布的房屋出租信息\",\"moduleName\":\"房源\",\"pageNumber\":1,\"pageSize\":10,\"projectId\":17}', '2017-01-05 12:49:56', '0');
+INSERT INTO `fly_operate_log` VALUES ('713', '1', '17', 'flyhero', 'SELECT', 'team', '成员', '查询：项目成员', '{\"pageNumber\":1,\"pageSize\":10,\"projectId\":17,\"userId\":1}', '2017-01-05 12:50:01', '0');
+INSERT INTO `fly_operate_log` VALUES ('714', '1', '17', 'flyhero', 'INSERT', 'interface', '接口', '新建：【获取手机验证码】接口', '{\"content\":\"\",\"creator\":1,\"falseExam\":\"{\\\"msg\\\":\\\"error\\\"}\",\"interDes\":\"获取手机验证码\",\"interName\":\"获取手机验证码\",\"interUrl\":\"192.168.1.64:8080/minsu_s/user/getMsgCode\",\"method\":\"POST\",\"moduleId\":5,\"param\":\"[{\\\"name\\\":\\\"mobile\\\",\\\"isTrue\\\":\\\"true\\\",\\\"interType\\\":\\\"String\\\",\\\"des\\\":\\\"手机号\\\",\\\"state\\\":true}]\",\"requestExam\":\"{\\\"mobile\\\":\\\"18365282216\\\"}\",\"responseParam\":\"msg:成功或失败\\ndes:文字说明\\nresult:返回结果\",\"status\":0,\"trueExam\":\"{\\\"msg\\\":\\\"ok\\\"}\"}', '2017-01-05 12:55:09', '0');
+INSERT INTO `fly_operate_log` VALUES ('715', '2', '11', 'admin', 'SELECT', 'team', '成员', '查询：项目成员', '{\"pageNumber\":1,\"pageSize\":10,\"projectId\":11,\"userId\":2}', '2017-02-17 14:07:53', '0');
+INSERT INTO `fly_operate_log` VALUES ('716', '2', '1', 'admin', 'SELECT', 'team', '成员', '查询：项目成员', '{\"pageNumber\":1,\"pageSize\":10,\"projectId\":1,\"userId\":2}', '2017-02-17 14:29:57', '0');
 
 -- ----------------------------
 -- Table structure for fly_project
@@ -894,7 +928,7 @@ CREATE TABLE `fly_project` (
   `update_time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `is_delete` int(2) DEFAULT '0' COMMENT '0可用1不可用',
   PRIMARY KEY (`project_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COMMENT='项目表';
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COMMENT='项目表';
 
 -- ----------------------------
 -- Records of fly_project
@@ -904,6 +938,7 @@ INSERT INTO `fly_project` VALUES ('11', '遛遛旅游', '一个旅游类的app',
 INSERT INTO `fly_project` VALUES ('12', '企鹅企鹅', '请问', 'v1.1', '112', '0', '2016-11-10 14:52:11', '2016-11-16 10:30:24', '1');
 INSERT INTO `fly_project` VALUES ('15', '聚心涂料', '出售涂料的app', 'v1.1', '400', '6', '2016-11-10 14:58:19', '2016-11-24 16:23:22', '0');
 INSERT INTO `fly_project` VALUES ('16', '安全审计', '政府日志审查', 'V1.0', '300', '0', '2016-11-10 14:59:26', '2016-11-16 11:35:15', '0');
+INSERT INTO `fly_project` VALUES ('17', '印屋-民宿', '面向短租市场的app。', 'V1.0', '200', '1', '2017-01-05 12:46:33', '2017-01-05 12:55:09', '0');
 
 -- ----------------------------
 -- Table structure for fly_table_info
@@ -949,18 +984,21 @@ CREATE TABLE `fly_user` (
   `company` varchar(255) DEFAULT NULL COMMENT '公司',
   `login_ip` varchar(50) NOT NULL COMMENT '登录Ip',
   `login_count` int(11) NOT NULL DEFAULT '0' COMMENT '登录次数',
+  `login_status` tinyint(4) NOT NULL COMMENT '1.正常 2.踢出',
   `create_time` datetime NOT NULL COMMENT '注册时间',
   `update_time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '最后登录时间',
   `is_delete` int(2) NOT NULL DEFAULT '0' COMMENT '0可用1不可用',
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `name_index` (`user_name`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='用户表';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='用户表';
 
 -- ----------------------------
 -- Records of fly_user
 -- ----------------------------
-INSERT INTO `fly_user` VALUES ('1', 'flyhero', 'f74f58d012532877', '/static/images/head.jpg', '1', '358681286@qq.com', null, '上海荧客', '0:0:0:0:0:0:0:1', '85', '2016-10-31 17:35:42', '2016-11-28 16:15:09', '0');
-INSERT INTO `fly_user` VALUES ('2', 'admin', '49ba59abbe56e057', '/static/images/head.jpg', '1', '928815309@qq.com', null, '上海荧客', '0:0:0:0:0:0:0:1', '227', '2016-10-31 17:41:27', '2016-12-29 17:09:36', '0');
+INSERT INTO `fly_user` VALUES ('1', 'flyhero', 'f74f58d012532877', '/static/images/head.jpg', '1', '358681286@qq.com', null, '上海荧客', '0:0:0:0:0:0:0:1', '90', '0', '2016-10-31 17:35:42', '2017-01-06 12:55:54', '0');
+INSERT INTO `fly_user` VALUES ('2', 'admin', '49ba59abbe56e057', '/static/images/head.jpg', '1', '928815309@qq.com', null, '上海荧客', '0:0:0:0:0:0:0:1', '248', '0', '2016-10-31 17:41:27', '2017-02-17 14:29:41', '0');
+INSERT INTO `fly_user` VALUES ('3', 'ertert', '49ba59abbe56e057', '/static/images/head.jpg', '0', '1175327069@qq.com', '0', null, '0:0:0:0:0:0:0:1', '0', '0', '2017-01-03 15:19:49', null, '0');
+INSERT INTO `fly_user` VALUES ('4', 'wewerwt', '49ba59abbe56e057', '/static/images/head.jpg', '1', '1175327069@qq.com', '0', null, '0:0:0:0:0:0:0:1', '0', '0', '2017-01-03 16:26:05', null, '0');
 
 -- ----------------------------
 -- Table structure for fly_user_project
@@ -976,7 +1014,7 @@ CREATE TABLE `fly_user_project` (
   `update_time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `is_delete` int(2) NOT NULL DEFAULT '0' COMMENT '0可用1不可用',
   PRIMARY KEY (`up_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of fly_user_project
@@ -988,6 +1026,26 @@ INSERT INTO `fly_user_project` VALUES ('6', '2', '12', '1', '1', '2016-11-10 14:
 INSERT INTO `fly_user_project` VALUES ('9', '2', '15', '1', '1', '2016-11-10 14:58:19', '2016-11-16 11:45:37', '0');
 INSERT INTO `fly_user_project` VALUES ('10', '2', '16', '1', '1', '2016-11-10 14:59:26', '2016-11-16 11:45:38', '0');
 INSERT INTO `fly_user_project` VALUES ('11', '1', '11', '0', '0', '2016-11-28 14:40:38', null, '0');
+INSERT INTO `fly_user_project` VALUES ('12', '1', '17', '1', '1', '2017-01-05 12:46:33', null, '0');
+
+-- ----------------------------
+-- Table structure for fly_version
+-- ----------------------------
+DROP TABLE IF EXISTS `fly_version`;
+CREATE TABLE `fly_version` (
+  `version_id` int(11) NOT NULL AUTO_INCREMENT,
+  `version_num` varchar(255) NOT NULL,
+  `version_des` tinytext NOT NULL,
+  `create_time` datetime NOT NULL,
+  `update_time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `is_delete` tinyint(4) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`version_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='系统版本';
+
+-- ----------------------------
+-- Records of fly_version
+-- ----------------------------
+INSERT INTO `fly_version` VALUES ('1', 'V1.0', '基本功能', '2016-12-19 13:33:40', null, '0');
 
 -- ----------------------------
 -- Table structure for fly_version_log
@@ -1001,7 +1059,7 @@ CREATE TABLE `fly_version_log` (
   `update_time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `is_delete` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`version_log_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='版本日志';
 
 -- ----------------------------
 -- Records of fly_version_log
