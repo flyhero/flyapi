@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.flyhero.flyapi.dao.WebInfoMapper">
+  <resultMap id="BaseResultMap" type="com.flyhero.flyapi.entity.WebInfo">
+    <id column="web_id" jdbcType="INTEGER" property="webId" />
+    <result column="part_name" jdbcType="VARCHAR" property="partName" />
+    <result column="language" jdbcType="VARCHAR" property="language" />
+    <result column="click_num" jdbcType="INTEGER" property="clickNum" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.flyhero.flyapi.entity.WebInfo">
+    <result column="part_content" jdbcType="LONGVARCHAR" property="partContent" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    web_id, part_name, language, click_num, create_time, update_time, is_delete
+  </sql>
+  <sql id="Blob_Column_List">
+    part_content
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from fly_web_info
+    where web_id = #{webId,jdbcType=INTEGER}
+  </select>
+  <select id="findAllByLanguage" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from fly_web_info
+    where language = #{language}
+  </select>  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from fly_web_info
+    where web_id = #{webId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.flyhero.flyapi.entity.WebInfo">
+    insert into fly_web_info (web_id, part_name, language, 
+      click_num, create_time, update_time, 
+      is_delete, part_content)
+    values (#{webId,jdbcType=INTEGER}, #{partName,jdbcType=VARCHAR}, #{language,jdbcType=VARCHAR}, 
+      #{clickNum,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{isDelete,jdbcType=INTEGER}, #{partContent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.flyhero.flyapi.entity.WebInfo">
+    insert into fly_web_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="webId != null">
+        web_id,
+      </if>
+      <if test="partName != null">
+        part_name,
+      </if>
+      <if test="language != null">
+        language,
+      </if>
+      <if test="clickNum != null">
+        click_num,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="isDelete != null">
+        is_delete,
+      </if>
+      <if test="partContent != null">
+        part_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="webId != null">
+        #{webId,jdbcType=INTEGER},
+      </if>
+      <if test="partName != null">
+        #{partName,jdbcType=VARCHAR},
+      </if>
+      <if test="language != null">
+        #{language,jdbcType=VARCHAR},
+      </if>
+      <if test="clickNum != null">
+        #{clickNum,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDelete != null">
+        #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="partContent != null">
+        #{partContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.flyhero.flyapi.entity.WebInfo">
+    update fly_web_info
+    <set>
+      <if test="partName != null">
+        part_name = #{partName,jdbcType=VARCHAR},
+      </if>
+      <if test="language != null">
+        language = #{language,jdbcType=VARCHAR},
+      </if>
+      <if test="clickNum != null">
+        click_num = #{clickNum,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDelete != null">
+        is_delete = #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="partContent != null">
+        part_content = #{partContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where web_id = #{webId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.flyhero.flyapi.entity.WebInfo">
+    update fly_web_info
+    set part_name = #{partName,jdbcType=VARCHAR},
+      language = #{language,jdbcType=VARCHAR},
+      click_num = #{clickNum,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      is_delete = #{isDelete,jdbcType=INTEGER},
+      part_content = #{partContent,jdbcType=LONGVARCHAR}
+    where web_id = #{webId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.flyhero.flyapi.entity.WebInfo">
+    update fly_web_info
+    set part_name = #{partName,jdbcType=VARCHAR},
+      language = #{language,jdbcType=VARCHAR},
+      click_num = #{clickNum,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      is_delete = #{isDelete,jdbcType=INTEGER}
+    where web_id = #{webId,jdbcType=INTEGER}
+  </update>
+</mapper>

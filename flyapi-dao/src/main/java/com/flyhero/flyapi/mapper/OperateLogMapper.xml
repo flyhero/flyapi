@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.flyhero.flyapi.dao.OperateLogMapper">
+  <resultMap id="BaseResultMap" type="com.flyhero.flyapi.entity.OperateLog">
+    <id column="log_id" jdbcType="INTEGER" property="logId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="project_id" jdbcType="INTEGER" property="projectId" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="operate_type" jdbcType="VARCHAR" property="operateType" />
+    <result column="model_class" jdbcType="VARCHAR" property="modelClass" />
+    <result column="model_name" jdbcType="VARCHAR" property="modelName" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    log_id, user_id, project_id, user_name, operate_type, model_class, model_name, remark, 
+    content, create_time, is_delete
+  </sql>
+  <select id="findLog" parameterType="java.lang.Integer" resultType="com.flyhero.flyapi.pojo.LogPojo">
+	SELECT count(1) count,DATE_FORMAT(create_time,'%Y-%m-%d') xtime
+	FROM fly_operate_log
+	WHERE project_id=#{projectId} AND operate_type='INSERT' AND model_class='interface'
+	GROUP BY DATE_FORMAT(create_time,'%Y-%m-%d')
+	ORDER BY xtime
+  </select>
+  <select id="findLogDetialByProId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    SELECT 
+    <include refid="Base_Column_List" />
+	FROM
+		fly_operate_log
+	WHERE
+		project_id = #{projectId}
+	AND operate_type IN ('UPDATE', 'INSERT', 'DELETE')
+	AND is_delete = 0
+	ORDER BY
+		create_time DESC
+  </select>
+  <select id="findAllLogByUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		SELECT
+			t.*
+		FROM
+			fly_operate_log t
+		WHERE
+			t.operate_type IN ('DELETE', 'UPDATE', 'INSERT')
+		AND EXISTS (
+			SELECT
+				t1.project_id
+			FROM
+				fly_user_project t1
+			WHERE
+				t1.user_id = #{userId}
+			AND t1.project_id = t.project_id
+			AND t1.is_delete = 0
+		)
+		ORDER BY t.create_time DESC	
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from fly_operate_log
+    where log_id = #{logId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from fly_operate_log
+    where log_id = #{logId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.flyhero.flyapi.entity.OperateLog">
+    insert into fly_operate_log (log_id, user_id, project_id, 
+      user_name, operate_type, model_class, 
+      model_name, remark, content, 
+      create_time, is_delete)
+    values (#{logId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{projectId,jdbcType=INTEGER}, 
+      #{userName,jdbcType=VARCHAR}, #{operateType,jdbcType=VARCHAR}, #{modelClass,jdbcType=VARCHAR}, 
+      #{modelName,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{isDelete,jdbcType=INTEGER})
+  </insert>
+  <insert id="addLog" parameterType="com.flyhero.flyapi.entity.OperateLog">
+    insert into fly_operate_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="logId != null">
+        log_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="projectId != null">
+        project_id,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="operateType != null">
+        operate_type,
+      </if>
+      <if test="modelClass != null">
+        model_class,
+      </if>
+      <if test="modelName != null">
+        model_name,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+        create_time,
+      <if test="isDelete != null">
+        is_delete,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="logId != null">
+        #{logId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="projectId != null">
+        #{projectId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="operateType != null">
+        #{operateType,jdbcType=VARCHAR},
+      </if>
+      <if test="modelClass != null">
+        #{modelClass,jdbcType=VARCHAR},
+      </if>
+      <if test="modelName != null">
+        #{modelName,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      	NOW(),
+      <if test="isDelete != null">
+        #{isDelete,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.flyhero.flyapi.entity.OperateLog">
+    update fly_operate_log
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="projectId != null">
+        project_id = #{projectId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="operateType != null">
+        operate_type = #{operateType,jdbcType=VARCHAR},
+      </if>
+      <if test="modelClass != null">
+        model_class = #{modelClass,jdbcType=VARCHAR},
+      </if>
+      <if test="modelName != null">
+        model_name = #{modelName,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDelete != null">
+        is_delete = #{isDelete,jdbcType=INTEGER},
+      </if>
+    </set>
+    where log_id = #{logId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.flyhero.flyapi.entity.OperateLog">
+    update fly_operate_log
+    set user_id = #{userId,jdbcType=INTEGER},
+      project_id = #{projectId,jdbcType=INTEGER},
+      user_name = #{userName,jdbcType=VARCHAR},
+      operate_type = #{operateType,jdbcType=VARCHAR},
+      model_class = #{modelClass,jdbcType=VARCHAR},
+      model_name = #{modelName,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      is_delete = #{isDelete,jdbcType=INTEGER}
+    where log_id = #{logId,jdbcType=INTEGER}
+  </update>
+</mapper>
