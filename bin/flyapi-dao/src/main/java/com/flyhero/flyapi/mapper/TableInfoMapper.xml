@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.flyhero.flyapi.dao.TableInfoMapper">
+  <resultMap id="BaseResultMap" type="com.flyhero.flyapi.entity.TableInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="db_id" jdbcType="INTEGER" property="dbId" />
+    <result column="TABLE_SCHEMA" jdbcType="VARCHAR" property="tableSchema" />
+    <result column="TABLE_NAME" jdbcType="VARCHAR" property="tableName" />
+    <result column="COLUMN_NAME" jdbcType="VARCHAR" property="columnName" />
+    <result column="IS_NULLABLE" jdbcType="VARCHAR" property="isNullable" />
+    <result column="COLUMN_TYPE" jdbcType="VARCHAR" property="columnType" />
+    <result column="COLUMN_KEY" jdbcType="VARCHAR" property="columnKey" />
+    <result column="COLUMN_DEFAULT" jdbcType="VARCHAR" property="columnDefault" />
+    <result column="COLUMN_COMMENT" jdbcType="VARCHAR" property="columnComment" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, db_id, TABLE_SCHEMA, TABLE_NAME, COLUMN_NAME, IS_NULLABLE, COLUMN_TYPE, COLUMN_KEY, 
+    COLUMN_DEFAULT, COLUMN_COMMENT, create_time, update_time, is_delete
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from fly_table_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="findDBByDbId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from fly_table_info
+    where db_id = #{dbId}
+  </select>
+  <select id="findTableNameByDbId" parameterType="java.lang.Integer" resultType="java.lang.String">
+    SELECT TABLE_NAME
+	FROM fly_table_info
+	WHERE db_id=#{dbId}
+	GROUP BY TABLE_NAME
+  </select>
+  <select id="findInfoByTableName" parameterType="java.lang.String" resultMap="BaseResultMap">
+	SELECT 
+	<include refid="Base_Column_List" />
+	FROM fly_table_info
+	WHERE TABLE_NAME= #{tableName}	
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from fly_table_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.flyhero.flyapi.entity.TableInfo">
+    insert into fly_table_info (id, db_id, TABLE_SCHEMA, 
+      TABLE_NAME, COLUMN_NAME, IS_NULLABLE, 
+      COLUMN_TYPE, COLUMN_KEY, COLUMN_DEFAULT, 
+      COLUMN_COMMENT, create_time, update_time, 
+      is_delete)
+    values (#{id,jdbcType=INTEGER}, #{dbId,jdbcType=INTEGER}, #{tableSchema,jdbcType=VARCHAR}, 
+      #{tableName,jdbcType=VARCHAR}, #{columnName,jdbcType=VARCHAR}, #{isNullable,jdbcType=VARCHAR}, 
+      #{columnType,jdbcType=VARCHAR}, #{columnKey,jdbcType=VARCHAR}, #{columnDefault,jdbcType=VARCHAR}, 
+      #{columnComment,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{isDelete,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.flyhero.flyapi.entity.TableInfo">
+    insert into fly_table_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="dbId != null">
+        db_id,
+      </if>
+      <if test="tableSchema != null">
+        TABLE_SCHEMA,
+      </if>
+      <if test="tableName != null">
+        TABLE_NAME,
+      </if>
+      <if test="columnName != null">
+        COLUMN_NAME,
+      </if>
+      <if test="isNullable != null">
+        IS_NULLABLE,
+      </if>
+      <if test="columnType != null">
+        COLUMN_TYPE,
+      </if>
+      <if test="columnKey != null">
+        COLUMN_KEY,
+      </if>
+      <if test="columnDefault != null">
+        COLUMN_DEFAULT,
+      </if>
+      <if test="columnComment != null">
+        COLUMN_COMMENT,
+      </if>
+        create_time,
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="isDelete != null">
+        is_delete,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="dbId != null">
+        #{dbId,jdbcType=INTEGER},
+      </if>
+      <if test="tableSchema != null">
+        #{tableSchema,jdbcType=VARCHAR},
+      </if>
+      <if test="tableName != null">
+        #{tableName,jdbcType=VARCHAR},
+      </if>
+      <if test="columnName != null">
+        #{columnName,jdbcType=VARCHAR},
+      </if>
+      <if test="isNullable != null">
+        #{isNullable,jdbcType=VARCHAR},
+      </if>
+      <if test="columnType != null">
+        #{columnType,jdbcType=VARCHAR},
+      </if>
+      <if test="columnKey != null">
+        #{columnKey,jdbcType=VARCHAR},
+      </if>
+      <if test="columnDefault != null">
+        #{columnDefault,jdbcType=VARCHAR},
+      </if>
+      <if test="columnComment != null">
+        #{columnComment,jdbcType=VARCHAR},
+      </if>
+        NOW(),
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDelete != null">
+        #{isDelete,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.flyhero.flyapi.entity.TableInfo">
+    update fly_table_info
+    <set>
+      <if test="dbId != null">
+        db_id = #{dbId,jdbcType=INTEGER},
+      </if>
+      <if test="tableSchema != null">
+        TABLE_SCHEMA = #{tableSchema,jdbcType=VARCHAR},
+      </if>
+      <if test="tableName != null">
+        TABLE_NAME = #{tableName,jdbcType=VARCHAR},
+      </if>
+      <if test="columnName != null">
+        COLUMN_NAME = #{columnName,jdbcType=VARCHAR},
+      </if>
+      <if test="isNullable != null">
+        IS_NULLABLE = #{isNullable,jdbcType=VARCHAR},
+      </if>
+      <if test="columnType != null">
+        COLUMN_TYPE = #{columnType,jdbcType=VARCHAR},
+      </if>
+      <if test="columnKey != null">
+        COLUMN_KEY = #{columnKey,jdbcType=VARCHAR},
+      </if>
+      <if test="columnDefault != null">
+        COLUMN_DEFAULT = #{columnDefault,jdbcType=VARCHAR},
+      </if>
+      <if test="columnComment != null">
+        COLUMN_COMMENT = #{columnComment,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDelete != null">
+        is_delete = #{isDelete,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.flyhero.flyapi.entity.TableInfo">
+    update fly_table_info
+    set db_id = #{dbId,jdbcType=INTEGER},
+      TABLE_SCHEMA = #{tableSchema,jdbcType=VARCHAR},
+      TABLE_NAME = #{tableName,jdbcType=VARCHAR},
+      COLUMN_NAME = #{columnName,jdbcType=VARCHAR},
+      IS_NULLABLE = #{isNullable,jdbcType=VARCHAR},
+      COLUMN_TYPE = #{columnType,jdbcType=VARCHAR},
+      COLUMN_KEY = #{columnKey,jdbcType=VARCHAR},
+      COLUMN_DEFAULT = #{columnDefault,jdbcType=VARCHAR},
+      COLUMN_COMMENT = #{columnComment,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      is_delete = #{isDelete,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

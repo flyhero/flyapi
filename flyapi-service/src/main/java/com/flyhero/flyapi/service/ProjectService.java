@@ -1,10 +1,7 @@
 package com.flyhero.flyapi.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.flyhero.flyapi.dao.ProjectMapper;
 import com.flyhero.flyapi.entity.Project;
 import com.flyhero.flyapi.pojo.ProjectDetailpojo;

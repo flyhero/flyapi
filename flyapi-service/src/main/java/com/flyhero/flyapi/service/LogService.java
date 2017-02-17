@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.flyhero.flyapi.dao.OperateLogMapper;
 import com.flyhero.flyapi.entity.OperateLog;
-import com.flyhero.flyapi.pojo.LogPojo;
+import com.flyhero.flyapi.pojo.LogVo;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
@@ -32,11 +32,11 @@ public class LogService {
 	 * @throws
 	 */
 	public Map<String, Object> findLog(Integer projectId){
-		List<LogPojo> list=operateLogMapper.findLog(projectId);
+		List<LogVo> list=operateLogMapper.findLog(projectId);
 		List<Integer> cList =new ArrayList<Integer>();
 		List<String> xList =new ArrayList<String>();
 		Map<String, Object> map=new HashMap<String, Object>();
-		for(LogPojo log:list){
+		for(LogVo log:list){
 			cList.add(log.getCount());
 			xList.add(log.getXtime());
 		}

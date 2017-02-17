@@ -3,11 +3,11 @@ package com.flyhero.flyapi.dao;
 import java.util.List;
 
 import com.flyhero.flyapi.entity.OperateLog;
-import com.flyhero.flyapi.pojo.LogPojo;
+import com.flyhero.flyapi.pojo.LogVo;
 
 public interface OperateLogMapper {
 	
-	List<LogPojo> findLog(Integer projectId);  
+	List<LogVo> findLog(Integer projectId);  
 	
 	List<OperateLog> findLogDetialByProId(Integer projectId);
 	

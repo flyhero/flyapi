@@ -18,7 +18,7 @@
     log_id, user_id, project_id, user_name, operate_type, model_class, model_name, remark, 
     content, create_time, is_delete
   </sql>
-  <select id="findLog" parameterType="java.lang.Integer" resultType="com.flyhero.flyapi.pojo.LogPojo">
+  <select id="findLog" parameterType="java.lang.Integer" resultType="com.flyhero.flyapi.pojo.LogVo">
 	SELECT count(1) count,DATE_FORMAT(create_time,'%Y-%m-%d') xtime
 	FROM fly_operate_log
 	WHERE project_id=#{projectId} AND operate_type='INSERT' AND model_class='interface'
