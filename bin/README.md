@@ -1,7 +1,7 @@
 # flyapi2.2
 接口管理系统 基于SSM+Maven的多模块项目
 
-[![Version](https://img.shields.io/badge/version-2.2.0-green.svg)](https://github.com/flyhero/flyapi2.2)
+[![Version](https://img.shields.io/badge/version-2.2.1-green.svg)](https://github.com/flyhero/flyapi2.2)
 
 接下来：
 1.测试接口响应速度
