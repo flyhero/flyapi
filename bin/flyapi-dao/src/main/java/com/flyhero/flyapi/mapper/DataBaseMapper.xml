@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.flyhero.flyapi.dao.DataBaseMapper">
+  <resultMap id="BaseResultMap" type="com.flyhero.flyapi.entity.DataBase">
+    <id column="db_id" jdbcType="INTEGER" property="dbId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="db_url" jdbcType="VARCHAR" property="dbUrl" />
+    <result column="db_name" jdbcType="VARCHAR" property="dbName" />
+    <result column="db_root" jdbcType="VARCHAR" property="dbRoot" />
+    <result column="db_password" jdbcType="VARCHAR" property="dbPassword" />
+    <result column="db_driver" jdbcType="VARCHAR" property="dbDriver" />
+    <result column="update_way" jdbcType="INTEGER" property="updateWay" />
+    <result column="update_day" jdbcType="INTEGER" property="updateDay" />
+    <result column="update_week" jdbcType="VARCHAR" property="updateWeek" />
+    <result column="update_hour" jdbcType="VARCHAR" property="updateHour" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
+    <result column="task_status" jdbcType="INTEGER" property="taskStatus" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    db_id, user_id, db_url, db_name, db_root, db_password, db_driver, update_way, update_day, 
+    update_week, update_hour, create_time, update_time, is_delete,task_status
+  </sql>
+  <select id="findDataBase" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    db_id, user_id, db_url, db_name, db_root, db_driver, update_way, update_day, 
+    update_week, update_hour, create_time, update_time, is_delete,task_status
+    from fly_data_base
+    where user_id = #{userId,jdbcType=INTEGER} and is_delete=0
+  </select>
+  <select id="findAllDB" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from fly_data_base
+    where is_delete=0
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from fly_data_base
+    where db_id = #{dbId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from fly_data_base
+    where db_id = #{dbId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.flyhero.flyapi.entity.DataBase">
+    insert into fly_data_base (db_id, user_id, db_url, 
+      db_name, db_root, db_password, 
+      db_driver, update_way, update_day, 
+      update_week, update_hour, create_time, 
+      update_time, is_delete)
+    values (#{dbId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{dbUrl,jdbcType=VARCHAR}, 
+      #{dbName,jdbcType=VARCHAR}, #{dbRoot,jdbcType=VARCHAR}, #{dbPassword,jdbcType=VARCHAR}, 
+      #{dbDriver,jdbcType=VARCHAR}, #{updateWay,jdbcType=INTEGER}, #{updateDay,jdbcType=INTEGER}, 
+      #{updateWeek,jdbcType=VARCHAR}, #{updateHour,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{isDelete,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.flyhero.flyapi.entity.DataBase">
+    insert into fly_data_base
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="dbId != null">
+        db_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="dbUrl != null">
+        db_url,
+      </if>
+      <if test="dbName != null">
+        db_name,
+      </if>
+      <if test="dbRoot != null">
+        db_root,
+      </if>
+      <if test="dbPassword != null">
+        db_password,
+      </if>
+      <if test="dbDriver != null">
+        db_driver,
+      </if>
+      <if test="updateWay != null">
+        update_way,
+      </if>
+      <if test="updateDay != null">
+        update_day,
+      </if>
+      <if test="updateWeek != null">
+        update_week,
+      </if>
+      <if test="updateHour != null">
+        update_hour,
+      </if>
+        create_time,
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="isDelete != null">
+        is_delete,
+      </if>
+      <if test="taskStatus != null">
+         task_status
+      </if>
+     
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="dbId != null">
+        #{dbId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="dbUrl != null">
+        #{dbUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="dbName != null">
+        #{dbName,jdbcType=VARCHAR},
+      </if>
+      <if test="dbRoot != null">
+        #{dbRoot,jdbcType=VARCHAR},
+      </if>
+      <if test="dbPassword != null">
+        #{dbPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="dbDriver != null">
+        #{dbDriver,jdbcType=VARCHAR},
+      </if>
+      <if test="updateWay != null">
+        #{updateWay,jdbcType=INTEGER},
+      </if>
+      <if test="updateDay != null">
+        #{updateDay,jdbcType=INTEGER},
+      </if>
+      <if test="updateWeek != null">
+        #{updateWeek,jdbcType=VARCHAR},
+      </if>
+      <if test="updateHour != null">
+        #{updateHour,jdbcType=VARCHAR},
+      </if>
+        NOW(),
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDelete != null">
+        #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="taskStatus != null">
+        #{taskStatus,jdbcType=INTEGER}
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.flyhero.flyapi.entity.DataBase">
+    update fly_data_base
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="dbUrl != null">
+        db_url = #{dbUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="dbName != null">
+        db_name = #{dbName,jdbcType=VARCHAR},
+      </if>
+      <if test="dbRoot != null">
+        db_root = #{dbRoot,jdbcType=VARCHAR},
+      </if>
+      <if test="dbPassword != null">
+        db_password = #{dbPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="dbDriver != null">
+        db_driver = #{dbDriver,jdbcType=VARCHAR},
+      </if>
+      <if test="updateWay != null">
+        update_way = #{updateWay,jdbcType=INTEGER},
+      </if>
+      <if test="updateDay != null">
+        update_day = #{updateDay,jdbcType=INTEGER},
+      </if>
+      <if test="updateWeek != null">
+        update_week = #{updateWeek,jdbcType=VARCHAR},
+      </if>
+      <if test="updateHour != null">
+        update_hour = #{updateHour,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDelete != null">
+        is_delete = #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="taskStatus != null">
+         task_status=#{taskStatus,jdbcType=INTEGER}
+      </if>
+    </set>
+    where db_id = #{dbId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.flyhero.flyapi.entity.DataBase">
+    update fly_data_base
+    set user_id = #{userId,jdbcType=INTEGER},
+      db_url = #{dbUrl,jdbcType=VARCHAR},
+      db_name = #{dbName,jdbcType=VARCHAR},
+      db_root = #{dbRoot,jdbcType=VARCHAR},
+      db_password = #{dbPassword,jdbcType=VARCHAR},
+      db_driver = #{dbDriver,jdbcType=VARCHAR},
+      update_way = #{updateWay,jdbcType=INTEGER},
+      update_day = #{updateDay,jdbcType=INTEGER},
+      update_week = #{updateWeek,jdbcType=VARCHAR},
+      update_hour = #{updateHour,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      is_delete = #{isDelete,jdbcType=INTEGER}
+    where db_id = #{dbId,jdbcType=INTEGER}
+  </update>
+</mapper>

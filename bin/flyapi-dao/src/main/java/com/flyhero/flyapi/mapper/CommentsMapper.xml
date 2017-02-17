@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.flyhero.flyapi.dao.CommentsMapper">
+  <resultMap id="BaseResultMap" type="com.flyhero.flyapi.entity.Comments">
+    <id column="comment_id" jdbcType="INTEGER" property="commentId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="interface_id" jdbcType="INTEGER" property="interfaceId" />
+    <result column="target_id" jdbcType="INTEGER" property="targetId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    comment_id, user_id, content, interface_id, target_id, create_time, is_delete
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from fly_comments
+    where comment_id = #{commentId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from fly_comments
+    where comment_id = #{commentId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.flyhero.flyapi.entity.Comments">
+    insert into fly_comments (comment_id, user_id, content, 
+      interface_id, target_id, create_time, 
+      is_delete)
+    values (#{commentId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, 
+      #{interfaceId,jdbcType=INTEGER}, #{targetId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{isDelete,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.flyhero.flyapi.entity.Comments">
+    insert into fly_comments
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="commentId != null">
+        comment_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="interfaceId != null">
+        interface_id,
+      </if>
+      <if test="targetId != null">
+        target_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="isDelete != null">
+        is_delete,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="commentId != null">
+        #{commentId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="interfaceId != null">
+        #{interfaceId,jdbcType=INTEGER},
+      </if>
+      <if test="targetId != null">
+        #{targetId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDelete != null">
+        #{isDelete,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.flyhero.flyapi.entity.Comments">
+    update fly_comments
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="interfaceId != null">
+        interface_id = #{interfaceId,jdbcType=INTEGER},
+      </if>
+      <if test="targetId != null">
+        target_id = #{targetId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDelete != null">
+        is_delete = #{isDelete,jdbcType=INTEGER},
+      </if>
+    </set>
+    where comment_id = #{commentId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.flyhero.flyapi.entity.Comments">
+    update fly_comments
+    set user_id = #{userId,jdbcType=INTEGER},
+      content = #{content,jdbcType=VARCHAR},
+      interface_id = #{interfaceId,jdbcType=INTEGER},
+      target_id = #{targetId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      is_delete = #{isDelete,jdbcType=INTEGER}
+    where comment_id = #{commentId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,146 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.flyhero.flyapi</groupId>
+    <artifactId>flyapi</artifactId>
+    <version>2.2.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>flyapi-common</artifactId>
+  <name>flyapi-common</name>
+  <url>http://maven.apache.org</url>
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+    </dependency>
+    <dependency>
+	    <groupId>com.flyhero.flyapi</groupId>
+	    <artifactId>flyapi-entity</artifactId>
+    </dependency>
+
+      	<dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+        </dependency>
+        <dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+		</dependency>
+
+    	<!-- 3)Spring web -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+		</dependency>
+		
+				<!-- 3.Servlet web -->
+		<dependency>
+			<groupId>taglibs</groupId>
+			<artifactId>standard</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+		</dependency>
+		
+		    <!-- 日志文件管理包 -->
+	    <dependency>
+	      <groupId>log4j</groupId>
+	      <artifactId>log4j</artifactId>
+	    </dependency>
+        <dependency>
+		    <groupId>org.slf4j</groupId>
+		    <artifactId>slf4j-api</artifactId>
+		</dependency>
+		
+				<!-- websocket -->
+ 		<dependency>  
+		   <groupId>org.springframework</groupId>  
+		   <artifactId>spring-websocket</artifactId>  
+		</dependency>  
+		<dependency>  
+		   <groupId>org.springframework</groupId>  
+		   <artifactId>spring-messaging</artifactId>  
+		</dependency>
+		
+			<dependency>  
+		        <groupId>org.springframework</groupId>  
+		        <artifactId>spring-jms</artifactId>  
+		    </dependency>		
+		    
+		    
+		    		    <!-- activemq -->
+		    <dependency>  
+		        <groupId>org.apache.activemq</groupId>  
+		        <artifactId>activemq-core</artifactId>  
+		    </dependency> 
+		    <dependency>  
+		        <groupId>org.apache.activemq</groupId>  
+		        <artifactId>activemq-pool</artifactId>  
+		    </dependency>  
+		    <!-- 格式化对象，方便输出日志 -->
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>fastjson</artifactId>
+    </dependency>
+    
+    <!-- 定时任务quartz -->	
+    	<dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+        </dependency>	
+        
+        		<!-- 生成文档 -->
+        <dependency>
+		    <groupId>org.apache.poi</groupId>
+		    <artifactId>poi</artifactId>
+		    </dependency>    
+		<dependency>
+		    <groupId>org.apache.poi</groupId>
+		    <artifactId>poi-ooxml</artifactId>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.poi</groupId>
+		    <artifactId>poi-scratchpad</artifactId>
+		</dependency>
+        <!-- https://mvnrepository.com/artifact/org.freemarker/freemarker -->
+		<dependency>
+		    <groupId>org.freemarker</groupId>
+		    <artifactId>freemarker</artifactId>
+		</dependency>
+		
+		 <!-- 网络 -->
+		<dependency>
+		    <groupId>commons-httpclient</groupId>
+		    <artifactId>commons-httpclient</artifactId>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.httpcomponents</groupId>
+		    <artifactId>httpclient</artifactId>
+		</dependency>
+		
+			<dependency>
+				<groupId>javax.mail</groupId>
+				<artifactId>mail</artifactId>
+			</dependency>
+    
+  </dependencies>
+</project>
