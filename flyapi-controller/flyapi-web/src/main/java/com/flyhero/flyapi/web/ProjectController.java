@@ -197,8 +197,8 @@ public class ProjectController extends BaseController{
 	 */
 	@RequestMapping("findProjectDetail.do")
 	@ResponseBody
-	public JSONResult findProjectDetail(Integer upId){
-		ProjectDetailpojo projectDetailpojo= projectService.findProjectDetail(upId);
+	public JSONResult findProjectDetail(Integer projectId){
+		ProjectDetailpojo projectDetailpojo= projectService.findProjectDetail(projectId);
 		return new JSONResult(Constant.MSG_OK, Constant.CODE_200,projectDetailpojo);
 	}
 	/**

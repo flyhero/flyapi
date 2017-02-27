@@ -16,6 +16,10 @@
 	content="width=1000, initial-scale=1.0, maximum-scale=1.0">
 <link rel="shortcut icon" href="img/favicon.ico">
 <jsp:include page="base/static.jsp"></jsp:include>
+    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/static/barrage/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/static/barrage/css/barrager.css">
+    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/static/barrage/pick-a-color/css/pick-a-color-1.2.3.min.css">
+    <link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/static/barrage/syntaxhighlighter/styles/shCoreDefault.css"/>
 </head>
 <body>
 	<div class="panel panel-default">
@@ -30,12 +34,20 @@
 				      <div class="col-xs-4">
 				      	 <textarea rows="20" style="width: 100%">聊天内容</textarea>
 				      	 <textarea rows="15" style="width: 100%">发送内容</textarea>
+				      	 <button class="btn btn-info">发送</button>
 				      </div>
 			</div>
 		</div>
+		<input name="change"  value="弹幕" type="button" onclick="run()">
 	</div>
 
-
+    <!-- JS dependencies -->
+    <script type="text/javascript" src="<%=request.getContextPath()%>/static/barrage/js/tinycolor-0.9.15.min.js"></script>  
+    <script type="text/javascript" src="<%=request.getContextPath()%>/static/barrage/js/jquery.barrager.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/static/barrage/syntaxhighlighter/scripts/shCore.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/static/barrage/syntaxhighlighter/scripts/shBrushJScript.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/static/barrage/syntaxhighlighter/scripts/shBrushPhp.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/static/barrage/pick-a-color/js/pick-a-color-1.2.3.min.js"></script> 
 <script type="text/javascript">
  window.onbeforeunload=function (){
 	if(event.clientX>document.body.clientWidth && event.clientY < 0 || event.altKey){
@@ -50,6 +62,31 @@
 		alert($(this).val());
 	});
 }); */
+
+function run(){
+    var item={
+            img:'http://yaseng.org/jquery.barrager.js/static/img/heisenberg.png', //图片 
+            info:'弹幕文字信息', //文字 
+            href:'http://www.yaseng.org', //链接 
+            close:true, //显示关闭按钮 
+            speed:6, //延迟,单位秒,默认6 
+            bottom:70, //距离底部高度,单位px,默认随机 
+            color:'#fff', //颜色,默认白色 
+            old_ie_color:'#000000', //ie低版兼容色,不能与网页背景相同,默认黑色 
+          }
+         $('body').barrager(item);
+    var item1={
+            img:'http://yaseng.org/jquery.barrager.js/static/img/heisenberg.png', //图片 
+            info:'弹幕文字信息', //文字 
+            href:'http://www.yaseng.org', //链接 
+            close:true, //显示关闭按钮 
+            speed:6, //延迟,单位秒,默认6 
+           // bottom:70, //距离底部高度,单位px,默认随机 
+            color:'#fff', //颜色,默认白色 
+            old_ie_color:'#000000', //ie低版兼容色,不能与网页背景相同,默认黑色 
+          }
+         $('body').barrager(item1);
+}
 
 
 </script>
@@ -119,5 +156,7 @@
 //window.setInterval(function(){$.ajax(getting)},1000);
 
 </script>
+
+ 
 </body>
 </html>

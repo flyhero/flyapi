@@ -16,8 +16,8 @@ public class ProjectService{
 		return projectMapper.updateDoneCount(projectId);
 	}
 	
-	public ProjectDetailpojo findProjectDetail(Integer upId){
-		return projectMapper.findProjectDetail(upId);
+	public ProjectDetailpojo findProjectDetail(Integer projectId){
+		return projectMapper.findProjectDetail(projectId);
 	}
 	
 	public int deleteByPrimaryKey(Integer projectId) {

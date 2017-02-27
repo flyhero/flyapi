@@ -238,7 +238,7 @@ var theme = {
 				url : "../project/findProjectDetail.do",
 				dataType : "json",
 				data : {
-					"upId":upId
+					"projectId":projectId
 				},
 				success : function(data) {
 					$("#target-inter").append(data.data.targetCount);
@@ -626,18 +626,17 @@ var theme = {
 			//判断用户对此项目的权限
 			$.ajax({
 				type : 'POST',
-				url : "../project/*",
+				url : "../project/findUserIsEdit.do",
 				dataType : "json",
 				data : {
 					"projectId":projectId,
 					"userId":userId
 				},
 				success : function(data) {
-						if(data.isCreator == 1){
-							/*$("mtop20").append('<li><a><i class="fa fa-user"></i>&nbsp;'+user.userName+'</a></li>');*/
+						if(data.data == 1){
+							$("#managerTeam").append('<a href="#" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#addTeam">添加成员</a>');
+							$("#managerModule").append('<a href="#" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#addModule">添加模块</a>');
 						}
-						
-					
 				}
 
 			});

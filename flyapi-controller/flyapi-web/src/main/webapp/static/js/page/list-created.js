@@ -90,7 +90,7 @@
             	var jid=parseInt(row.project.projectId.toString()+'1');
             	var fid=parseInt(row.project.projectId.toString()+'2');
             	var jurl="'../forward/list_interfaces.html?projectId="+row.project.projectId+"'";
-            	var furl="'../forward/project_detail.html?projectId="+row.project.projectId+"&upId="+row.upId+"&isEdit=1'";
+            	var furl="'../forward/project_detail.html?projectId="+row.project.projectId+"'";
             	//var j='<a href="../forward/list_interfaces.html?projectId='+row.project.projectId+'" class="btn btn-info btn-xs"><i class="fa fa-sliders"></i> 接口 </a> &nbsp;&nbsp;';
             	var j='<a href="#" onclick="addParentTabs('+jid+','+jtitle+','+jurl+');" class="btn btn-info btn-xs"><i class="fa fa-sliders"></i> 接口 </a> &nbsp;&nbsp;';
                // var f='<a href="../forward/project_detail.html?projectId='+row.project.projectId+'&upId='+row.upId+'&isEdit=1" class="btn btn-primary btn-xs"><i class="fa fa-eye"></i> 详情 </a>&nbsp;&nbsp;'; 

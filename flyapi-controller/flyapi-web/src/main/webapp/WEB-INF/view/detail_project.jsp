@@ -87,15 +87,15 @@
 								</ul>
 								<br />
 
-								<div class=" mtop20">
-									<c:choose>
+								<div class=" mtop20" id="managerTeam">
+								<%-- 	<c:choose>
 										<c:when test="${isEdit== '1' || isEdit== 1 }">
 											<a href="#" class="btn btn-sm btn-primary"
 												data-toggle="modal" data-target="#addTeam">添加成员</a>
 										</c:when>
 										<c:otherwise>
 										</c:otherwise>
-									</c:choose>
+									</c:choose> --%>
 
 								</div>
 								<br />
@@ -105,15 +105,15 @@
 								</ul>
 								<br />
 
-								<div class=" mtop20">
-									<c:choose>
+								<div class=" mtop20" id="managerModule">
+									<%-- <c:choose>
 										<c:when test="${isEdit== '1' || isEdit== 1 }">
 											<a href="#" class="btn btn-sm btn-primary"
 												data-toggle="modal" data-target="#addModule">添加模块</a>
 										</c:when>
 										<c:otherwise>
 										</c:otherwise>
-									</c:choose>
+									</c:choose> --%>
 
 								</div>
 							</div>
@@ -243,10 +243,10 @@
 	<!-- ECharts -->
 	<script src="<%=request.getContextPath()%>/static/ace/vendors/echarts/dist/echarts.min.js"></script>
 	<script>
-		var userEdit = ${isEdit};
+		//var userEdit = ${isEdit};
 		var myId = ${sessionScope.user.userId};
 		var projectId = ${projectId};
-		var upId = ${upId};
+		//var upId = ${upId};
 		var userId = ${sessionScope.user.userId};
 	</script>
 	<script
