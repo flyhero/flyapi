@@ -37,8 +37,8 @@
 		<div class="panel-heading">
 			<h3 class="panel-title">版本日志</h3>
 		</div>
-		<div class="panel-body">
-
+		<div class="panel-body" id="versionLog">
+<!-- 
 			<div class="panel-group" id="accordion">
 				<div class="panel panel-default">
 					<div class="panel-heading">
@@ -118,7 +118,7 @@
 								<li>添加项目成员</li>
 							</ol>
 						</div>
-					</div>
+					</div> -->
 				</div>
 			</div>
 
