@@ -44,10 +44,10 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-lg-3 control-label">预计接口</label>
+						<label class="col-lg-3 control-label">结项日期</label>
 						<div class="col-lg-5">
-							<input type="number" class="form-control" name="targetCount"
-								id="targetCount" />
+							<input type="date" class="form-control" name="targetDate"
+								id="targetDate" />
 						</div>
 					</div>
 				</fieldset>

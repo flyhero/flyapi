@@ -21,7 +21,7 @@
 	    <result column="pro_des" jdbcType="VARCHAR" property="proDes" />
 	    <result column="pro_version" jdbcType="VARCHAR" property="proVersion" />
 	    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-	    <result column="target_count" jdbcType="INTEGER" property="targetCount" />
+	    <result column="target_date" jdbcType="DATE" property="targetDate" />
     	<result column="done_count" jdbcType="INTEGER" property="doneCount" />
     </collection>
   </resultMap> 
@@ -31,17 +31,17 @@
   </sql>
     
   <select id="findUserCreate" parameterType="java.lang.Integer" resultMap="UserProjectMap">
-  	select t1.up_id,t1.user_id,t2.project_id,t2.pro_name,t2.pro_des,t2.pro_version,t2.create_time,t2.target_count,t2.done_count
+  	select t1.up_id,t1.user_id,t2.project_id,t2.pro_name,t2.pro_des,t2.pro_version,t2.create_time,t2.target_date,t2.done_count
   	from fly_user_project t1 left join fly_project t2 on t1.project_id=t2.project_id
   	where t1.user_id=#{userId} and t1.is_creator=1 and t1.is_delete=0
   </select>
   <select id="findUserJoin" parameterType="java.lang.Integer" resultMap="UserProjectMap">
-  	select t1.up_id,t1.user_id,t2.project_id,t2.pro_name,t2.pro_des,t2.pro_version,t2.create_time,t2.target_count,t2.done_count
+  	select t1.up_id,t1.user_id,t2.project_id,t2.pro_name,t2.pro_des,t2.pro_version,t2.create_time,t2.target_date,t2.done_count
   	from fly_user_project t1 left join fly_project t2 on t1.project_id=t2.project_id
   	where t1.user_id=#{userId} and t1.is_creator=0 and t1.is_delete=0
   </select>  
   <select id="findUserEdit" parameterType="java.lang.Integer" resultMap="UserProjectMap">
-  	select t1.up_id,t1.user_id,t2.project_id,t2.pro_name,t2.pro_des,t2.pro_version,t2.create_time,t2.target_count,t2.done_count
+  	select t1.up_id,t1.user_id,t2.project_id,t2.pro_name,t2.pro_des,t2.pro_version,t2.create_time,t2.target_date,t2.done_count
   	from fly_user_project t1 left join fly_project t2 on t1.project_id=t2.project_id
   	where t1.user_id=#{userId} and t1.is_edit = 1 and t1.is_delete=0
   </select>     

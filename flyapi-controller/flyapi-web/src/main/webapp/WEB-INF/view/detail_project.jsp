@@ -16,10 +16,8 @@
 	rel="stylesheet">
 </head>
 <body>
-	<div class="container body">
 
 		<!-- page content -->
-		<div class="" role="main">
 
 			<div class="panel panel-default">
 				<div class="panel-heading">
@@ -31,7 +29,7 @@
 					<div class="col-md-9 col-sm-9 col-xs-12">
 
 						<ul class="stats-overview">
-							<li><span class="name"> 预计接口数</span> <span
+							<li><span class="name"> 项目结束日期</span> <span
 								class="value text-success" id="target-inter"> </span></li>
 							<li><span class="name"> 已完成接口 </span> <span
 								class="value text-success" id="done-inter"> </span></li>
@@ -125,7 +123,6 @@
 				</div>
 			</div>
 
-		</div>
 
 		<div class="modal fade" id="editTeam" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
@@ -238,7 +235,6 @@
 		</div>
 		<!-- /page content -->
 
-	</div>
 
 	<!-- ECharts -->
 	<script src="<%=request.getContextPath()%>/static/ace/vendors/echarts/dist/echarts.min.js"></script>

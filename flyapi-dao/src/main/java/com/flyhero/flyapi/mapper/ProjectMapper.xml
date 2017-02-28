@@ -6,14 +6,14 @@
     <result column="pro_name" jdbcType="VARCHAR" property="proName" />
     <result column="pro_des" jdbcType="VARCHAR" property="proDes" />
     <result column="pro_version" jdbcType="VARCHAR" property="proVersion" />
-    <result column="target_count" jdbcType="INTEGER" property="targetCount" />
+    <result column="target_date" jdbcType="DATE" property="targetDate" />
     <result column="done_count" jdbcType="INTEGER" property="doneCount" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
   </resultMap>
   <sql id="Base_Column_List">
-    project_id, pro_name, pro_des, pro_version, target_count, done_count, create_time, 
+    project_id, pro_name, pro_des, pro_version, target_date, done_count, create_time, 
     update_time, is_delete
   </sql>
 
@@ -29,7 +29,7 @@
 		t3.pro_des proDes,
 		t3.pro_version proVersion,
 		t3.create_time createTime,
-		t3.target_count targetCount,
+		t3.target_date targetDate,
 		t3.done_count doneCount
 	FROM
 		fly_project
@@ -44,7 +44,7 @@
 				t2.pro_des proDes,
 				t2.pro_version proVersion,
 				t2.create_time createTime,
-				t2.target_count targetCount,
+				t2.target_date targetDate,
 				t2.done_count doneCount,
 				t3.user_name userName,
 				t3.avatar_url avatarUrl,
@@ -69,7 +69,7 @@
 				t2.pro_des proDes,
 				t2.pro_version proVersion,
 				t2.create_time createTime,
-				t2.target_count targetCount,
+				t2.target_date targetDate,
 				t2.done_count doneCount,
 				t3.user_name userName,
 				t3.avatar_url avatarUrl,
@@ -96,11 +96,11 @@
   </delete>
   <insert id="insert" parameterType="com.flyhero.flyapi.entity.Project">
     insert into fly_project (project_id, pro_name, pro_des, 
-      pro_version, target_count, done_count, 
+      pro_version, target_date, done_count, 
       create_time, update_time, is_delete
       )
     values (#{projectId,jdbcType=INTEGER}, #{proName,jdbcType=VARCHAR}, #{proDes,jdbcType=VARCHAR}, 
-      #{proVersion,jdbcType=VARCHAR}, #{targetCount,jdbcType=INTEGER}, #{doneCount,jdbcType=INTEGER}, 
+      #{proVersion,jdbcType=VARCHAR}, #{targetDate,jdbcType=DATE}, #{doneCount,jdbcType=INTEGER}, 
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{isDelete,jdbcType=INTEGER}
       )
   </insert>
@@ -119,8 +119,8 @@
       <if test="proVersion != null">
         pro_version,
       </if>
-      <if test="targetCount != null">
-        target_count,
+      <if test="targetDate != null">
+        target_date,
       </if>
       <if test="doneCount != null">
         done_count,
@@ -146,8 +146,8 @@
       <if test="proVersion != null">
         #{proVersion,jdbcType=VARCHAR},
       </if>
-      <if test="targetCount != null">
-        #{targetCount,jdbcType=INTEGER},
+      <if test="targetDate != null">
+        #{targetDate,jdbcType=DATE},
       </if>
       <if test="doneCount != null">
         #{doneCount,jdbcType=INTEGER},
@@ -173,8 +173,8 @@
       <if test="proVersion != null">
         pro_version = #{proVersion,jdbcType=VARCHAR},
       </if>
-      <if test="targetCount != null">
-        target_count = #{targetCount,jdbcType=INTEGER},
+      <if test="targetDate != null">
+        target_date = #{targetDate,jdbcType=DATE},
       </if>
       <if test="doneCount != null">
         done_count = #{doneCount,jdbcType=INTEGER},
@@ -196,7 +196,7 @@
     set pro_name = #{proName,jdbcType=VARCHAR},
       pro_des = #{proDes,jdbcType=VARCHAR},
       pro_version = #{proVersion,jdbcType=VARCHAR},
-      target_count = #{targetCount,jdbcType=INTEGER},
+      target_date = #{targetDate,jdbcType=DATE},
       done_count = #{doneCount,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP},

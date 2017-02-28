@@ -20,7 +20,7 @@ public class Project extends Entity{
 
     private String proVersion;
 
-    private Integer targetCount;
+    private Date targetDate;
 
     private Integer doneCount;
 
@@ -62,15 +62,16 @@ public class Project extends Entity{
         this.proVersion = proVersion == null ? null : proVersion.trim();
     }
 
-    public Integer getTargetCount() {
-        return targetCount;
-    }
 
-    public void setTargetCount(Integer targetCount) {
-        this.targetCount = targetCount;
-    }
+    public Date getTargetDate() {
+		return targetDate;
+	}
 
-    public Integer getDoneCount() {
+	public void setTargetDate(Date targetDate) {
+		this.targetDate = targetDate;
+	}
+
+	public Integer getDoneCount() {
         return doneCount;
     }
 
@@ -106,9 +107,11 @@ public class Project extends Entity{
 	public String toString() {
 		return "Project [projectId=" + projectId + ", proName=" + proName
 				+ ", proDes=" + proDes + ", proVersion=" + proVersion
-				+ ", targetCount=" + targetCount + ", doneCount=" + doneCount
+				+ ", targetDate=" + targetDate + ", doneCount=" + doneCount
 				+ ", createTime=" + createTime + ", updateTime=" + updateTime
 				+ ", isDelete=" + isDelete + "]";
 	}
+
+
     
 }

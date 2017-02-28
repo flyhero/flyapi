@@ -11,7 +11,13 @@ import com.flyhero.flyapi.entity.Version;
 import com.flyhero.flyapi.pojo.JSONResult;
 import com.flyhero.flyapi.service.VersionService;
 import com.flyhero.flyapi.utils.Constant;
-
+/**
+ * 版本控制器
+ * @ClassName: VersionController 
+ * @author flyhero(http://flyhero.top)
+ * @date 2017年2月27日 下午3:26:43 
+ *
+ */
 @Controller
 @RequestMapping("version")
 public class VersionController extends BaseController{

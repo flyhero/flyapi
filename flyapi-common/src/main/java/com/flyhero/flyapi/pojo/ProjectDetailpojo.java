@@ -23,7 +23,7 @@ public class ProjectDetailpojo implements Serializable{
 	private String proDes;
 	private String proVersion;
 	private Date createTime;
-	private Integer targetCount;
+	private Date targetDate;
 	private Integer doneCount;
 	public Integer getUpId() {
 		return upId;
@@ -91,11 +91,11 @@ public class ProjectDetailpojo implements Serializable{
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
-	public Integer getTargetCount() {
-		return targetCount;
+	public Date getTargetDate() {
+		return targetDate;
 	}
-	public void setTargetCount(Integer targetCount) {
-		this.targetCount = targetCount;
+	public void setTargetDate(Date targetDate) {
+		this.targetDate = targetDate;
 	}
 	public Integer getDoneCount() {
 		return doneCount;
