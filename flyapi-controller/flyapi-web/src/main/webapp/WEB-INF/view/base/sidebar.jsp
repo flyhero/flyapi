@@ -48,6 +48,18 @@
 				<li><a href="javascript:void(0);" data-addtab="jsonon"
 						url="../forward/go.html?name=jsonon"><i class="glyphicon glyphicon-fire"></i> JSON格式化</a>
 				</li>
+				<li><a href="javascript:void(0);" data-addtab="jsonon1"
+						url="../forward/go.html?name=jsonon"><i class="glyphicon glyphicon-fire"></i> 调查问卷</a>
+				</li>
+				<li><a href="javascript:void(0);" data-addtab="jsonon2"
+						url="../forward/go.html?name=edit_resume"><i class="glyphicon glyphicon-fire"></i> 在线简历</a>
+				</li>
+				<li><a href="javascript:void(0);" data-addtab="jsonon3"
+						url="../forward/go.html?name=list_recruit"><i class="glyphicon glyphicon-fire"></i> 招聘页</a>
+				</li>
+				<li><a href="javascript:void(0);" data-addtab="jsonon4"
+						url="../forward/go.html?name=jsonon"><i class="glyphicon glyphicon-fire"></i> 团队技术文章</a>
+				</li>
 				
 		</ul>
 	</div>

@@ -34,20 +34,23 @@
             field: 'project.proDes',
             title: '项目描述'
         },{
-            field: 'project.targetCount',
+            field: 'project.targetDate',
             title: '已完成',
             formatter:function(value,row,index){  
-	             var a=row.project.doneCount/row.project.targetCount*100;
+	      /*       var a=row.project.doneCount/row.project.targetCount*100;*/
+	             
+            	 var a= getDayToNow(row.project.createTime);
+            	 var c=getDaydiff(row.project.targetDate,row.project.createTime);
 	             var b='<div class="progress progress-striped active">'
 	            	   +' <div class="progress-bar progress-bar-success" role="progressbar"'
 	            	         +'aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"'
 	            	         +'style="width: '
-	            	         +a
+	            	         +a*100/c
 	            	         +'%;">'
 	            	    +'</div>'
-	            	    +'<small>已完成'
+/*	            	    +'<small>已完成'
 	            	    +a
-	            	    +'%</small>'
+	            	    +'%</small>'*/
 	            	+'</div>';
              	 return b;  
          	} 

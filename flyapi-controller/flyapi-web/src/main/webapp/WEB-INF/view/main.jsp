@@ -47,8 +47,11 @@
 								<div class="tab-content">
 									<div role="tabpanel" class="tab-pane active" id="home">
 										<br>
-										<iframe class="iframeClass" frameborder="no" border="0"
-											src="../forward/index_main.html" style="height: 1800px;"></iframe>
+										 <iframe class="iframeClass" id="ifrm" 
+											src="../forward/index_main.html"></iframe> 
+											<!-- <iframe class="iframeClass" id="ifrm" scrolling="no" frameborder="0" width="100%"  marginheight="0" marginwidth="0" onLoad="setIframeHeight(this.id)"
+											src="../forward/index_main.html" ></iframe> -->
+											
 									</div>
 								</div>
 							</div>

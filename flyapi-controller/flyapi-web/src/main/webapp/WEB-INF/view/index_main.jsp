@@ -52,6 +52,19 @@
 				  title:"感谢你的支持",
 				  offset: '100px'
 				}); */
+				
+				
+				var mask_div = document.createElement('div');
+				mask_div.id = 'mask_div1';
+				mask_div.appendChild(document.createTextNode("水印由flyapi提供支持"));
+				mask_div.style.position = "absolute";
+				mask_div.style.right =  '20px';
+				mask_div.style.bottom =  '10px';
+				mask_div.style.overflow = "hidden";
+				mask_div.style.zIndex = "9999";
+				mask_div.style.opacity = 0.3;
+				document.body.appendChild(mask_div);
+				
 			</script>
 			<script
 				src="<%=request.getContextPath()%>/static/js/page/index-main.js"></script>

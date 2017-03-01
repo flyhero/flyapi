@@ -28,7 +28,7 @@
     marginwidth: 0;
     marginheight: 0;
     scrolling-x: 'no';
-    scrolling-y: auto;
+    scrolling-y: 'no';
     allowtransparency: true;
 }
 

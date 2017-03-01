@@ -51,3 +51,9 @@
     	var day = parseInt(total / (24*60*60));//计算整数天数
 		return day;
     }
+
+	function setIframeHeight() { 
+		var iframeHeight = $("#ifrm").contents().find("body").height();
+		$("#ifrm").height(iframeHeight);
+	} 
+	 
