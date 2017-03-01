@@ -37,6 +37,12 @@ public class User extends Entity{
     private Date updateTime;
 
     private Integer isDelete;
+    
+    private String phone;
+    
+    private String openid;
+    
+    private String platform;
 
     public Integer getUserId() {
         return userId;
@@ -142,6 +148,30 @@ public class User extends Entity{
         this.isDelete = isDelete;
     }
 
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getOpenid() {
+		return openid;
+	}
+
+	public void setOpenid(String openid) {
+		this.openid = openid;
+	}
+
+	public String getPlatform() {
+		return platform;
+	}
+
+	public void setPlatform(String platform) {
+		this.platform = platform;
+	}
+
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", userName=" + userName
@@ -149,7 +179,11 @@ public class User extends Entity{
 				+ ", sex=" + sex + ", email=" + email + ", address=" + address
 				+ ", company=" + company + ", loginIp=" + loginIp
 				+ ", loginCount=" + loginCount + ", createTime=" + createTime
-				+ ", updateTime=" + updateTime + ", isDelete=" + isDelete + "]";
+				+ ", updateTime=" + updateTime + ", isDelete=" + isDelete
+				+ ", phone=" + phone + ", openid=" + openid + ", platform="
+				+ platform + "]";
 	}
+
+
     
 }

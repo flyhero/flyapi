@@ -15,10 +15,13 @@
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="openid" jdbcType="VARCHAR" property="openid" />
+    <result column="platform" jdbcType="VARCHAR" property="platform" />
   </resultMap>
   <sql id="Base_Column_List">
     user_id, user_name, password, avatar_url, sex, email, address, company, login_ip, 
-    login_count, create_time, update_time, is_delete
+    login_count, create_time, update_time, is_delete,phone,openid,platform
   </sql>
   
   <select id="findByUserName" parameterType="com.flyhero.flyapi.entity.User" resultMap="BaseResultMap">
@@ -107,6 +110,15 @@
       <if test="isDelete != null">
         is_delete,
       </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="openid != null">
+        openid,
+      </if>
+      <if test="platform != null">
+        platform,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="userId != null">
@@ -148,6 +160,15 @@
       <if test="isDelete != null">
         #{isDelete,jdbcType=INTEGER},
       </if>
+      <if test="phone != null">
+        #{phone},
+      </if>
+      <if test="openid != null">
+        #{openid},
+      </if>
+      <if test="platform != null">
+        #{platform},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.flyhero.flyapi.entity.User">
@@ -188,6 +209,15 @@
       </if>
       <if test="isDelete != null">
         is_delete = #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        #{phone},
+      </if>
+      <if test="openid != null">
+        #{openid},
+      </if>
+      <if test="platform != null">
+        #{platform},
       </if>
     </set>
     where user_id = #{userId,jdbcType=INTEGER}

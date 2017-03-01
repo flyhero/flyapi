@@ -8,7 +8,9 @@ import com.alibaba.fastjson.JSONObject;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.flyhero.flyapi.pojo.JSONResult;
 import com.flyhero.flyapi.service.ModuleService;
@@ -29,16 +31,17 @@ import org.springframework.web.servlet.ModelAndView;
 
 /**
  * 用户控制器
- * @ClassName: UserController 
+ * 
+ * @ClassName: UserController
  * @author flyhero(http://flyhero.top)
- * @date 2016年10月28日 下午5:50:47 
+ * @date 2016年10月28日 下午5:50:47
  *
  */
 @Controller
 @RequestMapping("user")
 public class UserController extends BaseController {
-	
-	private Logger logger=Logger.getLogger(UserController.class);
+
+	private Logger logger = Logger.getLogger(UserController.class);
 
 	@Autowired
 	private UserService userService;
@@ -51,8 +54,22 @@ public class UserController extends BaseController {
 	@Autowired
 	private ProjectService projectService;
 
-
-
+	/**
+	 * restful
+	 * @Title: get 
+	 * @author flyhero(http://flyhero.top)  
+	 * @date 2017年3月1日 上午10:06:17 
+	 * @param @param id
+	 * @param @return   
+	 * @return JSONResult    
+	 * @throws
+	 */
+	@RequestMapping(value = "/hello/{id}", method = RequestMethod.GET)
+	@ResponseBody
+	public JSONResult get(@PathVariable("id") Integer id) {
+		System.out.println("get" + id);
+		return new JSONResult(Constant.MSG_OK, Constant.CODE_200);
+	}
 
 	/**
 	 * 用户注册
@@ -69,7 +86,7 @@ public class UserController extends BaseController {
 	@RequestMapping(value = "register.do")
 	@ResponseBody
 	public JSONResult register(User user) throws Exception {
-		String ip=IPAddressUtil.getIPAddr(request);
+		String ip = IPAddressUtil.getIPAddr(request);
 		user.setLoginIp(ip);
 		user.setAddress(IPAddressUtil.getPosition(ip, "UTF-8"));
 		user.setPassword(Md5Util.textToMD5L16(user.getPassword()));
@@ -97,11 +114,11 @@ public class UserController extends BaseController {
 	@RequestMapping("checkUserName.do")
 	@ResponseBody
 	public JSONObject checkUserName(User user) {
-		logger.info("正在验证用户:"+user.getUserName()+" 是否存在");
-		User u=userService.findByUserName(user);
-		if(u != null){
+		logger.info("正在验证用户:" + user.getUserName() + " 是否存在");
+		User u = userService.findByUserName(user);
+		if (u != null) {
 			json.put("valid", false);
-		}else{
+		} else {
 			json.put("valid", true);
 		}
 		return json;
@@ -121,7 +138,7 @@ public class UserController extends BaseController {
 	 */
 	@RequestMapping(value = "login.do")
 	public ModelAndView login(User user) throws Exception {
-		if(getCuUser()!=null){
+		if (getCuUser() != null) {
 			return new ModelAndView("redirect:/forward/main.html");
 		}
 
@@ -154,33 +171,34 @@ public class UserController extends BaseController {
 	}
 
 	@RequestMapping("goToModule.do")
-	public ModelAndView goToModule(int projectId){
-		Project p=projectService.selectByPrimaryKey(projectId);
-		UserProject up= new UserProject();
-		User u=(User) session.getAttribute("user");
+	public ModelAndView goToModule(int projectId) {
+		Project p = projectService.selectByPrimaryKey(projectId);
+		UserProject up = new UserProject();
+		User u = (User) session.getAttribute("user");
 		up.setUserId(u.getUserId());
 		up.setProjectId(projectId);
-		UserProject up1=userProjectService.selectByIdAndPro(up);
+		UserProject up1 = userProjectService.selectByIdAndPro(up);
 		mv.addObject("project", p);
 		mv.addObject("up", up1);
 		mv.setViewName("moduleList");
 		return mv;
 	}
+
 	@RequestMapping("goToInterface.do")
-	public ModelAndView goToInterface(int moduleId,int isEdit,String projectName){
+	public ModelAndView goToInterface(int moduleId, int isEdit,
+			String projectName) {
 		String name = null;
 		try {
-			name = new String(projectName.getBytes("iso8859-1"),"utf-8");
+			name = new String(projectName.getBytes("iso8859-1"), "utf-8");
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
-		Module m=moduleService.selectByPrimaryKey(moduleId);
+		Module m = moduleService.selectByPrimaryKey(moduleId);
 		mv.addObject("module", m);
 		mv.addObject("isEdit", isEdit);
 		mv.addObject("projectName", name);
 		mv.setViewName("interfaceList");
 		return mv;
 	}
-	
 
 }
