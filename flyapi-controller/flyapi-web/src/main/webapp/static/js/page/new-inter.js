@@ -40,15 +40,16 @@
 	        },{
 	            field: 'isTrue',
 	            title: '创建时间',
-	            edit:{  
-	                type:'select',//下拉框  
-	                data:[{id:1,text:'true'},{id:2,text:'false'}],  
-	                valueField:'id',  
-	                textField:'text',  
-	                editable : false,  
-	                onSelect:function(val,rec){  
-	                    //console.log(val,rec);  
-	                }  
+	                edit:{
+					    type:'select',//下拉框
+					   // url:'./index.php?r=dictionary/dictionaryInfo&type='+"run",
+					    data:[{id:1,text:'hello'},{id:2,text:'hi'}],
+					    valueField:'id',
+					    textField:'text',
+					    editable : false,
+					    onSelect:function(val,rec){
+					        //console.log(val,rec);
+					    }
 	            },
 	        } ],
 	        striped: true,  //表格显示条纹  
@@ -73,7 +74,7 @@
 				index : 1,
 				row : {
 					name : '描述',
-					isTrue : 1
+					isTrue : {id:3,text:'hello'}
 				}
 			});*/
 /*			$table.bootstrapTable("setFilterData", "isTrue", ["true", "false"]);*/

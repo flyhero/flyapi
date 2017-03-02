@@ -81,7 +81,7 @@
 		                    <value>/user/register.do</value>
 		                    <value>/user/checkUserName.do</value>
 		                    <value>forward/register.html</value>
-		                    <value>resume/public/</value>
+		                    <value>resume/publish/</value>
 		                </list>
 		            </property>
 		        </bean>
