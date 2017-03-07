@@ -214,8 +214,9 @@ var theme = {
 
 
 		var echartBarLine = echarts.init(document.getElementById('mainb'), theme);
+		var startEdit;
 		function edit(upId,isEdit,name,projectId) { 
-			if(userEdit==1){
+			if(startEdit==1){
 			    $("#userName").val(name);
 			    $("#isEdit  option[value='"+isEdit+"'] ").attr("selected",true)
 			    $("#upID").val(upId);
@@ -224,7 +225,7 @@ var theme = {
 			}
 		}  
 		function editModule(id,name,des) {  
-			if(userEdit==1){
+			if(startEdit==1){
 			    $("#editId").val(id);
 			    $("#editName").val(name);
 			    $("#editDes").val(des);
@@ -238,10 +239,10 @@ var theme = {
 				url : "../project/findProjectDetail.do",
 				dataType : "json",
 				data : {
-					"upId":upId
+					"projectId":projectId
 				},
 				success : function(data) {
-					$("#target-inter").append(data.data.targetCount);
+					$("#target-inter").append(formatDate(data.data.targetDate));
 					$("#done-inter").append(data.data.doneCount);
 					$("#created-day").append(getDayToNow(data.data.createTime));
 					$("#creator").append(data.data.userName);
@@ -626,18 +627,18 @@ var theme = {
 			//判断用户对此项目的权限
 			$.ajax({
 				type : 'POST',
-				url : "../project/*",
+				url : "../project/findUserIsEdit.do",
 				dataType : "json",
 				data : {
 					"projectId":projectId,
 					"userId":userId
 				},
 				success : function(data) {
-						if(data.isCreator == 1){
-							/*$("mtop20").append('<li><a><i class="fa fa-user"></i>&nbsp;'+user.userName+'</a></li>');*/
+					startEdit=data.data;  /*全局编辑权限*/
+						if(data.data == 1){
+							$("#managerTeam").append('<a href="#" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#addTeam">添加成员</a>');
+							$("#managerModule").append('<a href="#" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#addModule">添加模块</a>');
 						}
-						
-					
 				}
 
 			});

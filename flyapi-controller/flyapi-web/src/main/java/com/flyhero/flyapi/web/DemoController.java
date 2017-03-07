@@ -1,13 +1,15 @@
 package com.flyhero.flyapi.web;
 
 
-/*import java.io.IOException;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
 import javax.annotation.Resource;
+import javax.jms.Connection;
 import javax.jms.Destination;
 import javax.jms.JMSException;
+import javax.jms.Session;
 import javax.jms.TextMessage;
 import javax.management.MBeanServerConnection;
 import javax.management.remote.JMXConnector;
@@ -22,11 +24,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.flyhero.flyapi.activemq.consumer.ConsumerService;
 import com.flyhero.flyapi.activemq.producer.ProducerService;
-*/
 
-//@Controller
+
+@Controller
 public class DemoController {
-/*
+
 
     //队列名flyapi.activemq
     @Resource(name="demoQueueDestination")
@@ -68,7 +70,6 @@ public class DemoController {
     public ModelAndView queue_receive() throws JMSException {
         System.out.println("------------receive message");
         ModelAndView mv = new ModelAndView();
-        
         TextMessage tm = consumer.receive(demoQueueDestination);
         mv.addObject("textMessage", tm.getText());
         
@@ -77,7 +78,7 @@ public class DemoController {
     }
     
     
-     * ActiveMQ Manager Test
+     /* ActiveMQ Manager Test*/
      
     @RequestMapping(value="/jms",method=RequestMethod.GET)
     public ModelAndView jmsManager() throws IOException {
@@ -93,6 +94,6 @@ public class DemoController {
         return mv;
     }
     
-    */
+    
     
 }

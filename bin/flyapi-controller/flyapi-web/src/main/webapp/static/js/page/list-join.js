@@ -34,20 +34,23 @@
             field: 'project.proDes',
             title: '项目描述'
         },{
-            field: 'project.targetCount',
+            field: 'project.targetDate',
             title: '已完成',
             formatter:function(value,row,index){  
-	             var a=row.project.doneCount/row.project.targetCount*100;
+	      /*       var a=row.project.doneCount/row.project.targetCount*100;*/
+	             
+            	 var a= getDayToNow(row.project.createTime);
+            	 var c=getDaydiff(row.project.targetDate,row.project.createTime);
 	             var b='<div class="progress progress-striped active">'
 	            	   +' <div class="progress-bar progress-bar-success" role="progressbar"'
 	            	         +'aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"'
 	            	         +'style="width: '
-	            	         +a
+	            	         +a*100/c
 	            	         +'%;">'
 	            	    +'</div>'
-	            	    +'<small>已完成'
+/*	            	    +'<small>已完成'
 	            	    +a
-	            	    +'%</small>'
+	            	    +'%</small>'*/
 	            	+'</div>';
              	 return b;  
          	} 
@@ -64,7 +67,7 @@
             	var jid=parseInt(row.project.projectId.toString()+'1');
             	var fid=parseInt(row.project.projectId.toString()+'2');
             	var jurl="'../forward/list_interfaces.html?projectId="+row.project.projectId+"'";
-            	var furl="'../forward/project_detail.html?projectId="+row.project.projectId+"&upId="+row.upId+"&isEdit=0'";
+            	var furl="'../forward/project_detail.html?projectId="+row.project.projectId+"'";
             	var j='<a href="#" onclick="addParentTabs('+jid+','+jtitle+','+jurl+');" class="btn btn-info btn-xs"><i class="fa fa-sliders"></i> 接口 </a> &nbsp;&nbsp;';
             	var f='<a href="#" onclick="addParentTabs('+fid+','+ftitle+','+furl+');" class="btn btn-primary btn-xs"><i class="fa fa-eye"></i> 详情 </a>&nbsp;&nbsp;';
                 var g='<a href="../interface/downloadInter.do?projectId='+row.project.projectId+'" class="btn btn-success btn-xs"><i class="fa fa-download"></i> 下载 </a>';

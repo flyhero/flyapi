@@ -2,8 +2,8 @@ function add(){
     var proVersion= $("#proVersion").val();
     var proName=$("#proName").val();
     var proDes=$("#proDes").val();
-    var targetCount=$("#targetCount").val();
-    if(proVersion!=''&&proName!=''&&proDes!=''&&targetCount!=''){
+    var targetDate=$("#targetDate").val();
+    if(proVersion!=''&&proName!=''&&proDes!=''&&targetDate!=''){
     	$.ajax({
     		type : 'POST',
     		url : "../project/addProject.do",
@@ -12,7 +12,7 @@ function add(){
     			"proVersion" : proVersion,
     			"proName" : proName,
     			"proDes" : proDes,
-    			"targetCount" : targetCount
+    			"targetDate" : targetDate
     		},
     		success : function(data) {
     			if (data.msg == 'ok') {
@@ -68,20 +68,10 @@ $(document).ready(function() {
                     }
                 }
             },
-            targetCount: {
+            targetDate: {
                 validators: {
                     notEmpty: {
                         message: '不能为空'
-                    },
-                    lessThan: {
-                        value: 10000,
-                        inclusive: true,
-                        message: '接口数必须小于10000'
-                    },
-                    greaterThan: {
-                        value: 0,
-                        inclusive: false,
-                        message: '接口数必须大于0'
                     }
                 }
             }

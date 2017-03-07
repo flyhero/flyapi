@@ -15,16 +15,17 @@
         http://www.springframework.org/schema/jms
         http://www.springframework.org/schema/jms/spring-jms-4.1.xsd
         http://activemq.apache.org/schema/core
-        http://activemq.apache.org/schema/core/activemq-core-5.12.1.xsd"
+        http://activemq.apache.org/schema/core/activemq-core-5.7.0.xsd"
         >
     
     <context:component-scan base-package="com.flyhero.flyapi.activemq" />
     <mvc:annotation-driven />
         
     <amq:connectionFactory id="amqConnectionFactory" 
-        brokerURL="tcp://192.168.150.61:61616" 
+        brokerURL="tcp://localhost:61616" 
         userName="admin" 
-        password="admin" />
+        password="admin"
+        useAsyncSend="true" />
     
     <!-- 配置JMS连接工长 -->
     <bean id="connectionFactory"
@@ -32,6 +33,17 @@
         <constructor-arg ref="amqConnectionFactory" />
         <property name="sessionCacheSize" value="100" />
     </bean>
+      <!--连接池-->
+<!--    <bean id="pooledConnectionFactory" class="org.apache.activemq.pool.PooledConnectionFactory">  
+      <property name="connectionFactory" ref="amqConnectionFactory"/>  
+      <property name="maxConnections" value="10"/>  
+  </bean>   -->
+<!--     <bean id="connectionFactory" class="org.springframework.jms.connection.CachingConnectionFactory">  
+      <property name="targetConnectionFactory" ref="pooledConnectionFactory"/>  
+  </bean> -->
+  
+    <!-- 消息转换处理器 -->
+    <bean id="jmsMessageConverter" class="com.flyhero.flyapi.activemq.converter.ObjectConverter" />
     
     <!-- 定义消息队列（Queue） -->
     <bean id="demoQueueDestination" class="org.apache.activemq.command.ActiveMQQueue">
@@ -40,26 +52,42 @@
             <value>flyapi.activemq</value>
         </constructor-arg>
     </bean>
-    
     <!-- 配置JMS模板（Queue），Spring提供的JMS工具类，它发送、接收消息。 -->
     <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+        <!-- 进行持久化 -->
+    	<property name="deliveryMode" value="2" />
         <property name="connectionFactory" ref="connectionFactory" />
         <property name="defaultDestination" ref="demoQueueDestination" />
         <property name="receiveTimeout" value="10000" />
         <!-- true是topic，false是queue，默认是false，此处显示写出false -->
         <property name="pubSubDomain" value="false" />
+        <property name="messageConverter" ref="jmsMessageConverter"></property>
     </bean>
     
     
+    <!-- 发送消息的目的地（一个队列）订阅 -->
+    <bean id="flyTopicDestination" class="org.apache.activemq.command.ActiveMQTopic">
+        <!-- 设置消息队列的名字 -->
+        <constructor-arg index="0" value="flyapi.messages" />
+    </bean>
+    <bean id="topicTemplate" class="org.springframework.jms.core.JmsTemplate">
+    	<property name="deliveryMode" value="2" /><!-- 发送模式  DeliveryMode.NON_PERSISTENT=1:非持久 ; DeliveryMode.PERSISTENT=2:持久-->  
+        <property name="connectionFactory" ref="connectionFactory" />
+        <property name="defaultDestination" ref="flyTopicDestination" />
+        <property name="receiveTimeout" value="10000" />
+        <property name="pubSubDomain" value="true" /> <!-- true是topic，false是queue，默认是false，此处显示写出false -->
+        <property name="messageConverter" ref="jmsMessageConverter"></property>
+    </bean>
+    
     <!-- 配置消息队列监听者（Queue） -->
-    <bean id="queueMessageListener" class="com.flyhero.flyapi.activemq.listener.QueueMessageListener" />
+    <bean id="topicMessageListener" class="com.flyhero.flyapi.activemq.listener.TopicMessageListener" />
     
     <!-- 显示注入消息监听容器（Queue），配置连接工厂，监听的目标是demoQueueDestination，监听器是上面定义的监听器 -->
     <bean id="queueListenerContainer"
         class="org.springframework.jms.listener.DefaultMessageListenerContainer">
         <property name="connectionFactory" ref="connectionFactory" />
-        <property name="destination" ref="demoQueueDestination" />
-        <property name="messageListener" ref="queueMessageListener" />
+        <property name="destination" ref="flyTopicDestination" />
+        <property name="messageListener" ref="topicMessageListener" />
     </bean>
     
  </beans>

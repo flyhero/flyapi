@@ -56,16 +56,6 @@
 					    </div>
 					    <div class="panel-body">
 					        	在线n人
-					    </div>
-					</div>
-				</div>
-				<div class="col-xs-4">
-					<div class="panel panel-info">
-					    <div class="panel-heading">
-					        <h3 class="panel-title">房间一</h3>
-					    </div>
-					    <div class="panel-body">
-					        	在线n人
 					        <a href="#" class="btn btn-default" role="button"> 按钮</a>
 					    </div>
 					</div>

@@ -6,8 +6,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.jms.Destination;
+
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.flyhero.flyapi.activemq.producer.ProducerService;
+import com.flyhero.flyapi.activemq.topic.TopicService;
 import com.flyhero.flyapi.entity.Interfaces;
 import com.flyhero.flyapi.entity.Module;
 import com.flyhero.flyapi.entity.User;
@@ -19,6 +23,7 @@ import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;  
 
@@ -56,38 +61,26 @@ public class TestMyBatis {
    public void testInter(){
    }
    
-/*	@Autowired
-	private IUserProjectService userProjectService;
-	@Autowired
-	private IModuleService moduleService;
-    @Test
-    public void test1(){
-        User user=userService.findById(1);
-        System.out.println(user.toString());
-        logger.debug(user.toString());
-    }
-    @Test
-    public void testUpdate(){
-        User user=new User();
-        user.setUserId(1);
-        System.out.println(userService.updateLoginCount(user));
-    }
-    @Test
-    public void testPw(){
-    	System.out.println(Md5Util.textToMD5L16("123456"));
-    }
-    @Test
-    public void testProject(){
-		List<UserProject> list=userProjectService.selectMyProject(2);
-		for(UserProject u:list){
-//			System.out.println(u.getProject().getCreateTime());
-		}
-			System.out.println(JSONObject.toJSONString(list));
-    }
-    @Test
-	public void testModule(){
-		System.out.println(); 
-		List<Module> list=moduleService.selectByProjectId(1);
-		System.out.println(JSONObject.toJSONString(list));
-	}*/
+   @Autowired  
+   private ProducerService producerService;  
+   @Autowired
+   private TopicService topicService;
+   @Autowired  
+   @Qualifier("demoQueueDestination")  
+   private Destination demoQueueDestination; 
+   
+   @Autowired  
+   @Qualifier("flyTopicDestination")  
+   private Destination flyTopicDestination;  
+     
+   @Test  
+   public void testSend() {  
+	   User user=new User();
+	   user.setUserName("张三");
+/*   		logger.info("this is a test");
+       for (int i=0; i<2; i++) {  
+           producerService.sendMessage(demoQueueDestination, "你好，生产者！这是消息：" + (i+1));  
+       }  */
+       topicService.publish(flyTopicDestination,user);
+   }  
 }  

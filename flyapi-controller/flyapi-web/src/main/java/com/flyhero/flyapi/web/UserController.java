@@ -3,10 +3,14 @@ package com.flyhero.flyapi.web;
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
 
+import javax.jms.Destination;
+
 import com.alibaba.fastjson.JSONObject;
 
 import org.apache.log4j.Logger;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +25,7 @@ import com.flyhero.flyapi.service.InterfaceService;
 import com.flyhero.flyapi.utils.Constant;
 import com.flyhero.flyapi.utils.IPAddressUtil;
 import com.flyhero.flyapi.utils.Md5Util;
+import com.flyhero.flyapi.activemq.producer.ProducerService;
 import com.flyhero.flyapi.entity.Module;
 import com.flyhero.flyapi.entity.Project;
 import com.flyhero.flyapi.entity.User;
@@ -54,6 +59,19 @@ public class UserController extends BaseController {
 	@Autowired
 	private ProjectService projectService;
 
+	
+	   @Autowired  
+	   private ProducerService producerService;  
+	   @Autowired  
+	   private Destination demoQueueDestination;  
+	     
+	   @RequestMapping("mq")
+	   public void testSend() {  
+	   	logger.info("this is a test");
+	       for (int i=0; i<2; i++) {  
+	           producerService.sendMessage(demoQueueDestination, "你好，生产者！这是消息：" + (i+1));  
+	       }  
+	   }  
 	/**
 	 * restful
 	 * @Title: get 

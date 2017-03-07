@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>flyapi登录</title>
+<title>直播间</title>
 <meta name="description"
 	content="" />
 <meta name="viewport"
@@ -38,7 +38,7 @@
 				      </div>
 			</div>
 		</div>
-		<input name="change"  value="弹幕" type="button" onclick="run()">
+		<input name="change"  value="弹幕" type="button" onclick="sendMsg()">
 	</div>
 
     <!-- JS dependencies -->
@@ -57,44 +57,11 @@
 	}
 	return "ok";
 	} 
-/* $(document).ready(function() {
-	$('textarea').on('propertychange input', function(event) {
-		alert($(this).val());
-	});
-}); */
-
-function run(){
-    var item={
-            img:'http://yaseng.org/jquery.barrager.js/static/img/heisenberg.png', //图片 
-            info:'弹幕文字信息', //文字 
-            href:'http://www.yaseng.org', //链接 
-            close:true, //显示关闭按钮 
-            speed:6, //延迟,单位秒,默认6 
-            bottom:70, //距离底部高度,单位px,默认随机 
-            color:'#fff', //颜色,默认白色 
-            old_ie_color:'#000000', //ie低版兼容色,不能与网页背景相同,默认黑色 
-          }
-         $('body').barrager(item);
-    var item1={
-            img:'http://yaseng.org/jquery.barrager.js/static/img/heisenberg.png', //图片 
-            info:'弹幕文字信息', //文字 
-            href:'http://www.yaseng.org', //链接 
-            close:true, //显示关闭按钮 
-            speed:6, //延迟,单位秒,默认6 
-           // bottom:70, //距离底部高度,单位px,默认随机 
-            color:'#fff', //颜色,默认白色 
-            old_ie_color:'#000000', //ie低版兼容色,不能与网页背景相同,默认黑色 
-          }
-         $('body').barrager(item1);
-}
-
-
-</script>
-<%-- <script>
+ 
 	var path = '<%=socketPath%>';
 	var uid = ${sessionScope.user.userId};
 	var websocket;
-	var to=uid==1?2:1;
+	var to=roomId;
 	if ('WebSocket' in window) {
 		websocket = new WebSocket("ws://" + path + "/ws?uid=" + uid);
 	} else if ('MozWebSocket' in window) {
@@ -121,42 +88,32 @@ function run(){
 		console.log(event);
 	}
 	function sendMsg(){
-		var v=$("#msg").val();
-		if(v==""){
+		var msg=$("#msg").val();
+
+		if(msg==""){
 			return;
 		}else{
+		    var item={
+		            img:'http://yaseng.org/jquery.barrager.js/static/img/heisenberg.png', //图片 
+		            info: msg, //文字 
+		            //href:'http://www.yaseng.org', //链接 
+		            close:true, //显示关闭按钮 
+		            speed:6, //延迟,单位秒,默认6 
+		            bottom:70, //距离底部高度,单位px,默认随机 
+		            color:'#fff', //颜色,默认白色 
+		            old_ie_color:'#000000', //ie低版兼容色,不能与网页背景相同,默认黑色 
+		          }
+		    $('body').barrager(item);
+			
 			var data={};
-			data["from"]=from;
+			data["from"]=uid;
 			data["fromName"]=fromName;
 			data["to"]=to;
-			data["text"]=v;
+			data["text"]=msg;
 			websocket.send(JSON.stringify(data));
 		}
 	} 
-</script>--%>
-
-<script type="text/javascript">
-
-        var getting = {
-
-        url:'server.php',
-
-        dataType:'json',
-
-        success:function(res) {
-
-        console.log(res);
-
-}
-
-};
-
-//关键在这里，Ajax定时访问服务端，不断获取数据 ，这里是1秒请求一次。
-
-//window.setInterval(function(){$.ajax(getting)},1000);
-
 </script>
-
  
 </body>
 </html>

@@ -39,4 +39,34 @@
 			}
 
 		}); 
+		
 	}	
+	/*获取版本日志*/
+	$.ajax({
+		type : 'POST',
+		url : "../version/findVersionLog.do",
+		dataType : "json",
+		data:"",
+		success : function(result) {
+			$.each(result.data,function(index,version){
+				$("#versionLog").append('<div class="panel panel-default">'		
+										+'	<div class="panel-heading">'
+										+'		<h4 class="panel-title">'
+										+'			<span class="badge pull-right">'+formatDate(version.createTime)+'</span>'
+										+'				 <a data-toggle="collapse" data-parent="#accordion"'
+										+'				href="#collapse'+index+'"> '+version.versionNum+' </a>&nbsp;&nbsp;&nbsp;&nbsp;'+version.versionDes+''
+										+'		</h4>'
+										+'	</div>'
+										+'	<div id="collapse'+index+'" class="panel-collapse collapse  in">'
+										+'		<div class="panel-body">'
+										+'			<ol id="list'+index+'">'
+										+'			</ol>'
+										+'		</div>'
+										+'	</div>'
+										+'</div>');
+				$.each(version.versionLogList,function(logIndex,log){
+					$("#list"+index).append('<li>'+log.versionLogContent+'</li>');
+				});
+			});
+		}
+	});

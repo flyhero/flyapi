@@ -113,7 +113,7 @@
 							<button id="button" type="button" class="btn btn-default">添加</button>
 							<button id="button1" type="button" class="btn btn-default">生成请求示例</button>
 						</div>
-						<table id="table" data-toggle="table" data-toolbar="#toolbar"
+ 						<table id="table" data-toggle="table" data-toolbar="#toolbar"
 							data-height="240" data-click-to-select="true">
 							<thead>
 								<tr>
@@ -124,8 +124,8 @@
 									<th data-field="des" data-editable="true">说明(以#分隔符，其后为参数值)</th>
 								</tr>
 							</thead>
-						</table>
-					<!-- 	<table class="table table-striped table-bordered table-hover" id="cusTable"></table> -->
+						</table> 
+					<!--  	<table class="table table-striped table-bordered table-hover" id="cusTable"></table>  -->
 					</div>
 				</div>
 				<div class="form-group">

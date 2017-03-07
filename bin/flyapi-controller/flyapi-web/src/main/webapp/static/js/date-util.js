@@ -9,6 +9,14 @@
         oTime = oYear +'-'+ getzf(oMonth) +'-'+ getzf(oDay) +' '+ getzf(oHour) +':'+ getzf(oMin) +':'+getzf(oSen);//最后拼接时间  
         return oTime;  
     };  
+    function formatDate(str){  
+        var oDate = new Date(str),  
+        oYear = oDate.getFullYear(),  
+        oMonth = oDate.getMonth()+1,  
+        oDay = oDate.getDate(),  
+        oTime = oYear +'-'+ getzf(oMonth) +'-'+ getzf(oDay);//最后拼接时间  
+        return oTime;  
+    };  
     function getMonth(str){
         var oDate = new Date(str);
         var oMonth = oDate.getMonth()+1;
@@ -43,3 +51,9 @@
     	var day = parseInt(total / (24*60*60));//计算整数天数
 		return day;
     }
+
+	function setIframeHeight() { 
+		var iframeHeight = $("#ifrm").contents().find("body").height();
+		$("#ifrm").height(iframeHeight);
+	} 
+	 
