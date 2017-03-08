@@ -26,9 +26,9 @@ import com.flyhero.flyapi.activemq.consumer.ConsumerService;
 import com.flyhero.flyapi.activemq.producer.ProducerService;
 
 
-@Controller
+/*@Controller*/
 public class DemoController {
-
+/*
 
     //队列名flyapi.activemq
     @Resource(name="demoQueueDestination")
@@ -78,7 +78,7 @@ public class DemoController {
     }
     
     
-     /* ActiveMQ Manager Test*/
+      ActiveMQ Manager Test
      
     @RequestMapping(value="/jms",method=RequestMethod.GET)
     public ModelAndView jmsManager() throws IOException {
@@ -95,5 +95,5 @@ public class DemoController {
     }
     
     
-    
+    */
 }

@@ -54,13 +54,22 @@ public class SystemWebSocketHandler implements WebSocketHandler {
 			if(message.getPayloadLength()==0)return;
 			Message msg=JSONObject.parseObject(message.getPayload().toString(),Message.class);
 			msg.setDate(new Date());
-			if (msg.getTo() == -1){ //发送给指定某些人
+			switch (msg.getType()) {
+			case 1:
+				if (msg.getTo() == -1){ //发送给指定某些人
+					
+				}else if (msg.getTo() == 0){ //发送给所有人
+					broadcast(new TextMessage(JSON.toJSONString(msg)));
+				}else { //发送给指定某个人
+					sendMessageToUser(msg.getTo(), new TextMessage(JSON.toJSONString(msg)));
+				}
+				break;
+
+			default:
 				
-			}else if (msg.getTo() == 0){ //发送给所有人
-				broadcast(new TextMessage(JSON.toJSONString(msg)));
-			}else { //发送给指定某个人
-				sendMessageToUser(msg.getTo(), new TextMessage(JSON.toJSONString(msg)));
+				break;
 			}
+
 			
 			
 	}

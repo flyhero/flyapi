@@ -68,7 +68,7 @@ public class ModuleController extends BaseController{
 				up.setUserId(getCuUser().getUserId());
 				up.setProjectId(module.getProjectId());
 				List<TeamMemberPojo>  list=userProjectService.findTeamMembers(up);
-				Message msg = new Message(-1L, "系统广播", 0L, getCuUser().getUserName()+"新建："+module.getModuleName()+"模块", new Date());
+				Message msg = new Message(-1L, "系统广播", 0L,1, getCuUser().getUserName()+"新建："+module.getModuleName()+"模块", new Date());
 				handler.sendMessageToTeam(list, new TextMessage(JSON.toJSONString(msg)));
 			} catch (IOException e) {
 				e.printStackTrace();

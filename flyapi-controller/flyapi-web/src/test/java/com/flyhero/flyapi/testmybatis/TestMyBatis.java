@@ -10,8 +10,8 @@ import javax.jms.Destination;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.flyhero.flyapi.activemq.producer.ProducerService;
-import com.flyhero.flyapi.activemq.topic.TopicService;
+/*import com.flyhero.flyapi.activemq.producer.ProducerService;
+import com.flyhero.flyapi.activemq.topic.TopicService;*/
 import com.flyhero.flyapi.entity.Interfaces;
 import com.flyhero.flyapi.entity.Module;
 import com.flyhero.flyapi.entity.User;
@@ -61,7 +61,7 @@ public class TestMyBatis {
    public void testInter(){
    }
    
-   @Autowired  
+/*   @Autowired  
    private ProducerService producerService;  
    @Autowired
    private TopicService topicService;
@@ -77,10 +77,10 @@ public class TestMyBatis {
    public void testSend() {  
 	   User user=new User();
 	   user.setUserName("张三");
-/*   		logger.info("this is a test");
+   		logger.info("this is a test");
        for (int i=0; i<2; i++) {  
            producerService.sendMessage(demoQueueDestination, "你好，生产者！这是消息：" + (i+1));  
-       }  */
+       }  
        topicService.publish(flyTopicDestination,user);
-   }  
+   }  */
 }  

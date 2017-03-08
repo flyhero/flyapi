@@ -59,7 +59,7 @@ public class UserController extends BaseController {
 	@Autowired
 	private ProjectService projectService;
 
-	
+/*	
 	   @Autowired  
 	   private ProducerService producerService;  
 	   @Autowired  
@@ -71,7 +71,7 @@ public class UserController extends BaseController {
 	       for (int i=0; i<2; i++) {  
 	           producerService.sendMessage(demoQueueDestination, "你好，生产者！这是消息：" + (i+1));  
 	       }  
-	   }  
+	   }  */
 	/**
 	 * restful
 	 * @Title: get 

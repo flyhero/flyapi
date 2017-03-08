@@ -60,8 +60,9 @@
  
 	var path = '<%=socketPath%>';
 	var uid = ${sessionScope.user.userId};
+	var fromName = ${sessionScope.user.userName};
 	var websocket;
-	var to=roomId;
+	var to=liveId;
 	if ('WebSocket' in window) {
 		websocket = new WebSocket("ws://" + path + "/ws?uid=" + uid);
 	} else if ('MozWebSocket' in window) {
@@ -90,9 +91,7 @@
 	function sendMsg(){
 		var msg=$("#msg").val();
 
-		if(msg==""){
-			return;
-		}else{
+		if(msg != ""){
 		    var item={
 		            img:'http://yaseng.org/jquery.barrager.js/static/img/heisenberg.png', //图片 
 		            info: msg, //文字 
@@ -108,6 +107,7 @@
 			var data={};
 			data["from"]=uid;
 			data["fromName"]=fromName;
+			data["type"]=2;
 			data["to"]=to;
 			data["text"]=msg;
 			websocket.send(JSON.stringify(data));

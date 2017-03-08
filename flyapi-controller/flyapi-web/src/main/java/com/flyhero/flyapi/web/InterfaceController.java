@@ -89,7 +89,7 @@ public class InterfaceController extends BaseController {
 				up.setProjectId(projectId);
 				List<TeamMemberPojo> list = userProjectService
 						.findTeamMembers(up);
-				Message msg = new Message(-1L, "系统广播", 0L, getCuUser()
+				Message msg = new Message(-1L, "系统广播", 0L,1, getCuUser()
 						.getUserName()
 						+ "新建："
 						+ interfaces.getInterName()

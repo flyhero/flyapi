@@ -18,7 +18,7 @@
         http://activemq.apache.org/schema/core/activemq-core-5.7.0.xsd"
         >
     
-    <context:component-scan base-package="com.flyhero.flyapi.activemq" />
+<!--     <context:component-scan base-package="com.flyhero.flyapi.activemq" /> -->
     <mvc:annotation-driven />
         
     <amq:connectionFactory id="amqConnectionFactory" 
@@ -63,7 +63,6 @@
         <property name="pubSubDomain" value="false" />
         <property name="messageConverter" ref="jmsMessageConverter"></property>
     </bean>
-    
     
     <!-- 发送消息的目的地（一个队列）订阅 -->
     <bean id="flyTopicDestination" class="org.apache.activemq.command.ActiveMQTopic">
