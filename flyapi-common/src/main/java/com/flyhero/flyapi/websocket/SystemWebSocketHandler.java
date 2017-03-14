@@ -43,6 +43,7 @@ public class SystemWebSocketHandler implements WebSocketHandler {
 			throws Exception {
 		Long uid = (Long) session.getAttributes().get("uid");
 		if (userSocketSessionMap.get(uid) == null) {
+			System.out.println("建立连接："+uid);
 			userSocketSessionMap.put(uid, session);
 		}
 	}
