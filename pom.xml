@@ -209,7 +209,7 @@
 			<dependency>
 				<groupId>com.alibaba</groupId>
 				<artifactId>fastjson</artifactId>
-				<version>1.1.41</version>
+				<version>1.2.28</version>
 			</dependency>
 			<!-- spring aop 支持jar -->
 			<dependency>
