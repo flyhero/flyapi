@@ -1,4 +1,4 @@
-package com.flyhero.flyapi.service;
+package com.flyhero.flyapi.service.impl;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ import com.flyhero.flyapi.dao.WebInfoMapper;
 import com.flyhero.flyapi.entity.WebInfo;
 
 @Service
-public class WebInfoService{
+public class WebInfoServiceImpl{
 	@Autowired
 	private WebInfoMapper webInfoMapper;
 

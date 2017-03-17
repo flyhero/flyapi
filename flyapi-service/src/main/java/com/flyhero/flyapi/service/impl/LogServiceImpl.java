@@ -1,4 +1,4 @@
-package com.flyhero.flyapi.service;
+package com.flyhero.flyapi.service.impl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,7 +15,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
 @Service
-public class LogService {
+public class LogServiceImpl {
 	
 	@Autowired
 	private OperateLogMapper operateLogMapper; 

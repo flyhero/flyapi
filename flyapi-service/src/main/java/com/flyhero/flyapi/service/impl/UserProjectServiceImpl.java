@@ -1,4 +1,4 @@
-package com.flyhero.flyapi.service;
+package com.flyhero.flyapi.service.impl;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ import com.github.pagehelper.PageInfo;
 import com.sun.org.apache.bcel.internal.generic.NEW;
 
 @Service
-public class UserProjectService {
+public class UserProjectServiceImpl {
 
 	@Autowired
 	private UserProjectMapper userProjectMapper;

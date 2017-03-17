@@ -27,10 +27,10 @@ import com.flyhero.flyapi.pojo.InterPojo;
 import com.flyhero.flyapi.pojo.JSONResult;
 import com.flyhero.flyapi.pojo.Message;
 import com.flyhero.flyapi.pojo.TeamMemberPojo;
-import com.flyhero.flyapi.service.InterfaceService;
-import com.flyhero.flyapi.service.LogService;
-import com.flyhero.flyapi.service.ProjectService;
-import com.flyhero.flyapi.service.UserProjectService;
+import com.flyhero.flyapi.service.impl.InterfaceServiceImpl;
+import com.flyhero.flyapi.service.impl.LogServiceImpl;
+import com.flyhero.flyapi.service.impl.ProjectServiceImpl;
+import com.flyhero.flyapi.service.impl.UserProjectServiceImpl;
 import com.flyhero.flyapi.utils.Constant;
 import com.flyhero.flyapi.utils.HttpClientUtil;
 import com.flyhero.flyapi.websocket.SystemWebSocketHandler;
@@ -48,13 +48,13 @@ import com.github.pagehelper.PageInfo;
 public class InterfaceController extends BaseController {
 
 	@Autowired
-	private InterfaceService interfaceService;
+	private InterfaceServiceImpl interfaceService;
 	@Autowired
-	private LogService LogService;
+	private LogServiceImpl LogService;
 	@Autowired
-	private ProjectService projectService;
+	private ProjectServiceImpl projectService;
 	@Autowired
-	private UserProjectService userProjectService;
+	private UserProjectServiceImpl userProjectService;
 	@Resource
 	private SystemWebSocketHandler handler;
 

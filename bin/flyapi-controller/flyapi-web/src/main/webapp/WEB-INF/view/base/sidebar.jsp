@@ -60,6 +60,9 @@
 				<li><a href="javascript:void(0);" data-addtab="jsonon4"
 						url="../forward/go.html?name=jsonon"><i class="glyphicon glyphicon-fire"></i> 团队技术文章</a>
 				</li>
+				<li><a href="javascript:void(0);" data-addtab="jsonon5"
+						url="../forward/go.html?name=list_book"><i class="glyphicon glyphicon-fire"></i> 图书交换</a>
+				</li>
 				
 		</ul>
 	</div>

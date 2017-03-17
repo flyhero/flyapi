@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.flyhero.flyapi.entity.OperateLog;
 import com.flyhero.flyapi.pojo.JSONResult;
-import com.flyhero.flyapi.service.LogService;
+import com.flyhero.flyapi.service.impl.LogServiceImpl;
 import com.flyhero.flyapi.utils.Constant;
 import com.github.pagehelper.PageInfo;
 
@@ -27,7 +27,7 @@ import com.github.pagehelper.PageInfo;
 public class LogController extends BaseController{
 
 	@Autowired
-	private LogService logService;
+	private LogServiceImpl logService;
 	
 	@RequestMapping("findLog.do")
 	@ResponseBody

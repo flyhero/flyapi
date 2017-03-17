@@ -1,4 +1,4 @@
-package com.flyhero.flyapi.service;
+package com.flyhero.flyapi.service.impl;
 
 
 import java.util.List;
@@ -13,7 +13,7 @@ import com.github.pagehelper.PageInfo;
 
 
 @Service
-public class UserService{
+public class UserServiceImpl{
 	@Autowired
 	private UserMapper userMapper;
 

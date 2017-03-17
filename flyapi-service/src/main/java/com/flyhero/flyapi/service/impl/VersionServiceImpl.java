@@ -1,4 +1,4 @@
-package com.flyhero.flyapi.service;
+package com.flyhero.flyapi.service.impl;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ import com.flyhero.flyapi.dao.VersionMapper;
 import com.flyhero.flyapi.entity.Version;
 
 @Service
-public class VersionService{
+public class VersionServiceImpl{
 	@Autowired
 	private VersionMapper versionMapper;
 

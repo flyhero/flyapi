@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.flyhero.flyapi.entity.DataBase;
 import com.flyhero.flyapi.entity.TableInfo;
 import com.flyhero.flyapi.pojo.JSONResult;
-import com.flyhero.flyapi.service.DataBaseService;
-import com.flyhero.flyapi.service.TableInfoService;
+import com.flyhero.flyapi.service.impl.DataBaseServiceImpl;
+import com.flyhero.flyapi.service.impl.TableInfoServiceImpl;
 import com.flyhero.flyapi.utils.Constant;
 /**
  * 数据字典控制器
@@ -26,10 +26,10 @@ import com.flyhero.flyapi.utils.Constant;
 public class DataBaseController extends BaseController{
 	
 	@Autowired
-	private DataBaseService dataBaseService;
+	private DataBaseServiceImpl dataBaseService;
 	
 	@Autowired
-	private TableInfoService tableInfoService;
+	private TableInfoServiceImpl tableInfoService;
 	
 	/**
 	 * 添加数据字典

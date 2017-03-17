@@ -39,11 +39,11 @@ public class TestMyBatis {
     private static Logger logger = Logger.getLogger(TestMyBatis.class);  
 
    @Autowired
-   private UserService userService;
+   private UserServiceImpl userService;
    @Autowired
-   private UserProjectService userProjectService;
+   private UserProjectServiceImpl userProjectService;
    @Autowired
-   private InterfaceService interfaceService;
+   private InterfaceServiceImpl interfaceService;
    @Test
    public void testPage(){
 	   PageInfo<User> pageInfo= userService.queryByPage(1, 10);

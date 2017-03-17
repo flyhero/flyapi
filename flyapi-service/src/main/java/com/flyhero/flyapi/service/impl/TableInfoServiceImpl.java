@@ -1,4 +1,4 @@
-package com.flyhero.flyapi.service;
+package com.flyhero.flyapi.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +17,7 @@ import com.flyhero.flyapi.entity.TableInfo;
  *
  */
 @Service
-public class TableInfoService {
+public class TableInfoServiceImpl {
 	
 	@Autowired
 	private TableInfoMapper tableInfoMapper;

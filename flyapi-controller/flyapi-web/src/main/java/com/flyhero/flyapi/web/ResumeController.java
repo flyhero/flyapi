@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.flyhero.flyapi.entity.Resume;
 import com.flyhero.flyapi.pojo.JSONResult;
-import com.flyhero.flyapi.service.ResumeService;
+import com.flyhero.flyapi.service.impl.ResumeServiceImpl;
 import com.flyhero.flyapi.utils.Constant;
 
 /**
@@ -27,7 +27,7 @@ import com.flyhero.flyapi.utils.Constant;
 public class ResumeController extends BaseController{
 	
 	@Autowired
-	private ResumeService resumeService;
+	private ResumeServiceImpl resumeService;
 	/**
 	 * 前往简历页
 	 * @Title: goResumeHtml   

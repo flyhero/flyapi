@@ -1,4 +1,4 @@
-package com.flyhero.flyapi.service;
+package com.flyhero.flyapi.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -7,7 +7,7 @@ import com.flyhero.flyapi.dao.ResumeMapper;
 import com.flyhero.flyapi.entity.Resume;
 
 @Service
-public class ResumeService {
+public class ResumeServiceImpl {
 
 	@Autowired
 	private ResumeMapper resumeMapper;

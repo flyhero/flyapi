@@ -1,4 +1,4 @@
-package com.flyhero.flyapi.service;
+package com.flyhero.flyapi.service.impl;
 
 import java.io.File;
 import java.io.IOException;
@@ -22,7 +22,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
 @Service
-public class InterfaceService {
+public class InterfaceServiceImpl {
 
 	@Autowired
 	private InterfacesMapper interfacesMapper;

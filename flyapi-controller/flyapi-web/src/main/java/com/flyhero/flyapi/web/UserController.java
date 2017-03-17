@@ -29,11 +29,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.flyhero.flyapi.pojo.JSONResult;
 import com.flyhero.flyapi.pojo.LoginResult;
-import com.flyhero.flyapi.service.ModuleService;
-import com.flyhero.flyapi.service.ProjectService;
-import com.flyhero.flyapi.service.UserProjectService;
-import com.flyhero.flyapi.service.UserService;
-import com.flyhero.flyapi.service.InterfaceService;
+import com.flyhero.flyapi.service.impl.ModuleServiceImpl;
+import com.flyhero.flyapi.service.impl.ProjectServiceImpl;
+import com.flyhero.flyapi.service.impl.UserProjectServiceImpl;
+import com.flyhero.flyapi.service.impl.UserServiceImpl;
+import com.flyhero.flyapi.service.impl.InterfaceServiceImpl;
 import com.flyhero.flyapi.utils.Constant;
 import com.flyhero.flyapi.utils.IPAddressUtil;
 import com.flyhero.flyapi.utils.LoginEnum;
@@ -62,15 +62,15 @@ public class UserController extends BaseController {
 	private Logger logger = Logger.getLogger(UserController.class);
 
 	@Autowired
-	private UserService userService;
+	private UserServiceImpl userService;
 	@Autowired
-	private UserProjectService userProjectService;
+	private UserProjectServiceImpl userProjectService;
 	@Autowired
-	private ModuleService moduleService;
+	private ModuleServiceImpl moduleService;
 	@Autowired
-	private InterfaceService InterfaceService;
+	private InterfaceServiceImpl InterfaceService;
 	@Autowired
-	private ProjectService projectService;
+	private ProjectServiceImpl projectService;
 
 /*	
 	   @Autowired  

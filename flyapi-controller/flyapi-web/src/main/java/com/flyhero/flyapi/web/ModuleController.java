@@ -20,9 +20,9 @@ import com.flyhero.flyapi.entity.UserProject;
 import com.flyhero.flyapi.pojo.JSONResult;
 import com.flyhero.flyapi.pojo.Message;
 import com.flyhero.flyapi.pojo.TeamMemberPojo;
-import com.flyhero.flyapi.service.LogService;
-import com.flyhero.flyapi.service.ModuleService;
-import com.flyhero.flyapi.service.UserProjectService;
+import com.flyhero.flyapi.service.impl.LogServiceImpl;
+import com.flyhero.flyapi.service.impl.ModuleServiceImpl;
+import com.flyhero.flyapi.service.impl.UserProjectServiceImpl;
 import com.flyhero.flyapi.utils.Constant;
 import com.flyhero.flyapi.websocket.SystemWebSocketHandler;
 
@@ -38,11 +38,11 @@ import com.flyhero.flyapi.websocket.SystemWebSocketHandler;
 public class ModuleController extends BaseController{
 
 	@Autowired
-	private ModuleService moduleService;
+	private ModuleServiceImpl moduleService;
 	@Autowired
-	private LogService LogService;
+	private LogServiceImpl LogService;
 	@Autowired
-	private UserProjectService userProjectService;
+	private UserProjectServiceImpl userProjectService;
 	@Resource
 	private SystemWebSocketHandler handler;
 	/**

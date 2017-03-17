@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.flyhero.flyapi.entity.WebInfo;
 import com.flyhero.flyapi.pojo.JSONResult;
-import com.flyhero.flyapi.service.WebInfoService;
+import com.flyhero.flyapi.service.impl.WebInfoServiceImpl;
 import com.flyhero.flyapi.utils.Constant;
 
 @Controller
@@ -17,7 +17,7 @@ import com.flyhero.flyapi.utils.Constant;
 public class WebInfoController extends BaseController{
 
 	@Autowired
-	private WebInfoService webInfoService;
+	private WebInfoServiceImpl webInfoService;
 	
 	/**
 	 * 根据语言获取web信息

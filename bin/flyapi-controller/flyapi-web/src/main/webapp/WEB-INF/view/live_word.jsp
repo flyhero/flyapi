@@ -29,7 +29,7 @@
 		<div class="panel-body">
 			<div class="row">
 				      <div class="col-xs-8">
-				         <textarea rows="40" style="width: 100%">直播内容</textarea>
+				         <textarea name="live_content" rows="40" style="width: 100%">直播内容</textarea>
 				      </div>
 				      <div class="col-xs-4">
 				      	 <textarea rows="20" style="width: 100%">聊天内容</textarea>
@@ -57,11 +57,15 @@
 	}
 	return "ok";
 	} 
- 
+	 $('textarea[name="live_content"]').bind('input propertychange', function() {
+		    console.log($(this).val());
+		});
 	var path = '<%=socketPath%>';
 	var uid = ${sessionScope.user.userId};
+	var fromName = 'admin';
 	var websocket;
-	var to=roomId;
+	/* var to=liveId; */
+	var to=3;
 	if ('WebSocket' in window) {
 		websocket = new WebSocket("ws://" + path + "/ws?uid=" + uid);
 	} else if ('MozWebSocket' in window) {
@@ -90,9 +94,7 @@
 	function sendMsg(){
 		var msg=$("#msg").val();
 
-		if(msg==""){
-			return;
-		}else{
+		if(msg != ""){
 		    var item={
 		            img:'http://yaseng.org/jquery.barrager.js/static/img/heisenberg.png', //图片 
 		            info: msg, //文字 
@@ -105,12 +107,13 @@
 		          }
 		    $('body').barrager(item);
 			
-			var data={};
+/* 			var data={};
 			data["from"]=uid;
 			data["fromName"]=fromName;
+			data["type"]=2;
 			data["to"]=to;
 			data["text"]=msg;
-			websocket.send(JSON.stringify(data));
+			websocket.send(JSON.stringify(data)); */
 		}
 	} 
 </script>

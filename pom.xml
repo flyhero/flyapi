@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.flyhero.flyapi</groupId>
@@ -17,14 +16,14 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<!-- spring版本号 -->
+		<!-- spring版本�? -->
 		<spring.version>4.1.7.RELEASE</spring.version>
-		<!-- spring版本号 -->
+		<!-- spring版本�? -->
 		<shrio.version>1.3.2</shrio.version>
-		<!-- mybatis版本号 -->
+		<!-- mybatis版本�? -->
 		<mybatis.version>3.2.6</mybatis.version>
 		<mybatisspring.version>1.2.2</mybatisspring.version>
-		<!-- log4j日志文件管理包版本 -->
+		<!-- log4j日志文件管理包版�? -->
 		<slf4j.version>1.7.7</slf4j.version>
 		<log4j.version>1.2.17</log4j.version>
 	</properties>
@@ -34,7 +33,8 @@
 		<module>flyapi-controller</module>
 		<module>flyapi-common</module>
 		<module>flyapi-entity</module>
-	</modules>
+    <module>flyapi-service-api</module>
+  </modules>
 
 	<!-- maven依赖 -->
 	<dependencyManagement>
@@ -69,7 +69,7 @@
 				<artifactId>flyapi-entity</artifactId>
 				<version>${project.version}</version>
 			</dependency>
-			<!-- Scribe是一个简单的Java OAuth库，通过Scribe，可以很方便的实现OAuth验证的功能 -->
+			<!-- Scribe是一个简单的Java OAuth库，通过Scribe，可以很方便的实现OAuth验证的功�? -->
 			<dependency>
 				<groupId>org.scribe</groupId>
 				<artifactId>scribe</artifactId>
@@ -83,7 +83,7 @@
 			</dependency>
 			<!-- <dependency> <groupId>net.sourceforge.pinyin4j</groupId> <artifactId>pinyin4j</artifactId> 
 				<version>2.5.0</version> </dependency> -->
-			<!-- 2.数据库 -->
+			<!-- 2.数据�? -->
 			<dependency>
 				<groupId>mysql</groupId>
 				<artifactId>mysql-connector-java</artifactId>
@@ -141,7 +141,7 @@
 				<artifactId>spring-context</artifactId>
 				<version>${spring.version}</version>
 			</dependency>
-			<!-- 2)Spring DAO层 -->
+			<!-- 2)Spring DAO�? -->
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-jdbc</artifactId>
@@ -190,7 +190,7 @@
 				<artifactId>druid</artifactId>
 				<version>1.0.9</version>
 			</dependency>
-			<!-- 日志文件管理包 -->
+			<!-- 日志文件管理�? -->
 			<!-- log start -->
 			<dependency>
 				<groupId>log4j</groupId>
@@ -209,7 +209,7 @@
 			<dependency>
 				<groupId>com.alibaba</groupId>
 				<artifactId>fastjson</artifactId>
-				<version>1.2.28</version>
+				<version>1.2.29</version>
 			</dependency>
 			<!-- spring aop 支持jar -->
 			<dependency>
@@ -217,7 +217,7 @@
 				<artifactId>aspectjweaver</artifactId>
 				<version>1.8.9</version>
 			</dependency>
-			<!-- Map工具类 -->
+			<!-- Map工具�? -->
 			<dependency>
 				<groupId>commons-collections</groupId>
 				<artifactId>commons-collections</artifactId>
@@ -235,7 +235,7 @@
 				<artifactId>jackson-mapper-asl</artifactId>
 				<version>1.9.13</version>
 			</dependency>
-			<!-- 上传组件包 -->
+			<!-- 上传组件�? -->
 			<dependency>
 				<groupId>commons-fileupload</groupId>
 				<artifactId>commons-fileupload</artifactId>
@@ -356,7 +356,7 @@
 				<version>${spring.version}</version>
 			</dependency>
 			
-		    <!-- shiro核心包 -->
+		    <!-- shiro核心�? -->
 		    <dependency>
 		        <groupId>org.apache.shiro</groupId>
 		        <artifactId>shiro-core</artifactId>

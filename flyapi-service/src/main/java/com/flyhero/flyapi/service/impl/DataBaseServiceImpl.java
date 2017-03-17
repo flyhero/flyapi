@@ -1,4 +1,4 @@
-package com.flyhero.flyapi.service;
+package com.flyhero.flyapi.service.impl;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import com.flyhero.flyapi.entity.DataBase;
 import com.flyhero.flyapi.utils.DESUtil;
 
 @Service
-public class DataBaseService {
+public class DataBaseServiceImpl {
 
 	@Autowired
 	private DataBaseMapper dataBaseMapper;

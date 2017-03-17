@@ -1,4 +1,4 @@
-package com.flyhero.flyapi.service;
+package com.flyhero.flyapi.service.impl;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ import com.flyhero.flyapi.dao.ModuleMapper;
 import com.flyhero.flyapi.entity.Module;
 
 @Service
-public class ModuleService{
+public class ModuleServiceImpl{
 
 	@Autowired
 	private ModuleMapper moduleMapper;

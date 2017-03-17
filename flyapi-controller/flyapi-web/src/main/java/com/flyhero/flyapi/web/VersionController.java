@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.flyhero.flyapi.entity.Version;
 import com.flyhero.flyapi.pojo.JSONResult;
-import com.flyhero.flyapi.service.VersionService;
+import com.flyhero.flyapi.service.impl.VersionServiceImpl;
 import com.flyhero.flyapi.utils.Constant;
 /**
  * 版本控制器
@@ -23,7 +23,7 @@ import com.flyhero.flyapi.utils.Constant;
 public class VersionController extends BaseController{
 
 	@Autowired
-	private VersionService versionService;
+	private VersionServiceImpl versionService;
 	
 	/**
 	 * 获取版本日志

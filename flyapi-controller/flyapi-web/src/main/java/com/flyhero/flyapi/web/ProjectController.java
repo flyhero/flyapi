@@ -15,10 +15,10 @@ import com.flyhero.flyapi.entity.UserProject;
 import com.flyhero.flyapi.pojo.JSONResult;
 import com.flyhero.flyapi.pojo.ProjectDetailpojo;
 import com.flyhero.flyapi.pojo.TeamMemberPojo;
-import com.flyhero.flyapi.service.LogService;
-import com.flyhero.flyapi.service.ProjectService;
-import com.flyhero.flyapi.service.UserProjectService;
-import com.flyhero.flyapi.service.UserService;
+import com.flyhero.flyapi.service.impl.LogServiceImpl;
+import com.flyhero.flyapi.service.impl.ProjectServiceImpl;
+import com.flyhero.flyapi.service.impl.UserProjectServiceImpl;
+import com.flyhero.flyapi.service.impl.UserServiceImpl;
 import com.flyhero.flyapi.utils.Constant;
 import com.github.pagehelper.PageInfo;
 /**
@@ -33,13 +33,13 @@ import com.github.pagehelper.PageInfo;
 public class ProjectController extends BaseController{
 
 	@Autowired
-	private ProjectService projectService;
+	private ProjectServiceImpl projectService;
 	@Autowired
-	private UserProjectService userProjectService;
+	private UserProjectServiceImpl userProjectService;
 	@Autowired
-	private UserService userService;
+	private UserServiceImpl userService;
 	@Autowired
-	private LogService LogService;
+	private LogServiceImpl LogService;
 	
 	/**
 	 * 我创建的项目
