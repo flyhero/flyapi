@@ -20,10 +20,6 @@ import com.flyhero.flyapi.service.LogService;
 import com.flyhero.flyapi.service.ProjectService;
 import com.flyhero.flyapi.service.UserProjectService;
 import com.flyhero.flyapi.service.UserService;
-import com.flyhero.flyapi.service.impl.LogServiceImpl;
-import com.flyhero.flyapi.service.impl.ProjectServiceImpl;
-import com.flyhero.flyapi.service.impl.UserProjectServiceImpl;
-import com.flyhero.flyapi.service.impl.UserServiceImpl;
 import com.flyhero.flyapi.utils.Constant;
 import com.github.pagehelper.PageInfo;
 
@@ -223,15 +219,14 @@ public class ProjectController extends BaseController{
 	
 	/**
 	 * 添加项目成员
-	 * @Title: addMember  
+	 * @Title: addMember
+	 * @date 2017年3月20日 下午5:15:58 
 	 * @author flyhero(http://flyhero.top)
-	 * @date 2016年11月8日 下午4:20:07 
-	 * @param @param userName
-	 * @param @param projectId
-	 * @param @param isEdit
-	 * @param @return    设定文件 
-	 * @return JSONResult    返回类型 
-	 * @throws
+	 * @param userName
+	 * @param projectId
+	 * @param isEdit
+	 * @return
+	 * @return: JSONResult
 	 */
 	@RequestMapping("addMember.do")
 	@ResponseBody
@@ -251,18 +246,16 @@ public class ProjectController extends BaseController{
 			logService.addLog(log);
 			return new JSONResult(Constant.MSG_OK, Constant.CODE_200);
 		}
-		return new JSONResult(Constant.MSG_ERROR, Constant.CODE_200);
+		return JSONResult.ok();
 	}
-
 	/**
 	 * 查询项目成员
-	 * @Title: findTeamMembers  
-	 * @author flyhero(http://flyhero.top)
+	 * @Title: findTeamMembers
 	 * @date 2016年11月8日 下午5:49:05 
-	 * @param @param up
-	 * @param @return    设定文件 
-	 * @return JSONResult    返回类型 
-	 * @throws
+	 * @author flyhero(http://flyhero.top)
+	 * @param up
+	 * @return
+	 * @return: JSONResult
 	 */
 	@RequestMapping("findTeamMembers.do")
 	@ResponseBody
@@ -271,18 +264,17 @@ public class ProjectController extends BaseController{
 		OperateLog log=new OperateLog(getCuUser().getUserId(),getCuUser().getUserName(), up.getProjectId(), Constant.TYPE_SELECT,
 				Constant.CLASS_TEAM, Constant.NAME_TEAM, "查询：项目成员", JSONObject.toJSONString(up));
 		logService.addLog(log);
-		return new JSONResult(Constant.MSG_OK, Constant.CODE_200, list);
+		return JSONResult.ok(list);
 	}
 	/**
 	 * 删除团队成员
-	 * @Title: deleteTeamMembers 
-	 * @author flyhero(http://flyhero.top)  
-	 * @date 2016年11月29日 上午11:43:59 
-	 * @param @param up
-	 * @param @param name
-	 * @param @return   
-	 * @return JSONResult    
-	 * @throws
+	 * @Title: deleteTeamMembers
+	 * @date  2016年11月29日 上午11:43:59 
+	 * @author flyhero(http://flyhero.top)
+	 * @param up
+	 * @param name
+	 * @return
+	 * @return: JSONResult
 	 */
 	@RequestMapping("deleteTeamMembers.do")
 	@ResponseBody
@@ -298,14 +290,13 @@ public class ProjectController extends BaseController{
 	}
 	/**
 	 * 更新成员权限
-	 * @Title: updateMemberPermission  
-	 * @author flyhero(http://flyhero.top)
+	 * @Title: updateMemberPermission
 	 * @date 2016年11月10日 上午11:00:52 
-	 * @param @param up
-	 * @param @param name
-	 * @param @return    
-	 * @return JSONResult    返回类型 
-	 * @throws
+	 * @author flyhero(http://flyhero.top)
+	 * @param up
+	 * @param name
+	 * @return
+	 * @return: JSONResult
 	 */
 	@RequestMapping("updateMemberPermission.do")
 	@ResponseBody
@@ -317,20 +308,19 @@ public class ProjectController extends BaseController{
 			OperateLog log=new OperateLog(getCuUser().getUserId(),getCuUser().getUserName(), id, Constant.TYPE_UPDATE,
 					Constant.CLASS_TEAM, Constant.NAME_TEAM, "更新："+name+"的权限", JSONObject.toJSONString(up));
 			logService.addLog(log);
-			return new JSONResult(Constant.MSG_OK, Constant.CODE_200);
+			return JSONResult.error();
 		}
-		return new JSONResult(Constant.MSG_ERROR, Constant.CODE_200);
+		return JSONResult.ok();
 		
 	}
 	/**
 	 * 获取用户对某个项目的权限
-	 * @Title: findUserIsEdit 
-	 * @author flyhero(http://flyhero.top)  
+	 * @Title: findUserIsEdit
 	 * @date 2016年11月24日 下午1:38:30 
-	 * @param @param up
-	 * @param @return   
-	 * @return JSONResult    
-	 * @throws
+	 * @author flyhero(http://flyhero.top)
+	 * @param up
+	 * @return
+	 * @return: JSONResult
 	 */
 	@ResponseBody
 	@RequestMapping("findUserIsEdit.do")
