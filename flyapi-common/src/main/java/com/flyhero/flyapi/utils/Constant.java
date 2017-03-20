@@ -4,6 +4,8 @@ public class Constant {
 	/**
 	 * 请求出错
 	 */
+	public static final boolean SUCCESS_T = true;
+	public static final boolean SUCCESS_F= false;
 	public static final String MSG_ERROR="error";
 	/**
 	 * 请求成功

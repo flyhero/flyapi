@@ -78,20 +78,23 @@ public class UserServiceImpl{
 	@Transactional
 	public int insert() {
 		int num=0;
-		try {
+
 			User user=new User();
-			user.setUserName("wangfly2");
+			user.setUserName("wangfly4");
 			user.setPassword("wang123456");
 			user.setLoginIp("192.168.1.84");
 			user.setCreateTime(new Date());
 			num=userMapper.insertSelective(user);
 			String string=null;
+//			try {
 			if(string.equals("456")){
 				System.out.println("相等");
+				return 25;
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			return 26;
+//		}
 
 		return num;
 	}

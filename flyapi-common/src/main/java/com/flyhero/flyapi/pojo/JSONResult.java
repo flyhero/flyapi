@@ -2,6 +2,8 @@ package com.flyhero.flyapi.pojo;
 
 import java.io.Serializable;
 
+import com.flyhero.flyapi.utils.Constant;
+
 /**
  * 封装返回json结果
  * <p>Title: JSONResult</p>
@@ -19,6 +21,7 @@ public class JSONResult implements Serializable{
 	
 	private static final long serialVersionUID = -3190673237558249474L;
 
+	private boolean success;
 	/**
 	 * 返回信息的提示
 	 */
@@ -32,17 +35,65 @@ public class JSONResult implements Serializable{
 	 */
 	private Object data;
 	
+	
+	public JSONResult(boolean success, String msg, Integer code, Object data) {
+		super();
+		this.success = success;
+		this.msg = msg;
+		this.code = code;
+		this.data = data;
+	}
+
 	public JSONResult(String msg, Integer code, Object data) {
 		super();
 		this.msg = msg;
 		this.code = code;
 		this.data = data;
 	}
-	
+	public JSONResult(Boolean success,String msg, Integer code) {
+		super();
+		this.success = success;
+		this.msg = msg;
+		this.code = code;
+	}
 	public JSONResult(String msg, Integer code) {
 		super();
 		this.msg = msg;
 		this.code = code;
+	}
+	
+	public static JSONResult ok(){
+		return ok(null);
+	}
+	public static JSONResult ok(Object data){
+		return ok(Constant.CODE_200, data);
+	}
+	public static JSONResult ok(int code,Object data){
+		return new JSONResult(Constant.SUCCESS_T,Constant.MSG_OK,code,data);
+	}
+	public static JSONResult ok(int code,String msg,Object data){
+		return new JSONResult(Constant.SUCCESS_T,msg,code,data);
+	}
+
+	public static JSONResult error(){
+		return error(null);
+	}
+	public static JSONResult error(Object data){
+		return new JSONResult(Constant.MSG_ERROR,Constant.CODE_200,data);
+	}
+	public static JSONResult error(int code,Object data){
+		return new JSONResult(Constant.SUCCESS_F,Constant.MSG_ERROR,code,data);
+	}
+	public static JSONResult error(int code,String msg,Object data){
+		return new JSONResult(Constant.SUCCESS_F,msg,code,data);
+	}
+	
+	public boolean isSuccess() {
+		return success;
+	}
+
+	public void setSuccess(boolean success) {
+		this.success = success;
 	}
 
 	public String getMsg() {

@@ -141,25 +141,8 @@ public class ProjectController extends BaseController{
 	@RequestMapping("addProject.do")
 	@ResponseBody
 	public JSONResult addProject(Project project){
-		int flag=projectService.insertSelective(project);
-		System.out.println("id:"+project.getProjectId());
-		if(flag>0){
-			UserProject record=new UserProject();
-			User u=(User)getCuUser();
-			OperateLog log=new OperateLog(u.getUserId(),getCuUser().getUserName(), 0, Constant.TYPE_INSERT, Constant.CLASS_PROJECT, 
-					Constant.NAME_PROJECT, "创建："+project.getProName()+"项目", JSONObject.toJSONString(project));
-			LogService.addLog(log);
-			if(u != null){
-				record.setProjectId(project.getProjectId());
-				record.setUserId(u.getUserId());
-				record.setIsCreator(1);
-				record.setIsEdit(1);
-				record.setIsDelete(0);
-				userProjectService.insertSelective(record);
-				return new JSONResult(Constant.MSG_OK, Constant.CODE_200);
-			}
-
-		}
+		User u=(User)getCuUser();
+		projectService.saveProject(project,u);
 		return new JSONResult(Constant.MSG_ERROR, Constant.CODE_200);
 	}
 	/**

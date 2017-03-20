@@ -59,7 +59,13 @@ public class TestMyBatis {
    }
    @Test
    public void testInter(){
-	  int a= userService.insert();
+	   int a= 0;
+	   try {
+		  a= userService.insert();
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+	 
 	  System.out.println(a);
    }
    

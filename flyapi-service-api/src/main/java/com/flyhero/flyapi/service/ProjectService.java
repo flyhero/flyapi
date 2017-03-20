@@ -1,6 +1,7 @@
 package com.flyhero.flyapi.service;
 
 import com.flyhero.flyapi.entity.Project;
+import com.flyhero.flyapi.entity.User;
 import com.flyhero.flyapi.pojo.ProjectDetailpojo;
 
 public interface ProjectService {
@@ -13,7 +14,7 @@ public interface ProjectService {
 
 	int insert(Project record);
 
-	int insertSelective(Project record);
+	int saveProject(Project record,User user);
 
 	Project selectByPrimaryKey(Integer projectId);
 
