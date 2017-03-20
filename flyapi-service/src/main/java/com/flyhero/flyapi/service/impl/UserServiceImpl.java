@@ -1,10 +1,13 @@
 package com.flyhero.flyapi.service.impl;
 
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.flyhero.flyapi.dao.UserMapper;
 import com.flyhero.flyapi.entity.User;
@@ -34,7 +37,7 @@ public class UserServiceImpl{
 		}
 		return user2;
 	}
-
+	
 	public int insertSelective(User record) {
 		return userMapper.insertSelective(record);
 	}
@@ -72,4 +75,24 @@ public class UserServiceImpl{
 		return userMapper.updateLoginCount(user);
 	}
 	
+	@Transactional
+	public int insert() {
+		int num=0;
+		try {
+			User user=new User();
+			user.setUserName("wangfly2");
+			user.setPassword("wang123456");
+			user.setLoginIp("192.168.1.84");
+			user.setCreateTime(new Date());
+			num=userMapper.insertSelective(user);
+			String string=null;
+			if(string.equals("456")){
+				System.out.println("相等");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return num;
+	}
 }

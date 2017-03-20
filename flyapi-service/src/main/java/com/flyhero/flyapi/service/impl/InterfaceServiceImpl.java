@@ -16,13 +16,14 @@ import com.flyhero.flyapi.entity.Interfaces;
 import com.flyhero.flyapi.pojo.InterPojo;
 import com.flyhero.flyapi.pojo.InterfacesPojo;
 import com.flyhero.flyapi.pojo.ParamPojo;
+import com.flyhero.flyapi.service.InterfaceService;
 import com.flyhero.flyapi.utils.DocUtil;
 import com.flyhero.flyapi.utils.FormatUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
 @Service
-public class InterfaceServiceImpl {
+public class InterfaceServiceImpl implements InterfaceService{
 
 	@Autowired
 	private InterfacesMapper interfacesMapper;

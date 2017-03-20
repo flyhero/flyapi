@@ -7,9 +7,10 @@ import org.springframework.stereotype.Service;
 
 import com.flyhero.flyapi.dao.VersionMapper;
 import com.flyhero.flyapi.entity.Version;
+import com.flyhero.flyapi.service.VersionService;
 
 @Service
-public class VersionServiceImpl{
+public class VersionServiceImpl implements VersionService{
 	@Autowired
 	private VersionMapper versionMapper;
 

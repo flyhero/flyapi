@@ -2,12 +2,14 @@ package com.flyhero.flyapi.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.flyhero.flyapi.dao.ProjectMapper;
 import com.flyhero.flyapi.entity.Project;
 import com.flyhero.flyapi.pojo.ProjectDetailpojo;
+import com.flyhero.flyapi.service.ProjectService;
 
 @Service
-public class ProjectServiceImpl{
+public class ProjectServiceImpl implements ProjectService{
 
 	@Autowired
 	private ProjectMapper projectMapper;

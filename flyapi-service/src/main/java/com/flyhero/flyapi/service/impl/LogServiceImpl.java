@@ -11,11 +11,12 @@ import org.springframework.stereotype.Service;
 import com.flyhero.flyapi.dao.OperateLogMapper;
 import com.flyhero.flyapi.entity.OperateLog;
 import com.flyhero.flyapi.pojo.LogVo;
+import com.flyhero.flyapi.service.LogService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
 @Service
-public class LogServiceImpl {
+public class LogServiceImpl implements LogService{
 	
 	@Autowired
 	private OperateLogMapper operateLogMapper; 

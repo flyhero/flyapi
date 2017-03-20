@@ -7,10 +7,11 @@ import org.springframework.stereotype.Service;
 
 import com.flyhero.flyapi.dao.DataBaseMapper;
 import com.flyhero.flyapi.entity.DataBase;
+import com.flyhero.flyapi.service.DataBaseService;
 import com.flyhero.flyapi.utils.DESUtil;
 
 @Service
-public class DataBaseServiceImpl {
+public class DataBaseServiceImpl implements DataBaseService{
 
 	@Autowired
 	private DataBaseMapper dataBaseMapper;

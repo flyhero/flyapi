@@ -1,6 +1,5 @@
 package com.flyhero.flyapi.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.flyhero.flyapi.dao.TableInfoMapper;
 import com.flyhero.flyapi.entity.TableInfo;
+import com.flyhero.flyapi.service.TableInfoService;
 
 /**
  * 
@@ -17,7 +17,7 @@ import com.flyhero.flyapi.entity.TableInfo;
  *
  */
 @Service
-public class TableInfoServiceImpl {
+public class TableInfoServiceImpl implements TableInfoService{
 	
 	@Autowired
 	private TableInfoMapper tableInfoMapper;

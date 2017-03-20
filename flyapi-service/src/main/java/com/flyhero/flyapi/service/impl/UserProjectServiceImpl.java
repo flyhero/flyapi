@@ -6,15 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.flyhero.flyapi.dao.UserProjectMapper;
-import com.flyhero.flyapi.entity.Project;
 import com.flyhero.flyapi.entity.UserProject;
 import com.flyhero.flyapi.pojo.TeamMemberPojo;
+import com.flyhero.flyapi.service.UserProjectService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.sun.org.apache.bcel.internal.generic.NEW;
 
 @Service
-public class UserProjectServiceImpl {
+public class UserProjectServiceImpl implements UserProjectService{
 
 	@Autowired
 	private UserProjectMapper userProjectMapper;

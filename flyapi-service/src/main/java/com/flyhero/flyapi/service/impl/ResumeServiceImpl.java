@@ -5,9 +5,10 @@ import org.springframework.stereotype.Service;
 
 import com.flyhero.flyapi.dao.ResumeMapper;
 import com.flyhero.flyapi.entity.Resume;
+import com.flyhero.flyapi.service.ResumeService;
 
 @Service
-public class ResumeServiceImpl {
+public class ResumeServiceImpl implements ResumeService{
 
 	@Autowired
 	private ResumeMapper resumeMapper;

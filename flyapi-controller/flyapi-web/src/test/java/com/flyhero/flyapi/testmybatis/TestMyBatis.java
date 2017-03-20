@@ -16,6 +16,9 @@ import com.flyhero.flyapi.entity.Interfaces;
 import com.flyhero.flyapi.entity.Module;
 import com.flyhero.flyapi.entity.User;
 import com.flyhero.flyapi.entity.UserProject;
+import com.flyhero.flyapi.service.impl.InterfaceServiceImpl;
+import com.flyhero.flyapi.service.impl.UserProjectServiceImpl;
+import com.flyhero.flyapi.service.impl.UserServiceImpl;
 import com.flyhero.flyapi.utils.DocUtil;
 import com.flyhero.flyapi.utils.Md5Util;
 
@@ -27,9 +30,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;  
 
-import com.flyhero.flyapi.service.InterfaceService;
-import com.flyhero.flyapi.service.UserProjectService;
-import com.flyhero.flyapi.service.UserService;
 import com.github.pagehelper.PageInfo;
   
 @RunWith(SpringJUnit4ClassRunner.class)     //表示继承了SpringJUnit4ClassRunner类  
@@ -59,6 +59,8 @@ public class TestMyBatis {
    }
    @Test
    public void testInter(){
+	  int a= userService.insert();
+	  System.out.println(a);
    }
    
 /*   @Autowired  

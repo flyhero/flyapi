@@ -7,9 +7,10 @@ import org.springframework.stereotype.Service;
 
 import com.flyhero.flyapi.dao.ModuleMapper;
 import com.flyhero.flyapi.entity.Module;
+import com.flyhero.flyapi.service.ModuleService;
 
 @Service
-public class ModuleServiceImpl{
+public class ModuleServiceImpl implements ModuleService{
 
 	@Autowired
 	private ModuleMapper moduleMapper;
