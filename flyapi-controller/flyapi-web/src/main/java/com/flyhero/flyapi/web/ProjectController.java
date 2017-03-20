@@ -2,6 +2,7 @@ package com.flyhero.flyapi.web;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,12 +16,17 @@ import com.flyhero.flyapi.entity.UserProject;
 import com.flyhero.flyapi.pojo.JSONResult;
 import com.flyhero.flyapi.pojo.ProjectDetailpojo;
 import com.flyhero.flyapi.pojo.TeamMemberPojo;
+import com.flyhero.flyapi.service.LogService;
+import com.flyhero.flyapi.service.ProjectService;
+import com.flyhero.flyapi.service.UserProjectService;
+import com.flyhero.flyapi.service.UserService;
 import com.flyhero.flyapi.service.impl.LogServiceImpl;
 import com.flyhero.flyapi.service.impl.ProjectServiceImpl;
 import com.flyhero.flyapi.service.impl.UserProjectServiceImpl;
 import com.flyhero.flyapi.service.impl.UserServiceImpl;
 import com.flyhero.flyapi.utils.Constant;
 import com.github.pagehelper.PageInfo;
+
 /**
  * 项目控制器
  * @ClassName: ProjectController 
@@ -32,14 +38,15 @@ import com.github.pagehelper.PageInfo;
 @RequestMapping("project")
 public class ProjectController extends BaseController{
 
+	Logger logger=Logger.getLogger(ProjectController.class);
 	@Autowired
-	private ProjectServiceImpl projectService;
+	private ProjectService projectService;
 	@Autowired
-	private UserProjectServiceImpl userProjectService;
+	private UserProjectService userProjectService;
 	@Autowired
-	private UserServiceImpl userService;
+	private UserService userService;
 	@Autowired
-	private LogServiceImpl LogService;
+	private LogService logService;
 	
 	/**
 	 * 我创建的项目
@@ -104,9 +111,9 @@ public class ProjectController extends BaseController{
 	public JSONResult findUserProject(Integer userId){
 		List<UserProject> list=userProjectService.findUserProject(userId);
 		if(list != null && !list.isEmpty()){
-			return new JSONResult(Constant.MSG_OK, Constant.CODE_200, list);
+			return JSONResult.ok(list);
 		}
-		return null;
+		return JSONResult.error();
 	}
 
 	/**
@@ -124,9 +131,9 @@ public class ProjectController extends BaseController{
 	public JSONResult findUserEdit(Integer userId){
 		List<UserProject> list=userProjectService.findUserEdit(userId);
 		if(list != null && !list.isEmpty()){
-			return new JSONResult(Constant.MSG_OK, Constant.CODE_200, list);
+			return JSONResult.ok(list);
 		}
-		return new JSONResult(Constant.MSG_ERROR, Constant.CODE_200, list);
+		return JSONResult.error();
 	}
 	/**
 	 * 新建项目
@@ -141,9 +148,15 @@ public class ProjectController extends BaseController{
 	@RequestMapping("addProject.do")
 	@ResponseBody
 	public JSONResult addProject(Project project){
-		User u=(User)getCuUser();
-		projectService.saveProject(project,u);
-		return new JSONResult(Constant.MSG_ERROR, Constant.CODE_200);
+		try {
+			User u=(User)getCuUser();
+			projectService.saveProject(project,u);
+		} catch (Exception e) {
+			logger.error("添加项目出错：", e);
+			return JSONResult.error();
+		}
+		
+		return JSONResult.ok();
 	}
 	/**
 	 * 更新项目
@@ -158,15 +171,15 @@ public class ProjectController extends BaseController{
 	@RequestMapping("updateProject.do")
 	@ResponseBody
 	public JSONResult updateProject(Project project){
-
-		int flag=projectService.updateByPrimaryKeySelective(project);
-		if(flag>0){
-			OperateLog log=new OperateLog(getCuUser().getUserId(),getCuUser().getUserName(), project.getProjectId(), Constant.TYPE_UPDATE,
-					Constant.CLASS_PROJECT, Constant.NAME_PROJECT, "更新："+project.getProName()+"项目", JSONObject.toJSONString(project));
-			LogService.addLog(log);
-			return new JSONResult(Constant.MSG_OK, Constant.CODE_200);
+		try {
+			User user=getCuUser();
+			projectService.updateProject(project,user);
+		} catch (Exception e) {
+			logger.error("更新项目", e);
+			return JSONResult.error();
 		}
-		return new JSONResult(Constant.MSG_ERROR, Constant.CODE_200);
+
+		return JSONResult.ok();
 	}
 	/**
 	 * 项目详情
@@ -182,7 +195,7 @@ public class ProjectController extends BaseController{
 	@ResponseBody
 	public JSONResult findProjectDetail(Integer projectId){
 		ProjectDetailpojo projectDetailpojo= projectService.findProjectDetail(projectId);
-		return new JSONResult(Constant.MSG_OK, Constant.CODE_200,projectDetailpojo);
+		return JSONResult.ok(projectDetailpojo);
 	}
 	/**
 	 * 删除项目
@@ -197,18 +210,15 @@ public class ProjectController extends BaseController{
 	@RequestMapping("deleteProject.do")
 	@ResponseBody
 	public JSONResult deleteProject(Project project){
-		project.setIsDelete(1);
-		UserProject uProject=new UserProject();
-		uProject.setProjectId(project.getProjectId());
-		int flag=projectService.updateByPrimaryKeySelective(project);
-		int flag1=userProjectService.deleteUserProject(uProject);
-		if(flag>0 && flag1>0){
-			OperateLog log=new OperateLog(getCuUser().getUserId(),getCuUser().getUserName(), project.getProjectId(), Constant.TYPE_DELETE,
-					Constant.CLASS_PROJECT, Constant.NAME_PROJECT, "删除："+project.getProName()+"项目", JSONObject.toJSONString(project));
-			LogService.addLog(log);
-			return new JSONResult(Constant.MSG_OK, Constant.CODE_200);
+		try {
+			User user = getCuUser();
+			projectService.deleteProject(project, user);
+		} catch (Exception e) {
+			logger.error("删除项目",e);
+			return JSONResult.error();
 		}
-		return new JSONResult(Constant.MSG_ERROR, Constant.CODE_200);
+
+		return JSONResult.ok();
 	}
 	
 	/**
@@ -238,7 +248,7 @@ public class ProjectController extends BaseController{
 		if(flag>0){
 			OperateLog log=new OperateLog(getCuUser().getUserId(),getCuUser().getUserName(), projectId, Constant.TYPE_INSERT,
 					Constant.CLASS_TEAM, Constant.NAME_TEAM, "添加：项目成员-"+userName, JSONObject.toJSONString(up));
-			LogService.addLog(log);
+			logService.addLog(log);
 			return new JSONResult(Constant.MSG_OK, Constant.CODE_200);
 		}
 		return new JSONResult(Constant.MSG_ERROR, Constant.CODE_200);
@@ -260,7 +270,7 @@ public class ProjectController extends BaseController{
 		List<TeamMemberPojo>  list=userProjectService.findTeamMembers(up);
 		OperateLog log=new OperateLog(getCuUser().getUserId(),getCuUser().getUserName(), up.getProjectId(), Constant.TYPE_SELECT,
 				Constant.CLASS_TEAM, Constant.NAME_TEAM, "查询：项目成员", JSONObject.toJSONString(up));
-		LogService.addLog(log);
+		logService.addLog(log);
 		return new JSONResult(Constant.MSG_OK, Constant.CODE_200, list);
 	}
 	/**
@@ -281,7 +291,7 @@ public class ProjectController extends BaseController{
 		if(flag>0){
 			OperateLog log=new OperateLog(getCuUser().getUserId(),getCuUser().getUserName(), up.getProjectId(), Constant.TYPE_DELETE,
 					Constant.CLASS_TEAM, Constant.NAME_TEAM, "删除："+name+"-成员", JSONObject.toJSONString(up));
-			LogService.addLog(log);
+			logService.addLog(log);
 			return new JSONResult(Constant.MSG_OK, Constant.CODE_200);
 		}
 		return new JSONResult(Constant.MSG_ERROR, Constant.CODE_200);
@@ -306,7 +316,7 @@ public class ProjectController extends BaseController{
 		if(flag>0){
 			OperateLog log=new OperateLog(getCuUser().getUserId(),getCuUser().getUserName(), id, Constant.TYPE_UPDATE,
 					Constant.CLASS_TEAM, Constant.NAME_TEAM, "更新："+name+"的权限", JSONObject.toJSONString(up));
-			LogService.addLog(log);
+			logService.addLog(log);
 			return new JSONResult(Constant.MSG_OK, Constant.CODE_200);
 		}
 		return new JSONResult(Constant.MSG_ERROR, Constant.CODE_200);
@@ -327,8 +337,7 @@ public class ProjectController extends BaseController{
 	public JSONResult findUserIsEdit(UserProject up){
 		up.setUserId(getCuUser().getUserId());
 		int count=userProjectService.findUserIsEdit(up);
-		return new JSONResult(Constant.MSG_OK, Constant.CODE_200,count);
-		
+		return JSONResult.ok();
 	}
 	
 }

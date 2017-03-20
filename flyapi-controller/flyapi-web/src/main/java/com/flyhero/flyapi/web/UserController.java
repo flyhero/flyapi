@@ -18,9 +18,7 @@ import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.UnauthorizedException;
 import org.apache.shiro.subject.Subject;
-import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,7 +26,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.flyhero.flyapi.pojo.JSONResult;
-import com.flyhero.flyapi.pojo.LoginResult;
+import com.flyhero.flyapi.pojo.TipsEnum;
 import com.flyhero.flyapi.service.impl.ModuleServiceImpl;
 import com.flyhero.flyapi.service.impl.ProjectServiceImpl;
 import com.flyhero.flyapi.service.impl.UserProjectServiceImpl;
@@ -36,9 +34,7 @@ import com.flyhero.flyapi.service.impl.UserServiceImpl;
 import com.flyhero.flyapi.service.impl.InterfaceServiceImpl;
 import com.flyhero.flyapi.utils.Constant;
 import com.flyhero.flyapi.utils.IPAddressUtil;
-import com.flyhero.flyapi.utils.LoginEnum;
 import com.flyhero.flyapi.utils.Md5Util;
-import com.flyhero.flyapi.activemq.producer.ProducerService;
 import com.flyhero.flyapi.entity.Module;
 import com.flyhero.flyapi.entity.Project;
 import com.flyhero.flyapi.entity.User;
@@ -172,18 +168,24 @@ public class UserController extends BaseController {
 	@RequestMapping(value = "register.do")
 	@ResponseBody
 	public JSONResult register(User user) throws Exception {
-		String ip = IPAddressUtil.getIPAddr(request);
-		user.setLoginIp(ip);
-		user.setAddress(IPAddressUtil.getPosition(ip, "UTF-8"));
-		user.setPassword(Md5Util.textToMD5L16(user.getPassword()));
-		user.setCreateTime(new Date(System.currentTimeMillis()));
-		user.setAvatarUrl("/static/images/head.jpg");
-		int flag = userService.insertSelective(user);
-		if (flag != 0) {
-			userService.updateLoginCount(user);
-			return new JSONResult(Constant.MSG_OK, Constant.CODE_200);
+		try {
+			String ip = IPAddressUtil.getIPAddr(request);
+			user.setLoginIp(ip);
+			user.setAddress(IPAddressUtil.getPosition(ip, "UTF-8"));
+			user.setPassword(Md5Util.textToMD5L16(user.getPassword()));
+			user.setCreateTime(new Date(System.currentTimeMillis()));
+			user.setAvatarUrl("/static/images/head.jpg");
+			int flag = userService.insertSelective(user);
+			if (flag != 0) {
+				userService.updateLoginCount(user);
+				return JSONResult.ok();
+			}
+		} catch (Exception e) {
+			logger.error("注册出错：", e);
+			return JSONResult.error();
 		}
-		return new LoginResult(LoginEnum.SUCCESS);
+
+		return JSONResult.ok();
 	}
 
 	/**

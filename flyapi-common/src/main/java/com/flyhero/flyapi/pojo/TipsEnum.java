@@ -1,13 +1,20 @@
-package com.flyhero.flyapi.utils;
+package com.flyhero.flyapi.pojo;
 
-public enum LoginEnum {
+/**
+ * 提示枚举
+ * @ClassName: TipsEnum 
+ * @author flyhero(http://flyhero.top)
+ * @date 2017年3月20日 下午4:47:24 
+ *
+ */
+public enum TipsEnum {
 
-	SUCCESS(1,"SUCCESS"),
-	ERROR(2,"ERROR"),
+	OK(200,"成功"),
+	ERROR(500,"失败"),
 	USER_NAME_ERROR(3,"your name is invalid");
 	public int code;
 	public String msg;
-	private LoginEnum(int code, String msg) {
+	private TipsEnum(int code, String msg) {
 		this.code = code;
 		this.msg = msg;
 	}

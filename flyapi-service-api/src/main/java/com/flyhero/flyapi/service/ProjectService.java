@@ -14,11 +14,13 @@ public interface ProjectService {
 
 	int insert(Project record);
 
-	int saveProject(Project record,User user);
+	void saveProject(Project record,User user);
 
 	Project selectByPrimaryKey(Integer projectId);
 
-	int updateByPrimaryKeySelective(Project record);
+	void updateProject(Project record,User user);
+	
+	void deleteProject(Project record,User user);
 
 	int updateByPrimaryKey(Project record);
 

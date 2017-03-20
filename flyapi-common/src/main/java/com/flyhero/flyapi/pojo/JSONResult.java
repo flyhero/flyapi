@@ -66,26 +66,34 @@ public class JSONResult implements Serializable{
 		return ok(null);
 	}
 	public static JSONResult ok(Object data){
-		return ok(Constant.CODE_200, data);
+		return ok(TipsEnum.OK.getMsg(),TipsEnum.OK.getCode(), data);
 	}
-	public static JSONResult ok(int code,Object data){
-		return new JSONResult(Constant.SUCCESS_T,Constant.MSG_OK,code,data);
-	}
-	public static JSONResult ok(int code,String msg,Object data){
+	public static JSONResult ok(String msg,int code,Object data){
 		return new JSONResult(Constant.SUCCESS_T,msg,code,data);
+	}
+	
+	public static JSONResult ok(TipsEnum tips){
+		return ok(tips, null);
+	}
+	public static JSONResult ok(TipsEnum tips,Object data){
+		return new JSONResult(Constant.SUCCESS_T,tips.getMsg(),tips.getCode(),data);
 	}
 
 	public static JSONResult error(){
 		return error(null);
 	}
 	public static JSONResult error(Object data){
-		return new JSONResult(Constant.MSG_ERROR,Constant.CODE_200,data);
+		return error(TipsEnum.ERROR.getMsg(),TipsEnum.ERROR.getCode(), data);
 	}
-	public static JSONResult error(int code,Object data){
-		return new JSONResult(Constant.SUCCESS_F,Constant.MSG_ERROR,code,data);
-	}
-	public static JSONResult error(int code,String msg,Object data){
+	public static JSONResult error(String msg,int code,Object data){
 		return new JSONResult(Constant.SUCCESS_F,msg,code,data);
+	}
+	
+	public static JSONResult error(TipsEnum tips){
+		return error(tips, null);
+	}
+	public static JSONResult error(TipsEnum tips,Object data){
+		return new JSONResult(Constant.SUCCESS_F,tips.getMsg(),tips.getCode(),data);
 	}
 	
 	public boolean isSuccess() {

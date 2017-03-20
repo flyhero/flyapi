@@ -26,7 +26,7 @@ public class ProjectServiceImpl implements ProjectService{
 	@Autowired
 	private LogService logService;
 	@Autowired
-	private UserProjectService UserProjectService;
+	private UserProjectService userProjectService;
 	
 	public int updateDoneCount(Integer projectId){
 		return projectMapper.updateDoneCount(projectId);
@@ -46,7 +46,7 @@ public class ProjectServiceImpl implements ProjectService{
 		return 0;
 	}
 
-	public int saveProject(Project record,User user) {
+	public void saveProject(Project record,User user) {
 		
 		int flag=projectMapper.insertSelective(record);
 		if(flag>0){
@@ -60,25 +60,39 @@ public class ProjectServiceImpl implements ProjectService{
 				userProject.setIsCreator(1);
 				userProject.setIsEdit(1);
 				userProject.setIsDelete(0);
-				UserProjectService.insertSelective(userProject);
+				userProjectService.insertSelective(userProject);
 			}
 
 		}
-		
-		return 1;
 	}
 
 	public Project selectByPrimaryKey(Integer projectId) {
 		return projectMapper.selectByPrimaryKey(projectId);
 	}
 
-	public int updateByPrimaryKeySelective(Project record) {
-		return projectMapper.updateByPrimaryKeySelective(record);
+	public void updateProject(Project project,User user) {
+		projectMapper.updateByPrimaryKeySelective(project);
+		OperateLog log=new OperateLog(user.getUserId(),user.getUserName(), project.getProjectId(), Constant.TYPE_UPDATE,
+				Constant.CLASS_PROJECT, Constant.NAME_PROJECT, "更新："+project.getProName()+"项目", JSONObject.toJSONString(project));
+		logService.addLog(log);
 	}
 
 	public int updateByPrimaryKey(Project record) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	@Override
+	public void deleteProject(Project project, User user) {
+		project.setIsDelete(1);
+		UserProject uProject=new UserProject();
+		uProject.setProjectId(project.getProjectId());
+		projectMapper.updateByPrimaryKeySelective(project);
+		userProjectService.deleteUserProject(uProject);
+		OperateLog log=new OperateLog(user.getUserId(),user.getUserName(), project.getProjectId(), Constant.TYPE_DELETE,
+				Constant.CLASS_PROJECT, Constant.NAME_PROJECT, "删除："+project.getProName()+"项目", JSONObject.toJSONString(project));
+		logService.addLog(log);
+	}
+
 
 }
