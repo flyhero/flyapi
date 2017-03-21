@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,10 +17,14 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.flyhero.flyapi.entity.Module;
 import com.flyhero.flyapi.entity.OperateLog;
+import com.flyhero.flyapi.entity.User;
 import com.flyhero.flyapi.entity.UserProject;
 import com.flyhero.flyapi.pojo.JSONResult;
 import com.flyhero.flyapi.pojo.Message;
 import com.flyhero.flyapi.pojo.TeamMemberPojo;
+import com.flyhero.flyapi.service.LogService;
+import com.flyhero.flyapi.service.ModuleService;
+import com.flyhero.flyapi.service.UserProjectService;
 import com.flyhero.flyapi.service.impl.LogServiceImpl;
 import com.flyhero.flyapi.service.impl.ModuleServiceImpl;
 import com.flyhero.flyapi.service.impl.UserProjectServiceImpl;
@@ -37,12 +42,13 @@ import com.flyhero.flyapi.websocket.SystemWebSocketHandler;
 @RequestMapping("module")
 public class ModuleController extends BaseController{
 
+	Logger logger=Logger.getLogger(ModuleController.class);
 	@Autowired
-	private ModuleServiceImpl moduleService;
+	private ModuleService moduleService;
 	@Autowired
-	private LogServiceImpl LogService;
+	private LogService LogService;
 	@Autowired
-	private UserProjectServiceImpl userProjectService;
+	private UserProjectService userProjectService;
 	@Resource
 	private SystemWebSocketHandler handler;
 	/**
@@ -58,24 +64,20 @@ public class ModuleController extends BaseController{
 	@RequestMapping("addModule.do")
 	@ResponseBody
 	public JSONResult addModule(Module module){
-		int flag=moduleService.insertSelective(module);
-		if(flag != 0){
 			try {
-				OperateLog log=new OperateLog(getCuUser().getUserId(),getCuUser().getUserName(), module.getProjectId(), Constant.TYPE_INSERT, Constant.CLASS_MODULE, 
-						Constant.NAME_MODULE, "新建："+module.getModuleName()+"模块", JSONObject.toJSONString(module));
-				LogService.addLog(log);
+				User user=getCuUser();
+				moduleService.addModule(module,user);
 				UserProject up=new UserProject();
 				up.setUserId(getCuUser().getUserId());
 				up.setProjectId(module.getProjectId());
 				List<TeamMemberPojo>  list=userProjectService.findTeamMembers(up);
-				Message msg = new Message(-1L, "系统广播", 0L,1, getCuUser().getUserName()+"新建："+module.getModuleName()+"模块", new Date());
+				Message msg = new Message(-1L, "系统广播", 0L,1, user.getUserName()+"新建："+module.getModuleName()+"模块", new Date());
 				handler.sendMessageToTeam(list, new TextMessage(JSON.toJSONString(msg)));
 			} catch (IOException e) {
-				e.printStackTrace();
+				logger.error("添加模块",e);
+				return JSONResult.error();
 			}
-			return new JSONResult(Constant.MSG_OK, Constant.CODE_200);
-		}
-		return new JSONResult(Constant.MSG_ERROR, Constant.CODE_200);
+		return JSONResult.ok();
 	}
 	
 	/**

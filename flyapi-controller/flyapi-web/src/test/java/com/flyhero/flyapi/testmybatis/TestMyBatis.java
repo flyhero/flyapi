@@ -16,6 +16,9 @@ import com.flyhero.flyapi.entity.Interfaces;
 import com.flyhero.flyapi.entity.Module;
 import com.flyhero.flyapi.entity.User;
 import com.flyhero.flyapi.entity.UserProject;
+import com.flyhero.flyapi.service.InterfaceService;
+import com.flyhero.flyapi.service.UserProjectService;
+import com.flyhero.flyapi.service.UserService;
 import com.flyhero.flyapi.service.impl.InterfaceServiceImpl;
 import com.flyhero.flyapi.service.impl.UserProjectServiceImpl;
 import com.flyhero.flyapi.service.impl.UserServiceImpl;
@@ -39,11 +42,11 @@ public class TestMyBatis {
     private static Logger logger = Logger.getLogger(TestMyBatis.class);  
 
    @Autowired
-   private UserServiceImpl userService;
+   private UserService userService;
    @Autowired
-   private UserProjectServiceImpl userProjectService;
+   private UserProjectService userProjectService;
    @Autowired
-   private InterfaceServiceImpl interfaceService;
+   private InterfaceService interfaceService;
    @Test
    public void testPage(){
 	   PageInfo<User> pageInfo= userService.queryByPage(1, 10);
@@ -57,7 +60,7 @@ public class TestMyBatis {
 		   System.out.println(up.toString());
 	   }
    }
-   @Test
+/*   @Test
    public void testInter(){
 	   int a= 0;
 	   try {
@@ -67,7 +70,7 @@ public class TestMyBatis {
 	}
 	 
 	  System.out.println(a);
-   }
+   }*/
    
 /*   @Autowired  
    private ProducerService producerService;  

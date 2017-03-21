@@ -2,7 +2,6 @@ package com.flyhero.flyapi.service;
 
 import com.flyhero.flyapi.entity.User;
 import com.github.pagehelper.PageInfo;
-
 public interface UserService {
 
 	User findById(int id);

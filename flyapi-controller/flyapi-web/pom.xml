@@ -23,6 +23,10 @@
 		</dependency>
 		<dependency>
 			<groupId>com.flyhero.flyapi</groupId>
+			<artifactId>flyapi-service-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.flyhero.flyapi</groupId>
 			<artifactId>flyapi-entity</artifactId>
 		</dependency>
 

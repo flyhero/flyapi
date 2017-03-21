@@ -6,17 +6,17 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.flyhero.flyapi.dao.UserMapper;
 import com.flyhero.flyapi.entity.User;
+import com.flyhero.flyapi.service.UserService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
-
+@Transactional
 @Service
-public class UserServiceImpl{
+public class UserServiceImpl implements UserService{
 	@Autowired
 	private UserMapper userMapper;
 
