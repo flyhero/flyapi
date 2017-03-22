@@ -6,6 +6,18 @@
 
 
 
+``` lua
+flyapi
+├── flyapi-common -- SSM框架公共模块
+├── flyapi-entity -- 实体类
+├── flyapi-dao -- 数据操作层
+├── flyapi-service -- 业务逻辑实现层
+├── flyapi-service-api -- 业务逻辑接口层
+└── flyapi-controller -- 控制器
+     ├── flyapi-admin -- 管理端
+     └── flyapi-web -- 客户端
+```
+
 
 # 项目地址
 Github: https://github.com/flyhero/flyapi
