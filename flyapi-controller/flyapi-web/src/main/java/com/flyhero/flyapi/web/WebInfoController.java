@@ -2,6 +2,7 @@ package com.flyhero.flyapi.web;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,7 @@ import com.flyhero.flyapi.utils.Constant;
 @RequestMapping("webinfo")
 public class WebInfoController extends BaseController{
 
+	Logger logger=Logger.getLogger(WebInfoController.class);
 	@Autowired
 	private WebInfoServiceImpl webInfoService;
 	
@@ -36,8 +38,9 @@ public class WebInfoController extends BaseController{
 		try {
 			webInfolList=webInfoService.findAllByLanguage(language);
 		} catch (Exception e) {
-			return new JSONResult(Constant.MSG_OK, Constant.CODE_500);
+			logger.error("根据语言获取web信息出错",e);
+			return JSONResult.error();
 		}
-		return new JSONResult(Constant.MSG_OK, Constant.CODE_200, webInfolList);
+		return JSONResult.ok(webInfolList);
 	}
 }

@@ -3,6 +3,7 @@ package com.flyhero.flyapi.web;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,9 +12,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.flyhero.flyapi.entity.DataBase;
 import com.flyhero.flyapi.entity.TableInfo;
 import com.flyhero.flyapi.pojo.JSONResult;
-import com.flyhero.flyapi.service.impl.DataBaseServiceImpl;
-import com.flyhero.flyapi.service.impl.TableInfoServiceImpl;
-import com.flyhero.flyapi.utils.Constant;
+import com.flyhero.flyapi.service.DataBaseService;
+import com.flyhero.flyapi.service.TableInfoService;
 /**
  * 数据字典控制器
  * @ClassName: DataBaseController 
@@ -25,11 +25,12 @@ import com.flyhero.flyapi.utils.Constant;
 @RequestMapping("db")
 public class DataBaseController extends BaseController{
 	
+	Logger logger=Logger.getLogger(DataBaseController.class);
 	@Autowired
-	private DataBaseServiceImpl dataBaseService;
+	private DataBaseService dataBaseService;
 	
 	@Autowired
-	private TableInfoServiceImpl tableInfoService;
+	private TableInfoService tableInfoService;
 	
 	/**
 	 * 添加数据字典
@@ -43,7 +44,12 @@ public class DataBaseController extends BaseController{
 	 */
 	@RequestMapping("addDataBase.do")
 	public String addDataBase(DataBase database){
-		int flag=dataBaseService.addDataBase(database);
+		try {
+			dataBaseService.addDataBase(database);
+		} catch (Exception e) {
+			logger.error("addDataBase出错：",e);
+		}
+		
 		return "redirect:list_database";
 	}
 	/**
@@ -59,11 +65,14 @@ public class DataBaseController extends BaseController{
 	@ResponseBody
 	@RequestMapping("findDataBase.do")
 	public JSONResult findDataBase(Integer userId){
-		List<DataBase> dataBase=dataBaseService.findDataBase(userId);
-		if(dataBase != null && !dataBase.isEmpty()){
-			return new JSONResult(Constant.MSG_OK, Constant.CODE_200, dataBase);
+		List<DataBase> dataBase = null;
+		try {
+			dataBase=dataBaseService.findDataBase(userId);
+		} catch (Exception e) {
+			logger.error("findDataBase出错：",e);
+			return JSONResult.error();
 		}
-		return new JSONResult(Constant.MSG_ERROR, Constant.CODE_200, dataBase);
+		return JSONResult.ok(dataBase);
 		
 	}
 	/**
@@ -79,17 +88,20 @@ public class DataBaseController extends BaseController{
 	@ResponseBody
 	@RequestMapping("findTableInfo.do")
 	public JSONResult findTableInfo(Integer dbId){
-		List<String> tableNameList=tableInfoService.findTableNameByDbId(dbId);
-		List<List<TableInfo>> list=new ArrayList<List<TableInfo>>();
-		if(tableNameList != null && !tableNameList.isEmpty()){
-			for(String tableName:tableNameList){
-				List<TableInfo> infoslist=tableInfoService.findInfoByTableName(tableName);
-				list.add(infoslist);
+		try {
+			List<String> tableNameList=tableInfoService.findTableNameByDbId(dbId);
+			List<List<TableInfo>> list=new ArrayList<List<TableInfo>>();
+			if(tableNameList != null && !tableNameList.isEmpty()){
+				for(String tableName:tableNameList){
+					List<TableInfo> infoslist=tableInfoService.findInfoByTableName(tableName);
+					list.add(infoslist);
+				}
+				return JSONResult.ok(list);
 			}
-			return new JSONResult(Constant.MSG_OK, Constant.CODE_200, list);
+		} catch (Exception e) {
+			logger.error("findTableInfo出错：",e);
 		}
-		return new JSONResult(Constant.MSG_ERROR, Constant.CODE_200, list);
-		
+		return JSONResult.error();
 	}
 
 }

@@ -2,6 +2,7 @@ package com.flyhero.flyapi.web;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +23,7 @@ import com.flyhero.flyapi.utils.Constant;
 @RequestMapping("version")
 public class VersionController extends BaseController{
 
+	Logger logger=Logger.getLogger(VersionController.class);
 	@Autowired
 	private VersionServiceImpl versionService;
 	
@@ -41,8 +43,9 @@ public class VersionController extends BaseController{
 		try {
 			versionList=versionService.findVersionLog();
 		} catch (Exception e) {
-			return new JSONResult(Constant.MSG_OK, Constant.CODE_500);
+			logger.error("获取版本日志出错",e);
+			return JSONResult.error(versionList);
 		}
-		return new JSONResult(Constant.MSG_OK, Constant.CODE_200, versionList);
+		return JSONResult.ok(versionList);
 	}
 }

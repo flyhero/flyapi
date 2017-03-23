@@ -284,9 +284,9 @@ public class ProjectController extends BaseController{
 			OperateLog log=new OperateLog(getCuUser().getUserId(),getCuUser().getUserName(), up.getProjectId(), Constant.TYPE_DELETE,
 					Constant.CLASS_TEAM, Constant.NAME_TEAM, "删除："+name+"-成员", JSONObject.toJSONString(up));
 			logService.addLog(log);
-			return new JSONResult(Constant.MSG_OK, Constant.CODE_200);
+			return JSONResult.ok();
 		}
-		return new JSONResult(Constant.MSG_ERROR, Constant.CODE_200);
+		return JSONResult.error();
 	}
 	/**
 	 * 更新成员权限

@@ -21,13 +21,16 @@ public class JSONResult implements Serializable{
 	
 	private static final long serialVersionUID = -3190673237558249474L;
 
+	/**
+	 * 成功或失败
+	 */
 	private boolean success;
 	/**
 	 * 返回信息的提示
 	 */
 	private String msg;
 	/**
-	 * 成功与失败的状态码
+	 * 信息对应的状态码
 	 */
 	private Integer code;
 	/**

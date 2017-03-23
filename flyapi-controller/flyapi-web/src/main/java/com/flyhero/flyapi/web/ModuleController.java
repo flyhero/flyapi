@@ -93,11 +93,14 @@ public class ModuleController extends BaseController{
 	@RequestMapping("deleteModule.do")
 	@ResponseBody
 	public JSONResult deleteModule(Module module){
-		int flag=moduleService.updateByPrimaryKeySelective(module);
-		if(flag != 0){
-			return new JSONResult(Constant.MSG_OK, Constant.CODE_200);
+		try {
+			int flag=moduleService.updateByPrimaryKeySelective(module);
+		} catch (Exception e) {
+			logger.error("deleteModule出错：",e);
+			return JSONResult.error();
 		}
-		return new JSONResult(Constant.MSG_ERROR, Constant.CODE_200);
+		
+		return JSONResult.ok();
 	}
 	
 	/**
@@ -113,11 +116,14 @@ public class ModuleController extends BaseController{
 	@RequestMapping("updateModule.do")
 	@ResponseBody
 	public JSONResult updateModule(Module module){
-		int flag=moduleService.updateByPrimaryKeySelective(module);
-		if(flag != 0){
-			return new JSONResult(Constant.MSG_OK, Constant.CODE_200);
+		try {
+			int flag=moduleService.updateByPrimaryKeySelective(module);
+		} catch (Exception e) {
+			logger.error("updateModule出错：",e);
+			return JSONResult.error();
 		}
-		return new JSONResult(Constant.MSG_ERROR, Constant.CODE_200);
+		
+		return JSONResult.ok();
 	}
 	
 	/**
@@ -133,11 +139,15 @@ public class ModuleController extends BaseController{
 	@RequestMapping("findModule.do")
 	@ResponseBody
 	public JSONResult findModule(Module module){
-		List<Module> list=moduleService.findModule(module.getProjectId());
-		if(list != null){
-			return new JSONResult(Constant.MSG_OK, Constant.CODE_200,list);
+		List<Module> list = null;
+		try {
+			list=moduleService.findModule(module.getProjectId());
+		} catch (Exception e) {
+			logger.error("findModule出错：",e);
+			return JSONResult.error();
 		}
-		return new JSONResult(Constant.MSG_ERROR, Constant.CODE_200,list);
+		
+		return JSONResult.ok(list);
 	}
 	
 }

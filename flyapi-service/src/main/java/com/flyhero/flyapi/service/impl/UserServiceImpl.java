@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.flyhero.flyapi.dao.UserMapper;
@@ -75,7 +76,7 @@ public class UserServiceImpl implements UserService{
 		return userMapper.updateLoginCount(user);
 	}
 	
-	@Transactional
+	@Transactional(propagation=Propagation.REQUIRED)
 	public int insert() {
 		int num=0;
 

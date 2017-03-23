@@ -11,6 +11,7 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.ServletOutputStream;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,16 +22,17 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.flyhero.flyapi.entity.Interfaces;
 import com.flyhero.flyapi.entity.OperateLog;
+import com.flyhero.flyapi.entity.User;
 import com.flyhero.flyapi.entity.UserProject;
 import com.flyhero.flyapi.pojo.HttpResponse;
 import com.flyhero.flyapi.pojo.InterPojo;
 import com.flyhero.flyapi.pojo.JSONResult;
 import com.flyhero.flyapi.pojo.Message;
 import com.flyhero.flyapi.pojo.TeamMemberPojo;
-import com.flyhero.flyapi.service.impl.InterfaceServiceImpl;
-import com.flyhero.flyapi.service.impl.LogServiceImpl;
-import com.flyhero.flyapi.service.impl.ProjectServiceImpl;
-import com.flyhero.flyapi.service.impl.UserProjectServiceImpl;
+import com.flyhero.flyapi.service.InterfaceService;
+import com.flyhero.flyapi.service.ProjectService;
+import com.flyhero.flyapi.service.LogService;
+import com.flyhero.flyapi.service.UserProjectService;
 import com.flyhero.flyapi.utils.Constant;
 import com.flyhero.flyapi.utils.HttpClientUtil;
 import com.flyhero.flyapi.websocket.SystemWebSocketHandler;
@@ -46,15 +48,17 @@ import com.github.pagehelper.PageInfo;
 @Controller
 @RequestMapping("interface")
 public class InterfaceController extends BaseController {
+	
+	Logger logger=Logger.getLogger(InterfaceController.class);
 
 	@Autowired
-	private InterfaceServiceImpl interfaceService;
+	private InterfaceService interfaceService;
 	@Autowired
-	private LogServiceImpl LogService;
+	private LogService LogService;
 	@Autowired
-	private ProjectServiceImpl projectService;
+	private ProjectService projectService;
 	@Autowired
-	private UserProjectServiceImpl userProjectService;
+	private UserProjectService userProjectService;
 	@Resource
 	private SystemWebSocketHandler handler;
 
@@ -72,18 +76,10 @@ public class InterfaceController extends BaseController {
 	@RequestMapping("addInterface.do")
 	@ResponseBody
 	public JSONResult addInterface(Interfaces interfaces, Integer projectId) {
-		interfaces.setCreator(getCuUser().getUserId());
-		int flag = interfaceService.insertSelective(interfaces);
-		if (flag != 0) {
+		User user=getCuUser();
+		interfaces.setCreator(user.getUserId());
 			try {
-				interfaces.setContent("");
-				OperateLog log = new OperateLog(getCuUser().getUserId(),
-						getCuUser().getUserName(), projectId,
-						Constant.TYPE_INSERT, Constant.CLASS_INTERFACE,
-						Constant.NAME_INTERFACE, "新建：【"
-								+ interfaces.getInterName() + "】接口",
-						JSONObject.toJSONString(interfaces));
-				LogService.addLog(log);
+				interfaceService.addInterface(interfaces, projectId, user);
 				UserProject up = new UserProject();
 				up.setUserId(getCuUser().getUserId());
 				up.setProjectId(projectId);
@@ -97,13 +93,10 @@ public class InterfaceController extends BaseController {
 				handler.sendMessageToTeam(list,
 						new TextMessage(JSON.toJSONString(msg)));
 			} catch (IOException e) {
-				e.printStackTrace();
+				logger.error("addInterface失败",e);
+				return JSONResult.error();
 			}
-			projectService.updateDoneCount(projectId);
-			return new JSONResult(Constant.MSG_OK, Constant.CODE_200);
-		}
-		return new JSONResult(Constant.MSG_ERROR, Constant.CODE_200);
-
+			return JSONResult.ok();
 	}
 
 	/**
@@ -120,8 +113,15 @@ public class InterfaceController extends BaseController {
 	@ResponseBody
 	@RequestMapping("findInterface.do")
 	public JSONResult findInterface(InterPojo interPojo) {
-		PageInfo<InterPojo> list = interfaceService.findInterByWhere(interPojo);
-		return new JSONResult(Constant.MSG_OK, Constant.CODE_200, list);
+		PageInfo<InterPojo> list = null;
+		try {
+			list = interfaceService.findInterByWhere(interPojo);
+		} catch (Exception e) {
+			logger.error("findInterface出错：",e);
+			return JSONResult.error();
+		}
+
+		return JSONResult.ok(list);
 	}
 
 	/**
@@ -195,13 +195,15 @@ public class InterfaceController extends BaseController {
 	@ResponseBody
 	@RequestMapping("findOneInter.do")
 	public JSONResult findOneInter(Integer interfaceId) {
-		Interfaces interfaces = interfaceService
-				.selectByPrimaryKey(interfaceId);
-		if (interfaces != null) {
-			return new JSONResult(Constant.MSG_OK, Constant.CODE_200,
-					interfaces);
+		Interfaces interfaces = null;
+		try {
+			interfaces = interfaceService
+					.selectByPrimaryKey(interfaceId);
+		} catch (Exception e) {
+			logger.error("findOneInter出错：",e);
+			return JSONResult.error();
 		}
-		return new JSONResult(Constant.MSG_OK, Constant.CODE_404, interfaces);
+		return JSONResult.ok(interfaces);
 	}
 
 	@RequestMapping("testHttp.do")
