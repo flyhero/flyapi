@@ -14,7 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.flyhero.flyapi.entity.Resume;
 import com.flyhero.flyapi.pojo.JSONResult;
 import com.flyhero.flyapi.service.impl.ResumeServiceImpl;
-import com.flyhero.flyapi.utils.Constant;
 
 /**
  * 简历控制器
@@ -38,7 +37,6 @@ public class ResumeController extends BaseController{
 	 * @param: @param resumeId
 	 * @param: @return      
 	 * @return: ModelAndView      
-	 * @throws
 	 */
 	@RequestMapping(value="/publish/{resumeId}",method=RequestMethod.GET)
 	public ModelAndView goResumeHtml(@PathVariable("resumeId") Integer resumeId){
@@ -55,7 +53,6 @@ public class ResumeController extends BaseController{
 	 * @param: @param resumeId
 	 * @param: @return      
 	 * @return: JSONResult      
-	 * @throws
 	 */
 	@ResponseBody
 	@RequestMapping("/publish/info")
@@ -79,7 +76,6 @@ public class ResumeController extends BaseController{
 	 * @param: @param userId
 	 * @param: @return      
 	 * @return: JSONResult      
-	 * @throws
 	 */
 	@ResponseBody
 	@RequestMapping(value="/findResumeByUserId/{userId}",method=RequestMethod.GET)
@@ -103,7 +99,6 @@ public class ResumeController extends BaseController{
 	 * @param @param resume
 	 * @param @return   
 	 * @return JSONResult    
-	 * @throws
 	 */
 	@ResponseBody
 	@RequestMapping(value="saveUserResume.do",method=RequestMethod.POST)

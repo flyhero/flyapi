@@ -3,8 +3,6 @@ package com.flyhero.flyapi.web;
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
 
-import javax.jms.Destination;
-
 import com.alibaba.fastjson.JSONObject;
 
 import org.apache.log4j.Logger;
@@ -26,7 +24,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.flyhero.flyapi.pojo.JSONResult;
-import com.flyhero.flyapi.pojo.TipsEnum;
 import com.flyhero.flyapi.service.impl.ModuleServiceImpl;
 import com.flyhero.flyapi.service.impl.ProjectServiceImpl;
 import com.flyhero.flyapi.service.impl.UserProjectServiceImpl;
@@ -89,7 +86,6 @@ public class UserController extends BaseController {
 	 * @param @param id
 	 * @param @return   
 	 * @return JSONResult    
-	 * @throws
 	 */
 	@RequestMapping(value = "/hello/{id}", method = RequestMethod.GET)
 	@ResponseBody
@@ -163,7 +159,6 @@ public class UserController extends BaseController {
 	 * @param @return
 	 * @param @throws Exception 参数
 	 * @return String 返回类型
-	 * @throws
 	 */
 	@RequestMapping(value = "register.do")
 	@ResponseBody
@@ -197,7 +192,6 @@ public class UserController extends BaseController {
 	 * @param @param user
 	 * @param @return 参数
 	 * @return JSONObject 返回类型
-	 * @throws
 	 */
 	@RequestMapping("checkUserName.do")
 	@ResponseBody
@@ -222,7 +216,6 @@ public class UserController extends BaseController {
 	 * @param @return
 	 * @param @throws Exception 参数
 	 * @return String 返回类型
-	 * @throws
 	 */
 	@RequestMapping(value = "login.do")
 	public ModelAndView login(User user) throws Exception {
@@ -250,7 +243,6 @@ public class UserController extends BaseController {
 	 * @param @return
 	 * @param @throws Exception 参数
 	 * @return String 返回类型
-	 * @throws
 	 */
 	@RequestMapping(value = "logout.do")
 	public String logout() throws Exception {

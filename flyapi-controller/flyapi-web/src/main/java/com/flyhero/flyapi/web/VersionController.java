@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.flyhero.flyapi.entity.Version;
 import com.flyhero.flyapi.pojo.JSONResult;
 import com.flyhero.flyapi.service.impl.VersionServiceImpl;
-import com.flyhero.flyapi.utils.Constant;
 /**
  * 版本控制器
  * @ClassName: VersionController 
@@ -34,7 +33,6 @@ public class VersionController extends BaseController{
 	 * @date 2017年2月27日 下午4:35:10 
 	 * @param @return   
 	 * @return JSONResult    
-	 * @throws
 	 */
 	@ResponseBody
 	@RequestMapping("findVersionLog.do")
@@ -44,7 +42,7 @@ public class VersionController extends BaseController{
 			versionList=versionService.findVersionLog();
 		} catch (Exception e) {
 			logger.error("获取版本日志出错",e);
-			return JSONResult.error(versionList);
+			return JSONResult.error();
 		}
 		return JSONResult.ok(versionList);
 	}

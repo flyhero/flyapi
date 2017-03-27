@@ -21,7 +21,6 @@ import org.springframework.web.socket.TextMessage;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.flyhero.flyapi.entity.Interfaces;
-import com.flyhero.flyapi.entity.OperateLog;
 import com.flyhero.flyapi.entity.User;
 import com.flyhero.flyapi.entity.UserProject;
 import com.flyhero.flyapi.pojo.HttpResponse;

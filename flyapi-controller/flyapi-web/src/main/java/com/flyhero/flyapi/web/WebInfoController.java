@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.flyhero.flyapi.entity.WebInfo;
 import com.flyhero.flyapi.pojo.JSONResult;
 import com.flyhero.flyapi.service.impl.WebInfoServiceImpl;
-import com.flyhero.flyapi.utils.Constant;
 
 @Controller
 @RequestMapping("webinfo")
@@ -23,13 +22,12 @@ public class WebInfoController extends BaseController{
 	
 	/**
 	 * 根据语言获取web信息
-	 * @Title: findWebInfo 
-	 * @author flyhero(http://flyhero.top)  
-	 * @date 2016年12月19日 上午11:24:13 
-	 * @param @param language zh or en
-	 * @param @return   
-	 * @return JSONResult    
-	 * @throws
+	 * @Title: findWebInfo
+	 * @date 2017年3月27日 下午2:57:47 
+	 * @author flyhero(http://flyhero.top)
+	 * @param language
+	 * @return
+	 * @return: JSONResult
 	 */
 	@ResponseBody
 	@RequestMapping("findWebInfo.do")

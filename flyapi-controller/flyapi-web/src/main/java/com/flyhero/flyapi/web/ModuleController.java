@@ -14,9 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.socket.TextMessage;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.flyhero.flyapi.entity.Module;
-import com.flyhero.flyapi.entity.OperateLog;
 import com.flyhero.flyapi.entity.User;
 import com.flyhero.flyapi.entity.UserProject;
 import com.flyhero.flyapi.pojo.JSONResult;
@@ -25,10 +23,6 @@ import com.flyhero.flyapi.pojo.TeamMemberPojo;
 import com.flyhero.flyapi.service.LogService;
 import com.flyhero.flyapi.service.ModuleService;
 import com.flyhero.flyapi.service.UserProjectService;
-import com.flyhero.flyapi.service.impl.LogServiceImpl;
-import com.flyhero.flyapi.service.impl.ModuleServiceImpl;
-import com.flyhero.flyapi.service.impl.UserProjectServiceImpl;
-import com.flyhero.flyapi.utils.Constant;
 import com.flyhero.flyapi.websocket.SystemWebSocketHandler;
 
 /**
@@ -59,7 +53,6 @@ public class ModuleController extends BaseController{
 	 * @param @param module
 	 * @param @return    
 	 * @return JSONResult    返回类型 
-	 * @throws
 	 */
 	@RequestMapping("addModule.do")
 	@ResponseBody
@@ -88,7 +81,6 @@ public class ModuleController extends BaseController{
 	 * @param @param module
 	 * @param @return    
 	 * @return JSONResult    返回类型 
-	 * @throws
 	 */
 	@RequestMapping("deleteModule.do")
 	@ResponseBody
@@ -111,7 +103,6 @@ public class ModuleController extends BaseController{
 	 * @param @param module
 	 * @param @return    
 	 * @return JSONResult    返回类型 
-	 * @throws
 	 */
 	@RequestMapping("updateModule.do")
 	@ResponseBody
@@ -134,7 +125,6 @@ public class ModuleController extends BaseController{
 	 * @param @param module
 	 * @param @return    
 	 * @return JSONResult    返回类型 
-	 * @throws
 	 */
 	@RequestMapping("findModule.do")
 	@ResponseBody
