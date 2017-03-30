@@ -141,6 +141,5 @@ public class ForwardController extends BaseController{
 	public String goJson() {
 		return "jsonon";
 	}
-	
 
 }

@@ -196,6 +196,11 @@
 		        <groupId>org.apache.shiro</groupId>
 		        <artifactId>shiro-spring</artifactId>
 		    </dependency>
+			<!-- 添加spring-session支持 -->
+			<dependency>
+	           	<groupId>org.springframework.session</groupId>
+	            <artifactId>spring-session-data-redis</artifactId>
+			</dependency>
 	</dependencies>
 	<build>
 		<finalName>flyapi-web</finalName>

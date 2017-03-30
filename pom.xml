@@ -379,7 +379,12 @@
 		        <artifactId>shiro-spring</artifactId>
 		        <version>${shrio.version}</version>
 		    </dependency>
-			
+		    <!-- 添加spring-session支持 -->
+			<dependency>
+	           	<groupId>org.springframework.session</groupId>
+	            <artifactId>spring-session-data-redis</artifactId>
+	            <version>1.3.0.RELEASE</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 	<build>

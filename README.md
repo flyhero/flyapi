@@ -35,7 +35,12 @@ Github: https://github.com/flyhero/flyapi
 - 日志管理：SLF4J 1.7.7、Log4j
 - 即时消息：Spring WebSocket
 - 消息队列： Apache ActiveMQ
-
+- 校验框架：FluentValidator
+- 分布式协调服务：ZooKeeper
+- 分布式服务框架：Dubbo
+- 分布式会话： Spring-session 1.3.0
+- 分布式缓存数据库：Redis
+- 分布式全文检索：Solr
 2、前端
 
 - JS框架：jQuery 1.9

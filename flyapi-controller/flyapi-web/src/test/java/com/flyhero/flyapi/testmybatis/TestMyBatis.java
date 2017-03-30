@@ -32,6 +32,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;  
+import org.springframework.util.Assert;
 
 import com.github.pagehelper.PageInfo;
   
@@ -50,16 +51,18 @@ public class TestMyBatis {
    @Test
    public void testPage(){
 	   PageInfo<User> pageInfo= userService.queryByPage(1, 10);
-	   System.out.println(JSON.toJSONString(pageInfo));
+	   System.out.println("=====================");
+	   Assert.isTrue(1 < 0, "请上传营业执照号电子版！");
+	   System.out.println("=====================");
    }
    
-   @Test
+/*   @Test
    public void testPU(){
 	   List<UserProject> list=userProjectService.findUserProject(1);
 	   for(UserProject up:list){
 		   System.out.println(up.toString());
 	   }
-   }
+   }*/
 /*   @Test
    public void testInter(){
 	   int a= 0;
