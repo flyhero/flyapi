@@ -1,29 +1,20 @@
 # flyapi2.2.1
+## 项目简介
 接口管理系统 基于SSM+Maven的多模块项目
 开发中不必再麻烦的写文档，前后端人员联调会更加方便，通过在线接口管理，前端人员很容易知道后端人员增加、修改了哪些接口，大大减少了联调时间和增加了工作效率。
 项目成员可将项目中的接口生成pdf文档，方便保存。
 [![Version](https://img.shields.io/badge/version-2.2.1-green.svg)](https://github.com/flyhero/flyapi)
 
+## 目录Contents
 
-
-``` lua
-flyapi
-├── flyapi-common -- SSM框架公共模块
-├── flyapi-entity -- 实体类
-├── flyapi-dao -- 数据操作层
-├── flyapi-service -- 业务逻辑实现层
-├── flyapi-service-api -- 业务逻辑接口层
-└── flyapi-controller -- 控制器
-     ├── flyapi-admin -- 管理端
-     └── flyapi-web -- 客户端
-```
-
-
-# 项目地址
+## 快速入门Quick start
+## 项目地址
 Github: https://github.com/flyhero/flyapi
 
-# 技术选择
-1、后端
+
+## 技术与架构 Technology And Architecture
+### 技术选择
+#### 后端
 
 - 核心框架：Spring Framework 4.1.7
 - 视图框架：Spring MVC 4.1.7
@@ -41,7 +32,8 @@ Github: https://github.com/flyhero/flyapi
 - 分布式会话： Spring-session 1.3.0
 - 分布式缓存数据库：Redis
 - 分布式全文检索：Solr
-2、前端
+
+#### 前端
 
 - JS框架：jQuery 1.9
 - CSS框架：Twitter Bootstrap 3.3.1
@@ -53,17 +45,40 @@ Github: https://github.com/flyhero/flyapi
 - markdown编辑器: editor.md
 - 弹幕插件：jquery.barrager.js
 
-# 演示界面
-## 登录页面
+### 项目结构
+``` lua
+flyapi
+├── flyapi-common -- SSM框架公共模块
+├── flyapi-entity -- 实体类
+├── flyapi-dao -- 数据操作层
+├── flyapi-service -- 业务逻辑实现层
+├── flyapi-service-api -- 业务逻辑接口层
+└── flyapi-controller -- 控制器
+     ├── flyapi-admin -- 管理端
+     └── flyapi-web -- 客户端
+```
+
+## 配置Configuration
+
+## 环境搭建
+
+## 演示地址
+http://  用户名：   密码：
+
+## 演示界面 Screenshots
+### 登录页面
 ![登录页面](screenshot/login.png)
-## 主页面
+
+### 主页面
 ![主页面](screenshot/main.png)
-## 项目列表
+
+### 项目列表
 ![项目列表](screenshot/project.png)
-## 即时消息
+
+### 即时消息
 ![即时消息](screenshot/socket.png)
 
-
+## 待办事项To Do List
 接下来：
 1. 测试接口响应速度
 2. 增项目截止日期、删预测接口数
@@ -85,3 +100,40 @@ Github: https://github.com/flyhero/flyapi
 18.成长图谱
 19.团队技术文章
 20.分布式用户会话管理 spring-session
+
+
+## 更新日志CHANGELOG
+V1.0.1(2016/12/03 )
+- 列表
+- 列表2
+
+## 交流Discussing
+
+## Contributing
+
+我们欢迎反馈，缺陷报告和提交请求！
+We welcome feedback, bug reports, and pull requests!
+对于提交请求，请坚持下面的方针：
+For pull requests, please stick to the following guidelines:
+
+- Add tests for any new features and bug fixes. Ideally, each PR should increase the test coverage.
+- Follow the existing code style (e.g., indents). A PEP8 code linting target is included in the Makefile.
+- Put a reasonable amount of comments into the code.
+- Separate unrelated changes into multiple pull requests.
+Please note that we need to collect a signed Contributors License Agreement from each individual developer who contributes code to this repository. Please refer to the following links:
+
+- https://
+- https://
+
+## 版权声明
+本软件使用 Apache License 2.0 协议，请严格遵照协议内容：
+
+
+[功能描述]：主要描述一下这个项目的主要功能列表。
+[开发环境]：罗列使用本工程项目所需要安装的开发环境及配置，以及所需软件的版本说明和对应的下载链接。
+[项目结构简介]：简单介绍项目模块结构目录树，对用户可以修改的文件做重点说明。
+[测试DEMO]：此处可以简单介绍一下DEMO程序的思路，具体实现代码放在example文件夹中。
+[作者列表]：对于多人合作的项目，可以在这里简单介绍并感谢所有参与开发的研发人员。
+[更新链接]：提供后续更新的代码链接。
+[历史版本]：对历史版本更改 记录做个简单的罗列，让用户直观的了解到哪些版本解决了哪些问题。
+[联系方式]：可以提供微信、邮箱等联系方式，其他人对这个工程不明白的地方可以通过该联系方式与你联系。
