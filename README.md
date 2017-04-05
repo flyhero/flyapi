@@ -112,8 +112,11 @@ V1.0.1(2016/12/03 )
 ## Contributing
 
 我们欢迎反馈，缺陷报告和提交请求！
+
 We welcome feedback, bug reports, and pull requests!
+
 对于提交请求，请坚持下面的方针：
+
 For pull requests, please stick to the following guidelines:
 
 - Add tests for any new features and bug fixes. Ideally, each PR should increase the test coverage.
