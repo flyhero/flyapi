@@ -1,0 +1,197 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+		<meta content="ie=edge" http-equiv="x-ua-compatible">
+		<meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport">
+		<meta content="webkit" name="renderer">
+		<link href="https://modao.cc/favicon.ico" rel="icon">
+		<title>
+			flyapi登录注册
+		</title>
+		<link rel="stylesheet" media="screen" href="../res/css/application.css">
+		<link rel="stylesheet" media="screen" href="../res/css/landing-for-app.css">
+		<style>
+			::-webkit-scrollbar {
+				width: 8px;
+				height: 8px;
+			}
+			
+			 ::-webkit-scrollbar-thumb {
+				background-color: #c1c1c1;
+				border-radius: 4px;
+			}
+		</style>
+
+	</head>
+
+	<body class="sign">
+<!--		<script>
+			if(window.parent != window) {
+				document.body.className = document.body.className + ' iframe'
+			}
+		</script>-->
+		<script type="text/javascript" src="../res/mods/jquery.min.js" ></script>
+		<div class="switch-lang">
+			<a class="flag en" href="#">
+				<span>EN</span>
+			</a>
+		</div>
+
+		<div id="web">
+			<div class="login-box">
+				<div class="login-header">
+					<a href="https://modao.cc/">
+						<img class="logo" src="../res/css/logo-lg.svg">
+					</a>
+					<ul class="tab">
+						<li class="active" data-box="#signin-box" id="signin">
+							<a class="btn btn-link" href="#">登录</a>
+						</li>
+						<li data-box="#signup-box" id="signup">
+							<a class="btn btn-link" href="#">注册</a>
+						</li>
+					</ul>
+				</div>
+				<div class="box" id="signin-box">
+					<div class="login-body">
+						<form action="" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="Vp9hwqEtwtnMjSSiWnI7V3NxcutfXRuwXpA+SYI8sYdmruMQQQIYh+aGphKB/kpkai3TDRGs7oGpjmU7VGLEIw==">
+							<div class="form-group form-group-icon">
+								<input class="input-lg form-input email" name="email" placeholder="用户名">
+								<div class="form-icon">
+									<i class="fa fa-envelope"></i>
+								</div>
+							</div>
+							<div class="form-group form-group-icon">
+								<input class="input-lg form-input password" name="password" placeholder="密码" type="password">
+								<div class="form-icon">
+									<i class="fa fa-lock"></i>
+								</div>
+							</div>
+							<div class="form-group">
+								<button class="btn btn-primary btn-block submit" data-style="slide-up" type="submit">
+登入
+</button>
+							</div>
+						</form>
+					</div>
+					<div class="login-footer">
+						<p class="forgot-password">
+							<a href="https://modao.cc/forgot">
+								忘记密码？
+							</a>
+						</p>
+						<div class="quick-login">
+							<p class="hr">
+								<span>快捷登录</span>
+							</p>
+							<i class="iconfont icon-wenda"></i>
+							<a class="iconfont icon-qq"></a>
+						</div>
+						<div class="divider"></div>
+						<div class="switch-domain">
+							<a href="https://mockingbot.com/ncr">
+								<span>
+									绑定后一键登录
+								</span>
+							</a>
+						</div>
+						<div class="divider"></div>
+					</div>
+				</div>
+				<div class="box" id="signup-box" style="display: none">
+					<div class="login-body">
+						<form class="new_user" id="new_user" action="https://modao.cc/users" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="Vp9hwqEtwtnMjSSiWnI7V3NxcutfXRuwXpA+SYI8sYdmruMQQQIYh+aGphKB/kpkai3TDRGs7oGpjmU7VGLEIw==">
+							<div class="form-group form-group-icon">
+								<input class="input-lg form-input name" name="user[name]" placeholder="用户名">
+								<div class="form-icon">
+									<i class="fa fa-user"></i>
+								</div>
+							</div>
+							<div class="form-group form-group-icon">
+								<input class="input-lg form-input email" name="user[email]" placeholder="密码">
+								<div class="form-icon">
+									<i class="fa fa-envelope"></i>
+								</div>
+							</div>
+							<div class="form-group form-group-icon">
+								<input class="input-lg form-input password" name="user[password]" placeholder="确认密码" type="password">
+								<div class="form-icon">
+									<i class="fa fa-lock"></i>
+								</div>
+								<input name="user[code]" type="hidden">
+								<input name="inapp" type="hidden" value="0">
+							</div>
+							<div class="form-group">
+								<button class="btn btn-primary btn-block btn-lg submit" data-style="slide-up" type="submit">
+免费注册
+</button>
+							</div>
+						</form>
+					</div>
+					<div class="login-footer">
+						<p class="agree-terms">
+							点击「免费注册」按钮将视为您同意
+							<a class="text-highlight" href="https://modao.cc/tos">使用条款</a>
+						</p>
+						<div class="quick-login">
+							<p class="hr">
+								<span>快捷注册</span>
+							</p>
+							<a class="fa fa-wechat wechat-btn"></a>
+						</div>
+					</div>
+				</div>
+				<div class="box" id="wechat-box" style="display: none">
+	<!--				<div data-appid="wx26bcd6baa41a1f36" data-redirect-uri="https://modao.cc/wechats/sign_callbacks" id="wechat-login"><iframe src="./css/qrconnect.html" frameborder="0" scrolling="no" width="300px" height="400px"></iframe></div>-->
+				</div>
+			</div>
+
+		</div>
+
+		<script>
+
+				$(function() {
+					var $login;
+					$('ul.tab li').click(function(e) {
+						e.preventDefault();
+						$('ul.tab li').removeClass('active');
+						$(this).addClass('active');
+						$('.box').hide();
+						return $($(this).data('box')).show();
+					});
+					$('.signup-btn').click(function(e) {
+						e.preventDefault();
+						$('#signin').removeClass('active');
+						$('#signup').addClass('active');
+						$('.box').hide();
+						return $('#signup-box').show();
+					});
+					$('.wechat-btn').click(function(e) {
+						e.preventDefault();
+						$('.box').hide();
+						return $('#wechat-box').show();
+					});
+					$('input.email').focus();
+					$login = $('#wechat-login');
+					if(window.WxLogin) {
+						new WxLogin({
+							id: 'wechat-login',
+							appid: $login.data('appid'),
+							scope: 'snsapi_login',
+							href: 'https://' + location.host + '/css/wechat.css',
+							redirect_uri: encodeURIComponent($login.data('redirect-uri'))
+						});
+					}
+					return $login.find('iframe').load(function() {
+						return $login.removeClass('loading');
+					});
+				});
+
+		</script>
+
+	</body>
+
+</html>

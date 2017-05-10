@@ -1,9 +1,10 @@
-# flyapi2.2.1
+# flyapi
 ## 项目简介
-接口管理系统 基于SSM+Maven的多模块项目
-开发中不必再麻烦的写文档，前后端人员联调会更加方便，通过在线接口管理，前端人员很容易知道后端人员增加、修改了哪些接口，大大减少了联调时间和增加了工作效率。
-项目成员可将项目中的接口生成pdf文档，方便保存。
-[![Version](https://img.shields.io/badge/version-2.2.1-green.svg)](https://github.com/flyhero/flyapi)
+源于 2016年10月 接口管理系统 基于SSM+Maven的多模块项目
+后因其它相关系统比较完善，遂放弃继续开发。
+
+如今将用分布式编写多人博客系统。
+[![Version](https://img.shields.io/badge/version-1.0-green.svg)](https://github.com/flyhero/flyapi)
 
 ## 目录Contents
 

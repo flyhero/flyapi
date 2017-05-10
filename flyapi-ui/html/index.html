@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>flyapi首页</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<meta name="keywords" content="">
+		<meta name="description" content="">
+		<link rel="stylesheet" href="../res/layui/css/layui.css">
+		<link rel="stylesheet" href="../res/css/global.css">
+	</head>
+
+	<body>
+
+		<div class="header">
+			<div class="main">
+				<a class="logo" href="/" title="Fly">Fly社区</a>
+				<div class="nav">
+					<a class="nav-this" href="jie/index.html">
+						<i class="iconfont icon-wenda"></i>首页
+					</a>
+					<a href="jie/index.html">
+						<i class="iconfont icon-wenda"></i>问答
+					</a>
+					<a href="http://www.layui.com/" target="_blank">
+						<i class="iconfont icon-ui"></i>图书交换
+					</a>
+					<a href="http://www.layui.com/" target="_blank">
+						<i class="iconfont icon-ui"></i>其它
+					</a>
+				</div>
+
+				<div class="nav-user">
+					<!-- 未登入状态 -->
+					<a class="unlogin" href="user/login.html"><i class="iconfont icon-touxiang"></i></a>
+					<span><a href="user/login.html">登入</a><a href="user/reg.html">注册</a></span>
+					<!-- 登入后的状态 -->
+					<!-- 
+      <a class="avatar" href="user/index.html">
+        <img src="http://tp4.sinaimg.cn/1345566427/180/5730976522/0">
+        <cite>贤心</cite>
+        <i>VIP2</i>
+      </a>
+      <div class="nav">
+        <a href="/user/set/"><i class="iconfont icon-shezhi"></i>设置</a>
+        <a href="/user/logout/"><i class="iconfont icon-tuichu" style="top: 0; font-size: 22px;"></i>退了</a>
+      </div> -->
+
+				</div>
+			</div>
+		</div>
+
+		<div class="main layui-clear">
+			<div class="wrap">
+				<div class="content">
+					<div class="fly-tab fly-tab-index">
+						<span>
+          <a href="#">首页推荐</a>
+          <a href="#">最新更新</a>
+          <a href="jie/index.html">今日段子</a>
+          <a href="user/index.html">系列文章</a>
+        </span>
+						<form action="http://cn.bing.com/search" class="fly-search">
+							<i class="iconfont icon-sousuo"></i>
+							<input class="layui-input" autocomplete="off" placeholder="搜索内容，回车跳转" type="text" name="q">
+						</form>
+						<a href="jie/add.html" class="layui-btn jie-add">发布文章</a>
+					</div>
+
+					<ul class="fly-list fly-list-top">
+						<li class="fly-list-li">
+							<a href="user/home.html" class="fly-list-avatar">
+								<img src="http://tp4.sinaimg.cn/1345566427/180/5730976522/0" alt="">
+							</a>
+							<h2 class="fly-tip">
+            <a href="jie/detail.html">基于 layui的轻量级问答社区页面模版 V2版本</a>
+            <span class="fly-tip-stick">置顶</span>
+            <span class="fly-tip-jing">精帖</span>
+          </h2>
+							<p>
+								<span><a href="user/home.html">贤心</a></span>
+								<span>刚刚</span>
+								<span>layui框架综合</span>
+								<span class="fly-list-hint"> 
+              <i class="iconfont" title="回答">&#xe60c;</i> 317
+              <i class="iconfont" title="人气">&#xe60b;</i> 6830
+            </span>
+							</p>
+						</li>
+						<li class="fly-list-li">
+							<a href="user/home.html" class="fly-list-avatar">
+								<img src="../res/images/avatar/00.jpg" alt="">
+							</a>
+							<h2 class="fly-tip">
+            <a href="jie/detail.html">基于 layui的轻量级问答社区页面模版 V2版本</a>
+            <span class="fly-tip-stick">置顶</span>
+          </h2>
+							<p>
+								<span><a href="user/home.html">纸飞机</a></span>
+								<span>30分钟前</span>
+								<span>技术闲谈</span>
+								<span class="fly-list-hint"> 
+              <i class="iconfont" title="回答">&#xe60c;</i> 502
+              <i class="iconfont" title="人气">&#xe60b;</i> 81689
+            </span>
+							</p>
+						</li>
+					</ul>
+
+					<ul class="fly-list">
+						<li class="note-list">
+							<a class="des-img" href="/p/eb1a0e235e49" target="_blank">
+								<img src="//upload-images.jianshu.io/upload_images/2263276-65f149645b408224?imageMogr2/auto-orient/strip|imageView2/1/w/375/h/300" alt="300">
+							</a>
+							<div>
+								<div class="author">
+									<a class="avatar" target="_blank" href="/u/c3d9abd7063b">
+										<img src="../res/images/avatar/default.png" alt="96">
+									</a>
+									<div class="name">
+										<a class="blue-link" target="_blank" href="/u/c3d9abd7063b">flyhero</a>
+										<span class="time" data-shared-at="2017-04-05T09:53:58+08:00">&nbsp;5 小时前</span>
+									</div>
+								</div>
+								<h2 class="fly-tip">
+										<a target="_blank" href="/p/eb1a0e235e49">大话设计模式之工厂模式</a>
+									</h2>
+
+								<p class="abstract">
+									他不是别人 他是张国荣 14年前的今天，一颗巨星陨落。 我一直记得在电影《阿飞正传》中，张国荣有一句这样的台词：你知不知道有一种鸟没有脚的？他的一生只能在天上飞来去。一辈子只...
+								</p>
+								<div class="meta">
+									<a class="collection-tag" target="_blank" href="/c/qQB2Zn">想法</a>
+									<a target="_blank" href="/p/eb1a0e235e49">
+										<i class="iconfont ic-list-read">&#xe60b;</i> 271
+									</a>
+									<a target="_blank" href="/p/eb1a0e235e49#comments">
+										<i class="iconfont" title="回答">&#xe60c;</i> 8
+									</a> <span><i class="iconfont" title="人气">&#xe60b;</i> 106</span>
+								</div>
+							</div>
+						</li>
+						<li class="note-list">
+							<a class="des-img" href="/p/eb1a0e235e49" target="_blank">
+								<img src="//upload-images.jianshu.io/upload_images/2263276-65f149645b408224?imageMogr2/auto-orient/strip|imageView2/1/w/375/h/300" alt="300">
+							</a>
+							<div>
+								<div class="author">
+									<a class="avatar" target="_blank" href="/u/c3d9abd7063b">
+										<img src="../res/images/avatar/default.png" alt="96">
+									</a>
+									<div class="name">
+										<a class="blue-link" target="_blank" href="/u/c3d9abd7063b">爱情挽回指南</a>
+										<span class="time" data-shared-at="2017-04-05T09:53:58+08:00">5 小时前</span>
+									</div>
+								</div>
+								<h2 class="fly-tip">
+										<a target="_blank" href="/p/eb1a0e235e49">张国荣：“不如我们重头来过”</a>
+									</h2>
+
+								<p class="abstract">
+									他不是别人 他是张国荣 14年前的今天，一颗巨星陨落。 我一直记得在电影《阿飞正传》中，张国荣有一句这样的台词：你知不知道有一种鸟没有脚的？他的一生只能在天上飞来去。一辈子只...
+								</p>
+								<div class="meta">
+									<a class="collection-tag" target="_blank" href="/c/qQB2Zn">想法</a>
+									<a target="_blank" href="/p/eb1a0e235e49">
+										<i class="iconfont ic-list-read">&#xe60b;</i> 271
+									</a>
+									<a target="_blank" href="/p/eb1a0e235e49#comments">
+										<i class="iconfont" title="回答">&#xe60c;</i> 8
+									</a> <span><i class="iconfont" title="人气">&#xe60b;</i> 106</span>
+								</div>
+							</div>
+						</li>
+
+					</ul>
+
+					<div style="text-align: center">
+						<div class="laypage-main">
+							<a href="jie/index.html" class="laypage-next">更多求解</a>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+			<div class="edge">
+				<div class="fly-panel leifeng-rank">
+					<h3 class="fly-panel-title">今日名人榜- TOP 12</h3>
+					<dl>
+						<dd>
+							<a href="user/home.html">
+								<img src="../res/images/avatar/default.png">
+								<cite>纸飞机</cite>
+								<i>159次回答</i>
+							</a>
+						</dd>
+						<dd>
+							<a href="user/home.html">
+								<img src="../res/images/avatar/default.png">
+								<cite>纸飞机</cite>
+								<i>159次回答</i>
+							</a>
+						</dd>
+						<dd>
+							<a href="user/home.html">
+								<img src="../res/images/avatar/default.png">
+								<cite>纸飞机</cite>
+								<i>159次回答</i>
+							</a>
+						</dd>
+						<dd>
+							<a href="user/home.html">
+								<img src="../res/images/avatar/default.png">
+								<cite>纸飞机</cite>
+								<i>159次回答</i>
+							</a>
+						</dd>
+						<dd>
+							<a href="user/home.html">
+								<img src="../res/images/avatar/default.png">
+								<cite>纸飞机</cite>
+								<i>159次回答</i>
+							</a>
+						</dd>
+						<dd>
+							<a href="user/home.html">
+								<img src="../res/images/avatar/default.png">
+								<cite>纸飞机</cite>
+								<i>159次回答</i>
+							</a>
+						</dd>
+						<dd>
+							<a href="user/home.html">
+								<img src="../res/images/avatar/default.png">
+								<cite>纸飞机</cite>
+								<i>159次回答</i>
+							</a>
+						</dd>
+						<dd>
+							<a href="user/home.html">
+								<img src="../res/images/avatar/default.png">
+								<cite>纸飞机</cite>
+								<i>159次回答</i>
+							</a>
+						</dd>
+						<dd>
+							<a href="user/home.html">
+								<img src="../res/images/avatar/default.png">
+								<cite>纸飞机</cite>
+								<i>159次回答</i>
+							</a>
+						</dd>
+						<dd>
+							<a href="user/home.html">
+								<img src="../res/images/avatar/default.png">
+								<cite>纸飞机</cite>
+								<i>159次回答</i>
+							</a>
+						</dd>
+						<dd>
+							<a href="user/home.html">
+								<img src="../res/images/avatar/default.png">
+								<cite>纸飞机</cite>
+								<i>159次回答</i>
+							</a>
+						</dd>
+						<dd>
+							<a href="user/home.html">
+								<img src="../res/images/avatar/default.png">
+								<cite>纸飞机</cite>
+								<i>159次回答</i>
+							</a>
+						</dd>
+					</dl>
+				</div>
+
+				<dl class="fly-panel fly-list-one">
+					<dt class="fly-panel-title">今日热门</dt>
+					<dd>
+						<a href="jie/detail.html">使用 layui 秒搭后台大布局（基本结构）</a>
+						<span><i class="iconfont">&#xe60b;</i> 6087</span>
+					</dd>
+					<dd>
+						<a href="jie/detail.html">Java实现LayIM后端的核心代码</a>
+						<span><i class="iconfont">&#xe60b;</i> 767</span>
+					</dd>
+					<dd>
+						<a href="jie/detail.html">使用 layui 秒搭后台大布局（基本结构）</a>
+						<span><i class="iconfont">&#xe60b;</i> 6087</span>
+					</dd>
+					<dd>
+						<a href="jie/detail.html">Java实现LayIM后端的核心代码</a>
+						<span><i class="iconfont">&#xe60b;</i> 767</span>
+					</dd>
+					<dd>
+						<a href="jie/detail.html">使用 layui 秒搭后台大布局（基本结构）</a>
+						<span><i class="iconfont">&#xe60b;</i> 6087</span>
+					</dd>
+					<dd>
+						<a href="jie/detail.html">Java实现LayIM后端的核心代码</a>
+						<span><i class="iconfont">&#xe60b;</i> 767</span>
+					</dd>
+					<dd>
+						<a href="jie/detail.html">使用 layui 秒搭后台大布局（基本结构）</a>
+						<span><i class="iconfont">&#xe60b;</i> 6087</span>
+					</dd>
+					<dd>
+						<a href="jie/detail.html">Java实现LayIM后端的核心代码</a>
+						<span><i class="iconfont">&#xe60b;</i> 767</span>
+					</dd>
+				</dl>
+
+				<dl class="fly-panel fly-list-one">
+					<dt class="fly-panel-title">最近更新</dt>
+					<dd>
+						<a href="jie/detail.html">使用 layui 秒搭后台大布局之基本结构</a>
+						<span><i class="iconfont">&#xe60c;</i> 96</span>
+					</dd>
+					<dd>
+						<a href="jie/detail.html">使用 layui 秒搭后台大布局之基本结构</a>
+						<span><i class="iconfont">&#xe60c;</i> 96</span>
+					</dd>
+					<dd>
+						<a href="jie/detail.html">使用 layui 秒搭后台大布局之基本结构</a>
+						<span><i class="iconfont">&#xe60c;</i> 96</span>
+					</dd>
+					<dd>
+						<a href="jie/detail.html">使用 layui 秒搭后台大布局之基本结构</a>
+						<span><i class="iconfont">&#xe60c;</i> 96</span>
+					</dd>
+					<dd>
+						<a href="jie/detail.html">使用 layui 秒搭后台大布局之基本结构</a>
+						<span><i class="iconfont">&#xe60c;</i> 96</span>
+					</dd>
+					<dd>
+						<a href="jie/detail.html">使用 layui 秒搭后台大布局之基本结构</a>
+						<span><i class="iconfont">&#xe60c;</i> 96</span>
+					</dd>
+					<dd>
+						<a href="jie/detail.html">使用 layui 秒搭后台大布局之基本结构</a>
+						<span><i class="iconfont">&#xe60c;</i> 96</span>
+					</dd>
+					<dd>
+						<a href="jie/detail.html">使用 layui 秒搭后台大布局之基本结构</a>
+						<span><i class="iconfont">&#xe60c;</i> 96</span>
+					</dd>
+				</dl>
+
+				<div class="fly-panel fly-link">
+					<h3 class="fly-panel-title">友情链接</h3>
+					<dl>
+						<dd>
+							<a href="http://www.layui.com/" target="_blank">layui</a>
+						</dd>
+						<dd>
+							<a href="http://layim.layui.com/" target="_blank">LayIM</a>
+						</dd>
+						<dd>
+							<a href="http://layer.layui.com/" target="_blank">layer</a>
+						</dd>
+					</dl>
+				</div>
+
+			</div>
+		</div>
+
+		<div class="footer">
+			<p>
+				<a href="http://fly.layui.com/">Fly社区</a> 2017 &copy;
+				<a href="http://www.layui.com/">layui.com</a>
+			</p>
+			<p>
+				<a href="http://fly.layui.com/auth/get" target="_blank">产品授权</a>
+				<a href="http://fly.layui.com/jie/8157.html" target="_blank">获取Fly社区模版</a>
+				<a href="http://fly.layui.com/jie/2461.html" target="_blank">微信公众号</a>
+			</p>
+		</div>
+		<script src="../res/layui/layui.js"></script>
+		<script>
+			layui.cache.page = '';
+			layui.cache.user = {
+				username: '游客',
+				uid: -1,
+				avatar: '../res/images/avatar/00.jpg',
+				experience: 83,
+				sex: '男'
+			};
+			layui.config({
+				version: "2.0.0",
+				base: '../res/mods/'
+			}).extend({
+				fly: 'index'
+			}).use('fly');
+		</script>
+
+	</body>
+
+</html>
