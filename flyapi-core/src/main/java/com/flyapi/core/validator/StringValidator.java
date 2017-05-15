@@ -3,13 +3,14 @@ package com.flyapi.core.validator;
 import com.baidu.unbiz.fluentvalidator.*;
 import static com.baidu.unbiz.fluentvalidator.ResultCollectors.toSimple;
 /**
+ * 字符串验证类
  * author: flyhero
  * Date: 2017/5/15 0015 下午 4:37
  */
 public class StringValidator extends ValidatorHandler<String> implements Validator<String>{
 
     private int min = 0;
-    private int max = 2147483647;
+    private int max = 2147483647; //整型最大值
     private String fieldName = "";
     public StringValidator(String fieldName){
         this.fieldName = fieldName;
@@ -19,7 +20,7 @@ public class StringValidator extends ValidatorHandler<String> implements Validat
         this.max = max;
     }
     public StringValidator(int min, int max ,String fieldName){
-        this(fieldName);
+        this(fieldName); //调用其它构造函数
         this.min = min;
         this.max = max;
     }

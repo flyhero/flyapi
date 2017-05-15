@@ -53,6 +53,7 @@
             <version>1.2</version>
         </dependency>
 
+       <!-- log4j2-->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
@@ -152,6 +153,7 @@
         </dependency>
 
         <!-- fluent-validator -->
+       <!--作者 http://neoremind.com-->
         <dependency>
             <groupId>com.baidu.unbiz</groupId>
             <artifactId>fluent-validator</artifactId>

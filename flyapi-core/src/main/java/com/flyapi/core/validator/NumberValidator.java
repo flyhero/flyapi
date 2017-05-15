@@ -6,12 +6,13 @@ import com.baidu.unbiz.fluentvalidator.ValidatorContext;
 import com.baidu.unbiz.fluentvalidator.ValidatorHandler;
 
 /**
+ * 数字验证类
  * author: flyhero
  * Date: 2017/5/15 0015 下午 5:55
  */
 public class NumberValidator extends ValidatorHandler<Integer> implements Validator<Integer> {
     private int min = 0;
-    private int max = 0;
+    private int max = 2147483647;
     private String fieldName = "";
     public NumberValidator(String fieldName){
         this.fieldName=fieldName;
