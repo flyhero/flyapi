@@ -12,7 +12,6 @@
     <module>flyapi-service-api</module>
     <module>flyapi-service</module>
     <module>flyapi-dao</module>
-    <module>flyapi-admin</module>
   </modules>
   <packaging>pom</packaging>
 
