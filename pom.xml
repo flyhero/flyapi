@@ -8,6 +8,11 @@
   <modules>
     <module>flyapi-admin</module>
     <module>flyapi-core</module>
+    <module>flyapi-web</module>
+    <module>flyapi-service-api</module>
+    <module>flyapi-service</module>
+    <module>flyapi-dao</module>
+    <module>flyapi-admin</module>
   </modules>
   <packaging>pom</packaging>
 
