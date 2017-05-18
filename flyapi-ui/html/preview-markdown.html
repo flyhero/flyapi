@@ -67,19 +67,6 @@
                <textarea style="display:none;" name="test-editormd-markdown-doc">###Hello world!</textarea>               
             </div>
         </div>
-               <div class="layui-form layui-form-pane">
-          <form action="/jie/reply/" method="post">
-            <div class="layui-form-item layui-form-text">
-              <div class="layui-input-block">
-                <textarea id="L_content" name="content" required lay-verify="required" placeholder="我要回答"  class="layui-textarea fly-editor" style="height: 150px;"></textarea>
-              </div>
-            </div>
-            <div class="layui-form-item">
-              <input type="hidden" name="jid" value="{{rows.id}}">
-              <button class="layui-btn" lay-filter="*" lay-submit>提交回答</button>
-            </div>
-          </form>
-        </div>
         <!-- <script src="js/zepto.min.js"></script>
 		<script>		
 			var jQuery = Zepto;  // 为了避免修改flowChart.js和sequence-diagram.js的源码，所以使用Zepto.js时想支持flowChart/sequenceDiagram就得加上这一句
