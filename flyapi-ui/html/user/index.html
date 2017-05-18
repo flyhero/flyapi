@@ -9,6 +9,7 @@
   <meta name="description" content="Fly社区是模块化前端UI框架Layui的官网社区，致力于为web开发提供强劲动力">
   <link rel="stylesheet" href="../../res/layui/css/layui.css">
   <link rel="stylesheet" href="../../res/css/global.css">
+
 </head>
 <body>
 
@@ -27,16 +28,36 @@
     <div class="nav-user">      
       <!-- 登入后的状态 -->
       
-      <a class="avatar" href="../user/index.html">
+ <!--     <a class="avatar" href="../user/index.html">
         <img src="http://tp4.sinaimg.cn/1345566427/180/5730976522/0">
-        <cite>贤心</cite>
-        <i>VIP2</i>
-      </a>
+      </a>-->
       <div class="nav">
-        <a href="../user/set.html"><i class="iconfont icon-shezhi"></i>设置</a>
-        <a href=""><i class="iconfont icon-tuichu" style="top: 0; font-size: 22px;"></i>退了</a>
+        <!--<a href="../user/set.html"><i class="iconfont icon-shezhi"></i>设置</a>-->
+        <!--<a href=""><i class="iconfont icon-tuichu" style="top: 0; font-size: 22px;"></i>退了</a>-->
+        <ul class="layui-nav" lay-filter="">
+          <li class="layui-nav-item">
+            <a class="avatar" href="../user/index.html">
+              <img src="http://tp4.sinaimg.cn/1345566427/180/5730976522/0">
+            </a>
+            <dl class="layui-nav-child"> <!-- 二级菜单 -->
+              <dd><a href="">移动模块</a></dd>
+              <dd><a href="">后台模版</a></dd>
+              <dd><a href="">电商平台</a></dd>
+            </dl>
+          </li>
+        </ul>
+
       </div>
-      
+
+
+      <script>
+          //注意：导航 依赖 element 模块，否则无法进行功能性操作
+          layui.use('element', function(){
+              var element = layui.element();
+
+              //…
+          });
+      </script>
     </div>
   </div>
 </div>
