@@ -10,6 +10,11 @@
 		<meta name="description" content="">
 		<link rel="stylesheet" href="../res/layui/css/layui.css">
 		<link rel="stylesheet" href="../res/css/global.css">
+		<link rel="stylesheet" href="../res/css/xslider.css">
+		<link rel="stylesheet" href="../res/css/dropdown.css" />
+		<script src="../res/js/jquery.min.js"></script>
+		<script src="../res/js/jquery.sweet-dropdown.min.js"></script>
+		<script src="../res/js/xSlider.js"></script>
 	</head>
 
 	<body>
@@ -27,26 +32,55 @@
 					<a href="http://www.layui.com/" target="_blank">
 						<i class="iconfont icon-ui"></i>图书交换
 					</a>
-					<a href="http://www.layui.com/" target="_blank">
+					<a data-dropdown="#dropdown-other">
 						<i class="iconfont icon-ui"></i>其它
 					</a>
+					<div class="dropdown-menu dropdown-anchor-top-left dropdown-has-anchor" id="dropdown-other">
+						<ul>
+							<li><a href="#">主页</a></li>
+							<li><a href="#">设置</a></li>
+							<!--<li class="divider"></li>-->
+							<li><a href="#">反馈</a></li>
+						</ul>
+					</div>
 				</div>
 
-				<div class="nav-user">
+				<div class="flyhero-user">
 					<!-- 未登入状态 -->
-					<a class="unlogin" href="user/login.html"><i class="iconfont icon-touxiang"></i></a>
-					<span><a href="user/login.html">登入</a><a href="user/reg.html">注册</a></span>
+					<!--      <a class="unlogin" href="user/login.html"><i class="iconfont icon-touxiang"></i></a>
+                          <span><a href="user/login.html">登入</a><a href="user/reg.html">注册</a></span>
+                          <p class="out-login">
+                            <a href="" onclick="layer.msg('正在通过QQ登入', {icon:16, shade: 0.1, time:0})" class="iconfont icon-qq" title="QQ登入"></a>
+                            <a href="" onclick="layer.msg('正在通过微博登入', {icon:16, shade: 0.1, time:0})" class="iconfont icon-weibo" title="微博登入"></a>
+                          </p>   -->
+
 					<!-- 登入后的状态 -->
-					<!-- 
-      <a class="avatar" href="user/index.html">
-        <img src="http://tp4.sinaimg.cn/1345566427/180/5730976522/0">
-        <cite>贤心</cite>
-        <i>VIP2</i>
-      </a>
-      <div class="nav">
-        <a href="/user/set/"><i class="iconfont icon-shezhi"></i>设置</a>
-        <a href="/user/logout/"><i class="iconfont icon-tuichu" style="top: 0; font-size: 22px;"></i>退了</a>
-      </div> -->
+					<ul style="list-style: none">
+						<li class="user-hover" style="width: 80px;height: 65px;float: left;  ">
+							<a class="avatar dropdown" href="" data-dropdown="#dropdown-standard">
+								<img src="../res/images/avatar/flyhero.jpg">
+							</a>
+						</li>
+						<li class="user-hover" style="width: 80px;height: 65px;float: left;  ">
+							<a href="jie/add.html" class="layui-btn">发布文章</a>
+						</li>
+					</ul>
+					<!--<div class="user-hover" style="width: 80px;height: 65px;" data-dropdown="#dropdown-standard">
+						<a class="avatar dropdown" href="">
+							<img src="../res/images/avatar/flyhero.jpg">
+						</a>
+					</div>-->
+
+
+					<div class="dropdown-menu dropdown-anchor-top-left dropdown-has-anchor" id="dropdown-standard">
+						<ul>
+							<li><a href="#">主页</a></li>
+							<li><a href="#">设置</a></li>
+							<!--<li class="divider"></li>-->
+							<li><a href="#">反馈</a></li>
+						</ul>
+					</div>
+
 
 				</div>
 			</div>
@@ -57,18 +91,29 @@
 				<div class="content">
 					<div class="fly-tab fly-tab-index">
 						<span>
-          <a href="#">首页推荐</a>
-          <a href="#">最新更新</a>
-          <a href="jie/index.html">今日段子</a>
-          <a href="user/index.html">系列文章</a>
-        </span>
+						  <a href="#">首页推荐</a>
+						  <a href="#">最新更新</a>
+						  <a href="jie/index.html">今日段子</a>
+						  <a href="user/index.html">系列文章</a>
+						</span>
 						<form action="http://cn.bing.com/search" class="fly-search">
 							<i class="iconfont icon-sousuo"></i>
 							<input class="layui-input" autocomplete="off" placeholder="搜索内容，回车跳转" type="text" name="q">
 						</form>
 						<a href="jie/add.html" class="layui-btn jie-add">发布文章</a>
 					</div>
-
+					<div class="slider">
+						<div class="slider-img">
+							<ul class="slider-img-ul">
+								<li><img src="../res/images/slider-1.jpg"></li>
+								<li><img src="../res/images/slider-2.jpg"></li>
+								<li><img src="../res/images/slider-3.jpg"></li>
+								<li><img src="../res/images/slider-4.jpg"></li>
+								<li><img src="../res/images/slider-5.jpg"></li>
+							</ul>
+						</div>
+					</div>
+<!--
 					<ul class="fly-list fly-list-top">
 						<li class="fly-list-li">
 							<a href="user/home.html" class="fly-list-avatar">
@@ -107,7 +152,7 @@
             </span>
 							</p>
 						</li>
-					</ul>
+					</ul>-->
 
 					<ul class="fly-list">
 						<li class="note-list">
@@ -379,6 +424,22 @@
 			</p>
 		</div>
 		<script src="../res/layui/layui.js"></script>
+
+		<script type="text/javascript">
+
+            $(document).ready(function(){
+
+                $('.slider').xSlider({
+                    w: 900,
+                    current: 0,
+                    speed: 500,
+                    intervalTime: 5000
+
+                });
+            });
+
+		</script>
+
 		<script>
 			layui.cache.page = '';
 			layui.cache.user = {

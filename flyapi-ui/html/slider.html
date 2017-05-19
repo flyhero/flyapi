@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>xSlider幻灯片插件</title>
+    <link rel="stylesheet" href="../res/css/xslider.css">
+</head>
+<body>
+<div class="slider">
+    <div class="slider-img">
+        <ul class="slider-img-ul">
+            <li><img src="../res/images/slider-5.jpg"></li>
+            <li><img src="../res/images/slider-1.jpg"></li>
+            <li><img src="../res/images/slider-2.jpg"></li>
+            <li><img src="../res/images/slider-3.jpg"></li>
+            <li><img src="../res/images/slider-4.jpg"></li>
+            <li><img src="../res/images/slider-5.jpg"></li>
+            <li><img src="../res/images/slider-1.jpg"></li>
+        </ul>
+    </div>
+</div>
+<script src="../res/js/jquery.min.js"></script>
+<script src="../res/js/xSlider.js"></script>
+<script>
+    $('.slider').xSlider({
+
+        // slider width
+        w: 100,
+
+        // current slide
+        current: 0,
+
+        // animation speed
+        speed: 500,
+
+        // autoplay interval
+        intervalTime: 5000
+
+    })
+</script>
+</body></html>

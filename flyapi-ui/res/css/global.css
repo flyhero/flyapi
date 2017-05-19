@@ -437,7 +437,7 @@ body .fly-user-main{position: relative; width: 1085px; min-height: 600px; margin
 .fly-list-top .fly-list-li{}
 
 .note-list{
-	position: relative;  margin-top: 0; padding: 10px 0 10px 15px; border-bottom: 1px dotted #E9E9E9;
+	position: relative;  margin-top: 0; padding: 10px 0 10px 0px; border-bottom: 1px dotted #E9E9E9;
 }
 .note-list .des-img{
 	  position: absolute;
