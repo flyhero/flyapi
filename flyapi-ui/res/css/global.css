@@ -126,6 +126,22 @@ html .fly-full{margin-top: 65px;}
 .nav-user .nav a{padding: 0 10px;}
 .nav-user .unlogin i{margin-bottom: 12px;}
 
+
+.flyhero-user{position:absolute; right:0;}
+.flyhero-user span,
+.flyhero-user .unlogin,
+.out-login,
+.avatar,
+.avatar *,
+.flyhero-user .nav{display:inline-block; vertical-align: middle; *display: inline; *zoom:1;}
+.flyhero-user .unlogin{margin-right: 10px; margin-top: 8px;}
+.flyhero-user span{position: relative;}
+.flyhero-user span a{padding:0 10px; color:#A9B7B7}
+.flyhero-user span a:hover{color:#fff;}
+.flyhero-user .nav{position:relative; top: -2px; left: auto; right: 0; margin-left: 30px;}
+.flyhero-user .nav a{padding: 0 10px;}
+.flyhero-user .unlogin i{margin-bottom: 12px;}
+
 .out-login{margin-left:20px; text-align:center}
 .out-login a{color:#A9B7B7; font-size:30px; padding:0 10px;}
 .out-login a:hover{color:#fff;}
