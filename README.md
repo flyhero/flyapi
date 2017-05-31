@@ -3,7 +3,7 @@
 源于 2016年10月 接口管理系统 基于SSM+Maven的多模块项目
 后因其它相关系统比较完善，遂放弃继续开发。
 
-如今将用分布式编写多人博客系统。
+如今将编写多人博客系统,由于考虑这个是实用的系统，业务并不复杂和用户量并不较多的情况下，暂不使用分布式，在完成这个基础版本后，将会升级为分布式系统。
 [![Version](https://img.shields.io/badge/version-1.0-green.svg)](https://github.com/flyhero/flyapi)
 
 ## 目录Contents
@@ -24,20 +24,14 @@ Github: https://github.com/flyhero/flyapi
 - 分页插件：Mybatis-PageHelper 4.0.0
 - 数据库：MySql 5.6
 - 数据库连接池：Alibaba Druid 1.0.9
-- 日志管理：SLF4J 1.7.7、Log4j
+- 日志管理：SLF4J 1.7.7、Log4j2
 - 即时消息：Spring WebSocket
 - 消息队列： Apache ActiveMQ
 - 校验框架：FluentValidator
-- 分布式协调服务：ZooKeeper
-- 分布式服务框架：Dubbo
-- 分布式会话： Spring-session 1.3.0
-- 分布式缓存数据库：Redis
-- 分布式全文检索：Solr
 
 #### 前端
 
 - JS框架：jQuery 1.9
-- CSS框架：Twitter Bootstrap 3.3.1
 - 客户端验证：Bootstrap-Validator
 - 数据表格：Bootstrap-table
 - 日期控件： My97DatePicker
@@ -49,14 +43,15 @@ Github: https://github.com/flyhero/flyapi
 ### 项目结构
 ``` lua
 flyapi
-├── flyapi-common -- SSM框架公共模块
-├── flyapi-entity -- 实体类
-├── flyapi-dao -- 数据操作层
+├── flyapi-admin -- 管理端
+├── flyapi-core -- 核心模块
+├── flyapi-dao -- 数据库操作和实体类
+├── flyapi-doc -- 开发过程中的文档，软件说明等
 ├── flyapi-service -- 业务逻辑实现层
 ├── flyapi-service-api -- 业务逻辑接口层
-└── flyapi-controller -- 控制器
-     ├── flyapi-admin -- 管理端
-     └── flyapi-web -- 客户端
+├── flyapi-ui  -- 前端UI
+└── flyapi-web -- 控制器
+
 ```
 
 ## 配置Configuration
@@ -68,16 +63,16 @@ http://  用户名：   密码：
 
 ## 演示界面 Screenshots
 ### 登录页面
-![登录页面](screenshot/login.png)
+
 
 ### 主页面
-![主页面](screenshot/main.png)
+
 
 ### 项目列表
-![项目列表](screenshot/project.png)
+
 
 ### 即时消息
-![即时消息](screenshot/socket.png)
+
 
 ## 待办事项To Do List
 接下来：
