@@ -60,20 +60,47 @@
 	<!--  <mvc:default-servlet-handler/> -->
 	 
 	 <!-- 3.配置jsp 显示ViewResolver -->
-	 <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	<!-- <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 	 	<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
 	 	<property name="prefix" value="/WEB-INF/view/" />
 	 	<property name="suffix" value=".jsp" />
-	 </bean>
-	 
-	 <!-- 4.扫描web相关的bean -->
-	 <context:component-scan base-package="com.flyhero.flyapi.web" />
+	 </bean>-->
+
+
+	<!-- thymeleaf视图 -->
+	<!-- **************************************************************** -->
+	<!--  THYMELEAF-SPECIFIC ARTIFACTS                                    -->
+	<!--  TemplateResolver <- TemplateEngine <- ViewResolver              -->
+	<!-- **************************************************************** -->
+	<bean id="templateResolver" class="org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver">
+		<property name="order" value="0"/>
+		<property name="prefix" value="${zheng-ui.path}"/>
+		<property name="suffix" value=".html"/>
+		<property name="templateMode" value="HTML"/>
+		<property name="cacheable" value="false"/>
+		<property name="characterEncoding" value="UTF-8"/>
+		<!--<property name="cacheable" value="true"/>-->
+		<!--<property name="cacheTTLMs" value="10000"/>-->
+	</bean>
+	<bean id="templateEngine" class="org.thymeleaf.spring4.SpringTemplateEngine">
+		<property name="templateResolver" ref="templateResolver"/><!--模板中的表达式支持Spring表达式语言（Spring EL)-->
+		<property name="enableSpringELCompiler" value="true"/>
+	</bean>
+	<bean class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
+		<property name="templateEngine" ref="templateEngine"/>
+		<property name="characterEncoding" value="UTF-8"/>
+		<property name="viewNames" value="/${app.name}/*"/>
+	</bean>
+
+
+	<!-- 4.扫描web相关的bean -->
+	 <context:component-scan base-package="com.flyapi.web" />
 	 <!-- 扫描webSocket相关的bean -->
-	 <context:component-scan base-package="com.flyhero.flyapi.websocket" />
+	 <context:component-scan base-package="com.flyapi.websocket" />
 	 <mvc:interceptors>
 	 	<mvc:interceptor>
 	 			<mvc:mapping path="/**" />
-		        <bean class="com.flyhero.flyapi.interceptor.LoginInterceptor">
+		        <bean class="com.flyapi.interceptor.LoginInterceptor">
 		            <property name="excludedUrls">
 		                <list>
 	 	                    <value>/login</value>
@@ -103,5 +130,5 @@
 		<aop:advisor advice-ref="druid-stat-interceptor" pointcut-ref="druid-stat-pointcut" />
 	</aop:config>
   
-  <bean class="com.flyhero.flyapi.listener.StartupListener"/>
+
 </beans>
