@@ -95,8 +95,7 @@
 
 	<!-- 4.扫描web相关的bean -->
 	 <context:component-scan base-package="com.flyapi.web" />
-	 <!-- 扫描webSocket相关的bean -->
-	 <context:component-scan base-package="com.flyapi.websocket" />
+
 	 <mvc:interceptors>
 	 	<mvc:interceptor>
 	 			<mvc:mapping path="/**" />

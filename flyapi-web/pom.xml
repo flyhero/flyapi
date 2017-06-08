@@ -13,7 +13,7 @@
     <dependencies>
         <dependency>
             <groupId>com.flyapi</groupId>
-            <artifactId>flyapi-core</artifactId>
+            <artifactId>flyapi-service</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
