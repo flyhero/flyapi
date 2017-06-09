@@ -1,20 +1,17 @@
 package com.flyapi.dao;
 
 import com.flyapi.model.CmsArticle;
-import com.flyapi.model.CmsArticleWithBLOBs;
 
 public interface CmsArticleMapper {
     int deleteByPrimaryKey(Long articleId);
 
-    int insert(CmsArticleWithBLOBs record);
+    int insert(CmsArticle record);
 
-    int insertSelective(CmsArticleWithBLOBs record);
+    int insertSelective(CmsArticle record);
 
-    CmsArticleWithBLOBs selectByPrimaryKey(Long articleId);
+    CmsArticle selectByPrimaryKey(Long articleId);
 
-    int updateByPrimaryKeySelective(CmsArticleWithBLOBs record);
-
-    int updateByPrimaryKeyWithBLOBs(CmsArticleWithBLOBs record);
+    int updateByPrimaryKeySelective(CmsArticle record);
 
     int updateByPrimaryKey(CmsArticle record);
 }

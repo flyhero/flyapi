@@ -15,23 +15,16 @@
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="permissions" jdbcType="TINYINT" property="permissions" />
     <result column="is_delete" jdbcType="TINYINT" property="isDelete" />
-  </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.flyapi.dao.model.CmsArticleWithBLOBs">
     <result column="md_content" jdbcType="LONGVARCHAR" property="mdContent" />
     <result column="html_content" jdbcType="LONGVARCHAR" property="htmlContent" />
   </resultMap>
   <sql id="Base_Column_List">
     article_id, subject_id, title, article_des, cover, original, view_num, comment_num, 
-    like_num, create_time, update_time, permissions, is_delete
+    like_num, create_time, update_time, permissions, is_delete,md_content, html_content
   </sql>
-  <sql id="Blob_Column_List">
-    md_content, html_content
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
     from cms_article
     where article_id = #{articleId,jdbcType=BIGINT}
   </select>
@@ -39,7 +32,7 @@
     delete from cms_article
     where article_id = #{articleId,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.flyapi.dao.model.CmsArticleWithBLOBs">
+  <insert id="insert" parameterType="com.flyapi.dao.model.CmsArticle">
     insert into cms_article (article_id, subject_id, title, 
       article_des, cover, original, 
       view_num, comment_num, like_num, 
@@ -53,7 +46,7 @@
       #{isDelete,jdbcType=TINYINT}, #{mdContent,jdbcType=LONGVARCHAR}, #{htmlContent,jdbcType=LONGVARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.flyapi.dao.model.CmsArticleWithBLOBs">
+  <insert id="insertSelective" parameterType="com.flyapi.dao.model.CmsArticle">
     insert into cms_article
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="articleId != null">
@@ -150,7 +143,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.flyapi.dao.model.CmsArticleWithBLOBs">
+  <update id="updateByPrimaryKeySelective" parameterType="com.flyapi.dao.model.CmsArticle">
     update cms_article
     <set>
       <if test="subjectId != null">
@@ -198,24 +191,7 @@
     </set>
     where article_id = #{articleId,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.flyapi.dao.model.CmsArticleWithBLOBs">
-    update cms_article
-    set subject_id = #{subjectId,jdbcType=BIGINT},
-      title = #{title,jdbcType=VARCHAR},
-      article_des = #{articleDes,jdbcType=VARCHAR},
-      cover = #{cover,jdbcType=VARCHAR},
-      original = #{original,jdbcType=VARCHAR},
-      view_num = #{viewNum,jdbcType=INTEGER},
-      comment_num = #{commentNum,jdbcType=INTEGER},
-      like_num = #{likeNum,jdbcType=INTEGER},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
-      permissions = #{permissions,jdbcType=TINYINT},
-      is_delete = #{isDelete,jdbcType=TINYINT},
-      md_content = #{mdContent,jdbcType=LONGVARCHAR},
-      html_content = #{htmlContent,jdbcType=LONGVARCHAR}
-    where article_id = #{articleId,jdbcType=BIGINT}
-  </update>
+
   <update id="updateByPrimaryKey" parameterType="com.flyapi.dao.model.CmsArticle">
     update cms_article
     set subject_id = #{subjectId,jdbcType=BIGINT},
