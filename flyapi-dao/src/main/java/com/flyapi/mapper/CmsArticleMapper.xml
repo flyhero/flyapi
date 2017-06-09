@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.flyapi.dao.CmsArticleMapper">
+  <resultMap id="BaseResultMap" type="com.flyapi.dao.model.CmsArticle">
+    <id column="article_id" jdbcType="BIGINT" property="articleId" />
+    <result column="subject_id" jdbcType="BIGINT" property="subjectId" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="article_des" jdbcType="VARCHAR" property="articleDes" />
+    <result column="cover" jdbcType="VARCHAR" property="cover" />
+    <result column="original" jdbcType="VARCHAR" property="original" />
+    <result column="view_num" jdbcType="INTEGER" property="viewNum" />
+    <result column="comment_num" jdbcType="INTEGER" property="commentNum" />
+    <result column="like_num" jdbcType="INTEGER" property="likeNum" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="permissions" jdbcType="TINYINT" property="permissions" />
+    <result column="is_delete" jdbcType="TINYINT" property="isDelete" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.flyapi.dao.model.CmsArticleWithBLOBs">
+    <result column="md_content" jdbcType="LONGVARCHAR" property="mdContent" />
+    <result column="html_content" jdbcType="LONGVARCHAR" property="htmlContent" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    article_id, subject_id, title, article_des, cover, original, view_num, comment_num, 
+    like_num, create_time, update_time, permissions, is_delete
+  </sql>
+  <sql id="Blob_Column_List">
+    md_content, html_content
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from cms_article
+    where article_id = #{articleId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from cms_article
+    where article_id = #{articleId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.flyapi.dao.model.CmsArticleWithBLOBs">
+    insert into cms_article (article_id, subject_id, title, 
+      article_des, cover, original, 
+      view_num, comment_num, like_num, 
+      create_time, update_time, permissions, 
+      is_delete, md_content, html_content
+      )
+    values (#{articleId,jdbcType=BIGINT}, #{subjectId,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, 
+      #{articleDes,jdbcType=VARCHAR}, #{cover,jdbcType=VARCHAR}, #{original,jdbcType=VARCHAR}, 
+      #{viewNum,jdbcType=INTEGER}, #{commentNum,jdbcType=INTEGER}, #{likeNum,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{permissions,jdbcType=TINYINT}, 
+      #{isDelete,jdbcType=TINYINT}, #{mdContent,jdbcType=LONGVARCHAR}, #{htmlContent,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.flyapi.dao.model.CmsArticleWithBLOBs">
+    insert into cms_article
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="articleId != null">
+        article_id,
+      </if>
+      <if test="subjectId != null">
+        subject_id,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="articleDes != null">
+        article_des,
+      </if>
+      <if test="cover != null">
+        cover,
+      </if>
+      <if test="original != null">
+        original,
+      </if>
+      <if test="viewNum != null">
+        view_num,
+      </if>
+      <if test="commentNum != null">
+        comment_num,
+      </if>
+      <if test="likeNum != null">
+        like_num,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="permissions != null">
+        permissions,
+      </if>
+      <if test="isDelete != null">
+        is_delete,
+      </if>
+      <if test="mdContent != null">
+        md_content,
+      </if>
+      <if test="htmlContent != null">
+        html_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="articleId != null">
+        #{articleId,jdbcType=BIGINT},
+      </if>
+      <if test="subjectId != null">
+        #{subjectId,jdbcType=BIGINT},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="articleDes != null">
+        #{articleDes,jdbcType=VARCHAR},
+      </if>
+      <if test="cover != null">
+        #{cover,jdbcType=VARCHAR},
+      </if>
+      <if test="original != null">
+        #{original,jdbcType=VARCHAR},
+      </if>
+      <if test="viewNum != null">
+        #{viewNum,jdbcType=INTEGER},
+      </if>
+      <if test="commentNum != null">
+        #{commentNum,jdbcType=INTEGER},
+      </if>
+      <if test="likeNum != null">
+        #{likeNum,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="permissions != null">
+        #{permissions,jdbcType=TINYINT},
+      </if>
+      <if test="isDelete != null">
+        #{isDelete,jdbcType=TINYINT},
+      </if>
+      <if test="mdContent != null">
+        #{mdContent,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="htmlContent != null">
+        #{htmlContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.flyapi.dao.model.CmsArticleWithBLOBs">
+    update cms_article
+    <set>
+      <if test="subjectId != null">
+        subject_id = #{subjectId,jdbcType=BIGINT},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="articleDes != null">
+        article_des = #{articleDes,jdbcType=VARCHAR},
+      </if>
+      <if test="cover != null">
+        cover = #{cover,jdbcType=VARCHAR},
+      </if>
+      <if test="original != null">
+        original = #{original,jdbcType=VARCHAR},
+      </if>
+      <if test="viewNum != null">
+        view_num = #{viewNum,jdbcType=INTEGER},
+      </if>
+      <if test="commentNum != null">
+        comment_num = #{commentNum,jdbcType=INTEGER},
+      </if>
+      <if test="likeNum != null">
+        like_num = #{likeNum,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="permissions != null">
+        permissions = #{permissions,jdbcType=TINYINT},
+      </if>
+      <if test="isDelete != null">
+        is_delete = #{isDelete,jdbcType=TINYINT},
+      </if>
+      <if test="mdContent != null">
+        md_content = #{mdContent,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="htmlContent != null">
+        html_content = #{htmlContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where article_id = #{articleId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.flyapi.dao.model.CmsArticleWithBLOBs">
+    update cms_article
+    set subject_id = #{subjectId,jdbcType=BIGINT},
+      title = #{title,jdbcType=VARCHAR},
+      article_des = #{articleDes,jdbcType=VARCHAR},
+      cover = #{cover,jdbcType=VARCHAR},
+      original = #{original,jdbcType=VARCHAR},
+      view_num = #{viewNum,jdbcType=INTEGER},
+      comment_num = #{commentNum,jdbcType=INTEGER},
+      like_num = #{likeNum,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      permissions = #{permissions,jdbcType=TINYINT},
+      is_delete = #{isDelete,jdbcType=TINYINT},
+      md_content = #{mdContent,jdbcType=LONGVARCHAR},
+      html_content = #{htmlContent,jdbcType=LONGVARCHAR}
+    where article_id = #{articleId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.flyapi.dao.model.CmsArticle">
+    update cms_article
+    set subject_id = #{subjectId,jdbcType=BIGINT},
+      title = #{title,jdbcType=VARCHAR},
+      article_des = #{articleDes,jdbcType=VARCHAR},
+      cover = #{cover,jdbcType=VARCHAR},
+      original = #{original,jdbcType=VARCHAR},
+      view_num = #{viewNum,jdbcType=INTEGER},
+      comment_num = #{commentNum,jdbcType=INTEGER},
+      like_num = #{likeNum,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      permissions = #{permissions,jdbcType=TINYINT},
+      is_delete = #{isDelete,jdbcType=TINYINT}
+    where article_id = #{articleId,jdbcType=BIGINT}
+  </update>
+</mapper>

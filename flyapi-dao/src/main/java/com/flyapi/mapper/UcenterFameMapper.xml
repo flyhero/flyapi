@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.flyapi.dao.UcenterFameMapper">
+  <resultMap id="BaseResultMap" type="com.flyapi.dao.model.UcenterFame">
+    <id column="fame_id" jdbcType="BIGINT" property="fameId" />
+    <result column="start_value" jdbcType="INTEGER" property="startValue" />
+    <result column="end_value" jdbcType="INTEGER" property="endValue" />
+    <result column="fame_name" jdbcType="VARCHAR" property="fameName" />
+    <result column="fame_icon" jdbcType="VARCHAR" property="fameIcon" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="is_delete" jdbcType="TINYINT" property="isDelete" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    fame_id, start_value, end_value, fame_name, fame_icon, create_time, is_delete
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ucenter_fame
+    where fame_id = #{fameId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from ucenter_fame
+    where fame_id = #{fameId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.flyapi.dao.model.UcenterFame">
+    insert into ucenter_fame (fame_id, start_value, end_value, 
+      fame_name, fame_icon, create_time, 
+      is_delete)
+    values (#{fameId,jdbcType=BIGINT}, #{startValue,jdbcType=INTEGER}, #{endValue,jdbcType=INTEGER}, 
+      #{fameName,jdbcType=VARCHAR}, #{fameIcon,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{isDelete,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.flyapi.dao.model.UcenterFame">
+    insert into ucenter_fame
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fameId != null">
+        fame_id,
+      </if>
+      <if test="startValue != null">
+        start_value,
+      </if>
+      <if test="endValue != null">
+        end_value,
+      </if>
+      <if test="fameName != null">
+        fame_name,
+      </if>
+      <if test="fameIcon != null">
+        fame_icon,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="isDelete != null">
+        is_delete,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fameId != null">
+        #{fameId,jdbcType=BIGINT},
+      </if>
+      <if test="startValue != null">
+        #{startValue,jdbcType=INTEGER},
+      </if>
+      <if test="endValue != null">
+        #{endValue,jdbcType=INTEGER},
+      </if>
+      <if test="fameName != null">
+        #{fameName,jdbcType=VARCHAR},
+      </if>
+      <if test="fameIcon != null">
+        #{fameIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDelete != null">
+        #{isDelete,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.flyapi.dao.model.UcenterFame">
+    update ucenter_fame
+    <set>
+      <if test="startValue != null">
+        start_value = #{startValue,jdbcType=INTEGER},
+      </if>
+      <if test="endValue != null">
+        end_value = #{endValue,jdbcType=INTEGER},
+      </if>
+      <if test="fameName != null">
+        fame_name = #{fameName,jdbcType=VARCHAR},
+      </if>
+      <if test="fameIcon != null">
+        fame_icon = #{fameIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDelete != null">
+        is_delete = #{isDelete,jdbcType=TINYINT},
+      </if>
+    </set>
+    where fame_id = #{fameId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.flyapi.dao.model.UcenterFame">
+    update ucenter_fame
+    set start_value = #{startValue,jdbcType=INTEGER},
+      end_value = #{endValue,jdbcType=INTEGER},
+      fame_name = #{fameName,jdbcType=VARCHAR},
+      fame_icon = #{fameIcon,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      is_delete = #{isDelete,jdbcType=TINYINT}
+    where fame_id = #{fameId,jdbcType=BIGINT}
+  </update>
+</mapper>

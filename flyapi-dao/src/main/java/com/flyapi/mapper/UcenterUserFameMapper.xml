@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.flyapi.dao.UcenterUserFameMapper">
+  <resultMap id="BaseResultMap" type="com.flyapi.dao.model.UcenterUserFame">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="score" jdbcType="INTEGER" property="score" />
+    <result column="op_type" jdbcType="INTEGER" property="opType" />
+    <result column="op_desc" jdbcType="VARCHAR" property="opDesc" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_id, score, op_type, op_desc
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ucenter_user_fame
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from ucenter_user_fame
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.flyapi.dao.model.UcenterUserFame">
+    insert into ucenter_user_fame (id, user_id, score, 
+      op_type, op_desc)
+    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{score,jdbcType=INTEGER}, 
+      #{opType,jdbcType=INTEGER}, #{opDesc,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.flyapi.dao.model.UcenterUserFame">
+    insert into ucenter_user_fame
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="score != null">
+        score,
+      </if>
+      <if test="opType != null">
+        op_type,
+      </if>
+      <if test="opDesc != null">
+        op_desc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="score != null">
+        #{score,jdbcType=INTEGER},
+      </if>
+      <if test="opType != null">
+        #{opType,jdbcType=INTEGER},
+      </if>
+      <if test="opDesc != null">
+        #{opDesc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.flyapi.dao.model.UcenterUserFame">
+    update ucenter_user_fame
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="score != null">
+        score = #{score,jdbcType=INTEGER},
+      </if>
+      <if test="opType != null">
+        op_type = #{opType,jdbcType=INTEGER},
+      </if>
+      <if test="opDesc != null">
+        op_desc = #{opDesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.flyapi.dao.model.UcenterUserFame">
+    update ucenter_user_fame
+    set user_id = #{userId,jdbcType=BIGINT},
+      score = #{score,jdbcType=INTEGER},
+      op_type = #{opType,jdbcType=INTEGER},
+      op_desc = #{opDesc,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

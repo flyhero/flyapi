@@ -121,7 +121,7 @@
 	<bean id="druid-stat-pointcut" class="org.springframework.aop.support.JdkRegexpMethodPointcut" scope="prototype">
 		<property name="patterns">
 			<list>
-				<value>com.flyhero.flyapi.web.*</value>
+				<value>com.flyapi.web.*</value>
 			</list>
 		</property>
 	</bean>
