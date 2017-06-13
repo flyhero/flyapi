@@ -56,16 +56,8 @@
 		(1)加入对静态资源的处理：js,gif,png
 		(2)允许使用"/"做整体映射
 	 -->
-	 <mvc:resources mapping="/static/**" location="/static/" />
+	<!-- <mvc:resources mapping="/static/**" location="/static/" />-->
 	<!--  <mvc:default-servlet-handler/> -->
-	 
-	 <!-- 3.配置jsp 显示ViewResolver -->
-	<!-- <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-	 	<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
-	 	<property name="prefix" value="/WEB-INF/view/" />
-	 	<property name="suffix" value=".jsp" />
-	 </bean>-->
-
 
 	<!-- thymeleaf视图 -->
 	<!-- **************************************************************** -->
@@ -74,7 +66,7 @@
 	<!-- **************************************************************** -->
 	<bean id="templateResolver" class="org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver">
 		<property name="order" value="0"/>
-		<property name="prefix" value="${zheng-ui.path}"/>
+		<property name="prefix" value="/WEB-INF/"/>
 		<property name="suffix" value=".html"/>
 		<property name="templateMode" value="HTML"/>
 		<property name="cacheable" value="false"/>
@@ -89,17 +81,17 @@
 	<bean class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
 		<property name="templateEngine" ref="templateEngine"/>
 		<property name="characterEncoding" value="UTF-8"/>
-		<property name="viewNames" value="/${app.name}/*"/>
+		<property name="viewNames" value="/APP/*"/>
 	</bean>
 
 
 	<!-- 4.扫描web相关的bean -->
-	 <context:component-scan base-package="com.flyapi.web" />
+	 <context:component-scan base-package="com.flyapi.web.controller" />
 
 	 <mvc:interceptors>
 	 	<mvc:interceptor>
 	 			<mvc:mapping path="/**" />
-		        <bean class="com.flyapi.interceptor.LoginInterceptor">
+		        <bean class="com.flyapi.web.interceptor.LoginInterceptor">
 		            <property name="excludedUrls">
 		                <list>
 	 	                    <value>/login</value>
@@ -121,7 +113,7 @@
 	<bean id="druid-stat-pointcut" class="org.springframework.aop.support.JdkRegexpMethodPointcut" scope="prototype">
 		<property name="patterns">
 			<list>
-				<value>com.flyapi.web.*</value>
+				<value>com.flyapi.web.controller.*</value>
 			</list>
 		</property>
 	</bean>

@@ -37,12 +37,33 @@
     <url-pattern>/</url-pattern>
   </servlet-mapping>
 
+<!--  <context-param>
+    <param-name>profiles.activation</param-name>
+    <param-value>${profiles.activation}</param-value>
+  </context-param>-->
   <!-- 防止Spring内存溢出监听器 -->
   <listener>
     <listener-class>
       org.springframework.web.util.IntrospectorCleanupListener
     </listener-class>
   </listener>
+       <!-- log4j2-begin -->
+       <listener>
+           <listener-class>org.apache.logging.log4j.web.Log4jServletContextListener</listener-class>
+       </listener>
+       <filter>
+           <filter-name>log4jServletFilter</filter-name>
+           <filter-class>org.apache.logging.log4j.web.Log4jServletFilter</filter-class>
+       </filter>
+       <filter-mapping>
+           <filter-name>log4jServletFilter</filter-name>
+           <url-pattern>/*</url-pattern>
+           <dispatcher>REQUEST</dispatcher>
+           <dispatcher>FORWARD</dispatcher>
+           <dispatcher>INCLUDE</dispatcher>
+           <dispatcher>ERROR</dispatcher>
+       </filter-mapping>
+       <!-- log4j2-end -->
   <!-- WEB方式监控配置-->
   <servlet>
     <servlet-name>DruidStatView</servlet-name>
@@ -80,20 +101,20 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   <!-- 错误跳转页面 -->
-  <error-page>
-    <!-- 路径不正确 -->
+<!--  <error-page>
+    &lt;!&ndash; 路径不正确 &ndash;&gt;
     <error-code>404</error-code>
     <location>/WEB-INF/error/404.jsp</location>
   </error-page>
   <error-page>
-    <!-- 没有访问权限，访问被禁止 -->
+    &lt;!&ndash; 没有访问权限，访问被禁止 &ndash;&gt;
     <error-code>405</error-code>
     <location>/WEB-INF/error/405.jsp</location>
   </error-page>
   <error-page>
-    <!-- 内部错误 -->
+    &lt;!&ndash; 内部错误 &ndash;&gt;
     <error-code>500</error-code>
     <location>/WEB-INF/error/500.jsp</location>
-  </error-page>
+  </error-page>-->
 
 </web-app>

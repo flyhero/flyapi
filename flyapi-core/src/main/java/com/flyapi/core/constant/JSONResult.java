@@ -53,7 +53,7 @@ public class JSONResult implements Serializable{
     }
 
     public static JSONResult ok(){
-        return ok(null);
+        return ok(TipsEnum.OK);
     }
     public static JSONResult ok(Object data){
         return ok(TipsEnum.OK.getMsg(),TipsEnum.OK.getCode(), data);

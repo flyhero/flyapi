@@ -8,7 +8,7 @@
 
     <Properties>
         <!-- 配置日志文件输出目录 -->
-        <Property name="LOG_HOME">/Users/flyapi/logs</Property>
+        <Property name="LOG_HOME">G:\logs</Property>
     </Properties>
 
     <Appenders>
