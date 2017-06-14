@@ -17,4 +17,12 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserServiceImpl extends BaseServiceImpl<UcenterUser,UcenterUserMapper> implements UserService {
     @Autowired
     private UcenterUserMapper ucenterUserMapper;
+
+    public UcenterUser login(UcenterUser user){
+        return ucenterUserMapper.findUserByUsernameAndPassword(user);
+    }
+
+    public int findUserByUsername(String username) {
+        return 0;
+    }
 }

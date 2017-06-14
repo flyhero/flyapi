@@ -1,7 +1,6 @@
 package com.flyapi.core.validator;
 
 import com.baidu.unbiz.fluentvalidator.*;
-import static com.baidu.unbiz.fluentvalidator.ResultCollectors.toSimple;
 /**
  * 字符串验证类
  * author: flyhero
@@ -24,7 +23,9 @@ public class StringValidator extends ValidatorHandler<String> implements Validat
         this.min = min;
         this.max = max;
     }
-    public boolean validator(ValidatorContext context, String s){
+
+    @Override
+    public boolean validate(ValidatorContext context, String s) {
         if (null == s || "".equals(s)){
             context.addError(ValidationError.create(String.format("%s字符串不能为空!", fieldName))
                     .setErrorCode(100).setField(fieldName).setInvalidValue(s));
@@ -36,6 +37,5 @@ public class StringValidator extends ValidatorHandler<String> implements Validat
         }
         return true;
     }
-
 
 }

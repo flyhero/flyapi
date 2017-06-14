@@ -43,7 +43,7 @@
 				</div>
 				<div class="box" id="signin-box">
 					<div class="login-body">
-						<form action="" accept-charset="UTF-8" method="post">
+						<form action="http://localhost:8080/user/login" accept-charset="UTF-8" method="post">
 							<input name="utf8" type="hidden" value="✓">
 							<input type="hidden" name="token" value="Vp9hwqEtwtnMjSSiWnI7V3NxcutfXRuwXpA+SYI8sYdmruMQQQIYh+aGphKB/kpkai3TDRGs7oGpjmU7VGLEIw==">
 							<div class="form-group form-group-icon">
@@ -51,6 +51,9 @@
 								<div class="form-icon">
 									<i class="fa fa-envelope"></i>
 								</div>
+							</div>
+							<div  th:if="${msg} != null">
+								<p  th:text="${msg}"></p>
 							</div>
 							<div class="form-group form-group-icon">
 								<input class="input-lg form-input password" name="password" placeholder="密码" type="password">

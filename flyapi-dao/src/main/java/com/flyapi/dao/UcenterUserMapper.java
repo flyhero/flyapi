@@ -14,4 +14,8 @@ public interface UcenterUserMapper {
     int updateByPrimaryKeySelective(UcenterUser record);
 
     int updateByPrimaryKey(UcenterUser record);
+
+    UcenterUser findUserByUsernameAndPassword(UcenterUser record);
+
+    int findUserByUsername(String username);
 }

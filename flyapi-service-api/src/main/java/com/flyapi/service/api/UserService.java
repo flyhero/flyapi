@@ -8,4 +8,6 @@ import com.flyapi.model.UcenterUser;
  * Date: 2017/6/9 0009 下午 3:57
  */
 public interface UserService extends BaseService<UcenterUser> {
+    UcenterUser login(UcenterUser user);
+    int findUserByUsername(String username);
 }

@@ -255,4 +255,14 @@
       is_delete = #{isDelete,jdbcType=TINYINT}
     where user_id = #{userId,jdbcType=BIGINT}
   </update>
+
+  <select id="findUserByUsernameAndPassword" parameterType="com.flyapi.dao.model.UcenterUser" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from ucenter_user
+    where username = #{username} and password = #{password} AND is_delete = 0
+  </select>
+  <select id="findUserByUsername" parameterType="java.lang.String" resultType="int">
+    select count(*) from ucenter_user where username = #{username};
+  </select>
 </mapper>
