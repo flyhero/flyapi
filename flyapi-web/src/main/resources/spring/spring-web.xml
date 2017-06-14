@@ -13,12 +13,14 @@
 	http://www.springframework.org/schema/mvc
 	http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
 	<!-- 配置SpringMVC -->
+	<!-- 扫描web相关的bean -->
+	<context:component-scan base-package="com.flyapi.web.controller" />
 	<!-- 1.开启SpringMVC注解模式 -->
 	<!-- 简化配置： 
 		(1)自动注册DefaultAnootationHandlerMapping,AnotationMethodHandlerAdapter 
 		(2)提供一些列：数据绑定，数字和日期的format @NumberFormat, @DateTimeFormat, xml,json默认读写支持 
 	-->
-<!--  	<mvc:annotation-driven />   -->
+  	<mvc:annotation-driven />
    <!-- FastJson注入 -->
     <mvc:annotation-driven>
         <mvc:message-converters register-defaults="true">
@@ -57,7 +59,7 @@
 		(2)允许使用"/"做整体映射
 	 -->
 	<!-- <mvc:resources mapping="/static/**" location="/static/" />-->
-	<!--  <mvc:default-servlet-handler/> -->
+	<mvc:default-servlet-handler/>
 
 	<!-- thymeleaf视图 -->
 	<!-- **************************************************************** -->
@@ -66,7 +68,7 @@
 	<!-- **************************************************************** -->
 	<bean id="templateResolver" class="org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver">
 		<property name="order" value="0"/>
-		<property name="prefix" value="/WEB-INF/"/>
+		<property name="prefix" value="http://localhost/"/>
 		<property name="suffix" value=".html"/>
 		<property name="templateMode" value="HTML"/>
 		<property name="cacheable" value="false"/>
@@ -75,18 +77,17 @@
 		<!--<property name="cacheTTLMs" value="10000"/>-->
 	</bean>
 	<bean id="templateEngine" class="org.thymeleaf.spring4.SpringTemplateEngine">
-		<property name="templateResolver" ref="templateResolver"/><!--模板中的表达式支持Spring表达式语言（Spring EL)-->
-		<property name="enableSpringELCompiler" value="true"/>
+		<property name="templateResolver" ref="templateResolver"/>
+		<property name="enableSpringELCompiler" value="true"/><!--模板中的表达式支持Spring表达式语言（Spring EL)-->
 	</bean>
 	<bean class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
 		<property name="templateEngine" ref="templateEngine"/>
 		<property name="characterEncoding" value="UTF-8"/>
-		<property name="viewNames" value="/APP/*"/>
+<!--		<property name="viewNames" value="/*"/>-->
 	</bean>
 
 
-	<!-- 4.扫描web相关的bean -->
-	 <context:component-scan base-package="com.flyapi.web.controller" />
+
 
 	 <mvc:interceptors>
 	 	<mvc:interceptor>
@@ -95,11 +96,6 @@
 		            <property name="excludedUrls">
 		                <list>
 	 	                    <value>/login</value>
-		                    <value>/static/</value> 
-		                    <value>/user/register.do</value>
-		                    <value>/user/checkUserName.do</value>
-		                    <value>forward/register.html</value>
-		                    <value>resume/publish/</value>
 		                </list>
 		            </property>
 		        </bean>
@@ -108,7 +104,7 @@
   
   
   	<!-- 	配置druid监控spring jdbc 监控调用的方法-->
-	<bean id="druid-stat-interceptor" class="com.alibaba.druid.support.spring.stat.DruidStatInterceptor">
+<!--	<bean id="druid-stat-interceptor" class="com.alibaba.druid.support.spring.stat.DruidStatInterceptor">
 	</bean>
 	<bean id="druid-stat-pointcut" class="org.springframework.aop.support.JdkRegexpMethodPointcut" scope="prototype">
 		<property name="patterns">
@@ -119,7 +115,7 @@
 	</bean>
 	<aop:config  proxy-target-class="true">
 		<aop:advisor advice-ref="druid-stat-interceptor" pointcut-ref="druid-stat-pointcut" />
-	</aop:config>
+	</aop:config>-->
   
 
 </beans>

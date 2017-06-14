@@ -1,20 +1,46 @@
 <!DOCTYPE html>
 
-<html>
-
+<html xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<meta charset="utf-8">
 		<title>flyapi首页</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<meta name="keywords" content="">
 		<meta name="description" content="">
-		<link rel="stylesheet" href="../res/layui/css/layui.css">
-		<link rel="stylesheet" href="../res/css/global.css">
-		<link rel="stylesheet" href="../res/css/xslider.css">
-		<link rel="stylesheet" href="../res/css/dropdown.css" />
-		<script src="../res/js/jquery.min.js"></script>
-		<script src="../res/js/jquery.sweet-dropdown.min.js"></script>
-		<script src="../res/js/xSlider.js"></script>
+		<link rel="stylesheet" href="../res/layui/css/layui.css" th:href="@{${rootPath} + '/res/layui/css/layui.css'}">
+		<link rel="stylesheet" href="../res/css/global.css" th:href="@{${rootPath} + '/res/css/global.css'}">
+		<link rel="stylesheet" href="../res/css/dropdown.css" th:href="@{${rootPath} + '/res/css/dropdown.css'}"/>
+		<script src="../res/js/jquery.min.js" th:src="@{${rootPath} + '/res/js/jquery.min.js'}"></script>
+		<script src="../res/js/jquery.sweet-dropdown.min.js" th:src="@{${rootPath} + '/res/js/jquery.sweet-dropdown.min.js'}"></script>
+		<link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"  rel="stylesheet">
+		<link rel="stylesheet" href="../res/swiper/swiper-3.4.2.min.css" th:href="@{${rootPath} + '/res/swiper/swiper-3.4.2.min.css'}">
+		<script src="../res/swiper/swiper-3.4.2.jquery.min.js" th:src="@{${rootPath} + '/res/swiper/swiper-3.4.2.jquery.min.js'}"></script>
+		<style>
+			.swiper-container {
+				width: 100%;
+				height: 260px;
+
+			}
+			.swiper-slide {
+				text-align: center;
+				font-size: 18px;
+				background: #fff;
+
+				/* Center slide text vertically */
+				display: -webkit-box;
+				display: -ms-flexbox;
+				display: -webkit-flex;
+				display: flex;
+				-webkit-box-pack: center;
+				-ms-flex-pack: center;
+				-webkit-justify-content: center;
+				justify-content: center;
+				-webkit-box-align: center;
+				-ms-flex-align: center;
+				-webkit-align-items: center;
+				align-items: center;
+			}
+		</style>
 	</head>
 
 	<body>
@@ -24,16 +50,16 @@
 				<a class="logo" href="/" title="Fly">Fly社区</a>
 				<div class="nav">
 					<a class="nav-this" href="jie/index.html">
-						<i class="iconfont icon-wenda"></i>首页
+						<i class="fa fa-home fa-fw"></i>首页
 					</a>
 					<a href="jie/index.html">
-						<i class="iconfont icon-wenda"></i>问答
+						<i class="fa fa-question fa-fw"></i>问答
 					</a>
 					<a href="http://www.layui.com/" target="_blank">
-						<i class="iconfont icon-ui"></i>图书交换
+						<i class="fa fa-book fa-fw"></i>图书交换
 					</a>
 					<a data-dropdown="#dropdown-other">
-						<i class="iconfont icon-ui"></i>其它
+						<i class="fa fa-list fa-fw"></i>其它
 					</a>
 					<div class="dropdown-menu dropdown-anchor-top-left dropdown-has-anchor" id="dropdown-other">
 						<ul>
@@ -45,9 +71,28 @@
 					</div>
 				</div>
 
-				<div class="nav-user">
+				<div class="nav-user" th:if="${session.user} == null">
 					<!-- 未登入状态 -->
-					<a class="unlogin" href="" data-dropdown="#dropdown-standard"><i class="iconfont icon-touxiang"></i></a>
+					<a class="unlogin" href=""><i class="iconfont icon-touxiang"></i></a>
+					<span><a href="user/login.html">登入</a><a href="user/reg.html">注册</a></span>
+				</div>
+				<div class="flyhero-user" th:unless="${session.user} == null">
+					<!-- 登入状态 -->
+<!--					<a class="login" href="" data-dropdown="#dropdown-standard"><img src="" th:src="${session.user}"/></a>
+					<div class="dropdown-menu dropdown-anchor-top-left dropdown-has-anchor" id="dropdown-standard">
+						<ul>
+							<li><a href="#">主页</a></li>
+							<li><a href="#">设置</a></li>
+							&lt;!&ndash;<li class="divider"></li> 分隔符&ndash;&gt;
+							<li><a href="#">反馈</a></li>
+						</ul>
+					</div>-->
+					<div class="user-hover" style="width: 80px;height: 65px;" data-dropdown="#dropdown-standard">
+						<a class="avatar dropdown" href="">
+							<img src="../res/images/avatar/flyhero.jpg">
+						</a>
+					</div>
+
 					<div class="dropdown-menu dropdown-anchor-top-left dropdown-has-anchor" id="dropdown-standard">
 						<ul>
 							<li><a href="#">主页</a></li>
@@ -56,26 +101,7 @@
 							<li><a href="#">反馈</a></li>
 						</ul>
 					</div>
-					<span><a href="user/login.html">登入</a><a href="user/reg.html">注册</a></span>
-					<p class="out-login">
-						<a href="" onclick="layer.msg('正在通过QQ登入', {icon:16, shade: 0.1, time:0})" class="iconfont icon-qq" title="QQ登入"></a>
-						<a href="" onclick="layer.msg('正在通过微博登入', {icon:16, shade: 0.1, time:0})" class="iconfont icon-weibo" title="微博登入"></a>
-					</p>
-
-					<!-- 登入后的状态 -->
-					<!--
-                    <a class="avatar" href="user/index.html">
-                      <img src="http://tp4.sinaimg.cn/1345566427/180/5730976522/0">
-                      <cite>贤心</cite>
-                      <i>VIP2</i>
-                    </a>
-                    <div class="nav">
-                      <a href="/user/set/"><i class="iconfont icon-shezhi"></i>设置</a>
-                      <a href="/user/logout/"><i class="iconfont icon-tuichu" style="top: 0; font-size: 22px;"></i>退了</a>
-                    </div> -->
-
 				</div>
-
 
 
 			</div>
@@ -97,58 +123,19 @@
 						</form>
 						<a href="jie/add.html" class="layui-btn jie-add">发布文章</a>
 					</div>
-					<div class="slider">
-						<div class="slider-img">
-							<ul class="slider-img-ul">
-								<li><img src="../res/images/slider-1.jpg"></li>
-								<li><img src="../res/images/slider-2.jpg"></li>
-								<li><img src="../res/images/slider-3.jpg"></li>
-								<li><img src="../res/images/slider-4.jpg"></li>
-								<li><img src="../res/images/slider-5.jpg"></li>
-							</ul>
+					<div class="swiper-container">
+						<div class="swiper-wrapper">
+							<div class="swiper-slide">Slide 1</div>
+							<div class="swiper-slide">Slide 2</div>
+							<div class="swiper-slide">Slide 3</div>
+							<div class="swiper-slide">Slide 4</div>
 						</div>
+						<!-- Add Pagination -->
+						<div class="swiper-pagination"></div>
+						<!-- Add Arrows -->
+						<div class="swiper-button-next"></div>
+						<div class="swiper-button-prev"></div>
 					</div>
-<!--
-					<ul class="fly-list fly-list-top">
-						<li class="fly-list-li">
-							<a href="user/home.html" class="fly-list-avatar">
-								<img src="http://tp4.sinaimg.cn/1345566427/180/5730976522/0" alt="">
-							</a>
-							<h2 class="fly-tip">
-            <a href="jie/detail.html">基于 layui的轻量级问答社区页面模版 V2版本</a>
-            <span class="fly-tip-stick">置顶</span>
-            <span class="fly-tip-jing">精帖</span>
-          </h2>
-							<p>
-								<span><a href="user/home.html">贤心</a></span>
-								<span>刚刚</span>
-								<span>layui框架综合</span>
-								<span class="fly-list-hint"> 
-              <i class="iconfont" title="回答">&#xe60c;</i> 317
-              <i class="iconfont" title="人气">&#xe60b;</i> 6830
-            </span>
-							</p>
-						</li>
-						<li class="fly-list-li">
-							<a href="user/home.html" class="fly-list-avatar">
-								<img src="../res/images/avatar/00.jpg" alt="">
-							</a>
-							<h2 class="fly-tip">
-            <a href="jie/detail.html">基于 layui的轻量级问答社区页面模版 V2版本</a>
-            <span class="fly-tip-stick">置顶</span>
-          </h2>
-							<p>
-								<span><a href="user/home.html">纸飞机</a></span>
-								<span>30分钟前</span>
-								<span>技术闲谈</span>
-								<span class="fly-list-hint"> 
-              <i class="iconfont" title="回答">&#xe60c;</i> 502
-              <i class="iconfont" title="人气">&#xe60b;</i> 81689
-            </span>
-							</p>
-						</li>
-					</ul>-->
-
 					<ul class="fly-list">
 						<li class="note-list">
 <!--							<a class="des-img" href="/p/eb1a0e235e49" target="_blank">
@@ -174,11 +161,11 @@
 								<div class="meta">
 									<a class="collection-tag" target="_blank" href="/c/qQB2Zn">想法</a>
 									<a target="_blank" href="/p/eb1a0e235e49">
-										<i class="iconfont ic-list-read">&#xe60b;</i> 271
+										<i class="fa fa-eye fa-fw" title="阅读"></i> 271
 									</a>
 									<a target="_blank" href="/p/eb1a0e235e49#comments">
-										<i class="iconfont" title="回答">&#xe60c;</i> 8
-									</a> <span><i class="iconfont" title="人气">&#xe60b;</i> 106</span>
+										<i class="fa fa-commenting fa-fw" title="回答"></i> 8
+									</a> <span><i class="fa fa-thumbs-o-up fa-fw" title="人气"></i> 106</span>
 								</div>
 							</div>
 						</li>
@@ -418,38 +405,20 @@
 				<a href="http://fly.layui.com/jie/2461.html" target="_blank">微信公众号</a>
 			</p>
 		</div>
-		<script src="../res/layui/layui.js"></script>
+		<script src="../res/layui/layui.js" th:src="@{${rootPath} + '/res/layui/layui.js'}"></script>
 
-		<script type="text/javascript">
-
-            $(document).ready(function(){
-
-                $('.slider').xSlider({
-                    w: 900,
-                    current: 0,
-                    speed: 500,
-                    intervalTime: 5000
-
-                });
-            });
-
-		</script>
-
+		<!-- Initialize Swiper -->
 		<script>
-			layui.cache.page = '';
-			layui.cache.user = {
-				username: '游客',
-				uid: -1,
-				avatar: '../res/images/avatar/00.jpg',
-				experience: 83,
-				sex: '男'
-			};
-			layui.config({
-				version: "2.0.0",
-				base: '../res/mods/'
-			}).extend({
-				fly: 'index'
-			}).use('fly');
+            var swiper = new Swiper('.swiper-container', {
+                pagination: '.swiper-pagination',
+                nextButton: '.swiper-button-next',
+                prevButton: '.swiper-button-prev',
+                paginationClickable: true,
+                spaceBetween: 30,
+                centeredSlides: true,
+                autoplay: 2500,
+                autoplayDisableOnInteraction: false
+            });
 		</script>
 
 	</body>

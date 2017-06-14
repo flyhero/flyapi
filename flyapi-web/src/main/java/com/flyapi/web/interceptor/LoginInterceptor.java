@@ -3,6 +3,8 @@ package com.flyapi.web.interceptor;
 import java.util.List;
 
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -17,7 +19,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 
     private List<String> excludedUrls;
 
-
+    private Logger logger = LogManager.getLogger(LoginInterceptor.class);
 
     /**
      * 在DispatcherServlet完全处理完请求后被调用
@@ -45,19 +47,21 @@ public class LoginInterceptor implements HandlerInterceptor {
         if (null != request.getHeader("X-Requested-With") && request.getHeader("X-Requested-With").equalsIgnoreCase("XMLHttpRequest")) {
             return true;
         }
-        String requestUri = request.getRequestURI();
+/*        String requestUri = request.getRequestURI();
 
         for (String url : excludedUrls) {
             if (requestUri.contains(url)) {
                 return true;
             }
-        }
+        }*/
         HttpSession session = request.getSession();
 /*        User login = (User) session.getAttribute("user");
         if (login == null) {
             //System.out.println(request.getContextPath());
             response.sendRedirect(request.getContextPath());
         }*/
+        logger.info("设置根目录");
+        request.setAttribute("rootPath", "http://localhost/");
         return true;
     }
 

@@ -33,4 +33,10 @@ public class UserController extends BaseController {
 
         return JSONResult.ok(TipsEnum.OK);
     }
+
+    @RequestMapping("go")
+    public String go(){
+        session.setAttribute("user","hahah");
+        return "html/login";
+    }
 }

@@ -1789,13 +1789,18 @@ ul.tab.dark li::after {
 	transform: translateY(50%)
 }
 
-.login-box .login-footer .quick-login .fa-wechat {
+.login-box .login-footer .quick-login .fa-wechat  {
 	margin-top: 24px;
 	color: #0abb07;
 	font-size: 32px;
 	cursor: pointer
 }
-
+.fa-qq  {
+	margin-top: 24px;
+	color: #3580bb;
+	font-size: 32px !important;
+	cursor: pointer
+}
 .login-box .login-footer .switch-domain {
 	width: 80%;
 	margin: 0 auto
@@ -10318,11 +10323,11 @@ a.text-highlight {
 	z-index: 2
 }
 
-.sign,
+/*.sign,
 .forgot {
 	background: -webkit-linear-gradient(top, #feefee 0%, #fff 30%, #fff 100%) repeat-x;
 	background: linear-gradient(to bottom, #feefee 0%, #fff 30%, #fff 100%) repeat-x
-}
+}*/
 
 body trix-editor {
 	width: 100%;
