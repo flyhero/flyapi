@@ -27,7 +27,8 @@ public class NumberValidator extends ValidatorHandler<Integer> implements Valida
         this.max = max;
     }
 
-    public boolean validator(ValidatorContext context,Integer num){
+    @Override
+    public boolean validate(ValidatorContext context, Integer num) {
         if(null == num || 0 == num){
             context.addError(ValidationError.create(String.format("%s不能为空或 0 ！",fieldName))
                     .setErrorCode(100).setField(fieldName).setInvalidValue(num));
@@ -39,5 +40,4 @@ public class NumberValidator extends ValidatorHandler<Integer> implements Valida
         }
         return true;
     }
-
 }

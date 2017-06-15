@@ -28,10 +28,12 @@ public class DateValidator extends ValidatorHandler<Date> implements Validator<D
         this.minDate = minDate;
         this.maxDate = maxDate;
     }
-    public boolean validator(ValidatorContext context,Date date){
+
+    @Override
+    public boolean validate(ValidatorContext context, Date date) {
         if (date.before(maxDate) && date.after(minDate)){
             context.addError(ValidationError.create(String.format("日期%s不在范围内",fieldName))
-            .setField(fieldName).setErrorCode(100).setInvalidValue(date));
+                    .setField(fieldName).setErrorCode(100).setInvalidValue(date));
             return false;
         }
         return true;

@@ -45,8 +45,11 @@ public class UserController extends BaseController {
                 .on(registerDto.getPw(),new StringValidator("pw"))
                 .on(registerDto.getConfirmPw(),new StringValidator("pw"))
                 .doValidate().result(toSimple());
-        if(registerDto.getPw().equals(registerDto.getConfirmPw())){
-
+        logger.debug("验证结果："+result.isSuccess());
+        if(!registerDto.getPw().equals(registerDto.getConfirmPw())){
+            mv.addObject("msg","两次密码不同！");
+            mv.setViewName("html/register");
+            return mv;
         }
         return mv;
     }
