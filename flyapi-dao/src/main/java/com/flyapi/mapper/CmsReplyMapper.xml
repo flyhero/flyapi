@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.flyapi.dao.CmsReplyMapper">
-  <resultMap id="BaseResultMap" type="com.flyapi.dao.model.CmsReply">
+  <resultMap id="BaseResultMap" type="com.flyapi.model.CmsReply">
     <id column="reply_id" jdbcType="BIGINT" property="replyId" />
     <result column="comment_id" jdbcType="BIGINT" property="commentId" />
     <result column="re_reply_id" jdbcType="BIGINT" property="reReplyId" />
@@ -25,7 +25,7 @@
     delete from cms_reply
     where reply_id = #{replyId,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.flyapi.dao.model.CmsReply">
+  <insert id="insert" parameterType="com.flyapi.model.CmsReply">
     insert into cms_reply (reply_id, comment_id, re_reply_id, 
       content, from_user_id, to_user_id, 
       reply_type, create_time)
@@ -33,7 +33,7 @@
       #{content,jdbcType=VARCHAR}, #{fromUserId,jdbcType=BIGINT}, #{toUserId,jdbcType=BIGINT}, 
       #{replyType,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.flyapi.dao.model.CmsReply">
+  <insert id="insertSelective" parameterType="com.flyapi.model.CmsReply">
     insert into cms_reply
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="replyId != null">
@@ -88,7 +88,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.flyapi.dao.model.CmsReply">
+  <update id="updateByPrimaryKeySelective" parameterType="com.flyapi.model.CmsReply">
     update cms_reply
     <set>
       <if test="commentId != null">
@@ -115,7 +115,7 @@
     </set>
     where reply_id = #{replyId,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.flyapi.dao.model.CmsReply">
+  <update id="updateByPrimaryKey" parameterType="com.flyapi.model.CmsReply">
     update cms_reply
     set comment_id = #{commentId,jdbcType=BIGINT},
       re_reply_id = #{reReplyId,jdbcType=BIGINT},

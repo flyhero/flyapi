@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.flyapi.dao.UpmsAdminRoleMapper">
-  <resultMap id="BaseResultMap" type="com.flyapi.dao.model.UpmsAdminRole">
+  <resultMap id="BaseResultMap" type="com.flyapi.model.UpmsAdminRole">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="admin_id" jdbcType="BIGINT" property="adminId" />
     <result column="role_id" jdbcType="BIGINT" property="roleId" />
@@ -20,13 +20,13 @@
     delete from upms_admin_role
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.flyapi.dao.model.UpmsAdminRole">
+  <insert id="insert" parameterType="com.flyapi.model.UpmsAdminRole">
     insert into upms_admin_role (id, admin_id, role_id, 
       is_delete)
     values (#{id,jdbcType=BIGINT}, #{adminId,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT}, 
       #{isDelete,jdbcType=TINYINT})
   </insert>
-  <insert id="insertSelective" parameterType="com.flyapi.dao.model.UpmsAdminRole">
+  <insert id="insertSelective" parameterType="com.flyapi.model.UpmsAdminRole">
     insert into upms_admin_role
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -57,7 +57,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.flyapi.dao.model.UpmsAdminRole">
+  <update id="updateByPrimaryKeySelective" parameterType="com.flyapi.model.UpmsAdminRole">
     update upms_admin_role
     <set>
       <if test="adminId != null">
@@ -72,7 +72,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.flyapi.dao.model.UpmsAdminRole">
+  <update id="updateByPrimaryKey" parameterType="com.flyapi.model.UpmsAdminRole">
     update upms_admin_role
     set admin_id = #{adminId,jdbcType=BIGINT},
       role_id = #{roleId,jdbcType=BIGINT},

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.flyapi.dao.CmsTypeLogMapper">
-  <resultMap id="BaseResultMap" type="com.flyapi.dao.model.CmsTypeLog">
+  <resultMap id="BaseResultMap" type="com.flyapi.model.CmsTypeLog">
     <id column="type_id" jdbcType="INTEGER" property="typeId" />
     <result column="user_id" jdbcType="BIGINT" property="userId" />
     <result column="username" jdbcType="VARCHAR" property="username" />
@@ -22,13 +22,13 @@
     delete from cms_type_log
     where type_id = #{typeId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.flyapi.dao.model.CmsTypeLog">
+  <insert id="insert" parameterType="com.flyapi.model.CmsTypeLog">
     insert into cms_type_log (type_id, user_id, username, 
       score, acc, wpm)
     values (#{typeId,jdbcType=INTEGER}, #{userId,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, 
       #{score,jdbcType=INTEGER}, #{acc,jdbcType=DECIMAL}, #{wpm,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.flyapi.dao.model.CmsTypeLog">
+  <insert id="insertSelective" parameterType="com.flyapi.model.CmsTypeLog">
     insert into cms_type_log
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="typeId != null">
@@ -71,7 +71,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.flyapi.dao.model.CmsTypeLog">
+  <update id="updateByPrimaryKeySelective" parameterType="com.flyapi.model.CmsTypeLog">
     update cms_type_log
     <set>
       <if test="userId != null">
@@ -92,7 +92,7 @@
     </set>
     where type_id = #{typeId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.flyapi.dao.model.CmsTypeLog">
+  <update id="updateByPrimaryKey" parameterType="com.flyapi.model.CmsTypeLog">
     update cms_type_log
     set user_id = #{userId,jdbcType=BIGINT},
       username = #{username,jdbcType=VARCHAR},

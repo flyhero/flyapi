@@ -255,4 +255,29 @@ public class UcenterUser implements Serializable {
     public void setIsDelete(Byte isDelete) {
         this.isDelete = isDelete;
     }
+
+    @Override
+    public String toString() {
+        return "UcenterUser{" +
+                "userId=" + userId +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", nickName='" + nickName + '\'' +
+                ", avatar='" + avatar + '\'' +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
+                ", sex=" + sex +
+                ", sign='" + sign + '\'' +
+                ", company='" + company + '\'' +
+                ", country='" + country + '\'' +
+                ", area='" + area + '\'' +
+                ", province='" + province + '\'' +
+                ", city='" + city + '\'' +
+                ", platform='" + platform + '\'' +
+                ", fameValue=" + fameValue +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                ", isDelete=" + isDelete +
+                '}';
+    }
 }

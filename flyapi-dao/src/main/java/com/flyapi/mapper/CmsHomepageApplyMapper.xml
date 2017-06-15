@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.flyapi.dao.CmsHomepageApplyMapper">
-  <resultMap id="BaseResultMap" type="com.flyapi.dao.model.CmsHomepageApply">
+  <resultMap id="BaseResultMap" type="com.flyapi.model.CmsHomepageApply">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="article_id" jdbcType="BIGINT" property="articleId" />
     <result column="apply_status" jdbcType="TINYINT" property="applyStatus" />
@@ -21,13 +21,13 @@
     delete from cms_homepage_apply
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.flyapi.dao.model.CmsHomepageApply">
+  <insert id="insert" parameterType="com.flyapi.model.CmsHomepageApply">
     insert into cms_homepage_apply (id, article_id, apply_status, 
       create_time, is_delete)
     values (#{id,jdbcType=BIGINT}, #{articleId,jdbcType=BIGINT}, #{applyStatus,jdbcType=TINYINT}, 
       #{createTime,jdbcType=TIMESTAMP}, #{isDelete,jdbcType=TINYINT})
   </insert>
-  <insert id="insertSelective" parameterType="com.flyapi.dao.model.CmsHomepageApply">
+  <insert id="insertSelective" parameterType="com.flyapi.model.CmsHomepageApply">
     insert into cms_homepage_apply
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -64,7 +64,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.flyapi.dao.model.CmsHomepageApply">
+  <update id="updateByPrimaryKeySelective" parameterType="com.flyapi.model.CmsHomepageApply">
     update cms_homepage_apply
     <set>
       <if test="articleId != null">
@@ -82,7 +82,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.flyapi.dao.model.CmsHomepageApply">
+  <update id="updateByPrimaryKey" parameterType="com.flyapi.model.CmsHomepageApply">
     update cms_homepage_apply
     set article_id = #{articleId,jdbcType=BIGINT},
       apply_status = #{applyStatus,jdbcType=TINYINT},

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.flyapi.dao.UcenterFameMapper">
-  <resultMap id="BaseResultMap" type="com.flyapi.dao.model.UcenterFame">
+  <resultMap id="BaseResultMap" type="com.flyapi.model.UcenterFame">
     <id column="fame_id" jdbcType="BIGINT" property="fameId" />
     <result column="start_value" jdbcType="INTEGER" property="startValue" />
     <result column="end_value" jdbcType="INTEGER" property="endValue" />
@@ -23,7 +23,7 @@
     delete from ucenter_fame
     where fame_id = #{fameId,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.flyapi.dao.model.UcenterFame">
+  <insert id="insert" parameterType="com.flyapi.model.UcenterFame">
     insert into ucenter_fame (fame_id, start_value, end_value, 
       fame_name, fame_icon, create_time, 
       is_delete)
@@ -31,7 +31,7 @@
       #{fameName,jdbcType=VARCHAR}, #{fameIcon,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
       #{isDelete,jdbcType=TINYINT})
   </insert>
-  <insert id="insertSelective" parameterType="com.flyapi.dao.model.UcenterFame">
+  <insert id="insertSelective" parameterType="com.flyapi.model.UcenterFame">
     insert into ucenter_fame
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="fameId != null">
@@ -80,7 +80,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.flyapi.dao.model.UcenterFame">
+  <update id="updateByPrimaryKeySelective" parameterType="com.flyapi.model.UcenterFame">
     update ucenter_fame
     <set>
       <if test="startValue != null">
@@ -104,7 +104,7 @@
     </set>
     where fame_id = #{fameId,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.flyapi.dao.model.UcenterFame">
+  <update id="updateByPrimaryKey" parameterType="com.flyapi.model.UcenterFame">
     update ucenter_fame
     set start_value = #{startValue,jdbcType=INTEGER},
       end_value = #{endValue,jdbcType=INTEGER},

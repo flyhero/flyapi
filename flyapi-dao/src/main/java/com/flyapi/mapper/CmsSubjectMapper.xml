@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.flyapi.dao.CmsSubjectMapper">
-  <resultMap id="BaseResultMap" type="com.flyapi.dao.model.CmsSubject">
+  <resultMap id="BaseResultMap" type="com.flyapi.model.CmsSubject">
     <id column="subject_id" jdbcType="BIGINT" property="subjectId" />
     <result column="subject_title" jdbcType="VARCHAR" property="subjectTitle" />
     <result column="subject_des" jdbcType="VARCHAR" property="subjectDes" />
@@ -22,7 +22,7 @@
     delete from cms_subject
     where subject_id = #{subjectId,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.flyapi.dao.model.CmsSubject">
+  <insert id="insert" parameterType="com.flyapi.model.CmsSubject">
     insert into cms_subject (subject_id, subject_title, subject_des, 
       permissions, create_time, is_delete
       )
@@ -30,7 +30,7 @@
       #{permissions,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, #{isDelete,jdbcType=TINYINT}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.flyapi.dao.model.CmsSubject">
+  <insert id="insertSelective" parameterType="com.flyapi.model.CmsSubject">
     insert into cms_subject
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="subjectId != null">
@@ -73,7 +73,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.flyapi.dao.model.CmsSubject">
+  <update id="updateByPrimaryKeySelective" parameterType="com.flyapi.model.CmsSubject">
     update cms_subject
     <set>
       <if test="subjectTitle != null">
@@ -94,7 +94,7 @@
     </set>
     where subject_id = #{subjectId,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.flyapi.dao.model.CmsSubject">
+  <update id="updateByPrimaryKey" parameterType="com.flyapi.model.CmsSubject">
     update cms_subject
     set subject_title = #{subjectTitle,jdbcType=VARCHAR},
       subject_des = #{subjectDes,jdbcType=VARCHAR},

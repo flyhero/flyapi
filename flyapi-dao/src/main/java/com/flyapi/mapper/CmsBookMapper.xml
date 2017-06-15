@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.flyapi.dao.CmsBookMapper">
-  <resultMap id="BaseResultMap" type="com.flyapi.dao.model.CmsBook">
+  <resultMap id="BaseResultMap" type="com.flyapi.model.CmsBook">
     <id column="book_id" jdbcType="BIGINT" property="bookId" />
     <result column="book_name" jdbcType="VARCHAR" property="bookName" />
     <result column="book_price" jdbcType="DECIMAL" property="bookPrice" />
@@ -28,7 +28,7 @@
     delete from cms_book
     where book_id = #{bookId,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.flyapi.dao.model.CmsBook">
+  <insert id="insert" parameterType="com.flyapi.model.CmsBook">
     insert into cms_book (book_id, book_name, book_price, 
       postage, address, category, 
       contact, remark, create_time, 
@@ -38,7 +38,7 @@
       #{contact,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
       #{updateTime,jdbcType=TIMESTAMP}, #{isDelete,jdbcType=TINYINT})
   </insert>
-  <insert id="insertSelective" parameterType="com.flyapi.dao.model.CmsBook">
+  <insert id="insertSelective" parameterType="com.flyapi.model.CmsBook">
     insert into cms_book
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="bookId != null">
@@ -111,7 +111,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.flyapi.dao.model.CmsBook">
+  <update id="updateByPrimaryKeySelective" parameterType="com.flyapi.model.CmsBook">
     update cms_book
     <set>
       <if test="bookName != null">
@@ -147,7 +147,7 @@
     </set>
     where book_id = #{bookId,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.flyapi.dao.model.CmsBook">
+  <update id="updateByPrimaryKey" parameterType="com.flyapi.model.CmsBook">
     update cms_book
     set book_name = #{bookName,jdbcType=VARCHAR},
       book_price = #{bookPrice,jdbcType=DECIMAL},

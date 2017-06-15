@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.flyapi.dao.UcenterUserFameMapper">
-  <resultMap id="BaseResultMap" type="com.flyapi.dao.model.UcenterUserFame">
+  <resultMap id="BaseResultMap" type="com.flyapi.model.UcenterUserFame">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="user_id" jdbcType="BIGINT" property="userId" />
     <result column="score" jdbcType="INTEGER" property="score" />
@@ -21,13 +21,13 @@
     delete from ucenter_user_fame
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.flyapi.dao.model.UcenterUserFame">
+  <insert id="insert" parameterType="com.flyapi.model.UcenterUserFame">
     insert into ucenter_user_fame (id, user_id, score, 
       op_type, op_desc)
     values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{score,jdbcType=INTEGER}, 
       #{opType,jdbcType=INTEGER}, #{opDesc,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.flyapi.dao.model.UcenterUserFame">
+  <insert id="insertSelective" parameterType="com.flyapi.model.UcenterUserFame">
     insert into ucenter_user_fame
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -64,7 +64,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.flyapi.dao.model.UcenterUserFame">
+  <update id="updateByPrimaryKeySelective" parameterType="com.flyapi.model.UcenterUserFame">
     update ucenter_user_fame
     <set>
       <if test="userId != null">
@@ -82,7 +82,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.flyapi.dao.model.UcenterUserFame">
+  <update id="updateByPrimaryKey" parameterType="com.flyapi.model.UcenterUserFame">
     update ucenter_user_fame
     set user_id = #{userId,jdbcType=BIGINT},
       score = #{score,jdbcType=INTEGER},

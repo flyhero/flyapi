@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.flyapi.dao.UpmsRoleMapper">
-  <resultMap id="BaseResultMap" type="com.flyapi.dao.model.UpmsRole">
+  <resultMap id="BaseResultMap" type="com.flyapi.model.UpmsRole">
     <id column="role_id" jdbcType="BIGINT" property="roleId" />
     <result column="role_name" jdbcType="VARCHAR" property="roleName" />
     <result column="role_des" jdbcType="VARCHAR" property="roleDes" />
@@ -21,13 +21,13 @@
     delete from upms_role
     where role_id = #{roleId,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.flyapi.dao.model.UpmsRole">
+  <insert id="insert" parameterType="com.flyapi.model.UpmsRole">
     insert into upms_role (role_id, role_name, role_des, 
       create_time, is_delete)
     values (#{roleId,jdbcType=BIGINT}, #{roleName,jdbcType=VARCHAR}, #{roleDes,jdbcType=VARCHAR}, 
       #{createTime,jdbcType=TIMESTAMP}, #{isDelete,jdbcType=TINYINT})
   </insert>
-  <insert id="insertSelective" parameterType="com.flyapi.dao.model.UpmsRole">
+  <insert id="insertSelective" parameterType="com.flyapi.model.UpmsRole">
     insert into upms_role
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="roleId != null">
@@ -64,7 +64,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.flyapi.dao.model.UpmsRole">
+  <update id="updateByPrimaryKeySelective" parameterType="com.flyapi.model.UpmsRole">
     update upms_role
     <set>
       <if test="roleName != null">
@@ -82,7 +82,7 @@
     </set>
     where role_id = #{roleId,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.flyapi.dao.model.UpmsRole">
+  <update id="updateByPrimaryKey" parameterType="com.flyapi.model.UpmsRole">
     update upms_role
     set role_name = #{roleName,jdbcType=VARCHAR},
       role_des = #{roleDes,jdbcType=VARCHAR},

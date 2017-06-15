@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.flyapi.dao.CmsCollectArticleMapper">
-  <resultMap id="BaseResultMap" type="com.flyapi.dao.model.CmsCollectArticle">
+  <resultMap id="BaseResultMap" type="com.flyapi.model.CmsCollectArticle">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="user_id" jdbcType="BIGINT" property="userId" />
     <result column="article_id" jdbcType="BIGINT" property="articleId" />
@@ -21,13 +21,13 @@
     delete from cms_collect_article
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.flyapi.dao.model.CmsCollectArticle">
+  <insert id="insert" parameterType="com.flyapi.model.CmsCollectArticle">
     insert into cms_collect_article (id, user_id, article_id, 
       create_time, is_delete)
     values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{articleId,jdbcType=BIGINT}, 
       #{createTime,jdbcType=TIMESTAMP}, #{isDelete,jdbcType=TINYINT})
   </insert>
-  <insert id="insertSelective" parameterType="com.flyapi.dao.model.CmsCollectArticle">
+  <insert id="insertSelective" parameterType="com.flyapi.model.CmsCollectArticle">
     insert into cms_collect_article
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -64,7 +64,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.flyapi.dao.model.CmsCollectArticle">
+  <update id="updateByPrimaryKeySelective" parameterType="com.flyapi.model.CmsCollectArticle">
     update cms_collect_article
     <set>
       <if test="userId != null">
@@ -82,7 +82,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.flyapi.dao.model.CmsCollectArticle">
+  <update id="updateByPrimaryKey" parameterType="com.flyapi.model.CmsCollectArticle">
     update cms_collect_article
     set user_id = #{userId,jdbcType=BIGINT},
       article_id = #{articleId,jdbcType=BIGINT},

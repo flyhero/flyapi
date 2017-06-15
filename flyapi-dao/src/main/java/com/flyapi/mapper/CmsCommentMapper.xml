@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.flyapi.dao.CmsCommentMapper">
-  <resultMap id="BaseResultMap" type="com.flyapi.dao.model.CmsComment">
+  <resultMap id="BaseResultMap" type="com.flyapi.model.CmsComment">
     <id column="comment_id" jdbcType="BIGINT" property="commentId" />
     <result column="target_id" jdbcType="BIGINT" property="targetId" />
     <result column="user_id" jdbcType="BIGINT" property="userId" />
@@ -10,7 +10,7 @@
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="is_delete" jdbcType="TINYINT" property="isDelete" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.flyapi.dao.model.CmsComment">
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.flyapi.model.CmsComment">
     <result column="content" jdbcType="LONGVARCHAR" property="content" />
   </resultMap>
   <sql id="Base_Column_List">
@@ -31,7 +31,7 @@
     delete from cms_comment
     where comment_id = #{commentId,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.flyapi.dao.model.CmsComment">
+  <insert id="insert" parameterType="com.flyapi.model.CmsComment">
     insert into cms_comment (comment_id, target_id, user_id, 
       like_num, target_type, create_time, 
       is_delete, content)
@@ -39,7 +39,7 @@
       #{likeNum,jdbcType=INTEGER}, #{targetType,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, 
       #{isDelete,jdbcType=TINYINT}, #{content,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.flyapi.dao.model.CmsComment">
+  <insert id="insertSelective" parameterType="com.flyapi.model.CmsComment">
     insert into cms_comment
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="commentId != null">
@@ -94,7 +94,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.flyapi.dao.model.CmsComment">
+  <update id="updateByPrimaryKeySelective" parameterType="com.flyapi.model.CmsComment">
     update cms_comment
     <set>
       <if test="targetId != null">
@@ -121,7 +121,7 @@
     </set>
     where comment_id = #{commentId,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.flyapi.dao.model.CmsComment">
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.flyapi.model.CmsComment">
     update cms_comment
     set target_id = #{targetId,jdbcType=BIGINT},
       user_id = #{userId,jdbcType=BIGINT},
@@ -132,7 +132,7 @@
       content = #{content,jdbcType=LONGVARCHAR}
     where comment_id = #{commentId,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.flyapi.dao.model.CmsComment">
+  <update id="updateByPrimaryKey" parameterType="com.flyapi.model.CmsComment">
     update cms_comment
     set target_id = #{targetId,jdbcType=BIGINT},
       user_id = #{userId,jdbcType=BIGINT},

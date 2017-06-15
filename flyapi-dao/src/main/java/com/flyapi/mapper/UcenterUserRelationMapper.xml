@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.flyapi.dao.UcenterUserRelationMapper">
-  <resultMap id="BaseResultMap" type="com.flyapi.dao.model.UcenterUserRelation">
+  <resultMap id="BaseResultMap" type="com.flyapi.model.UcenterUserRelation">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="from_user_id" jdbcType="BIGINT" property="fromUserId" />
     <result column="to_user_id" jdbcType="BIGINT" property="toUserId" />
@@ -22,7 +22,7 @@
     delete from ucenter_user_relation
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.flyapi.dao.model.UcenterUserRelation">
+  <insert id="insert" parameterType="com.flyapi.model.UcenterUserRelation">
     insert into ucenter_user_relation (id, from_user_id, to_user_id, 
       rel_type, create_time, is_delete
       )
@@ -30,7 +30,7 @@
       #{relType,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, #{isDelete,jdbcType=TINYINT}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.flyapi.dao.model.UcenterUserRelation">
+  <insert id="insertSelective" parameterType="com.flyapi.model.UcenterUserRelation">
     insert into ucenter_user_relation
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -73,7 +73,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.flyapi.dao.model.UcenterUserRelation">
+  <update id="updateByPrimaryKeySelective" parameterType="com.flyapi.model.UcenterUserRelation">
     update ucenter_user_relation
     <set>
       <if test="fromUserId != null">
@@ -94,7 +94,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.flyapi.dao.model.UcenterUserRelation">
+  <update id="updateByPrimaryKey" parameterType="com.flyapi.model.UcenterUserRelation">
     update ucenter_user_relation
     set from_user_id = #{fromUserId,jdbcType=BIGINT},
       to_user_id = #{toUserId,jdbcType=BIGINT},

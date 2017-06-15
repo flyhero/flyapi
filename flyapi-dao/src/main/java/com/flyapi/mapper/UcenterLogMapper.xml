@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.flyapi.dao.UcenterLogMapper">
-  <resultMap id="BaseResultMap" type="com.flyapi.dao.model.UcenterLog">
+  <resultMap id="BaseResultMap" type="com.flyapi.model.UcenterLog">
     <id column="log_id" jdbcType="BIGINT" property="logId" />
     <result column="username" jdbcType="VARCHAR" property="username" />
     <result column="description" jdbcType="VARCHAR" property="description" />
@@ -29,7 +29,7 @@
     delete from ucenter_log
     where log_id = #{logId,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.flyapi.dao.model.UcenterLog">
+  <insert id="insert" parameterType="com.flyapi.model.UcenterLog">
     insert into ucenter_log (log_id, username, description, 
       create_time, spend_time, base_path, 
       uri, url, method, params, 
@@ -39,7 +39,7 @@
       #{uri,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{method,jdbcType=VARCHAR}, #{params,jdbcType=VARCHAR}, 
       #{userAgent,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.flyapi.dao.model.UcenterLog">
+  <insert id="insertSelective" parameterType="com.flyapi.model.UcenterLog">
     insert into ucenter_log
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="logId != null">
@@ -118,7 +118,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.flyapi.dao.model.UcenterLog">
+  <update id="updateByPrimaryKeySelective" parameterType="com.flyapi.model.UcenterLog">
     update ucenter_log
     <set>
       <if test="username != null">
@@ -157,7 +157,7 @@
     </set>
     where log_id = #{logId,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.flyapi.dao.model.UcenterLog">
+  <update id="updateByPrimaryKey" parameterType="com.flyapi.model.UcenterLog">
     update ucenter_log
     set username = #{username,jdbcType=VARCHAR},
       description = #{description,jdbcType=VARCHAR},

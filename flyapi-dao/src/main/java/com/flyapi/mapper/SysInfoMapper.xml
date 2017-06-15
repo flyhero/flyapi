@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.flyapi.dao.SysInfoMapper">
-  <resultMap id="BaseResultMap" type="com.flyapi.dao.model.SysInfo">
+  <resultMap id="BaseResultMap" type="com.flyapi.model.SysInfo">
     <id column="info_id" jdbcType="BIGINT" property="infoId" />
     <result column="part_name" jdbcType="VARCHAR" property="partName" />
     <result column="part_content" jdbcType="VARCHAR" property="partContent" />
@@ -25,7 +25,7 @@
     delete from sys_info
     where info_id = #{infoId,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.flyapi.dao.model.SysInfo">
+  <insert id="insert" parameterType="com.flyapi.model.SysInfo">
     insert into sys_info (info_id, part_name, part_content, 
       language, click_num, create_time, 
       update_time, is_delete)
@@ -33,7 +33,7 @@
       #{language,jdbcType=VARCHAR}, #{clickNum,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
       #{updateTime,jdbcType=TIMESTAMP}, #{isDelete,jdbcType=TINYINT})
   </insert>
-  <insert id="insertSelective" parameterType="com.flyapi.dao.model.SysInfo">
+  <insert id="insertSelective" parameterType="com.flyapi.model.SysInfo">
     insert into sys_info
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="infoId != null">
@@ -88,7 +88,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.flyapi.dao.model.SysInfo">
+  <update id="updateByPrimaryKeySelective" parameterType="com.flyapi.model.SysInfo">
     update sys_info
     <set>
       <if test="partName != null">
@@ -115,7 +115,7 @@
     </set>
     where info_id = #{infoId,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.flyapi.dao.model.SysInfo">
+  <update id="updateByPrimaryKey" parameterType="com.flyapi.model.SysInfo">
     update sys_info
     set part_name = #{partName,jdbcType=VARCHAR},
       part_content = #{partContent,jdbcType=VARCHAR},

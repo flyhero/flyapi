@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.flyapi.dao.UpmsAdminMapper">
-  <resultMap id="BaseResultMap" type="com.flyapi.dao.model.UpmsAdmin">
+  <resultMap id="BaseResultMap" type="com.flyapi.model.UpmsAdmin">
     <id column="admin_id" jdbcType="BIGINT" property="adminId" />
     <result column="admin" jdbcType="VARCHAR" property="admin" />
     <result column="password" jdbcType="VARCHAR" property="password" />
@@ -25,7 +25,7 @@
     delete from upms_admin
     where admin_id = #{adminId,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.flyapi.dao.model.UpmsAdmin">
+  <insert id="insert" parameterType="com.flyapi.model.UpmsAdmin">
     insert into upms_admin (admin_id, admin, password, 
       realname, phone, email, 
       avatar, sex, is_delete
@@ -35,7 +35,7 @@
       #{avatar,jdbcType=VARCHAR}, #{sex,jdbcType=TINYINT}, #{isDelete,jdbcType=TINYINT}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.flyapi.dao.model.UpmsAdmin">
+  <insert id="insertSelective" parameterType="com.flyapi.model.UpmsAdmin">
     insert into upms_admin
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="adminId != null">
@@ -96,7 +96,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.flyapi.dao.model.UpmsAdmin">
+  <update id="updateByPrimaryKeySelective" parameterType="com.flyapi.model.UpmsAdmin">
     update upms_admin
     <set>
       <if test="admin != null">
@@ -126,7 +126,7 @@
     </set>
     where admin_id = #{adminId,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.flyapi.dao.model.UpmsAdmin">
+  <update id="updateByPrimaryKey" parameterType="com.flyapi.model.UpmsAdmin">
     update upms_admin
     set admin = #{admin,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},

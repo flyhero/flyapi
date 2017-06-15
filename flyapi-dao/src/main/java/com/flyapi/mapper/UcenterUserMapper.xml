@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.flyapi.dao.UcenterUserMapper">
-  <resultMap id="BaseResultMap" type="com.flyapi.dao.model.UcenterUser">
+  <resultMap id="BaseResultMap" type="com.flyapi.model.UcenterUser">
     <id column="user_id" jdbcType="BIGINT" property="userId" />
     <result column="username" jdbcType="VARCHAR" property="username" />
     <result column="password" jdbcType="VARCHAR" property="password" />
@@ -36,7 +36,7 @@
     delete from ucenter_user
     where user_id = #{userId,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.flyapi.dao.model.UcenterUser">
+  <insert id="insert" parameterType="com.flyapi.model.UcenterUser">
     insert into ucenter_user (user_id, username, password, 
       nick_name, avatar, phone, 
       email, sex, sign, company, 
@@ -52,7 +52,7 @@
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{isDelete,jdbcType=TINYINT}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.flyapi.dao.model.UcenterUser">
+  <insert id="insertSelective" parameterType="com.flyapi.model.UcenterUser">
     insert into ucenter_user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="userId != null">
@@ -173,7 +173,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.flyapi.dao.model.UcenterUser">
+  <update id="updateByPrimaryKeySelective" parameterType="com.flyapi.model.UcenterUser">
     update ucenter_user
     <set>
       <if test="username != null">
@@ -233,7 +233,7 @@
     </set>
     where user_id = #{userId,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.flyapi.dao.model.UcenterUser">
+  <update id="updateByPrimaryKey" parameterType="com.flyapi.model.UcenterUser">
     update ucenter_user
     set username = #{username,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
@@ -256,7 +256,7 @@
     where user_id = #{userId,jdbcType=BIGINT}
   </update>
 
-  <select id="findUserByUsernameAndPassword" parameterType="com.flyapi.dao.model.UcenterUser" resultMap="BaseResultMap">
+  <select id="findUserByUsernameAndPassword" parameterType="com.flyapi.model.UcenterUser" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from ucenter_user
