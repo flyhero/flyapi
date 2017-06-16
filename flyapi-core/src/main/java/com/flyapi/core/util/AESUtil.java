@@ -18,7 +18,7 @@ import java.security.SecureRandom;
 public class AESUtil {
 
 
-    private static final String encodeRules = "zheng";
+    private static final String encodeRules = "flyapi";
 
     /**
      * 加密
@@ -131,7 +131,7 @@ public class AESUtil {
 
     public static void main(String[] args) {
         String[] keys = {
-                "flyhero", "123456"
+                "flyhero", "wang2017"
         };
         System.out.println("key | AESEncode | AESDecode");
         for (String key : keys) {

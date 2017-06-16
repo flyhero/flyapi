@@ -81,11 +81,17 @@ public class UserController extends BaseController {
         return mv;
     }
 
+    /**
+     * 跳转到某处
+     * Title: go
+     * params: [html]
+     * return: org.springframework.web.servlet.ModelAndView
+     * author: flyhero(http://flyhero.top)
+     * date: 2017/6/16 0016 下午 5:56
+     */
     @RequestMapping("go")
-    public ModelAndView go(){
-        session.setAttribute("user","hahah");
-        mv.addObject("msg","test");
-        mv.setViewName("html/login");
+    public ModelAndView go(String html){
+        mv.setViewName("html/"+html);
         return mv;
     }
     /**
@@ -121,6 +127,7 @@ public class UserController extends BaseController {
             mv.setViewName("html/login");
             return mv;
         }
+        //登录获取声望值  加条件限制，一天最多三次加分
         UcenterUserFame userFame=new UcenterUserFame();
         userFame.setId(snowflakeIdWorker.nextId());
         userFame.setUserId(userLogin.getUserId());
@@ -128,6 +135,7 @@ public class UserController extends BaseController {
         userFame.setOpType(1);
         userFame.setOpDesc("登录");
         userFameService.insertSelective(userFame);
+
         session.setAttribute("user",userLogin);
         mv.setViewName("html/index");
         return mv;

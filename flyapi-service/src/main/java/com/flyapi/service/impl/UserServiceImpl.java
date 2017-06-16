@@ -1,6 +1,7 @@
 package com.flyapi.service.impl;
 
 import com.flyapi.core.base.BaseServiceImpl;
+import com.flyapi.core.util.AESUtil;
 import com.flyapi.dao.UcenterUserMapper;
 import com.flyapi.model.UcenterUser;
 import com.flyapi.service.api.UserService;
@@ -19,6 +20,7 @@ public class UserServiceImpl extends BaseServiceImpl<UcenterUser,UcenterUserMapp
     private UcenterUserMapper ucenterUserMapper;
 
     public UcenterUser login(UcenterUser user){
+        user.setPassword(AESUtil.AESEncode(user.getPassword()));
         return ucenterUserMapper.findUserByUsernameAndPassword(user);
     }
 
