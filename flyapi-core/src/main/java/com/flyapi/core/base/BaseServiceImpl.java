@@ -1,5 +1,7 @@
 package com.flyapi.core.base;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -9,6 +11,7 @@ import java.lang.reflect.Method;
  */
 public class BaseServiceImpl<Model,Dao> implements BaseService<Model> {
 
+    @Autowired
     public Dao dao;
     @Override
     public int deleteByPrimaryKey(Long id) {
@@ -45,6 +48,8 @@ public class BaseServiceImpl<Model,Dao> implements BaseService<Model> {
     @Override
     public int insertSelective(Model record) {
         try {
+            Class cl=record.getClass();
+            System.out.println("反射类："+dao.getClass().toString());
             Method method=dao.getClass().getDeclaredMethod("insertSelective",record.getClass());
             Object result=method.invoke(dao,record);
             return Integer.parseInt(String.valueOf(result));

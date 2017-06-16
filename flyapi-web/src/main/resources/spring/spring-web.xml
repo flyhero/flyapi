@@ -21,6 +21,12 @@
 		(2)提供一些列：数据绑定，数字和日期的format @NumberFormat, @DateTimeFormat, xml,json默认读写支持 
 	-->
   	<mvc:annotation-driven />
+
+	<!--id生成器-->
+	<bean id="SnowflakeIdWorker" class="com.flyapi.core.id.SnowflakeIdWorker">
+		<constructor-arg value="0" name="workerId"/>
+		<constructor-arg value="0" name="datacenterId"/>
+	</bean>
    <!-- FastJson注入 -->
     <mvc:annotation-driven>
         <mvc:message-converters register-defaults="true">

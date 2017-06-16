@@ -8,8 +8,12 @@ import static com.baidu.unbiz.fluentvalidator.ResultCollectors.toComplex;
 import static com.baidu.unbiz.fluentvalidator.ResultCollectors.toComplex2;
 import com.baidu.unbiz.fluentvalidator.Result;
 import com.flyapi.core.base.BaseController;
+import com.flyapi.core.id.SnowflakeIdWorker;
+import com.flyapi.core.util.AESUtil;
 import com.flyapi.core.validator.StringValidator;
 import com.flyapi.model.UcenterUser;
+import com.flyapi.model.UcenterUserFame;
+import com.flyapi.service.api.UserFameService;
 import com.flyapi.service.api.UserService;
 import com.flyapi.web.pojo.dto.RegisterDto;
 import org.apache.logging.log4j.LogManager;
@@ -20,6 +24,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Date;
+
 /**
  * author: flyhero
  * Date: 2017/6/12 0012 上午 10:53
@@ -29,6 +35,10 @@ import org.springframework.web.servlet.ModelAndView;
 public class UserController extends BaseController {
     @Autowired
     private UserService userService;
+    @Autowired
+    private UserFameService userFameService;
+    @Autowired
+    private SnowflakeIdWorker snowflakeIdWorker;
 
     private Logger logger = LogManager.getLogger(UserController.class);
     /**
@@ -41,14 +51,31 @@ public class UserController extends BaseController {
      */
     @RequestMapping("register")
     public ModelAndView register(RegisterDto registerDto){
-        Result result=FluentValidator.checkAll().on(registerDto.getUsername(),new StringValidator(0,11,"username"))
-                .on(registerDto.getPw(),new StringValidator("pw"))
-                .on(registerDto.getConfirmPw(),new StringValidator("pw"))
+        Result result=FluentValidator.checkAll()
+                .on(registerDto.getUsername(),new StringValidator(0,11,"用户名"))
+                .on(registerDto.getPw(),new StringValidator("密码"))
+                .on(registerDto.getConfirmPw(),new StringValidator("再次密码"))
                 .doValidate().result(toSimple());
         logger.debug("验证结果："+result.isSuccess());
+        if(!result.isSuccess()){
+            mv.addObject("msg",result.getErrors());
+            mv.setViewName("html/login");
+            return mv;
+        }
         if(!registerDto.getPw().equals(registerDto.getConfirmPw())){
             mv.addObject("msg","两次密码不同！");
-            mv.setViewName("html/register");
+            mv.setViewName("html/login");
+            return mv;
+        }
+        UcenterUser user =new UcenterUser();
+        user.setUserId(snowflakeIdWorker.nextId());
+        user.setUsername(registerDto.getUsername());
+        user.setNickName(registerDto.getUsername());
+        user.setPassword(AESUtil.AESEncode(registerDto.getPw()));
+        user.setCreateTime(new Date(System.currentTimeMillis()));
+        if(userService.insertSelective(user) > 0){
+            session.setAttribute("user",userService.login(user));
+            mv.setViewName("html/index");
             return mv;
         }
         return mv;
@@ -94,6 +121,13 @@ public class UserController extends BaseController {
             mv.setViewName("html/login");
             return mv;
         }
+        UcenterUserFame userFame=new UcenterUserFame();
+        userFame.setId(snowflakeIdWorker.nextId());
+        userFame.setUserId(userLogin.getUserId());
+        userFame.setScore(2);
+        userFame.setOpType(1);
+        userFame.setOpDesc("登录");
+        userFameService.insertSelective(userFame);
         session.setAttribute("user",userLogin);
         mv.setViewName("html/index");
         return mv;

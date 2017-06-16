@@ -7,7 +7,7 @@ package com.flyapi.web.pojo.dto;
 public class RegisterDto {
     private String username;
     private String pw;
-    private String ConfirmPw;
+    private String confirmPw;
 
     public String getUsername() {
         return username;
@@ -26,10 +26,10 @@ public class RegisterDto {
     }
 
     public String getConfirmPw() {
-        return ConfirmPw;
+        return confirmPw;
     }
 
     public void setConfirmPw(String confirmPw) {
-        ConfirmPw = confirmPw;
+        this.confirmPw = confirmPw;
     }
 }

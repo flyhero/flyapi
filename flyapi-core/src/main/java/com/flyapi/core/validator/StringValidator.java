@@ -27,11 +27,11 @@ public class StringValidator extends ValidatorHandler<String> implements Validat
     @Override
     public boolean validate(ValidatorContext context, String s) {
         if (null == s || "".equals(s)){
-            context.addError(ValidationError.create(String.format("%s字符串不能为空!", fieldName))
+            context.addError(ValidationError.create(String.format("%s不能为空!", fieldName))
                     .setErrorCode(100).setField(fieldName).setInvalidValue(s));
             return false;
         }else if(s.length() < min || s.length() > max){
-            context.addError(ValidationError.create(String.format("%s长度超出范围!", fieldName))
+            context.addError(ValidationError.create(String.format("%s长度不能超出%s-%s!", fieldName,min,max))
                     .setErrorCode(101).setField(fieldName).setInvalidValue(s));
             return false;
         }
