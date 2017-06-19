@@ -3,6 +3,7 @@
 <mapper namespace="com.flyapi.dao.CmsSubjectMapper">
   <resultMap id="BaseResultMap" type="com.flyapi.model.CmsSubject">
     <id column="subject_id" jdbcType="BIGINT" property="subjectId" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
     <result column="subject_title" jdbcType="VARCHAR" property="subjectTitle" />
     <result column="subject_des" jdbcType="VARCHAR" property="subjectDes" />
     <result column="permissions" jdbcType="TINYINT" property="permissions" />
@@ -10,7 +11,7 @@
     <result column="is_delete" jdbcType="TINYINT" property="isDelete" />
   </resultMap>
   <sql id="Base_Column_List">
-    subject_id, subject_title, subject_des, permissions, create_time, is_delete
+    subject_id,user_id, subject_title, subject_des, permissions, create_time, is_delete
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 

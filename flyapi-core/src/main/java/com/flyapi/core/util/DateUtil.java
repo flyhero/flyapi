@@ -35,13 +35,13 @@ public class DateUtil {
         long time= System.currentTimeMillis()-date.getTime();
         if (time>ONE_WEEK && time < 4*ONE_WEEK){
             return toWeeks(time)+WEEK_AGO;
-        }else if(time >ONE_DAY) {
+        }else if(time >ONE_DAY && time < ONE_WEEK) {
             return toDays(time)+DAY_AGO;
-        }else if(time >ONE_HOUR){
+        }else if(time >ONE_HOUR && time <ONE_DAY){
             return toHours(time)+HOUR_AGO;
-        }else if(time > ONE_MINUTE){
+        }else if(time > ONE_MINUTE && time < ONE_HOUR){
             return toMinutes(time)+MINUTE_AGO;
-        }else if(time > ONE_SECOND){
+        }else if(time > ONE_SECOND && time < ONE_MINUTE){
             return toSeconds(time)+SECOND_AGO;
         }else {
             return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
@@ -66,7 +66,7 @@ public class DateUtil {
     }
     public static void main(String[] args) {
         try {
-            Date date=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2017-05-26 13:37:56");
+            Date date=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2017-04-02 14:26:47");
             System.out.println(formatDate(date));
         } catch (ParseException e) {
             e.printStackTrace();

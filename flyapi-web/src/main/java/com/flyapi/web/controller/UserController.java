@@ -78,6 +78,11 @@ public class UserController extends BaseController {
             mv.setViewName("html/login");
             return mv;
         }
+        if(userService.findUserByUsername(registerDto.getUsername()) == 1){
+            mv.addObject("msg","用户名已存在");
+            mv.setViewName("html/login");
+            return mv;
+        }
         if(!registerDto.getPw().equals(registerDto.getConfirmPw())){
             mv.addObject("msg","两次密码不同！");
             mv.setViewName("html/login");
@@ -140,6 +145,20 @@ public class UserController extends BaseController {
         userFameService.addFameValue(userLogin.getUserId(),1);
         //CookieUtil.setCookie(response,"isLogin",String.valueOf(userLogin.getUserId()));
         session.setAttribute("user",userLogin);
+        mv.setViewName("html/index");
+        return mv;
+    }
+    /**
+     * 退出
+     * Title: logout
+     * params: []
+     * return: org.springframework.web.servlet.ModelAndView
+     * author: flyhero(http://flyhero.top)
+     * date: 2017/6/19 0019 下午 3:55
+     */
+    @RequestMapping("logout")
+    public ModelAndView logout(){
+        session.removeAttribute("user");
         mv.setViewName("html/index");
         return mv;
     }

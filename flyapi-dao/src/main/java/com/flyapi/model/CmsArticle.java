@@ -18,6 +18,11 @@ public class CmsArticle implements Serializable {
     private Long subjectId;
 
     /**
+     * 作者id
+     */
+    private Long userId;
+
+    /**
      * 标题
      */
     private String title;
@@ -83,6 +88,14 @@ public class CmsArticle implements Serializable {
     private String htmlContent;
 
     private static final long serialVersionUID = 1L;
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
 
     public String getMdContent() {
         return mdContent;

@@ -14,4 +14,6 @@ public interface CmsArticleMapper {
     int updateByPrimaryKeySelective(CmsArticle record);
 
     int updateByPrimaryKey(CmsArticle record);
+
+    int updateCommentNumOrLikeNumOrViewNum(CmsArticle record);
 }

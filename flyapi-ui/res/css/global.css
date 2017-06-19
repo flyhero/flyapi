@@ -297,17 +297,17 @@ body .fly-user-main{position: relative; width: 1085px; min-height: 600px; margin
 /* Detail页 */
 .detail-box{margin-bottom: 15px; padding: 20px;}
 .detail h1{font-size: 24px; line-height: 30px; padding: 5px 0;}
-.detail-about{position:relative; margin-top:5px; line-height:20px; background-color: #F2F2F2; padding: 15px; color:#999;}
+.detail-about{position:relative; margin-top:5px; line-height:20px; padding: 15px 15px 15px 0px; color:#999;}
 .detail-about span,
 .jie-about span,
 .detail-about .jie-user{margin-right:10px; display:inline-block; *display:inline; *zoom:1; vertical-align:top; font-size:12px;}
 .detail-about .jie-status, .detail-about .jie-status-ok{color:#fff;}
 .detail-about .fly-jing{padding:0 6px; background-color:#c00; color:#fff;}
 .detail-about .jie-user{position:relative;}
-.detail-about .jie-user cite{top: -3px; left: 56px; width: 260px; color: #4f99cf; font-size: 14px;}
+.detail-about .jie-user cite {top: -3px; left: 56px; width: 260px; color: #4f99cf; font-size: 14px;}
 .detail-about .jie-user cite em{padding-left:5px; color:#999; cursor:default; font-size:12px; font-style: normal;}
 .detail-about .jie-user img{position: relative; display: block; margin: 0; top: 0; border-radius: 2px;}
-.detail-hits{position:absolute; left: 71px; bottom: 15px; font-size: 0;}
+.detail-hits{position:absolute; left: 56px; bottom: 15px; font-size: 0;}
 .detail-hits span{margin-top: 0; font-size: 12px;}
 .detail-hits .layui-btn{border-radius: 0;}
 .detail-hits .layui-btn+.layui-btn{margin-left: 5px;}
@@ -323,6 +323,11 @@ body .fly-user-main{position: relative; width: 1085px; min-height: 600px; margin
 .detail-about-reply{background: none; padding: 0;}
 .detail-about-reply .detail-hits{left: 56px; bottom: 0;}
 .detail .page-title{ border: none; background-color: #f2f2f2;}
+
+/* 详情里 个人信息顶端昵称 */
+.user-top{position:absolute; left: 56px; top: 15px; font-size: 0;}
+.user-top span{margin-top: 0; font-size: 12px;}
+.user-top span a{margin-top: 0; font-size: 16px;}
 
 /* 求解 */
 .jie-row li{position: relative; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px dotted #E9E9E9; font-size: 0;}

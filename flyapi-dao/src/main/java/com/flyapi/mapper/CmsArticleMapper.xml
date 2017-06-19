@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="com.flyapi.model.CmsArticle">
     <id column="article_id" jdbcType="BIGINT" property="articleId" />
     <result column="subject_id" jdbcType="BIGINT" property="subjectId" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="article_des" jdbcType="VARCHAR" property="articleDes" />
     <result column="cover" jdbcType="VARCHAR" property="cover" />
@@ -19,7 +20,7 @@
     <result column="html_content" jdbcType="LONGVARCHAR" property="htmlContent" />
   </resultMap>
   <sql id="Base_Column_List">
-    article_id, subject_id, title, article_des, cover, original, view_num, comment_num, 
+    article_id, subject_id,user_id, title, article_des, cover, original, view_num, comment_num,
     like_num, create_time, update_time, permissions, is_delete,md_content, html_content
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
@@ -206,6 +207,21 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       permissions = #{permissions,jdbcType=TINYINT},
       is_delete = #{isDelete,jdbcType=TINYINT}
+    where article_id = #{articleId,jdbcType=BIGINT}
+  </update>
+  <update id="updateCommentNumOrLikeNumOrViewNum" parameterType="com.flyapi.model.CmsArticle" >
+    update cms_article
+    <set>
+      <if test="viewNum != null">
+        view_num = view_num + 1,
+      </if>
+      <if test="commentNum != null">
+        comment_num = comment_num + 1,
+      </if>
+      <if test="likeNum != null">
+        like_num = like_num + 1,
+      </if>
+    </set>
     where article_id = #{articleId,jdbcType=BIGINT}
   </update>
 </mapper>

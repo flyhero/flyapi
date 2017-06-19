@@ -13,6 +13,11 @@ public class CmsSubject implements Serializable {
     private Long subjectId;
 
     /**
+     * 作者id
+     */
+    private Long userId;
+
+    /**
      * 专题标题
      */
     private String subjectTitle;
@@ -38,6 +43,14 @@ public class CmsSubject implements Serializable {
     private Byte isDelete;
 
     private static final long serialVersionUID = 1L;
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
 
     public Long getSubjectId() {
         return subjectId;
