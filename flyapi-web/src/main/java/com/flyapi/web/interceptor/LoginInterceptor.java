@@ -10,6 +10,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -54,11 +55,23 @@ public class LoginInterceptor implements HandlerInterceptor {
                 return true;
             }
         }*/
-        HttpSession session = request.getSession();
-/*        User login = (User) session.getAttribute("user");
+        logger.info(request.getSession().getId());
+/*        HttpSession session = request.getSession();
+        User login = (User) session.getAttribute("user");
         if (login == null) {
             //System.out.println(request.getContextPath());
             response.sendRedirect(request.getContextPath());
+        }*/
+/*        Cookie[] cookies = request.getCookies();
+        if(null == cookies){
+            logger.debug("cookies is null!");
+            return false;
+        }else {
+            for(Cookie cookie:cookies){
+                if(cookie.getName().equals("isLogin")){
+                    return true;
+                }
+            }
         }*/
         logger.info("设置根目录");
         request.setAttribute("rootPath", "http://localhost/");

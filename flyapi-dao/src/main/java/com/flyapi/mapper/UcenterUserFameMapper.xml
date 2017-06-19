@@ -90,4 +90,16 @@
       op_desc = #{opDesc,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <select id="findCountByUserIdAndOpType" parameterType="com.flyapi.model.UcenterUserFame" resultType="java.lang.Integer">
+    select count(*)
+    from ucenter_user_fame
+    where user_id = #{userId,jdbcType=BIGINT} AND op_type = #{opType} AND DATE_FORMAT(NOW(),'%Y-%m-%d') = DATE_FORMAT(create_time,'%Y-%m-%d')
+  </select>
+
+  <update id="updateFameValueByUserId" parameterType="com.flyapi.model.UcenterUserFame">
+    update ucenter_user
+    set fame_value = fame_value + #{score}
+    where user_id = #{userId}
+  </update>
 </mapper>

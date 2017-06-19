@@ -10,6 +10,7 @@ import com.baidu.unbiz.fluentvalidator.Result;
 import com.flyapi.core.base.BaseController;
 import com.flyapi.core.id.SnowflakeIdWorker;
 import com.flyapi.core.util.AESUtil;
+import com.flyapi.core.util.CookieUtil;
 import com.flyapi.core.validator.StringValidator;
 import com.flyapi.model.UcenterUser;
 import com.flyapi.model.UcenterUserFame;
@@ -41,11 +42,26 @@ public class UserController extends BaseController {
     private SnowflakeIdWorker snowflakeIdWorker;
 
     private Logger logger = LogManager.getLogger(UserController.class);
+
+    /**
+     * 跳转到某处
+     * Title: go
+     * params: [html]
+     * return: org.springframework.web.servlet.ModelAndView
+     * author: flyhero(http://flyhero.top)
+     * date: 2017/6/16 0016 下午 5:56
+     */
+    @RequestMapping("go")
+    public ModelAndView go(String html){
+        mv.setViewName("html/"+html);
+        return mv;
+    }
+
     /**
      * 注册
      * Title: register
      * params: [registerDto]
-     * return: java.lang.String
+     * return: ModelAndView
      * author: flyhero(http://flyhero.top)
      * date: 2017/6/15 0015 下午 5:49
      */
@@ -81,31 +97,19 @@ public class UserController extends BaseController {
         return mv;
     }
 
-    /**
-     * 跳转到某处
-     * Title: go
-     * params: [html]
-     * return: org.springframework.web.servlet.ModelAndView
-     * author: flyhero(http://flyhero.top)
-     * date: 2017/6/16 0016 下午 5:56
-     */
-    @RequestMapping("go")
-    public ModelAndView go(String html){
-        mv.setViewName("html/"+html);
-        return mv;
-    }
+
     /**
      * 登录
      * Title: login
      * params: [user] 用户名和密码
-     * return: java.lang.String
+     * return: ModelAndView
      * author: flyhero(http://flyhero.top)
      * date: 2017/6/15 0015 下午 4:26
      */
     @RequestMapping("login")
     public ModelAndView login(UcenterUser user){
-        Result result=FluentValidator.checkAll().on(user.getUsername(),new StringValidator(0,11,"username"))
-                .on(user.getPassword(),new StringValidator("password")).doValidate().result(toSimple());
+        Result result=FluentValidator.checkAll().on(user.getUsername(),new StringValidator(0,11,"用户名"))
+                .on(user.getPassword(),new StringValidator("密码")).doValidate().result(toSimple());
         logger.info(result);
         ComplexResult complexResult=FluentValidator.checkAll().on(user.getUsername(),new StringValidator(0,11,"username"))
                 .on(user.getPassword(),new StringValidator("password")).doValidate().result(toComplex());
@@ -116,6 +120,11 @@ public class UserController extends BaseController {
         ComplexResult2 complexResult2=FluentValidator.checkAll().on(user.getUsername(),new StringValidator(0,11,"username"))
                 .on(user.getPassword(),new StringValidator("password")).doValidate().result(toComplex2());
         logger.info(complexResult2);
+        if(!result.isSuccess()){
+            mv.addObject("msg",result.getErrors());
+            mv.setViewName("html/login");
+            return mv;
+        }
         if(userService.findUserByUsername(user.getUsername()) !=1){
             mv.addObject("msg","用户名不存在");
             mv.setViewName("html/login");
@@ -127,15 +136,9 @@ public class UserController extends BaseController {
             mv.setViewName("html/login");
             return mv;
         }
-        //登录获取声望值  加条件限制，一天最多三次加分
-        UcenterUserFame userFame=new UcenterUserFame();
-        userFame.setId(snowflakeIdWorker.nextId());
-        userFame.setUserId(userLogin.getUserId());
-        userFame.setScore(2);
-        userFame.setOpType(1);
-        userFame.setOpDesc("登录");
-        userFameService.insertSelective(userFame);
 
+        userFameService.addFameValue(userLogin.getUserId(),1);
+        //CookieUtil.setCookie(response,"isLogin",String.valueOf(userLogin.getUserId()));
         session.setAttribute("user",userLogin);
         mv.setViewName("html/index");
         return mv;

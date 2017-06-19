@@ -10,4 +10,5 @@ import com.flyapi.model.UcenterUserFame;
  */
 public interface UserFameService extends BaseService<UcenterUserFame> {
 
+    int addFameValue(Long userId,Integer opType);
 }
