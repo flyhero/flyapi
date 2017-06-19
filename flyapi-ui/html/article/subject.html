@@ -1,18 +1,16 @@
 <!DOCTYPE html>
-<html>
-
+<html xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<meta charset="utf-8">
 		<title>专题页面</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<meta name="keywords" content="">
 		<meta name="description" content="">
-		<link rel="stylesheet" href="../../res/layui/css/layui.css">
-		<link rel="stylesheet" href="../../res/css/global.css">
+		<link rel="stylesheet" href="../../res/layui/css/layui.css" th:href="@{${rootPath} + '/res/layui/css/layui.css'}">
+		<link rel="stylesheet" href="../../res/css/global.css" th:href="@{${rootPath} + '/res/css/global.css'}">
 	</head>
 
 	<body>
-
 		<div class="header">
 			<div class="main">
 				<a class="logo" href="/" title="Fly">Fly社区</a>
@@ -60,6 +58,27 @@
 			<div class="fly-panel">
 				<h3 class="fly-panel-title">推荐专题</h3>
 				<ul class="fly-case-list">
+					<th:block th:if="${not #lists.isEmpty(subjectList)}">
+						<th:block th:each="subject,index:${subjectList}">
+							<li data-id="160">
+								<a class="fly-case-img" href="#" target="_blank">
+									<img src="../../res/images/avatar/default.png" th:src="subject" alt="">
+									<cite class="layui-btn layui-btn-primary layui-btn-small">去围观</cite>
+								</a>
+								<h2><a href="#" target="_blank" th:text="${subject.subjectTitle}">标题</a></h2>
+								<p class="fly-case-desc" th:text="${subject.subjectDes}">描述</p>
+								<div class="fly-case-info">
+									<a href="/u/2802912" th:href="'http://'+ ${user.userId}" class="fly-case-user" target="_blank">
+										<img src="http://q.qlogo.cn/qqapp/101235792/5068B86B734FD45F863F69BE6A08A6FF/100" th:src="${user.avatar}">
+									</a>
+									<p class="layui-elip" style="font-size: 12px;"><span th:text="${user.nickName}" style="color: #666;">nacooo</span> <span th:text="${subject.createTime}">13天前</span> </p>
+									<p>获得
+										<a class="fly-case-nums fly-case-active" href="javascript:;" data-type="showPraise" style=" padding:0 5px; color: #01AAED;">6</a>个赞</p>
+									<button class="layui-btn layui-btn-primary fly-case-active" data-type="praise">订阅</button>
+								</div>
+							</li>
+						</th:block>
+					</th:block>
 					<li data-id="160">
 						<a class="fly-case-img" href="#" target="_blank"> 
 							<img src="../../res/images/avatar/default.png" alt="口红网">
@@ -126,7 +145,7 @@
 				<a href="http://fly.layui.com/jie/2461.html" target="_blank">微信公众号</a>
 			</p>
 		</div>
-		<script src="../res/layui/layui.js"></script>
+		<script src="../res/layui/layui.js" th:src="@{${rootPath} + '/res/layui/layui.js'}"></script>
 		<script>
 			layui.cache.page = '';
 			layui.cache.user = {
