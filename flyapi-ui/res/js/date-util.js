@@ -53,13 +53,13 @@ function timeAgo(dateTimeStamp) {
 
     if (diffValue>ONE_WEEK && diffValue < 4*ONE_WEEK){
         return parseInt(diffValue/ONE_WEEK)+WEEK_AGO;
-    }else if(diffValue >ONE_DAY && time < ONE_WEEK) {
+    }else if(diffValue >ONE_DAY && diffValue < ONE_WEEK) {
         return parseInt(diffValue/ONE_DAY)+DAY_AGO;
-    }else if(diffValue >ONE_HOUR && time <ONE_DAY){
+    }else if(diffValue >ONE_HOUR && diffValue <ONE_DAY){
         return parseInt(diffValue/ONE_HOUR)+HOUR_AGO;
-    }else if(diffValue > ONE_MINUTE && time < ONE_HOUR){
+    }else if(diffValue > ONE_MINUTE && diffValue < ONE_HOUR){
         return parseInt(diffValue/ONE_MINUTE)+MINUTE_AGO;
-    }else if(diffValue > ONE_SECOND && time < ONE_MINUTE){
+    }else if(diffValue > ONE_SECOND && diffValue < ONE_MINUTE){
         return parseInt(diffValue/ONE_SECOND)+SECOND_AGO;
     }else {
         result=dateTimeStamp;

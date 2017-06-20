@@ -66,7 +66,7 @@ public class DateUtil {
     }
     public static void main(String[] args) {
         try {
-            Date date=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2017-04-02 14:26:47");
+            Date date=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2017-05-29 14:26:47");
             System.out.println(formatDate(date));
         } catch (ParseException e) {
             e.printStackTrace();

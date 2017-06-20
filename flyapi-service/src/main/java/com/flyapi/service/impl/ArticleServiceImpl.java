@@ -31,4 +31,5 @@ public class ArticleServiceImpl extends BaseServiceImpl<CmsArticle,CmsArticleMap
     public int updateCommentNumOrLikeNumOrViewNum(CmsArticle record) {
         return cmsArticleMapper.updateCommentNumOrLikeNumOrViewNum(record);
     }
+
 }

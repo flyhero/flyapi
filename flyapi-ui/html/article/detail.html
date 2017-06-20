@@ -254,7 +254,6 @@
 <script src="../../res/js/date-util.js" th:src="@{${rootPath} + '/res/js/date-util.js'}"></script>
 <script th:inline="javascript">
   var t=timeAgo(getMyDate([[${article.createTime}]]));
-  alert(t);
   $(".user-top").append("<span>"+t+"</span>");
 </script>
 </body>

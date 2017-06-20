@@ -18,6 +18,11 @@ public class CmsSubject implements Serializable {
     private Long userId;
 
     /**
+     * 封面图
+     */
+    private String cover;
+
+    /**
      * 专题标题
      */
     private String subjectTitle;
@@ -43,6 +48,14 @@ public class CmsSubject implements Serializable {
     private Byte isDelete;
 
     private static final long serialVersionUID = 1L;
+
+    public String getCover() {
+        return cover;
+    }
+
+    public void setCover(String cover) {
+        this.cover = cover;
+    }
 
     public Long getUserId() {
         return userId;
