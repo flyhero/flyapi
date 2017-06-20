@@ -200,7 +200,7 @@ body .layui-edit-face  .layui-layer-content{padding:0; background-color:#fff; co
 
 /* 面板 */
 .fly-panel{background-color: #fff; border-radius: 5px;}
-.fly-panel[pad20]{padding: 20px;}
+/*.fly-panel[pad20]{padding: 20px;}*/
 .fly-panel-title{position: relative; height: 40px; line-height: 40px; padding: 0 15px; margin-bottom: 5px; background-color: #f8f8f8; color: #333; border-radius: 5px 5px 0 0; font-size: 14px;}
 
 /* 右侧 - 雷锋榜 */
