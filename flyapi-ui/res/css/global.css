@@ -297,7 +297,7 @@ body .fly-user-main{position: relative; width: 1085px; min-height: 600px; margin
 /* Detail页 */
 .detail-box{margin-bottom: 15px; padding: 20px;}
 .detail h1{font-size: 24px; line-height: 30px; padding: 5px 0;}
-.detail-about{position:relative; margin-top:5px; line-height:20px; padding: 15px 15px 15px 0px; color:#999;}
+.detail-about{position:relative; margin-top:5px; line-height:20px; padding: 5px 15px 15px 0px; color:#999;}
 .detail-about span,
 .jie-about span,
 .detail-about .jie-user{margin-right:10px; display:inline-block; *display:inline; *zoom:1; vertical-align:top; font-size:12px;}
@@ -312,7 +312,7 @@ body .fly-user-main{position: relative; width: 1085px; min-height: 600px; margin
 .detail-hits .layui-btn{border-radius: 0;}
 .detail-hits .layui-btn+.layui-btn{margin-left: 5px;}
 .detail-hits .jie-admin{margin-right: 1px;}
-.detail-body{margin: 20px 0 50px; min-height: 202px; line-height:26px; font-size:16px; word-wrap: break-word;}
+.detail-body{margin: 10px 0 50px; min-height: 202px; line-height:26px; font-size:16px; word-wrap: break-word;}
 .detail-body p{margin-bottom:15px;}
 .detail-body a{color:#4f99cf;}
 .detail-body img{max-width: 100%; cursor: crosshair;}
@@ -323,11 +323,6 @@ body .fly-user-main{position: relative; width: 1085px; min-height: 600px; margin
 .detail-about-reply{background: none; padding: 0;}
 .detail-about-reply .detail-hits{left: 56px; bottom: 0;}
 .detail .page-title{ border: none; background-color: #f2f2f2;}
-
-/* 详情里 个人信息顶端昵称 */
-.user-top{position:absolute; left: 56px; top: 15px; font-size: 0;}
-.user-top span{margin-top: 0; font-size: 12px;}
-.user-top span a{margin-top: 0; font-size: 16px;}
 
 /* 求解 */
 .jie-row li{position: relative; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px dotted #E9E9E9; font-size: 0;}
