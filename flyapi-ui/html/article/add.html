@@ -93,7 +93,7 @@
           </div>
         </div>
         <div class="layui-form-item">
-          <button class="layui-btn" lay-filter="*" id="get-md-btn" lay-submit>立即发布</button>
+          <button class="layui-btn" lay-filter="*" lay-submit>立即发布</button>
         </div>
       </form>
     </div>
@@ -140,8 +140,8 @@
                 imageUpload : true,
                 imageFormats : ["jpg", "jpeg", "gif", "png"],
                 imageUploadURL : "./php/upload.php",
-                crossDomainUpload : true,
-                uploadCallbackURL : "http://localhost/editor.md/examples/php/upload_callback.html?test=dfdf",
+/*                crossDomainUpload : true,
+                uploadCallbackURL : "http://localhost/editor.md/examples/php/upload_callback.html?test=dfdf",*/
                 onload : function() {
                     console.log('onload', this);
                     //this.fullscreen();

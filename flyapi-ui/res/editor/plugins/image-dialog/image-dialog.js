@@ -251,12 +251,11 @@
                     },
                     buttons: {
                         enter: [lang.buttons.enter, function () {
-                            alert("按钮监听");
                             var url = this.find('[data-url]').val()
                             var alt = this.find('[data-alt]').val()
                             var link = this.find('[data-link]').val()
                             if (url === '') {
-                                alert(imageLang.imageURLEmpty)
+                                layer.msg(imageLang.imageURLEmpty, {icon: 5})
                                 return false
                             }
                             var altAttr = (alt !== '') ? ' "' + alt + '"' : ''
@@ -264,9 +263,9 @@
                             var text = ''
                             for (var i = 0, length = arr_url.length; i < length; i++) {
                                 if (link === '' || link === 'http://') {
-                                    text = text + '![' + alt + '](' + arr_url[i] + altAttr + ')/r/n/r/n'
+                                    text = text + '![' + alt + '](' + arr_url[i] + altAttr + ')'
                                 } else {
-                                    text = text + '[![' + alt + '](' + arr_url[i] + altAttr + ')](' + link + altAttr + ')/r/n/r/n'
+                                    text = text + '[![' + alt + '](' + arr_url[i] + altAttr + ')](' + link + altAttr + ')'
                                 }
                             }
                             cm.replaceSelection(text)
@@ -318,7 +317,6 @@
                     }
                 }
                 var submitHandler = function() {
-                        alert("提交监听");
                     var files = $('[name="file"]')[0].files
                     if (files.length > 0) {
                         Qiniu_upload(files, files.length, 0)
@@ -331,11 +329,17 @@
                     var isImage = /^(\s|\S)+(jpg|png|JPG|PNG|gif|jpeg)+$/
                    // var isImage = new RegExp('/^(\s|\S)+(' + settings.imageFormats.join('|') + ')+$/') // /(/.(webp|jpg|jpeg|gif|bmp|png))$/
                     if (fileName === '') {
-                        alert(imageLang.uploadFileEmpty)
+                        layer.msg(imageLang.uploadFileEmpty, {icon: 5});
                         return false
                     }
                     if (!isImage.test(fileName)) {
-                        alert(imageLang.formatNotAllowed + settings.imageFormats.join(', '))
+                        layer.msg(imageLang.formatNotAllowed + settings.imageFormats.join(', '), {icon: 5});
+                        return false
+                    }
+                    var img=new Image();
+                    img.src=fileName;
+                    if(img.fileSize>3*1024){
+                        layer.msg(imageLang.sizeNotAllowed, {icon: 5});
                         return false
                     }
                     loading(true)
