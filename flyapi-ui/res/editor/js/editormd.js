@@ -99,7 +99,7 @@
         appendMarkdown       : "",             // if in init textarea value not empty, append markdown to textarea
         width                : "100%",
         height               : "100%",
-        path                 : "./lib/",       // Dependents module file directory
+        path                 : "http://localhost/res/editor/lib/",       // Dependents module file directory ./lib/
         pluginPath           : "",             // If this empty, default use settings.path + "../plugins/"
         delay                : 300,            // Delay parse markdown to html, Uint : ms
         autoLoadModules      : true,           // Automatic load dependent module files
@@ -1902,7 +1902,9 @@
                 
                 if (state.fullscreen)
                 {
-                    editor.height($(window).height());
+                    editor.height($(window).height()-65);
+                    editor.css({"z-index":"9999"});
+                    $(".editormd-fullscreen").css({"top":"70px"});
                 }
 
                 if (settings.toolbar && !settings.readOnly) 
@@ -2671,7 +2673,7 @@
             }
 
             $("html,body").css("overflow", "");
-
+            $(".editormd-fullscreen").css({"top":"0px"});
             editor.css({
                 width    : editor.data("oldWidth"),
                 height   : editor.data("oldHeight")
