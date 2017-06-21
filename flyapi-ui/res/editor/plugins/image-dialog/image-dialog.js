@@ -251,6 +251,7 @@
                     },
                     buttons: {
                         enter: [lang.buttons.enter, function () {
+                            alert("按钮监听");
                             var url = this.find('[data-url]').val()
                             var alt = this.find('[data-alt]').val()
                             var link = this.find('[data-link]').val()
@@ -317,6 +318,7 @@
                     }
                 }
                 var submitHandler = function() {
+                        alert("提交监听");
                     var files = $('[name="file"]')[0].files
                     if (files.length > 0) {
                         Qiniu_upload(files, files.length, 0)
@@ -326,7 +328,8 @@
                 var fileInput = dialog.find('[name="file"]')
                 fileInput.off('change').on('change', function() {
                     var fileName = fileInput.val()
-                    var isImage = new RegExp('(//.(' + settings.imageFormats.join('|') + '))$') // /(/.(webp|jpg|jpeg|gif|bmp|png))$/
+                    var isImage = /^(\s|\S)+(jpg|png|JPG|PNG|gif|jpeg)+$/
+                   // var isImage = new RegExp('/^(\s|\S)+(' + settings.imageFormats.join('|') + ')+$/') // /(/.(webp|jpg|jpeg|gif|bmp|png))$/
                     if (fileName === '') {
                         alert(imageLang.uploadFileEmpty)
                         return false
