@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
+
 /**
  * author: flyhero
  * Date: 2017/6/9 0009 下午 3:58
@@ -42,6 +44,7 @@ public class UserFameServiceImpl extends BaseServiceImpl<UcenterUserFame,Ucenter
                     userFame.setId(snowflakeIdWorker.nextId());
                     userFame.setScore(2);
                     userFame.setOpDesc("登录");
+                    userFame.setCreateTime(new Date());
                     ucenterUserFameMapper.insertSelective(userFame);
                     ucenterUserFameMapper.updateFameValueByUserId(userFame);
                 }

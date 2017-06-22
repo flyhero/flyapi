@@ -7,9 +7,10 @@
     <result column="score" jdbcType="INTEGER" property="score" />
     <result column="op_type" jdbcType="INTEGER" property="opType" />
     <result column="op_desc" jdbcType="VARCHAR" property="opDesc" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, user_id, score, op_type, op_desc
+    id, user_id, score, op_type, op_desc,create_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -45,6 +46,9 @@
       <if test="opDesc != null">
         op_desc,
       </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -61,6 +65,9 @@
       </if>
       <if test="opDesc != null">
         #{opDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime},
       </if>
     </trim>
   </insert>

@@ -26,11 +26,11 @@ public class WebTest {
         logger.debug("wang");
         logger.error("error");
         logger.warn("warn");
-        UcenterUser user=new UcenterUser();
+/*        UcenterUser user=new UcenterUser();
         user.setUsername("wang");
         user.setPassword("456789");
         logger.info("结果："+userService.findUserByUsername(user.getUsername()));
         UcenterUser login=userService.login(user);
-        logger.info(login.toString());
+        logger.info(login.toString());*/
     }
 }

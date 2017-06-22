@@ -1,6 +1,7 @@
 package com.flyapi.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * @author 
@@ -31,7 +32,20 @@ public class UcenterUserFame implements Serializable {
      */
     private String opDesc;
 
+    /**
+     * 操作描述
+     */
+    private Date createTime;
+
     private static final long serialVersionUID = 1L;
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
 
     public Long getId() {
         return id;

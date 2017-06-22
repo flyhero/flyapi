@@ -74,7 +74,7 @@ public class LoginInterceptor implements HandlerInterceptor {
             }
         }*/
         logger.info("设置根目录");
-        request.setAttribute("rootPath", "http://localhost/");
+        request.setAttribute("rootPath", "http://192.168.1.9/");
         return true;
     }
 

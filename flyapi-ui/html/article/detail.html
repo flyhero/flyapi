@@ -84,12 +84,12 @@
   <div class="wrap">
     <div class="content detail">
       <div class="fly-panel detail-box">
-        <h1 th:text="${article.title}">Fly Template v2.0，基于 layui 的轻量级社区模版</h1>
+        <h1 th:text="${detailVo.article.title}">Fly Template v2.0，基于 layui 的轻量级社区模版</h1>
         <div class="detail-about">
           <a class="jie-user" href="">
             <img src="http://tp4.sinaimg.cn/1345566427/180/5730976522/0" alt="">
             <cite>
-              <i th:text="${user.nickName}">纸飞机</i>
+              <i th:text="${detailVo.user.nickName}">纸飞机</i>
                <em>(楼主)</em>
                <em style="color:#5FB878" id="pub-time">1分钟前发布</em>
               <!-- <em style="color:#FF9E3F">（活雷锋）</em>
@@ -97,9 +97,9 @@
             </cite>
           </a>
           <div class="detail-hits">
-            <span class="iconfont" th:text="'阅读 ' +${article.viewNum}">阅读 200</span>
-            <span class="iconfont" th:text="'评论 ' +${article.commentNum}">评论 200</span>
-            <span class="iconfont" th:text="'喜欢 ' +${article.likeNum}">喜欢 200</span>
+            <span class="iconfont" th:text="'阅读 ' +${detailVo.article.viewNum}">阅读 200</span>
+            <span class="iconfont" th:text="'评论 ' +${detailVo.article.commentNum}">评论 200</span>
+            <span class="iconfont" th:text="'喜欢 ' +${detailVo.article.likeNum}">喜欢 200</span>
             <span class="layui-btn layui-btn-mini jie-admin " type="collect" data-type="add">收藏</span>
             <
             <!--<span class="layui-btn layui-btn-mini jie-admin  layui-btn-danger" type="collect" data-type="add">取消收藏</span>-->
@@ -110,7 +110,7 @@
         <div class="detail-body photos" style="margin-bottom: 20px;">
           <div id="layout">
             <div id="test-editormd-view">
-              <textarea style="display:none;" id="md-content" th:text="${article.mdContent}" name="test-editormd-markdown-doc">###Hello world!</textarea>
+              <textarea style="display:none;" id="md-content" th:text="${detailVo.article.mdContent}" name="test-editormd-markdown-doc">###Hello world!</textarea>
             </div>
           </div>
           <!-- <script src="js/zepto.min.js"></script>
@@ -256,8 +256,8 @@
 <script src="../../res/layui/layui.js" th:src="@{${rootPath} + '/res/layui/layui.js'}"></script>
 <script src="../../res/js/date-util.js" th:src="@{${rootPath} + '/res/js/date-util.js'}"></script>
 <script th:inline="javascript">
-  var t=timeAgo(getMyDate([[${article.createTime}]]));
-  $(".user-top").append("<span>"+t+"</span>");
+  var t=timeAgo(getMyDate([[${detailVo.article.createTime}]]));
+  $("#pub-time").text(t);
 </script>
 </body>
 </html>

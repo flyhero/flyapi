@@ -224,4 +224,57 @@
     </set>
     where article_id = #{articleId,jdbcType=BIGINT}
   </update>
+  <select id="findArticleSimple" resultType="com.flyapi.vo.ArticleSimpleVo">
+    SELECT
+        t.article_id articleId,
+        t.article_des articleDes,
+        t.subject_id subjectId,
+        t.user_id userId,
+        t.title,
+        t.cover,
+        t.view_num viewNum,
+        t.comment_num commentNum,
+        t.like_num likeNum,
+        t.create_time createTime,
+        t1.subject_title subjectTitle,
+        t2.avatar,
+        t2.nick_name nickName
+    FROM
+        (
+            SELECT
+                article_id
+            FROM
+                cms_homepage_apply
+            WHERE
+                apply_status = 1
+            AND is_delete = 0
+        ) tt
+    LEFT JOIN cms_article t ON tt.article_id = t.article_id
+    LEFT JOIN cms_subject t1 ON t.subject_id = t1.subject_id
+    LEFT JOIN ucenter_user t2 ON t.user_id = t2.user_id
+    WHERE
+        t.permissions = 0
+    AND t.is_delete = 0
+    ORDER BY t.create_time DESC
+  </select>
+  <select id="findLastUpdateOrHotArticles" parameterType="java.lang.Integer" resultType="com.flyapi.model.CmsArticle">
+    SELECT
+        article_id articleId,
+        title,
+        view_num viewNum
+    FROM
+        cms_article
+    WHERE
+        is_delete = 0
+    AND permissions = 0
+    <if test="type == 1">
+      ORDER BY
+      update_time DESC
+    </if>
+    <if test="type == 2">
+      ORDER BY
+      view_num DESC
+    </if>
+    LIMIT 8
+  </select>
 </mapper>

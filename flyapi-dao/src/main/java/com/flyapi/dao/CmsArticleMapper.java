@@ -1,6 +1,9 @@
 package com.flyapi.dao;
 
 import com.flyapi.model.CmsArticle;
+import com.flyapi.vo.ArticleSimpleVo;
+
+import java.util.List;
 
 public interface CmsArticleMapper {
     int deleteByPrimaryKey(Long articleId);
@@ -16,4 +19,8 @@ public interface CmsArticleMapper {
     int updateByPrimaryKey(CmsArticle record);
 
     int updateCommentNumOrLikeNumOrViewNum(CmsArticle record);
+
+    List<ArticleSimpleVo> findArticleSimple();
+
+    List<CmsArticle> findLastUpdateOrHotArticles(int type);
 }
