@@ -628,7 +628,6 @@ a cite {
 .layui-btn-group+.layui-btn-group {
 	margin-left: 10px
 }
-
 .layui-input,
 .layui-select,
 .layui-textarea {
@@ -682,7 +681,7 @@ a cite {
 }
 
 .layui-form-item {
-	margin-bottom: 15px;
+	margin-bottom: 10px;
 	clear: both;
 	*zoom: 1
 }
@@ -705,6 +704,7 @@ a cite {
 }
 
 .layui-form-item .layui-inline {
+	width: 45%; /*修改*/
 	margin-bottom: 5px;
 	margin-right: 10px
 }

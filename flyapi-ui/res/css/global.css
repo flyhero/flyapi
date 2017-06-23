@@ -309,7 +309,7 @@ body .fly-user-main{position: relative; width: 1085px; min-height: 600px; margin
 .detail-about .jie-user img{position: relative; display: block; margin: 0; top: 0; border-radius: 2px;}
 .detail-hits{position:absolute; left: 56px; bottom: 15px; font-size: 0;}
 .detail-hits span{margin-top: 0; font-size: 12px;}
-.detail-hits .layui-btn{border-radius: 0;}
+/*.detail-hits .layui-btn{border-radius: 0;}*/
 .detail-hits .layui-btn+.layui-btn{margin-left: 5px;}
 .detail-hits .jie-admin{margin-right: 1px;}
 .detail-body{margin: 10px 0 50px; min-height: 202px; line-height:26px; font-size:16px; word-wrap: break-word;}

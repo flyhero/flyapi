@@ -90,7 +90,7 @@
             <img src="http://tp4.sinaimg.cn/1345566427/180/5730976522/0" alt="">
             <cite>
               <i th:text="${detailVo.user.nickName}">纸飞机</i>
-               <em>(楼主)</em>
+               <em>(金牌会员)</em>
                <em style="color:#5FB878" id="pub-time">1分钟前发布</em>
               <!-- <em style="color:#FF9E3F">（活雷锋）</em>
                <em style="color:#999">（该号已被封）</em> -->
@@ -101,8 +101,8 @@
             <span class="iconfont" th:text="'评论 ' +${detailVo.article.commentNum}">评论 200</span>
             <span class="iconfont" th:text="'喜欢 ' +${detailVo.article.likeNum}">喜欢 200</span>
             <span class="layui-btn layui-btn-mini jie-admin " type="collect" data-type="add">收藏</span>
-            <
-            <!--<span class="layui-btn layui-btn-mini jie-admin  layui-btn-danger" type="collect" data-type="add">取消收藏</span>-->
+
+           <a href="detail.html"> <span class="layui-btn layui-btn-mini layui-btn-normal">阅读原文</span></a>
 
           </div>
         </div>
@@ -150,6 +150,7 @@
           </script>
 
         </div>
+        <hr>
       </div>
 
       <div class="fly-panel detail-box" style="padding-top: 0;">
