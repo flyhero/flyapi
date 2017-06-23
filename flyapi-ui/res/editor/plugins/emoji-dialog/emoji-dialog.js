@@ -138,7 +138,7 @@
 					}
 				});
 			}
-			
+
 			var category = ["Github emoji", "Twemoji", "Font awesome", "Editor.md logo"];
 			var tab      = dialog.find("." + classPrefix + "tab");
 

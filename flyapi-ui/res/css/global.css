@@ -82,7 +82,7 @@ pre{padding: 10px 15px; margin: 10px 0; font-size: 12px; border-left: 6px solid 
 .fly-msg, .fly-error{padding:10px 15px; line-height:24px;}
 .fly-msg{background-color:#F8F8F8; color:#666;}
 .fly-msg a{color:#4F99CF}
-.page-title{position: relative; font-size: 14px; margin: 0 0 20px; padding: 10px 15px; line-height:30px; background-color: #F2F2F2}
+.page-title{position: relative; font-size: 14px; margin: 0 0 12px; padding: 6px 15px; line-height:30px; background-color: #F2F2F2}
 .edge .page-title{width:auto; margin: 0; line-height: 38px; padding: 0 15px; border: none; background-color: #f2f2f2;}
 .fly-editbox{position:relative;}
 
