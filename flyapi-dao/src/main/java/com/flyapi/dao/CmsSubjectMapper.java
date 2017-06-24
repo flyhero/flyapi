@@ -2,6 +2,8 @@ package com.flyapi.dao;
 
 import com.flyapi.model.CmsSubject;
 
+import java.util.List;
+
 public interface CmsSubjectMapper {
     int deleteByPrimaryKey(Long subjectId);
 
@@ -14,4 +16,6 @@ public interface CmsSubjectMapper {
     int updateByPrimaryKeySelective(CmsSubject record);
 
     int updateByPrimaryKey(CmsSubject record);
+
+    List<CmsSubject> findSubjectList();
 }

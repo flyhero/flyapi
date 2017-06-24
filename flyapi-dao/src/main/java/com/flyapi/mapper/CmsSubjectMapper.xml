@@ -105,4 +105,10 @@
       is_delete = #{isDelete,jdbcType=TINYINT}
     where subject_id = #{subjectId,jdbcType=BIGINT}
   </update>
+  <select id="findSubjectList"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from cms_subject
+    where permissions = 0 AND is_delete = 0s
+  </select>
 </mapper>
