@@ -7,14 +7,15 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<meta name="keywords" content="">
 		<meta name="description" content="">
-		<link rel="stylesheet" href="../res/layui/css/layui.css" th:href="@{${rootPath} + '/res/layui/css/layui.css'}">
+<!--		<link rel="stylesheet" href="../res/layui/css/layui.css" th:href="@{${rootPath} + '/res/layui/css/layui.css'}">
 		<link rel="stylesheet" href="../res/css/global.css" th:href="@{${rootPath} + '/res/css/global.css'}">
 		<link rel="stylesheet" href="../res/css/dropdown.css" th:href="@{${rootPath} + '/res/css/dropdown.css'}"/>
 		<script src="../res/js/jquery.min.js" th:src="@{${rootPath} + '/res/js/jquery.min.js'}"></script>
 		<script src="../res/js/jquery.sweet-dropdown.min.js" th:src="@{${rootPath} + '/res/js/jquery.sweet-dropdown.min.js'}"></script>
 		<link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"  rel="stylesheet">
 		<link rel="stylesheet" href="../res/swiper/swiper-3.4.2.min.css" th:href="@{${rootPath} + '/res/swiper/swiper-3.4.2.min.css'}">
-		<script src="../res/swiper/swiper-3.4.2.jquery.min.js" th:src="@{${rootPath} + '/res/swiper/swiper-3.4.2.jquery.min.js'}"></script>
+		<script src="../res/swiper/swiper-3.4.2.jquery.min.js" th:src="@{${rootPath} + '/res/swiper/swiper-3.4.2.jquery.min.js'}"></script>-->
+		<th:block th:include="/html/common/link::link"></th:block>
 		<style>
 			.swiper-container {
 				width: 100%;
@@ -52,8 +53,8 @@
 					<a class="nav-this" href="jie/index.html">
 						<i class="fa fa-home fa-fw"></i>首页
 					</a>
-					<a href="jie/index.html">
-						<i class="fa fa-question fa-fw"></i>问答
+					<a href="subject.html" th:href="@{${rootPath} + 'html/article/subject.html'}">
+						<i class="fa fa-question fa-fw"></i>专题
 					</a>
 					<a href="http://www.layui.com/" target="_blank">
 						<i class="fa fa-book fa-fw"></i>图书交换
@@ -78,18 +79,9 @@
 				</div>
 				<div class="flyhero-user" th:unless="${session.user} == null">
 					<!-- 登入状态 -->
-<!--					<a class="login" href="" data-dropdown="#dropdown-standard"><img src="" th:src="${session.user}"/></a>
-					<div class="dropdown-menu dropdown-anchor-top-left dropdown-has-anchor" id="dropdown-standard">
-						<ul>
-							<li><a href="#">主页</a></li>
-							<li><a href="#">设置</a></li>
-							&lt;!&ndash;<li class="divider"></li> 分隔符&ndash;&gt;
-							<li><a href="#">反馈</a></li>
-						</ul>
-					</div>-->
 					<div class="user-hover" style="width: 80px;height: 65px;" data-dropdown="#dropdown-standard">
 						<a class="avatar dropdown" href="">
-							<img src="../res/images/avatar/flyhero.jpg">
+							<img src="../res/images/avatar/flyhero.jpg" th:src="@{${rootPath} + ${session.user.avatar}}">
 						</a>
 					</div>
 
@@ -278,7 +270,7 @@
             });
             $.getJSON("../article/findLastUpdateOrHotArticles",{"type":2},function (result) {
                 $.each(result.data,function(index,hot){
-                    $("#hot-article").append('<dd><a href="/article/detail.html/'+last.articleId+'">'+hot.title+'</a><span><i class="iconfont">&#xe60b;</i> '+hot.viewNum+'</span></dd>');
+                    $("#hot-article").append('<dd><a href="/article/detail.html/'+hot.articleId+'">'+hot.title+'</a><span><i class="iconfont">&#xe60b;</i> '+hot.viewNum+'</span></dd>');
                 });
             });
 		</script>

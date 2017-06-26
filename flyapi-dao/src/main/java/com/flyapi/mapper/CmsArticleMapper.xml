@@ -257,7 +257,7 @@
     AND t.is_delete = 0
     ORDER BY t.create_time DESC
   </select>
-  <select id="findLastUpdateOrHotArticles" parameterType="java.lang.Integer" resultType="com.flyapi.model.CmsArticle">
+  <select id="findLastUpdateOrHotArticles" parameterType="int" resultType="com.flyapi.model.CmsArticle">
     SELECT
         article_id articleId,
         title,
@@ -267,11 +267,11 @@
     WHERE
         is_delete = 0
     AND permissions = 0
-    <if test="type == 1">
+    <if test="atype == 1">
       ORDER BY
       update_time DESC
     </if>
-    <if test="type == 2">
+    <if test="atype == 2">
       ORDER BY
       view_num DESC
     </if>

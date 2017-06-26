@@ -6,58 +6,38 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<meta name="keywords" content="">
 		<meta name="description" content="">
+
 		<link rel="stylesheet" href="../../res/layui/css/layui.css" th:href="@{${rootPath} + '/res/layui/css/layui.css'}">
 		<link rel="stylesheet" href="../../res/css/global.css" th:href="@{${rootPath} + '/res/css/global.css'}">
+		<script src="../../res/js/jquery.min.js" th:src="@{${rootPath} + '/res/js/jquery.min.js'}"></script>
+		<script src="../../res/layui/layui.js" th:src="@{${rootPath} + '/res/layui/layui.js'}"></script>
 	</head>
 
 	<body>
-		<div class="header">
-			<div class="main">
-				<a class="logo" href="/" title="Fly">Fly社区</a>
-				<div class="nav">
-					<a href="jie/index.html">
-						<i class="iconfont icon-wenda"></i>首页
-					</a>
-					<a href="jie/index.html">
-						<i class="iconfont icon-wenda"></i>问答
-					</a>
-					<a href="http://www.layui.com/" target="_blank">
-						<i class="iconfont icon-ui"></i>图书交换
-					</a>
-					<a href="http://www.layui.com/" target="_blank">
-						<i class="iconfont icon-ui"></i>段子手
-					</a>
-				</div>
-
-				<div class="nav-user">
-					<!-- 未登入状态 -->
-					<a class="unlogin" href="user/login.html"><i class="iconfont icon-touxiang"></i></a>
-					<span><a href="user/login.html">登入</a><a href="user/reg.html">注册</a></span>
-					<p class="out-login">
-						<a href="" onclick="layer.msg('正在通过QQ登入', {icon:16, shade: 0.1, time:0})" class="iconfont icon-qq" title="QQ登入"></a>
-						<a href="" onclick="layer.msg('正在通过微博登入', {icon:16, shade: 0.1, time:0})" class="iconfont icon-weibo" title="微博登入"></a>
-					</p>
-
-					<!-- 登入后的状态 -->
-					<!-- 
-      <a class="avatar" href="user/index.html">
-        <img src="http://tp4.sinaimg.cn/1345566427/180/5730976522/0">
-        <cite>贤心</cite>
-        <i>VIP2</i>
-      </a>
-      <div class="nav">
-        <a href="/user/set/"><i class="iconfont icon-shezhi"></i>设置</a>
-        <a href="/user/logout/"><i class="iconfont icon-tuichu" style="top: 0; font-size: 22px;"></i>退了</a>
-      </div> -->
-
-				</div>
-			</div>
-		</div>
 
 		<div class="main">
 			<div class="fly-panel">
-				<h3 class="fly-panel-title">推荐专题</h3>
-				<ul class="fly-case-list">
+<!--				<h3 class="fly-panel-title">推荐专题</h3>-->
+				<fieldset class="layui-elem-field">
+					<legend>筛选专题</legend>
+					<div class="layui-field-box">
+						<div  class="layui-form">
+							<div class="layui-form-item">
+								<label class="layui-form-label">从多到少：</label>
+								<div>
+									<input type="checkbox" id="like" value="1" lay-filter="like" title="点赞" checked>
+									<input type="checkbox" id="comment" value="0" lay-filter="comment" title="评论">
+									<input type="checkbox" id="rss" value="0" lay-filter="rss" title="订阅">
+									<form action=""  class="fly-search">
+										<i class="iconfont icon-sousuo"></i>
+										<input class="layui-input" autocomplete="off" placeholder="搜索内容，回车跳转" type="text" name="q">
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</fieldset>
+				<ul class="fly-case-list" id="subject-list">
 					<th:block th:if="${not #lists.isEmpty(subjectList)}">
 						<th:block th:each="subject,index:${subjectList}">
 							<li data-id="160">
@@ -84,35 +64,138 @@
 			</div>
 		</div>
 
-		<div class="footer">
-			<p>
-				<a href="http://fly.layui.com/">Fly社区</a> 2017 &copy;
-				<a href="http://www.layui.com/">layui.com</a>
-			</p>
-			<p>
-				<a href="http://fly.layui.com/auth/get" target="_blank">产品授权</a>
-				<a href="http://fly.layui.com/jie/8157.html" target="_blank">获取Fly社区模版</a>
-				<a href="http://fly.layui.com/jie/2461.html" target="_blank">微信公众号</a>
-			</p>
-		</div>
-		<script src="../res/layui/layui.js" th:src="@{${rootPath} + '/res/layui/layui.js'}"></script>
-		<script>
-			layui.cache.page = '';
-			layui.cache.user = {
-				username: '游客',
-				uid: -1,
-				avatar: '../res/images/avatar/00.jpg',
-				experience: 83,
-				sex: '男'
-			};
-			layui.config({
-				version: "2.0.0",
-				base: '../res/mods/'
-			}).extend({
-				fly: 'index'
-			}).use('fly');
-		</script>
+<!--		<th:block th:include="/html/common/footer::footer"></th:block>-->
+
 
 	</body>
+<script type="text/javascript">
+    $(function() {
+        layui.use('form', function () {
+            var form = layui.form();
 
+            //各种基于事件的操作，下面会有进一步介绍
+            form.on('checkbox(like)', function (data) {
+                if (data.elem.checked) {
+                    $("#like").val(1);
+                } else {
+                    $("#like").val(0);
+                }
+                getData();
+            });
+            form.on('checkbox(comment)', function (data) {
+                if (data.elem.checked) {
+                    $("#comment").val(1);
+                } else {
+                    $("#comment").val(0);
+                }
+                getData();
+            });
+            form.on('checkbox(rss)', function (data) {
+                if (data.elem.checked) {
+                    $("#rss").val(1);
+                } else {
+                    $("#rss").val(0);
+                }
+                getData();
+            });
+
+        });
+
+    });
+    function getData() {
+        layui.use('flow', function(){
+            var flow = layui.flow;
+            var pageCount;
+            flow.load({
+                elem: '#subject-list', //流加载容器
+                scrollElem: '#subject-list', //滚动条所在元素，一般不用填，此处只是演示需要。
+                isAuto: false,
+                isLazyimg: true,
+                done: function(page, next){ //加载下一页
+                    //模拟插入
+                    setTimeout(function(){
+                        var lis = [];
+                        $.ajax({
+                            type : 'POST',
+                            url : "../subject/findSubjectList",
+                            dataType : "json",
+                            data : {
+                                "pageNum":page,
+                                "pageSize":6,
+                                "like":$("#like").val(),
+                                "comment":$("#comment").val(),
+                                "rss":$("#rss").val()
+                            },
+                            success : function(result) {
+
+                                pageCount = result.data.pages;
+
+                                $.each(result.data.list,function(index,simple){
+
+                                    lis.push('=');
+                                    //alert("qian"+lis)
+                                    next(lis.join(''), page < pageCount);
+                                    lis = [];
+                                });
+
+                            }
+
+                        });
+
+                        //alert("hou"+lis)
+                        // next(lis.join(''), page < pageCount); //假设总页数为 6
+
+
+                    }, 500);
+                }
+            });
+
+        });
+    }
+</script>
+	<script th:inline="javascript">
+
+        layui.use('flow', function(){
+            var flow = layui.flow;
+            var pageCount;
+            flow.load({
+                elem: '#subject-list', //流加载容器
+                scrollElem: '#subject-list', //滚动条所在元素，一般不用填，此处只是演示需要。
+                isAuto: false,
+                isLazyimg: true,
+                done: function(page, next){ //加载下一页
+                    //模拟插入
+                    setTimeout(function(){
+                        var lis = [];
+/*                        $.ajax({
+                            type : 'POST',
+                            url : "../subject/findSubjectList",
+                            dataType : "json",
+                            data : {
+                                "pageNum":page,
+                                "pageSize":6,
+                                "like":$("#like").val(),
+								"comment":$("#comment").val(),
+								"rss":$("#rss").val()
+                            },
+                            success : function(result) {
+
+                                pageCount = result.data.pages;
+
+                                $.each(result.data.list,function(index,simple){
+
+                                    lis.push('+');
+
+                                    next(lis.join(''), page < pageCount);
+                                    lis = [];
+                                });
+
+                            }
+                        });*/
+                    }, 500);
+                }
+            });
+
+        });
+	</script>
 </html>

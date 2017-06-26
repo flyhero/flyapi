@@ -11,6 +11,8 @@ import com.flyapi.vo.ArticleSimpleVo;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.annotations.Param;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,6 +30,9 @@ import java.util.List;
 @Controller
 @RequestMapping("article")
 public class ArticleController extends BaseController {
+
+    private Logger logger = LogManager.getLogger(ArticleController.class);
+
     @Autowired
     private ArticleService articleService;
     @Autowired
@@ -79,10 +84,12 @@ public class ArticleController extends BaseController {
     @ResponseBody
     @RequestMapping("findLastUpdateOrHotArticles")
     public JSONResult findLastUpdateOrHotArticles(int type){
+        logger.info("接收值："+type);
         List<CmsArticle> list =null;
         try{
             list=articleService.findLastUpdateOrHotArticles(type);
         }catch (Exception e){
+            logger.error(e.toString());
             return JSONResult.error();
         }
         return JSONResult.ok(list);

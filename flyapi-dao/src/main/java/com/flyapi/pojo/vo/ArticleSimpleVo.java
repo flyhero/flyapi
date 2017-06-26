@@ -1,4 +1,4 @@
-package com.flyapi.vo;
+package com.flyapi.pojo.vo;
 
 import java.util.Date;
 

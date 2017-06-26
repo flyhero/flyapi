@@ -1,4 +1,4 @@
-package com.flyapi.web.pojo.dto;
+package com.flyapi.pojo.dto;
 
 /**
  * author: flyhero

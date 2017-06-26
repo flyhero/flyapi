@@ -68,7 +68,7 @@ public class ArticleServiceImpl extends BaseServiceImpl<CmsArticle,CmsArticleMap
      * author: flyhero(http://flyhero.top)
      * date: 2017/6/22 0022 下午 5:37
      */
-    public List<CmsArticle> findLastUpdateOrHotArticles(int type){
+    public List<CmsArticle> findLastUpdateOrHotArticles(Integer type){
         return cmsArticleMapper.findLastUpdateOrHotArticles(type);
     }
 }

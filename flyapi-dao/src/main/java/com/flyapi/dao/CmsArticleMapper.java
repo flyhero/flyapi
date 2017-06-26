@@ -2,6 +2,7 @@ package com.flyapi.dao;
 
 import com.flyapi.model.CmsArticle;
 import com.flyapi.vo.ArticleSimpleVo;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -22,5 +23,5 @@ public interface CmsArticleMapper {
 
     List<ArticleSimpleVo> findArticleSimple();
 
-    List<CmsArticle> findLastUpdateOrHotArticles(int type);
+    List<CmsArticle> findLastUpdateOrHotArticles(@Param("atype")Integer atype);
 }

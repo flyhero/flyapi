@@ -1,4 +1,4 @@
-package com.flyapi.vo;
+package com.flyapi.pojo.vo;
 
 import com.flyapi.model.CmsArticle;
 import com.flyapi.model.UcenterUser;

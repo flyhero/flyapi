@@ -70,7 +70,7 @@ public class JSONResult implements Serializable{
     }
 
     public static JSONResult error(){
-        return error(null);
+        return error(TipsEnum.ERROR);
     }
     public static JSONResult error(Object data){
         return error(TipsEnum.ERROR.getMsg(),TipsEnum.ERROR.getCode(), data);
