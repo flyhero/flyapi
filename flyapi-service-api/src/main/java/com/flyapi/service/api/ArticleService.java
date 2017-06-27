@@ -2,8 +2,8 @@ package com.flyapi.service.api;
 
 import com.flyapi.core.base.BaseService;
 import com.flyapi.model.CmsArticle;
-import com.flyapi.vo.ArticleDetailVo;
-import com.flyapi.vo.ArticleSimpleVo;
+import com.flyapi.pojo.vo.ArticleDetailVo;
+import com.flyapi.pojo.vo.ArticleSimpleVo;
 
 import java.util.List;
 

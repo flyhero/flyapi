@@ -13,55 +13,6 @@
 </head>
 <body>
 
-<div class="header">
-  <div class="main">
-    <a class="logo" href="/" title="Fly">Fly社区</a>
-    <div class="nav">
-      <a class="nav-this" href="index.html">
-        <i class="iconfont icon-wenda"></i>问答
-      </a>
-      <a href="http://www.layui.com/" target="_blank">
-        <i class="iconfont icon-ui"></i>框架
-      </a>
-    </div>
-    
-    <div class="nav-user">      
-      <!-- 登入后的状态 -->
-      
- <!--     <a class="avatar" href="../user/index.html">
-        <img src="http://tp4.sinaimg.cn/1345566427/180/5730976522/0">
-      </a>-->
-      <div class="nav">
-        <!--<a href="../user/set.html"><i class="iconfont icon-shezhi"></i>设置</a>-->
-        <!--<a href=""><i class="iconfont icon-tuichu" style="top: 0; font-size: 22px;"></i>退了</a>-->
-        <ul class="layui-nav" lay-filter="">
-          <li class="layui-nav-item">
-            <a class="avatar" href="../user/index.html">
-              <img src="http://tp4.sinaimg.cn/1345566427/180/5730976522/0">
-            </a>
-            <dl class="layui-nav-child"> <!-- 二级菜单 -->
-              <dd><a href="">移动模块</a></dd>
-              <dd><a href="">后台模版</a></dd>
-              <dd><a href="">电商平台</a></dd>
-            </dl>
-          </li>
-        </ul>
-
-      </div>
-
-
-      <script>
-          //注意：导航 依赖 element 模块，否则无法进行功能性操作
-          layui.use('element', function(){
-              var element = layui.element();
-
-              //…
-          });
-      </script>
-    </div>
-  </div>
-</div>
-
 <div class="main fly-user-main layui-clear">
   <ul class="layui-nav layui-nav-tree layui-inline" lay-filter="user">
     <li class="layui-nav-item">
@@ -103,8 +54,9 @@
     -->
     <div class="layui-tab layui-tab-brief" lay-filter="user">
       <ul class="layui-tab-title" id="LAY_mine">
-        <li data-type="mine-jie" lay-id="index" class="layui-this">我发的帖（<span>89</span>）</li>
-        <li data-type="collection" data-url="/collection/find/" lay-id="collection">我收藏的帖（<span>16</span>）</li>
+        <li data-type="mine-jie" lay-id="index" class="layui-this">我的专题（<span>8</span>）</li>
+        <li data-type="collection" data-url="/collection/find/" lay-id="article">我的文章（<span>16</span>）</li>
+        <li data-type="collection" data-url="/collection/find/" lay-id="collection">我的收藏（<span>1</span>）</li>
       </ul>
       <div class="layui-tab-content" style="padding: 20px 0;">
         <div class="layui-tab-item layui-show">
@@ -138,19 +90,19 @@
           </ul>
           <div id="LAY_page1"></div>
         </div>
+        <div class="layui-tab-item">
+          <ul class="mine-view jie-row">
+            <li>
+              <a class="jie-title" href="http://fly.layui.com/jie/5366.html" target="_blank">asdasdasd</a>
+              <i>收藏于23小时前</i>  </li>
+          </ul>
+          <div id="sad"></div>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
-<div class="footer">
-  <p><a href="http://fly.layui.com/">Fly社区</a> 2017 &copy; <a href="http://www.layui.com/">layui.com</a></p>
-  <p>
-    <a href="http://fly.layui.com/auth/get" target="_blank">产品授权</a>
-    <a href="http://fly.layui.com/jie/8157.html" target="_blank">获取Fly社区模版</a>
-    <a href="http://fly.layui.com/jie/2461.html" target="_blank">微信公众号</a>
-  </p>
-</div>
 <script src="../../res/layui/layui.js"></script>
 <script>
 layui.cache.page = 'user';

@@ -224,7 +224,7 @@
     </set>
     where article_id = #{articleId,jdbcType=BIGINT}
   </update>
-  <select id="findArticleSimple" resultType="com.flyapi.vo.ArticleSimpleVo">
+  <select id="findArticleSimple" resultType="com.flyapi.pojo.vo.ArticleSimpleVo">
     SELECT
         t.article_id articleId,
         t.article_des articleDes,
@@ -276,5 +276,29 @@
       view_num DESC
     </if>
     LIMIT 8
+  </select>
+  <select id="findArticleListByCount" parameterType="com.flyapi.pojo.dto.SubjectDto" resultType="com.flyapi.model.CmsArticle">
+    SELECT
+      user_id userId,
+      subject_id subjectId,
+      sum(view_num) viewNum,
+      sum(comment_num) commentNum,
+      sum(like_num) likeNum
+    FROM
+      cms_article
+    WHERE
+      is_delete = 0
+      AND permissions = 0
+    GROUP BY subjectId
+    ORDER BY
+    <if test="view != null and view == 1">
+      viewNum DESC
+    </if>
+    <if test="like != null and like == 1">
+      likeNum DESC
+    </if>
+    <if test="comment != null and comment == 1">
+      commentNum DESC
+    </if>
   </select>
 </mapper>
