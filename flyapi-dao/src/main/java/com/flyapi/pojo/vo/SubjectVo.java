@@ -27,4 +27,5 @@ public class SubjectVo extends CmsArticle{
     public void setUcenterUser(UcenterUser ucenterUser) {
         this.ucenterUser = ucenterUser;
     }
+
 }
