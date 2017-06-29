@@ -67,4 +67,8 @@ public class QiniuController {
         }
         return JSONResult.ok();
     }
+
+    public static void main(String[] args) {
+
+    }
 }
