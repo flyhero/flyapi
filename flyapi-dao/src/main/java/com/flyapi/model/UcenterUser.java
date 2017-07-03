@@ -88,6 +88,16 @@ public class UcenterUser implements Serializable {
     private Integer fameValue;
 
     /**
+     * 赞赏语
+     */
+    private String supportWord;
+
+    /**
+     * 赞赏码
+     */
+    private String supportQrcode;
+
+    /**
      * 注册时间
      */
     private Date createTime;
@@ -232,6 +242,22 @@ public class UcenterUser implements Serializable {
         this.fameValue = fameValue;
     }
 
+    public String getSupportWord() {
+        return supportWord;
+    }
+
+    public void setSupportWord(String supportWord) {
+        this.supportWord = supportWord;
+    }
+
+    public String getSupportQrcode() {
+        return supportQrcode;
+    }
+
+    public void setSupportQrcode(String supportQrcode) {
+        this.supportQrcode = supportQrcode;
+    }
+
     public Date getCreateTime() {
         return createTime;
     }
@@ -275,6 +301,8 @@ public class UcenterUser implements Serializable {
                 ", city='" + city + '\'' +
                 ", platform='" + platform + '\'' +
                 ", fameValue=" + fameValue +
+                ", supportWord='" + supportWord + '\'' +
+                ", supportQrcode='" + supportQrcode + '\'' +
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +
                 ", isDelete=" + isDelete +

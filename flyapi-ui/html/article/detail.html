@@ -148,6 +148,16 @@
 
         </div>
         <hr>
+        <div>
+          <center><p>赞赏语</p></center>
+          <center><button onclick="showQrcode()" class="layui-btn layui-btn-danger layui-btn-radius">赞赏支持</button></center>
+        </div>
+        <hr>
+          <div>
+            <button class="layui-btn layui-btn-primary layui-btn-radius">原始按钮</button>
+            <button class="layui-btn layui-btn-normal layui-btn-radius"><i class="fa fa-thumbs-o-up fa-fw" title="回答"></i>百搭按钮</button>
+          </div>
+
       </div>
 
       <div class="fly-panel detail-box" style="padding-top: 0;">
@@ -249,6 +259,19 @@
 <script th:inline="javascript">
   var t=timeAgo(getMyDate([[${detailVo.article.createTime}]]));
   $("#pub-time").text(t);
+
+  function showQrcode() {
+      layer.open({
+          type: 1,
+          title: false,
+          closeBtn: 0,
+         // area: '300px',
+          skin: 'layui-layer-nobg', //没有背景色
+          shadeClose: true,
+          content: '<img src="//upload-images.jianshu.io/upload_images/2263276-65f149645b408224?imageMogr2/auto-orient/strip|imageView2/1/w/375/h/300" alt="300">'
+      });
+  }
+
 </script>
 </body>
 </html>

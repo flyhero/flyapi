@@ -18,13 +18,15 @@
     <result column="city" jdbcType="VARCHAR" property="city" />
     <result column="platform" jdbcType="VARCHAR" property="platform" />
     <result column="fame_value" jdbcType="INTEGER" property="fameValue" />
+    <result column="support_word" jdbcType="VARCHAR" property="supportWord" />
+    <result column="support_qrcode" jdbcType="VARCHAR" property="supportQrcode" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="is_delete" jdbcType="TINYINT" property="isDelete" />
   </resultMap>
   <sql id="Base_Column_List">
     user_id, username, password, nick_name, avatar, phone, email, sex, sign, company, 
-    country, area, province, city, platform, fame_value, create_time, update_time, is_delete
+    country, area, province, city, platform, fame_value, support_word, support_qrcode , create_time, update_time, is_delete
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
