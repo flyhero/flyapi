@@ -67,4 +67,5 @@ public class QiniuController {
         }
         return JSONResult.ok();
     }
+
 }
