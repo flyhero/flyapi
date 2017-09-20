@@ -31,7 +31,8 @@
           </div>
         </div>
         <div class="layui-inline">
-          <label class="layui-form-label">权限</label>
+<!--          <label class="layui-form-label">权限</label>-->
+
           <div class="layui-input-block">
             <input th:value="${article.permissions}" value="0" type="checkbox" id="switch" name="switch" lay-filter="permissions" lay-skin="switch" lay-text="公开|私有" checked>
 
@@ -41,7 +42,7 @@
       <div class="layui-form-item">
         <label for="2" class="layui-form-label">描述</label>
         <div class="layui-input-block">
-          <input type="text" id="2" name="des" required lay-verify="required" autocomplete="off" class="layui-input">
+          <input type="text" id="2" name="des" required placeholder="让别人对你的文章更感兴趣" lay-verify="required" autocomplete="off" class="layui-input">
         </div>
       </div>
 

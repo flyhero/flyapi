@@ -7,10 +7,11 @@
 		<meta name="keywords" content="">
 		<meta name="description" content="">
 
-		<link rel="stylesheet" href="../../res/layui002/css/layui.css" th:href="@{${rootPath} + '/res/layui/css/layui.css'}">
+<!--		<link rel="stylesheet" href="../../res/layui/css/layui.css" th:href="@{${rootPath} + '/res/layui/css/layui.css'}">
 		<link rel="stylesheet" href="../../res/css/global.css" th:href="@{${rootPath} + '/res/css/global.css'}">
-		<script src="../../res/js/jquery.min.js" th:src="@{${rootPath} + '/res/js/jquery.min.js'}"></script>
-		<script src="../../res/layui002/layui.js" th:src="@{${rootPath} + '/res/layui/layui.js'}"></script>
+		<script src="../../res/js/jquery.min.js" th:src="@{${rootPath} + '/res/js/jquery.min.js'}"></script>-->
+		<script src="../../res/layui/layui.js" th:src="@{${rootPath} + '/res/layui/layui.js'}"></script>
+		<th:block th:include="html/common/link::link"></th:block>
 	</head>
 
 	<body>
@@ -66,14 +67,14 @@
 			</div>
 		</div>
 
-<!--		<th:block th:include="/html/common/footer::footer"></th:block>-->
+	<th:block th:replace="/html/common/footer::footer"></th:block>
 
 
 	</body>
 <script type="text/javascript">
     $(function() {
         layui.use('form', function () {
-            var form = layui.form();
+            var form = layui.form;
 
             //各种基于事件的操作，下面会有进一步介绍
             form.on('checkbox(like)', function (data) {

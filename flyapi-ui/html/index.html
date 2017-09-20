@@ -153,20 +153,10 @@
 </div>
 <th:block th:replace="/html/common/footer::footer"></th:block>
 
-<script src="../res/layui002/layui.js" th:src="@{${rootPath} + '/res/layui/layui.js'}"></script>
+<script src="../res/layui/layui.js" th:src="@{${rootPath} + '/res/layui/layui.js'}"></script>
 <script src="../../res/js/date-util.js" th:src="@{${rootPath} + '/res/js/date-util.js'}"></script>
-<!-- Initialize Swiper -->
+
 <script>
-    /*    var swiper = new Swiper('.swiper-container', {
-            pagination: '.swiper-pagination',
-            nextButton: '.swiper-button-next',
-            prevButton: '.swiper-button-prev',
-            paginationClickable: true,
-            spaceBetween: 30,
-            centeredSlides: true,
-            autoplay: 2500,
-            autoplayDisableOnInteraction: false
-        });*/
 
     $.ajax({
         type: 'POST',
