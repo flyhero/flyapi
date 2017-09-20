@@ -161,7 +161,7 @@ public class UserController extends BaseController {
     @RequestMapping("logout")
     public ModelAndView logout(){
         session.removeAttribute("user");
-        mv.setViewName("html/index");
+        mv.setViewName("flyapi/html/index");
         return mv;
     }
 }

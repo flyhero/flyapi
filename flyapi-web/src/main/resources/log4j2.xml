@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration status="off">
     <Properties>
-        <Property name="LOG_HOME">G:/logs</Property>
+        <Property name="LOG_HOME">logs</Property>
         <Property name="LOG_NAME">log.txt</Property>
     </Properties>
     <appenders>
