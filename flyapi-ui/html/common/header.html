@@ -1,69 +1,53 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-  ...
-</head>
 <body>
-<div class="header" th:fragment="header">
-    <div class="main">
-      <a class="logo" href="/" title="Fly">Fly社区</a>
-      <div class="nav">
+<div class="main" th:fragment="header">
+    <a class="logo" href="/" title="Fly">Fly社区</a>
+    <div class="nav">
         <a class="nav-this" href="jie/index.html">
-          <i class="fa fa-home fa-fw"></i>首页
+            <i class="fa fa-home fa-fw"></i>首页
         </a>
-        <a href="jie/index.html">
-          <i class="fa fa-question fa-fw"></i>专题
+        <a href="subject.html" th:href="@{${rootPath} + '/html/article/subject.html'}">
+            <i class="fa fa-question fa-fw"></i>专题
         </a>
         <a href="http://www.layui.com/" target="_blank">
-          <i class="fa fa-book fa-fw"></i>图书交换
+            <i class="fa fa-book fa-fw"></i>图书交换
         </a>
         <a data-dropdown="#dropdown-other">
-          <i class="fa fa-list fa-fw"></i>其它
+            <i class="fa fa-list fa-fw"></i>其它
         </a>
         <div class="dropdown-menu dropdown-anchor-top-left dropdown-has-anchor" id="dropdown-other">
-          <ul>
-            <li><a href="#">主页</a></li>
-            <li><a href="#">设置</a></li>
-            <!--<li class="divider"></li>-->
-            <li><a href="#">反馈</a></li>
-          </ul>
+            <ul>
+                <li><a href="#">主页</a></li>
+                <li><a href="#">设置</a></li>
+                <!--<li class="divider"></li>-->
+                <li><a href="#">反馈</a></li>
+            </ul>
         </div>
-      </div>
+    </div>
 
-      <div class="nav-user" th:if="${session.user} == null">
+    <div class="nav-user" th:if="${session.user} == null">
         <!-- 未登入状态 -->
         <a class="unlogin" href=""><i class="iconfont icon-touxiang"></i></a>
         <span><a href="user/login.html">登入</a><a href="user/reg.html">注册</a></span>
-      </div>
-      <div class="flyhero-user" th:unless="${session.user} == null">
+    </div>
+    <div class="flyhero-user" th:unless="${session.user} == null">
         <!-- 登入状态 -->
-        <!--					<a class="login" href="" data-dropdown="#dropdown-standard"><img src="" th:src="${session.user}"/></a>
-                            <div class="dropdown-menu dropdown-anchor-top-left dropdown-has-anchor" id="dropdown-standard">
-                                <ul>
-                                    <li><a href="#">主页</a></li>
-                                    <li><a href="#">设置</a></li>
-                                    &lt;!&ndash;<li class="divider"></li> 分隔符&ndash;&gt;
-                                    <li><a href="#">反馈</a></li>
-                                </ul>
-                            </div>-->
         <div class="user-hover" style="width: 80px;height: 65px;" data-dropdown="#dropdown-standard">
-          <a class="avatar dropdown" href="">
-            <img src="../res/images/avatar/flyhero.jpg" th:src="@{${rootPath} + ${session.user.avatar}}">
-          </a>
+            <a class="avatar dropdown" href="">
+                <img src="../res/images/avatar/flyhero.jpg" th:src="@{${rootPath} + ${session.user.avatar}}">
+            </a>
         </div>
 
         <div class="dropdown-menu dropdown-anchor-top-left dropdown-has-anchor" id="dropdown-standard">
-          <ul>
-            <li><a href="#">主页</a></li>
-            <li><a href="#">设置</a></li>
-            <!--<li class="divider"></li>-->
-            <li><a href="#">反馈</a></li>
-          </ul>
+            <ul>
+                <li><a href="#">主页</a></li>
+                <li><a href="#">设置</a></li>
+                <!--<li class="divider"></li>-->
+                <li><a href="#">反馈</a></li>
+            </ul>
         </div>
-      </div>
-
-
     </div>
-  </div>
+</div>
 </body>
 </html>

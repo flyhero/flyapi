@@ -13,56 +13,7 @@
 <body>
 
 <div class="header">
-    <div class="main">
-        <a class="logo" href="/" title="Fly">Fly社区</a>
-        <div class="nav">
-            <a class="nav-this" href="jie/index.html">
-                <i class="fa fa-home fa-fw"></i>首页
-            </a>
-            <a href="subject.html" th:href="@{${rootPath} + 'html/article/subject.html'}">
-                <i class="fa fa-question fa-fw"></i>专题
-            </a>
-            <a href="http://www.layui.com/" target="_blank">
-                <i class="fa fa-book fa-fw"></i>图书交换
-            </a>
-            <a data-dropdown="#dropdown-other">
-                <i class="fa fa-list fa-fw"></i>其它
-            </a>
-            <div class="dropdown-menu dropdown-anchor-top-left dropdown-has-anchor" id="dropdown-other">
-                <ul>
-                    <li><a href="#">主页</a></li>
-                    <li><a href="#">设置</a></li>
-                    <!--<li class="divider"></li>-->
-                    <li><a href="#">反馈</a></li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="nav-user" th:if="${session.user} == null">
-            <!-- 未登入状态 -->
-            <a class="unlogin" href=""><i class="iconfont icon-touxiang"></i></a>
-            <span><a href="user/login.html">登入</a><a href="user/reg.html">注册</a></span>
-        </div>
-        <div class="flyhero-user" th:unless="${session.user} == null">
-            <!-- 登入状态 -->
-            <div class="user-hover" style="width: 80px;height: 65px;" data-dropdown="#dropdown-standard">
-                <a class="avatar dropdown" href="">
-                    <img src="../res/images/avatar/flyhero.jpg" th:src="@{${rootPath} + ${session.user.avatar}}">
-                </a>
-            </div>
-
-            <div class="dropdown-menu dropdown-anchor-top-left dropdown-has-anchor" id="dropdown-standard">
-                <ul>
-                    <li><a href="#">主页</a></li>
-                    <li><a href="#">设置</a></li>
-                    <!--<li class="divider"></li>-->
-                    <li><a href="#">反馈</a></li>
-                </ul>
-            </div>
-        </div>
-
-
-    </div>
+    <th:block th:include="html/common/header::header"></th:block>
 </div>
 
 <div class="main layui-clear">
@@ -84,11 +35,16 @@
 
             <div class="layui-carousel" id="test1">
                 <div carousel-item>
-                    <div><img src="../res/images/slider-1.jpg" th:src="@{${rootPath} + '/res/images/slider-1.jpg'}"/></div>
-                    <div><img src="../res/images/slider-1.jpg" th:src="@{${rootPath} + '/res/images/slider-2.jpg'}"/></div>
-                    <div><img src="../res/images/slider-1.jpg" th:src="@{${rootPath} + '/res/images/slider-3.jpg'}"/></div>
-                    <div><img src="../res/images/slider-1.jpg" th:src="@{${rootPath} + '/res/images/slider-4.jpg'}"/></div>
-                    <div><img src="../res/images/slider-1.jpg" th:src="@{${rootPath} + '/res/images/slider-5.jpg'}"/></div>
+                    <div><img src="../res/images/slider-1.jpg" th:src="@{${rootPath} + '/res/images/slider-1.jpg'}"/>
+                    </div>
+                    <div><img src="../res/images/slider-1.jpg" th:src="@{${rootPath} + '/res/images/slider-2.jpg'}"/>
+                    </div>
+                    <div><img src="../res/images/slider-1.jpg" th:src="@{${rootPath} + '/res/images/slider-3.jpg'}"/>
+                    </div>
+                    <div><img src="../res/images/slider-1.jpg" th:src="@{${rootPath} + '/res/images/slider-4.jpg'}"/>
+                    </div>
+                    <div><img src="../res/images/slider-1.jpg" th:src="@{${rootPath} + '/res/images/slider-5.jpg'}"/>
+                    </div>
                 </div>
             </div>
             <ul class="fly-list" id="article-list">
@@ -201,16 +157,16 @@
 <script src="../../res/js/date-util.js" th:src="@{${rootPath} + '/res/js/date-util.js'}"></script>
 <!-- Initialize Swiper -->
 <script>
-    var swiper = new Swiper('.swiper-container', {
-        pagination: '.swiper-pagination',
-        nextButton: '.swiper-button-next',
-        prevButton: '.swiper-button-prev',
-        paginationClickable: true,
-        spaceBetween: 30,
-        centeredSlides: true,
-        autoplay: 2500,
-        autoplayDisableOnInteraction: false
-    });
+    /*    var swiper = new Swiper('.swiper-container', {
+            pagination: '.swiper-pagination',
+            nextButton: '.swiper-button-next',
+            prevButton: '.swiper-button-prev',
+            paginationClickable: true,
+            spaceBetween: 30,
+            centeredSlides: true,
+            autoplay: 2500,
+            autoplayDisableOnInteraction: false
+        });*/
 
     $.ajax({
         type: 'POST',
@@ -258,15 +214,19 @@
 
                             $.each(result.data.list, function (index, simple) {
 
-                                lis.push('<li class="note-list"><a class="des-img" href="#" target="_blank">' +
+                                lis.push('<li class="note-list">' +
+                                    '<a class="des-img" href="#" target="_blank">' +
                                     '<img src="' + simple.cover + '" alt="300">' +
-                                    '</a><div><div class="author"><a class="avatar" target="_blank" href="#">' +
-                                    '<img src="../res/images/avatar/default.png" alt="96"></a><div class="name">' +
+                                    '</a>' +
+                                    '<div><div class="author">' +
+                                    '<a class="avatar" target="_blank" href="#">' +
+                                    '<img src="../res/images/avatar/default.png" th:src="@{${rootPath} + \'/res/images/avatar/default.png\'}">' +
+                                    '</a><div class="name">' +
                                     '<a class="blue-link" target="_blank" href="#">' + simple.nickName + '</a>' +
                                     '<span class="time" data-shared-at="2017-04-05T09:53:58+08:00">&nbsp;&nbsp;&nbsp;' + timeAgo(getMyDate(simple.createTime)) + '</span></div></div>' +
                                     '<h2 class="fly-tip"><a target="_blank" href="../article/detail/' + simple.articleId + '">' + simple.title + '</a></h2>' +
                                     '<p class="abstract">' + simple.articleDes + '</p>' +
-                                    '<div class="meta"><a class="collection-tag" target="_blank" href="/c/qQB2Zn">Spring源码分析和实践</a>' +
+                                    '<div class="meta"><a class="collection-tag" target="_blank" href="/c/qQB2Zn">' + simple.subjectTitle + '</a>' +
                                     '<span><i class="fa fa-eye fa-fw" title="阅读"></i> ' + simple.viewNum + '</span>' +
                                     '<a target="_blank" href="#"><i class="fa fa-commenting fa-fw" title="回答"></i>' + simple.commentNum + '</a> ' +
                                     '<span><i class="fa fa-thumbs-o-up fa-fw" title="人气"></i> ' + simple.likeNum + '</span></div></div></li>');
