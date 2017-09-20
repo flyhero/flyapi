@@ -1,339 +1,306 @@
 <!DOCTYPE html>
 
 <html xmlns:th="http://www.thymeleaf.org">
-	<head>
-		<meta charset="utf-8">
-		<title>flyapi首页</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-		<meta name="keywords" content="">
-		<meta name="description" content="">
-<!--		<link rel="stylesheet" href="../res/layui/css/layui.css" th:href="@{${rootPath} + '/res/layui/css/layui.css'}">
-		<link rel="stylesheet" href="../res/css/global.css" th:href="@{${rootPath} + '/res/css/global.css'}">
-		<link rel="stylesheet" href="../res/css/dropdown.css" th:href="@{${rootPath} + '/res/css/dropdown.css'}"/>
-		<script src="../res/js/jquery.min.js" th:src="@{${rootPath} + '/res/js/jquery.min.js'}"></script>
-		<script src="../res/js/jquery.sweet-dropdown.min.js" th:src="@{${rootPath} + '/res/js/jquery.sweet-dropdown.min.js'}"></script>
-		<link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"  rel="stylesheet">
-		<link rel="stylesheet" href="../res/swiper/swiper-3.4.2.min.css" th:href="@{${rootPath} + '/res/swiper/swiper-3.4.2.min.css'}">
-		<script src="../res/swiper/swiper-3.4.2.jquery.min.js" th:src="@{${rootPath} + '/res/swiper/swiper-3.4.2.jquery.min.js'}"></script>-->
-		<th:block th:include="html/common/link::link"></th:block>
-		<style>
-			.swiper-container {
-				width: 100%;
-				height: 260px;
+<head>
+    <meta charset="utf-8">
+    <title>flyapi首页</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <th:block th:include="html/common/link::link"></th:block>
+</head>
 
-			}
-			.swiper-slide {
-				text-align: center;
-				font-size: 18px;
-				background: #fff;
+<body>
 
-				/* Center slide text vertically */
-				display: -webkit-box;
-				display: -ms-flexbox;
-				display: -webkit-flex;
-				display: flex;
-				-webkit-box-pack: center;
-				-ms-flex-pack: center;
-				-webkit-justify-content: center;
-				justify-content: center;
-				-webkit-box-align: center;
-				-ms-flex-align: center;
-				-webkit-align-items: center;
-				align-items: center;
-			}
-		</style>
-	</head>
+<div class="header">
+    <div class="main">
+        <a class="logo" href="/" title="Fly">Fly社区</a>
+        <div class="nav">
+            <a class="nav-this" href="jie/index.html">
+                <i class="fa fa-home fa-fw"></i>首页
+            </a>
+            <a href="subject.html" th:href="@{${rootPath} + 'html/article/subject.html'}">
+                <i class="fa fa-question fa-fw"></i>专题
+            </a>
+            <a href="http://www.layui.com/" target="_blank">
+                <i class="fa fa-book fa-fw"></i>图书交换
+            </a>
+            <a data-dropdown="#dropdown-other">
+                <i class="fa fa-list fa-fw"></i>其它
+            </a>
+            <div class="dropdown-menu dropdown-anchor-top-left dropdown-has-anchor" id="dropdown-other">
+                <ul>
+                    <li><a href="#">主页</a></li>
+                    <li><a href="#">设置</a></li>
+                    <!--<li class="divider"></li>-->
+                    <li><a href="#">反馈</a></li>
+                </ul>
+            </div>
+        </div>
 
-	<body>
+        <div class="nav-user" th:if="${session.user} == null">
+            <!-- 未登入状态 -->
+            <a class="unlogin" href=""><i class="iconfont icon-touxiang"></i></a>
+            <span><a href="user/login.html">登入</a><a href="user/reg.html">注册</a></span>
+        </div>
+        <div class="flyhero-user" th:unless="${session.user} == null">
+            <!-- 登入状态 -->
+            <div class="user-hover" style="width: 80px;height: 65px;" data-dropdown="#dropdown-standard">
+                <a class="avatar dropdown" href="">
+                    <img src="../res/images/avatar/flyhero.jpg" th:src="@{${rootPath} + ${session.user.avatar}}">
+                </a>
+            </div>
 
-		<div class="header">
-			<div class="main">
-				<a class="logo" href="/" title="Fly">Fly社区</a>
-				<div class="nav">
-					<a class="nav-this" href="jie/index.html">
-						<i class="fa fa-home fa-fw"></i>首页
-					</a>
-					<a href="subject.html" th:href="@{${rootPath} + 'html/article/subject.html'}">
-						<i class="fa fa-question fa-fw"></i>专题
-					</a>
-					<a href="http://www.layui.com/" target="_blank">
-						<i class="fa fa-book fa-fw"></i>图书交换
-					</a>
-					<a data-dropdown="#dropdown-other">
-						<i class="fa fa-list fa-fw"></i>其它
-					</a>
-					<div class="dropdown-menu dropdown-anchor-top-left dropdown-has-anchor" id="dropdown-other">
-						<ul>
-							<li><a href="#">主页</a></li>
-							<li><a href="#">设置</a></li>
-							<!--<li class="divider"></li>-->
-							<li><a href="#">反馈</a></li>
-						</ul>
-					</div>
-				</div>
-
-				<div class="nav-user" th:if="${session.user} == null">
-					<!-- 未登入状态 -->
-					<a class="unlogin" href=""><i class="iconfont icon-touxiang"></i></a>
-					<span><a href="user/login.html">登入</a><a href="user/reg.html">注册</a></span>
-				</div>
-				<div class="flyhero-user" th:unless="${session.user} == null">
-					<!-- 登入状态 -->
-					<div class="user-hover" style="width: 80px;height: 65px;" data-dropdown="#dropdown-standard">
-						<a class="avatar dropdown" href="">
-							<img src="../res/images/avatar/flyhero.jpg" th:src="@{${rootPath} + ${session.user.avatar}}">
-						</a>
-					</div>
-
-					<div class="dropdown-menu dropdown-anchor-top-left dropdown-has-anchor" id="dropdown-standard">
-						<ul>
-							<li><a href="#">主页</a></li>
-							<li><a href="#">设置</a></li>
-							<!--<li class="divider"></li>-->
-							<li><a href="#">反馈</a></li>
-						</ul>
-					</div>
-				</div>
+            <div class="dropdown-menu dropdown-anchor-top-left dropdown-has-anchor" id="dropdown-standard">
+                <ul>
+                    <li><a href="#">主页</a></li>
+                    <li><a href="#">设置</a></li>
+                    <!--<li class="divider"></li>-->
+                    <li><a href="#">反馈</a></li>
+                </ul>
+            </div>
+        </div>
 
 
-			</div>
-		</div>
+    </div>
+</div>
 
-		<div class="main layui-clear">
-			<div class="wrap">
-				<div class="content">
-					<div class="fly-tab fly-tab-index">
+<div class="main layui-clear">
+    <div class="wrap">
+        <div class="content">
+            <div class="fly-tab fly-tab-index">
 						<span>
 						  <a href="#">首页推荐</a>
 						  <a href="#">最新更新</a>
 						  <a href="jie/index.html">今日段子</a>
 						  <a href="user/index.html">系列文章</a>
 						</span>
-						<form action="http://cn.bing.com/search" class="fly-search">
-							<i class="iconfont icon-sousuo"></i>
-							<input class="layui-input" autocomplete="off" placeholder="搜索内容，回车跳转" type="text" name="q">
-						</form>
-						<a href="jie/add.html" class="layui-btn jie-add">发布文章</a>
-					</div>
-					<div class="swiper-container">
-						<div class="swiper-wrapper">
-							<div class="swiper-slide">Slide 1</div>
-							<div class="swiper-slide">Slide 2</div>
-							<div class="swiper-slide">Slide 3</div>
-							<div class="swiper-slide">Slide 4</div>
-						</div>
-						<!-- Add Pagination -->
-						<div class="swiper-pagination"></div>
-						<!-- Add Arrows -->
-						<div class="swiper-button-next"></div>
-						<div class="swiper-button-prev"></div>
-					</div>
-					<ul class="fly-list" id="article-list">
-						<li class="note-list">
-							<a class="des-img" href="/p/eb1a0e235e49" target="_blank">
-								<img src="//upload-images.jianshu.io/upload_images/2263276-65f149645b408224?imageMogr2/auto-orient/strip|imageView2/1/w/375/h/300" alt="300">
-							</a>
-							<div>
-								<div class="author">
-									<a class="avatar" target="_blank" href="/u/c3d9abd7063b">
-										<img src="../res/images/avatar/default.png" alt="96">
-									</a>
-									<div class="name">
-										<a class="blue-link" target="_blank" href="/u/c3d9abd7063b">flyhero</a>
-										<span class="time" data-shared-at="2017-04-05T09:53:58+08:00">&nbsp;5 小时前</span>
-									</div>
-								</div>
-								<h2 class="fly-tip">
-										<a target="_blank" href="/p/eb1a0e235e49">大话设计模式之工厂模式</a>
-									</h2>
+                <form action="http://cn.bing.com/search" class="fly-search">
+                    <i class="iconfont icon-sousuo"></i>
+                    <input class="layui-input" autocomplete="off" placeholder="搜索内容，回车跳转" type="text" name="q">
+                </form>
+                <a href="jie/add.html" class="layui-btn jie-add">发布文章</a>
+            </div>
 
-								<p class="abstract">
-									他不是别人 他是张国荣 14年前的今天，一颗巨星陨落。他不是别人 他是张国荣 14年前的今天，一颗巨星陨落。他不是别人 他是张国荣 14年前的今天，一颗巨星陨落。他不是别人 他是张国荣 14年前的今天，一颗巨星陨落。
-								</p>
-								<div class="meta">
-									<a class="collection-tag" target="_blank" href="/c/qQB2Zn">Spring源码分析和实践之详细解析</a>
-									<a target="_blank" href="/p/eb1a0e235e49">
-										<i class="fa fa-eye fa-fw" title="阅读"></i> 271
-									</a>
-									<a target="_blank" href="/p/eb1a0e235e49#comments">
-										<i class="fa fa-commenting fa-fw" title="回答"></i> 8
-									</a> <span><i class="fa fa-thumbs-o-up fa-fw" title="人气"></i> 106</span>
-								</div>
-							</div>
-						</li>
+            <div class="layui-carousel" id="test1">
+                <div carousel-item>
+                    <div><img src="../res/images/slider-1.jpg" th:src="@{${rootPath} + '/res/images/slider-1.jpg'}"/></div>
+                    <div><img src="../res/images/slider-1.jpg" th:src="@{${rootPath} + '/res/images/slider-2.jpg'}"/></div>
+                    <div><img src="../res/images/slider-1.jpg" th:src="@{${rootPath} + '/res/images/slider-3.jpg'}"/></div>
+                    <div><img src="../res/images/slider-1.jpg" th:src="@{${rootPath} + '/res/images/slider-4.jpg'}"/></div>
+                    <div><img src="../res/images/slider-1.jpg" th:src="@{${rootPath} + '/res/images/slider-5.jpg'}"/></div>
+                </div>
+            </div>
+            <ul class="fly-list" id="article-list">
+                <li class="note-list">
+                    <a class="des-img" href="/p/eb1a0e235e49" target="_blank">
+                        <img src="//upload-images.jianshu.io/upload_images/2263276-65f149645b408224?imageMogr2/auto-orient/strip|imageView2/1/w/375/h/300"
+                             alt="300">
+                    </a>
+                    <div>
+                        <div class="author">
+                            <a class="avatar" target="_blank" href="/u/c3d9abd7063b">
+                                <img src="../res/images/avatar/default.png" alt="96">
+                            </a>
+                            <div class="name">
+                                <a class="blue-link" target="_blank" href="/u/c3d9abd7063b">flyhero</a>
+                                <span class="time" data-shared-at="2017-04-05T09:53:58+08:00">&nbsp;5 小时前</span>
+                            </div>
+                        </div>
+                        <h2 class="fly-tip">
+                            <a target="_blank" href="/p/eb1a0e235e49">大话设计模式之工厂模式</a>
+                        </h2>
 
-
-					</ul>
-
-				</div>
-			</div>
-
-			<div class="edge">
-				<div class="fly-panel leifeng-rank">
-					<h3 class="fly-panel-title">今日名人榜- TOP 12</h3>
-					<dl>
-						<dd>
-							<a href="user/home.html">
-								<img src="../res/images/avatar/default.png">
-								<cite>纸飞机</cite>
-								<i>159次回答</i>
-							</a>
-						</dd>
-						<dd>
-							<a href="user/home.html">
-								<img src="../res/images/avatar/default.png">
-								<cite>纸飞机</cite>
-								<i>159次回答</i>
-							</a>
-						</dd>
+                        <p class="abstract">
+                            他不是别人 他是张国荣 14年前的今天，一颗巨星陨落。他不是别人 他是张国荣 14年前的今天，一颗巨星陨落。他不是别人 他是张国荣 14年前的今天，一颗巨星陨落。他不是别人 他是张国荣
+                            14年前的今天，一颗巨星陨落。
+                        </p>
+                        <div class="meta">
+                            <a class="collection-tag" target="_blank" href="/c/qQB2Zn">Spring源码分析和实践之详细解析</a>
+                            <a target="_blank" href="/p/eb1a0e235e49">
+                                <i class="fa fa-eye fa-fw" title="阅读"></i> 271
+                            </a>
+                            <a target="_blank" href="/p/eb1a0e235e49#comments">
+                                <i class="fa fa-commenting fa-fw" title="回答"></i> 8
+                            </a> <span><i class="fa fa-thumbs-o-up fa-fw" title="人气"></i> 106</span>
+                        </div>
+                    </div>
+                </li>
 
 
-					</dl>
-				</div>
+            </ul>
 
-				<dl class="fly-panel fly-list-one" id="hot-article">
-					<dt class="fly-panel-title">今日热门</dt>
-					<dd>
-						<a href="jie/detail.html">使用 layui 秒搭后台大布局（基本结构）</a>
-						<span><i class="iconfont">&#xe60b;</i> 6087</span>
-					</dd>
-					<dd>
-						<a href="jie/detail.html">Java实现LayIM后端的核心代码</a>
-						<span><i class="iconfont">&#xe60b;</i> 767</span>
-					</dd>
-				</dl>
+        </div>
+    </div>
 
-				<dl class="fly-panel fly-list-one" id="last-update">
-					<dt class="fly-panel-title">最近更新</dt>
-					<dd>
-						<a href="jie/detail.html">使用 layui 秒搭后台大布局之基本结构</a>
-					</dd>
-					<dd>
-						<a href="jie/detail.html">使用 layui 秒搭后台大布局之基本结构</a>
-					</dd>
-				</dl>
+    <div class="edge">
+        <div class="fly-panel leifeng-rank">
+            <h3 class="fly-panel-title">今日名人榜- TOP 12</h3>
+            <dl>
+                <dd>
+                    <a href="user/home.html">
+                        <img src="../res/images/avatar/default.png">
+                        <cite>纸飞机</cite>
+                        <i>159次回答</i>
+                    </a>
+                </dd>
+                <dd>
+                    <a href="user/home.html">
+                        <img src="../res/images/avatar/default.png">
+                        <cite>纸飞机</cite>
+                        <i>159次回答</i>
+                    </a>
+                </dd>
 
-				<div class="fly-panel fly-link">
-					<h3 class="fly-panel-title">友情链接</h3>
-					<dl>
-						<dd>
-							<a href="http://www.layui.com/" target="_blank">layui</a>
-						</dd>
-						<dd>
-							<a href="http://layim.layui.com/" target="_blank">LayIM</a>
-						</dd>
-						<dd>
-							<a href="http://layer.layui.com/" target="_blank">layer</a>
-						</dd>
-					</dl>
-				</div>
 
-			</div>
-		</div>
+            </dl>
+        </div>
 
-		<div class="footer">
-			<p>
-				<a href="http://fly.layui.com/">Fly社区</a> 2017 &copy;
-				<a href="http://www.layui.com/">layui.com</a>
-			</p>
-			<p>
-				<a href="http://fly.layui.com/auth/get" target="_blank">产品授权</a>
-				<a href="http://fly.layui.com/jie/8157.html" target="_blank">获取Fly社区模版</a>
-				<a href="http://fly.layui.com/jie/2461.html" target="_blank">微信公众号</a>
-			</p>
-		</div>
-		<script src="../res/layui002/layui.js" th:src="@{${rootPath} + '/res/layui/layui.js'}"></script>
-		<script src="../../res/js/date-util.js" th:src="@{${rootPath} + '/res/js/date-util.js'}"></script>
-		<!-- Initialize Swiper -->
-		<script>
-            var swiper = new Swiper('.swiper-container', {
-                pagination: '.swiper-pagination',
-                nextButton: '.swiper-button-next',
-                prevButton: '.swiper-button-prev',
-                paginationClickable: true,
-                spaceBetween: 30,
-                centeredSlides: true,
-                autoplay: 2500,
-                autoplayDisableOnInteraction: false
+        <dl class="fly-panel fly-list-one" id="hot-article">
+            <dt class="fly-panel-title">今日热门</dt>
+            <dd>
+                <a href="jie/detail.html">使用 layui 秒搭后台大布局（基本结构）</a>
+                <span><i class="iconfont">&#xe60b;</i> 6087</span>
+            </dd>
+            <dd>
+                <a href="jie/detail.html">Java实现LayIM后端的核心代码</a>
+                <span><i class="iconfont">&#xe60b;</i> 767</span>
+            </dd>
+        </dl>
+
+        <dl class="fly-panel fly-list-one" id="last-update">
+            <dt class="fly-panel-title">最近更新</dt>
+            <dd>
+                <a href="jie/detail.html">使用 layui 秒搭后台大布局之基本结构</a>
+            </dd>
+            <dd>
+                <a href="jie/detail.html">使用 layui 秒搭后台大布局之基本结构</a>
+            </dd>
+        </dl>
+
+        <div class="fly-panel fly-link">
+            <h3 class="fly-panel-title">友情链接</h3>
+            <dl>
+                <dd>
+                    <a href="http://www.layui.com/" target="_blank">layui</a>
+                </dd>
+                <dd>
+                    <a href="http://layim.layui.com/" target="_blank">LayIM</a>
+                </dd>
+                <dd>
+                    <a href="http://layer.layui.com/" target="_blank">layer</a>
+                </dd>
+            </dl>
+        </div>
+
+    </div>
+</div>
+<th:block th:replace="/html/common/footer::footer"></th:block>
+
+<script src="../res/layui002/layui.js" th:src="@{${rootPath} + '/res/layui/layui.js'}"></script>
+<script src="../../res/js/date-util.js" th:src="@{${rootPath} + '/res/js/date-util.js'}"></script>
+<!-- Initialize Swiper -->
+<script>
+    var swiper = new Swiper('.swiper-container', {
+        pagination: '.swiper-pagination',
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev',
+        paginationClickable: true,
+        spaceBetween: 30,
+        centeredSlides: true,
+        autoplay: 2500,
+        autoplayDisableOnInteraction: false
+    });
+
+    $.ajax({
+        type: 'POST',
+        url: "../article/findLastUpdateOrHotArticles",
+        dataType: "json",
+        data: {"type": 1},
+        success: function (result) {
+            $.each(result.data, function (index, last) {
+                $("#last-update").append('<dd><a href="/article/detail.html/' + last.articleId + '">' + last.title + '</a></dd>');
             });
+        }
+    });
+    $.getJSON("../article/findLastUpdateOrHotArticles", {"type": 2}, function (result) {
+        $.each(result.data, function (index, hot) {
+            $("#hot-article").append('<dd><a href="/article/detail.html/' + hot.articleId + '">' + hot.title + '</a><span><i class="iconfont">&#xe60b;</i> ' + hot.viewNum + '</span></dd>');
+        });
+    });
+</script>
+<script th:inline="javascript">
 
-            $.ajax({
-                type : 'POST',
-                url : "../article/findLastUpdateOrHotArticles",
-                dataType : "json",
-                data : {"type":1},
-                success : function(result) {
-                    $.each(result.data,function(index,last){
-						$("#last-update").append('<dd><a href="/article/detail.html/'+last.articleId+'">'+last.title+'</a></dd>');
-                    });
-                }
-            });
-            $.getJSON("../article/findLastUpdateOrHotArticles",{"type":2},function (result) {
-                $.each(result.data,function(index,hot){
-                    $("#hot-article").append('<dd><a href="/article/detail.html/'+hot.articleId+'">'+hot.title+'</a><span><i class="iconfont">&#xe60b;</i> '+hot.viewNum+'</span></dd>');
-                });
-            });
-		</script>
-		<script th:inline="javascript">
+    layui.use('flow', function () {
+        var flow = layui.flow;
+        var pageCount;
+        flow.load({
+            elem: '#article-list', //流加载容器
+            scrollElem: '#article-list', //滚动条所在元素，一般不用填，此处只是演示需要。
+            isAuto: false,
+            isLazyimg: true,
+            done: function (page, next) { //加载下一页
 
-                        layui.use('flow', function(){
-                            var flow = layui.flow;
-							var pageCount;
-                            flow.load({
-                                elem: '#article-list', //流加载容器
-                                scrollElem: '#article-list', //滚动条所在元素，一般不用填，此处只是演示需要。
-                                isAuto: false,
-                                isLazyimg: true,
-                                done: function(page, next){ //加载下一页
+                //模拟插入
+                setTimeout(function () {
+                    var lis = [];
+                    $.ajax({
+                        type: 'POST',
+                        url: "../article/findArticleList",
+                        dataType: "json",
+                        data: {
+                            "pageNum": page,
+                            "pageSize": 6
+                        },
+                        success: function (result) {
 
-                                    //模拟插入
-                                    setTimeout(function(){
-                                        var lis = [];
-                                        $.ajax({
-                                            type : 'POST',
-                                            url : "../article/findArticleList",
-                                            dataType : "json",
-                                            data : {
-                                                "pageNum":page,
-                                                "pageSize":6
-                                            },
-                                            success : function(result) {
+                            pageCount = result.data.pages;
 
-                                                pageCount = result.data.pages;
+                            $.each(result.data.list, function (index, simple) {
 
-                                                $.each(result.data.list,function(index,simple){
-
-                                                    lis.push('<li class="note-list"><a class="des-img" href="#" target="_blank">' +
-                                                        '<img src="'+simple.cover+'" alt="300">' +
-                                                        '</a><div><div class="author"><a class="avatar" target="_blank" href="#">' +
-                                                        '<img src="../res/images/avatar/default.png" alt="96"></a><div class="name">' +
-                                                        '<a class="blue-link" target="_blank" href="#">'+simple.nickName+'</a>' +
-                                                        '<span class="time" data-shared-at="2017-04-05T09:53:58+08:00">&nbsp;&nbsp;&nbsp;'+timeAgo(getMyDate(simple.createTime))+'</span></div></div>' +
-                                                        '<h2 class="fly-tip"><a target="_blank" href="../article/detail/'+simple.articleId+'">'+simple.title+'</a></h2>' +
-                                                        '<p class="abstract">'+simple.articleDes+'</p>' +
-                                                        '<div class="meta"><a class="collection-tag" target="_blank" href="/c/qQB2Zn">Spring源码分析和实践</a>' +
-                                                        '<span><i class="fa fa-eye fa-fw" title="阅读"></i> '+simple.viewNum+'</span>' +
-                                                        '<a target="_blank" href="#"><i class="fa fa-commenting fa-fw" title="回答"></i>'+simple.commentNum+'</a> ' +
-                                                        '<span><i class="fa fa-thumbs-o-up fa-fw" title="人气"></i> '+simple.likeNum+'</span></div></div></li>');
-													//alert("qian"+lis)
-                                                    next(lis.join(''), page < pageCount);
-                                                    lis = [];
-                                                });
-
-                                            }
-
-                                        });
-
-                                        //alert("hou"+lis)
-                                       // next(lis.join(''), page < pageCount); //假设总页数为 6
-
-
-                                    }, 500);
-                                }
+                                lis.push('<li class="note-list"><a class="des-img" href="#" target="_blank">' +
+                                    '<img src="' + simple.cover + '" alt="300">' +
+                                    '</a><div><div class="author"><a class="avatar" target="_blank" href="#">' +
+                                    '<img src="../res/images/avatar/default.png" alt="96"></a><div class="name">' +
+                                    '<a class="blue-link" target="_blank" href="#">' + simple.nickName + '</a>' +
+                                    '<span class="time" data-shared-at="2017-04-05T09:53:58+08:00">&nbsp;&nbsp;&nbsp;' + timeAgo(getMyDate(simple.createTime)) + '</span></div></div>' +
+                                    '<h2 class="fly-tip"><a target="_blank" href="../article/detail/' + simple.articleId + '">' + simple.title + '</a></h2>' +
+                                    '<p class="abstract">' + simple.articleDes + '</p>' +
+                                    '<div class="meta"><a class="collection-tag" target="_blank" href="/c/qQB2Zn">Spring源码分析和实践</a>' +
+                                    '<span><i class="fa fa-eye fa-fw" title="阅读"></i> ' + simple.viewNum + '</span>' +
+                                    '<a target="_blank" href="#"><i class="fa fa-commenting fa-fw" title="回答"></i>' + simple.commentNum + '</a> ' +
+                                    '<span><i class="fa fa-thumbs-o-up fa-fw" title="人气"></i> ' + simple.likeNum + '</span></div></div></li>');
+                                //alert("qian"+lis)
+                                next(lis.join(''), page < pageCount);
+                                lis = [];
                             });
 
-                        });
-		</script>
-	</body>
+                        }
+
+                    });
+
+                    //alert("hou"+lis)
+                    // next(lis.join(''), page < pageCount); //假设总页数为 6
+
+
+                }, 500);
+            }
+        });
+
+    });
+
+    layui.use('carousel', function () {
+        var carousel = layui.carousel;
+        //建造实例
+        carousel.render({
+            elem: '#test1',
+            width: '100%', //设置容器宽度
+            height: '260px',
+            arrow: 'always' //始终显示箭头
+            //,anim: 'updown' //切换动画方式
+        });
+    });
+</script>
+</body>
 
 </html>

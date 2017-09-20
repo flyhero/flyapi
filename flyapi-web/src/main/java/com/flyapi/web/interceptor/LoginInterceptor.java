@@ -74,7 +74,7 @@ public class LoginInterceptor implements HandlerInterceptor {
             }
         }*/
         logger.info("设置根目录");
-        request.setAttribute("rootPath", "http://localhost:8080/");
+        request.setAttribute("rootPath", "http://localhost:8080");
         return true;
     }
 
