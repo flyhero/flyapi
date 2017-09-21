@@ -303,4 +303,10 @@
     </if>
     </trim>
   </select>
+  <select id="findArticleBySubjectId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from cms_article
+    where subject_id = #{subjectId,jdbcType=BIGINT}
+  </select>
 </mapper>

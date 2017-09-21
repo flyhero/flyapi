@@ -244,7 +244,7 @@ body .fly-user-main{position: relative; width: 1085px; min-height: 600px; margin
 .user-about p span{padding:0 5px; color:#999;}
 
 /* 个人主页 */
-.fly-home{position: relative; padding: 30px 0 30px; text-align: center;  background-color: #fff;}
+.fly-home{position: relative; padding: 20px 0 5px; text-align: center;  background-color: #fff;}
 .fly-home img{width:120px; height:120px; border-radius:100%;}
 .fly-home h1{font-size:26px; line-height:30px; margin-top:10px;}
 .fly-home h1 span{font-size:14px; color:#999;}

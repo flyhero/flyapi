@@ -60,6 +60,10 @@
       </ul>
       <div class="layui-tab-content" style="padding: 20px 0;">
         <div class="layui-tab-item layui-show">
+
+          <button name="addSubject" class="layui-btn layui-btn-radius">创建专题</button>
+          <hr class="layui-bg-red">
+
           <ul class="mine-view jie-row">
             <li>
               <a class="jie-title" href="/jie/8116.html" target="_blank">LayIM 3.5.0 发布，移动端版本大更新（带演示图）</a>
@@ -103,8 +107,14 @@
   </div>
 </div>
 
-<script src="../../res/layui002/layui.js"></script>
+<script src="../../res/layui/layui.js"></script>
 <script>
+  
+  
+  $("addSubject").onclick(function () {
+
+  });
+  
 layui.cache.page = 'user';
 layui.cache.user = {
   username: '游客'

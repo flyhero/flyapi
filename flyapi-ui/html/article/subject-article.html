@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>专题内容页面</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <script src="../../res/layui/layui.js" th:src="@{${rootPath} + '/res/layui/layui.js'}"></script>
+    <th:block th:include="html/common/link::link"></th:block>
+</head>
+
+<body>
+<div class="header">
+    <th:block th:include="html/common/header::header"></th:block>
+</div>
+<div class="main">
+    <div class="fly-panel">
+        <h2 class="fly-panel-title" th:text="${title}">专题文章</h2>
+        <ul class="layui-timeline">
+            <li class="layui-timeline-item">
+                <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+                <div class="layui-timeline-content layui-text">
+                    <h3 class="layui-timeline-title">Spring aop的使用方法</h3>
+                    <p>
+                        layui 2.0 的一切准备工作似乎都已到位。发布之弦，一触即发。
+                    </p>
+                    <span class="layui-badge layui-bg-gray">22017-06-22 14:30:49</span>
+                </div>
+            </li>
+            <li class="layui-timeline-item">
+                <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+                <div class="layui-timeline-content layui-text">
+                    <h3 class="layui-timeline-title">spring cloud 实现微服务</h3>
+                    <p>杜甫的思想核心是儒家的仁政思想，他有“<em>致君尧舜上，再使风俗淳</em>”的宏伟抱负。个人最爱的名篇有：</p>
+                    <span class="layui-badge layui-bg-gray">22017-06-22 14:30:49</span>
+                </div>
+            </li>
+            <li class="layui-timeline-item">
+                <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+                <div class="layui-timeline-content layui-text">
+                    <div class="layui-timeline-title">过去</div>
+                </div>
+            </li>
+
+            <th:block th:if="${not #lists.isEmpty(articleList)}">
+                <th:block th:each="article,index:${articleList}">
+                    <li class="layui-timeline-item">
+                        <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+                        <div class="layui-timeline-content layui-text">
+                            <h3 class="layui-timeline-title" th:text="${article.title}">Spring aop的使用方法</h3>
+                            <p th:text="${article.articleDes}">
+                                layui 2.0 的一切准备工作似乎都已到位。发布之弦，一触即发。
+                            </p>
+                            <span class="layui-badge layui-bg-gray" th:text="${#dates.format(article.createTime, 'yyyy年MM月dd日 HH:mm:ss')}">2017-06-22 14:30:49</span>
+                        </div>
+                    </li>
+                </th:block>
+            </th:block>
+
+
+
+        </ul>
+
+    </div>
+</div>
+
+<th:block th:replace="/html/common/footer::footer"></th:block>
+
+</body>
+</html>

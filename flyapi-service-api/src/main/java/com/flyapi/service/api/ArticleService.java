@@ -25,4 +25,6 @@ public interface ArticleService extends BaseService<CmsArticle> {
     List<ArticleSimpleVo> findArticleSimple();
 
     List<CmsArticle> findLastUpdateOrHotArticles(Integer type);
+
+    List<CmsArticle> findArticleBySubjectId(Long subjectId);
 }

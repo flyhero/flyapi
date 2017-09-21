@@ -23,9 +23,9 @@
         <div class="fly-tab">
         <span>
           <a href="" name="all" class="tab-this">综合</a>
-          <a href="" name="like">点赞 ↓⬇︎⇩</a>
-          <a href="" name="comment">评论↓⬇︎⇩</a>
-          <a href="" name="view">浏览量↓⬇︎⇩</a>
+          <a href="" name="like">点赞 ↓</a>
+          <a href="" name="comment">评论⬇︎</a>
+          <a href="" name="view">浏览量⇩</a>
         </span>
             <form action="http://cn.bing.com/search" class="fly-search">
                 <i class="iconfont icon-sousuo"></i>
@@ -151,8 +151,8 @@
                                 $.each(result.data.list, function (index, simple) {
 
                                     lis.push('               <li data-id="160">\n' +
-                                        '                        <a class="fly-case-img" href="#" target="_blank">\n' +
-                                        '                            <img src="../../res/images/avatar/default.png" th:src="subject" alt="">\n' +
+                                        '                        <a class="fly-case-img" href="../article/list/'+simple.cmsSubject.subjectId +'/专题：' + simple.cmsSubject.subjectTitle + '" target="_blank">\n' +
+                                        '                            <img src="../../res/images/avatar/default.png" th:src="' + simple.cmsSubject.cover + '" alt="">\n' +
                                         '                            <cite class="layui-btn layui-btn-primary layui-btn-small">去围观</cite>\n' +
                                         '                        </a>\n' +
                                         '                        <h2><a href="#" target="_blank" >' + simple.cmsSubject.subjectTitle + '</a></h2>\n' +
@@ -163,8 +163,8 @@
                                         '                                <img src="' + simple.ucenterUser.avatar + '">' +
                                         '                            </a>\n' +
                                         '                            <p class="layui-elip" style="font-size: 12px;">' +
-                                        '                               <span style="color: #666;">' + simple.ucenterUser.nickName + '</span>\n' +
-                                        '                               <span>' + simple.cmsSubject.createTime + '</span></p>\n' +
+                                        '                               <span style="color: #666;">' + simple.ucenterUser.nickName + '</span>' +
+                                        '                               <span>' + getMyDate(simple.cmsSubject.createTime) + '</span></p>\n' +
                                         '                            <p>获得\n' +
                                         '                                <a class="fly-case-nums fly-case-active" href="javascript:;" data-type="showPraise"\n' +
                                         '                                   style=" padding:0 5px; color: #01AAED;">6</a>个赞</p>\n' +

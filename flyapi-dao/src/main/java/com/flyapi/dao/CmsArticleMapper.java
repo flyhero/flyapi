@@ -27,4 +27,7 @@ public interface CmsArticleMapper {
     List<CmsArticle> findLastUpdateOrHotArticles(@Param("atype")Integer atype);
 
     List<CmsArticle> findArticleListByCount(SubjectDto subjectDto);
+
+
+    List<CmsArticle> findArticleBySubjectId(Long subjectId);
 }

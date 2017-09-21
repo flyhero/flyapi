@@ -15,10 +15,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -51,6 +48,23 @@ public class ArticleController extends BaseController {
 
         mv.addObject("detailVo",detailVo);
         mv.setViewName("html/article/detail");
+        return mv;
+    }
+    /**
+     * 根据专题获取文章列表
+     * Title: findArticleBySubjectId
+     * params: [subjectId]
+     * return: org.springframework.web.servlet.ModelAndView
+     * author: flyhero(http://flyhero.top)
+     * date: 2017/6/22 0022 上午 11:35
+     */
+    @GetMapping("list/{subjectId}/{title}")
+    public ModelAndView findArticleBySubjectId(@PathVariable Long subjectId,@PathVariable String title){
+        List<CmsArticle> list = articleService.findArticleBySubjectId(subjectId);
+
+        mv.addObject("articleList",list);
+        mv.addObject("title",title);
+        mv.setViewName("html/article/subject-article");
         return mv;
     }
     /**

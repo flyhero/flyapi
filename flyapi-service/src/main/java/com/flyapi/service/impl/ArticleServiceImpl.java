@@ -71,4 +71,14 @@ public class ArticleServiceImpl extends BaseServiceImpl<CmsArticle,CmsArticleMap
     public List<CmsArticle> findLastUpdateOrHotArticles(Integer type){
         return cmsArticleMapper.findLastUpdateOrHotArticles(type);
     }
+    /**
+     * Title: findArticleBySubjectId
+     * params: [int type]
+     * return: java.util.List<com.flyapi.model.CmsArticle>
+     * author: flyhero(http://www.iflyapi.cn)
+     * date: 2017/9/21 0022 下午 2:28
+     */
+    public List<CmsArticle> findArticleBySubjectId(Long subjectId) {
+        return cmsArticleMapper.findArticleBySubjectId(subjectId);
+    }
 }

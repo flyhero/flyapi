@@ -85,6 +85,29 @@ function getMyDate(str){
         oTime = oYear +'-'+ getzf(oMonth) +'-'+ getzf(oDay) +' '+ getzf(oHour) +':'+ getzf(oMin) +':'+getzf(oSen);//最后拼接时间
     return oTime;
 };
+
+/**
+ * 转为中国字年月日 日期
+ * @param str
+ * @returns {string}
+ */
+function formatDateToZH(str){
+    var oDate = new Date(str),
+        oYear = oDate.getFullYear(),
+        oMonth = oDate.getMonth()+1,
+        oDay = oDate.getDate(),
+        oHour = oDate.getHours(),
+        oMin = oDate.getMinutes(),
+        oSen = oDate.getSeconds(),
+        oTime = oYear +'年'+ getzf(oMonth) +'月'+ getzf(oDay) +'日 '+ getzf(oHour) +':'+ getzf(oMin) +':'+getzf(oSen);//最后拼接时间
+    return oTime;
+};
+
+/**
+ * 转换为日期 没有时间
+ * @param str
+ * @returns {string}
+ */
 function formatDate(str){
     var oDate = new Date(str),
         oYear = oDate.getFullYear(),
