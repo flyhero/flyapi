@@ -12,7 +12,8 @@
 ## 项目地址
 Github: https://github.com/flyhero/flyapi
 
-
+## 注意
+当静态资源服务器变化时需要修改 editormd.js中102，103行库和插件的位置
 ## 技术与架构 Technology And Architecture
 ### 技术选择
 #### 后端

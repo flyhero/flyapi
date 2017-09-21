@@ -109,6 +109,6 @@
     select
     <include refid="Base_Column_List" />
     from cms_subject
-    where permissions = 0 AND is_delete = 0s
+    where permissions = 0 AND is_delete = 0
   </select>
 </mapper>

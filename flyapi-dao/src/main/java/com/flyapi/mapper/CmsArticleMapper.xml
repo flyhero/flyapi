@@ -289,16 +289,18 @@
     WHERE
       is_delete = 0
       AND permissions = 0
-    GROUP BY subjectId
+    GROUP BY subjectId,userId
     ORDER BY
+    <trim suffixOverrides=",">
     <if test="view != null and view == 1">
-      viewNum DESC
+      viewNum DESC,
     </if>
     <if test="like != null and like == 1">
-      likeNum DESC
+      likeNum DESC,
     </if>
     <if test="comment != null and comment == 1">
-      commentNum DESC
+      commentNum DESC,
     </if>
+    </trim>
   </select>
 </mapper>
