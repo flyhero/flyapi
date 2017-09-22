@@ -1,13 +1,15 @@
 # flyapi
 ## 项目简介
+[![Version](https://img.shields.io/badge/license-Apache2.0-blue.svg)](https://github.com/flyhero/flyapi)
+
+[![Version](https://img.shields.io/badge/version-1.0-green.svg)](https://github.com/flyhero/flyapi)
+
 源于 2016年10月 接口管理系统 基于SSM+Maven的多模块项目
 后因其它相关系统比较完善，遂放弃继续开发。
 
 如今将编写多人博客系统,由于考虑这个是实用的系统，业务并不复杂和用户量并不较多的情况下，暂不使用分布式，在完成这个基础版本后，将会升级为分布式系统。
 
-[![Version](https://img.shields.io/badge/version-1.0-green.svg)](https://github.com/flyhero/flyapi)
 
-[![license](https://img.shields.io/badge/license-Apache 2.0-blue.svg)](https://github.com/flyhero/flyapi)
 ## 目录Contents
 
 ## 快速入门Quick start
