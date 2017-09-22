@@ -5,7 +5,7 @@
     <title>文章详细</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="keywords" content="">
-    <meta name="description" content="">
+    <meta name="description" content="" th:content="${detailVo.article.articleDes}">
     <link rel="stylesheet" href="../../res/editor/css/editormd.preview.css"
           th:href="@{${rootPath} + '/res/editor/css/editormd.preview.css'}"/>
     <th:block th:include="html/common/link::link"></th:block>
@@ -147,7 +147,7 @@
                                 <img style="width: 40px;height: 40px;"
                                      src="http://tp4.sinaimg.cn/1345566427/180/5730976522/0" alt="">
                                 <a href="../add-subject.html" target="_blank">flyhero</a>
-                                <input type="hidden"value=""/>
+                                <input type="hidden" value=""/>
                             </div>
                             <div style="float:right; text-align:right"><span class="layui-badge layui-bg-gray">2017-06-22 14:30:49</span>
                             </div>
@@ -185,7 +185,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="comment-reply"  style="text-align: right; padding-top: 8px">
+                            <div class="comment-reply" style="text-align: right; padding-top: 8px">
                                 <!--<a href="javascript:void(0);" id="re_test">回复</a>-->
                                 <span type="reply">
                                   回复
@@ -208,7 +208,8 @@
                             </div>
                         </div>
                         <div class="layui-form-item">
-                            <input type="hidden" name="articleId" value="{{rows.id}}">
+                            <input type="hidden" name="articleId" value="0" th:value="${detailVo.article.articleId}">
+                            <input type="hidden" name="commentId" value="0">
                             <button class="layui-btn" lay-filter="*" lay-submit>提交回答</button>
                         </div>
                     </form>
@@ -228,7 +229,7 @@
 
 <th:block th:replace="/html/common/footer::footer"></th:block>
 
-<script src="../../res/layui002/layui.js" th:src="@{${rootPath} + '/res/layui/layui.js'}"></script>
+<script src="../../res/layui/layui.js" th:src="@{${rootPath} + '/res/layui/layui.js'}"></script>
 <script src="../../res/js/date-util.js" th:src="@{${rootPath} + '/res/js/date-util.js'}"></script>
 <script th:inline="javascript">
 
@@ -237,17 +238,16 @@
     };
 
     gather.commentActive = {
-        reply: function(li){ //回复
-            alert(li.find('.comment-user a').text());
+        reply: function (li) { //回复
             var val = dom.content.val();
-            var aite = '@'+ li.find('.comment-user a').text().replace(/\s/g, '');
+            var aite = '@' + li.find('.comment-user a').text().replace(/\s/g, '');
             dom.content.focus()
-            if(val.indexOf(aite) !== -1) return;
-            dom.content.val(aite +' ' + val);
+            if (val.indexOf(aite) !== -1) return;
+            dom.content.val(aite + ' ' + val);
         }
 
     };
-    $('.comment-reply span').on('click', function(){
+    $('.comment-reply span').on('click', function () {
         var othis = $(this), type = othis.attr('type');
         gather.commentActive[type].call(this, othis.parents('.comment-area'));
     });
