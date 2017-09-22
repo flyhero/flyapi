@@ -10,7 +10,7 @@ layui.define(['layer', 'laytpl', 'form', 'upload', 'util'], function(exports){
   var $ = layui.jquery
   ,layer = layui.layer
   ,laytpl = layui.laytpl
-  ,form = layui.form()
+  ,form = layui.form
   ,util = layui.util
   ,device = layui.device()
   

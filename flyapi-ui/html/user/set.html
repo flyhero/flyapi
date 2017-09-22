@@ -1,17 +1,23 @@
-
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="utf-8">
   <title>帐号设置</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="keywords" content="fly,layui,前端社区">
   <meta name="description" content="Fly社区是模块化前端UI框架Layui的官网社区，致力于为web开发提供强劲动力">
-  <link rel="stylesheet" href="../../res/layui002/css/layui.css">
-  <link rel="stylesheet" href="../../res/css/global.css">
+  <link rel="stylesheet" href="../../res/layui/css/layui.css"  th:href="@{${rootPath} + '/res/layui/css/layui.css'}">
+  <link rel="stylesheet" href="../../res/css/global.css" th:href="@{${rootPath} + '/res/css/global.css'}">
+
+  <link rel="stylesheet" href="../res/css/dropdown.css" th:href="@{${rootPath} + '/res/css/dropdown.css'}"/>
+  <script src="../res/js/jquery.sweet-dropdown.min.js" th:src="@{${rootPath} + '/res/js/jquery.sweet-dropdown.min.js'}"></script>
+
+
 </head>
 <body>
-
+<div class="header">
+  <th:block th:include="html/common/header::header"></th:block>
+</div>
 <div class="main fly-user-main layui-clear">
   <ul class="layui-nav layui-nav-tree layui-inline" lay-filter="user">
     <li class="layui-nav-item">
@@ -158,8 +164,7 @@
     </div>
   </div>
 </div>
-
-<script src="../../res/layui002/layui.js"></script>
+<script src="../../res/layui/layui.js" th:src="@{${rootPath} + '/res/layui/layui.js'}"></script>
 <script>
 layui.cache.page = 'user';
 layui.cache.user = {
@@ -171,7 +176,7 @@ layui.cache.user = {
 };
 layui.config({
   version: "2.0.0"
-  ,base: '../../res/mods/'
+  ,base: 'http://localhost:8080/res/mods/'
 }).extend({
   fly: 'index'
 }).use('fly');

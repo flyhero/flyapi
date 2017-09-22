@@ -1,18 +1,24 @@
 
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="utf-8">
   <title>用户中心</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="keywords" content="fly,layui,前端社区">
   <meta name="description" content="Fly社区是模块化前端UI框架Layui的官网社区，致力于为web开发提供强劲动力">
-  <link rel="stylesheet" href="../../res/layui002/css/layui.css">
-  <link rel="stylesheet" href="../../res/css/global.css">
+
+  <link rel="stylesheet" href="../../res/layui/css/layui.css"  th:href="@{${rootPath} + '/res/layui/css/layui.css'}">
+  <link rel="stylesheet" href="../../res/css/global.css" th:href="@{${rootPath} + '/res/css/global.css'}">
+
+  <link rel="stylesheet" href="../res/css/dropdown.css" th:href="@{${rootPath} + '/res/css/dropdown.css'}"/>
+  <script src="../res/js/jquery.sweet-dropdown.min.js" th:src="@{${rootPath} + '/res/js/jquery.sweet-dropdown.min.js'}"></script>
 
 </head>
 <body>
-
+<div class="header">
+  <th:block th:include="html/common/header::header"></th:block>
+</div>
 <div class="main fly-user-main layui-clear">
   <ul class="layui-nav layui-nav-tree layui-inline" lay-filter="user">
     <li class="layui-nav-item">
@@ -52,7 +58,8 @@
       您的邮箱尚未验证，这比较影响您的帐号安全，<a href="activate.html">立即去激活？</a>
     </div>
     -->
-    <div class="layui-tab layui-tab-brief" lay-filter="user">
+
+      <div class="layui-tab layui-tab-brief" lay-filter="user">
       <ul class="layui-tab-title" id="LAY_mine">
         <li data-type="mine-jie" lay-id="index" class="layui-this">我的专题（<span>8</span>）</li>
         <li data-type="collection" data-url="/collection/find/" lay-id="article">我的文章（<span>16</span>）</li>
@@ -61,7 +68,7 @@
       <div class="layui-tab-content" style="padding: 20px 0;">
         <div class="layui-tab-item layui-show">
 
-          <button name="addSubject" class="layui-btn layui-btn-radius">创建专题</button>
+          <a href="update-sub.html" class="layui-btn layui-btn-radius">创建专题</a>
           <hr class="layui-bg-red">
 
           <ul class="mine-view jie-row">
@@ -107,28 +114,25 @@
   </div>
 </div>
 
-<script src="../../res/layui/layui.js"></script>
+<script src="../../res/layui/layui.js" th:src="@{${rootPath} + '/res/layui/layui.js'}"></script>
 <script>
-  
-  
-  $("addSubject").onclick(function () {
 
-  });
-  
-layui.cache.page = 'user';
-layui.cache.user = {
-  username: '游客'
-  ,uid: -1
-  ,avatar: '../../res/images/avatar/00.jpg'
-  ,experience: 83
-  ,sex: '男'
-};
-layui.config({
-  version: "2.0.0"
-  ,base: '../../res/mods/'
-}).extend({
-  fly: 'index'
-}).use('fly');
+    layui.cache.page = 'user';
+    layui.cache.user = {
+        username: '游客'
+        ,uid: -1
+        ,avatar: '../../res/images/avatar/00.jpg'
+        ,experience: 83
+        ,sex: '男'
+    };
+    layui.config({
+        version: "2.0.0"
+        ,base: 'http://localhost:8080/res/mods/'
+    }).extend({
+        fly: 'index'
+    }).use('fly');
+
+
 </script>
 
 </body>
