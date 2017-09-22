@@ -16,161 +16,58 @@
     </style>
 </head>
 <body>
-<div class="main fly-user-main layui-clear">
-    <ul class="layui-nav layui-nav-tree layui-inline" lay-filter="user">
-        <li class="layui-nav-item">
-            <a href="home.html">
-                <i class="layui-icon">&#xe609;</i>
-                我的主页
-            </a>
-        </li>
-        <li class="layui-nav-item">
-            <a href="index.html">
-                <i class="layui-icon">&#xe612;</i>
-                用户中心
-            </a>
-        </li>
-        <li class="layui-nav-item">
-            <a href="set.html">
-                <i class="layui-icon">&#xe620;</i>
-                基本设置
-            </a>
-        </li>
-        <li class="layui-nav-item">
-            <a href="message.html">
-                <i class="layui-icon">&#xe611;</i>
-                我的消息
-            </a>
-        </li>
-    </ul>
+<div class="layui-collapse" lay-accordion="">
+    <div class="layui-colla-item">
+        <h2 class="layui-colla-title">文豪</h2>
+        <div class="layui-colla-content layui-show">
+评论】
+            <div class="layui-collapse" lay-accordion="">
+                <div class="layui-colla-item">
+                    <h2 class="layui-colla-title">唐代</h2>
+                    <div class="layui-colla-content layui-show">
 
-    <div class="site-tree-mobile layui-hide">
-        <i class="layui-icon">&#xe602;</i>
-    </div>
-    <div class="site-mobile-shade"></div>
+                      wang
 
-    <div class="fly-panel fly-panel-user">
-
-        <div class="layui-tab layui-tab-brief" lay-filter="user">
-            <h3 class="fly-panel-title">创建/编辑专题</h3>
-            <form class="layui-form" action="">
-                <div class="layui-form-item">
-                    <label class="layui-form-label">专题封面</label>
-                    <div class="layui-input-block">
-                        <div class="layui-upload">
-                            <button type="button" class="layui-btn" id="test1">上传图片</button>
-                            <div class="layui-upload-list">
-                                <img class="layui-upload-img" id="demo1">
-                                <p id="demoText"></p>
-                            </div>
-                        </div>
                     </div>
                 </div>
+            </div><br>
+            <div class="layui-collapse" lay-accordion="">
+                <div class="layui-colla-item">
+                    <h2 class="layui-colla-title">唐代</h2>
+                    <div class="layui-colla-content layui-show">
 
-                <div class="layui-form-item">
-                    <label class="layui-form-label">专题名称</label>
-                    <div class="layui-input-block">
-                        <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入标题"
-                               class="layui-input">
-                    </div>
-                </div>
+                        wang
 
-                <div class="layui-form-item">
-                    <label class="layui-form-label">权限</label>
-                    <div class="layui-input-block">
-                        <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
                     </div>
                 </div>
-                <div class="layui-form-item layui-form-text">
-                    <label class="layui-form-label">描述</label>
-                    <div class="layui-input-block">
-                        <textarea placeholder="请输入内容" class="layui-textarea"></textarea>
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <div class="layui-input-block">
-                        <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
-                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-                    </div>
-                </div>
-            </form>
+            </div>
+
         </div>
     </div>
+
 </div>
+<br>
+<div class="layui-collapse" lay-accordion="">
+    <div class="layui-colla-item">
+        <h2 class="layui-colla-title">文豪</h2>
+        <div class="layui-colla-content layui-show">
 
+  qingfei
+
+        </div>
+    </div>
+
+</div>
 <script>
-    layui.use('form', function () {
-        var form = layui.form
-            , layer = layui.layer;
+    layui.use(['element', 'layer'], function(){
+        var element = layui.element;
+        var layer = layui.layer;
 
-        //自定义验证规则
-        form.verify({
-            title: function (value) {
-                if (value.length < 5) {
-                    return '标题至少得5个字符啊';
-                }
-            }
-            , pass: [/(.+){6,12}$/, '密码必须6到12位']
-            , content: function (value) {
-                layedit.sync(editIndex);
-            }
+        //监听折叠
+        element.on('collapse(test)', function(data){
+            layer.msg('展开状态：'+ data.show);
         });
-
-        //监听指定开关
-        form.on('switch(switchTest)', function (data) {
-            layer.msg('开关checked：' + (this.checked ? 'true' : 'false'), {
-                offset: '6px'
-            });
-            layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
-        });
-
-        //监听提交
-        form.on('submit(demo1)', function (data) {
-            layer.alert(JSON.stringify(data.field), {
-                title: '最终的提交信息'
-            })
-            return false;
-        });
-
-
     });
-
-
-    layui.use('upload', function () {
-        var $ = layui.jquery
-            , upload = layui.upload;
-
-        var uploadInst = upload.render({
-            elem: '#test1'
-            , url: '/upload/'
-            , size: 2048 //限制文件大小，单位 KB
-            , before: function (obj) {
-                //预读本地文件示例，不支持ie8
-                obj.preview(function (index, file, result) {
-                    $('#demo1').attr('src', result); //图片链接（base64）
-                });
-            }
-            , done: function (res) {
-                //如果上传失败
-                if (res.code > 0) {
-                    return layer.msg('上传失败');
-                }
-                //上传成功
-                layer.msg(res.url);
-            }
-            , error: function () {
-                //演示失败状态，并实现重传
-                var demoText = $('#demoText');
-                demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-mini demo-reload">重试</a>');
-                demoText.find('.demo-reload').on('click', function () {
-                    uploadInst.upload();
-                });
-            }
-        });
-
-    });
-
-
 </script>
 
 </body>

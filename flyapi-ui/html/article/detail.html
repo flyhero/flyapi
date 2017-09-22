@@ -1,215 +1,229 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head >
-  <meta charset="utf-8">
-  <title>文章详细</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="keywords" content="">
-  <meta name="description" content="">
-  <link rel="stylesheet" href="../../res/editor/css/editormd.preview.css" th:href="@{${rootPath} + '/res/editor/css/editormd.preview.css'}" />
-  <th:block th:include="html/common/link::link"></th:block>
+<head>
+    <meta charset="utf-8">
+    <title>文章详细</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link rel="stylesheet" href="../../res/editor/css/editormd.preview.css"
+          th:href="@{${rootPath} + '/res/editor/css/editormd.preview.css'}"/>
+    <th:block th:include="html/common/link::link"></th:block>
 
 </head>
 <body>
 <style>
-  #sidebar {
-    width: 400px;
-    height: 100%;
-    position: fixed;
-    overflow: hidden;
-    background: #fff;
-    z-index: 100;
-    border: 1px solid #ddd;
-    border-top: none;
-    border-bottom: none;
-  }
+    #sidebar {
+        width: 400px;
+        height: 100%;
+        position: fixed;
+        overflow: hidden;
+        background: #fff;
+        z-index: 100;
+        border: 1px solid #ddd;
+        border-top: none;
+        border-bottom: none;
+    }
 
-  #sidebar:hover {
-    overflow: auto;
-  }
+    #sidebar:hover {
+        overflow: auto;
+    }
 
-  #sidebar h2 {
-    font-size: 16px;
-  }
+    #sidebar h2 {
+        font-size: 16px;
+    }
 </style>
 
 <div class="header">
-  <th:block th:include="html/common/header::header"></th:block>
+    <th:block th:include="html/common/header::header"></th:block>
 </div>
 
 <div class="main layui-clear">
-  <div class="wrap">
-    <div class="content detail">
-      <div class="fly-panel detail-box">
-        <h1 th:text="${detailVo.article.title}">Fly Template v2.0，基于 layui 的轻量级社区模版</h1>
-        <div class="detail-about">
-          <a class="jie-user" href="">
-            <img src="http://tp4.sinaimg.cn/1345566427/180/5730976522/0" alt="">
-            <cite>
-              <i th:text="${detailVo.user.nickName}">纸飞机</i>
-               <em>(金牌会员)</em>
-               <em style="color:#5FB878" id="pub-time">1分钟前发布</em>
-              <!-- <em style="color:#FF9E3F">（活雷锋）</em>
-               <em style="color:#999">（该号已被封）</em> -->
-            </cite>
-          </a>
-          <div class="detail-hits">
-            <span class="iconfont" th:text="'阅读 ' +${detailVo.article.viewNum}">阅读 200</span>
-            <span class="iconfont" th:text="'评论 ' +${detailVo.article.commentNum}">评论 200</span>
-            <span class="iconfont" th:text="'喜欢 ' +${detailVo.article.likeNum}">喜欢 200</span>
-            <span class="layui-btn layui-btn-mini jie-admin " type="collect" data-type="add">收藏</span>
+    <div class="wrap">
+        <div class="content detail">
+            <div class="fly-panel detail-box">
+                <h1 th:text="${detailVo.article.title}">Fly Template v2.0，基于 layui 的轻量级社区模版</h1>
+                <div class="detail-about">
+                    <a class="jie-user" href="">
+                        <img src="http://tp4.sinaimg.cn/1345566427/180/5730976522/0" alt="">
+                        <cite>
+                            <i th:text="${detailVo.user.nickName}">纸飞机</i>
+                            <em>(金牌会员)</em>
+                            <em style="color:#5FB878" id="pub-time">1分钟前发布</em>
+                            <!-- <em style="color:#FF9E3F">（活雷锋）</em>
+                             <em style="color:#999">（该号已被封）</em> -->
+                        </cite>
+                    </a>
+                    <div class="detail-hits">
+                        <span class="iconfont" th:text="'阅读 ' +${detailVo.article.viewNum}">阅读 200</span>
+                        <span class="iconfont" th:text="'评论 ' +${detailVo.article.commentNum}">评论 200</span>
+                        <span class="iconfont" th:text="'喜欢 ' +${detailVo.article.likeNum}">喜欢 200</span>
+                        <span class="layui-btn layui-btn-mini jie-admin " type="collect" data-type="add">收藏</span>
 
-           <a href="detail.html"> <span class="layui-btn layui-btn-mini layui-btn-normal">阅读原文</span></a>
+                        <a href="detail.html"> <span class="layui-btn layui-btn-mini layui-btn-normal">阅读原文</span></a>
 
-          </div>
+                    </div>
+                </div>
+
+                <div class="detail-body photos" style="margin-bottom: 20px;">
+                    <div id="layout">
+                        <div id="test-editormd-view">
+                            <textarea style="display:none;" id="md-content" th:text="${detailVo.article.mdContent}"
+                                      name="test-editormd-markdown-doc">###Hello world!</textarea>
+                        </div>
+                    </div>
+                    <!-- <script src="js/zepto.min.js"></script>
+                    <script>
+                        var jQuery = Zepto;  // 为了避免修改flowChart.js和sequence-diagram.js的源码，所以使用Zepto.js时想支持flowChart/sequenceDiagram就得加上这一句
+                    </script> -->
+                    <script src="../../res/editor/js/jquery.min.js"
+                            th:src="@{${rootPath} + '/res/editor/js/jquery.min.js'}"></script>
+                    <script src="../../res/editor/lib/marked.min.js"
+                            th:src="@{${rootPath} + '/res/editor/lib/marked.min.js'}"></script>
+                    <script src="../../res/editor/lib/prettify.min.js"
+                            th:src="@{${rootPath} + '/res/editor/lib/prettify.min.js'}"></script>
+
+                    <script src="../../res/editor/lib/raphael.min.js"
+                            th:src="@{${rootPath} + '/res/editor/lib/raphael.min.js'}"></script>
+                    <script src="../../res/editor/lib/underscore.min.js"
+                            th:src="@{${rootPath} + '/res/editor/lib/underscore.min.js'}"></script>
+                    <script src="../../res/editor/lib/sequence-diagram.min.js"
+                            th:src="@{${rootPath} + '/res/editor/lib/sequence-diagram.min.js'}"></script>
+                    <script src="../../res/editor/lib/flowchart.min.js"
+                            th:src="@{${rootPath} + '/res/editor/lib/flowchart.min.js'}"></script>
+                    <script src="../../res/editor/lib/jquery.flowchart.min.js"
+                            th:src="@{${rootPath} + '/res/editor/lib/jquery.flowchart.min.js'}"></script>
+
+                    <script src="../../res/editor/js/editormd.js"
+                            th:src="@{${rootPath} + '/res/editor/js/editormd.js'}"></script>
+                    <script type="text/javascript">
+                        $(function () {
+                            var testEditormdView = editormd.markdownToHTML("test-editormd-view", {
+                                markdown: $("#md-content").text(),//+ "\r\n" + $("#md-content").text(),
+                                //htmlDecode      : true,       // 开启 HTML 标签解析，为了安全性，默认不开启
+                                htmlDecode: "style,script,iframe",  // you can filter tags decode
+                                //toc             : false,
+                                tocm: true,    // Using [TOCM]
+                                tocContainer: "#custom-toc-container", // 自定义 ToC 容器层
+                                //gfm             : false,
+                                //tocDropdown     : true,
+                                // markdownSourceCode : true, // 是否保留 Markdown 源码，即是否删除保存源码的 Textarea 标签
+                                emoji: true,
+                                taskList: true,
+                                tex: true,  // 默认不解析
+                                flowChart: true,  // 默认不解析
+                                sequenceDiagram: true,  // 默认不解析
+                            });
+                        });
+                    </script>
+
+                </div>
+                <hr>
+                <div>
+                    <center><p>赞赏语</p></center>
+                    <center>
+                        <button onclick="showQrcode()" class="layui-btn layui-btn-danger layui-btn-radius">赞赏支持</button>
+                    </center>
+                </div>
+                <hr>
+                <div>
+                    <button class="layui-btn layui-btn-primary layui-btn-radius">原始按钮</button>
+                    <button class="layui-btn layui-btn-normal layui-btn-radius"><i class="fa fa-thumbs-o-up fa-fw"
+                                                                                   title="回答"></i>百搭按钮
+                    </button>
+                </div>
+
+            </div>
+
+            <div class="fly-panel detail-box" style="padding-top: 0;">
+
+                <fieldset class="layui-elem-field layui-field-title">
+                    <legend>评论区</legend>
+                </fieldset>
+                <div class="layui-collapse comment-area" lay-accordion="">
+                    <div class="layui-colla-item">
+                        <div class="layui-colla-title">
+                            <div style="float:left; text-align:left" class="comment-user">
+                                <img style="width: 40px;height: 40px;"
+                                     src="http://tp4.sinaimg.cn/1345566427/180/5730976522/0" alt="">
+                                <a href="../add-subject.html" target="_blank">flyhero</a>
+                                <input type="hidden"value=""/>
+                            </div>
+                            <div style="float:right; text-align:right"><span class="layui-badge layui-bg-gray">2017-06-22 14:30:49</span>
+                            </div>
+                        </div>
+
+                        <div class="layui-colla-content layui-show">
+                            感觉怎么样
+                            <div class="layui-collapse" lay-accordion="">
+                                <div class="layui-colla-item">
+                                    <div class="layui-colla-title">
+                                        <div style="float:left; text-align:left">
+                                            <img style="width: 40px;height: 40px;"
+                                                 src="http://tp4.sinaimg.cn/1345566427/180/5730976522/0" alt="">
+                                            <a>法师</a>
+                                        </div>
+                                        <div style="float:right; text-align:right"><span
+                                                class="layui-badge layui-bg-gray">2017-06-22 14:30:49</span></div>
+
+                                    </div>
+
+                                    <div class="layui-colla-content layui-show">
+
+                                        还不错啊是覅潍坊市东方闪电安慰法奇偶问问
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-collapse" lay-accordion="">
+                                <div class="layui-colla-item">
+                                    <h2 class="layui-colla-title">坦克</h2>
+                                    <div class="layui-colla-content layui-show">
+
+                                        这个不知道
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="comment-reply"  style="text-align: right; padding-top: 8px">
+                                <!--<a href="javascript:void(0);" id="re_test">回复</a>-->
+                                <span type="reply">
+                                  回复
+                                </span>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                </div>
+                <br>
+                <div class="layui-form layui-form-pane">
+                    <form action="/jie/reply/" method="post">
+                        <div class="layui-form-item layui-form-text">
+                            <div class="layui-input-block">
+                                <textarea id="L_content" name="content" required lay-verify="required"
+                                          placeholder="我要回答" class="layui-textarea fly-editor"
+                                          style="height: 150px;"></textarea>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <input type="hidden" name="articleId" value="{{rows.id}}">
+                            <button class="layui-btn" lay-filter="*" lay-submit>提交回答</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-        
-        <div class="detail-body photos" style="margin-bottom: 20px;">
-          <div id="layout">
-            <div id="test-editormd-view">
-              <textarea style="display:none;" id="md-content" th:text="${detailVo.article.mdContent}" name="test-editormd-markdown-doc">###Hello world!</textarea>
-            </div>
-          </div>
-          <!-- <script src="js/zepto.min.js"></script>
-          <script>
-              var jQuery = Zepto;  // 为了避免修改flowChart.js和sequence-diagram.js的源码，所以使用Zepto.js时想支持flowChart/sequenceDiagram就得加上这一句
-          </script> -->
-          <script src="../../res/editor/js/jquery.min.js" th:src="@{${rootPath} + '/res/editor/js/jquery.min.js'}"></script>
-          <script src="../../res/editor/lib/marked.min.js" th:src="@{${rootPath} + '/res/editor/lib/marked.min.js'}"></script>
-          <script src="../../res/editor/lib/prettify.min.js" th:src="@{${rootPath} + '/res/editor/lib/prettify.min.js'}"></script>
-
-          <script src="../../res/editor/lib/raphael.min.js" th:src="@{${rootPath} + '/res/editor/lib/raphael.min.js'}"></script>
-          <script src="../../res/editor/lib/underscore.min.js" th:src="@{${rootPath} + '/res/editor/lib/underscore.min.js'}"></script>
-          <script src="../../res/editor/lib/sequence-diagram.min.js" th:src="@{${rootPath} + '/res/editor/lib/sequence-diagram.min.js'}"></script>
-          <script src="../../res/editor/lib/flowchart.min.js" th:src="@{${rootPath} + '/res/editor/lib/flowchart.min.js'}"></script>
-          <script src="../../res/editor/lib/jquery.flowchart.min.js" th:src="@{${rootPath} + '/res/editor/lib/jquery.flowchart.min.js'}"></script>
-
-          <script src="../../res/editor/js/editormd.js" th:src="@{${rootPath} + '/res/editor/js/editormd.js'}"></script>
-          <script type="text/javascript">
-              $(function() {
-                  var testEditormdView = editormd.markdownToHTML("test-editormd-view", {
-                      markdown        : $("#md-content").text() ,//+ "\r\n" + $("#md-content").text(),
-                      //htmlDecode      : true,       // 开启 HTML 标签解析，为了安全性，默认不开启
-                      htmlDecode      : "style,script,iframe",  // you can filter tags decode
-                      //toc             : false,
-                      tocm            : true,    // Using [TOCM]
-                      tocContainer    : "#custom-toc-container", // 自定义 ToC 容器层
-                      //gfm             : false,
-                      //tocDropdown     : true,
-                      // markdownSourceCode : true, // 是否保留 Markdown 源码，即是否删除保存源码的 Textarea 标签
-                      emoji           : true,
-                      taskList        : true,
-                      tex             : true,  // 默认不解析
-                      flowChart       : true,  // 默认不解析
-                      sequenceDiagram : true,  // 默认不解析
-                  });
-              });
-          </script>
-
-        </div>
-        <hr>
-        <div>
-          <center><p>赞赏语</p></center>
-          <center><button onclick="showQrcode()" class="layui-btn layui-btn-danger layui-btn-radius">赞赏支持</button></center>
-        </div>
-        <hr>
-          <div>
-            <button class="layui-btn layui-btn-primary layui-btn-radius">原始按钮</button>
-            <button class="layui-btn layui-btn-normal layui-btn-radius"><i class="fa fa-thumbs-o-up fa-fw" title="回答"></i>百搭按钮</button>
-          </div>
-
-      </div>
-
-      <div class="fly-panel detail-box" style="padding-top: 0;">
-        <a name="comment"></a>
-        <ul class="jieda photos" id="jieda">
-          <li data-id="12" class="jieda-daan">
-            <a name="item-121212121212"></a>
-            <div class="detail-about detail-about-reply">
-              <a class="jie-user" href="">
-                <img src="../../res/images/avatar/default.png" alt="">
-                <cite>
-                  <i>纸飞机</i>
-                  <!-- <em>(楼主)</em>
-                  <em style="color:#5FB878">(管理员)</em>
-                  <em style="color:#FF9E3F">（活雷锋）</em>
-                  <em style="color:#999">（该号已被封）</em> -->
-                </cite>
-              </a>
-              <div class="detail-hits">
-                <span>3分钟前</span>
-              </div>
-              <i class="iconfont icon-caina" title="最佳答案"></i>
-            </div>
-            <div class="detail-body jieda-body">
-              <p>么么哒</p>
-            </div>
-            <div class="jieda-reply">
-              <span class="jieda-zan zanok" type="zan"><i class="iconfont icon-zan"></i><em>12</em></span>
-              <span type="reply"><i class="iconfont icon-svgmoban53"></i>回复</span>
-              <!-- <div class="jieda-admin">
-                <span type="edit">编辑</span>
-                <span type="del">删除</span>
-                <span class="jieda-accept" type="accept">采纳</span>
-              </div> -->
-            </div>
-          </li>
-          
-          <li data-id="13">
-            <a name="item-121212121212"></a>
-            <div class="detail-about detail-about-reply">
-              <a class="jie-user" href="">
-                <img src="../../res/images/avatar/default.png" alt="">
-                <cite>
-                  <i>香菇</i>
-                  <em style="color:#FF9E3F">活雷锋</em>
-                </cite>
-              </a>
-              <div class="detail-hits">
-                <span>刚刚</span>
-              </div>
-            </div>
-            <div class="detail-body jieda-body">
-              <p>蓝瘦</p>
-            </div>
-            <div class="jieda-reply">
-              <span class="jieda-zan" type="zan"><i class="iconfont icon-zan"></i><em>0</em></span>
-              <span type="reply"><i class="iconfont icon-svgmoban53"></i>回复</span>
-              <div class="jieda-admin">
-                <span type="edit">编辑</span>
-                <span type="del">删除</span>
-                <span class="jieda-accept" type="accept">采纳</span>
-              </div>
-            </div>
-          </li>
-          
-          <!-- <li class="fly-none">没有任何回答</li> -->
-        </ul>
-        
-        <div class="layui-form layui-form-pane">
-          <form action="/jie/reply/" method="post">
-            <div class="layui-form-item layui-form-text">
-              <div class="layui-input-block">
-                <textarea id="L_content" name="content" required lay-verify="required" placeholder="我要回答"  class="layui-textarea fly-editor" style="height: 150px;"></textarea>
-              </div>
-            </div>
-            <div class="layui-form-item">
-              <input type="hidden" name="jid" value="{{rows.id}}">
-              <button class="layui-btn" lay-filter="*" lay-submit>提交回答</button>
-            </div>
-          </form>
-        </div>
-      </div>
     </div>
-  </div>
-  
-  <div class="edge">
-    <div id="sidebar">
-      <center><h1>目录</h1></center>
 
-      <div class="markdown-body editormd-preview-container" id="custom-toc-container">#custom-toc-container</div>
+    <div class="edge">
+        <div id="sidebar">
+            <center><h1>目录</h1></center>
+
+            <div class="markdown-body editormd-preview-container" id="custom-toc-container">#custom-toc-container</div>
+        </div>
     </div>
-  </div>
 </div>
 
 <th:block th:replace="/html/common/footer::footer"></th:block>
@@ -217,20 +231,51 @@
 <script src="../../res/layui002/layui.js" th:src="@{${rootPath} + '/res/layui/layui.js'}"></script>
 <script src="../../res/js/date-util.js" th:src="@{${rootPath} + '/res/js/date-util.js'}"></script>
 <script th:inline="javascript">
-  var t=timeAgo(getMyDate([[${detailVo.article.createTime}]]));
-  $("#pub-time").text(t);
 
-  function showQrcode() {
-      layer.open({
-          type: 1,
-          title: false,
-          closeBtn: 0,
-         // area: '300px',
-          skin: 'layui-layer-nobg', //没有背景色
-          shadeClose: true,
-          content: '<img src="//upload-images.jianshu.io/upload_images/2263276-65f149645b408224?imageMogr2/auto-orient/strip|imageView2/1/w/375/h/300" alt="300">'
-      });
-  }
+    var gather = {}, dom = {
+        content: $('#L_content')
+    };
+
+    gather.commentActive = {
+        reply: function(li){ //回复
+            alert(li.find('.comment-user a').text());
+            var val = dom.content.val();
+            var aite = '@'+ li.find('.comment-user a').text().replace(/\s/g, '');
+            dom.content.focus()
+            if(val.indexOf(aite) !== -1) return;
+            dom.content.val(aite +' ' + val);
+        }
+
+    };
+    $('.comment-reply span').on('click', function(){
+        var othis = $(this), type = othis.attr('type');
+        gather.commentActive[type].call(this, othis.parents('.comment-area'));
+    });
+
+    var t = timeAgo(getMyDate([[${detailVo.article.createTime}]]));
+    $("#pub-time").text(t);
+
+    function showQrcode() {
+        layer.open({
+            type: 1,
+            title: false,
+            closeBtn: 0,
+            // area: '300px',
+            skin: 'layui-layer-nobg', //没有背景色
+            shadeClose: true,
+            content: '<img src="//upload-images.jianshu.io/upload_images/2263276-65f149645b408224?imageMogr2/auto-orient/strip|imageView2/1/w/375/h/300" alt="300">'
+        });
+    }
+
+    layui.use(['element', 'layer'], function () {
+        var element = layui.element;
+        var layer = layui.layer;
+
+        //监听折叠
+        element.on('collapse(test)', function (data) {
+            layer.msg('展开状态：' + data.show);
+        });
+    });
 
 </script>
 </body>
