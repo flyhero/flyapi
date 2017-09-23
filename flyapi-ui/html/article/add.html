@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="keywords" content="">
   <meta name="description" content="">
-  <link rel="stylesheet" href="../../res/layui002/css/layui.css" th:href="@{${rootPath} + '/res/layui/css/layui.css'}">
+  <link rel="stylesheet" href="../../res/layui/css/layui.css" th:href="@{${rootPath} + '/res/layui/css/layui.css'}">
   <link rel="stylesheet" href="../../res/css/global.css" th:href="@{${rootPath} + '/res/css/global.css'}">
   <link rel="stylesheet" href="../../res/editor/css/editormd.css" th:href="@{${rootPath} + '/res/editor/css/editormd.css'}"/>
   <script src="../../res/js/jquery.min.js" th:src="@{${rootPath} + '/res/js/jquery.min.js'}"></script>
@@ -15,32 +15,7 @@
 <body>
 
 <div class="header">
-  <div class="main">
-    <a class="logo" href="/" title="Fly">Fly社区</a>
-    <div class="nav">
-      <a class="nav-this" href="index.html">
-        <i class="iconfont icon-wenda"></i>问答
-      </a>
-      <a href="http://www.layui.com/" target="_blank">
-        <i class="iconfont icon-ui"></i>框架
-      </a>
-    </div>
-    
-    <div class="nav-user">      
-      <!-- 登入后的状态 -->
-      
-      <a class="avatar" href="../user/index.html">
-        <img src="http://tp4.sinaimg.cn/1345566427/180/5730976522/0">
-        <cite>贤心</cite>
-        <i>VIP2</i>
-      </a>
-      <div class="nav">
-        <a href="../user/set.html"><i class="iconfont icon-shezhi"></i>设置</a>
-        <a href=""><i class="iconfont icon-tuichu" style="top: 0; font-size: 22px;"></i>退了</a>
-      </div>
-      
-    </div>
-  </div>
+  <th:block th:include="html/common/header::header"></th:block>
 </div>
 
 <div class="main layui-clear">
@@ -53,15 +28,16 @@
       <form class="layui-form">
         <div class="layui-form-item">
         <div class="layui-inline">
-          <label for="1" class="layui-form-label">标题</label>
+          <label class="layui-form-label">标题</label>
           <div class="layui-input-block">
-            <input th:value="${article.title}" type="text" id="1" name="title" required lay-verify="required" autocomplete="off" class="layui-input">
+
+            <input th:value="${article} ? ${article.title} :''" type="text" id="1" name="title" required lay-verify="required" autocomplete="off" class="layui-input">
           </div>
         </div>
         <div class="layui-inline">
           <label class="layui-form-label">权限</label>
           <div class="layui-input-block">
-            <input th:value="${article.permissions}" value="0" type="checkbox" id="switch" name="switch" lay-filter="permissions" lay-skin="switch" lay-text="公开|私有" checked>
+            <input th:value="${article} ? ${article.permissions} :''" value="0" type="checkbox" id="switch" name="switch" lay-filter="permissions" lay-skin="switch" lay-text="公开|私有" checked>
           </div>
         </div>
         </div>
@@ -74,7 +50,7 @@
         <div class="layui-form-item layui-form-text">
          <div class="layui-input-block ">
            <div id="editormd-text">
-             <textarea style="display:none;"># hello</textarea>
+             <textarea style="display:none;">just do it</textarea>
            </div>
          </div>
         </div>
@@ -102,7 +78,7 @@
           <div class="layui-inline">
             <label class="layui-form-label">原文链接</label>
             <div class="layui-input-block">
-              <input th:value="${article.origin}" type="text" id="origin" name="origin" required lay-verify="url" placeholder="原文链接" autocomplete="off" class="layui-input">
+              <input th:value="${article} ? ${article.origin} :''"  type="text" id="origin" name="origin" required lay-verify="url" placeholder="原文链接" autocomplete="off" class="layui-input">
             </div>
           </div>
 
@@ -253,14 +229,7 @@
         });
     });
 </script>
-<div class="footer">
-  <p><a href="http://fly.layui.com/">Fly社区</a> 2017 &copy; <a href="http://www.layui.com/">layui.com</a></p>
-  <p>
-    <a href="http://fly.layui.com/auth/get" target="_blank">产品授权</a>
-    <a href="http://fly.layui.com/jie/8157.html" target="_blank">获取Fly社区模版</a>
-    <a href="http://fly.layui.com/jie/2461.html" target="_blank">微信公众号</a>
-  </p>
-</div>
+<th:block th:replace="/html/common/footer::footer"></th:block>
 <script src="../../res/layui002/layui.js" th:src="@{${rootPath} + '/res/layui/layui.js'}"></script>
 <script>
 

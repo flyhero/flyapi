@@ -67,6 +67,7 @@ public class ArticleController extends BaseController {
         mv.setViewName("html/article/subject-article");
         return mv;
     }
+    
     /**
      * Title: findArticleList
      * params: [pageNum, pageSize]

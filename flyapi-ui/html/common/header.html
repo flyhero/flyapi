@@ -30,7 +30,7 @@
         <div class="nav-user" th:if="${session.user} == null">
             <!-- 未登入状态 -->
             <a class="unlogin" href=""><i class="iconfont icon-touxiang"></i></a>
-            <span><a href="user/login.html">登入</a><a href="user/reg.html">注册</a></span>
+            <span><a href="../user/login.html">登入</a><a href="user/reg.html">注册</a></span>
         </div>
         <div class="flyhero-user" th:unless="${session.user} == null">
             <!-- 登入状态 -->
