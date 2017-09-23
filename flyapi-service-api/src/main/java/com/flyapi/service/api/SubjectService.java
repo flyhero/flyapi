@@ -15,4 +15,5 @@ public interface SubjectService extends BaseService<CmsSubject> {
     List<SubjectVo> findSubjectList(SubjectDto subjectDto);
 
     List<CmsSubject> findUserSubject(Long userId);
+
 }

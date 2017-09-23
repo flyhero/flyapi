@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -67,11 +68,36 @@ public class SubjectController extends BaseController{
         PageHelper.startPage(pageNum,pageSize);
         try {
             List<CmsSubject> list =subjectService.findUserSubject(userId);
+            if (list == null || list.isEmpty()){
+                return JSONResult.error();
+            }
             pageInfo=new PageInfo<CmsSubject>(list);
         }catch (Exception e){
             logger.error(e.toString());
             return JSONResult.error();
         }
         return JSONResult.ok(pageInfo);
+    }
+
+    /**
+     * 根据专题id前往修改专题页面
+     * Title: goUpdateSubject
+     * params: Long subjectId
+     * return: ModelAndView
+     * author: flyhero(http://flyhero.top)
+     * date: 2017/9/23 0027 下午 2:57
+     */
+    @ResponseBody
+    @GetMapping("goUpdateSubject/{subjectId}")
+    public ModelAndView goUpdateSubject(@PathVariable Long subjectId){
+        CmsSubject cmsSubject =null;
+        try {
+            cmsSubject =subjectService.selectByPrimaryKey(subjectId);
+        }catch (Exception e){
+            logger.error(e.toString());
+        }
+        mv.addObject("cmsSubject",cmsSubject);
+        mv.setViewName("html/user/update-sub");
+        return mv;
     }
 }

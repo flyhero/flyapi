@@ -8,7 +8,7 @@
     <meta name="description" content="Fly社区是模块化前端UI框架Layui的官网社区，致力于为web开发提供强劲动力">
     <link rel="stylesheet" href="../../res/layui/css/layui.css" th:href="@{${rootPath} + '/res/layui/css/layui.css'}">
     <link rel="stylesheet" href="../../res/css/global.css" th:href="@{${rootPath} + '/res/css/global.css'}">
-
+    <script src="../res/js/jquery.min.js" th:src="@{${rootPath} + '/res/js/jquery.min.js'}"></script>
     <link rel="stylesheet" href="../res/css/dropdown.css" th:href="@{${rootPath} + '/res/css/dropdown.css'}"/>
     <script src="../res/js/jquery.sweet-dropdown.min.js"
             th:src="@{${rootPath} + '/res/js/jquery.sweet-dropdown.min.js'}"></script>
@@ -28,7 +28,7 @@
             </a>
         </li>
         <li class="layui-nav-item">
-            <a href="index.html">
+            <a href="../user/go?html=user/index">
                 <i class="layui-icon">&#xe612;</i>
                 用户中心
             </a>
