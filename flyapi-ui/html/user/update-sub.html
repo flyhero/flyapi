@@ -1,12 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>创建/修改专题</title>
-    <link rel="stylesheet" href="../../res/layui/css/layui.css">
-    <link rel="stylesheet" href="../../res/css/global.css">
-    <script src="../../res/layui/layui.js"></script>
+    <link rel="stylesheet" href="../../res/layui/css/layui.css" th:href="@{${rootPath} + '/res/layui/css/layui.css'}">
+    <link rel="stylesheet" href="../../res/css/global.css" th:href="@{${rootPath} + '/res/css/global.css'}">
+    <script src="../res/js/jquery.min.js" th:src="@{${rootPath} + '/res/js/jquery.min.js'}"></script>
+    <link rel="stylesheet" href="../../res/css/dropdown.css" th:href="@{${rootPath} + '/res/css/dropdown.css'}"/>
+    <script src="../../res/js/jquery.sweet-dropdown.min.js"
+            th:src="@{${rootPath} + '/res/js/jquery.sweet-dropdown.min.js'}"></script>
+    <script src="../../res/layui/layui.js" th:src="@{${rootPath} + '/res/layui/layui.js'}"></script>
     <style>
         .layui-upload-img {
             width: 92px;

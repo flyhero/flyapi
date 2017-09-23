@@ -61,14 +61,14 @@
 
         <div class="layui-tab layui-tab-brief" lay-filter="user">
             <ul class="layui-tab-title" id="LAY_mine">
-                <li data-type="mine-jie" lay-id="index" class="layui-this">我的专题（<span>8</span>）</li>
-                <li data-type="collection" data-url="/collection/find/" lay-id="article">我的文章（<span>16</span>）</li>
-                <li data-type="collection" data-url="/collection/find/" lay-id="collection">我的收藏（<span>1</span>）</li>
+                <li data-type="mine-jie" lay-id="index" class="layui-this">我的专题（<span id="sub-count">0</span>）</li>
+                <li data-type="collection" data-url="/collection/find/" lay-id="article">我的文章（<span id="article-count">0</span>）</li>
+                <li data-type="collection" data-url="/collection/find/" lay-id="collection">我的收藏（<span id="collection-count">0</span>）</li>
             </ul>
             <div class="layui-tab-content" style="padding: 20px 0;">
                 <div class="layui-tab-item layui-show">
 
-                    <a href="update-sub.html" class="layui-btn layui-btn-radius">创建专题</a>
+                    <a href="../user/go?html=user/update-sub.html" target="_blank" class="layui-btn layui-btn-radius">创建专题</a>
                     <hr class="layui-bg-red">
 
                     <ul class="mine-view jie-row" id="userSubject">
@@ -82,11 +82,13 @@
                     <div id="LAY_page"></div>
                 </div>
                 <div class="layui-tab-item">
-                    <ul class="mine-view jie-row">
+                    <ul class="mine-view jie-row" id="userArticle">
                         <li>
-                            <a class="jie-title" href="http://fly.layui.com/jie/5366.html" target="_blank">layui
-                                常见问题的处理和实用干货集锦</a>
-                            <i>收藏于23小时前</i></li>
+                            <a class="jie-title" href="/jie/8116.html" target="_blank">LayIM 3.5.0 发布，移动端版本大更新（带演示图）</a>
+                            <i>2017/3/14 上午8:30:00</i>
+                            <a class="mine-edit" href="/jie/edit/8116">编辑</a>
+                            <em>661阅/10答</em>
+                        </li>
                     </ul>
                     <div id="LAY_page1"></div>
                 </div>
@@ -108,7 +110,7 @@
 
     layui.use('flow', function () {
         var flow = layui.flow;
-        var pageCount;
+
         flow.load({
             elem: '#userSubject', //流加载容器
             scrollElem: '#userSubject', //滚动条所在元素，一般不用填，此处只是演示需要。
@@ -119,6 +121,7 @@
                 //模拟插入
                 setTimeout(function () {
                     var lis = [];
+                    var pageCount;
                     $.ajax({
                         type: 'GET',
                         url: "../subject/findSubjectByUserId/" + [[${session.user.userId}]],
@@ -129,23 +132,26 @@
                         },
                         success: function (result) {
 
-                            if(!result.success){
-                                return;
-                            }
-                            pageCount = result.data.pages;
+                            if(result.success){
+                                pageCount = result.data.pages;
+                                $("#sub-count").text(result.data.total);
+                                $.each(result.data.list, function (index, simple) {
 
-                            $.each(result.data.list, function (index, simple) {
+                                    lis.push('<li>\n' +
+                                        '        <a class="jie-title" href="#" target="_blank" >' + simple.subjectTitle + '</a>\n' +
+                                        '        <i>' + simple.createTime + '</i>\n' +
+                                        '        <a class="mine-edit" target="_blank" href="../subject/goUpdateSubject/'+simple.subjectId+'">编辑</a>\n' +
+                                        '        <em>661阅/10答</em>\n' +
+                                        '     </li>');
 
-                                lis.push('<li>\n' +
-                                    '        <a class="jie-title" href="#" target="_blank" >' + simple.subjectTitle + '</a>\n' +
-                                    '        <i>' + simple.createTime + '</i>\n' +
-                                    '        <a class="mine-edit" href="../subject/goUpdateSubject/'+simple.subjectId+'">编辑</a>\n' +
-                                    '        <em>661阅/10答</em>\n' +
-                                    '     </li>');
-
+                                    next(lis.join(''), page < pageCount);
+                                    lis = [];
+                                });
+                            }else {
                                 next(lis.join(''), page < pageCount);
                                 lis = [];
-                            });
+                            }
+
 
                         }
 
@@ -153,6 +159,56 @@
                 }, 500);
             }
         });
+
+
+        flow.load({
+            elem: '#userArticle', //流加载容器
+            scrollElem: '#userArticle', //滚动条所在元素，一般不用填，此处只是演示需要。
+            isAuto: false,
+            isLazyimg: true,
+            done: function (page, next) { //加载下一页
+
+                //模拟插入
+                setTimeout(function () {
+                    var lis = [];
+                    var pageCount;
+                    $.ajax({
+                        type: 'GET',
+                        url: "../article/findArticleListByUserId/" + [[${session.user.userId}]],
+                        dataType: "json",
+                        data: {
+                            "pageNum": page,
+                            "pageSize": 6
+                        },
+                        success: function (result) {
+                            if(result.success){
+                                pageCount = result.data.pages;
+                                $("#article-count").text(result.data.total);
+                                $.each(result.data.list, function (index, simple) {
+
+                                    lis.push('<li>\n' +
+                                        '        <a class="jie-title" href="#" target="_blank" >' + simple.title + '</a>\n' +
+                                        '        <i>' + simple.createTime + '</i>\n' +
+                                        '        <a class="mine-edit" href="../subject/goUpdateSubject/'+simple.subjectId+'">编辑</a>\n' +
+                                        '        <em>661阅/10答</em>\n' +
+                                        '     </li>');
+
+                                    next(lis.join(''), page < pageCount);
+                                    lis = [];
+                                });
+                            }else {
+                                next(lis.join(''), page < pageCount);
+                                lis = [];
+                            }
+
+
+                        }
+
+                    });
+                }, 500);
+            }
+        });
+
 
     });
 

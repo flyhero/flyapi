@@ -124,6 +124,9 @@ public class ArticleController extends BaseController {
         PageHelper.startPage(pageNum, pageSize);
         try{
             List<CmsArticle> list = articleService.findArticleByUserId(userId);
+            if(list == null || list.isEmpty()){
+                return JSONResult.error();
+            }
             pageInfo = new PageInfo<CmsArticle>(list);
         }catch (Exception ex){
             return JSONResult.error();
