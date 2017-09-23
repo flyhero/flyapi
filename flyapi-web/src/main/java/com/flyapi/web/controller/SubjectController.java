@@ -3,15 +3,19 @@ package com.flyapi.web.controller;
 import com.alibaba.druid.filter.AutoLoad;
 import com.flyapi.core.base.BaseController;
 import com.flyapi.core.constant.JSONResult;
+import com.flyapi.model.CmsSubject;
 import com.flyapi.pojo.dto.SubjectDto;
 import com.flyapi.pojo.vo.SubjectVo;
 import com.flyapi.service.api.SubjectService;
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -47,6 +51,27 @@ public class SubjectController extends BaseController{
             return JSONResult.error();
         }
 
+        return JSONResult.ok(pageInfo);
+    }
+    /**
+     * Title: findSubjectByUserId
+     * params: Long userId,int pageNum,int pageSize
+     * return: com.flyapi.core.constant.JSONResult
+     * author: flyhero(http://flyhero.top)
+     * date: 2017/9/23 0027 下午 1:42
+     */
+    @ResponseBody
+    @GetMapping("findSubjectByUserId/{userId}")
+    public JSONResult findSubjectByUserId(@PathVariable Long userId,int pageNum,int pageSize){
+        PageInfo<CmsSubject> pageInfo =null;
+        PageHelper.startPage(pageNum,pageSize);
+        try {
+            List<CmsSubject> list =subjectService.findUserSubject(userId);
+            pageInfo=new PageInfo<CmsSubject>(list);
+        }catch (Exception e){
+            logger.error(e.toString());
+            return JSONResult.error();
+        }
         return JSONResult.ok(pageInfo);
     }
 }

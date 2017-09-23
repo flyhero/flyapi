@@ -51,4 +51,9 @@ public class SubjectServiceImpl extends BaseServiceImpl<CmsSubject,CmsSubjectMap
         }
         return voList;
     }
+
+    public List<CmsSubject> findUserSubject(Long userId) {
+        List<CmsSubject> list = cmsSubjectMapper.findUserSubject(userId);
+        return list;
+    }
 }

@@ -18,4 +18,6 @@ public interface CmsSubjectMapper {
     int updateByPrimaryKey(CmsSubject record);
 
     List<CmsSubject> findSubjectList();
+
+    List<CmsSubject> findUserSubject(Long userId);
 }

@@ -30,4 +30,6 @@ public interface CmsArticleMapper {
 
 
     List<CmsArticle> findArticleBySubjectId(Long subjectId);
+
+    List<CmsArticle> findArticleByUserId(Long userId);
 }

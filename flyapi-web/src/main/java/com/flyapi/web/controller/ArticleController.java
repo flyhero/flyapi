@@ -67,7 +67,7 @@ public class ArticleController extends BaseController {
         mv.setViewName("html/article/subject-article");
         return mv;
     }
-    
+
     /**
      * Title: findArticleList
      * params: [pageNum, pageSize]
@@ -110,5 +110,25 @@ public class ArticleController extends BaseController {
         return JSONResult.ok(list);
     }
 
+    /**
+     * Title: findArticleListByUserId
+     * params: long userId,int pageNum,int pageSize
+     * return: com.flyapi.core.constant.JSONResult
+     * author: flyhero(http://flyhero.top)
+     * date: 2017/9/23 0022 下午 1:53
+     */
+    @ResponseBody
+    @RequestMapping("findArticleListByUserId/{userId}")
+    public JSONResult findArticleListByUserId(@PathVariable long userId,int pageNum,int pageSize){
+        PageInfo<CmsArticle> pageInfo = null;
+        PageHelper.startPage(pageNum, pageSize);
+        try{
+            List<CmsArticle> list = articleService.findArticleByUserId(userId);
+            pageInfo = new PageInfo<CmsArticle>(list);
+        }catch (Exception ex){
+            return JSONResult.error();
+        }
+        return JSONResult.ok(pageInfo);
+    }
 
 }

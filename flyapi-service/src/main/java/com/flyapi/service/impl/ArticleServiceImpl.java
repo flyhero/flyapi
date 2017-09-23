@@ -81,4 +81,8 @@ public class ArticleServiceImpl extends BaseServiceImpl<CmsArticle,CmsArticleMap
     public List<CmsArticle> findArticleBySubjectId(Long subjectId) {
         return cmsArticleMapper.findArticleBySubjectId(subjectId);
     }
+
+    public List<CmsArticle> findArticleByUserId(Long userId) {
+        return cmsArticleMapper.findArticleByUserId(userId);
+    }
 }

@@ -308,5 +308,15 @@
     <include refid="Base_Column_List" />
     from cms_article
     where subject_id = #{subjectId,jdbcType=BIGINT}
+    ORDER BY create_time DESC
   </select>
+
+  <select id="findArticleByUserId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from cms_article
+    where user_id = #{userId,jdbcType=BIGINT}
+    ORDER BY create_time DESC
+  </select>
+
 </mapper>
