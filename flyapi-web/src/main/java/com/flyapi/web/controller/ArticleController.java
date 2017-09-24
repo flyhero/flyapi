@@ -38,7 +38,7 @@ public class ArticleController extends BaseController {
      * Title: findArticleDetail
      * params: [articleId]
      * return: org.springframework.web.servlet.ModelAndView
-     * author: flyhero(http://flyhero.top)
+     * author: flyhero(http://www.iflyapi.cn)
      * date: 2017/6/22 0022 上午 11:35
      */
     @RequestMapping(value = "detail/{articleId}",method = RequestMethod.GET)
@@ -55,7 +55,7 @@ public class ArticleController extends BaseController {
      * Title: findArticleBySubjectId
      * params: [subjectId]
      * return: org.springframework.web.servlet.ModelAndView
-     * author: flyhero(http://flyhero.top)
+     * author: flyhero(http://www.iflyapi.cn)
      * date: 2017/6/22 0022 上午 11:35
      */
     @GetMapping("list/{subjectId}/{title}")
@@ -72,7 +72,7 @@ public class ArticleController extends BaseController {
      * Title: findArticleList
      * params: [pageNum, pageSize]
      * return: com.flyapi.core.constant.JSONResult
-     * author: flyhero(http://flyhero.top)
+     * author: flyhero(http://www.iflyapi.cn)
      * date: 2017/6/22 0022 上午 11:10
      */
     @ResponseBody
@@ -93,7 +93,7 @@ public class ArticleController extends BaseController {
      * Title: findLastUpdateOrHotArticles
      * params: [type]
      * return: com.flyapi.core.constant.JSONResult
-     * author: flyhero(http://flyhero.top)
+     * author: flyhero(http://www.iflyapi.cn)
      * date: 2017/6/22 0022 下午 6:11
      */
     @ResponseBody
@@ -114,7 +114,7 @@ public class ArticleController extends BaseController {
      * Title: findArticleListByUserId
      * params: long userId,int pageNum,int pageSize
      * return: com.flyapi.core.constant.JSONResult
-     * author: flyhero(http://flyhero.top)
+     * author: flyhero(http://www.iflyapi.cn)
      * date: 2017/9/23 0022 下午 1:53
      */
     @ResponseBody
