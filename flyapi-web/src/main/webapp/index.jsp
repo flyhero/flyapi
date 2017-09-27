@@ -12,5 +12,8 @@
 </head>
 <body>
 hello world!
+<script language="javascript" type="text/javascript">
+    window.location.href="user/go?html=index.html";
+</script>
 </body>
 </html>

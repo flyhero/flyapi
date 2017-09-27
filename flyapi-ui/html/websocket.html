@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.bootcss.com/sockjs-client/1.1.4/sockjs.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    var path = 'http://localhost:8990';
+    var uid = 2329321;
+    var websocket;
+    if ('WebSocket' in window) {
+        websocket = new WebSocket("ws://" + path + "/ws?uid=" + uid);
+    } else if ('MozWebSocket' in window) {
+        websocket = new MozWebSocket("ws://" + path + "/ws" + uid);
+    } else {
+        websocket = new SockJS("http://" + path + "/ws/sockjs" + uid);
+    }
+    websocket.onopen = function(event) {
+        console.log("WebSocket:已连接");
+        console.log(event);
+    };
+    websocket.onmessage = function(event) {
+        var data = JSON.parse(event.data);
+        var time=getMyDate(data.date);
+        console.log("WebSocket:收到一条消息", data);
+
+    };
+    websocket.onerror = function(event) {
+        console.log("WebSocket:发生错误 ");
+        console.log(event);
+    };
+    websocket.onclose = function(event) {
+        console.log("WebSocket:已关闭");
+        console.log(event);
+    }
+</script>
+</body>
+</html>

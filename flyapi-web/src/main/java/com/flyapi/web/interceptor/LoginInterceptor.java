@@ -3,6 +3,7 @@ package com.flyapi.web.interceptor;
 import java.util.List;
 
 
+import com.flyapi.model.UcenterUser;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,7 +58,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         }*/
         logger.info(request.getSession().getId());
 /*        HttpSession session = request.getSession();
-        User login = (User) session.getAttribute("user");
+        UcenterUser login = (UcenterUser) session.getAttribute("user");
         if (login == null) {
             //System.out.println(request.getContextPath());
             response.sendRedirect(request.getContextPath());
@@ -74,7 +75,7 @@ public class LoginInterceptor implements HandlerInterceptor {
             }
         }*/
         logger.info("设置根目录");
-        request.setAttribute("rootPath", "http://localhost:8080");
+        request.setAttribute("rootPath", "http://192.168.102:8080");
         return true;
     }
 

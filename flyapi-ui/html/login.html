@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	  xmlns:th="http://www.thymeleaf.org">
@@ -48,14 +47,14 @@
 						<form id="signupForm" action="http://localhost:8090/flyapi-web/user/login" accept-charset="UTF-8" method="post">
 							<input name="utf8" type="hidden" value="✓">
 							<input type="hidden" name="token" value="Vp9hwqEtwtnMjSSiWnI7V3NxcutfXRuwXpA+SYI8sYdmruMQQQIYh+aGphKB/kpkai3TDRGs7oGpjmU7VGLEIw==">
-
-							<div th:if="${msg} != null" class="form-error">
+							<th:block th:if="${msg} != null">
+								<div th:if="${msg} != null" class="form-error">
 								<span class="form-error-icon">
 									<i class="fa fa-info-circle"></i>
 									<span  th:text="${msg}"></span>
 								</span>
-							</div>
-
+								</div>
+							</th:block>
 							<div class="form-group form-group-icon">
 								<input class="input-lg form-input username" name="username" placeholder="用户名">
 								<div class="form-icon">
@@ -101,13 +100,15 @@
 				</div>
 				<div class="box" id="signup-box" style="display: none">
 					<div class="login-body">
-						<form class="new_user" id="new_user" action="http://localhost:8080/user/register"  method="post"><input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="Vp9hwqEtwtnMjSSiWnI7V3NxcutfXRuwXpA+SYI8sYdmruMQQQIYh+aGphKB/kpkai3TDRGs7oGpjmU7VGLEIw==">
+						<form class="new_user" id="new_user" action="http://localhost:8090/flyapi-web/user/register"  method="post"><input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="Vp9hwqEtwtnMjSSiWnI7V3NxcutfXRuwXpA+SYI8sYdmruMQQQIYh+aGphKB/kpkai3TDRGs7oGpjmU7VGLEIw==">
+							<th:block th:if="${msg} != null">
 							<div th:if="${msg} != null" class="form-error">
 								<span class="form-error-icon">
 									<i class="fa fa-info-circle"></i>
 									<span  th:text="${msg}"></span>
 								</span>
 							</div>
+							</th:block>
 							<div class="form-group form-group-icon">
 								<input class="input-lg form-input name" name="username" placeholder="用户名">
 								<div class="form-icon">

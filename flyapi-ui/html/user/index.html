@@ -107,7 +107,12 @@
 
 <script src="../../res/layui/layui.js" th:src="@{${rootPath} + '/res/layui/layui.js'}"></script>
 <script th:inline="javascript">
-
+    layui.config({
+        version: "2.0.0",
+        base: '../../../res/mods/'
+    }).extend({
+        fly: 'index'
+    }).use('fly');
     layui.use('flow', function () {
         var flow = layui.flow;
 
@@ -213,20 +218,6 @@
     });
 
 
-    layui.cache.page = 'user';
-    layui.cache.user = {
-        username: '游客'
-        , uid: -1
-        , avatar: '../../res/images/avatar/00.jpg'
-        , experience: 83
-        , sex: '男'
-    };
-    layui.config({
-        version: "2.0.0"
-        , base: 'http://localhost:8080/res/mods/'
-    }).extend({
-        fly: 'index'
-    }).use('fly');
 
 
 </script>
