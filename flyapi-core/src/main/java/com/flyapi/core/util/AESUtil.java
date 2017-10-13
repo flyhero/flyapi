@@ -131,7 +131,7 @@ public class AESUtil {
 
     public static void main(String[] args) {
         String[] keys = {
-                "flyhero", "wang2017"
+                "flyhero", "http://192.168.0.102:8990/user/login?clientId=qwerasdf&username=admin&password=admin"
         };
         System.out.println("key | AESEncode | AESDecode");
         for (String key : keys) {
