@@ -2,6 +2,7 @@ package com.flyapi.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author 
@@ -46,6 +47,8 @@ public class CmsComment implements Serializable {
      * 评论内容
      */
     private String content;
+
+    private List<CmsReply> cmsReplyList;
 
     private static final long serialVersionUID = 1L;
 
@@ -111,5 +114,13 @@ public class CmsComment implements Serializable {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public List<CmsReply> getCmsReplyList() {
+        return cmsReplyList;
+    }
+
+    public void setCmsReplyList(List<CmsReply> cmsReplyList) {
+        this.cmsReplyList = cmsReplyList;
     }
 }

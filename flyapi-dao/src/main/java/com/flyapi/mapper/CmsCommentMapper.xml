@@ -9,21 +9,14 @@
     <result column="target_type" jdbcType="TINYINT" property="targetType" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="is_delete" jdbcType="TINYINT" property="isDelete" />
-  </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.flyapi.model.CmsComment">
     <result column="content" jdbcType="LONGVARCHAR" property="content" />
   </resultMap>
   <sql id="Base_Column_List">
-    comment_id, target_id, user_id, like_num, target_type, create_time, is_delete
+    comment_id, target_id, user_id, like_num, target_type, create_time, is_delete, content
   </sql>
-  <sql id="Blob_Column_List">
-    content
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
     from cms_comment
     where comment_id = #{commentId,jdbcType=BIGINT}
   </select>

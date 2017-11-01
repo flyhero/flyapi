@@ -128,8 +128,11 @@
                 <hr>
                 <div>
                     <button class="layui-btn layui-btn-primary layui-btn-radius">收藏</button>
-                    <button class="layui-btn layui-btn-normal layui-btn-radius"><i class="fa fa-thumbs-o-up fa-fw"
-                                                                                   title="回答"></i>喜欢
+                    <button class="layui-btn layui-btn-normal layui-btn-radius">
+                        <i class="fa fa-thumbs-o-up fa-fw" title="回答"></i>喜欢
+                    </button>
+                    <button class="layui-btn layui-btn-normal layui-btn-radius">
+                        <i class="fa fa-thumbs-o-up fa-fw" title="回答"></i>举报
                     </button>
                 </div>
 
@@ -275,6 +278,56 @@
         element.on('collapse(test)', function (data) {
             layer.msg('展开状态：' + data.show);
         });
+    });
+
+
+
+
+    layui.use('flow', function () {
+        var flow = layui.flow;
+        var pageCount;
+        flow.load({
+            elem: '#article-list', //流加载容器
+            scrollElem: '#article-list', //滚动条所在元素，一般不用填，此处只是演示需要。
+            isAuto: false,
+            isLazyimg: true,
+            done: function (page, next) { //加载下一页
+
+                //模拟插入
+                setTimeout(function () {
+                    var lis = [];
+                    $.ajax({
+                        type: 'POST',
+                        url: "../article/findArticleList",
+                        dataType: "json",
+                        data: {
+                            "pageNum": page,
+                            "pageSize": 6
+                        },
+                        success: function (result) {
+
+                            pageCount = result.data.pages;
+
+                            $.each(result.data.list, function (index, simple) {
+
+                                lis.push('');
+                                //alert("qian"+lis)
+                                next(lis.join(''), page < pageCount);
+                                lis = [];
+                            });
+
+                        }
+
+                    });
+
+                    //alert("hou"+lis)
+                    // next(lis.join(''), page < pageCount); //假设总页数为 6
+
+
+                }, 500);
+            }
+        });
+
     });
 
 </script>

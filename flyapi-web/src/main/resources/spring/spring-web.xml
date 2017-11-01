@@ -74,7 +74,7 @@
 	<!-- **************************************************************** -->
 	<bean id="templateResolver" class="org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver">
 		<property name="order" value="0"/>
-		<property name="prefix" value="http://192.168.0.102:8080/"/>
+		<property name="prefix" value="http://www.flyapi.com:8080/"/>
 		<property name="suffix" value=".html"/>
 		<property name="templateMode" value="HTML"/>
 		<property name="cacheable" value="false"/>
