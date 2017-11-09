@@ -1,0 +1,360 @@
+2017-11-01 17:04:14   DEBUG [main][LogFactory.java:135] - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2017-11-01 17:04:14   ERROR [main][Log4j2Impl.java:58] - maxIdle is deprecated
+2017-11-01 17:04:15   INFO  [main][Log4j2Impl.java:106] - {dataSource-1} inited
+2017-11-01 17:04:15   DEBUG [main][VFS.java:109] - Class not found: org.jboss.vfs.VFS
+2017-11-01 17:04:15   DEBUG [main][JBoss6VFS.java:142] - JBoss 6 VFS API is not available in this environment.
+2017-11-01 17:04:15   DEBUG [main][VFS.java:109] - Class not found: org.jboss.vfs.VirtualFile
+2017-11-01 17:04:15   DEBUG [main][VFS.java:70] - VFS implementation org.apache.ibatis.io.JBoss6VFS is not valid in this environment.
+2017-11-01 17:04:15   DEBUG [main][VFS.java:84] - Using VFS adapter org.apache.ibatis.io.DefaultVFS
+2017-11-01 17:04:15   DEBUG [main][DefaultVFS.java:222] - Find JAR URL: jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/model
+2017-11-01 17:04:15   DEBUG [main][DefaultVFS.java:230] - Inner URL: file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/model
+2017-11-01 17:04:15   DEBUG [main][DefaultVFS.java:243] - Extracted JAR URL: file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar
+2017-11-01 17:04:15   DEBUG [main][DefaultVFS.java:330] - Found JAR: file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar
+2017-11-01 17:04:15   DEBUG [main][DefaultVFS.java:65] - Listing jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/model
+2017-11-01 17:04:15   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/CmsArticle.class
+2017-11-01 17:04:15   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/CmsBook.class
+2017-11-01 17:04:15   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/CmsCollectArticle.class
+2017-11-01 17:04:15   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/CmsComment.class
+2017-11-01 17:04:15   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/CmsHomepageApply.class
+2017-11-01 17:04:15   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/CmsLike.class
+2017-11-01 17:04:15   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/CmsPk.class
+2017-11-01 17:04:15   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/CmsReply.class
+2017-11-01 17:04:15   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/CmsRss.class
+2017-11-01 17:04:15   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/CmsSubject.class
+2017-11-01 17:04:15   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/CmsTypeLog.class
+2017-11-01 17:04:15   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/SysInfo.class
+2017-11-01 17:04:15   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/UcenterFame.class
+2017-11-01 17:04:15   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/UcenterLog.class
+2017-11-01 17:04:15   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/UcenterUser.class
+2017-11-01 17:04:15   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/UcenterUserAuth.class
+2017-11-01 17:04:15   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/UcenterUserFame.class
+2017-11-01 17:04:15   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/UcenterUserRelation.class
+2017-11-01 17:04:15   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/UpmsAdmin.class
+2017-11-01 17:04:15   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/UpmsAdminRole.class
+2017-11-01 17:04:15   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/UpmsPermission.class
+2017-11-01 17:04:15   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/UpmsRole.class
+2017-11-01 17:04:15   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/UpmsRolePermission.class
+2017-11-01 17:04:15   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.CmsArticle matches criteria [is assignable to Object]
+2017-11-01 17:04:15   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.CmsBook matches criteria [is assignable to Object]
+2017-11-01 17:04:15   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.CmsCollectArticle matches criteria [is assignable to Object]
+2017-11-01 17:04:15   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.CmsComment matches criteria [is assignable to Object]
+2017-11-01 17:04:15   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.CmsHomepageApply matches criteria [is assignable to Object]
+2017-11-01 17:04:15   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.CmsLike matches criteria [is assignable to Object]
+2017-11-01 17:04:15   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.CmsPk matches criteria [is assignable to Object]
+2017-11-01 17:04:15   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.CmsReply matches criteria [is assignable to Object]
+2017-11-01 17:04:15   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.CmsRss matches criteria [is assignable to Object]
+2017-11-01 17:04:15   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.CmsSubject matches criteria [is assignable to Object]
+2017-11-01 17:04:15   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.CmsTypeLog matches criteria [is assignable to Object]
+2017-11-01 17:04:15   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.SysInfo matches criteria [is assignable to Object]
+2017-11-01 17:04:15   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.UcenterFame matches criteria [is assignable to Object]
+2017-11-01 17:04:15   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.UcenterLog matches criteria [is assignable to Object]
+2017-11-01 17:04:15   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.UcenterUser matches criteria [is assignable to Object]
+2017-11-01 17:04:15   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.UcenterUserAuth matches criteria [is assignable to Object]
+2017-11-01 17:04:15   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.UcenterUserFame matches criteria [is assignable to Object]
+2017-11-01 17:04:15   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.UcenterUserRelation matches criteria [is assignable to Object]
+2017-11-01 17:04:15   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.UpmsAdmin matches criteria [is assignable to Object]
+2017-11-01 17:04:15   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.UpmsAdminRole matches criteria [is assignable to Object]
+2017-11-01 17:04:15   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.UpmsPermission matches criteria [is assignable to Object]
+2017-11-01 17:04:15   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.UpmsRole matches criteria [is assignable to Object]
+2017-11-01 17:04:15   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.UpmsRolePermission matches criteria [is assignable to Object]
+2017-11-01 17:04:15   DEBUG [main][SqlSessionFactoryBean.java:436] - Scanned package: 'com.flyapi.model' for aliases
+2017-11-01 17:04:15   DEBUG [main][LogFactory.java:135] - Logging initialized using 'class org.apache.ibatis.logging.log4j2.Log4j2Impl' adapter.
+2017-11-01 17:04:15   DEBUG [main][SqlSessionFactoryBean.java:496] - Parsed configuration file: 'class path resource [mybatis-config.xml]'
+2017-11-01 17:04:15   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/CmsArticleMapper.xml]'
+2017-11-01 17:04:15   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/CmsBookMapper.xml]'
+2017-11-01 17:04:15   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/CmsCollectArticleMapper.xml]'
+2017-11-01 17:04:15   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/CmsCommentMapper.xml]'
+2017-11-01 17:04:15   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/CmsHomepageApplyMapper.xml]'
+2017-11-01 17:04:15   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/CmsLikeMapper.xml]'
+2017-11-01 17:04:15   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/CmsPkMapper.xml]'
+2017-11-01 17:04:15   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/CmsReplyMapper.xml]'
+2017-11-01 17:04:15   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/CmsRssMapper.xml]'
+2017-11-01 17:04:15   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/CmsSubjectMapper.xml]'
+2017-11-01 17:04:15   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/CmsTypeLogMapper.xml]'
+2017-11-01 17:04:15   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/SysInfoMapper.xml]'
+2017-11-01 17:04:15   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/UcenterFameMapper.xml]'
+2017-11-01 17:04:15   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/UcenterLogMapper.xml]'
+2017-11-01 17:04:15   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/UcenterUserAuthMapper.xml]'
+2017-11-01 17:04:15   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/UcenterUserFameMapper.xml]'
+2017-11-01 17:04:15   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/UcenterUserMapper.xml]'
+2017-11-01 17:04:15   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/UcenterUserRelationMapper.xml]'
+2017-11-01 17:04:15   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/UpmsAdminMapper.xml]'
+2017-11-01 17:04:15   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/UpmsAdminRoleMapper.xml]'
+2017-11-01 17:04:15   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/UpmsPermissionMapper.xml]'
+2017-11-01 17:04:15   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/UpmsRoleMapper.xml]'
+2017-11-01 17:04:15   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/UpmsRolePermissionMapper.xml]'
+2017-11-01 17:04:16   INFO  [main][WebTest.java:25] - haha
+2017-11-01 17:04:16   DEBUG [main][WebTest.java:26] - wang
+2017-11-01 17:04:16   ERROR [main][WebTest.java:27] - error
+2017-11-01 17:04:16   WARN  [main][WebTest.java:28] - warn
+2017-11-01 17:04:16   INFO  [Thread-1][Log4j2Impl.java:106] - {dataSource-1} closed
+2017-11-01 17:04:31   DEBUG [main][LogFactory.java:135] - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2017-11-01 17:04:31   ERROR [main][Log4j2Impl.java:58] - maxIdle is deprecated
+2017-11-01 17:04:31   INFO  [main][Log4j2Impl.java:106] - {dataSource-1} inited
+2017-11-01 17:04:31   DEBUG [main][VFS.java:109] - Class not found: org.jboss.vfs.VFS
+2017-11-01 17:04:31   DEBUG [main][JBoss6VFS.java:142] - JBoss 6 VFS API is not available in this environment.
+2017-11-01 17:04:31   DEBUG [main][VFS.java:109] - Class not found: org.jboss.vfs.VirtualFile
+2017-11-01 17:04:31   DEBUG [main][VFS.java:70] - VFS implementation org.apache.ibatis.io.JBoss6VFS is not valid in this environment.
+2017-11-01 17:04:31   DEBUG [main][VFS.java:84] - Using VFS adapter org.apache.ibatis.io.DefaultVFS
+2017-11-01 17:04:31   DEBUG [main][DefaultVFS.java:222] - Find JAR URL: jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/model
+2017-11-01 17:04:31   DEBUG [main][DefaultVFS.java:230] - Inner URL: file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/model
+2017-11-01 17:04:31   DEBUG [main][DefaultVFS.java:243] - Extracted JAR URL: file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar
+2017-11-01 17:04:31   DEBUG [main][DefaultVFS.java:330] - Found JAR: file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar
+2017-11-01 17:04:31   DEBUG [main][DefaultVFS.java:65] - Listing jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/model
+2017-11-01 17:04:31   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/CmsArticle.class
+2017-11-01 17:04:31   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/CmsBook.class
+2017-11-01 17:04:31   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/CmsCollectArticle.class
+2017-11-01 17:04:31   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/CmsComment.class
+2017-11-01 17:04:31   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/CmsHomepageApply.class
+2017-11-01 17:04:31   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/CmsLike.class
+2017-11-01 17:04:31   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/CmsPk.class
+2017-11-01 17:04:31   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/CmsReply.class
+2017-11-01 17:04:31   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/CmsRss.class
+2017-11-01 17:04:31   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/CmsSubject.class
+2017-11-01 17:04:31   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/CmsTypeLog.class
+2017-11-01 17:04:31   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/SysInfo.class
+2017-11-01 17:04:31   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/UcenterFame.class
+2017-11-01 17:04:31   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/UcenterLog.class
+2017-11-01 17:04:31   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/UcenterUser.class
+2017-11-01 17:04:31   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/UcenterUserAuth.class
+2017-11-01 17:04:31   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/UcenterUserFame.class
+2017-11-01 17:04:31   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/UcenterUserRelation.class
+2017-11-01 17:04:31   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/UpmsAdmin.class
+2017-11-01 17:04:31   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/UpmsAdminRole.class
+2017-11-01 17:04:31   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/UpmsPermission.class
+2017-11-01 17:04:31   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/UpmsRole.class
+2017-11-01 17:04:31   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/UpmsRolePermission.class
+2017-11-01 17:04:31   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.CmsArticle matches criteria [is assignable to Object]
+2017-11-01 17:04:31   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.CmsBook matches criteria [is assignable to Object]
+2017-11-01 17:04:31   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.CmsCollectArticle matches criteria [is assignable to Object]
+2017-11-01 17:04:31   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.CmsComment matches criteria [is assignable to Object]
+2017-11-01 17:04:31   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.CmsHomepageApply matches criteria [is assignable to Object]
+2017-11-01 17:04:31   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.CmsLike matches criteria [is assignable to Object]
+2017-11-01 17:04:31   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.CmsPk matches criteria [is assignable to Object]
+2017-11-01 17:04:31   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.CmsReply matches criteria [is assignable to Object]
+2017-11-01 17:04:31   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.CmsRss matches criteria [is assignable to Object]
+2017-11-01 17:04:31   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.CmsSubject matches criteria [is assignable to Object]
+2017-11-01 17:04:31   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.CmsTypeLog matches criteria [is assignable to Object]
+2017-11-01 17:04:31   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.SysInfo matches criteria [is assignable to Object]
+2017-11-01 17:04:31   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.UcenterFame matches criteria [is assignable to Object]
+2017-11-01 17:04:31   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.UcenterLog matches criteria [is assignable to Object]
+2017-11-01 17:04:31   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.UcenterUser matches criteria [is assignable to Object]
+2017-11-01 17:04:31   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.UcenterUserAuth matches criteria [is assignable to Object]
+2017-11-01 17:04:31   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.UcenterUserFame matches criteria [is assignable to Object]
+2017-11-01 17:04:31   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.UcenterUserRelation matches criteria [is assignable to Object]
+2017-11-01 17:04:31   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.UpmsAdmin matches criteria [is assignable to Object]
+2017-11-01 17:04:31   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.UpmsAdminRole matches criteria [is assignable to Object]
+2017-11-01 17:04:31   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.UpmsPermission matches criteria [is assignable to Object]
+2017-11-01 17:04:31   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.UpmsRole matches criteria [is assignable to Object]
+2017-11-01 17:04:31   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.UpmsRolePermission matches criteria [is assignable to Object]
+2017-11-01 17:04:31   DEBUG [main][SqlSessionFactoryBean.java:436] - Scanned package: 'com.flyapi.model' for aliases
+2017-11-01 17:04:31   DEBUG [main][LogFactory.java:135] - Logging initialized using 'class org.apache.ibatis.logging.log4j2.Log4j2Impl' adapter.
+2017-11-01 17:04:31   DEBUG [main][SqlSessionFactoryBean.java:496] - Parsed configuration file: 'class path resource [mybatis-config.xml]'
+2017-11-01 17:04:31   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/CmsArticleMapper.xml]'
+2017-11-01 17:04:31   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/CmsBookMapper.xml]'
+2017-11-01 17:04:31   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/CmsCollectArticleMapper.xml]'
+2017-11-01 17:04:31   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/CmsCommentMapper.xml]'
+2017-11-01 17:04:31   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/CmsHomepageApplyMapper.xml]'
+2017-11-01 17:04:31   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/CmsLikeMapper.xml]'
+2017-11-01 17:04:31   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/CmsPkMapper.xml]'
+2017-11-01 17:04:31   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/CmsReplyMapper.xml]'
+2017-11-01 17:04:31   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/CmsRssMapper.xml]'
+2017-11-01 17:04:31   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/CmsSubjectMapper.xml]'
+2017-11-01 17:04:31   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/CmsTypeLogMapper.xml]'
+2017-11-01 17:04:31   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/SysInfoMapper.xml]'
+2017-11-01 17:04:31   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/UcenterFameMapper.xml]'
+2017-11-01 17:04:31   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/UcenterLogMapper.xml]'
+2017-11-01 17:04:31   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/UcenterUserAuthMapper.xml]'
+2017-11-01 17:04:31   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/UcenterUserFameMapper.xml]'
+2017-11-01 17:04:31   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/UcenterUserMapper.xml]'
+2017-11-01 17:04:31   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/UcenterUserRelationMapper.xml]'
+2017-11-01 17:04:31   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/UpmsAdminMapper.xml]'
+2017-11-01 17:04:31   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/UpmsAdminRoleMapper.xml]'
+2017-11-01 17:04:31   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/UpmsPermissionMapper.xml]'
+2017-11-01 17:04:31   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/UpmsRoleMapper.xml]'
+2017-11-01 17:04:31   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/UpmsRolePermissionMapper.xml]'
+2017-11-01 17:04:32   INFO  [main][WebTest.java:25] - haha
+2017-11-01 17:04:32   DEBUG [main][WebTest.java:26] - wang
+2017-11-01 17:04:32   ERROR [main][WebTest.java:27] - error
+2017-11-01 17:04:32   WARN  [main][WebTest.java:28] - warn
+2017-11-01 17:04:32   INFO  [Thread-1][Log4j2Impl.java:106] - {dataSource-1} closed
+2017-11-01 17:05:37   DEBUG [main][LogFactory.java:135] - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2017-11-01 17:05:37   ERROR [main][Log4j2Impl.java:58] - maxIdle is deprecated
+2017-11-01 17:05:37   INFO  [main][Log4j2Impl.java:106] - {dataSource-1} inited
+2017-11-01 17:05:37   DEBUG [main][VFS.java:109] - Class not found: org.jboss.vfs.VFS
+2017-11-01 17:05:37   DEBUG [main][JBoss6VFS.java:142] - JBoss 6 VFS API is not available in this environment.
+2017-11-01 17:05:37   DEBUG [main][VFS.java:109] - Class not found: org.jboss.vfs.VirtualFile
+2017-11-01 17:05:37   DEBUG [main][VFS.java:70] - VFS implementation org.apache.ibatis.io.JBoss6VFS is not valid in this environment.
+2017-11-01 17:05:37   DEBUG [main][VFS.java:84] - Using VFS adapter org.apache.ibatis.io.DefaultVFS
+2017-11-01 17:05:37   DEBUG [main][DefaultVFS.java:222] - Find JAR URL: jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/model
+2017-11-01 17:05:37   DEBUG [main][DefaultVFS.java:230] - Inner URL: file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/model
+2017-11-01 17:05:37   DEBUG [main][DefaultVFS.java:243] - Extracted JAR URL: file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar
+2017-11-01 17:05:37   DEBUG [main][DefaultVFS.java:330] - Found JAR: file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar
+2017-11-01 17:05:37   DEBUG [main][DefaultVFS.java:65] - Listing jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/model
+2017-11-01 17:05:37   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/CmsArticle.class
+2017-11-01 17:05:37   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/CmsBook.class
+2017-11-01 17:05:37   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/CmsCollectArticle.class
+2017-11-01 17:05:37   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/CmsComment.class
+2017-11-01 17:05:37   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/CmsHomepageApply.class
+2017-11-01 17:05:37   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/CmsLike.class
+2017-11-01 17:05:37   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/CmsPk.class
+2017-11-01 17:05:37   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/CmsReply.class
+2017-11-01 17:05:37   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/CmsRss.class
+2017-11-01 17:05:37   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/CmsSubject.class
+2017-11-01 17:05:37   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/CmsTypeLog.class
+2017-11-01 17:05:37   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/SysInfo.class
+2017-11-01 17:05:37   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/UcenterFame.class
+2017-11-01 17:05:37   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/UcenterLog.class
+2017-11-01 17:05:37   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/UcenterUser.class
+2017-11-01 17:05:37   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/UcenterUserAuth.class
+2017-11-01 17:05:37   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/UcenterUserFame.class
+2017-11-01 17:05:37   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/UcenterUserRelation.class
+2017-11-01 17:05:37   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/UpmsAdmin.class
+2017-11-01 17:05:37   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/UpmsAdminRole.class
+2017-11-01 17:05:37   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/UpmsPermission.class
+2017-11-01 17:05:37   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/UpmsRole.class
+2017-11-01 17:05:37   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/UpmsRolePermission.class
+2017-11-01 17:05:37   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.CmsArticle matches criteria [is assignable to Object]
+2017-11-01 17:05:37   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.CmsBook matches criteria [is assignable to Object]
+2017-11-01 17:05:37   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.CmsCollectArticle matches criteria [is assignable to Object]
+2017-11-01 17:05:37   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.CmsComment matches criteria [is assignable to Object]
+2017-11-01 17:05:37   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.CmsHomepageApply matches criteria [is assignable to Object]
+2017-11-01 17:05:37   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.CmsLike matches criteria [is assignable to Object]
+2017-11-01 17:05:37   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.CmsPk matches criteria [is assignable to Object]
+2017-11-01 17:05:37   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.CmsReply matches criteria [is assignable to Object]
+2017-11-01 17:05:37   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.CmsRss matches criteria [is assignable to Object]
+2017-11-01 17:05:37   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.CmsSubject matches criteria [is assignable to Object]
+2017-11-01 17:05:37   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.CmsTypeLog matches criteria [is assignable to Object]
+2017-11-01 17:05:37   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.SysInfo matches criteria [is assignable to Object]
+2017-11-01 17:05:37   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.UcenterFame matches criteria [is assignable to Object]
+2017-11-01 17:05:37   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.UcenterLog matches criteria [is assignable to Object]
+2017-11-01 17:05:37   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.UcenterUser matches criteria [is assignable to Object]
+2017-11-01 17:05:37   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.UcenterUserAuth matches criteria [is assignable to Object]
+2017-11-01 17:05:37   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.UcenterUserFame matches criteria [is assignable to Object]
+2017-11-01 17:05:37   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.UcenterUserRelation matches criteria [is assignable to Object]
+2017-11-01 17:05:37   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.UpmsAdmin matches criteria [is assignable to Object]
+2017-11-01 17:05:37   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.UpmsAdminRole matches criteria [is assignable to Object]
+2017-11-01 17:05:37   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.UpmsPermission matches criteria [is assignable to Object]
+2017-11-01 17:05:37   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.UpmsRole matches criteria [is assignable to Object]
+2017-11-01 17:05:37   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.UpmsRolePermission matches criteria [is assignable to Object]
+2017-11-01 17:05:37   DEBUG [main][SqlSessionFactoryBean.java:436] - Scanned package: 'com.flyapi.model' for aliases
+2017-11-01 17:05:37   DEBUG [main][LogFactory.java:135] - Logging initialized using 'class org.apache.ibatis.logging.log4j2.Log4j2Impl' adapter.
+2017-11-01 17:05:37   DEBUG [main][SqlSessionFactoryBean.java:496] - Parsed configuration file: 'class path resource [mybatis-config.xml]'
+2017-11-01 17:05:37   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/CmsArticleMapper.xml]'
+2017-11-01 17:05:37   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/CmsBookMapper.xml]'
+2017-11-01 17:05:37   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/CmsCollectArticleMapper.xml]'
+2017-11-01 17:05:37   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/CmsCommentMapper.xml]'
+2017-11-01 17:05:37   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/CmsHomepageApplyMapper.xml]'
+2017-11-01 17:05:37   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/CmsLikeMapper.xml]'
+2017-11-01 17:05:37   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/CmsPkMapper.xml]'
+2017-11-01 17:05:37   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/CmsReplyMapper.xml]'
+2017-11-01 17:05:37   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/CmsRssMapper.xml]'
+2017-11-01 17:05:37   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/CmsSubjectMapper.xml]'
+2017-11-01 17:05:37   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/CmsTypeLogMapper.xml]'
+2017-11-01 17:05:37   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/SysInfoMapper.xml]'
+2017-11-01 17:05:37   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/UcenterFameMapper.xml]'
+2017-11-01 17:05:37   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/UcenterLogMapper.xml]'
+2017-11-01 17:05:37   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/UcenterUserAuthMapper.xml]'
+2017-11-01 17:05:37   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/UcenterUserFameMapper.xml]'
+2017-11-01 17:05:37   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/UcenterUserMapper.xml]'
+2017-11-01 17:05:37   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/UcenterUserRelationMapper.xml]'
+2017-11-01 17:05:37   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/UpmsAdminMapper.xml]'
+2017-11-01 17:05:37   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/UpmsAdminRoleMapper.xml]'
+2017-11-01 17:05:37   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/UpmsPermissionMapper.xml]'
+2017-11-01 17:05:37   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/UpmsRoleMapper.xml]'
+2017-11-01 17:05:37   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/UpmsRolePermissionMapper.xml]'
+2017-11-01 17:05:38   INFO  [main][WebTest.java:25] - haha
+2017-11-01 17:05:38   DEBUG [main][WebTest.java:26] - wang
+2017-11-01 17:05:38   ERROR [main][WebTest.java:27] - error
+2017-11-01 17:05:38   WARN  [main][WebTest.java:28] - warn
+2017-11-01 17:05:38   INFO  [Thread-1][Log4j2Impl.java:106] - {dataSource-1} closed
+2017-11-01 17:05:52   DEBUG [main][LogFactory.java:135] - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2017-11-01 17:05:52   ERROR [main][Log4j2Impl.java:58] - maxIdle is deprecated
+2017-11-01 17:05:52   INFO  [main][Log4j2Impl.java:106] - {dataSource-1} inited
+2017-11-01 17:05:52   DEBUG [main][VFS.java:109] - Class not found: org.jboss.vfs.VFS
+2017-11-01 17:05:52   DEBUG [main][JBoss6VFS.java:142] - JBoss 6 VFS API is not available in this environment.
+2017-11-01 17:05:52   DEBUG [main][VFS.java:109] - Class not found: org.jboss.vfs.VirtualFile
+2017-11-01 17:05:52   DEBUG [main][VFS.java:70] - VFS implementation org.apache.ibatis.io.JBoss6VFS is not valid in this environment.
+2017-11-01 17:05:52   DEBUG [main][VFS.java:84] - Using VFS adapter org.apache.ibatis.io.DefaultVFS
+2017-11-01 17:05:52   DEBUG [main][DefaultVFS.java:222] - Find JAR URL: jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/model
+2017-11-01 17:05:52   DEBUG [main][DefaultVFS.java:230] - Inner URL: file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/model
+2017-11-01 17:05:52   DEBUG [main][DefaultVFS.java:243] - Extracted JAR URL: file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar
+2017-11-01 17:05:52   DEBUG [main][DefaultVFS.java:330] - Found JAR: file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar
+2017-11-01 17:05:52   DEBUG [main][DefaultVFS.java:65] - Listing jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/model
+2017-11-01 17:05:52   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/CmsArticle.class
+2017-11-01 17:05:52   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/CmsBook.class
+2017-11-01 17:05:52   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/CmsCollectArticle.class
+2017-11-01 17:05:52   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/CmsComment.class
+2017-11-01 17:05:52   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/CmsHomepageApply.class
+2017-11-01 17:05:52   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/CmsLike.class
+2017-11-01 17:05:52   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/CmsPk.class
+2017-11-01 17:05:52   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/CmsReply.class
+2017-11-01 17:05:52   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/CmsRss.class
+2017-11-01 17:05:52   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/CmsSubject.class
+2017-11-01 17:05:52   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/CmsTypeLog.class
+2017-11-01 17:05:52   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/SysInfo.class
+2017-11-01 17:05:52   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/UcenterFame.class
+2017-11-01 17:05:52   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/UcenterLog.class
+2017-11-01 17:05:52   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/UcenterUser.class
+2017-11-01 17:05:52   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/UcenterUserAuth.class
+2017-11-01 17:05:52   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/UcenterUserFame.class
+2017-11-01 17:05:52   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/UcenterUserRelation.class
+2017-11-01 17:05:52   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/UpmsAdmin.class
+2017-11-01 17:05:52   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/UpmsAdminRole.class
+2017-11-01 17:05:52   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/UpmsPermission.class
+2017-11-01 17:05:52   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/UpmsRole.class
+2017-11-01 17:05:52   DEBUG [main][DefaultVFS.java:200] - Found resource: /com/flyapi/model/UpmsRolePermission.class
+2017-11-01 17:05:53   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.CmsArticle matches criteria [is assignable to Object]
+2017-11-01 17:05:53   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.CmsBook matches criteria [is assignable to Object]
+2017-11-01 17:05:53   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.CmsCollectArticle matches criteria [is assignable to Object]
+2017-11-01 17:05:53   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.CmsComment matches criteria [is assignable to Object]
+2017-11-01 17:05:53   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.CmsHomepageApply matches criteria [is assignable to Object]
+2017-11-01 17:05:53   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.CmsLike matches criteria [is assignable to Object]
+2017-11-01 17:05:53   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.CmsPk matches criteria [is assignable to Object]
+2017-11-01 17:05:53   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.CmsReply matches criteria [is assignable to Object]
+2017-11-01 17:05:53   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.CmsRss matches criteria [is assignable to Object]
+2017-11-01 17:05:53   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.CmsSubject matches criteria [is assignable to Object]
+2017-11-01 17:05:53   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.CmsTypeLog matches criteria [is assignable to Object]
+2017-11-01 17:05:53   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.SysInfo matches criteria [is assignable to Object]
+2017-11-01 17:05:53   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.UcenterFame matches criteria [is assignable to Object]
+2017-11-01 17:05:53   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.UcenterLog matches criteria [is assignable to Object]
+2017-11-01 17:05:53   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.UcenterUser matches criteria [is assignable to Object]
+2017-11-01 17:05:53   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.UcenterUserAuth matches criteria [is assignable to Object]
+2017-11-01 17:05:53   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.UcenterUserFame matches criteria [is assignable to Object]
+2017-11-01 17:05:53   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.UcenterUserRelation matches criteria [is assignable to Object]
+2017-11-01 17:05:53   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.UpmsAdmin matches criteria [is assignable to Object]
+2017-11-01 17:05:53   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.UpmsAdminRole matches criteria [is assignable to Object]
+2017-11-01 17:05:53   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.UpmsPermission matches criteria [is assignable to Object]
+2017-11-01 17:05:53   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.UpmsRole matches criteria [is assignable to Object]
+2017-11-01 17:05:53   DEBUG [main][ResolverUtil.java:256] - Checking to see if class com.flyapi.model.UpmsRolePermission matches criteria [is assignable to Object]
+2017-11-01 17:05:53   DEBUG [main][SqlSessionFactoryBean.java:436] - Scanned package: 'com.flyapi.model' for aliases
+2017-11-01 17:05:53   DEBUG [main][LogFactory.java:135] - Logging initialized using 'class org.apache.ibatis.logging.log4j2.Log4j2Impl' adapter.
+2017-11-01 17:05:53   DEBUG [main][SqlSessionFactoryBean.java:496] - Parsed configuration file: 'class path resource [mybatis-config.xml]'
+2017-11-01 17:05:53   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/CmsArticleMapper.xml]'
+2017-11-01 17:05:53   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/CmsBookMapper.xml]'
+2017-11-01 17:05:53   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/CmsCollectArticleMapper.xml]'
+2017-11-01 17:05:53   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/CmsCommentMapper.xml]'
+2017-11-01 17:05:53   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/CmsHomepageApplyMapper.xml]'
+2017-11-01 17:05:53   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/CmsLikeMapper.xml]'
+2017-11-01 17:05:53   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/CmsPkMapper.xml]'
+2017-11-01 17:05:53   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/CmsReplyMapper.xml]'
+2017-11-01 17:05:53   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/CmsRssMapper.xml]'
+2017-11-01 17:05:53   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/CmsSubjectMapper.xml]'
+2017-11-01 17:05:53   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/CmsTypeLogMapper.xml]'
+2017-11-01 17:05:53   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/SysInfoMapper.xml]'
+2017-11-01 17:05:53   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/UcenterFameMapper.xml]'
+2017-11-01 17:05:53   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/UcenterLogMapper.xml]'
+2017-11-01 17:05:53   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/UcenterUserAuthMapper.xml]'
+2017-11-01 17:05:53   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/UcenterUserFameMapper.xml]'
+2017-11-01 17:05:53   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/UcenterUserMapper.xml]'
+2017-11-01 17:05:53   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/UcenterUserRelationMapper.xml]'
+2017-11-01 17:05:53   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/UpmsAdminMapper.xml]'
+2017-11-01 17:05:53   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/UpmsAdminRoleMapper.xml]'
+2017-11-01 17:05:53   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/UpmsPermissionMapper.xml]'
+2017-11-01 17:05:53   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/UpmsRoleMapper.xml]'
+2017-11-01 17:05:53   DEBUG [main][SqlSessionFactoryBean.java:528] - Parsed mapper file: 'URL [jar:file:/Users/qfwang/IdeaProjects/flyapi/flyapi-dao/target/flyapi-dao-1.0-SNAPSHOT.jar!/com/flyapi/mapper/UpmsRolePermissionMapper.xml]'
+2017-11-01 17:05:54   INFO  [main][WebTest.java:25] - haha
+2017-11-01 17:05:54   DEBUG [main][WebTest.java:26] - wang
+2017-11-01 17:05:54   ERROR [main][WebTest.java:27] - error
+2017-11-01 17:05:54   WARN  [main][WebTest.java:28] - warn
+2017-11-01 17:05:54   INFO  [Thread-1][Log4j2Impl.java:106] - {dataSource-1} closed

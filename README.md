@@ -18,6 +18,8 @@ Github: https://github.com/flyhero/flyapi
 
 
 ## 技术与架构 Technology And Architecture
+### 架构图
+
 ### 技术选择
 #### 后端
 
@@ -115,6 +117,7 @@ V1.0.1(2016/12/03 )
 - 列表2
 
 ## 交流Discussing
+1. 独自开发中是否有必要写service接口？
 
 ## Contributing
 

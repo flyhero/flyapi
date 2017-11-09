@@ -3,11 +3,14 @@ package com.flyapi.web.controller;
 import com.flyapi.core.base.BaseController;
 import com.flyapi.core.constant.JSONResult;
 import com.flyapi.model.CmsArticle;
+import com.flyapi.model.CmsComment;
 import com.flyapi.model.UcenterUser;
 import com.flyapi.service.api.ArticleService;
+import com.flyapi.service.api.CommentService;
 import com.flyapi.service.api.UserService;
 import com.flyapi.pojo.vo.ArticleDetailVo;
 import com.flyapi.pojo.vo.ArticleSimpleVo;
+import com.flyapi.service.impl.CommentServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.annotations.Param;
@@ -34,6 +37,8 @@ public class ArticleController extends BaseController {
     private ArticleService articleService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private CommentService commentService;
     /**
      * Title: findArticleDetail
      * params: [articleId]
@@ -45,7 +50,6 @@ public class ArticleController extends BaseController {
     public ModelAndView findArticleDetail(@PathVariable("articleId")Long articleId){
 
         ArticleDetailVo detailVo = articleService.findArticleDetail(articleId);
-
         mv.addObject("detailVo",detailVo);
         mv.setViewName("html/article/detail");
         return mv;
@@ -83,6 +87,29 @@ public class ArticleController extends BaseController {
         try{
             List<ArticleSimpleVo> list = articleService.findArticleSimple();
             pageInfo = new PageInfo<ArticleSimpleVo>(list);
+        }catch (Exception ex){
+            return JSONResult.error();
+        }
+
+        return JSONResult.ok(pageInfo);
+    }
+    /**
+     * 获取评论列表
+     * @title: findCommentList
+     * @author qfwang
+     * @params [pageNum, pageSize, articleId]
+     * @return com.flyapi.core.constant.JSONResult
+     * @date 2017/11/1 下午5:57
+     */
+    @ResponseBody
+    @RequestMapping("comment/{articleId}")
+    public JSONResult findCommentList(int pageNum,int pageSize,@PathVariable long articleId){
+
+        PageInfo<CmsComment> pageInfo = null;
+        PageHelper.startPage(pageNum, pageSize);
+        try{
+            List<CmsComment> list = commentService.findCommentById(articleId);
+            pageInfo = new PageInfo<CmsComment>(list);
         }catch (Exception ex){
             return JSONResult.error();
         }

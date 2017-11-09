@@ -2,6 +2,8 @@ package com.flyapi.dao;
 
 import com.flyapi.model.CmsComment;
 
+import java.util.List;
+
 public interface CmsCommentMapper {
     int deleteByPrimaryKey(Long commentId);
 
@@ -16,4 +18,6 @@ public interface CmsCommentMapper {
     int updateByPrimaryKeyWithBLOBs(CmsComment record);
 
     int updateByPrimaryKey(CmsComment record);
+
+    List<CmsComment> findCommentById(long targetId);
 }

@@ -2,9 +2,11 @@ package com.flyapi.service.impl;
 
 import com.flyapi.core.base.BaseServiceImpl;
 import com.flyapi.dao.CmsArticleMapper;
+import com.flyapi.dao.CmsCommentMapper;
 import com.flyapi.dao.CmsSubjectMapper;
 import com.flyapi.dao.UcenterUserMapper;
 import com.flyapi.model.CmsArticle;
+import com.flyapi.model.CmsComment;
 import com.flyapi.model.CmsSubject;
 import com.flyapi.model.UcenterUser;
 import com.flyapi.service.api.ArticleService;
@@ -46,6 +48,7 @@ public class ArticleServiceImpl extends BaseServiceImpl<CmsArticle,CmsArticleMap
         cmsArticleMapper.updateCommentNumOrLikeNumOrViewNum(cmsArticle); //更新评论数、点赞数、浏览数
 
         UcenterUser user=userMapper.selectByPrimaryKey(article.getUserId());
+
         ArticleDetailVo detailVo =new ArticleDetailVo();
         detailVo.setArticle(article);
         detailVo.setUser(user);
