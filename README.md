@@ -58,7 +58,6 @@ flyapi
 ├── flyapi-service-api -- 业务逻辑接口层
 ├── flyapi-ui  -- 前端UI
 └── flyapi-web -- 控制器
-
 ```
 
 ## 配置Configuration
