@@ -144,7 +144,7 @@
                     <legend>评论区</legend>
                 </fieldset>
                 <div id="comment-area">
-                <div class="layui-collapse comment-area"  lay-accordion="">
+<!--                <div class="layui-collapse"  lay-accordion="">
                     <div class="layui-colla-item">
                         <div class="layui-colla-title">
                             <div style="float:left; text-align:left" class="comment-user">
@@ -179,18 +179,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="layui-collapse" lay-accordion="">
-                                <div class="layui-colla-item">
-                                    <h2 class="layui-colla-title">坦克</h2>
-                                    <div class="layui-colla-content layui-show">
-
-                                        这个不知道
-
-                                    </div>
-                                </div>
-                            </div>
                             <div class="comment-reply" style="text-align: right; padding-top: 8px">
-                                <!--<a href="javascript:void(0);" id="re_test">回复</a>-->
+                                &lt;!&ndash;<a href="javascript:void(0);" id="re_test">回复</a>&ndash;&gt;
                                 <span type="reply">
                                   回复
                                 </span>
@@ -200,7 +190,8 @@
                         </div>
                     </div>
 
-                </div></div>
+                </div>-->
+                </div>
                 <br>
                 <div class="layui-form layui-form-pane">
                     <form action="/jie/reply/" method="post">
@@ -309,9 +300,47 @@
 
                             pageCount = result.data.pages;
 
-                            $.each(result.data.list, function (index, simple) {
+                            $.each(result.data.list, function (index, comment) {
+                                lis.push('            <div class="layui-collapse"  lay-accordion="">\n' +
+                                    '                    <div class="layui-colla-item">\n' +
+                                    '                        <div class="layui-colla-title">\n' +
+                                    '                            <div style="float:left; text-align:left" class="comment-user">\n' +
+                                    '                                <img style="width: 40px;height: 40px;"\n' +
+                                    '                                     src="http://tp4.sinaimg.cn/1345566427/180/5730976522/0" alt="">\n' +
+                                    '                                <a href="../add-subject.html" target="_blank">flyhero</a>\n' +
+                                    '                                <input type="hidden" value=""/>\n' +
+                                    '                            </div>\n' +
+                                    '                            <div style="float:right; text-align:right"><span class="layui-badge layui-bg-gray">2017-06-22 14:30:49</span>\n' +
+                                    '                            </div>\n' +
+                                    '                        </div>\n' +
+                                    '                        <div class="layui-colla-content layui-show">'+comment.content);
+                                $.each(comment.cmsReplyList,function(index,reply){
+                                    lis.push('                            <div class="layui-collapse" lay-accordion="">\n' +
+                                        '                                <div class="layui-colla-item">\n' +
+                                        '                                    <div class="layui-colla-title">\n' +
+                                        '                                        <div style="float:left; text-align:left">\n' +
+                                        '                                            <img style="width: 40px;height: 40px;"\n' +
+                                        '                                                 src="http://tp4.sinaimg.cn/1345566427/180/5730976522/0" alt="">\n' +
+                                        '                                            <a>法师</a>\n' +
+                                        '                                        </div>\n' +
+                                        '                                        <div style="float:right; text-align:right"><span\n' +
+                                        '                                                class="layui-badge layui-bg-gray">2017-06-22 14:30:49</span></div>\n' +
+                                        '                                    </div>\n' +
+                                        '                                    <div class="layui-colla-content layui-show">' +reply.content+
+                                        '                                    </div>\n' +
+                                        '                                </div>\n' +
+                                        '                            </div>');
+                                });
 
-                                lis.push('<p>2222222222222222222222<p/>');
+                                lis.push('                            <div class="comment-reply" style="text-align: right; padding-top: 8px">\n' +
+                                    '                                <!--<a href="javascript:void(0);" id="re_test">回复</a>-->\n' +
+                                    '                                <span type="reply">\n' +
+                                    '                                  回复\n' +
+                                    '                                </span>\n' +
+                                    '                            </div>\n' +
+                                    '                        </div>\n' +
+                                    '                    </div>\n' +
+                                    '                </div>');
 
                                 next(lis.join(''), page < pageCount);
                                 lis = [];

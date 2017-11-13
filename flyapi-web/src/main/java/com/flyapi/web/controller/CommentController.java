@@ -46,4 +46,8 @@ public class CommentController {
 
         return JSONResult.ok(pageInfo);
     }
+
+    public JSONResult addComment(){
+        return JSONResult.error();
+    }
 }
