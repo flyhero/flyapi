@@ -37,8 +37,6 @@ public class ArticleController extends BaseController {
     private ArticleService articleService;
     @Autowired
     private UserService userService;
-    @Autowired
-    private CommentService commentService;
     /**
      * Title: findArticleDetail
      * params: [articleId]
@@ -93,29 +91,7 @@ public class ArticleController extends BaseController {
 
         return JSONResult.ok(pageInfo);
     }
-    /**
-     * 获取评论列表
-     * @title: findCommentList
-     * @author qfwang
-     * @params [pageNum, pageSize, articleId]
-     * @return com.flyapi.core.constant.JSONResult
-     * @date 2017/11/1 下午5:57
-     */
-    @ResponseBody
-    @RequestMapping("comment/{articleId}")
-    public JSONResult findCommentList(int pageNum,int pageSize,@PathVariable long articleId){
 
-        PageInfo<CmsComment> pageInfo = null;
-        PageHelper.startPage(pageNum, pageSize);
-        try{
-            List<CmsComment> list = commentService.findCommentById(articleId);
-            pageInfo = new PageInfo<CmsComment>(list);
-        }catch (Exception ex){
-            return JSONResult.error();
-        }
-
-        return JSONResult.ok(pageInfo);
-    }
     /**
      * Title: findLastUpdateOrHotArticles
      * params: [type]

@@ -282,7 +282,6 @@
     });
 
 
-
     var id ="[[${detailVo.article.articleId}]]";
     layui.use('flow', function () {
         var flow = layui.flow;
@@ -299,8 +298,8 @@
                 setTimeout(function () {
                     var lis = [];
                     $.ajax({
-                        type: 'POST',
-                        url: "../comment/"+id,
+                        type: 'GET',
+                        url: "../../comment/"+id,
                         dataType: "json",
                         data: {
                             "pageNum": page,
