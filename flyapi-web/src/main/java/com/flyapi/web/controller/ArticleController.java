@@ -66,7 +66,7 @@ public class ArticleController extends BaseController {
 
         mv.addObject("articleList",list);
         mv.addObject("title",title);
-        mv.setViewName("html/article/subject-article");
+        mv.setViewName("html/article/sub-timeline");
         return mv;
     }
 
