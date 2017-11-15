@@ -107,7 +107,7 @@ http://  用户名：   密码：
 6. 在线简历页，github登录后生成贡献报告【https://github.com/ecmadao/hacknical】
 7. 第三方登录【QQ，微信，github】
 8. 成长图谱
-9. 团队技术文章
+9. 头像自动生成
 10. 情景对话式段子（自选对话人物）
 
 ## 更新日志CHANGELOG

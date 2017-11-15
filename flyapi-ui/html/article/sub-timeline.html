@@ -7,25 +7,11 @@
 
 <link rel="stylesheet" href="../../res/css/timeline.css" th:href="@{${rootPath} + '/res/css/timeline.css'}"/>
 <th:block th:include="html/common/link::link"></th:block>
-<style type="text/css">
-h2.top_title{border-bottom:none;background:none;text-align:center;line-height:32px; font-size:20px}
-h2.top_title span{font-size:12px; color:#666;font-weight:500}
-</style>
 </head>
 
 <body>
 
 <section id="cd-timeline" class="cd-container">
-	<div class="cd-timeline-block">
-		<div class="cd-timeline-img cd-picture">
-			<img src="img/cd-icon-picture.svg" alt="Picture">
-		</div>
-
-		<div class="cd-timeline-content">
-			<h2>HTML5+CSS3实现的响应式垂直时间轴</h2>
-			<span class="cd-date">2015-01-06</span>
-		</div>
-	</div>
 	<div class="cd-timeline-block">
 		<div class="cd-timeline-img cd-movie">
 			<img src="img/cd-icon-movie.svg" alt="Movie">
@@ -44,20 +30,10 @@ h2.top_title span{font-size:12px; color:#666;font-weight:500}
 		</div>
 
 		<div class="cd-timeline-content">
-			<h2>PHP操作Session和Cookie</h2>
+			<h2><a href="#">PHP操作Session和Cookie</a></h2>
 			<p>我们跟踪用户信息时需要用到Session和Cookie，比如用户登录验证、记录用户浏览历史，存储购物车数据，限制用户会话有效时间等。今天我们来了解下PHP是如何操作Session和Cookie的。</p>
 			<a href="#" class="cd-read-more" target="_blank">阅读全文</a>
 			<span class="cd-date">2014-12-20</span>
-		</div>
-	</div>
-	<div class="cd-timeline-block">
-		<div class="cd-timeline-img cd-movie">
-			<img src="img/cd-icon-movie.svg" alt="Movie">
-		</div>
-
-		<div class="cd-timeline-content">
-			<h2><a href="#">加入flyapi大家族</a></h2>
-			<span class="cd-date">2014-12-14</span>
 		</div>
 	</div>
 
@@ -75,13 +51,13 @@ h2.top_title span{font-size:12px; color:#666;font-weight:500}
 			</li>-->
 			<div class="cd-timeline-block">
 				<div class="cd-timeline-img cd-picture">
-					<img src="img/cd-icon-picture.svg" alt="Picture">
+					<img src="//upload-images.jianshu.io/upload_images/2263276-65f149645b408224?imageMogr2/auto-orient/strip|imageView2/1/w/375/h/300" alt="Picture">
 				</div>
 
 				<div class="cd-timeline-content">
 					<h2 th:text="${article.title}">PHP操作Session和Cookie</h2>
 					<p th:text="${article.articleDes}">我们跟踪用户信息时需要用到Session和Cookie，比如用户登录验证、记录用户浏览历史，存储购物车数据，限制用户会话有效时间等。今天我们来了解下PHP是如何操作Session和Cookie的。</p>
-					<a href="#" class="cd-read-more" target="_blank">阅读全文</a>
+					<!--<a href="#" class="cd-read-more" target="_blank">阅读全文</a>-->
 					<span class="cd-date" th:text="${#dates.format(article.createTime, 'yyyy年MM月dd日 HH:mm:ss')}">2014-12-20</span>
 				</div>
 			</div>
