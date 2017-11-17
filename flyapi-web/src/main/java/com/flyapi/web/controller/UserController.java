@@ -12,9 +12,11 @@ import com.flyapi.core.id.SnowflakeIdWorker;
 import com.flyapi.core.util.AESUtil;
 import com.flyapi.core.util.CookieUtil;
 import com.flyapi.core.validator.StringValidator;
+import com.flyapi.model.SettingStore;
 import com.flyapi.model.UcenterUser;
 import com.flyapi.model.UcenterUserFame;
 import com.flyapi.pojo.dto.RegisterDto;
+import com.flyapi.service.api.SettingStoreService;
 import com.flyapi.service.api.UserFameService;
 import com.flyapi.service.api.UserService;
 import org.apache.logging.log4j.LogManager;
@@ -42,6 +44,8 @@ public class UserController extends BaseController {
     private UserFameService userFameService;
     @Autowired
     private SnowflakeIdWorker snowflakeIdWorker;
+    @Autowired
+    private SettingStoreService settingStoreService;
 
     private Logger logger = LogManager.getLogger(UserController.class);
 
@@ -97,7 +101,12 @@ public class UserController extends BaseController {
         user.setPassword(AESUtil.AESEncode(registerDto.getPw()));
         user.setCreateTime(new Date(System.currentTimeMillis()));
         if(userService.insertSelective(user) > 0){
-            session.setAttribute("user",userService.login(user));
+            UcenterUser login = userService.login(user);
+            SettingStore store = new SettingStore();
+            store.setId(snowflakeIdWorker.nextId());
+            store.setUserId(login.getUserId());
+            settingStoreService.insertSelective(store);
+            session.setAttribute("user",login);
             mv.setViewName("html/index");
             return mv;
         }
