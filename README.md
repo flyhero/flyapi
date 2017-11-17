@@ -19,7 +19,7 @@ Github: https://github.com/flyhero/flyapi
 
 ## 技术与架构 Technology And Architecture
 ### 架构图
-![flyapi架构](flyapi-doc/flyapi-architecture.png)
+![flyapi架构](flyapi-doc/images/flyapi-architecture.png)
 ### 技术选择
 #### 后端
 
