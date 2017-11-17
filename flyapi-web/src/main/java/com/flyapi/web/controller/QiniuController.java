@@ -10,6 +10,7 @@ import com.qiniu.storage.UploadManager;
 import com.qiniu.storage.model.DefaultPutRet;
 import com.qiniu.util.Auth;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -26,18 +27,25 @@ import java.io.*;
 @RequestMapping("qiniu")
 public class QiniuController {
 
-    @RequestMapping("uploadImage")
+    /**
+     * 上传图片到七牛
+     * @title: uploadImage
+     * @author flyhero <http://www.iflyapi.cn>
+     * @params [file]
+     * @return com.flyapi.core.constant.JSONResult
+     * @date 2017/11/16 下午1:59
+     */
+    @PostMapping("upload")
     @ResponseBody
-    public JSONResult uploadImage( @RequestParam(value = "file", required = false) MultipartFile file){
-
+    public JSONResult uploadImage( @RequestParam(value = "editormd-image-file", required = false) MultipartFile file){
         //构造一个带指定Zone对象的配置类
         Configuration cfg = new Configuration(Zone.zone0());
         //...其他参数参考类注释
         UploadManager uploadManager = new UploadManager(cfg);
         //...生成上传凭证，然后准备上传
-        String accessKey = "your access key";
-        String secretKey = "your secret key";
-        String bucket = "your bucket name";
+        String accessKey = "vDuNp0Z4WtB2boJeLQ_mNXxcCdjnTaUeJ4yWOsWT";
+        String secretKey = "AEbH11WApJIzQtLag7FouMKZNWS3oeJZX16TYUoD";
+        String bucket = "flyapi";
         //默认不指定key的情况下，以文件内容的hash值作为文件名
         String key = null;
         try {
@@ -48,6 +56,7 @@ public class QiniuController {
             try {
                 Response response = uploadManager.put(byteInputStream,key,upToken,null, null);
                 //解析上传成功的结果
+                System.out.println("上传成功的结果:"+response.bodyString());
                 DefaultPutRet putRet = JSON.parseObject(response.bodyString(), DefaultPutRet.class);
                 System.out.println(putRet.key);
                 System.out.println(putRet.hash);
