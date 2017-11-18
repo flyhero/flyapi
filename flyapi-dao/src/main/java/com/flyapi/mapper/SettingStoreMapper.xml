@@ -21,7 +21,7 @@
     select 
     <include refid="Base_Column_List" />
     from setting_store
-    where id = #{userId,jdbcType=BIGINT} and is_delete = 0
+    where user_id = #{userId,jdbcType=BIGINT} and is_delete = 0
     limit 1
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
