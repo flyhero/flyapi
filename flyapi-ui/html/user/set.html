@@ -60,6 +60,7 @@
                 <li lay-id="pass">密码</li>
                 <li lay-id="bind">帐号绑定</li>
                 <li lay-id="support">赞赏</li>
+                <li lay-id="store">图床</li>
             </ul>
             <div class="layui-tab-content" style="padding: 20px 0;">
                 <div class="layui-form layui-form-pane layui-tab-item layui-show">
@@ -192,6 +193,88 @@
                         </div>
                     </form>
                 </div>
+
+                <div class="layui-form layui-form-pane layui-tab-item">
+                    <div class="layui-row">
+                        <div class="layui-col-md6">
+                            <form action="/user/repass" method="post">
+                                <div class="layui-form-item">
+                                    <label for="L_nowpass" class="layui-form-label">accessKey</label>
+                                    <div class="layui-input-inline">
+                                        <input type="password" id="accessKey" name="accessKey" required lay-verify="required"
+                                               autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label for="L_repass" class="layui-form-label">secretKey</label>
+                                    <div class="layui-input-inline">
+                                        <input type="password" id="secretKey" name="secretKey" required lay-verify="required"
+                                               autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label for="L_repass" class="layui-form-label">bucket</label>
+                                    <div class="layui-input-inline">
+                                        <input type="password" id="bucket" name="bucket" required lay-verify="required"
+                                               autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label for="L_repass" class="layui-form-label">domain</label>
+                                    <div class="layui-input-inline">
+                                        <input type="password" id="domain" name="domain" required lay-verify="required"
+                                               autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+
+
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">平台</label>
+                                    <div class="layui-input-inline">
+                                        <select name="quiz1">
+                                            <option value="">请选择</option>
+                                            <option value="浙江" selected="">七牛</option>
+                                            <option value="你的工号">极简图床</option>
+                                            <option value="你最喜欢的老师">新浪</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="layui-form-item">
+                                    <button class="layui-btn" key="set-mine" lay-filter="*" lay-submit>确认</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="layui-col-md6">
+                            <fieldset class="layui-elem-field layui-field-title">
+                                <legend>设置图床</legend>
+                            </fieldset>
+                            <ul class="layui-timeline">
+                                <li class="layui-timeline-item">
+                                    <i class="layui-icon layui-timeline-axis"></i>
+                                    <div class="layui-timeline-content layui-text">
+                                        <h3 class="layui-timeline-title">方式一</h3>
+                                        <p>
+                                            对本站任意赞助，可获得试用我们提供的图床，不必再设置。
+                                        </p>
+                                    </div>
+                                </li>
+                                <li class="layui-timeline-item">
+                                    <i class="layui-icon layui-timeline-axis"></i>
+                                    <div class="layui-timeline-content layui-text">
+                                        <h3 class="layui-timeline-title">方式二</h3>
+                                        <ul>
+                                            <li><img src="http://www.iflyapi.cn:8080/res/images/qiniu/qiniu-step1.png" width="400px" height="300px"/></li>
+                                            <li><img src="http://www.iflyapi.cn:8080/res/images/qiniu/qiniu-step2.png" width="400px" height="300px"/></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
         </div>
