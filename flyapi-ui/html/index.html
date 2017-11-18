@@ -33,18 +33,9 @@
                 <a href="../user/go?html=article/add.html" target="_blank" class="layui-btn jie-add">发布文章</a>
             </div>
 
-            <div class="layui-carousel" id="test1">
-                <div carousel-item>
-                    <div><img src="../res/images/slider-1.jpg" th:src="@{${rootPath} + '/res/images/slider-1.jpg'}"/>
-                    </div>
-                    <div><img src="../res/images/slider-1.jpg" th:src="@{${rootPath} + '/res/images/slider-2.jpg'}"/>
-                    </div>
-                    <div><img src="../res/images/slider-1.jpg" th:src="@{${rootPath} + '/res/images/slider-3.jpg'}"/>
-                    </div>
-                    <div><img src="../res/images/slider-1.jpg" th:src="@{${rootPath} + '/res/images/slider-4.jpg'}"/>
-                    </div>
-                    <div><img src="../res/images/slider-1.jpg" th:src="@{${rootPath} + '/res/images/slider-5.jpg'}"/>
-                    </div>
+            <div class="layui-carousel" id="carousel-index">
+                <div carousel-item=""  id="cal-list">
+<!--                <div><img src="../res/images/slider-1.jpg" th:src="@{${rootPath} + '/res/images/slider-1.jpg'}"/></div>  -->
                 </div>
             </div>
             <ul class="fly-list" id="article-list">
@@ -174,9 +165,13 @@
             $("#hot-article").append('<dd><a href="/article/detail.html/' + hot.articleId + '">' + hot.title + '</a><span><i class="iconfont">&#xe60b;</i> ' + hot.viewNum + '</span></dd>');
         });
     });
+    $.getJSON("../setting/carousel", {}, function (result) {
+        $.each(result.data, function (index, carousel) {
+            $("#cal-list").append('<div><a href="index.html" ><img src="'+carousel.imgUrl+'" title="'+carousel.title+'"/></a></div>');
+        });
+    });
 </script>
 <script th:inline="javascript">
-
     layui.use('flow', function () {
         var flow = layui.flow;
         var pageCount;
@@ -243,7 +238,7 @@
         var carousel = layui.carousel;
         //建造实例
         carousel.render({
-            elem: '#test1',
+            elem: '#carousel-index',
             width: '100%', //设置容器宽度
             height: '260px',
             arrow: 'always' //始终显示箭头

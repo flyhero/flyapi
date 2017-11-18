@@ -1,11 +1,16 @@
 package com.flyapi.web.controller;
 
 import com.flyapi.core.base.BaseController;
+import com.flyapi.core.constant.JSONResult;
+import com.flyapi.model.SettingCarousel;
 import com.flyapi.service.api.SettingCarouselService;
 import com.flyapi.service.api.SettingStoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 /**
  * Author: qfwang
@@ -19,4 +24,25 @@ public class SettingController extends BaseController{
     private SettingCarouselService settingCarouselService;
     @Autowired
     private SettingStoreService settingStoreService;
+
+    /**
+     *
+     * @title: findCarouselList
+     * @author flyhero <http://www.iflyapi.cn>
+     * @params []
+     * @return com.flyapi.core.constant.JSONResult
+     * @date 2017/11/18 下午12:01
+     */
+    @RequestMapping("carousel")
+    @ResponseBody
+    public JSONResult findCarouselList(){
+        List<SettingCarousel> list = null;
+        try {
+            list = settingCarouselService.findList();
+        } catch (Exception e) {
+            JSONResult.error();
+            e.printStackTrace();
+        }
+        return JSONResult.ok(list);
+    }
 }
