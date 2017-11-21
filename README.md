@@ -80,6 +80,36 @@ flyapi
     - 安装mysql server 5.6+ ,导入flyapi.sql文件
     - 安装tomcat 7+ ,端口设为8090
 
+    IDEA
+    
+    - 安装maven
+    
+### nginx配置
+```
+   server {
+        listen       8080;
+        server_name  localhost;
+        location / {
+            #root   html;
+            #自己项目中的静态页路径
+            root   /Users/qfwang/IdeaProjects/flyapi/flyapi-ui;
+
+            #解决跨域问题
+            add_header 'Access-Control-Allow-Origin' '*';
+            add_header 'Access-Control-Allow-Credentials' 'true';
+            add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
+            add_header 'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type';
+
+            index  index.html index.htm;
+        }
+
+        error_page   500 502 503 504  /50x.html;
+        location = /50x.html {
+            root   html;
+        }
+    }
+
+```
 ## 演示地址
 http://  用户名：   密码：
 
