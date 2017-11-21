@@ -77,13 +77,14 @@ flyapi
 ## 环境搭建
     本人是在mac下开发的，若在win下使用，自行修改
     - 安装nginx for mac ，默认端口为8080
-    - 安装mysql server 5.6+ ,导入flyapi.sql文件
+    - 安装mysql server 5.6+ ,导入flyapi_*.sql文件
     - 安装tomcat 7+ ,端口设为8090
 
     IDEA
     
     - 安装maven
-    
+### host 设置
+127.0.0.1	www.iflyapi.cn
 ### nginx配置
 ```
    server {
