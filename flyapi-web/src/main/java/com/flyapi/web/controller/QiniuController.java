@@ -57,7 +57,9 @@ public class QiniuController extends BaseController {
         String domain = "";
 
         UcenterUser ucenterUser = (UcenterUser) session.getAttribute("user");
-        SettingStore store = settingStoreService.selectByPrimaryKey(ucenterUser.getUserId());
+        //SettingStore store = settingStoreService.selectByPrimaryKey(ucenterUser.getUserId());
+        SettingStore store = new SettingStore();
+        store.setVip(1);
         if (store != null) {
             if(store.getVip() != 0){ //已赞助
                  accessKey = "vDuNp0Z4WtB2boJeLQ_mNXxcCdjnTaUeJ4yWOsWT";
@@ -86,8 +88,9 @@ public class QiniuController extends BaseController {
         UploadManager uploadManager = new UploadManager(cfg);
         //...生成上传凭证，然后准备上传
 
+        System.out.println(file.getOriginalFilename());
         //默认不指定key的情况下，以文件内容的hash值作为文件名
-        String key = userId + "/fileName";
+        String key = userId +"/"+ file.getOriginalFilename();
         try {
             byte[] uploadBytes = file.getBytes();
             ByteArrayInputStream byteInputStream = new ByteArrayInputStream(uploadBytes);
@@ -100,6 +103,7 @@ public class QiniuController extends BaseController {
                 DefaultPutRet putRet = JSON.parseObject(response.bodyString(), DefaultPutRet.class);
                 System.out.println(putRet.key);
                 System.out.println(putRet.hash);
+                System.out.println("访问地址："+domain+"/"+key);
             } catch (QiniuException ex) {
                 Response r = ex.response;
                 System.err.println(r.toString());

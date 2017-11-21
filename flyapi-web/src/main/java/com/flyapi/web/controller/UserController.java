@@ -102,10 +102,12 @@ public class UserController extends BaseController {
         user.setCreateTime(new Date(System.currentTimeMillis()));
         if(userService.insertSelective(user) > 0){
             UcenterUser login = userService.login(user);
+            //初始化图床设置
             SettingStore store = new SettingStore();
             store.setId(snowflakeIdWorker.nextId());
             store.setUserId(login.getUserId());
             settingStoreService.insertSelective(store);
+
             session.setAttribute("user",login);
             mv.setViewName("html/index");
             return mv;
@@ -146,6 +148,7 @@ public class UserController extends BaseController {
             mv.setViewName("html/login");
             return mv;
         }
+        user.setPassword(AESUtil.AESEncode(user.getPassword()));
         UcenterUser userLogin = userService.login(user);
         if(userLogin == null){
             mv.addObject("msg","用户名或密码错误！");

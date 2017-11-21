@@ -69,7 +69,7 @@ flyapi
 
       layui.config({
           version: "2.0.0"
-          ,base: 'http://localhost:8080/res/mods/'
+          ,base: 'http://www.iflyapi.cn:8080/res/mods/'
       }).extend({
           fly: 'index'
       }).use('fly');
