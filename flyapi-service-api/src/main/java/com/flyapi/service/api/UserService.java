@@ -1,6 +1,7 @@
 package com.flyapi.service.api;
 
 import com.flyapi.core.base.BaseService;
+import com.flyapi.model.SettingStore;
 import com.flyapi.model.UcenterUser;
 
 /**
@@ -10,4 +11,13 @@ import com.flyapi.model.UcenterUser;
 public interface UserService extends BaseService<UcenterUser> {
     UcenterUser login(UcenterUser user);
     int findUserByUsername(String username);
+    /**
+     * 初始化图床设置
+     * @title: initStore
+     * @author flyhero <http://www.iflyapi.cn>
+     * @params [user, store]
+     * @return int
+     * @date 2017/11/21 下午5:42
+     */
+    UcenterUser initStore(UcenterUser user,SettingStore store);
 }

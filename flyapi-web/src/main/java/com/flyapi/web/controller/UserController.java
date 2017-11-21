@@ -101,12 +101,9 @@ public class UserController extends BaseController {
         user.setPassword(AESUtil.AESEncode(registerDto.getPw()));
         user.setCreateTime(new Date(System.currentTimeMillis()));
         if(userService.insertSelective(user) > 0){
-            UcenterUser login = userService.login(user);
-            //初始化图床设置
             SettingStore store = new SettingStore();
             store.setId(snowflakeIdWorker.nextId());
-            store.setUserId(login.getUserId());
-            settingStoreService.insertSelective(store);
+            UcenterUser login = userService.initStore(user,store);
 
             session.setAttribute("user",login);
             mv.setViewName("html/index");
