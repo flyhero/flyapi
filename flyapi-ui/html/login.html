@@ -153,10 +153,12 @@
 			</div>
 
 		</div>
-		<script>
+		<script th:inline="javascript">
 
 				$(function() {
 
+				    var user =[[${session.user}]];
+				    console.log(user);
 					var $login;
 					$('ul.tab li').click(function(e) {
 						e.preventDefault();
