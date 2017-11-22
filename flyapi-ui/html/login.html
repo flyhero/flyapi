@@ -28,7 +28,7 @@
 			<div class="login-box">
 				<div class="login-header">
 					<a href="#">
-						<img class="logo" src="../res/css/logo-lg.svg" th:src="@{${rootPath} + '/images/flyapi-logo.png'}">
+						<img class="logo" src="../images/login.png" th:src="@{${rootPath} + '/res/images/login.png'}">
 					</a>
 					<ul class="tab">
 						<li class="active" data-box="#signin-box" id="signin">
@@ -158,7 +158,9 @@
 				$(function() {
 
 				    var user =[[${session.user}]];
-				    console.log(user);
+				    if(user != null){
+                        window.location.href="http://www.iflyapi.cn:8090/flyapi-web/forward/go?html=index.html";
+                    }
 					var $login;
 					$('ul.tab li').click(function(e) {
 						e.preventDefault();
