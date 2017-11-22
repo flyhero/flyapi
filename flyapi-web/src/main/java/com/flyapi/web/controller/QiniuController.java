@@ -1,6 +1,7 @@
 package com.flyapi.web.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.baidu.unbiz.fluentvalidator.FluentValidator;
 import com.flyapi.core.base.BaseController;
 import com.flyapi.core.constant.JSONResult;
 import com.flyapi.model.SettingStore;
@@ -49,12 +50,12 @@ public class QiniuController extends BaseController {
     @ResponseBody
     public JSONResult uploadImage(@RequestParam(value = "editormd-image-file", required = false) MultipartFile file) {
 
-
         String accessKey = "";
         String secretKey = "";
         String bucket = "";
         Long userId = 1000000L;
         String domain = "";
+        String imgUrl = "";
 
         UcenterUser ucenterUser = (UcenterUser) session.getAttribute("user");
         //SettingStore store = settingStoreService.selectByPrimaryKey(ucenterUser.getUserId());
@@ -66,7 +67,7 @@ public class QiniuController extends BaseController {
                  secretKey = "AEbH11WApJIzQtLag7FouMKZNWS3oeJZX16TYUoD";
                  bucket = "flyhero";
                  userId = 1000000L;
-                 domain = "";
+                 domain = "http://7xv6ov.com1.z0.glb.clouddn.com";
             }else {
                 if(!StringUtils.isEmpty(store.getAk()) && !StringUtils.isEmpty(store.getSk())
                         && !StringUtils.isEmpty(store.getDomain()) && !StringUtils.isEmpty(store.getBucket())){
@@ -104,6 +105,7 @@ public class QiniuController extends BaseController {
                 System.out.println(putRet.key);
                 System.out.println(putRet.hash);
                 System.out.println("访问地址："+domain+"/"+key);
+                imgUrl = domain+"/"+key;
             } catch (QiniuException ex) {
                 Response r = ex.response;
                 System.err.println(r.toString());
@@ -118,7 +120,7 @@ public class QiniuController extends BaseController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return JSONResult.ok();
+        return JSONResult.ok(imgUrl);
     }
 
     public static void main(String[] args) {
