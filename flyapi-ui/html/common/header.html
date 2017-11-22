@@ -27,8 +27,10 @@
             </div>
         </div>
 
+        <div id="login-state">
+
+        </div>
         <div class="nav-user" th:if="${session.user} == null">
-            <!-- 未登入状态 -->
             <a class="unlogin" href=""><i class="iconfont icon-touxiang"></i></a>
             <span>
                 <a href="http://www.iflyapi.cn:8090/flyapi-web/forward/go?html=login.html">登入</a>
@@ -36,7 +38,6 @@
             </span>
         </div>
         <div class="flyhero-user" th:unless="${session.user} == null">
-            <!-- 登入状态 -->
             <div class="user-hover" style="width: 80px;height: 65px;" data-dropdown="#dropdown-standard">
                 <a class="avatar dropdown" href="">
                     <img src="../res/images/avatar/flyhero.jpg" th:src="@{${rootPath} + ${session.user.avatar}}">
@@ -47,12 +48,13 @@
                 <ul>
                     <li><a href="http://www.flyapi.cn:8090/flyapi-web/forword/go?html=/user/home">主页</a></li>
                     <li><a href="http://localhost:8090/flyapi-web/user/go?html=/user/set">设置</a></li>
-                    <!--<li class="divider"></li>-->
+                    &lt;!&ndash;<li class="divider"></li>&ndash;&gt;
                     <li><a href="#">反馈</a></li>
                 </ul>
             </div>
         </div>
     </div>
 </div>
+
 </body>
 </html>

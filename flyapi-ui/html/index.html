@@ -47,7 +47,7 @@
                     <div>
                         <div class="author">
                             <a class="avatar" target="_blank" href="/u/c3d9abd7063b">
-                                <img src="../res/images/avatar/default.png" alt="96">
+                                <img src="http://www.iflyapi.cn:8080/res/images/avatar/default.png" alt="96">
                             </a>
                             <div class="name">
                                 <a class="blue-link" target="_blank" href="/u/c3d9abd7063b">flyhero</a>
@@ -134,6 +134,7 @@
 <script src="../res/layui/layui.js" th:src="@{${rootPath} + '/res/layui/layui.js'}"></script>
 <script src="../../res/js/date-util.js" th:src="@{${rootPath} + '/res/js/date-util.js'}"></script>
 
+
 <script>
 
     $.ajax({
@@ -162,6 +163,7 @@
     layui.use('flow', function () {
         var flow = layui.flow;
         var pageCount;
+        var rootPath = [[${rootPath}]];
         flow.load({
             elem: '#article-list', //流加载容器
             scrollElem: '#article-list', //滚动条所在元素，一般不用填，此处只是演示需要。
@@ -192,7 +194,7 @@
                                     '</a>' +
                                     '<div><div class="author">' +
                                     '<a class="avatar" target="_blank" href="#">' +
-                                    '<img src="../res/images/avatar/default.png" th:src="@{${rootPath} + \'/res/images/avatar/default.png\'}">' +
+                                    '<img src="'+rootPath+simple.avatar+'">' +
                                     '</a><div class="name">' +
                                     '<a class="blue-link" target="_blank" href="#">' + simple.nickName + '</a>' +
                                     '<span class="time" data-shared-at="2017-04-05T09:53:58+08:00">&nbsp;&nbsp;&nbsp;' + timeAgo(getMyDate(simple.createTime)) + '</span></div></div>' +
