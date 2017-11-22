@@ -153,12 +153,14 @@
 			</div>
 
 		</div>
+
+
 		<script th:inline="javascript">
 
 				$(function() {
 
 				    var user =[[${session.user}]];
-				    if(user != null){
+				    if(user != null){ //若已经登录，跳转到主页
                         window.location.href="http://www.iflyapi.cn:8090/flyapi-web/forward/go?html=index.html";
                     }
 					var $login;

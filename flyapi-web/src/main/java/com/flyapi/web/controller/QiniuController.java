@@ -80,7 +80,7 @@ public class QiniuController extends BaseController {
                 }
             }
         }else {
-            return JSONResult.error("位置错误，请联系管理员",401,"");
+            return JSONResult.error("未知错误，请联系管理员",401,"");
         }
         //构造一个带指定Zone对象的配置类
         Configuration cfg = new Configuration(Zone.zone0());

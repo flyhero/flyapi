@@ -104,7 +104,7 @@ public class UserController extends BaseController {
             SettingStore store = new SettingStore();
             store.setId(snowflakeIdWorker.nextId());
             UcenterUser login = userService.initStore(user,store);
-
+            login.setPassword("");
             session.setAttribute("user",login);
             mv.setViewName("html/index");
             return mv;
@@ -155,6 +155,7 @@ public class UserController extends BaseController {
 
         userFameService.addFameValue(userLogin.getUserId(),1);
         //CookieUtil.setCookie(response,"isLogin",String.valueOf(userLogin.getUserId()));
+        userLogin.setPassword("");
         session.setAttribute("user",userLogin);
         mv.setViewName("html/index");
         return mv;
