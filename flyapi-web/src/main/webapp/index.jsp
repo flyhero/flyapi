@@ -13,7 +13,7 @@
 <body>
 hello world!
 <script language="javascript" type="text/javascript">
-    window.location.href="user/go?html=index";
+    window.location.href="forward/go?html=index";
 </script>
 </body>
 </html>

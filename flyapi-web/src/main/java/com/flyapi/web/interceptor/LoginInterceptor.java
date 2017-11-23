@@ -50,7 +50,7 @@ public class LoginInterceptor implements HandlerInterceptor {
             return true;
         }
         String requestUri = request.getRequestURI();
-        request.setAttribute("rootPath", "http://www.iflyapi.cn:8080");
+        request.setAttribute("rootPath", "http://www.iflyapi.cn:8090/flyapi-web/");
         for (String url : excludedUrls) {
             if (requestUri.contains(url)) {
                 return true;
@@ -64,7 +64,7 @@ public class LoginInterceptor implements HandlerInterceptor {
             response.sendRedirect(request.getContextPath());
         }*/
 
-        Cookie[] cookies = request.getCookies();
+/*        Cookie[] cookies = request.getCookies();
         if(null == cookies){
             logger.debug("cookies is null!");
             return false;
@@ -78,7 +78,7 @@ public class LoginInterceptor implements HandlerInterceptor {
                     logger.debug("未登录");
                 }
             }
-        }
+        }*/
 
         return true;
     }

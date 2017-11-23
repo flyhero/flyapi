@@ -2,6 +2,7 @@ package com.flyapi.web.controller;
 
 import com.flyapi.core.base.BaseController;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -24,7 +25,7 @@ public class ForwardController extends BaseController{
      */
     @RequestMapping("go")
     public ModelAndView go(String html){
-        mv.setViewName("html/"+html);
+        mv.setViewName(html);
         return mv;
     }
 }

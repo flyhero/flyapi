@@ -59,7 +59,7 @@ public class UserController extends BaseController {
      */
     @RequestMapping("go")
     public ModelAndView go(String html){
-        mv.setViewName(""+html);
+        mv.setViewName(html);
         return mv;
     }
 
