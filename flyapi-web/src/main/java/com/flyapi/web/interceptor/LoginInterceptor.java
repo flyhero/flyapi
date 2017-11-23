@@ -49,13 +49,13 @@ public class LoginInterceptor implements HandlerInterceptor {
         if (null != request.getHeader("X-Requested-With") && request.getHeader("X-Requested-With").equalsIgnoreCase("XMLHttpRequest")) {
             return true;
         }
-/*        String requestUri = request.getRequestURI();
-
+        String requestUri = request.getRequestURI();
+        request.setAttribute("rootPath", "http://www.iflyapi.cn:8080");
         for (String url : excludedUrls) {
             if (requestUri.contains(url)) {
                 return true;
             }
-        }*/
+        }
         logger.info(request.getSession().getId());
 /*        HttpSession session = request.getSession();
         UcenterUser login = (UcenterUser) session.getAttribute("user");
@@ -63,19 +63,23 @@ public class LoginInterceptor implements HandlerInterceptor {
             //System.out.println(request.getContextPath());
             response.sendRedirect(request.getContextPath());
         }*/
-/*        Cookie[] cookies = request.getCookies();
+
+        Cookie[] cookies = request.getCookies();
         if(null == cookies){
             logger.debug("cookies is null!");
             return false;
         }else {
             for(Cookie cookie:cookies){
                 if(cookie.getName().equals("isLogin")){
+                    System.out.println(request.getRequestURI());
+                    logger.debug("登录了");
                     return true;
+                }else {
+                    logger.debug("未登录");
                 }
             }
-        }*/
-        logger.info("设置根目录");
-        request.setAttribute("rootPath", "http://www.iflyapi.cn:8080");
+        }
+
         return true;
     }
 

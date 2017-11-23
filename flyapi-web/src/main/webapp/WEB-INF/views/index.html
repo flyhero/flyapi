@@ -7,13 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="keywords" content="">
     <meta name="description" content="">
-    <th:block th:include="html/common/link::link"></th:block>
+    <th:block th:include="common/link::link"></th:block>
 </head>
 
 <body>
 
 <div class="header">
-    <th:block th:include="html/common/header::header"></th:block>
+    <th:block th:include="common/header::header"></th:block>
 </div>
 
 <div class="main layui-clear">
@@ -130,7 +130,7 @@
     </div>
 </div>
 
-<th:block th:replace="/html/common/footer::footer"></th:block>
+<th:block th:replace="common/footer::footer"></th:block>
 
 <script src="../res/layui/layui.js" th:src="@{${rootPath} + '/res/layui/layui.js'}"></script>
 <script src="../../res/js/date-util.js" th:src="@{${rootPath} + '/res/js/date-util.js'}"></script>
@@ -161,6 +161,7 @@
     });
 </script>
 <script th:inline="javascript">
+
     layui.use('flow', function () {
         var flow = layui.flow;
         var pageCount;
@@ -236,6 +237,7 @@
         });
     });
 </script>
+<script src="../res/js/cookie-util.js" th:src="@{${rootPath} + '/res/js/cookie-util.js'}"></script>
 </body>
 
 </html>

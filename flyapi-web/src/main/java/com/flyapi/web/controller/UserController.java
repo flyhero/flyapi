@@ -59,7 +59,7 @@ public class UserController extends BaseController {
      */
     @RequestMapping("go")
     public ModelAndView go(String html){
-        mv.setViewName("html/"+html);
+        mv.setViewName(""+html);
         return mv;
     }
 
@@ -81,17 +81,17 @@ public class UserController extends BaseController {
         logger.debug("验证结果："+result.isSuccess());
         if(!result.isSuccess()){
             mv.addObject("msg",result.getErrors());
-            mv.setViewName("html/login");
+            mv.setViewName("login");
             return mv;
         }
         if(userService.findUserByUsername(registerDto.getUsername()) == 1){
             mv.addObject("msg","用户名已存在");
-            mv.setViewName("html/login");
+            mv.setViewName("login");
             return mv;
         }
         if(!registerDto.getPw().equals(registerDto.getConfirmPw())){
             mv.addObject("msg","两次密码不同！");
-            mv.setViewName("html/login");
+            mv.setViewName("login");
             return mv;
         }
         UcenterUser user =new UcenterUser();
@@ -106,7 +106,8 @@ public class UserController extends BaseController {
             UcenterUser login = userService.initStore(user,store);
             login.setPassword("");
             session.setAttribute("user",login);
-            mv.setViewName("html/index");
+            CookieUtil.setCookie(response,"isLogin","true");
+            mv.setViewName("index");
             return mv;
         }
         return mv;
@@ -137,19 +138,19 @@ public class UserController extends BaseController {
         logger.info(complexResult2);
         if(!result.isSuccess()){
             mv.addObject("msg",result.getErrors());
-            mv.setViewName("html/login");
+            mv.setViewName("login");
             return mv;
         }
         if(userService.findUserByUsername(user.getUsername()) !=1){
             mv.addObject("msg","用户名不存在");
-            mv.setViewName("html/login");
+            mv.setViewName("login");
             return mv;
         }
         user.setPassword(AESUtil.AESEncode(user.getPassword()));
         UcenterUser userLogin = userService.login(user);
         if(userLogin == null){
             mv.addObject("msg","用户名或密码错误！");
-            mv.setViewName("html/login");
+            mv.setViewName("login");
             return mv;
         }
 
@@ -157,7 +158,8 @@ public class UserController extends BaseController {
         //CookieUtil.setCookie(response,"isLogin",String.valueOf(userLogin.getUserId()));
         userLogin.setPassword("");
         session.setAttribute("user",userLogin);
-        mv.setViewName("html/index");
+        CookieUtil.setCookie(response,"isLogin","true");
+        mv.setViewName("index");
         return mv;
     }
     /**
@@ -171,7 +173,8 @@ public class UserController extends BaseController {
     @RequestMapping("logout")
     public ModelAndView logout(){
         session.removeAttribute("user");
-        mv.setViewName("flyapi/html/index");
+        CookieUtil.delCookie(response,"isLogin");
+        mv.setViewName("flyapi/index");
         return mv;
     }
 }

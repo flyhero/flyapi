@@ -74,7 +74,7 @@
 	<!-- **************************************************************** -->
 	<bean id="templateResolver" class="org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver">
 		<property name="order" value="0"/>
-		<property name="prefix" value="http://www.iflyapi.cn:8080/"/>
+		<property name="prefix" value="/WEB-INF/views/"/>
 		<property name="suffix" value=".html"/>
 		<property name="templateMode" value="HTML"/>
 		<property name="cacheable" value="false"/>
@@ -102,6 +102,7 @@
 		            <property name="excludedUrls">
 		                <list>
 	 	                    <value>/login</value>
+							<value>/static/</value>
 		                </list>
 		            </property>
 		        </bean>
