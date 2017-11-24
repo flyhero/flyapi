@@ -21,6 +21,8 @@
 		(2)提供一些列：数据绑定，数字和日期的format @NumberFormat, @DateTimeFormat, xml,json默认读写支持 
 	-->
   	<mvc:annotation-driven />
+	<!--启动对@AspectJ注解的支持 , proxy-target-class设置为true表示通知spring使用cglib而不是jdk的来生成代理方法，这样AOP可以拦截到Controller -->
+	<aop:aspectj-autoproxy proxy-target-class="true" />
 
 	<!--id生成器-->
 	<bean id="SnowflakeIdWorker" class="com.flyapi.core.id.SnowflakeIdWorker">
