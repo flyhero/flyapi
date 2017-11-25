@@ -89,7 +89,7 @@ http://  用户名：   密码：
 
 ## 演示界面 Screenshots
 ### 登录注册页面
-
+![flyapi架构](flyapi-doc/images/login-register.png)
 
 ### 首页面
 
