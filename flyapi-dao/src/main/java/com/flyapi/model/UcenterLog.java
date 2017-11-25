@@ -69,6 +69,24 @@ public class UcenterLog implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    public UcenterLog() {
+    }
+
+    public UcenterLog(Long logId, String username, String description, Date createTime, Integer spendTime, String basePath, String uri, String url, String method, String params, String userAgent, String ip) {
+        this.logId = logId;
+        this.username = username;
+        this.description = description;
+        this.createTime = createTime;
+        this.spendTime = spendTime;
+        this.basePath = basePath;
+        this.uri = uri;
+        this.url = url;
+        this.method = method;
+        this.params = params;
+        this.userAgent = userAgent;
+        this.ip = ip;
+    }
+
     public Long getLogId() {
         return logId;
     }
@@ -163,5 +181,23 @@ public class UcenterLog implements Serializable {
 
     public void setIp(String ip) {
         this.ip = ip;
+    }
+
+    @Override
+    public String toString() {
+        return "UcenterLog{" +
+                "logId=" + logId +
+                ", username='" + username + '\'' +
+                ", description='" + description + '\'' +
+                ", createTime=" + createTime +
+                ", spendTime=" + spendTime +
+                ", basePath='" + basePath + '\'' +
+                ", uri='" + uri + '\'' +
+                ", url='" + url + '\'' +
+                ", method='" + method + '\'' +
+                ", params='" + params + '\'' +
+                ", userAgent='" + userAgent + '\'' +
+                ", ip='" + ip + '\'' +
+                '}';
     }
 }

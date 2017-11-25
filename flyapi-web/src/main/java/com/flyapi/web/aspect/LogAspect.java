@@ -1,19 +1,27 @@
 package com.flyapi.web.aspect;
 
+import com.alibaba.fastjson.JSON;
+import com.flyapi.core.id.SnowflakeIdWorker;
 import com.flyapi.core.util.IPUtil;
 import com.flyapi.model.UcenterLog;
 import com.flyapi.model.UcenterUser;
+import com.flyapi.service.api.LogService;
 import org.apache.logging.log4j.LogManager;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.apache.logging.log4j.Logger;
+
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
+import java.util.Enumeration;
+import java.util.HashMap;
 
 /**
  * author: flyhero
@@ -27,6 +35,11 @@ public class LogAspect {
 
     private long startTime = 0L;
     private long endTime = 0L;
+
+    @Autowired
+    private SnowflakeIdWorker snowflakeIdWorker;
+    @Autowired
+    private LogService logService;
     //controller层切入点
     @Pointcut("@annotation(com.flyapi.core.annotation.EnableFlyapiLog)")
     public void controllerAspect() {
@@ -35,57 +48,53 @@ public class LogAspect {
 
     /**
      * 前置通知 用于拦截Controller层操作
+     *
      * @param joinPoint 切点
      */
-    @Before("execution(* com.flyapi.web..*.*(..))")
+    @Before("execution(* com.flyapi.web.controller..*.*(..))")
     public void doBefore(JoinPoint joinPoint) {
         startTime = System.currentTimeMillis();
-        System.out.println("前置通知");
 
     }
 
-    @After("execution(* com.flyapi.web..*.*(..))")
+    @After("execution(* com.flyapi.web.controller..*.*(..))")
     public void doAfter(JoinPoint joinPoint) {
-        System.out.println("后置通知");
-
         endTime = System.currentTimeMillis();
 
+        UcenterUser user = null;
 
-        UcenterLog log = new UcenterLog();
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder
-                .getRequestAttributes()).getRequest();
-        // 获取登陆用户信息
-        UcenterUser manager = (UcenterUser) request.getSession().getAttribute(
-                "currentManager");
-        // 获取请求ip
+        ServletRequestAttributes servletRequestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        HttpServletRequest request = servletRequestAttributes.getRequest();
+
+        user = (UcenterUser) request.getSession().getAttribute("user");
+
+        String username = "未登录用户";
+        if (user != null) {
+            username = user.getUsername();
+        }
+        String basePath =request.getRemoteHost()+":"+request.getLocalPort();
         String ip = IPUtil.getIP(request);
         String uri = request.getRequestURI();
-        String url = request.getContextPath();
+        String url = basePath+uri;
         String method = request.getMethod();
-        long spendTime = endTime - startTime;
+        int spendTime = (int)(endTime - startTime);
         String ua = request.getHeader("User-Agent");
         //获取用户请求方法的参数并序列化为JSON格式字符串
-        String params = "";
-/*        if (joinPoint.getArgs() != null && joinPoint.getArgs().length > 0) {
-            for (int i = 0; i < joinPoint.getArgs().length; i++) {
-                params += JSONUtil.toJsonString(joinPoint.getArgs()[i]) + ";";
-            }
-        }*/
-        try {
-            System.out.println("请求方法:" + (joinPoint.getTarget().getClass().getName() + "."
-                    + joinPoint.getSignature().getName() + "()"));
-            System.out.println("请求IP:" + ip);
-            log.setMethod((joinPoint.getTarget().getClass().getName() + "." + joinPoint.getSignature().getName() + "()"));
-            log.setIp(ip);
-            log.setParams(null);
-            // 保存数据库
-            System.out.println("=====前置通知结束=====");
-        } catch (Exception e) {
-            // 记录本地异常日志
-            logger.error("==前置通知异常==");
-            logger.error("异常信息:{}", e);
+        HashMap<String, String> requestParams = new HashMap<String, String>();
+        Enumeration<String> paramNames = request.getParameterNames();
+        while (paramNames.hasMoreElements()) {
+            String paramName = paramNames.nextElement();
+            String paramValue = request.getParameter(paramName);
+            requestParams.put(paramName, paramValue);
         }
+        String params = JSON.toJSONString(requestParams);
 
+
+        String description = joinPoint.getTarget().getClass().getName() + "." + joinPoint.getSignature().getName() + "()";
+        UcenterLog log = new UcenterLog(snowflakeIdWorker.nextId(),username,description,new Date(),spendTime,basePath,uri,url,method,params,ua,ip);
+        System.out.println(log.toString());
+
+        logService.insertSelective(log);
     }
 
 }
