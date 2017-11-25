@@ -7,18 +7,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="keywords" content="fly,layui,前端社区">
     <meta name="description" content="Fly社区是模块化前端UI框架Layui的官网社区，致力于为web开发提供强劲动力">
-    <link rel="stylesheet" href="../../res/layui/css/layui.css"  th:href="@{${rootPath} + '/res/layui/css/layui.css'}">
-    <link rel="stylesheet" href="../../res/css/global.css" th:href="@{${rootPath} + '/res/css/global.css'}">
+    <link rel="stylesheet" href="../../../static/layui/css/layui.css"  th:href="@{${rootPath} + '/static/layui/css/layui.css'}">
+    <link rel="stylesheet" href="../../../static/css/global.css" th:href="@{${rootPath} + '/static/css/global.css'}">
 
-    <link rel="stylesheet" href="../res/css/dropdown.css" th:href="@{${rootPath} + '/res/css/dropdown.css'}"/>
-    <script src="../res/js/jquery.min.js" th:src="@{${rootPath} + '/res/js/jquery.min.js'}"></script>
-    <script src="../res/js/jquery.sweet-dropdown.min.js" th:src="@{${rootPath} + '/res/js/jquery.sweet-dropdown.min.js'}"></script>
+    <link rel="stylesheet" href="../../../static/css/dropdown.css" th:href="@{${rootPath} + '/static/css/dropdown.css'}"/>
+    <script src="../../../static/js/jquery.min.js" th:src="@{${rootPath} + '/static/js/jquery.min.js'}"></script>
+    <script src="../../../static/js/jquery.sweet-dropdown.min.js" th:src="@{${rootPath} + '/static/js/jquery.sweet-dropdown.min.js'}"></script>
 </head>
 
 <body style="margin-top: 65px;">
 
 <div class="header">
-    <th:block th:include="html/common/header::header"></th:block>
+    <th:block th:include="common/header::header"></th:block>
 </div>
 <div class="layui-fluid">
 
@@ -27,7 +27,7 @@
             <div class="fly-home">
                 <img src="http://tp4.sinaimg.cn/1345566427/180/5730976522/0" alt="{{info.username}}">
                 <h1>
-                    贤心
+                    flyhero
                     <i class="iconfont icon-nan"></i>
                     <!-- <i class="iconfont icon-nv"></i> -->
 
@@ -123,8 +123,7 @@
                 <h3 class="fly-panel-title">开源项目</h3>
                 <ul class="jie-row">
                     <li>
-
-                        <a href="/jie/{{item.id}}.html" class="jie-title">flyapiflyapiflyapiflyapiflyapi</a>
+                        <a href="/jie/{{item.id}}.html" class="jie-title">flyapi</a>
                         <em>
                             <iframe
                                     style="margin-left: 1px; margin-bottom:-5px;"
@@ -134,6 +133,20 @@
                             <iframe
                                     frameborder="0" scrolling="0" width="80px" height="20px"
                                     src="https://ghbtns.com/github-btn.html?user=flyhero&repo=flyapi&type=fork&count=true">
+                            </iframe>
+                        </em>
+                    </li>
+                    <li>
+                        <a href="/jie/{{item.id}}.html" class="jie-title">spring-cloud-microservice</a>
+                        <em>
+                            <iframe
+                                    style="margin-left: 1px; margin-bottom:-5px;"
+                                    frameborder="0" scrolling="0" width="80px" height="20px"
+                                    src="https://ghbtns.com/github-btn.html?user=flyhero&repo=spring-cloud-microservice&type=star&count=true">
+                            </iframe>
+                            <iframe
+                                    frameborder="0" scrolling="0" width="80px" height="20px"
+                                    src="https://ghbtns.com/github-btn.html?user=flyhero&repo=spring-cloud-microservice&type=fork&count=true">
                             </iframe>
                         </em>
                     </li>
@@ -231,21 +244,21 @@ full: true
 
 </div>
 
-<th:block th:replace="/html/common/footer::footer"></th:block>
+<th:block th:replace="common/footer::footer"></th:block>
 
-<script src="../../res/layui/layui.js" th:src="@{${rootPath} + '/res/layui/layui.js'}"></script>
+<script src="../../../static/layui/layui.js" th:src="@{${rootPath} + '/static/layui/layui.js'}"></script>
 <script>
     layui.cache.page = 'user';
     layui.cache.user = {
         username: '游客',
         uid: -1,
-        avatar: '../../res/images/avatar/00.jpg',
+        avatar: '../../../static/images/avatar/00.jpg',
         experience: 83,
         sex: '男'
     };
     layui.config({
         version: "2.0.0",
-        base: '../../res/mods/'
+        base: '../../../static/mods/'
     }).extend({
         fly: 'index'
     }).use('fly');

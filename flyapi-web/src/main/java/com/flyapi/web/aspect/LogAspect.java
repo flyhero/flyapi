@@ -1,6 +1,7 @@
 package com.flyapi.web.aspect;
 
 import com.alibaba.fastjson.JSON;
+import com.flyapi.core.annotation.EnableFlyapiLog;
 import com.flyapi.core.id.SnowflakeIdWorker;
 import com.flyapi.core.util.IPUtil;
 import com.flyapi.model.UcenterLog;
@@ -19,6 +20,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
+import java.lang.reflect.Method;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -95,6 +97,45 @@ public class LogAspect {
         System.out.println(log.toString());
 
         logService.insertSelective(log);
+    }
+
+    /**
+     * 获取方法注解中的描述
+     * @title: getMthodRemark
+     * @author qfwang
+     * @params [joinPoint]
+     * @return java.lang.String
+     * @date 2017/11/25 下午3:51
+     */
+    public static String getMthodRemark(JoinPoint joinPoint) throws Exception {
+
+        String targetName = joinPoint.getTarget().getClass().getName();
+        String methodName = joinPoint.getSignature().getName();
+        System. out.println("====调用" +methodName+"方法-开始！");
+        Object[] arguments = joinPoint.getArgs();   //获得参数列表
+        System.out.println("打印出方法调用时传入的参数，可以在这里通过添加参数的类型，进行一些简易逻辑处理和判断");
+        if(arguments.length<=0){
+            System.out.println("=== "+methodName+" 方法没有参数");
+        }else{
+            for(int i=0;i<arguments.length;i++){
+                System.out.println("==== 参数   "+(i+1)+" : "+arguments[i]);
+            }
+        }
+
+        Class targetClass = Class.forName(targetName);
+        Method[] method = targetClass.getMethods();
+        String description = "";
+        for (Method m : method) {
+            if (m.getName().equals(methodName)) {
+                Class[] tmpCs = m.getParameterTypes();
+                if (tmpCs.length == arguments.length) {
+                    EnableFlyapiLog methodCache = m.getAnnotation(EnableFlyapiLog.class);
+                    description = methodCache.description();
+                    break;
+                }
+            }
+        }
+        return description;
     }
 
 }
