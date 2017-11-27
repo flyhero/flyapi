@@ -2,52 +2,73 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.flyapi.dao.CmsBookMapper">
   <resultMap id="BaseResultMap" type="com.flyapi.model.CmsBook">
-    <id column="book_id" jdbcType="BIGINT" property="bookId" />
-    <result column="book_name" jdbcType="VARCHAR" property="bookName" />
-    <result column="book_price" jdbcType="DECIMAL" property="bookPrice" />
+    <id column="book_id" jdbcType="BIGINT" property="book_id" />
+    <result column="user_id" jdbcType="BIGINT" property="user_id" />
+    <result column="book_name" jdbcType="VARCHAR" property="book_name" />
+    <result column="book_price" jdbcType="DECIMAL" property="book_price" />
     <result column="postage" jdbcType="DECIMAL" property="postage" />
     <result column="address" jdbcType="VARCHAR" property="address" />
     <result column="category" jdbcType="VARCHAR" property="category" />
     <result column="contact" jdbcType="VARCHAR" property="contact" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
-    <result column="is_delete" jdbcType="TINYINT" property="isDelete" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="create_time" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="update_time" />
+    <result column="is_delete" jdbcType="TINYINT" property="is_delete" />
   </resultMap>
+
   <sql id="Base_Column_List">
-    book_id, book_name, book_price, postage, address, category, contact, remark, create_time, 
-    update_time, is_delete
+    book_id, user_id, book_name, book_price, postage, address, category, contact, remark, 
+    create_time, update_time, is_delete
   </sql>
+
+  <select id="findBookList" resultType="com.flyapi.pojo.vo.BookVo">
+    SELECT
+    a.book_id bookeId,a.user_id, a.book_name bookName, a.book_price bookPrice, a.postage, a.address, a.category, a.contact,
+    a.remark,a.create_time createTime, b.user_id userId,b.avatar,b.nick_name nickName
+    FROM cms_book a
+    LEFT JOIN ucenter_user b ON a.user_id = b.user_id
+    WHERE a.is_delete = 0
+  </select>
+  <select id="findCount" resultType="java.lang.Long">
+    select count(*)
+    from cms_book
+    where is_delete = 0
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from cms_book
-    where book_id = #{bookId,jdbcType=BIGINT}
+    where book_id = #{book_id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from cms_book
-    where book_id = #{bookId,jdbcType=BIGINT}
+    where book_id = #{book_id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.flyapi.model.CmsBook">
-    insert into cms_book (book_id, book_name, book_price, 
-      postage, address, category, 
-      contact, remark, create_time, 
-      update_time, is_delete)
-    values (#{bookId,jdbcType=BIGINT}, #{bookName,jdbcType=VARCHAR}, #{bookPrice,jdbcType=DECIMAL}, 
-      #{postage,jdbcType=DECIMAL}, #{address,jdbcType=VARCHAR}, #{category,jdbcType=VARCHAR}, 
-      #{contact,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updateTime,jdbcType=TIMESTAMP}, #{isDelete,jdbcType=TINYINT})
+    insert into cms_book (book_id, user_id, book_name, 
+      book_price, postage, address, 
+      category, contact, remark, 
+      create_time, update_time, is_delete
+      )
+    values (#{book_id,jdbcType=BIGINT}, #{user_id,jdbcType=BIGINT}, #{book_name,jdbcType=VARCHAR}, 
+      #{book_price,jdbcType=DECIMAL}, #{postage,jdbcType=DECIMAL}, #{address,jdbcType=VARCHAR}, 
+      #{category,jdbcType=VARCHAR}, #{contact,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{create_time,jdbcType=TIMESTAMP}, #{update_time,jdbcType=TIMESTAMP}, #{is_delete,jdbcType=TINYINT}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.flyapi.model.CmsBook">
     insert into cms_book
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="bookId != null">
+      <if test="book_id != null">
         book_id,
       </if>
-      <if test="bookName != null">
+      <if test="user_id != null">
+        user_id,
+      </if>
+      <if test="book_name != null">
         book_name,
       </if>
-      <if test="bookPrice != null">
+      <if test="book_price != null">
         book_price,
       </if>
       <if test="postage != null">
@@ -65,25 +86,28 @@
       <if test="remark != null">
         remark,
       </if>
-      <if test="createTime != null">
+      <if test="create_time != null">
         create_time,
       </if>
-      <if test="updateTime != null">
+      <if test="update_time != null">
         update_time,
       </if>
-      <if test="isDelete != null">
+      <if test="is_delete != null">
         is_delete,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="bookId != null">
-        #{bookId,jdbcType=BIGINT},
+      <if test="book_id != null">
+        #{book_id,jdbcType=BIGINT},
       </if>
-      <if test="bookName != null">
-        #{bookName,jdbcType=VARCHAR},
+      <if test="user_id != null">
+        #{user_id,jdbcType=BIGINT},
       </if>
-      <if test="bookPrice != null">
-        #{bookPrice,jdbcType=DECIMAL},
+      <if test="book_name != null">
+        #{book_name,jdbcType=VARCHAR},
+      </if>
+      <if test="book_price != null">
+        #{book_price,jdbcType=DECIMAL},
       </if>
       <if test="postage != null">
         #{postage,jdbcType=DECIMAL},
@@ -100,25 +124,29 @@
       <if test="remark != null">
         #{remark,jdbcType=VARCHAR},
       </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
+      <if test="create_time != null">
+        #{create_time,jdbcType=TIMESTAMP},
       </if>
-      <if test="updateTime != null">
-        #{updateTime,jdbcType=TIMESTAMP},
+      <if test="update_time != null">
+        #{update_time,jdbcType=TIMESTAMP},
       </if>
-      <if test="isDelete != null">
-        #{isDelete,jdbcType=TINYINT},
+      <if test="is_delete != null">
+        #{is_delete,jdbcType=TINYINT},
       </if>
     </trim>
   </insert>
+
   <update id="updateByPrimaryKeySelective" parameterType="com.flyapi.model.CmsBook">
     update cms_book
     <set>
-      <if test="bookName != null">
-        book_name = #{bookName,jdbcType=VARCHAR},
+      <if test="user_id != null">
+        user_id = #{user_id,jdbcType=BIGINT},
       </if>
-      <if test="bookPrice != null">
-        book_price = #{bookPrice,jdbcType=DECIMAL},
+      <if test="book_name != null">
+        book_name = #{book_name,jdbcType=VARCHAR},
+      </if>
+      <if test="book_price != null">
+        book_price = #{book_price,jdbcType=DECIMAL},
       </if>
       <if test="postage != null">
         postage = #{postage,jdbcType=DECIMAL},
@@ -135,30 +163,31 @@
       <if test="remark != null">
         remark = #{remark,jdbcType=VARCHAR},
       </if>
-      <if test="createTime != null">
-        create_time = #{createTime,jdbcType=TIMESTAMP},
+      <if test="create_time != null">
+        create_time = #{create_time,jdbcType=TIMESTAMP},
       </if>
-      <if test="updateTime != null">
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      <if test="update_time != null">
+        update_time = #{update_time,jdbcType=TIMESTAMP},
       </if>
-      <if test="isDelete != null">
-        is_delete = #{isDelete,jdbcType=TINYINT},
+      <if test="is_delete != null">
+        is_delete = #{is_delete,jdbcType=TINYINT},
       </if>
     </set>
-    where book_id = #{bookId,jdbcType=BIGINT}
+    where book_id = #{book_id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.flyapi.model.CmsBook">
     update cms_book
-    set book_name = #{bookName,jdbcType=VARCHAR},
-      book_price = #{bookPrice,jdbcType=DECIMAL},
+    set user_id = #{user_id,jdbcType=BIGINT},
+      book_name = #{book_name,jdbcType=VARCHAR},
+      book_price = #{book_price,jdbcType=DECIMAL},
       postage = #{postage,jdbcType=DECIMAL},
       address = #{address,jdbcType=VARCHAR},
       category = #{category,jdbcType=VARCHAR},
       contact = #{contact,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
-      is_delete = #{isDelete,jdbcType=TINYINT}
-    where book_id = #{bookId,jdbcType=BIGINT}
+      create_time = #{create_time,jdbcType=TIMESTAMP},
+      update_time = #{update_time,jdbcType=TIMESTAMP},
+      is_delete = #{is_delete,jdbcType=TINYINT}
+    where book_id = #{book_id,jdbcType=BIGINT}
   </update>
 </mapper>

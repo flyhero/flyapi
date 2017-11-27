@@ -18,7 +18,7 @@
         <ul class="fly-case-list">
             <li data-id="160">
                 <a class="fly-case-img" href="#" target="_blank">
-                    <img src="../../../static/images/avatar/default.png" alt="口红网">
+                    <img src="../../../static/images/avatar/default.png" alt="hhhhh">
                     <cite class="layui-btn layui-btn-primary layui-btn-small">去围观</cite>
                 </a>
                 <h3><a href="#" target="_blank">大话设计模式之无敌神功</a></h3>
@@ -36,48 +36,10 @@
                     <p>联系：18365282216</p>
                 </div>
             </li>
-            <li data-id="160">
-                <a class="fly-case-img" href="#" target="_blank">
-                    <img src="../../../static/images/avatar/default.png" alt="口红网">
-                    <cite class="layui-btn layui-btn-primary layui-btn-small">去围观</cite>
-                </a>
-                <h2><a href="#" target="_blank">书名</a></h2>
-                <div class="fly-case-desc">
-                    <p>类别：Java &nbsp;&nbsp;价格：88元</p>
-                    <p>地址：上海市徐汇区</p>
-                    <p>备注：包邮</p>
-                </div>
-                <div class="fly-case-date">
-                    <a href="/u/2802912" class="fly-case-user" target="_blank">
-                        <img src="http://q.qlogo.cn/qqapp/101235792/5068B86B734FD45F863F69BE6A08A6FF/100">
-                    </a>
-                    <p class="layui-elip" style="font-size: 12px;"><span style="color: #666;">flyhero123456</span>
-                        2017-05-18</p>
-                    <p>联系：18365282216</p>
-                </div>
-            </li>
-            <li data-id="160">
-                <a class="fly-case-img" href="#" target="_blank">
-                    <img src="../../res/images/avatar/default.png" alt="口红网">
-                    <cite class="layui-btn layui-btn-primary layui-btn-small">去围观</cite>
-                </a>
-                <h2><a href="#" target="_blank">书名</a></h2>
-                <div class="fly-case-desc">
-                    <p>类别：Java &nbsp;&nbsp;价格：88元</p>
-                    <p>地址：上海市徐汇区</p>
-                    <p>备注：包邮</p>
-                </div>
-                <div class="fly-case-date">
-                    <a href="/u/2802912" class="fly-case-user" target="_blank">
-                        <img src="http://q.qlogo.cn/qqapp/101235792/5068B86B734FD45F863F69BE6A08A6FF/100">
-                    </a>
-                    <p class="layui-elip" style="font-size: 12px;"><span style="color: #666;">flyhero123456</span>
-                        2017-05-18</p>
-                    <p>联系：18365282216</p>
-                </div>
-            </li>
+
 
         </ul>
+        <div id="pageInfo"></div>
     </div>
 </div>
 
@@ -97,6 +59,52 @@
     }).extend({
         fly: 'index'
     }).use('fly');
+
+
+    layui.use(['laypage', 'layer'], function(){
+        var laypage = layui.laypage,layer = layui.layer;
+        var count = 0;
+        $.getJSON("../book/count",{},function (result) {
+            count = result.data;
+        });
+        //完整功能
+        laypage.render({
+            elem: 'pageInfo',
+            count: 100,
+            //,groups: 0
+            layout: ['count', 'prev', 'page', 'next', 'limit', 'skip'],
+            jump: function(obj){
+                //obj.curr,obj.limit
+                console.log(obj.curr)
+                $.getJSON("../book/books",{"pageNum":obj.curr,"pageSize":obj.limit},function (result) {
+                    $(".fly-case-list").empty();
+                    $.each(result.data.list,function(index,book){
+                        $(".fly-case-list").append('<li data-id="160">\n' +
+                            '                <a class="fly-case-img" href="#" target="_blank">\n' +
+                            '                    <img src="../../../static/images/avatar/default.png" alt="hhhhh">\n' +
+                            '                    <cite class="layui-btn layui-btn-primary layui-btn-small">去围观</cite>\n' +
+                            '                </a>\n' +
+                            '                <h3><a href="#" target="_blank">'+book.bookName+'</a></h3>\n' +
+                            '                <div class="fly-case-desc">\n' +
+                            '                    <p>类别：Java &nbsp;&nbsp;价格：'+book.bookPrice+'元</p>\n' +
+                            '                    <p>地址：'+book.address+'</p>\n' +
+                            '                    <p>备注：'+book.remark+'</p>\n' +
+                            '                </div>\n' +
+                            '                <div class="fly-case-date">\n' +
+                            '                    <a href="/u/2802912" class="fly-case-user" target="_blank">\n' +
+                            '                        <img src="http://q.qlogo.cn/qqapp/101235792/5068B86B734FD45F863F69BE6A08A6FF/100">\n' +
+                            '                    </a>\n' +
+                            '                    <p class="layui-elip" style="font-size: 12px;"><span style="color: #666;">'+book.nickName+'</span>\n' +
+                            '                        2017-05-18</p>\n' +
+                            '                    <p>联系：'+book.contact+'</p>\n' +
+                            '                </div>\n' +
+                            '            </li>');
+                    });
+                });
+            }
+        });
+
+    });
 </script>
 
 </body>

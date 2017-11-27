@@ -14,6 +14,11 @@ public class CmsBook implements Serializable {
     private Long bookId;
 
     /**
+     * 用户id
+     */
+    private Long userId;
+
+    /**
      * 书名
      */
     private String bookName;
@@ -71,6 +76,14 @@ public class CmsBook implements Serializable {
 
     public void setBookId(Long bookId) {
         this.bookId = bookId;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getBookName() {
