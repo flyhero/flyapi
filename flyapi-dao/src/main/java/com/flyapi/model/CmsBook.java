@@ -29,6 +29,11 @@ public class CmsBook implements Serializable {
     private BigDecimal bookPrice;
 
     /**
+     * 封面
+     */
+    private String bookCover;
+
+    /**
      * 邮费
      */
     private BigDecimal postage;
@@ -100,6 +105,14 @@ public class CmsBook implements Serializable {
 
     public void setBookPrice(BigDecimal bookPrice) {
         this.bookPrice = bookPrice;
+    }
+
+    public String getBookCover() {
+        return bookCover;
+    }
+
+    public void setBookCover(String bookCover) {
+        this.bookCover = bookCover;
     }
 
     public BigDecimal getPostage() {
