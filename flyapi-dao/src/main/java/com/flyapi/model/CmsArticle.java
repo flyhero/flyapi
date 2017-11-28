@@ -73,6 +73,11 @@ public class CmsArticle implements Serializable {
     private Byte permissions;
 
     /**
+     * 0草稿1发布
+     */
+    private Byte status;
+
+    /**
      * 0显示1删除
      */
     private Byte isDelete;
@@ -207,6 +212,14 @@ public class CmsArticle implements Serializable {
 
     public void setPermissions(Byte permissions) {
         this.permissions = permissions;
+    }
+
+    public Byte getStatus() {
+        return status;
+    }
+
+    public void setStatus(Byte status) {
+        this.status = status;
     }
 
     public Byte getIsDelete() {

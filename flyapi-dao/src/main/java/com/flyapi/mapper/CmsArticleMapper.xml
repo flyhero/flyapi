@@ -15,13 +15,14 @@
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="permissions" jdbcType="TINYINT" property="permissions" />
+    <result column="status" jdbcType="TINYINT" property="status" />
     <result column="is_delete" jdbcType="TINYINT" property="isDelete" />
     <result column="md_content" jdbcType="LONGVARCHAR" property="mdContent" />
     <result column="html_content" jdbcType="LONGVARCHAR" property="htmlContent" />
   </resultMap>
   <sql id="Base_Column_List">
     article_id, subject_id,user_id, title, article_des, cover, original, view_num, comment_num,
-    like_num, create_time, update_time, permissions, is_delete,md_content, html_content
+    like_num, create_time, update_time, permissions,status, is_delete,md_content, html_content
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -86,6 +87,9 @@
       <if test="permissions != null">
         permissions,
       </if>
+      <if test="status != null">
+        permissions,
+      </if>
       <if test="isDelete != null">
         is_delete,
       </if>
@@ -133,6 +137,9 @@
       <if test="permissions != null">
         #{permissions,jdbcType=TINYINT},
       </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
       <if test="isDelete != null">
         #{isDelete,jdbcType=TINYINT},
       </if>
@@ -179,6 +186,9 @@
       </if>
       <if test="permissions != null">
         permissions = #{permissions,jdbcType=TINYINT},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
       </if>
       <if test="isDelete != null">
         is_delete = #{isDelete,jdbcType=TINYINT},
@@ -254,6 +264,7 @@
     LEFT JOIN ucenter_user t2 ON t.user_id = t2.user_id
     WHERE
         t.permissions = 0
+    AND t.status = 1
     AND t.is_delete = 0
     ORDER BY t.create_time DESC
   </select>
@@ -267,6 +278,7 @@
     WHERE
         is_delete = 0
     AND permissions = 0
+    AND status = 1
     <if test="atype == 1">
       ORDER BY
       update_time DESC
@@ -289,6 +301,7 @@
     WHERE
       is_delete = 0
       AND permissions = 0
+      AND status = 1
     GROUP BY subjectId,userId
     ORDER BY
     <trim suffixOverrides=",">
