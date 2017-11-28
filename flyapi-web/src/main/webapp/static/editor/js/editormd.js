@@ -99,12 +99,12 @@
         appendMarkdown       : "",             // if in init textarea value not empty, append markdown to textarea
         width                : "100%",
         height               : "100%",
-        path                 : "http://localhost:8080/res/editor/lib/",       // Dependents module file directory ./lib/
-        pluginPath           : "http://localhost:8080/res/editor/plugins/",             // If this empty, default use settings.path + "../plugins/"
+        path                 : "../../../static/editor/lib/",       // Dependents module file directory ./lib/
+        pluginPath           : "../../../static/editor/plugins/",             // If this empty, default use settings.path + "../plugins/"
         delay                : 300,            // Delay parse markdown to html, Uint : ms
         autoLoadModules      : true,           // Automatic load dependent module files
         watch                : true,
-        placeholder          : "Enjoy Markdown! coding now...",
+        placeholder          : "开启你的成神之路吧……",
         gotoLine             : true,
         codeFold             : false,
         autoHeight           : false,
@@ -412,12 +412,14 @@
             
             if (typeof markdownTextarea.attr("name") === "undefined" || markdownTextarea.attr("name") === "")
             {
-                markdownTextarea.attr("name", (settings.name !== "") ? settings.name : id + "-markdown-doc");
+                //markdownTextarea.attr("name", (settings.name !== "") ? settings.name : id + "-markdown-doc");
+                markdownTextarea.attr("name", (settings.name !== "") ? settings.name : ''+ "mdContent");
             }
             
             var appendElements = [
                 (!settings.readOnly) ? "<a href=\"javascript:;\" class=\"fa fa-close " + classPrefix + "preview-close-btn\"></a>" : "",
-                ( (settings.saveHTMLToTextarea) ? "<textarea class=\"" + classNames.textarea.html + "\" name=\"" + id + "-html-code\"></textarea>" : "" ),
+                //( (settings.saveHTMLToTextarea) ? "<textarea class=\"" + classNames.textarea.html + "\" name=\"" + id + "-html-code\"></textarea>" : "" ),
+                ( (settings.saveHTMLToTextarea) ? "<textarea class=\"" + classNames.textarea.html + "\" name=\"" + '' + "htmlContent\"></textarea>" : "" ),
                 "<div class=\"" + classPrefix + "preview\"><div class=\"markdown-body " + classPrefix + "preview-container\"></div></div>",
                 "<div class=\"" + classPrefix + "container-mask\" style=\"display:block;\"></div>",
                 "<div class=\"" + classPrefix + "mask\"></div>"

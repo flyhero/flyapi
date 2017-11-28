@@ -137,4 +137,12 @@ public class ArticleController extends BaseController {
         return JSONResult.ok(pageInfo);
     }
 
+
+    @ResponseBody
+    @PostMapping("add")
+    public JSONResult addArticle(){
+
+        return JSONResult.ok();
+    }
+
 }

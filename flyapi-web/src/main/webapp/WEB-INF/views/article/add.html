@@ -4,11 +4,11 @@
     <meta charset="utf-8">
     <title>发表文章</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="stylesheet" href="../../static/layui/css/layui.css" th:href="@{${rootPath} + '/static/layui/css/layui.css'}">
-    <link rel="stylesheet" href="../../static/css/global.css" th:href="@{${rootPath} + '/static/css/global.css'}">
-    <link rel="stylesheet" href="../../static/editor/css/editormd.css"
+    <link rel="stylesheet" href="../../../static/layui/css/layui.css" th:href="@{${rootPath} + '/static/layui/css/layui.css'}">
+    <link rel="stylesheet" href="../../../static/css/global.css" th:href="@{${rootPath} + '/static/css/global.css'}">
+    <link rel="stylesheet" href="../../../static/editor/css/editormd.css"
           th:href="@{${rootPath} + '/static/editor/css/editormd.css'}"/>
-    <script src="../../static/js/jquery.min.js" th:src="@{${rootPath} + '/static/js/jquery.min.js'}"></script>
+    <script src="../../../static/js/jquery.min.js" th:src="@{${rootPath} + '/static/js/jquery.min.js'}"></script>
 </head>
 <body>
 
@@ -36,14 +36,14 @@
                 <div class="layui-form-item">
                     <label for="2" class="layui-form-label">摘要</label>
                     <div class="layui-input-block">
-                        <input type="text" id="2" name="des" required lay-verify="required" autocomplete="off"
+                        <input type="text" id="2" name="articleDes" required lay-verify="required" autocomplete="off"
                                class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item layui-form-text">
                     <div class="layui-input-block ">
                         <div id="editormd-text">
-                            <textarea style="display:none;">just do it</textarea>
+                            <textarea style="display:none;"></textarea>
                         </div>
                     </div>
                 </div>
@@ -66,28 +66,29 @@
                                         </th:block>
                                     </th:block>
                                 </th:block>
-                                <option value="1">Spring</option>
+                                <option value="21321423423423">Spring</option>
                             </select>
                         </div>
                     </div>
                     <div class="layui-inline">
                         <label class="layui-form-label">原文链接</label>
                         <div class="layui-input-block">
-                            <input th:value="${article} ? ${article.origin} :''" type="text" id="origin" name="origin"
-                                   required lay-verify="url" placeholder="为空既原创" autocomplete="off" class="layui-input">
+                            <input th:value="${article} ? ${article.origin} :''" type="text" id="original" name="original"
+                                   lay-verify="url" placeholder="为空既原创" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-inline">
                         <label class="layui-form-label">权限</label>
                         <div class="layui-input-block">
                             <input th:value="${article} ? ${article.permissions} :''" value="0" type="checkbox"
-                                   id="switch" name="switch" lay-filter="permissions" lay-skin="switch" lay-text="公开|私有"
+                                   id="permissions" name="permissions" lay-filter="permissions" lay-skin="switch" lay-text="公开|私有"
                                    checked>
                         </div>
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <button class="layui-btn" lay-filter="pub" lay-submit="">立即发布</button>
+                    <button class="layui-btn " lay-filter="draft" lay-submit="">保存草稿</button>
                     <input type="checkbox" name="apply" value="0" id="apply" lay-filter="apply" title="首页投稿" checked>
                 </div>
             </form>
@@ -95,19 +96,19 @@
     </div>
 </div>
 
-<script src="../../static/editor/js/editormd.js" th:src="@{${rootPath} + '/static/editor/js/editormd.js'}"></script>
+<script src="../../../static/editor/js/editormd.js" th:src="@{${rootPath} + '/static/editor/js/editormd.js'}"></script>
 
 
-<script src="../../static/editor/lib/marked.min.js" th:src="@{${rootPath} + '/static/editor/lib/marked.min.js'}"></script>
-<script src="../../static/editor/lib/prettify.min.js" th:src="@{${rootPath} + '/static/editor/lib/prettify.min.js'}"></script>
-<script src="../../static/editor/lib/raphael.min.js" th:src="@{${rootPath} + '/static/editor/lib/raphael.min.js'}"></script>
-<script src="../../static/editor/lib/underscore.min.js"
+<script src="../../../static/editor/lib/marked.min.js" th:src="@{${rootPath} + '/static/editor/lib/marked.min.js'}"></script>
+<script src="../../../static/editor/lib/prettify.min.js" th:src="@{${rootPath} + '/static/editor/lib/prettify.min.js'}"></script>
+<script src="../../../static/editor/lib/raphael.min.js" th:src="@{${rootPath} + '/static/editor/lib/raphael.min.js'}"></script>
+<script src="../../../static/editor/lib/underscore.min.js"
         th:src="@{${rootPath} + '/static/editor/lib/underscore.min.js'}"></script>
-<script src="../../static/editor/lib/sequence-diagram.min.js"
+<script src="../../../static/editor/lib/sequence-diagram.min.js"
         th:src="@{${rootPath} + '/static/editor/lib/sequence-diagram.min.js'}"></script>
-<script src="../../static/editor/lib/flowchart.min.js"
+<script src="../../../static/editor/lib/flowchart.min.js"
         th:src="@{${rootPath} + '/static/editor/lib/flowchart.min.js'}"></script>
-<script src="../../static/editor/lib/jquery.flowchart.min.js"
+<script src="../../../static/editor/lib/jquery.flowchart.min.js"
         th:src="@{${rootPath} + '/static/editor/lib/jquery.flowchart.min.js'}"></script>
 
 
@@ -115,7 +116,7 @@
 
     $(function () {
         layui.use('form', function () {
-            var form = layui.form();
+            var form = layui.form;
 
             //各种基于事件的操作，下面会有进一步介绍
             form.on('switch(permissions)', function (data) {
@@ -141,12 +142,18 @@
 
             //监听提交
             form.on('submit(pub)', function (data) {
+                alert(data.field);
+/*                layer.alert(JSON.stringify(data.field), {
+                    title: '最终的提交信息'
+                })*/
+                return false;
+            });
+            form.on('submit(draft)', function (data) {
                 layer.alert(JSON.stringify(data.field), {
                     title: '最终的提交信息'
                 })
                 return false;
             });
-
 
         });
 
@@ -247,7 +254,7 @@
     });
 </script>
 <th:block th:replace="/html/common/footer::footer"></th:block>
-<script src="../../static/layui/layui.js" th:src="@{${rootPath} + '/static/layui/layui.js'}"></script>
+<script src="../../../static/layui/layui.js" th:src="@{${rootPath} + '/static/layui/layui.js'}"></script>
 <script>
 
 </script>
