@@ -29,14 +29,14 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">标题</label>
                     <div class="layui-input-block">
-                        <input th:value="${article} ? ${article.title} :''" type="text" id="1" name="title" required
+                        <input th:value="${article} ? ${article.title} :''" type="text" id="title" name="title" required
                                lay-verify="required" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
-                    <label for="2" class="layui-form-label">摘要</label>
+                    <label for="articleDes" class="layui-form-label">摘要</label>
                     <div class="layui-input-block">
-                        <input type="text" id="2" name="articleDes" required lay-verify="required" autocomplete="off"
+                        <input type="text" id="articleDes" name="articleDes" required lay-verify="required" autocomplete="off"
                                class="layui-input">
                     </div>
                 </div>
@@ -85,11 +85,12 @@
                                    checked>
                         </div>
                     </div>
+                    <input type="checkbox" name="apply" value="0" id="apply" lay-filter="apply" title="首页投稿" checked>
                 </div>
                 <div class="layui-form-item">
                     <button class="layui-btn" lay-filter="pub" lay-submit="">立即发布</button>
                     <button class="layui-btn " lay-filter="draft" lay-submit="">保存草稿</button>
-                    <input type="checkbox" name="apply" value="0" id="apply" lay-filter="apply" title="首页投稿" checked>
+
                 </div>
             </form>
         </div>
@@ -115,47 +116,6 @@
 <script type="text/javascript">
 
     $(function () {
-        layui.use('form', function () {
-            var form = layui.form;
-
-            //各种基于事件的操作，下面会有进一步介绍
-            form.on('switch(permissions)', function (data) {
-                if (data.elem.checked) {
-                    $("#switch").val(0);
-                } else {
-                    $("#switch").val(1);
-                }
-                /*                console.log(data.elem); //得到checkbox原始DOM对象
-                                console.log(data.elem.checked); //开关是否开启，true或者false
-                                console.log(data.value); //开关value值，也可以通过data.elem.value得到
-                                console.log(data.othis); //得到美化后的DOM对象*/
-            });
-
-            form.on('checkbox(apply)', function (data) {
-                if (data.elem.checked) {
-                    $("#apply").val(0);
-                } else {
-                    $("#apply").val(1);
-                }
-            });
-
-
-            //监听提交
-            form.on('submit(pub)', function (data) {
-                alert(data.field);
-/*                layer.alert(JSON.stringify(data.field), {
-                    title: '最终的提交信息'
-                })*/
-                return false;
-            });
-            form.on('submit(draft)', function (data) {
-                layer.alert(JSON.stringify(data.field), {
-                    title: '最终的提交信息'
-                })
-                return false;
-            });
-
-        });
 
         var testEditor = editormd("editormd-text", {
             width: "100%",
@@ -197,60 +157,63 @@
             }
         });
 
-        $("#goto-line-btn").bind("click", function () {
-            testEditor.gotoLine(90);
-        });
 
-        $("#show-btn").bind('click', function () {
-            testEditor.show();
-        });
+        layui.use('form', function () {
+            var form = layui.form;
 
-        $("#hide-btn").bind('click', function () {
-            testEditor.hide();
-        });
-
-        $("#get-md-btn").bind('click', function () {
-            alert(testEditor.getMarkdown());
-        });
-
-        $("#get-html-btn").bind('click', function () {
-            alert(testEditor.getHTML());
-        });
-
-        $("#watch-btn").bind('click', function () {
-            testEditor.watch();
-        });
-
-        $("#unwatch-btn").bind('click', function () {
-            testEditor.unwatch();
-        });
-
-        $("#preview-btn").bind('click', function () {
-            testEditor.previewing();
-        });
-
-        $("#fullscreen-btn").bind('click', function () {
-            testEditor.fullscreen();
-        });
-
-        $("#show-toolbar-btn").bind('click', function () {
-            testEditor.showToolbar();
-        });
-
-        $("#close-toolbar-btn").bind('click', function () {
-            testEditor.hideToolbar();
-        });
-
-        $("#toc-menu-btn").click(function () {
-            testEditor.config({
-                tocDropdown: true,
-                tocTitle: "目录 Table of Contents",
+            //各种基于事件的操作，下面会有进一步介绍
+            form.on('switch(permissions)', function (data) {
+                if (data.elem.checked) {
+                    $("#permissions").val(0);
+                } else {
+                    $("#permissions").val(1);
+                }
+                /*                console.log(data.elem); //得到checkbox原始DOM对象
+                                console.log(data.elem.checked); //开关是否开启，true或者false
+                                console.log(data.value); //开关value值，也可以通过data.elem.value得到
+                                console.log(data.othis); //得到美化后的DOM对象*/
             });
+
+            form.on('checkbox(apply)', function (data) {
+                if (data.elem.checked) {
+                    $("#apply").val(0);
+                } else {
+                    $("#apply").val(1);
+                }
+            });
+
+
+            function postArticle(status) {
+                $.post("../article/add",
+                    {
+                        "title":$("#title").val(),
+                        "articleDes":$("#articleDes").val(),
+                        "mdContent":testEditor.getMarkdown(),
+                        "htmlContent":testEditor.getHTML(),
+                        "subjectId":$("#subjectId").val(),
+                        "original":$("#original").val(),
+                        "permissions":$("#permissions").val(),
+                        "apply": $("#apply").val(),
+                        "status":status
+                    },
+                    function(result){
+
+                    }, "json");
+            }
+            //监听提交
+            form.on('submit(pub)', function (data) {
+                postArticle(1);
+            });
+            form.on('submit(draft)', function (data) {
+/*                layer.alert(JSON.stringify(data.field), {
+                    title: '最终的提交信息'
+                })*/
+
+                return false;
+            });
+
         });
 
-        $("#toc-default-btn").click(function () {
-            testEditor.config("tocDropdown", false);
-        });
     });
 </script>
 <th:block th:replace="/html/common/footer::footer"></th:block>
