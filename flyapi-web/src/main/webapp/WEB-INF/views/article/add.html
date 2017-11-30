@@ -197,6 +197,9 @@
                         "status":status
                     },
                     function(result){
+                        if(result.code==200){
+                            location.href="";
+                        }
 
                     }, "json");
             }
