@@ -9,6 +9,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -65,5 +66,20 @@ public class BookController extends BaseController{
             return JSONResult.error();
         }
         return JSONResult.ok(count);
+    }
+
+    /**
+     * 修改书籍信息
+     * @title: updateBookInfo
+     * @author qfwang
+     * @params [book]
+     * @return com.flyapi.core.constant.JSONResult
+     * @date 2017/12/5 下午4:11
+     */
+    @ResponseBody
+    @PutMapping("update")
+    public JSONResult updateBookInfo(CmsBook book){
+        bookService.updateByPrimaryKeySelective(book);
+        return JSONResult.ok();
     }
 }
