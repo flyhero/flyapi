@@ -115,6 +115,42 @@ public class UserController extends BaseController {
         return mv;
     }
 
+    @PostMapping("register")
+    @ResponseBody
+    public JSONResult userRegister(RegisterDto registerDto){
+        Result result=FluentValidator.checkAll()
+                .on(registerDto.getUsername(),new StringValidator(0,11,"用户名"))
+                .on(registerDto.getPw(),new StringValidator("密码"))
+                .on(registerDto.getConfirmPw(),new StringValidator("再次密码"))
+                .doValidate().result(toSimple());
+        logger.debug("验证结果："+result.isSuccess());
+        if(!result.isSuccess()){
+            return JSONResult.error(result.getErrors().toString(),300,null);
+        }
+        if(userService.findUserByUsername(registerDto.getUsername()) == 1){
+            return JSONResult.error("用户名已存在",300,null);
+        }
+        if(!registerDto.getPw().equals(registerDto.getConfirmPw())){
+            return JSONResult.error("两次密码不同！",300,null);
+        }
+        UcenterUser user =new UcenterUser();
+        user.setUserId(snowflakeIdWorker.nextId());
+        user.setUsername(registerDto.getUsername());
+        user.setNickName(registerDto.getUsername());
+        user.setPassword(AESUtil.AESEncode(registerDto.getPw()));
+        user.setCreateTime(new Date(System.currentTimeMillis()));
+        if(userService.insertSelective(user) > 0){
+            SettingStore store = new SettingStore();
+            store.setId(snowflakeIdWorker.nextId());
+            UcenterUser login = userService.initStore(user,store);
+            login.setPassword("");
+            session.setAttribute("user",login);
+            CookieUtil.setCookie(response,"isLogin","true");
+            mv.setViewName("index");
+            return JSONResult.ok();
+        }
+        return JSONResult.ok();
+    }
 
     /**
      * 登录
@@ -169,16 +205,12 @@ public class UserController extends BaseController {
     public JSONResult userLogin(UcenterUser user){
         Result result=FluentValidator.checkAll().on(user.getUsername(),new StringValidator(0,11,"用户名"))
                 .on(user.getPassword(),new StringValidator("密码")).doValidate().result(toSimple());
-        logger.info(result);
         ComplexResult complexResult=FluentValidator.checkAll().on(user.getUsername(),new StringValidator(0,11,"username"))
                 .on(user.getPassword(),new StringValidator("password")).doValidate().result(toComplex());
-        logger.info(complexResult);
         String string=FluentValidator.checkAll().on(user.getUsername(),new StringValidator(0,11,"username"))
                 .on(user.getPassword(),new StringValidator("password")).doValidate().toString();
-        logger.info(string);
         ComplexResult2 complexResult2=FluentValidator.checkAll().on(user.getUsername(),new StringValidator(0,11,"username"))
                 .on(user.getPassword(),new StringValidator("password")).doValidate().result(toComplex2());
-        logger.info(complexResult2);
         if(!result.isSuccess()){
             mv.addObject("msg",result.getErrors());
             mv.setViewName("login");
