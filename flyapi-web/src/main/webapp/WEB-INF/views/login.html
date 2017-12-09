@@ -35,9 +35,8 @@
 				</div>
 				<div class="box" id="signin-box">
 					<div class="login-body">
-						<form id="signupForm" action="http://www.iflyapi.cn:8090/flyapi-web/user/login" accept-charset="UTF-8" method="post">
-							<input name="utf8" type="hidden" value="✓">
-							<input type="hidden" name="token" value="Vp9hwqEtwtnMjSSiWnI7V3NxcutfXRuwXpA+SYI8sYdmruMQQQIYh+aGphKB/kpkai3TDRGs7oGpjmU7VGLEIw==">
+						<!--<form id="signupForm" action="http://www.iflyapi.cn:8090/flyapi-web/user/login" accept-charset="UTF-8" method="post">-->
+						<form class="layui-form">
 							<th:block th:if="${msg} != null">
 								<div th:if="${msg} != null" class="form-error">
 								<span class="form-error-icon">
@@ -59,7 +58,10 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<button class="btn btn-primary btn-block submit" data-style="slide-up" type="submit">
+<!--								<button class="btn btn-primary btn-block submit" data-style="slide-up" type="submit">
+									登录
+								</button>-->
+								<button class="btn btn-primary btn-block submit"  lay-filter="login-btn" lay-submit="">
 									登录
 								</button>
 							</div>
@@ -147,7 +149,7 @@
 			</div>
 
 		</div>
-
+		<script src="../../../static/layui/layui.js" th:src="@{${rootPath} + '/static/layui/layui.js'}"></script>
 
 		<script th:inline="javascript">
 
@@ -206,6 +208,37 @@
 
 				});
 
+
+                layui.use('form', function () {
+                    var form = layui.form;
+
+
+                    function postLogin(data) {
+
+                        $.post("../user/login",
+                            data,
+                            function(result){
+                                if(result.code==200){
+                                    location.href="";
+                                }else {
+                                    layer.alert(result.msg);
+								}
+
+                            }, "json");
+                    }
+                    //监听提交
+                    form.on('submit(login-btn)', function (data) {
+/*                        layer.alert(JSON.stringify(data.field), {
+                            title: '最终的提交信息'
+                        })*/
+						var jsonText=JSON.stringify(data.field);
+                        var jsonOb=JSON.parse(jsonText);
+						postLogin(jsonOb);
+                       return false;
+                    });
+
+
+                });
 		</script>
 	</body>
 

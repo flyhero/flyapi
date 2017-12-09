@@ -8,6 +8,7 @@ import static com.baidu.unbiz.fluentvalidator.ResultCollectors.toComplex;
 import static com.baidu.unbiz.fluentvalidator.ResultCollectors.toComplex2;
 import com.baidu.unbiz.fluentvalidator.Result;
 import com.flyapi.core.base.BaseController;
+import com.flyapi.core.constant.JSONResult;
 import com.flyapi.core.id.SnowflakeIdWorker;
 import com.flyapi.core.util.AESUtil;
 import com.flyapi.core.util.CookieUtil;
@@ -23,6 +24,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -162,6 +164,43 @@ public class UserController extends BaseController {
         mv.setViewName("index");
         return mv;
     }
+    @PostMapping("login")
+    @ResponseBody
+    public JSONResult userLogin(UcenterUser user){
+        Result result=FluentValidator.checkAll().on(user.getUsername(),new StringValidator(0,11,"用户名"))
+                .on(user.getPassword(),new StringValidator("密码")).doValidate().result(toSimple());
+        logger.info(result);
+        ComplexResult complexResult=FluentValidator.checkAll().on(user.getUsername(),new StringValidator(0,11,"username"))
+                .on(user.getPassword(),new StringValidator("password")).doValidate().result(toComplex());
+        logger.info(complexResult);
+        String string=FluentValidator.checkAll().on(user.getUsername(),new StringValidator(0,11,"username"))
+                .on(user.getPassword(),new StringValidator("password")).doValidate().toString();
+        logger.info(string);
+        ComplexResult2 complexResult2=FluentValidator.checkAll().on(user.getUsername(),new StringValidator(0,11,"username"))
+                .on(user.getPassword(),new StringValidator("password")).doValidate().result(toComplex2());
+        logger.info(complexResult2);
+        if(!result.isSuccess()){
+            mv.addObject("msg",result.getErrors());
+            mv.setViewName("login");
+            return JSONResult.error("error",300,null);
+        }
+        if(userService.findUserByUsername(user.getUsername()) !=1){
+            return JSONResult.error("用户名不存在",300,null);
+        }
+        user.setPassword(AESUtil.AESEncode(user.getPassword()));
+        UcenterUser userLogin = userService.login(user);
+        if(userLogin == null){
+            return JSONResult.error("用户名或密码错误！",300,null);
+        }
+
+        userFameService.addFameValue(userLogin.getUserId(),1);
+        //CookieUtil.setCookie(response,"isLogin",String.valueOf(userLogin.getUserId()));
+        userLogin.setPassword("");
+        session.setAttribute("user",userLogin);
+        CookieUtil.setCookie(response,"isLogin","true");
+        return JSONResult.ok();
+    }
+
     /**
      * 退出
      * Title: logout
