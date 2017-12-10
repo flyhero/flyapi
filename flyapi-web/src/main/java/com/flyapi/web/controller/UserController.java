@@ -245,7 +245,7 @@ public class UserController extends BaseController {
     public ModelAndView logout(){
         session.removeAttribute("user");
         CookieUtil.delCookie(response,"isLogin");
-        mv.setViewName("flyapi/index");
+        mv.setViewName("index");
         return mv;
     }
 }

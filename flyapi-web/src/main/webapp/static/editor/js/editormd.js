@@ -99,8 +99,8 @@
         appendMarkdown       : "",             // if in init textarea value not empty, append markdown to textarea
         width                : "100%",
         height               : "100%",
-        path                 : "../../../static/editor/lib/",       // Dependents module file directory ./lib/
-        pluginPath           : "../../../static/editor/plugins/",             // If this empty, default use settings.path + "../plugins/"
+        path                 : "../../static/editor/lib/",       // Dependents module file directory ./lib/
+        pluginPath           : "../../static/editor/plugins/",             // If this empty, default use settings.path + "../plugins/"
         delay                : 300,            // Delay parse markdown to html, Uint : ms
         autoLoadModules      : true,           // Automatic load dependent module files
         watch                : true,
@@ -3371,6 +3371,7 @@
     // Emoji graphics files url path
     editormd.emoji     = {
         path  : "http://www.emoji-cheat-sheet.com/graphics/emojis/",
+        //path: "http://www.webpagefx.com/tools/emoji-cheat-sheet/graphics/emojis/",
         ext   : ".png"
     };
 

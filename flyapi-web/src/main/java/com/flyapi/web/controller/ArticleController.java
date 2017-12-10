@@ -49,7 +49,7 @@ public class ArticleController extends BaseController {
 
         ArticleDetailVo detailVo = articleService.findArticleDetail(articleId);
         mv.addObject("detailVo",detailVo);
-        mv.setViewName("html/article/detail");
+        mv.setViewName("article/detail");
         return mv;
     }
     /**
@@ -66,7 +66,7 @@ public class ArticleController extends BaseController {
 
         mv.addObject("articleList",list);
         mv.addObject("title",title);
-        mv.setViewName("html/article/sub-timeline");
+        mv.setViewName("article/sub-timeline");
         return mv;
     }
 

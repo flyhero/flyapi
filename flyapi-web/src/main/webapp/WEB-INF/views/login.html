@@ -103,7 +103,7 @@
 								</div>
 							</div>
 							<div class="form-group form-group-icon">
-								<input class="input-lg form-input email" name="pw" placeholder="密码">
+								<input class="input-lg form-input email" name="pw" placeholder="密码" type="password">
 								<div class="form-icon">
 									<i class="fa fa-lock"></i>
 								</div>
@@ -149,21 +149,10 @@
 		<script th:inline="javascript">
 
 				$(function() {
-
-/*                    function getCookie(cname){
-                        var name = cname + "=";
-                        var ca = document.cookie.split(';');
-                        for(var i=0; i<ca.length; i++) {
-                            var c = ca[i].trim();
-                            if (c.indexOf(name)==0) return c.substring(name.length,c.length);
-                        }
-                        return "";
-                    }
-                    var user=getCookie("isLogin");
-                    if (user == "true") {//若已经登录，跳转到主页
+                    var user=[[${session.user}]];
+                    if (user != null && user !="") {//若已经登录，跳转到主页
                         window.location.href = "http://www.iflyapi.cn:8090/flyapi-web/forward/go?html=index.html"
-                    }*/
-
+                    }
 
 					var $login;
 					$('ul.tab li').click(function(e) {
@@ -214,7 +203,7 @@
                             data,
                             function(result){
                                 if(result.code==200){
-                                    location.href="";
+                                    location.href="http://www.iflyapi.cn:8090/flyapi-web/forward/go?html=index.html";
                                 }else {
                                     layer.alert(result.msg);
 								}
@@ -228,7 +217,7 @@
                             data,
                             function(result){
                                 if(result.code==200){
-                                    location.href="";
+                                    location.href="http://www.iflyapi.cn:8090/flyapi-web/forward/go?html=index.html";
                                 }else {
                                     layer.alert(result.msg);
                                 }
