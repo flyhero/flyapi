@@ -40,8 +40,7 @@ public class SettingController extends BaseController{
         try {
             list = settingCarouselService.findList();
         } catch (Exception e) {
-            JSONResult.error();
-            e.printStackTrace();
+            return JSONResult.error(e);
         }
         return JSONResult.ok(list);
     }
