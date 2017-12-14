@@ -6,17 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="keywords" content="">
     <meta name="description" content="">
-    <link rel="stylesheet" href="../../../static/layui/css/layui.css" th:href="@{${rootPath} + '/static/layui/css/layui.css'}">
-    <link rel="stylesheet" href="../../../static/css/global.css" th:href="@{${rootPath} + '/static/css/global.css'}">
+    <th:block th:include="common/link::link"></th:block>
 </head>
 
 <body>
-
+<div class="header">
+    <th:block th:include="common/header::header"></th:block>
+</div>
 <div class="main">
     <div class="fly-panel">
         <h3 class="fly-panel-title">图书</h3>
         <ul class="fly-case-list">
-            <li data-id="160">
+<!--            <li data-id="160">
                 <a class="fly-case-img" href="#" target="_blank">
                     <img src="../../../static/images/avatar/default.png" alt="hhhhh">
                     <cite class="layui-btn layui-btn-primary layui-btn-small">去围观</cite>
@@ -35,7 +36,7 @@
                         2017-05-18</p>
                     <p>联系：18365282216</p>
                 </div>
-            </li>
+            </li>-->
 
 
         </ul>
@@ -43,16 +44,16 @@
     </div>
 </div>
 
-<script src="../../../static/layui/layui.js"></script>
+<script src="../../../static/layui/layui.js" th:src="@{${rootPath} + '/static/layui/layui.js'}"></script>
 <script>
-    layui.cache.page = '';
+/*    layui.cache.page = '';
     layui.cache.user = {
         username: '游客',
         uid: -1,
-        avatar: '../../../static/images/avatar/00.jpg',
+        avatar: '../../static/images/avatar/00.jpg',
         experience: 83,
         sex: '男'
-    };
+    };*/
     layui.config({
         version: "2.0.0",
         base: '../../../static/mods/'
@@ -60,17 +61,16 @@
         fly: 'index'
     }).use('fly');
 
-
+    var dataCount = 0;
+    $.getJSON("../book/count",{},function (result) {
+        dataCount = result.data;
+    });
     layui.use(['laypage', 'layer'], function(){
         var laypage = layui.laypage,layer = layui.layer;
-        var count = 0;
-        $.getJSON("../book/count",{},function (result) {
-            count = result.data;
-        });
         //完整功能
         laypage.render({
             elem: 'pageInfo',
-            count: 100,
+            count: dataCount,
             //,groups: 0
             layout: ['count', 'prev', 'page', 'next', 'limit', 'skip'],
             jump: function(obj){
@@ -86,7 +86,7 @@
                             '                </a>\n' +
                             '                <h3><a href="#" target="_blank">'+book.bookName+'</a></h3>\n' +
                             '                <div class="fly-case-desc">\n' +
-                            '                    <p>类别：Java &nbsp;&nbsp;价格：'+book.bookPrice+'元</p>\n' +
+                            '                    <p>类别：'+book.category+' &nbsp;&nbsp;价格：'+book.bookPrice+'元</p>\n' +
                             '                    <p>地址：'+book.address+'</p>\n' +
                             '                    <p>备注：'+book.remark+'</p>\n' +
                             '                </div>\n' +
