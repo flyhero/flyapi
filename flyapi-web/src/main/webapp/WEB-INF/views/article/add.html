@@ -184,12 +184,18 @@
 
 
             function postArticle(status) {
+                var coverHtml = testEditor.getHTML();
+                //var pa=new RegExp("<img[^>]*>");
+                var pa=new RegExp("<img src=\"(.+?)\"");
+                var cover = pa.exec(coverHtml)[0];
+                console.log(cover);
                 $.post("../article/add",
                     {
                         "title":$("#title").val(),
                         "articleDes":$("#articleDes").val(),
+                        "cover": cover,
                         "mdContent":testEditor.getMarkdown(),
-                        "htmlContent":testEditor.getHTML(),
+                        "htmlContent":coverHtml,
                         "subjectId":$("#subjectId").val(),
                         "original":$("#original").val(),
                         "permissions":$("#permissions").val(),
@@ -211,7 +217,7 @@
 /*                layer.alert(JSON.stringify(data.field), {
                     title: '最终的提交信息'
                 })*/
-
+                postArticle(0);
                 return false;
             });
 
