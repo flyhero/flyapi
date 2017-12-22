@@ -18,10 +18,10 @@
     <div class="fly-panel">
         <div class="fly-tab">
         <span>
-          <a href="javascript:void(0)" onclick="allFn()" name="all" class="tab-this">综合</a>
-          <a href="javascript:void(0)" onclick="likeFn()" name="like">点赞 ↓</a>
-          <a href="javascript:void(0)" onclick="commentFn()" name="comment">评论⬇︎</a>
-          <a href="javascript:void(0)" onclick="viewFn()" name="view">浏览量⇩</a>
+          <a href="javascript:void(0)" onclick="allFn()" name="all" id="all">综合</a><!--class="tab-this"-->
+          <a href="javascript:void(0)" onclick="likeFn()" name="like" id="like">点赞 ↓</a>
+          <a href="javascript:void(0)" onclick="commentFn()" name="comment" id="comment">评论⬇︎</a>
+          <a href="javascript:void(0)" onclick="viewFn()" name="view" id="view">浏览量⇩</a>
         </span>
             <form action="http://cn.bing.com/search" class="fly-search">
                 <i class="iconfont icon-sousuo"></i>
@@ -69,7 +69,8 @@
 </body>
 <script type="text/javascript">
     $(function () {
-
+        $("a").removeClass("nav-this");
+        $("#subject").addClass("nav-this")
         getData(1,1,1);
         /*        layui.use('form', function () {
                     var form = layui.form;
@@ -105,16 +106,23 @@
     });
     function likeFn() {
         getData(1,0,0);
-       // $("#like").addClass()
+        $("a").removeClass("tab-this")
+        $("#like").addClass("tab-this");
     };
     function commentFn() {
         getData(0,1,0);
+        $("a").removeClass("tab-this")
+        $("#comment").addClass("tab-this");
     };
     function viewFn() {
         getData(0,0,1);
+        $("a").removeClass("tab-this")
+        $("#view").addClass("tab-this");
     };
     function allFn() {
         getData(1,1,1);
+        $("a").removeClass("tab-this")
+        $("#all").addClass("tab-this");
     };
     function getData(like,comment,view) {
        //var rootPath =  [[${rootPath}]].toString();

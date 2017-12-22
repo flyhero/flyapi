@@ -46,6 +46,9 @@
 
 <script src="../../../static/layui/layui.js" th:src="@{${rootPath} + '/static/layui/layui.js'}"></script>
 <script>
+
+    $("a").removeClass("nav-this");
+    $("#book").addClass("nav-this")
 /*    layui.cache.page = '';
     layui.cache.user = {
         username: '游客',
@@ -64,47 +67,52 @@
     var dataCount = 0;
     $.getJSON("../book/count",{},function (result) {
         dataCount = result.data;
-    });
-    layui.use(['laypage', 'layer'], function(){
-        var laypage = layui.laypage,layer = layui.layer;
-        //完整功能
-        laypage.render({
-            elem: 'pageInfo',
-            count: dataCount,
-            //,groups: 0
-            layout: ['count', 'prev', 'page', 'next', 'limit', 'skip'],
-            jump: function(obj){
-                //obj.curr,obj.limit
-                console.log(obj.curr)
-                $.getJSON("../book/books",{"pageNum":obj.curr,"pageSize":obj.limit},function (result) {
-                    $(".fly-case-list").empty();
-                    $.each(result.data.list,function(index,book){
-                        $(".fly-case-list").append('<li data-id="160">\n' +
-                            '                <a class="fly-case-img" href="#" target="_blank">\n' +
-                            '                    <img src="../../../static/images/avatar/default.png" alt="hhhhh">\n' +
-                            '                    <cite class="layui-btn layui-btn-primary layui-btn-small">去围观</cite>\n' +
-                            '                </a>\n' +
-                            '                <h3><a href="#" target="_blank">'+book.bookName+'</a></h3>\n' +
-                            '                <div class="fly-case-desc">\n' +
-                            '                    <p>类别：'+book.category+' &nbsp;&nbsp;价格：'+book.bookPrice+'元</p>\n' +
-                            '                    <p>地址：'+book.address+'</p>\n' +
-                            '                    <p>备注：'+book.remark+'</p>\n' +
-                            '                </div>\n' +
-                            '                <div class="fly-case-date">\n' +
-                            '                    <a href="/u/2802912" class="fly-case-user" target="_blank">\n' +
-                            '                        <img src="http://q.qlogo.cn/qqapp/101235792/5068B86B734FD45F863F69BE6A08A6FF/100">\n' +
-                            '                    </a>\n' +
-                            '                    <p class="layui-elip" style="font-size: 12px;"><span style="color: #666;">'+book.nickName+'</span>\n' +
-                            '                        2017-05-18</p>\n' +
-                            '                    <p>联系：'+book.contact+'</p>\n' +
-                            '                </div>\n' +
-                            '            </li>');
+
+
+        layui.use(['laypage', 'layer'], function(){
+            var laypage = layui.laypage,layer = layui.layer;
+            //完整功能
+            laypage.render({
+                elem: 'pageInfo',
+                count: dataCount,
+                //,groups: 0
+                layout: ['count', 'prev', 'page', 'next', 'limit', 'skip'],
+                jump: function(obj){
+                    //obj.curr,obj.limit
+                    console.log(obj.curr)
+                    $.getJSON("../book/books",{"pageNum":obj.curr,"pageSize":obj.limit},function (result) {
+                        $(".fly-case-list").empty();
+                        $.each(result.data.list,function(index,book){
+                            $(".fly-case-list").append('<li data-id="160">\n' +
+                                '                <a class="fly-case-img" href="#" target="_blank">\n' +
+                                '                    <img src="../../../static/images/avatar/default.png" alt="hhhhh">\n' +
+                                '                    <cite class="layui-btn layui-btn-primary layui-btn-small">去围观</cite>\n' +
+                                '                </a>\n' +
+                                '                <h3><a href="#" target="_blank">'+book.bookName+'</a></h3>\n' +
+                                '                <div class="fly-case-desc">\n' +
+                                '                    <p>类别：'+book.category+' &nbsp;&nbsp;价格：'+book.bookPrice+'元</p>\n' +
+                                '                    <p>地址：'+book.address+'</p>\n' +
+                                '                    <p>备注：'+book.remark+'</p>\n' +
+                                '                </div>\n' +
+                                '                <div class="fly-case-date">\n' +
+                                '                    <a href="/u/2802912" class="fly-case-user" target="_blank">\n' +
+                                '                        <img src="http://q.qlogo.cn/qqapp/101235792/5068B86B734FD45F863F69BE6A08A6FF/100">\n' +
+                                '                    </a>\n' +
+                                '                    <p class="layui-elip" style="font-size: 12px;"><span style="color: #666;">'+book.nickName+'</span>\n' +
+                                '                        2017-05-18</p>\n' +
+                                '                    <p>联系：'+book.contact+'</p>\n' +
+                                '                </div>\n' +
+                                '            </li>');
+                        });
                     });
-                });
-            }
+                }
+            });
+
         });
 
+
     });
+
 </script>
 
 </body>

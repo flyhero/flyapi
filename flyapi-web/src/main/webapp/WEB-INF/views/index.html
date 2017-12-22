@@ -138,6 +138,9 @@
 
 <script>
 
+    $("a").removeClass("nav-this");
+    $("#home").addClass("nav-this")
+
     $.ajax({
         type: 'POST',
         url: "../article/findLastUpdateOrHotArticles",
