@@ -33,6 +33,7 @@
                                         <div sign-v-1="" class="to-read--m">试读</div>
                                     </div>
                                 </div>
+
                             </div>
                             <div sign-v-1="" class="section">
                                 <div sign-v-1="" class="step">
@@ -53,6 +54,35 @@
                                         </div><!----></div>
                                 </div>
                             </div>
+
+
+                            <th:block th:if="${not #lists.isEmpty(articleList)}">
+                                <th:block th:each="article,index:${articleList}">
+
+                                    <div sign-v-1="" class="section">
+                                        <div sign-v-1="" class="step">
+                                            <div sign-v-1="" class="step-btn">2</div>
+                                        </div>
+                                        <div sign-v-1="" class="center">
+                                            <div sign-v-1="" class="title" th:text="${article.title}">如何使用掘金发布小册</div>
+                                            <div sign-v-1="" class="sub-line"><!----><!---->
+                                                <div sign-v-1="" class="statistics"><span sign-v-1=""
+                                                                                          class="duration">时长: 2分</span><span
+                                                        sign-v-1="" class="readed">1887次学习</span><span sign-v-1=""
+                                                                                                       class="comment">8条评论</span>
+                                                </div>
+                                            </div>
+                                            <div sign-v-1="" class="aside">
+                                                <div sign-v-1="" class="lock"><img sign-v-1=""
+                                                                                   src="lock.svg">
+                                                </div><!----></div>
+                                        </div>
+                                    </div>
+
+
+                                </th:block>
+                            </th:block>
+
 
                         </div>
                     </div>
