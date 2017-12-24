@@ -107,7 +107,7 @@
             <dt class="fly-panel-title">今日热门</dt>
             <dd>
                 <a href="jie/detail.html">使用 layui 秒搭后台大布局（基本结构）</a>
-                <span><i class="iconfont">&#xe60b;</i> 6087</span>
+                <span><i class="fa fa-eye fa-fw"></i> 6087</span>
             </dd>
         </dl>
 
@@ -154,7 +154,7 @@
     });
     $.getJSON("../article/findLastUpdateOrHotArticles", {"type": 2}, function (result) {
         $.each(result.data, function (index, hot) {
-            $("#hot-article").append('<dd><a href="/article/detail.html/' + hot.articleId + '">' + hot.title + '</a><span><i class="iconfont">&#xe60b;</i> ' + hot.viewNum + '</span></dd>');
+            $("#hot-article").append('<dd><a href="/article/detail.html/' + hot.articleId + '">' + hot.title + '</a><span><i class="fa fa-eye fa-fw"></i> ' + hot.viewNum + '</span></dd>');
         });
     });
     $.getJSON("../setting/carousel", {}, function (result) {

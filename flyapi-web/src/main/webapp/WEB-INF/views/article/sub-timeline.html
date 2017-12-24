@@ -63,7 +63,7 @@
                             <th:block th:if="${not #lists.isEmpty(articleList)}">
                                 <th:block th:each="article,index:${articleList}">
 
-                                    <div sign-v-1="" class="section">
+                                    <div sign-v-1="" class="section" th:onclick="'javascript:divClick(\''+${article.articleId}+'\');'">
                                         <div sign-v-1="" class="step">
                                             <div sign-v-1="" class="step-btn" th:text="${index.index}">0</div>
                                         </div>
@@ -114,5 +114,11 @@
         </main>
     </div>
 <th:block th:replace="common/footer::footer"></th:block>
+
+<script>
+    function divClick(articleId) {
+        location.href="http://www.iflyapi.cn:8090/flyapi-web/article/"+articleId;
+    };
+</script>
 </body>
 </html>
