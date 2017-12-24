@@ -444,7 +444,7 @@ li {
 }
 
 .book-info-view[sign-v-2] {
-    margin-top: 1.767rem;
+    /*margin-top: 1.767rem;*/
     min-height: calc(100vh - 195px)
 }
 

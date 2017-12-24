@@ -321,7 +321,7 @@
     <include refid="Base_Column_List" />
     from cms_article
     where subject_id = #{subjectId,jdbcType=BIGINT}
-    ORDER BY create_time DESC
+    ORDER BY create_time
   </select>
 
   <select id="findArticleByUserId" parameterType="java.lang.Long" resultMap="BaseResultMap">

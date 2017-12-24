@@ -71,9 +71,22 @@
                                             <div sign-v-1="" class="title" th:text="${article.title}">如何使用掘金发布小册</div>
                                             <div sign-v-1="" class="sub-line">
                                                 <div sign-v-1="" class="statistics">
-                                                    <span sign-v-1="" class="duration">时长: 2分</span>
-                                                    <span sign-v-1="" class="readed">1887次学习</span>
-                                                    <span sign-v-1="" class="comment">8条评论</span>
+                                                    <span sign-v-1="" class="duration" >
+                                                        <i class="fa fa-eye fa-fw" title="阅读"></i>
+                                                        <th:block th:text="${article.viewNum}"></th:block>
+                                                    </span>
+                                                    <span sign-v-1="" class="duration" >
+                                                        <i class="fa fa-thumbs-o-up fa-fw" title="喜欢"></i>
+                                                        <th:block th:text="${article.likeNum}"></th:block>
+                                                    </span>
+                                                    <span sign-v-1="" class="duration" >
+                                                        <i class="fa fa-commenting fa-fw" title="评论"></i>
+                                                        <th:block th:text="${article.commentNum}"></th:block>
+                                                    </span>
+                                                    <span sign-v-1="" class="duration" >
+                                                        <i class="fa fa-clock-o fa-fw" title="时间"></i>
+                                                        <th:block th:text="${article.createTime}"></th:block>
+                                                    </span>
                                                 </div>
                                             </div>
                                             <div sign-v-1="" class="aside">
