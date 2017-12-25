@@ -21,10 +21,10 @@
         <div class="content">
             <div class="fly-tab fly-tab-index">
 						<span>
-						  <a href="#" class="tab-this">首页推荐</a>
-						  <a href="jie/index.html">今日段子</a>
+						  <a href="javascript:void(0)" onclick="homeFn()">首页推荐</a>
+						  <a href="javascript:void(0)" onclick="topicFn()">今日段子</a>
 						</span>
-                <form action="http://cn.bing.com/search" class="fly-search">
+                <form action="#" class="fly-search">
                     <i class="iconfont icon-sousuo"></i>
                     <input class="layui-input" autocomplete="off" placeholder="搜索内容，回车跳转" type="text" name="q">
                 </form>
@@ -71,8 +71,6 @@
                         </div>
                     </div>
                 </li>
-
-
             </ul>
 
         </div>
@@ -139,6 +137,11 @@
     $("a").removeClass("nav-this");
     $("#home").addClass("nav-this")
 
+    $.getJSON("../setting/carousel", {}, function (result) {
+        $.each(result.data, function (index, carousel) {
+            $("#cal-list").append('<div><a href="index.html" ><img src="'+carousel.imgUrl+'" title="'+carousel.title+'"/></a></div>');
+        });
+    });
     $.ajax({
         type: 'POST',
         url: "../article/findLastUpdateOrHotArticles",
@@ -155,13 +158,15 @@
             $("#hot-article").append('<dd><a href="/article/detail.html/' + hot.articleId + '">' + hot.title + '</a><span><i class="fa fa-eye fa-fw"></i> ' + hot.viewNum + '</span></dd>');
         });
     });
-    $.getJSON("../setting/carousel", {}, function (result) {
-        $.each(result.data, function (index, carousel) {
-            $("#cal-list").append('<div><a href="index.html" ><img src="'+carousel.imgUrl+'" title="'+carousel.title+'"/></a></div>');
-        });
-    });
+
 </script>
 <script th:inline="javascript">
+
+    function likeFn() {
+        getData(1,0,0);
+        $("a").removeClass("tab-this")
+        $("#like").addClass("tab-this");
+    };
 
     layui.use('flow', function () {
         var flow = layui.flow;
@@ -186,11 +191,8 @@
                             "pageSize": 6
                         },
                         success: function (result) {
-
                             pageCount = result.data.pages;
-
                             $.each(result.data.list, function (index, simple) {
-
                                 lis.push('<li class="note-list">' +
                                     '<a class="des-img" href="#" target="_blank">' +
                                     '<img src="' + simple.cover + '" alt="300">' +
@@ -211,19 +213,12 @@
                                 next(lis.join(''), page < pageCount);
                                 lis = [];
                             });
-
                         }
-
                     });
-
-                    //alert("hou"+lis)
                     // next(lis.join(''), page < pageCount); //假设总页数为 6
-
-
                 }, 500);
             }
         });
-
     });
 
     layui.use('carousel', function () {
@@ -236,6 +231,7 @@
             arrow: 'always' //始终显示箭头
             //,anim: 'updown' //切换动画方式
         });
+
     });
 </script>
 </body>
