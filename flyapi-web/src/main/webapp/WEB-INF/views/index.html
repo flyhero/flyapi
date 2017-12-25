@@ -21,10 +21,8 @@
         <div class="content">
             <div class="fly-tab fly-tab-index">
 						<span>
-						  <a href="#">首页推荐</a>
-						  <a href="#">最新更新</a>
+						  <a href="#" class="tab-this">首页推荐</a>
 						  <a href="jie/index.html">今日段子</a>
-						  <a href="user/index.html">系列文章</a>
 						</span>
                 <form action="http://cn.bing.com/search" class="fly-search">
                     <i class="iconfont icon-sousuo"></i>
@@ -40,10 +38,10 @@
             </div>
             <ul class="fly-list" id="article-list">
                 <li class="note-list">
-                    <a class="des-img" href="/p/eb1a0e235e49" target="_blank">
+  <!--                  <a class="des-img" href="/p/eb1a0e235e49" target="_blank">
                         <img src="//upload-images.jianshu.io/upload_images/2263276-65f149645b408224?imageMogr2/auto-orient/strip|imageView2/1/w/375/h/300"
                              alt="300">
-                    </a>
+                    </a>-->
                     <div>
                         <div class="author">
                             <a class="avatar" target="_blank" href="/u/c3d9abd7063b">
@@ -148,7 +146,7 @@
         data: {"type": 1},
         success: function (result) {
             $.each(result.data, function (index, last) {
-                $("#last-update").append('<dd><a href="/article/detail.html/' + last.articleId + '">' + last.title + '</a></dd>');
+                $("#last-update").append('<dd><a href="/article/detail.html/' + last.articleId + '">' + last.title + '</a><span><i class="fa fa-clock-o fa-fw"></i> ' + timeAgo(getMyDate(last.createTime)) + '</span></dd>');
             });
         }
     });
