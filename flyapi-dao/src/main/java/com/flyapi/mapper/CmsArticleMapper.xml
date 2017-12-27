@@ -287,7 +287,7 @@
       ORDER BY
       view_num DESC
     </if>
-    LIMIT 8
+    LIMIT 6
   </select>
   <select id="findArticleListByCount" parameterType="com.flyapi.pojo.dto.SubjectDto" resultType="com.flyapi.model.CmsArticle">
     SELECT

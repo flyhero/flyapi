@@ -34,7 +34,7 @@
         <div class="nav-user" th:if="${session.user} == null">
             <a class="unlogin" href=""><i class="fa fa-user-circle-o fa-2x"></i></a>
             <span>
-                <a href="http://www.iflyapi.cn:8090/flyapi-web/forward/go?html=login.html">登入</a>
+                <a href="#" th:href="@{${rootPath} + '/forward/go?html=login'}" >登录</a>
                 <a href="../user/login.html">注册</a>
             </span>
         </div>
@@ -47,8 +47,8 @@
 
             <div class="dropdown-menu dropdown-anchor-top-left dropdown-has-anchor" id="dropdown-standard">
                 <ul>
-                    <li><a href="../forword/go?html=/user/home">主页</a></li>
-                    <li><a href="../forword/go?html=/user/set">设置</a></li>
+                    <li><a href="../forword/go?html=/user/home" th:href="@{${rootPath} + '/forward/go?html=/user/home'}">主页</a></li>
+                    <li><a href="../forword/go?html=/user/set" th:href="@{${rootPath} + '/forward/go?html=/user/set'}">设置</a></li>
                     <li><a href="../user/logout">退出</a></li>
                     <!--<li class="divider"></li>-->
                 </ul>

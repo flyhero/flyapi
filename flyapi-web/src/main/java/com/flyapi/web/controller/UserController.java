@@ -65,6 +65,7 @@ public class UserController extends BaseController {
         return mv;
     }
 
+
     /**
      * 注册
      * Title: register

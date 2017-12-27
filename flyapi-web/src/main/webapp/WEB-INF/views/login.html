@@ -151,7 +151,7 @@
 				$(function() {
                     var user=[[${session.user}]];
                     if (user != null && user !="") {//若已经登录，跳转到主页
-                        window.location.href = "http://www.iflyapi.cn:8090/flyapi-web/forward/go?html=index.html"
+                        window.location.href = "http://www.iflyapi.cn:8090/forward/go?html=index.html"
                     }
 
 					var $login;
@@ -203,7 +203,7 @@
                             data,
                             function(result){
                                 if(result.code==200){
-                                    location.href="http://www.iflyapi.cn:8090/flyapi-web/forward/go?html=index.html";
+                                    location.href="http://www.iflyapi.cn:8090/forward/go?html=index.html";
                                 }else {
                                     layer.alert(result.msg);
 								}

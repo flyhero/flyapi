@@ -50,7 +50,7 @@ public class LoginInterceptor implements HandlerInterceptor {
             return true;
         }
         String requestUri = request.getRequestURI();
-        request.setAttribute("rootPath", "http://www.iflyapi.cn:8090/flyapi-web");
+        request.setAttribute("rootPath", "http://www.iflyapi.cn:8090");
         for (String url : excludedUrls) {
             if (requestUri.contains(url)) {
                 return true;

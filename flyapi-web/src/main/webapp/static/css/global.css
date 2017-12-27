@@ -121,7 +121,7 @@ html .fly-full{margin-top: 65px;}
 .nav-user .unlogin{margin-right: 10px; margin-top: 8px;}
 .nav-user span{position: relative;}
 .nav-user span a{padding:0 10px; color:#A9B7B7}
-.nav-user span a:hover{color:#fff;}
+.nav-user span a:hover{color:#009688;}
 .nav-user .nav{position:relative; top: -2px; left: auto; right: 0; margin-left: 30px;}
 .nav-user .nav a{padding: 0 10px;}
 .nav-user .unlogin i{margin-bottom: 12px;}
@@ -550,6 +550,38 @@ body .fly-user-main{position: relative; width: 1085px; min-height: 600px; margin
 .layer-ext-ul li{margin: 8px;}
 
 .layer-ext-case .layui-layer-title{border: none; background-color: #009688; color: #fff;}
+
+
+/*自定义徽章*/
+.fly-badge{
+    height: 24px;
+    line-height: 24px;
+    border-radius: 50%;
+    padding: 0 10px;
+    margin-right: 10px;
+    background-color: #ea6f5a;
+    color: #fff;
+    font-size: 12px;
+}
+.fly-badge-0{
+    background-color: #FF5722;
+}
+.fly-badge-1{
+    background-color: #FFB800;
+}
+.fly-badge-2{
+    background-color: #1E9FFF;
+}
+.fly-badge-3{
+    background-color: #009688;
+}
+.fly-badge-4{
+    background-color: #ea6f5a;
+}
+.fly-badge-5{
+    background-color: #ea9f5a;
+}
+
 
 /* 适配多设备 */
 @media screen and (max-width: 1024px) {

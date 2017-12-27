@@ -7,13 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="keywords" content="">
     <meta name="description" content="">
-    <th:block th:include="common/link::link"></th:block>
+    <th:block th:include="WEB-INF/views/common/link::link"></th:block>
 </head>
 
 <body>
 
 <div class="header">
-    <th:block th:include="common/header::header"></th:block>
+    <th:block th:include="WEB-INF/views/common/header::header"></th:block>
 </div>
 
 <div class="main layui-clear">
@@ -102,9 +102,8 @@
         <dl class="fly-panel fly-list-one" id="hot-article">
             <dt class="fly-panel-title">今日热门</dt>
             <dd>
-                <span class="layui-badge layui-bg-orange">1</span>
-                <a href="#">使用 layui 秒搭后台大布局（基本结构）</a>
-                <!--<span><i class="fa fa-eye fa-fw"></i> 6087</span>-->
+                <a href="jie/detail.html">使用 layui 秒搭后台大布局（基本结构）</a>
+                <span><i class="fa fa-eye fa-fw"></i> 6087</span>
             </dd>
         </dl>
 
@@ -127,7 +126,7 @@
     </div>
 </div>
 
-<th:block th:replace="common/footer::footer"></th:block>
+<th:block th:replace="WEB-INF/views/common/footer::footer"></th:block>
 
 <script src="../static/layui/layui.js" th:src="@{${rootPath} + '/static/layui/layui.js'}"></script>
 <script src="../../static/js/date-util.js" th:src="@{${rootPath} + '/static/js/date-util.js'}"></script>
@@ -156,7 +155,7 @@
     });
     $.getJSON("../article/findLastUpdateOrHotArticles", {"type": 2}, function (result) {
         $.each(result.data, function (index, hot) {
-            $("#hot-article").append('<dd><span class="fly-badge fly-badge-'+index+'">'+index+'</span><a href="/article/detail.html/' + hot.articleId + '">' + hot.title + '</a><span><i class="fa fa-eye fa-fw"></i> ' + hot.viewNum + '</span></dd>');
+            $("#hot-article").append('<dd><a href="/article/detail.html/' + hot.articleId + '">' + hot.title + '</a><span><i class="fa fa-eye fa-fw"></i> ' + hot.viewNum + '</span></dd>');
         });
     });
 
