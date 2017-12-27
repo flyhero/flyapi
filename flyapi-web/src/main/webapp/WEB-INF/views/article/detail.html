@@ -144,6 +144,38 @@
                     <legend>评论区</legend>
                 </fieldset>
                 <div id="comment-area">
+
+                    <th:block th:if="${not #lists.isEmpty(commentList)}">
+                        <th:block th:each="comment,index:${commentList}">
+                            <div class="layui-collapse"  lay-accordion="">
+                                <div class="layui-colla-item">
+                                    <div class="layui-colla-title">
+                                        <div style="float:left; text-align:left" class="comment-user">
+                                            <img style="width: 40px;height: 40px;"
+                                                 src="http://tp4.sinaimg.cn/1345566427/180/5730976522/0" alt="">
+                                            <a href="../add-subject.html" target="_blank">flyhero</a>
+                                            <input type="hidden" value=""/>
+                                        </div>
+                                        <div style="float:right; text-align:right"><span class="layui-badge layui-bg-gray">2017-06-22 14:30:49</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="layui-colla-content layui-show">
+                                        感觉怎么样wqeqwqw
+                                        <div class="comment-reply" style="text-align: right; padding-top: 8px">
+                                            <!--<a href="javascript:void(0);" id="re_test">回复</a>-->
+                                            <span type="reply">
+                                                回复
+                                            </span>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </th:block>
+                    </th:block>
                 <div class="layui-collapse"  lay-accordion="">
                     <div class="layui-colla-item">
                         <div class="layui-colla-title">
@@ -159,7 +191,7 @@
 
                         <div class="layui-colla-content layui-show">
                             感觉怎么样
-                            <div class="layui-collapse" lay-accordion="">
+                           <!-- <div class="layui-collapse" lay-accordion="">
                                 <div class="layui-colla-item">
                                     <div class="layui-colla-title">
                                         <div style="float:left; text-align:left">
@@ -178,7 +210,7 @@
 
                                     </div>
                                 </div>
-                            </div>
+                            </div>-->
                             <div class="comment-reply" style="text-align: right; padding-top: 8px">
                                 &lt;!&ndash;<a href="javascript:void(0);" id="re_test">回复</a>&ndash;&gt;
                                 <span type="reply">
@@ -272,7 +304,7 @@
         });
     });
 
-
+/*
     var id ="[[${detailVo.article.articleId}]]";
     layui.use('flow', function () {
         var flow = layui.flow;
@@ -358,7 +390,7 @@
             }
         });
 
-    });
+    });*/
 
 
 
