@@ -93,9 +93,9 @@
                 <div class="layui-form layui-form-pane layui-tab-item">
                     <form action="/user/repass" method="post">
                         <div class="layui-form-item">
-                            <label for="L_nowpass" class="layui-form-label">当前密码</label>
+                            <label  class="layui-form-label">当前密码</label>
                             <div class="layui-input-inline">
-                                <input type="password" id="L_nowpass" name="nowpass" required lay-verify="required"
+                                <input type="password" name="nowpass" required lay-verify="required"
                                        autocomplete="off" class="layui-input">
                             </div>
                         </div>
@@ -255,7 +255,6 @@
     </div>
 </div>
 </div>
-<script src="../../../static/layui/layui.js" th:src="@{${rootPath} + '/static/layui/layui.js'}"></script>
 <script>
 
     $("li").removeClass("layui-this");
@@ -269,12 +268,26 @@
         , experience: 83
         , sex: '男'
     };
-    layui.config({
-        version: "2.0.0"
-        , base: 'http://www.iflyapi.cn:8090/static/mods/'
-    }).extend({
-        fly: 'index'
-    }).use('fly');
+    layui.use(['util', 'element', 'layer','form','laytpl','laypage'], function(){
+        var $ = layui.jquery;
+        var layer = layui.layer;
+        var util = layui.util;
+        var laytpl = layui.laytpl;
+        var form = layui.form;  //表单的依赖
+        var laypage = layui.laypage;//分页的依赖
+        var element = layui.element;//Tab的切换功能，切换事件监听等，需要依赖element模块
+
+        //右下角bar top
+        util.fixbar({
+            bar1: true,
+            click: function(type){
+                console.log(type);
+                if(type === 'bar1'){
+                    alert('点击了bar1')
+                }
+            }
+        });
+    });
 
     layui.use('upload', function() {
         var $ = layui.jquery

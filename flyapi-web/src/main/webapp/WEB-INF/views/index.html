@@ -33,6 +33,11 @@
 
             <div class="layui-carousel" id="carousel-index">
                 <div carousel-item=""  id="cal-list">
+                    <th:block th:if="${not #lists.isEmpty(carouselList)}">
+                        <th:block th:each="carousel,index:${carouselList}">
+                            <div><a href="#" th:href="${carousel.detailUrl}"><img src="'#" title="轮播图" th:src="${carousel.imgUrl}" th:title="${carousel.title}"/></a></div>
+                        </th:block>
+                    </th:block>
 <!--                <div><img src="../res/images/slider-1.jpg" th:src="@{${rootPath} + '/res/images/slider-1.jpg'}"/></div>  -->
                 </div>
             </div>
@@ -127,20 +132,16 @@
     </div>
 </div>
 
-<script src="../static/layui/layui.js" th:src="@{${rootPath} + '/static/layui/layui.js'}"></script>
-<script src="../../static/js/date-util.js" th:src="@{${rootPath} + '/static/js/date-util.js'}"></script>
-
-
 <script>
 
     $("a").removeClass("nav-this");
     $("#home").addClass("nav-this")
 
-    $.getJSON("../setting/carousel", {}, function (result) {
+/*    $.getJSON("../setting/carousel", {}, function (result) {
         $.each(result.data, function (index, carousel) {
             $("#cal-list").append('<div><a href="index.html" ><img src="'+carousel.imgUrl+'" title="'+carousel.title+'"/></a></div>');
         });
-    });
+    });*/
     $.ajax({
         type: 'POST',
         url: "../article/findLastUpdateOrHotArticles",
@@ -230,7 +231,27 @@
             arrow: 'always' //始终显示箭头
             //,anim: 'updown' //切换动画方式
         });
+    });
 
+    layui.use(['util', 'element', 'layer','form','laytpl','laypage'], function(){
+        var $ = layui.jquery;
+        var layer = layui.layer;
+        var util = layui.util;
+        var laytpl = layui.laytpl;
+        var form = layui.form;  //表单的依赖
+        var laypage = layui.laypage;//分页的依赖
+        var element = layui.element;//Tab的切换功能，切换事件监听等，需要依赖element模块
+
+        //右下角bar top
+        util.fixbar({
+            bar1: true,
+            click: function(type){
+                console.log(type);
+                if(type === 'bar1'){
+                    alert('点击了bar1')
+                }
+            }
+        });
     });
 </script>
 </body>

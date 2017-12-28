@@ -24,6 +24,8 @@
 	<!--启动对@AspectJ注解的支持 , proxy-target-class设置为true表示通知spring使用cglib而不是jdk的来生成代理方法，这样AOP可以拦截到Controller -->
 	<aop:aspectj-autoproxy proxy-target-class="true" />
 
+	<mvc:view-controller path="/" view-name="redirect:/index.html" />
+
 	<!--id生成器-->
 	<bean id="SnowflakeIdWorker" class="com.flyapi.core.id.SnowflakeIdWorker">
 		<constructor-arg value="0" name="workerId"/>

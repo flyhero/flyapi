@@ -24,10 +24,10 @@
   <div class="site-mobile-shade"></div>
 
   <div class="fly-panel fly-panel-user" pad20>
-	  <div class="layui-tab layui-tab-brief" lay-filter="user" id="LAY_msg" style="margin-top: 15px;">
+<!--	  <div class="layui-tab layui-tab-brief" lay-filter="user" id="LAY_msg" style="margin-top: 15px;">
 	    <button class="layui-btn layui-btn-danger" id="LAY_delallmsg">清空全部消息</button>
 	    <div  id="LAY_minemsg" style="margin-top: 10px;">
-        <!--<div class="fly-none">您暂时没有最新消息</div>-->
+        &lt;!&ndash;<div class="fly-none">您暂时没有最新消息</div>&ndash;&gt;
         <ul class="mine-msg">
           <li data-id="123">
             <blockquote class="layui-elem-quote">
@@ -43,13 +43,37 @@
           </li>
         </ul>
       </div>
-	  </div>
-	</div>
+	  </div>-->
+
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
+      <legend>简洁风格的Tab</legend>
+    </fieldset>
+
+    <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+      <ul class="layui-tab-title">
+        <li class="layui-this">网站设置</li>
+        <li>用户管理</li>
+        <li>权限分配</li>
+        <li>商品管理</li>
+        <li>订单管理</li>
+      </ul>
+      <div class="layui-tab-content" style="height: 100px;">
+        <div class="layui-tab-item layui-show">内容不一样是要有，因为你可以监听tab事件（阅读下文档就是了）</div>
+        <div class="layui-tab-item">内容2</div>
+        <div class="layui-tab-item">内容3</div>
+        <div class="layui-tab-item">内容4</div>
+        <div class="layui-tab-item">内容5</div>
+      </div>
+    </div>
+
+
+  </div>
 
 </div>
 
 
-<script src="../../res/layui/layui.js"></script>
+
+
 <script>
     $("li").removeClass("layui-this");
     $("#fly-message").addClass("layui-this")
@@ -62,12 +86,28 @@ layui.cache.user = {
   ,experience: 83
   ,sex: '男'
 };
-layui.config({
+/*layui.config({
   version: "2.0.0"
   ,base: '../../res/mods/'
 }).extend({
   fly: 'index'
-}).use('fly');
+}).use('fly');*/
+
+
+    layui.use(['util', 'element', 'layer','upload','form','laytpl','laypage','fly'], function(){
+        var $ = layui.jquery;
+        var layer = layui.layer;
+        var util = layui.util;
+        var laytpl = layui.laytpl;
+        var form = layui.form;
+        var upload = layui.upload;
+        var laypage = layui.laypage;
+        var fly = layui.fly;
+        var element = layui.element;//Tab的切换功能，切换事件监听等，需要依赖element模块
+    });
+
+
+
 </script>
 
 </body>

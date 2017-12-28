@@ -22,4 +22,21 @@
   </p>
 </div>
 </body>
+<script>
+    layui.use('util', function(){
+        var $ = layui.jquery;
+        var util = layui.util;
+
+        //右下角bar top
+        util.fixbar({
+            bar1: true,
+            click: function(type){
+                console.log(type);
+                if(type === 'bar1'){
+                    alert('点击了bar1')
+                }
+            }
+        });
+    });
+</script>
 </html>
