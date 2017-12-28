@@ -111,6 +111,15 @@
                 <a href="#">使用 layui 秒搭后台大布局（基本结构）</a>
                 &lt;!&ndash;<span><i class="fa fa-eye fa-fw"></i> 6087</span>&ndash;&gt;
             </dd>-->
+            <th:block th:if="${not #lists.isEmpty(hotList)}">
+                <th:block th:each="hot,index:${hotList}">
+                    <dd>
+                        <span class="fly-badge fly-badge-1" th:text="${index.index}"></span>
+                        <a href="#" th:href="@{${rootPath} + '/article/detail/'+${hot.articleId}}" th:text="${hot.title}">标题</a>
+                        <span><i class="fa fa-eye fa-fw"></i>120</span>
+                    </dd>
+                </th:block>
+            </th:block>
         </dl>
 
         <dl class="fly-panel fly-list-one" id="last-update">
@@ -118,6 +127,15 @@
 <!--            <dd>
                 <a href="jie/detail.html">使用 layui 秒搭后台大布局之基本结构</a>
             </dd>-->
+            <th:block th:if="${not #lists.isEmpty(updateList)}">
+                <th:block th:each="last,index:${updateList}">
+                    <dd>
+                        <a href="/#" th:href="@{${rootPath} + '/article/detail/'+${last.articleId}}" th:text="${last.title}">标题</a>
+                        <span><i class="fa fa-clock-o fa-fw"></i> <i th:text="${#dates.format(last.createTime, 'yyyy/MM/dd hh:mm:ss')}"></i></span>
+                    </dd>
+                    </dd>
+                </th:block>
+            </th:block>
         </dl>
 
         <div class="fly-panel fly-link">
@@ -142,7 +160,7 @@
             $("#cal-list").append('<div><a href="index.html" ><img src="'+carousel.imgUrl+'" title="'+carousel.title+'"/></a></div>');
         });
     });*/
-    $.ajax({
+/*    $.ajax({
         type: 'POST',
         url: "../article/findLastUpdateOrHotArticles",
         dataType: "json",
@@ -157,7 +175,7 @@
         $.each(result.data, function (index, hot) {
             $("#hot-article").append('<dd><span class="fly-badge fly-badge-'+index+'">'+index+'</span><a href="/article/detail.html/' + hot.articleId + '">' + hot.title + '</a><span><i class="fa fa-eye fa-fw"></i> ' + hot.viewNum + '</span></dd>');
         });
-    });
+    });*/
 
 </script>
 <script th:inline="javascript">

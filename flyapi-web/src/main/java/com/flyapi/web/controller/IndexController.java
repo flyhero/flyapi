@@ -2,8 +2,12 @@ package com.flyapi.web.controller;
 
 import com.flyapi.core.base.BaseController;
 import com.flyapi.core.constant.JSONResult;
+import com.flyapi.model.CmsArticle;
 import com.flyapi.model.SettingCarousel;
+import com.flyapi.service.api.ArticleService;
 import com.flyapi.service.api.SettingCarouselService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,20 +22,38 @@ import java.util.List;
 @Controller
 public class IndexController extends BaseController{
 
+    private Logger logger = LogManager.getLogger(ArticleController.class);
+
     @Autowired
     private SettingCarouselService settingCarouselService;
+
+    @Autowired
+    private ArticleService articleService;
+
 
     @RequestMapping("index.html")
     public ModelAndView index(){
 
-        List<SettingCarousel> list = null;
+        List<SettingCarousel> carouselList = null;
         try {
-            list = settingCarouselService.findList();
+            carouselList = settingCarouselService.findList();
         } catch (Exception e) {
             System.out.println(e.toString());
         }
+
+
+        List<CmsArticle> updateList =null;
+        List<CmsArticle> hotList =null;
+        try{
+            updateList=articleService.findLastUpdateOrHotArticles(1);
+            hotList=articleService.findLastUpdateOrHotArticles(2);
+        }catch (Exception e){
+            logger.error(e.toString());
+        }
         mv.setViewName("index");
-        mv.addObject("carouselList",list);
+        mv.addObject("carouselList",carouselList);
+        mv.addObject("updateList",updateList);
+        mv.addObject("hotList",hotList);
         return mv;
     }
 }
