@@ -68,5 +68,62 @@
 	</th:block>
 </section>
 
+
+
+<!--     <th:block th:if="${not #lists.isEmpty(commentList)}">
+           <th:block th:each="comment,index:${commentList}">
+               <div class="layui-collapse" lay-accordion="">
+                   <div class="layui-colla-item">
+                       <div class="layui-colla-title">
+                           <div style="float:left; text-align:left" class="comment-user">
+                               <img style="width: 40px;height: 40px;" src="" alt=""/>
+                               <a href="../add-subject.html" target="_blank">flyhero</a>
+                               <input type="hidden" value=""/>
+                           </div>
+                           <div style="float:right; text-align:right">
+                               <span class="layui-badge layui-bg-gray" th:text="${comment.createTime}">2017-06-22 14:30:49</span>
+                           </div>
+                       </div>
+
+                       <div class="layui-colla-content layui-show">
+                           <p th:text="${comment.content}"></p>
+
+
+                           <th:block th:if="${not #lists.isEmpty(comment.cmsReplyList)}">
+                               <th:block th:each="reply,index:${comment.cmsReplyList}">
+                                   <div class="layui-collapse" lay-accordion="">
+                                       <div class="layui-colla-item">
+                                           <div class="layui-colla-title">
+                                               <div style="float:left; text-align:left">
+                                                   <img style="width: 40px;height: 40px;" src="http://tp4.sinaimg.cn/1345566427/180/5730976522/0" alt=""/>
+                                                   <a href="../add-subject.html" target="_blank">flyhero</a>
+                                               </div>
+                                               <div style="float:right; text-align:right">
+                                                   <span class="layui-badge layui-bg-gray"
+                                                         th:text="${reply.createTime}">2017-06-22 14:30:49</span>
+                                               </div>
+
+                                           </div>
+
+                                           <div class="layui-colla-content layui-show">
+
+                                               <p th:text="${reply.content}"></p>
+
+                                           </div>
+                                       </div>
+                                   </div>
+                               </th:block>
+                           </th:block>
+
+                           <div class="comment-reply" style="text-align: right; padding-top: 8px">
+                               <span type="reply">
+                                   回复
+                               </span>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+           </th:block>
+       </th:block>-->
 </body>
 </html>

@@ -11,140 +11,157 @@
 		<title>
 			flyapi登录注册
 		</title>
+		<th:block th:include="common/link::link"></th:block>
 		<link rel="stylesheet" media="screen" href="../static/css/application.css" th:href="@{${rootPath} + '/static/css/application.css'}">
-		<link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"  rel="stylesheet">
-		<script type="text/javascript" src="../static/mods/jquery.min.js" th:src="@{${rootPath} + '/static/mods/jquery.min.js'}" ></script>
 	</head>
 
-	<body class="sign">
+	<body >
 
-		<div id="web">
-			<div class="login-box">
-				<div class="login-header">
-					<a href="#">
-						<img class="logo" src="../static/images/login.png" th:src="@{${rootPath} + '/static/images/login.png'}">
-					</a>
-					<div class="switch-domain">
-						<a href="#">
+
+	<div class="layui-fluid" style="margin: 0">
+
+		<div class="layui-row">
+
+			<div class="layui-col-sm8 sign">
+
+					<div  id="web">
+						<div class="login-box">
+
+
+							<div class="login-header">
+								<a href="#">
+									<img class="login-logo" src="../static/images/login.png" th:src="@{${rootPath} + '/static/images/login.png'}">
+								</a>
+								<div class="switch-domain">
+									<a href="#">
 								<span>
 									每个人都能写本书
 								</span>
-						</a>
-					</div>
-					<ul class="tab">
-						<li class="active" data-box="#signin-box" id="signin">
-							<a class="btn btn-link" href="#">登录</a>
-						</li>
-						<li data-box="#signup-box" id="signup">
-							<a class="btn btn-link" href="#">注册</a>
-						</li>
-					</ul>
-				</div>
-				<div class="box" id="signin-box">
-					<div class="login-body">
-						<!--<form id="signupForm" action="http://www.iflyapi.cn:8090/flyapi-web/user/login" accept-charset="UTF-8" method="post">-->
-						<form class="layui-form" id="loginForm">
-<!--							<th:block th:if="${msg} != null">
-								<div th:if="${msg} != null" class="form-error">
-								<span class="form-error-icon">
-									<i class="fa fa-info-circle"></i>
-									<span  th:text="${msg}"></span>
-								</span>
+									</a>
 								</div>
-							</th:block>-->
-							<div class="form-group form-group-icon">
-								<input class="input-lg form-input username" name="username" placeholder="用户名">
-								<div class="form-icon">
-									<i class="fa fa-user"></i>
+								<ul class="tab">
+									<li class="active" data-box="#signin-box" id="signin">
+										<a class="btn btn-link" href="#">登录</a>
+									</li>
+									<li data-box="#signup-box" id="signup">
+										<a class="btn btn-link" href="#">注册</a>
+									</li>
+								</ul>
+							</div>
+							<div class="box" id="signin-box">
+								<div class="login-body">
+									<form class="layui-form" id="loginForm">
+										<!--							<th:block th:if="${msg} != null">
+                                                                        <div th:if="${msg} != null" class="form-error">
+                                                                        <span class="form-error-icon">
+                                                                            <i class="fa fa-info-circle"></i>
+                                                                            <span  th:text="${msg}"></span>
+                                                                        </span>
+                                                                        </div>
+                                                                    </th:block>-->
+										<div class="form-group form-group-icon">
+											<input class="input-lg form-input username" name="username" placeholder="用户名">
+											<div class="form-icon">
+												<i class="fa fa-user"></i>
+											</div>
+										</div>
+										<div class="form-group form-group-icon">
+											<input class="input-lg form-input password" name="password" placeholder="密码" type="password">
+											<div class="form-icon">
+												<i class="fa fa-lock"></i>
+											</div>
+										</div>
+										<div class="form-group">
+											<!--								<button class="btn btn-primary btn-block submit" data-style="slide-up" type="submit">
+                                                                                登录
+                                                                            </button>-->
+											<button class="btn btn-primary btn-block submit"  lay-filter="login-btn" lay-submit="">
+												登录
+											</button>
+										</div>
+									</form>
 								</div>
-							</div>
-							<div class="form-group form-group-icon">
-								<input class="input-lg form-input password" name="password" placeholder="密码" type="password">
-								<div class="form-icon">
-									<i class="fa fa-lock"></i>
-								</div>
-							</div>
-							<div class="form-group">
-<!--								<button class="btn btn-primary btn-block submit" data-style="slide-up" type="submit">
-									登录
-								</button>-->
-								<button class="btn btn-primary btn-block submit"  lay-filter="login-btn" lay-submit="">
-									登录
-								</button>
-							</div>
-						</form>
-					</div>
-					<div class="login-footer">
-						<p class="forgot-password">
-							<a href="#">
-								忘记密码？
-							</a>
-						</p>
-						<div class="quick-login">
-							<p class="hr">
-								<span>快捷登录</span>
-							</p>
-							<i class="fa fa-wechat"></i>&nbsp;
-							<i class="fa fa-qq"></i>
-						</div>
-						<div class="divider"></div>
+								<div class="login-footer">
+									<p class="forgot-password">
+										<a href="#">
+											忘记密码？
+										</a>
+									</p>
+									<div class="quick-login">
+										<p class="hr">
+											<span>快捷登录</span>
+										</p>
+										<i class="fa fa-wechat"></i>&nbsp;
+										<i class="fa fa-qq"></i>
+									</div>
+									<div class="divider"></div>
 
-					</div>
-				</div>
-				<div class="box" id="signup-box" style="display: none">
-					<div class="login-body">
-<!--						<form class="new_user" id="new_user" action="http://www.iflyapi.cn:8090/flyapi-web/user/register"  method="post"><input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="Vp9hwqEtwtnMjSSiWnI7V3NxcutfXRuwXpA+SYI8sYdmruMQQQIYh+aGphKB/kpkai3TDRGs7oGpjmU7VGLEIw==">
-							-->
-						<form class="layui-form" id="registerForm">
-							<div class="form-group form-group-icon">
-								<input class="input-lg form-input name" name="username" placeholder="用户名">
-								<div class="form-icon">
-									<i class="fa fa-user"></i>
 								</div>
 							</div>
-							<div class="form-group form-group-icon">
-								<input class="input-lg form-input email" name="pw" placeholder="密码" type="password">
-								<div class="form-icon">
-									<i class="fa fa-lock"></i>
+							<div class="box" id="signup-box" style="display: none">
+								<div class="login-body">
+									<!--						<form class="new_user" id="new_user" action="http://www.iflyapi.cn:8090/flyapi-web/user/register"  method="post"><input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="Vp9hwqEtwtnMjSSiWnI7V3NxcutfXRuwXpA+SYI8sYdmruMQQQIYh+aGphKB/kpkai3TDRGs7oGpjmU7VGLEIw==">
+                                                                -->
+									<form class="layui-form" id="registerForm">
+										<div class="form-group form-group-icon">
+											<input class="input-lg form-input name" name="username" placeholder="用户名">
+											<div class="form-icon">
+												<i class="fa fa-user"></i>
+											</div>
+										</div>
+										<div class="form-group form-group-icon">
+											<input class="input-lg form-input email" name="pw" placeholder="密码" type="password">
+											<div class="form-icon">
+												<i class="fa fa-lock"></i>
+											</div>
+										</div>
+										<div class="form-group form-group-icon">
+											<input class="input-lg form-input password" name="confirmPw" placeholder="确认密码" type="password">
+											<div class="form-icon">
+												<i class="fa fa-lock"></i>
+											</div>
+										</div>
+										<div class="form-group">
+											<!--								<button class="btn btn-primary btn-block btn-lg submit" data-style="slide-up" type="submit">
+                                                                            免费注册
+                                                                            </button>-->
+											<button class="btn btn-primary btn-block submit"  lay-filter="register-btn" lay-submit="">
+												免费注册
+											</button>
+										</div>
+									</form>
+								</div>
+								<div class="login-footer">
+									<p class="agree-terms">
+										点击「免费注册」按钮将视为您同意
+										<a class="text-highlight" href="#">使用条款</a>
+									</p>
+									<div class="quick-login">
+										<p class="hr">
+											<span>快捷注册</span>
+										</p>
+										<i class="fa fa-wechat"></i>
+										<i class="fa fa-qq"></i>
+									</div>
 								</div>
 							</div>
-							<div class="form-group form-group-icon">
-								<input class="input-lg form-input password" name="confirmPw" placeholder="确认密码" type="password">
-								<div class="form-icon">
-									<i class="fa fa-lock"></i>
-								</div>
+							<div class="box" id="wechat-box" style="display: none">
+								<!--				<div data-appid="wx26bcd6baa41a1f36" data-redirect-uri="https://modao.cc/wechats/sign_callbacks" id="wechat-login"><iframe src="./css/qrconnect.html" frameborder="0" scrolling="no" width="300px" height="400px"></iframe></div>-->
 							</div>
-							<div class="form-group">
-<!--								<button class="btn btn-primary btn-block btn-lg submit" data-style="slide-up" type="submit">
-								免费注册
-								</button>-->
-								<button class="btn btn-primary btn-block submit"  lay-filter="register-btn" lay-submit="">
-									免费注册
-								</button>
-							</div>
-						</form>
-					</div>
-					<div class="login-footer">
-						<p class="agree-terms">
-							点击「免费注册」按钮将视为您同意
-							<a class="text-highlight" href="#">使用条款</a>
-						</p>
-						<div class="quick-login">
-							<p class="hr">
-								<span>快捷注册</span>
-							</p>
-							<i class="fa fa-wechat"></i>
-							<i class="fa fa-qq"></i>
 						</div>
-					</div>
+
 				</div>
-				<div class="box" id="wechat-box" style="display: none">
-	<!--				<div data-appid="wx26bcd6baa41a1f36" data-redirect-uri="https://modao.cc/wechats/sign_callbacks" id="wechat-login"><iframe src="./css/qrconnect.html" frameborder="0" scrolling="no" width="300px" height="400px"></iframe></div>-->
-				</div>
+
+
 			</div>
+			<div class="layui-col-sm4">
 
+				wang
+
+
+			</div>
 		</div>
-		<script src="../../../static/layui/layui.js" th:src="@{${rootPath} + '/static/layui/layui.js'}"></script>
+	</div>
 
 		<script th:inline="javascript">
 

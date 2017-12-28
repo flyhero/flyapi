@@ -4,15 +4,9 @@
     <meta charset="utf-8">
     <title>帐号设置</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="keywords" content="fly,layui,前端社区">
-    <meta name="description" content="Fly社区是模块化前端UI框架Layui的官网社区，致力于为web开发提供强劲动力">
-    <link rel="stylesheet" href="../../../static/layui/css/layui.css" th:href="@{${rootPath} + '/static/layui/css/layui.css'}">
-    <link rel="stylesheet" href="../../../static/css/global.css" th:href="@{${rootPath} + '/res/css/global.css'}">
-    <script src="../../../static/js/jquery.min.js" th:src="@{${rootPath} + '/static/js/jquery.min.js'}"></script>
-    <link rel="stylesheet" href="../../../static/css/dropdown.css" th:href="@{${rootPath} + '/static/css/dropdown.css'}"/>
-    <script src="../../../static/js/jquery.sweet-dropdown.min.js"
-            th:src="@{${rootPath} + '/static/js/jquery.sweet-dropdown.min.js'}"></script>
-
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <th:block th:include="common/link::link"></th:block>
 
 </head>
 <body>
@@ -20,32 +14,7 @@
     <th:block th:include="common/header::header"></th:block>
 </div>
 <div class="main fly-user-main layui-clear">
-    <ul class="layui-nav layui-nav-tree layui-inline" lay-filter="user">
-        <li class="layui-nav-item">
-            <a href="home.html">
-                <i class="layui-icon">&#xe609;</i>
-                我的主页
-            </a>
-        </li>
-        <li class="layui-nav-item">
-            <a href="../user/go?html=user/index">
-                <i class="layui-icon">&#xe612;</i>
-                用户中心
-            </a>
-        </li>
-        <li class="layui-nav-item layui-this">
-            <a href="set.html">
-                <i class="layui-icon">&#xe620;</i>
-                基本设置
-            </a>
-        </li>
-        <li class="layui-nav-item">
-            <a href="message.html">
-                <i class="layui-icon">&#xe611;</i>
-                我的消息
-            </a>
-        </li>
-    </ul>
+    <th:block th:include="common/left::left"></th:block>
 
     <div class="site-tree-mobile layui-hide">
         <i class="layui-icon">&#xe602;</i>
@@ -238,9 +207,9 @@
                                     <div class="layui-input-inline">
                                         <select name="quiz1">
                                             <option value="">请选择</option>
-                                            <option value="浙江" selected="">七牛</option>
-                                            <option value="你的工号">极简图床</option>
-                                            <option value="你最喜欢的老师">新浪</option>
+                                            <option value="0" selected="">七牛</option>
+                                            <option value="1">极简图床</option>
+                                            <option value="2">新浪</option>
                                         </select>
                                     </div>
                                 </div>
@@ -269,8 +238,8 @@
                                     <div class="layui-timeline-content layui-text">
                                         <h3 class="layui-timeline-title">方式二</h3>
                                         <ul>
-                                            <li><img src="http://www.iflyapi.cn:8080/res/images/qiniu/qiniu-step1.png" width="400px" height="300px"/></li>
-                                            <li><img src="http://www.iflyapi.cn:8080/res/images/qiniu/qiniu-step2.png" width="400px" height="300px"/></li>
+                                            <li><img src="http://www.iflyapi.cn:8090/static/images/qiniu/qiniu-step1.png" width="400px" height="300px"/></li>
+                                            <li><img src="http://www.iflyapi.cn:8090/static/images/qiniu/qiniu-step2.png" width="400px" height="300px"/></li>
                                         </ul>
                                     </div>
                                 </li>
@@ -288,6 +257,10 @@
 </div>
 <script src="../../../static/layui/layui.js" th:src="@{${rootPath} + '/static/layui/layui.js'}"></script>
 <script>
+
+    $("li").removeClass("layui-this");
+    $("#fly-set").addClass("layui-this")
+
     layui.cache.page = 'user';
     layui.cache.user = {
         username: '游客'

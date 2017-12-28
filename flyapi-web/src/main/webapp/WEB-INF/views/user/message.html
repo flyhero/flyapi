@@ -7,42 +7,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="keywords" content="fly,layui,前端社区">
   <meta name="description" content="Fly社区是模块化前端UI框架Layui的官网社区，致力于为web开发提供强劲动力">
-  <link rel="stylesheet" href="../../res/layui/css/layui.css">
-  <link rel="stylesheet" href="../../res/css/global.css">
+  <th:block th:include="common/link::link"></th:block>
 </head>
 <body>
 
 <div class="header">
-
+  <th:block th:include="common/header::header"></th:block>
 </div>
 
 <div class="main fly-user-main layui-clear">
-  <ul class="layui-nav layui-nav-tree layui-inline" lay-filter="user">
-    <li class="layui-nav-item">
-      <a href="home.html">
-        <i class="layui-icon">&#xe609;</i>
-        我的主页
-      </a>
-    </li>
-    <li class="layui-nav-item">
-      <a href="index.html">
-        <i class="layui-icon">&#xe612;</i>
-        用户中心
-      </a>
-    </li>
-    <li class="layui-nav-item">
-      <a href="set.html">
-        <i class="layui-icon">&#xe620;</i>
-        基本设置
-      </a>
-    </li>
-    <li class="layui-nav-item layui-this">
-      <a href="message.html">
-        <i class="layui-icon">&#xe611;</i>
-        我的消息
-      </a>
-    </li>
-  </ul>
+  <th:block th:include="common/left::left"></th:block>
   
   <div class="site-tree-mobile layui-hide">
     <i class="layui-icon">&#xe602;</i>
@@ -77,6 +51,9 @@
 
 <script src="../../res/layui/layui.js"></script>
 <script>
+    $("li").removeClass("layui-this");
+    $("#fly-message").addClass("layui-this")
+
 layui.cache.page = 'user';
 layui.cache.user = {
   username: '游客'

@@ -34,8 +34,8 @@
         <div class="nav-user" th:if="${session.user} == null">
             <a class="unlogin" href=""><i class="fa fa-user-circle-o fa-2x"></i></a>
             <span>
-                <a href="#" th:href="@{${rootPath} + '/forward/go?html=login'}" >登录</a>
-                <a href="../user/login.html">注册</a>
+                <a href="#" th:href="@{${rootPath} + '/forward/go?html=login'}" >登录/注册</a>
+                <!--<a href="../user/login.html">注册</a>-->
             </span>
         </div>
         <div class="flyhero-user" th:unless="${session.user} == null">
