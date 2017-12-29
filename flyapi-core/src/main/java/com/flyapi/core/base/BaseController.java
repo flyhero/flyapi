@@ -1,6 +1,7 @@
 package com.flyapi.core.base;
 
 import com.alibaba.fastjson.JSONObject;
+import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import javax.servlet.http.HttpServletRequest;
@@ -10,7 +11,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Enumeration;
 import java.util.HashMap;
-
 /**
  * author: flyhero
  * Date: 2017/5/13 0013 下午 2:43
@@ -37,6 +37,23 @@ public class BaseController {
         this.session = session;
         mv = new ModelAndView();
         json = new JSONObject();
+    }
+
+    /**
+     * 当前是否登录
+     * @title: isLogin
+     * @author flyhero <http://www.iflyapi.cn>
+     * @params []
+     * @return boolean
+     * @date 2017/12/29 下午6:01
+     */
+    public boolean isLogin(){
+        return !StringUtils.isEmpty(session.getAttribute("user"));
+    }
+
+
+    public Object currentUser(){
+        return session.getAttribute("user");
     }
 
     /**

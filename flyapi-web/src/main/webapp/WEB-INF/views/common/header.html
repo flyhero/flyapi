@@ -7,7 +7,7 @@
         <div class="nav">
            <!-- class="nav-this"-->
             <a id="home"  href="../forward/go?html=index.html" th:href="@{${rootPath} + '/forward/go?html=index'}">
-                <i class="fa fa-home fa-fw"></i>首页
+                <i class="fa fa-home fa-fw"></i>发现
             </a>
             <a id="subject" href="../forward/go?html=article/subject" th:href="@{${rootPath} + '/forward/go?html=article/subject'}" target="_blank">
                 <i class="fa fa-map-o fa-fw"></i>专题
@@ -35,7 +35,6 @@
             <a class="unlogin" href=""><i class="fa fa-user-circle-o fa-2x"></i></a>
             <span>
                 <a href="#" th:href="@{${rootPath} + '/forward/go?html=login'}" >登录/注册</a>
-                <!--<a href="../user/login.html">注册</a>-->
             </span>
         </div>
         <div class="flyhero-user" th:unless="${session.user} == null">

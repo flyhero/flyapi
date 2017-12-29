@@ -39,7 +39,7 @@ public class UserFameServiceImpl extends BaseServiceImpl<UcenterUserFame,Ucenter
         userFame.setOpType(opType);
         int num=ucenterUserFameMapper.findCountByUserIdAndOpType(userFame);
         switch (opType){
-            case 1:
+            case 1://登录
                 if(num < 1){
                     userFame.setId(snowflakeIdWorker.nextId());
                     userFame.setScore(2);
@@ -49,7 +49,35 @@ public class UserFameServiceImpl extends BaseServiceImpl<UcenterUserFame,Ucenter
                     ucenterUserFameMapper.updateFameValueByUserId(userFame);
                 }
                 break;
-            case 2:
+            case 2://发布
+                if(num < 3){
+                    userFame.setId(snowflakeIdWorker.nextId());
+                    userFame.setScore(5);
+                    userFame.setOpDesc("发布文章");
+                    userFame.setCreateTime(new Date());
+                    ucenterUserFameMapper.insertSelective(userFame);
+                    ucenterUserFameMapper.updateFameValueByUserId(userFame);
+                }
+                break;
+            case 3://评论
+                if(num < 5){
+                    userFame.setId(snowflakeIdWorker.nextId());
+                    userFame.setScore(3);
+                    userFame.setOpDesc("评论");
+                    userFame.setCreateTime(new Date());
+                    ucenterUserFameMapper.insertSelective(userFame);
+                    ucenterUserFameMapper.updateFameValueByUserId(userFame);
+                }
+                break;
+            case 4://阅读
+                if(num < 15){
+                    userFame.setId(snowflakeIdWorker.nextId());
+                    userFame.setScore(1);
+                    userFame.setOpDesc("阅读");
+                    userFame.setCreateTime(new Date());
+                    ucenterUserFameMapper.insertSelective(userFame);
+                    ucenterUserFameMapper.updateFameValueByUserId(userFame);
+                }
                 break;
             default:
                 break;

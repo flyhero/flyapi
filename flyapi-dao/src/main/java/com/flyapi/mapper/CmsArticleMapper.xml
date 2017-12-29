@@ -272,6 +272,7 @@
     SELECT
         article_id articleId,
         title,
+        create_time createTime,
         view_num viewNum
     FROM
         cms_article

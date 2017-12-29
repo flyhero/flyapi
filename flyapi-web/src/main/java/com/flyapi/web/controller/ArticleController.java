@@ -3,8 +3,10 @@ package com.flyapi.web.controller;
 import com.flyapi.core.base.BaseController;
 import com.flyapi.core.constant.JSONResult;
 import com.flyapi.model.CmsArticle;
+import com.flyapi.model.UcenterUser;
 import com.flyapi.service.api.ArticleService;
 import com.flyapi.service.api.CommentService;
+import com.flyapi.service.api.UserFameService;
 import com.flyapi.service.api.UserService;
 import com.flyapi.pojo.vo.ArticleDetailVo;
 import com.flyapi.pojo.vo.ArticleSimpleVo;
@@ -35,6 +37,8 @@ public class ArticleController extends BaseController {
     private UserService userService;
     @Autowired
     private CommentService commentService;
+    @Autowired
+    private UserFameService userFameService;
     /**
      * Title: findArticleDetail
      * params: [articleId]
@@ -45,6 +49,10 @@ public class ArticleController extends BaseController {
     @RequestMapping(value = "detail/{articleId}",method = RequestMethod.GET)
     public ModelAndView findArticleDetail(@PathVariable("articleId")Long articleId){
 
+        if(isLogin()){
+            UcenterUser user = (UcenterUser)currentUser();
+            userFameService.addFameValue(user.getUserId(),4);
+        }
         ArticleDetailVo detailVo = articleService.findArticleDetail(articleId);
         mv.addObject("detailVo",detailVo);
         mv.addObject("commentList",commentService.findCommentById(articleId));

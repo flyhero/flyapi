@@ -38,7 +38,6 @@
                             <div><a href="#" th:href="${carousel.detailUrl}"><img src="'#" title="轮播图" th:src="${carousel.imgUrl}" th:title="${carousel.title}"/></a></div>
                         </th:block>
                     </th:block>
-<!--                <div><img src="../res/images/slider-1.jpg" th:src="@{${rootPath} + '/res/images/slider-1.jpg'}"/></div>  -->
                 </div>
             </div>
             <ul class="fly-list" id="article-list">
@@ -83,7 +82,7 @@
 
     <div class="edge">
         <div class="fly-panel leifeng-rank">
-            <h3 class="fly-panel-title">今日名人榜- TOP 12</h3>
+            <h3 class="fly-panel-title">今日名人榜- TOP 8</h3>
             <dl>
                 <dd>
                     <a href="user/home.html">
@@ -128,10 +127,10 @@
                 <a href="jie/detail.html">使用 layui 秒搭后台大布局之基本结构</a>
             </dd>-->
             <th:block th:if="${not #lists.isEmpty(updateList)}">
-                <th:block th:each="last,index:${updateList}">
+                <th:block th:each="update,index:${updateList}">
                     <dd>
-                        <a href="/#" th:href="@{${rootPath} + '/article/detail/'+${last.articleId}}" th:text="${last.title}">标题</a>
-                        <span><i class="fa fa-clock-o fa-fw"></i> <i th:text="${#dates.format(last.createTime, 'yyyy/MM/dd hh:mm:ss')}"></i></span>
+                        <a href="/#" th:href="@{${rootPath} + '/article/detail/'+${update.articleId}}" th:text="${update.title}">标题</a>
+                        <span><i class="fa fa-clock-o fa-fw"></i> <span th:text="${#dates.format(update.createTime, 'hh:mm')}"></span></span>
                     </dd>
                     </dd>
                 </th:block>
@@ -181,7 +180,6 @@
 <script th:inline="javascript">
 
     function likeFn() {
-        getData(1,0,0);
         $("a").removeClass("tab-this")
         $("#like").addClass("tab-this");
     };
