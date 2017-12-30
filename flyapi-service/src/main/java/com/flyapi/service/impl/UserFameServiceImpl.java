@@ -6,6 +6,7 @@ import com.flyapi.dao.UcenterFameMapper;
 import com.flyapi.dao.UcenterUserFameMapper;
 import com.flyapi.model.UcenterFame;
 import com.flyapi.model.UcenterUserFame;
+import com.flyapi.pojo.vo.TopVo;
 import com.flyapi.service.api.FameService;
 import com.flyapi.service.api.UserFameService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * author: flyhero
@@ -84,5 +86,10 @@ public class UserFameServiceImpl extends BaseServiceImpl<UcenterUserFame,Ucenter
         }
 
         return 0;
+    }
+
+    public List<TopVo> findSumGroupByUserId() {
+        List<TopVo> list=ucenterUserFameMapper.findSumGroupByUserId();
+        return list;
     }
 }

@@ -35,40 +35,47 @@
                 <div class="layui-form layui-form-pane layui-tab-item layui-show">
                     <form method="post">
                         <div class="layui-form-item">
-                            <label for="L_email" class="layui-form-label">邮箱</label>
-                            <div class="layui-input-inline">
-                                <input type="text" id="L_email" name="email" required lay-verify="email"
-                                       autocomplete="off" value="" class="layui-input">
-                            </div>
-                            <div class="layui-form-mid layui-word-aux">如果您在邮箱已激活的情况下，变更了邮箱，需<a href="activate.html"
-                                                                                               style="font-size: 12px; color: #4f99cf;">重新验证邮箱</a>。
-                            </div>
-                        </div>
-                        <div class="layui-form-item">
                             <label for="L_username" class="layui-form-label">昵称</label>
                             <div class="layui-input-inline">
                                 <input type="text" id="L_username" name="username" required lay-verify="required"
-                                       autocomplete="off" value="" class="layui-input">
-                            </div>
-                            <div class="layui-inline">
-                                <div class="layui-input-inline">
-                                    <input type="radio" name="sex" value="0" checked title="男">
-                                    <input type="radio" name="sex" value="1" title="女">
-                                </div>
+                                       autocomplete="off" th:value="${setInfo.nickName}" class="layui-input">
                             </div>
                         </div>
                         <div class="layui-form-item">
-                            <label for="L_city" class="layui-form-label">城市</label>
+                            <label class="layui-form-label">性别</label>
+                            <div class="layui-input-block">
+                                <input type="radio" name="sex" value="1" title="男" checked="">
+                                <input type="radio" name="sex" value="2" title="女">
+                                <input type="radio" name="sex" value="0" title="未知">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label for="L_email" class="layui-form-label">邮箱</label>
                             <div class="layui-input-inline">
-                                <input type="text" id="L_city" name="city" autocomplete="off" value=""
-                                       class="layui-input">
+                                <input type="text" id="L_email" name="email" required lay-verify="email"
+                                       autocomplete="off" th:value="${setInfo.email}" class="layui-input">
+                            </div>
+                            <div class="layui-form-mid layui-word-aux">如果您在邮箱已激活的情况下，变更了邮箱，需
+                                <a href="activate.html" style="font-size: 12px; color: #4f99cf;">重新验证邮箱</a>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label for="phone" class="layui-form-label">手机</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="phone" name="phone" required lay-verify="phone"
+                                       autocomplete="off" th:value="${setInfo.phone}" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label for="company" class="layui-form-label">公司</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="company" name="company" autocomplete="off" th:value="${setInfo.company}" class="layui-input">
                             </div>
                         </div>
                         <div class="layui-form-item layui-form-text">
                             <label for="L_sign" class="layui-form-label">签名</label>
                             <div class="layui-input-block">
-                                <textarea placeholder="随便写些什么刷下存在感" id="L_sign" name="sign" autocomplete="off"
-                                          class="layui-textarea" style="height: 80px;"></textarea>
+                                <textarea placeholder="随便写些什么刷下存在感" id="L_sign" name="sign" autocomplete="off" th:text="${setInfo.sign}" class="layui-textarea" style="height: 80px;"></textarea>
                             </div>
                         </div>
                         <div class="layui-form-item">
@@ -84,7 +91,7 @@
                             <div class="upload-img">
                                 <input type="file" name="file" id="LAY-file" lay-title="上传头像">
                             </div>
-                            <img src="http://tp4.sinaimg.cn/1345566427/180/5730976522/0">
+                            <img src="http://tp4.sinaimg.cn/1345566427/180/5730976522/0" th:src="${setInfo.avatar}">
                             <span class="loading"></span>
                         </div>
                     </div>
@@ -143,24 +150,21 @@
                 </div>
 
                 <div class="layui-form layui-form-pane layui-tab-item">
-                    <form action="/user/repass" method="post">
+                    <form action="" method="post">
                         <div class="layui-form-item">
-                            <label for="L_nowpass" class="layui-form-label">赞赏语</label>
+                            <label for="supportWord" class="layui-form-label">赞赏语</label>
                             <div class="layui-input-inline">
-                                <input type="password" id="L_nowpass" name="nowpass" required lay-verify="required"
+                                <input type="text" id="supportWord" name="supportWord" required lay-verify="required" th:value="${setInfo.supportWord}"
                                        autocomplete="off" class="layui-input">
                             </div>
                         </div>
                             <div class="layui-upload">
                                 <button type="button" class="layui-btn layui-btn-primary" id="test1">上传二维码</button>
                                 <div class="layui-upload-list">
-                                    <img class="layui-upload-img" id="demo1" height="300px" width="300px">
+                                    <img class="layui-upload-img" id="demo1" height="300px" width="300px" th:src="${setInfo.supportQrcode}">
                                     <p id="demoText"></p>
                                 </div>
                             </div>
-
-
-
 
                         <div class="layui-form-item">
                             <button class="layui-btn" key="set-mine" lay-filter="*" lay-submit>保存</button>
@@ -173,7 +177,7 @@
                         <div class="layui-col-md6">
                             <form action="/user/repass" method="post">
                                 <div class="layui-form-item">
-                                    <label for="L_nowpass" class="layui-form-label">accessKey</label>
+                                    <label for="accessKey" class="layui-form-label">accessKey</label>
                                     <div class="layui-input-inline">
                                         <input type="password" id="accessKey" name="accessKey" required lay-verify="required"
                                                autocomplete="off" class="layui-input">
@@ -290,27 +294,27 @@
     });
 
     layui.use('upload', function() {
-        var $ = layui.jquery
-            , upload = layui.upload;
+        var $ = layui.jquery,
+            upload = layui.upload;
 
         //普通图片上传
         var uploadInst = upload.render({
-            elem: '#test1'
-            , url: '/upload/'
-            , before: function (obj) {
+            elem: '#test1',
+            url: '/upload/',
+            before: function (obj) {
                 //预读本地文件示例，不支持ie8
                 obj.preview(function (index, file, result) {
                     $('#demo1').attr('src', result); //图片链接（base64）
                 });
-            }
-            , done: function (res) {
+            },
+            done: function (res) {
                 //如果上传失败
                 if (res.code > 0) {
                     return layer.msg('上传失败');
                 }
                 //上传成功
-            }
-            , error: function () {
+            },
+            error: function () {
                 //演示失败状态，并实现重传
                 var demoText = $('#demoText');
                 demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-mini demo-reload">重试</a>');

@@ -5,15 +5,13 @@
     <meta charset="utf-8">
     <title>用户主页</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="keywords" content="fly,layui,前端社区">
-    <meta name="description" content="Fly社区是模块化前端UI框架Layui的官网社区，致力于为web开发提供强劲动力">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
     <th:block th:include="common/link::link"></th:block>
-
     <script src="../../static/echarts/echarts.min.js"></script>
     <script src="http://echarts.baidu.com/resource/echarts-gl-latest/dist/echarts-gl.min.js"></script>
     <script src="../../static/js/jquery.min.js"></script>
     <script src="../../static/echarts//dat.gui.js"></script>
-
     <style>
         #echart {
             position: absolute;
@@ -85,8 +83,7 @@
                             <em>1136阅/27答</em>
                         </li>
                     </ul>
-                    <div class="fly-none" style="min-height: 50px; padding:30px 0; height:auto;"><i
-                            style="font-size:14px;">查看更多</i></div>
+                    <div class="fly-none" style="min-height: 50px; padding:30px 0; height:auto;"><i style="font-size:14px;">查看更多</i></div>
 
                 </div>
                 <div class="fly-panel leifeng-rank">
@@ -104,8 +101,9 @@
                             <em>1136阅/27答</em>
                         </li>
                     </ul>
-                    <div class="fly-none" style="min-height: 50px; padding:30px 0; height:auto;"><i
-                            style="font-size:14px;">查看更多</i></div>
+                    <div class="fly-none" style="min-height: 50px; padding:30px 0; height:auto;">
+                        <i style="font-size:14px;">查看更多</i>
+                    </div>
 
                 </div>
 
@@ -117,15 +115,13 @@
                 <h3 class="fly-panel-title">开源项目</h3>
                 <ul class="jie-row">
                     <li>
-                        <a href="/jie/{{item.id}}.html" class="jie-title">flyapi</a>
+                        <a href="#" class="jie-title">flyapi</a>
                         <em>
-                            <iframe
-                                    style="margin-left: 1px; margin-bottom:-5px;"
+                            <iframe style="margin-left: 1px; margin-bottom:-5px;"
                                     frameborder="0" scrolling="0" width="80px" height="20px"
                                     src="https://ghbtns.com/github-btn.html?user=flyhero&repo=flyapi&type=star&count=true">
                             </iframe>
-                            <iframe
-                                    frameborder="0" scrolling="0" width="80px" height="20px"
+                            <iframe frameborder="0" scrolling="0" width="80px" height="20px"
                                     src="https://ghbtns.com/github-btn.html?user=flyhero&repo=flyapi&type=fork&count=true">
                             </iframe>
                         </em>
@@ -175,31 +171,6 @@
       <i>1天前</i>
       <em>1136阅/27答</em>
     </li>
-    <li>
-      <a href="/jie/{{item.id}}.html" class="jie-title">使用 layui 秒搭后台大布局（基本结构）</a>
-      <i>1天前</i>
-      <em>1136阅/27答</em>
-    </li>
-    <li>
-      <a href="/jie/{{item.id}}.html" class="jie-title">使用 layui 秒搭后台大布局（基本结构）</a>
-      <i>1天前</i>
-      <em>1136阅/27答</em>
-    </li>
-    <li>
-      <a href="/jie/{{item.id}}.html" class="jie-title">使用 layui 秒搭后台大布局（基本结构）</a>
-      <i>1天前</i>
-      <em>1136阅/27答</em>
-    </li>
-    <li>
-      <a href="/jie/{{item.id}}.html" class="jie-title">使用 layui 秒搭后台大布局（基本结构）</a>
-      <i>1天前</i>
-      <em>1136阅/27答</em>
-    </li>
-    <li>
-      <a href="/jie/{{item.id}}.html" class="jie-title">使用 layui 秒搭后台大布局（基本结构）</a>
-      <i>1天前</i>
-      <em>1136阅/27答</em>
-    </li>
   </ul>
    <div class="fly-none" style="min-height: 50px; padding:30px 0; height:auto;"><i style="font-size:14px;">没有发表任何求解</i></div>
 </div>
@@ -235,7 +206,6 @@ full: true
 </div>
 </div>
 -->
-
 </div>
 
 <th:block th:replace="common/footer::footer"></th:block>
@@ -250,12 +220,6 @@ full: true
         experience: 83,
         sex: '男'
     };
-    layui.config({
-        version: "2.0.0",
-        base: '../../../static/mods/'
-    }).extend({
-        fly: 'index'
-    }).use('fly');
 </script>
 <script>
     var chart = echarts.init(document.getElementById('echart'));

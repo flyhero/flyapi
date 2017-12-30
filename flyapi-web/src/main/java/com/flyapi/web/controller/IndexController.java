@@ -4,8 +4,10 @@ import com.flyapi.core.base.BaseController;
 import com.flyapi.core.constant.JSONResult;
 import com.flyapi.model.CmsArticle;
 import com.flyapi.model.SettingCarousel;
+import com.flyapi.pojo.vo.TopVo;
 import com.flyapi.service.api.ArticleService;
 import com.flyapi.service.api.SettingCarouselService;
+import com.flyapi.service.api.UserFameService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,8 @@ public class IndexController extends BaseController{
 
     @Autowired
     private ArticleService articleService;
+    @Autowired
+    private UserFameService userFameService;
 
 
     @RequestMapping("index.html")
@@ -44,9 +48,11 @@ public class IndexController extends BaseController{
 
         List<CmsArticle> updateList =null;
         List<CmsArticle> hotList =null;
+        List<TopVo> topList =null;
         try{
             updateList=articleService.findLastUpdateOrHotArticles(1);
             hotList=articleService.findLastUpdateOrHotArticles(2);
+            topList=userFameService.findSumGroupByUserId();
         }catch (Exception e){
             logger.error(e.toString());
         }
@@ -54,6 +60,7 @@ public class IndexController extends BaseController{
         mv.addObject("carouselList",carouselList);
         mv.addObject("updateList",updateList);
         mv.addObject("hotList",hotList);
+        mv.addObject("topList",topList);
         return mv;
     }
 }

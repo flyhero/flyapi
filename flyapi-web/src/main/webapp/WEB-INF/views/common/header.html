@@ -6,13 +6,13 @@
         <a class="logo" href="/" title="Fly">flyapi</a>
         <div class="nav">
            <!-- class="nav-this"-->
-            <a id="home"  href="../forward/go?html=index.html" th:href="@{${rootPath} + '/forward/go?html=index'}">
+            <a id="home"  href="../index.html" th:href="@{${rootPath} + '/index.html'}">
                 <i class="fa fa-home fa-fw"></i>发现
             </a>
-            <a id="subject" href="../forward/go?html=article/subject" th:href="@{${rootPath} + '/forward/go?html=article/subject'}" target="_blank">
+            <a id="subject" href="../forward/go?html=article/subject" th:href="@{${rootPath} + '/forward/go?html=article/subject'}" >
                 <i class="fa fa-map-o fa-fw"></i>专题
             </a>
-            <a id="book" href="../forward/go?html=book/index" th:href="@{${rootPath} + '/forward/go?html=book/index'}"  target="_blank">
+            <a id="book" href="../forward/go?html=book/index" th:href="@{${rootPath} + '/forward/go?html=book/index'}">
                 <i class="fa fa-book fa-fw"></i>易书
             </a>
             <a  data-dropdown="#dropdown-other">
@@ -47,7 +47,7 @@
             <div class="dropdown-menu dropdown-anchor-top-left dropdown-has-anchor" id="dropdown-standard">
                 <ul>
                     <li><a href="../forword/go?html=/user/home" th:href="@{${rootPath} + '/forward/go?html=/user/home'}">主页</a></li>
-                    <li><a href="../forword/go?html=/user/set" th:href="@{${rootPath} + '/forward/go?html=/user/set'}">设置</a></li>
+                    <li><a href="../forword/go?html=/user/set" th:href="@{${rootPath} + '/user/set'}">设置</a></li>
                     <li><a href="../user/logout">退出</a></li>
                     <!--<li class="divider"></li>-->
                 </ul>

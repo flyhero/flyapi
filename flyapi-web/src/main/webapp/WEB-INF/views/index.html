@@ -84,21 +84,25 @@
         <div class="fly-panel leifeng-rank">
             <h3 class="fly-panel-title">今日名人榜- TOP 8</h3>
             <dl>
-                <dd>
-                    <a href="user/home.html">
-                        <img src="../res/images/avatar/default.png">
-                        <cite>纸飞机</cite>
-                        <i>159次回答</i>
-                    </a>
-                </dd>
-                <dd>
-                    <a href="user/home.html">
-                        <img src="../res/images/avatar/default.png">
-                        <cite>纸飞机</cite>
-                        <i>159次回答</i>
-                    </a>
-                </dd>
 
+                <dd>
+                    <a href="user/home.html">
+                        <img src="../res/images/avatar/default.png">
+                        <cite>纸飞机</cite>
+                        <i>159次回答</i>
+                    </a>
+                </dd>
+                <th:block th:if="${not #lists.isEmpty(topList)}">
+                    <th:block th:each="top,index:${topList}">
+                        <dd>
+                            <a href="user/home.html">
+                                <img src="" th:src="${top.avatar}">
+                                <cite th:text="${top.nickName}"></cite>
+                                <i th:text="'NO.'+${index.index+1}">NO.1</i>
+                            </a>
+                        </dd>
+                    </th:block>
+                </th:block>
 
             </dl>
         </div>

@@ -104,6 +104,19 @@
     where user_id = #{userId,jdbcType=BIGINT} AND op_type = #{opType} AND DATE_FORMAT(NOW(),'%Y-%m-%d') = DATE_FORMAT(create_time,'%Y-%m-%d')
   </select>
 
+  <select id="findSumGroupByUserId" resultType="com.flyapi.pojo.vo.TopVo">
+    SELECT t.sumScore,t1.user_id userId,t1.avatar,t1.nick_name nickName
+    from (
+        select sum(score) sumScore,user_id userId
+        from ucenter_user_fame
+        where DATE_FORMAT(NOW(),'%Y-%m-%d') = DATE_FORMAT(create_time,'%Y-%m-%d')
+        GROUP BY user_id
+        ORDER BY sumScore
+        limit 0,8
+        ) t
+        LEFT JOIN ucenter_user t1 ON t.userId = t1.user_id
+  </select>
+
   <update id="updateFameValueByUserId" parameterType="com.flyapi.model.UcenterUserFame">
     update ucenter_user
     set fame_value = fame_value + #{score}

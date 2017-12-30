@@ -3,6 +3,9 @@ package com.flyapi.service.api;
 import com.flyapi.core.base.BaseService;
 import com.flyapi.model.UcenterFame;
 import com.flyapi.model.UcenterUserFame;
+import com.flyapi.pojo.vo.TopVo;
+
+import java.util.List;
 
 /**
  * author: flyhero
@@ -11,4 +14,5 @@ import com.flyapi.model.UcenterUserFame;
 public interface UserFameService extends BaseService<UcenterUserFame> {
 
     int addFameValue(Long userId,Integer opType);
+    List<TopVo> findSumGroupByUserId();
 }

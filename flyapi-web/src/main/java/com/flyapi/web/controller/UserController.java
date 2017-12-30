@@ -24,6 +24,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -138,7 +139,7 @@ public class UserController extends BaseController {
         user.setUserId(snowflakeIdWorker.nextId());
         user.setUsername(registerDto.getUsername());
         user.setNickName(registerDto.getUsername());
-        user.setPassword(AESUtil.AESEncode(registerDto.getPw()));
+        user.setPassword(AESUtil.AESEncode(registerDto.getPw().trim()));
         user.setCreateTime(new Date(System.currentTimeMillis()));
         if(userService.insertSelective(user) > 0){
             SettingStore store = new SettingStore();
@@ -247,6 +248,17 @@ public class UserController extends BaseController {
         session.removeAttribute("user");
         CookieUtil.delCookie(response,"isLogin");
         mv.setViewName("index");
+        return mv;
+    }
+
+    @GetMapping("set")
+    public ModelAndView setInfo(){
+        System.out.println("==========user/set");
+        UcenterUser currentUser = (UcenterUser)currentUser();
+        UcenterUser user=userService.selectByPrimaryKey(currentUser.getUserId());
+        user.setPassword("");
+        mv.addObject("setInfo",user);
+        mv.setViewName("/user/set");
         return mv;
     }
 }
