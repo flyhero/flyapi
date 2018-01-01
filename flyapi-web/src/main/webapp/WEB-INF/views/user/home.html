@@ -51,7 +51,7 @@
 
             <fieldset class="layui-elem-field" style="margin-top: 20px; max-width: 540px;min-height: 150px">
                 <legend>自我宣言</legend>
-                <div class="layui-field-box">
+                <div class="layui-field-box" th:text="${setInfo.sign}">
                     我们有一种天生的惰性，总想着吃最少的苦，走最短的弯路，获得最大的收益。但是，很多事情，别人可以替你做却无法替你感受，缺少了这一段心路历程，你即使再成功，精神的田地里依然是一片荒芜。
                 </div>
             </fieldset>
@@ -64,7 +64,7 @@
             <div class="content">
 
 
-                            <div id="echart" class="fly-panel leifeng-rank"></div>
+
                     <!--<div class="fly-none" style="min-height: 50px; padding:30px 0; height:auto;"><i style="font-size:14px;">没有发表任何求解</i></div>-->
 
 
@@ -88,7 +88,7 @@
                 </div>
                 <div class="fly-panel leifeng-rank">
                     <h3 class="fly-panel-title">全部专题</h3>
-                    <ul class="jie-row">
+<!--                    <ul class="jie-row">
                         <li>
                             <span class="fly-jing">精</span>
                             <a href="/jie/{{item.id}}.html" class="jie-title">使用 layui 秒搭后台大布局（基本结构）</a>
@@ -100,7 +100,17 @@
                             <i>1天前</i>
                             <em>1136阅/27答</em>
                         </li>
-                    </ul>
+                    </ul>-->
+
+                    <div class="layui-row">
+                        <div  class="layui-col-md5">
+                            <div id="bing" style="width: 100%;height: 300px;border-right: dashed 1px;"></div>
+                        </div>
+                        <div class="layui-col-md7">
+                            <div id="echart"  style="width: 100%;height: 300px;"></div>
+                        </div>
+                    </div>
+
                     <div class="fly-none" style="min-height: 50px; padding:30px 0; height:auto;">
                         <i style="font-size:14px;">查看更多</i>
                     </div>
@@ -222,6 +232,7 @@ full: true
     };
 </script>
 <script>
+var bing = echarts.init(document.getElementById('bing'));
     var chart = echarts.init(document.getElementById('echart'));
 
     var hours = ['12a', '1a', '2a', '3a', '4a', '5a', '6a',
@@ -229,8 +240,8 @@ full: true
         '12p', '1p', '2p', '3p', '4p', '5p',
         '6p', '7p', '8p', '9p', '10p', '11p'
     ];
-    var days = ['Saturday', 'Friday', 'Thursday',
-        'Wednesday', 'Tuesday', 'Monday', 'Sunday'
+    var days = ['Sat', 'Fri', 'Thur',
+        'Wed', 'Tues', 'Mon', 'Sun'
     ];
 
     var data = [
@@ -404,6 +415,11 @@ full: true
         [6, 23, 6]
     ];
     option = {
+        title : {
+            text: '活动图',
+            subtext: '纯属虚构',
+            x:'center'
+        },
         tooltip: {},
         visualMap: {
             max: 20,
@@ -467,11 +483,60 @@ full: true
             }
         }]
     }
-    chart.setOption(option);
+
+
+
+option1 = {
+    title : {
+        text: '某站点用户访问来源',
+        subtext: '纯属虚构',
+        x:'center'
+    },
+    tooltip : {
+        trigger: 'item',
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
+    },
+    legend: {
+        orient: 'vertical',
+       /* left: 'left',*/
+        bottom: 10,
+        data: ['1k+','邮件营销','联盟广告','视频广告','搜索引擎']
+    },
+    series : [
+        {
+            name: '访问来源',
+            type: 'pie',
+            radius : '55%',
+            center: ['50%', '60%'],
+            data:[
+                {value:335, name:'1k+'},
+                {value:310, name:'100+'},
+                {value:234, name:'200+'},
+                {value:135, name:'500+'},
+                {value:1548, name:'50+'}
+            ],
+            itemStyle: {
+                emphasis: {
+                    shadowBlur: 10,
+                    shadowOffsetX: 0,
+                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                }
+            }
+        }
+    ]
+};
+
+
+
+chart.setOption(option);
+bing.setOption(option1);
 
     window.addEventListener('resize', function () {
         chart.resize();
+        bing.resize();
     });
+
+
 
 </script>
 </body>

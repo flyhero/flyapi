@@ -24,10 +24,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
@@ -259,6 +256,17 @@ public class UserController extends BaseController {
         user.setPassword("");
         mv.addObject("setInfo",user);
         mv.setViewName("/user/set");
+        return mv;
+    }
+
+
+    @GetMapping("{userId}")
+    public ModelAndView space(@PathVariable Long userId){
+        System.out.println("==========user/set");
+        UcenterUser user=userService.selectByPrimaryKey(userId);
+        user.setPassword("");
+        mv.addObject("setInfo",user);
+        mv.setViewName("/user/home");
         return mv;
     }
 }

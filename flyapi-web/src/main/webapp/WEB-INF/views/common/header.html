@@ -46,7 +46,7 @@
 
             <div class="dropdown-menu dropdown-anchor-top-left dropdown-has-anchor" id="dropdown-standard">
                 <ul>
-                    <li><a href="../forword/go?html=/user/home" th:href="@{${rootPath} + '/forward/go?html=/user/home'}">主页</a></li>
+                    <li><a href="../forword/go?html=/user/home" th:href="@{${rootPath} + '/user/'+${session.user.userId}}">主页</a></li>
                     <li><a href="../forword/go?html=/user/set" th:href="@{${rootPath} + '/user/set'}">设置</a></li>
                     <li><a href="../user/logout">退出</a></li>
                     <!--<li class="divider"></li>-->
