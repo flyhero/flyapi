@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.flyapi.dao.SysNoticeMapper">
+  <resultMap id="BaseResultMap" type="com.flyapi.model.SysNotice">
+    <id column="notice_id" jdbcType="BIGINT" property="noticeId" />
+    <result column="notice_title" jdbcType="VARCHAR" property="noticeTitle" />
+    <result column="notice_type" jdbcType="TINYINT" property="noticeType" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="is_delete" jdbcType="TINYINT" property="isDelete" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.flyapi.model.SysNotice">
+    <result column="notice_content" jdbcType="LONGVARCHAR" property="noticeContent" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    notice_id, notice_title, notice_type, user_id, create_time, update_time, is_delete
+  </sql>
+  <sql id="Blob_Column_List">
+    notice_content
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sys_notice
+    where notice_id = #{noticeId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from sys_notice
+    where notice_id = #{noticeId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.flyapi.model.SysNotice">
+    insert into sys_notice (notice_id, notice_title, notice_type, 
+      user_id, create_time, update_time, 
+      is_delete, notice_content)
+    values (#{noticeId,jdbcType=BIGINT}, #{noticeTitle,jdbcType=VARCHAR}, #{noticeType,jdbcType=TINYINT}, 
+      #{userId,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{isDelete,jdbcType=TINYINT}, #{noticeContent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.flyapi.model.SysNotice">
+    insert into sys_notice
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="noticeId != null">
+        notice_id,
+      </if>
+      <if test="noticeTitle != null">
+        notice_title,
+      </if>
+      <if test="noticeType != null">
+        notice_type,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="isDelete != null">
+        is_delete,
+      </if>
+      <if test="noticeContent != null">
+        notice_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="noticeId != null">
+        #{noticeId,jdbcType=BIGINT},
+      </if>
+      <if test="noticeTitle != null">
+        #{noticeTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="noticeType != null">
+        #{noticeType,jdbcType=TINYINT},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDelete != null">
+        #{isDelete,jdbcType=TINYINT},
+      </if>
+      <if test="noticeContent != null">
+        #{noticeContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.flyapi.model.SysNotice">
+    update sys_notice
+    <set>
+      <if test="noticeTitle != null">
+        notice_title = #{noticeTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="noticeType != null">
+        notice_type = #{noticeType,jdbcType=TINYINT},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDelete != null">
+        is_delete = #{isDelete,jdbcType=TINYINT},
+      </if>
+      <if test="noticeContent != null">
+        notice_content = #{noticeContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where notice_id = #{noticeId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.flyapi.model.SysNotice">
+    update sys_notice
+    set notice_title = #{noticeTitle,jdbcType=VARCHAR},
+      notice_type = #{noticeType,jdbcType=TINYINT},
+      user_id = #{userId,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      is_delete = #{isDelete,jdbcType=TINYINT},
+      notice_content = #{noticeContent,jdbcType=LONGVARCHAR}
+    where notice_id = #{noticeId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.flyapi.model.SysNotice">
+    update sys_notice
+    set notice_title = #{noticeTitle,jdbcType=VARCHAR},
+      notice_type = #{noticeType,jdbcType=TINYINT},
+      user_id = #{userId,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      is_delete = #{isDelete,jdbcType=TINYINT}
+    where notice_id = #{noticeId,jdbcType=BIGINT}
+  </update>
+</mapper>
