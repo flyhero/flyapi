@@ -27,6 +27,15 @@
     from sys_notice
     where notice_id = #{noticeId,jdbcType=BIGINT}
   </select>
+  <select id="findNoticeByUserId" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sys_notice
+    where user_id = #{userId,jdbcType=BIGINT} OR notice_type = 0
+    ORDER BY create_time DESC
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from sys_notice
     where notice_id = #{noticeId,jdbcType=BIGINT}

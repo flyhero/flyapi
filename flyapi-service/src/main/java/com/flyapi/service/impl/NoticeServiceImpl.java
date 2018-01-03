@@ -20,4 +20,10 @@ import java.util.List;
 @Service
 @Transactional
 public class NoticeServiceImpl extends BaseServiceImpl<SysNotice,SysNoticeMapper> implements NoticeService {
+    @Autowired
+    private SysNoticeMapper sysNoticeMapper;
+
+    public List<SysNotice> findNoticeByUserId(Long userId) {
+        return sysNoticeMapper.findNoticeByUserId(userId);
+    }
 }

@@ -2,6 +2,8 @@ package com.flyapi.dao;
 
 import com.flyapi.model.SysNotice;
 
+import java.util.List;
+
 public interface SysNoticeMapper {
     int deleteByPrimaryKey(Long noticeId);
 
@@ -10,6 +12,8 @@ public interface SysNoticeMapper {
     int insertSelective(SysNotice record);
 
     SysNotice selectByPrimaryKey(Long noticeId);
+
+    List<SysNotice> findNoticeByUserId(Long noticeId);
 
     int updateByPrimaryKeySelective(SysNotice record);
 

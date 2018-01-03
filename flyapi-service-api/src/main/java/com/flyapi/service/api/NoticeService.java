@@ -10,5 +10,5 @@ import java.util.List;
  *
  */
 public interface NoticeService extends BaseService<SysNotice> {
-
+    List<SysNotice> findNoticeByUserId(Long userId);
 }
