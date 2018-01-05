@@ -8,6 +8,7 @@
 后因其它相关系统比较完善，遂放弃继续开发。
 
 如今将编写多人博客系统,由于许多知名博客界面在我看来较丑，所以准备自己写一个吧。
+本来要写个人博客，但感觉自己用的话，比较浪费，不如让同样喜欢这个博客的人一起使用。
 
 因为准备实用，所以使用简单的SSM搭建，不使用分布式概念。
 
@@ -64,18 +65,9 @@ flyapi
 ## 配置Configuration
 ### 注意
 - 当静态资源服务器变化时需要修改 editormd.js中102，103行库和插件的位置
-- 记得html页面里修改以下路径
 
-      layui.config({
-          version: "2.0.0"
-          ,base: 'http://www.iflyapi.cn:8080/res/mods/'
-      }).extend({
-          fly: 'index'
-      }).use('fly');
-      
 ## 环境搭建
     本人是在mac下开发的，若在win下使用，自行修改
-    - 安装nginx for mac ，默认端口为8080
     - 安装mysql server 5.6+ ,导入flyapi_*.sql文件
     - 安装tomcat 7+ ,端口设为8090
 
