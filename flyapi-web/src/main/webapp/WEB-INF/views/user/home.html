@@ -235,7 +235,7 @@ full: true
 var bing = echarts.init(document.getElementById('bing'));
     var chart = echarts.init(document.getElementById('echart'));
 
-    var hours = ['12a', '1a', '2a', '3a', '4a', '5a', '6a',
+ /*   var hours = ['12a', '1a', '2a', '3a', '4a', '5a', '6a',
         '7a', '8a', '9a', '10a', '11a',
         '12p', '1p', '2p', '3p', '4p', '5p',
         '6p', '7p', '8p', '9p', '10p', '11p'
@@ -483,6 +483,60 @@ var bing = echarts.init(document.getElementById('bing'));
             }
         }]
     }
+
+*/
+
+
+
+function getVirtulData(year) {
+    year = year || '2017';
+    var date = +echarts.number.parseDate(year + '-01-01');
+    var end = +echarts.number.parseDate((+year + 1) + '-01-01');
+    var dayTime = 3600 * 24 * 1000;
+    var data = [];
+    for (var time = date; time < end; time += dayTime) {
+        data.push([
+            echarts.format.formatTime('yyyy-MM-dd', time),
+            Math.floor(Math.random() * 1000)
+        ]);
+    }
+    return data;
+}
+
+
+
+option = {
+    title : {
+        text: '活动图',
+        subtext: '纯属虚构',
+        x:'center'
+    },
+    tooltip: {
+        position: 'top'
+    },
+    visualMap: {
+        min: 0,
+        max: 1000,
+        calculable: true,
+        orient: 'horizontal',
+        left: 'center',
+        top: 'top'
+    },
+
+    calendar: [
+        {
+            range: '2018',
+            cellSize: ['auto', 20]
+        }],
+
+    series: [{
+        type: 'heatmap',
+        coordinateSystem: 'calendar',
+        calendarIndex: 0,
+        data: getVirtulData(2018)
+    }]
+
+};
 
 
 

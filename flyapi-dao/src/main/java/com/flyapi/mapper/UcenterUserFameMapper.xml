@@ -122,4 +122,12 @@
     set fame_value = fame_value + #{score}
     where user_id = #{userId}
   </update>
+
+  <select id="ww">
+    SELECT SUM(score),DATE_FORMAT(create_time,'%Y-%m-%d')
+    FROM ucenter_user_fame
+    WHERE user_id = 325267539200311296
+    GROUP BY DATE_FORMAT(create_time,'%Y-%m-%d')
+
+  </select>
 </mapper>
