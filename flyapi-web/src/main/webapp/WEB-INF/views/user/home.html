@@ -111,10 +111,6 @@
                         </div>
                     </div>
 
-                    <div class="fly-none" style="min-height: 50px; padding:30px 0; height:auto;">
-                        <i style="font-size:14px;">查看更多</i>
-                    </div>
-
                 </div>
 
             </div>
@@ -151,6 +147,17 @@
                         </em>
                     </li>
                 </ul>
+            </div>
+            <div class="fly-panel fly-link">
+                <h3 class="fly-panel-title">热门阅读</h3>
+                <dl>
+                    <dd>
+                        <i class="iconfont icon-shijian"></i><span> 注册于 2015年09月04日</span>
+                    </dd>
+                    <dd>
+                        <a href="http://layim.layui.com/" target="_blank">个人主页被 5.3k 人浏览</a>
+                    </dd>
+                </dl>
             </div>
             <div class="fly-panel fly-link">
                 <h3 class="fly-panel-title">注册与浏览</h3>
@@ -486,7 +493,31 @@ var bing = echarts.init(document.getElementById('bing'));
 
 */
 
+function dateFormat(date) {
 
+// 获取当前月份
+    var nowMonth = date.getMonth() + 1;
+
+// 获取当前是几号
+    var strDate = date.getDate();
+
+// 添加分隔符“-”
+    var seperator = "/";
+
+// 对月份进行处理，1-9月在前面添加一个“0”
+    if (nowMonth >= 1 && nowMonth <= 9) {
+        nowMonth = "0" + nowMonth;
+    }
+
+// 对月份进行处理，1-9号在前面添加一个“0”
+    if (strDate >= 0 && strDate <= 9) {
+        strDate = "0" + strDate;
+    }
+
+// 最后拼接字符串，得到一个格式为(yyyy-MM-dd)的日期
+    var nowDate = date.getFullYear() + seperator + nowMonth + seperator + strDate;
+    return nowDate;
+}
 
 function getVirtulData(year) {
     year = year || '2017';
@@ -502,17 +533,36 @@ function getVirtulData(year) {
     }
     return data;
 }
-
+function getVirtulData1(startDate,endDate) {
+    var date = +echarts.number.parseDate(startDate);
+    var end = +echarts.number.parseDate(endDate);
+    var dayTime = 3600 * 24 * 1000;
+    var data = [];
+    for (var time = date; time < end; time += dayTime) {
+        data.push([
+            dateFormat(new Date(time)),
+            Math.floor(Math.random() * 1000)
+        ]);
+    }
+    return data;
+}
+var nowDate =  new Date();
+var endDate= dateFormat(nowDate);
+nowDate.setMonth(nowDate.getMonth()-6);
+var startDate= dateFormat(nowDate);
 
 
 option = {
-    title : {
-        text: '活动图',
-        subtext: '纯属虚构',
-        x:'center'
+    title: {
+        text: '2016年某人每天的步数',
+        subtext: '数据纯属虚构',
+        left: 'center'
     },
     tooltip: {
-        position: 'top'
+        position: 'top',
+        formatter: function (params) {
+            return params.value[0]+' : ' + params.value[1];
+        }
     },
     visualMap: {
         min: 0,
@@ -520,20 +570,26 @@ option = {
         calculable: true,
         orient: 'horizontal',
         left: 'center',
-        top: 'top'
+        bottom: 30
     },
 
     calendar: [
         {
-            range: '2018',
-            cellSize: ['auto', 20]
+            range: [startDate,endDate],
+            cellSize: ['auto', 20],
+            monthLabel: {
+                nameMap: 'cn',
+            },
+            dayLabel: {
+                nameMap: 'cn'
+            }
         }],
 
     series: [{
         type: 'heatmap',
         coordinateSystem: 'calendar',
         calendarIndex: 0,
-        data: getVirtulData(2018)
+        data: getVirtulData1(startDate,endDate)
     }]
 
 };
