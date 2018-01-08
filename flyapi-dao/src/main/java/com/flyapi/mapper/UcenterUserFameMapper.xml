@@ -123,11 +123,10 @@
     where user_id = #{userId}
   </update>
 
-  <select id="ww">
-    SELECT SUM(score),DATE_FORMAT(create_time,'%Y-%m-%d')
+  <select id="findActive" parameterType="java.lang.Long" resultType="com.flyapi.pojo.vo.ActiveVo">
+    SELECT SUM(score) sumScore,DATE_FORMAT(create_time,'%Y-%m-%d') activeDate
     FROM ucenter_user_fame
     WHERE user_id = 325267539200311296
     GROUP BY DATE_FORMAT(create_time,'%Y-%m-%d')
-
   </select>
 </mapper>

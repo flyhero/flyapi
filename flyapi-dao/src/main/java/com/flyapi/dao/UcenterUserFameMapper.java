@@ -1,6 +1,7 @@
 package com.flyapi.dao;
 
 import com.flyapi.model.UcenterUserFame;
+import com.flyapi.pojo.vo.ActiveVo;
 import com.flyapi.pojo.vo.TopVo;
 
 import java.util.List;
@@ -23,4 +24,6 @@ public interface UcenterUserFameMapper {
     int updateFameValueByUserId(UcenterUserFame userFame);
 
     List<TopVo> findSumGroupByUserId();
+
+    List<ActiveVo> findActive(Long userId);
 }
