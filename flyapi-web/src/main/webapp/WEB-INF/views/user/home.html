@@ -152,7 +152,7 @@
                 <h3 class="fly-panel-title">热门阅读</h3>
                 <dl>
                     <dd>
-                        <i class="iconfont icon-shijian"></i><span> 注册于 2015年09月04日</span>
+                        <i class="iconfont icon-shijian"></i><span th:text="'注册于：'+${#dates.format(setInfo.createTime, 'yyyy年MM月dd日')}"> 注册于 2015年09月04日</span>
                     </dd>
                     <dd>
                         <a href="http://layim.layui.com/" target="_blank">个人主页被 5.3k 人浏览</a>
@@ -238,8 +238,9 @@ full: true
         sex: '男'
     };
 </script>
-<script>
-var bing = echarts.init(document.getElementById('bing'));
+<script th:inline="javascript">
+    var actives = [[${activeVos}]];
+    var bing = echarts.init(document.getElementById('bing'));
     var chart = echarts.init(document.getElementById('echart'));
 
  /*   var hours = ['12a', '1a', '2a', '3a', '4a', '5a', '6a',
@@ -526,6 +527,7 @@ function getVirtulData(year) {
     var dayTime = 3600 * 24 * 1000;
     var data = [];
     for (var time = date; time < end; time += dayTime) {
+        console.log(time);
         data.push([
             echarts.format.formatTime('yyyy-MM-dd', time),
             Math.floor(Math.random() * 1000)
@@ -538,12 +540,26 @@ function getVirtulData1(startDate,endDate) {
     var end = +echarts.number.parseDate(endDate);
     var dayTime = 3600 * 24 * 1000;
     var data = [];
+/*
     for (var time = date; time < end; time += dayTime) {
-        data.push([
-            dateFormat(new Date(time)),
-            Math.floor(Math.random() * 1000)
-        ]);
-    }
+*/
+
+        for(index in actives){//遍历json数组时，这么写p为索引，0,1
+
+            console.log(actives[index].sumScore + " " + actives[index].activeDate);
+
+            data.push([
+                actives[index].activeDate,
+                actives[index].sumScore
+            ]);
+        }
+    /*        console.log(dateFormat(new Date(time)));
+
+            data.push([
+                dateFormat(new Date(time)),
+                Math.floor(Math.random() * 1000)
+            ]);
+        }*/
     return data;
 }
 var nowDate =  new Date();

@@ -6,6 +6,7 @@ import com.flyapi.dao.UcenterFameMapper;
 import com.flyapi.dao.UcenterUserFameMapper;
 import com.flyapi.model.UcenterFame;
 import com.flyapi.model.UcenterUserFame;
+import com.flyapi.pojo.vo.ActiveVo;
 import com.flyapi.pojo.vo.TopVo;
 import com.flyapi.service.api.FameService;
 import com.flyapi.service.api.UserFameService;
@@ -91,5 +92,9 @@ public class UserFameServiceImpl extends BaseServiceImpl<UcenterUserFame,Ucenter
     public List<TopVo> findSumGroupByUserId() {
         List<TopVo> list=ucenterUserFameMapper.findSumGroupByUserId();
         return list;
+    }
+
+    public List<ActiveVo> findActive(Long userId) {
+        return ucenterUserFameMapper.findActive(userId);
     }
 }

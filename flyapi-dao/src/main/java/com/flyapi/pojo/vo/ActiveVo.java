@@ -1,5 +1,7 @@
 package com.flyapi.pojo.vo;
 
+import java.util.Date;
+
 /**
  * Author: qfwang
  * Date: 2018-01-08 下午5:39

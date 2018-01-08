@@ -13,13 +13,10 @@ import com.flyapi.core.id.SnowflakeIdWorker;
 import com.flyapi.core.util.AESUtil;
 import com.flyapi.core.util.CookieUtil;
 import com.flyapi.core.validator.StringValidator;
-import com.flyapi.model.SettingStore;
-import com.flyapi.model.UcenterUser;
-import com.flyapi.model.UcenterUserFame;
+import com.flyapi.model.*;
 import com.flyapi.pojo.dto.RegisterDto;
-import com.flyapi.service.api.SettingStoreService;
-import com.flyapi.service.api.UserFameService;
-import com.flyapi.service.api.UserService;
+import com.flyapi.pojo.vo.ActiveVo;
+import com.flyapi.service.api.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +43,10 @@ public class UserController extends BaseController {
     private SnowflakeIdWorker snowflakeIdWorker;
     @Autowired
     private SettingStoreService settingStoreService;
+    @Autowired
+    private CommentService commentService;
+    @Autowired
+    private ArticleService articleService;
 
     private Logger logger = LogManager.getLogger(UserController.class);
 
@@ -258,14 +259,26 @@ public class UserController extends BaseController {
         mv.setViewName("/user/set");
         return mv;
     }
+    @GetMapping("message")
+    public ModelAndView message(){
+        System.out.println("==========user/message");
+        UcenterUser currentUser = (UcenterUser)currentUser();
+        List<CmsArticle> articles = articleService.findArticleByUserId(currentUser.getUserId());
+/*        List<CmsComment> comments = commentService.findCommentById();
+        mv.addObject("setInfo",user);*/
+        mv.setViewName("/user/set");
+        return mv;
+    }
 
 
     @GetMapping("{userId}")
     public ModelAndView space(@PathVariable Long userId){
         System.out.println("==========user/set");
         UcenterUser user=userService.selectByPrimaryKey(userId);
+        List<ActiveVo> activeVos=userFameService.findActive(userId);
         user.setPassword("");
         mv.addObject("setInfo",user);
+        mv.addObject("activeVos",activeVos);
         mv.setViewName("/user/home");
         return mv;
     }

@@ -3,10 +3,12 @@
 <mapper namespace="com.flyapi.dao.CmsCommentMapper">
   <resultMap id="BaseResultMap" type="com.flyapi.model.CmsComment">
     <id column="comment_id" jdbcType="BIGINT" property="commentId" />
+    <result column="author_id" jdbcType="BIGINT" property="authorId" />
     <result column="target_id" jdbcType="BIGINT" property="targetId" />
     <result column="user_id" jdbcType="BIGINT" property="userId" />
     <result column="like_num" jdbcType="INTEGER" property="likeNum" />
     <result column="target_type" jdbcType="TINYINT" property="targetType" />
+    <result column="is_read" jdbcType="TINYINT" property="isRead" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="is_delete" jdbcType="TINYINT" property="isDelete" />
     <result column="content" jdbcType="LONGVARCHAR" property="content" />
@@ -28,7 +30,7 @@
   </resultMap>
 
   <sql id="Base_Column_List">
-    comment_id, target_id, user_id, like_num, target_type, create_time, is_delete, content
+    comment_id, author_id,target_id, user_id, like_num, target_type,is_read, create_time, is_delete, content
   </sql>
 
   <select id="getReplyByCommentId"  resultMap="replyMap">
@@ -69,6 +71,9 @@
       <if test="commentId != null">
         comment_id,
       </if>
+      <if test="authorId != null">
+        author_id,
+      </if>
       <if test="targetId != null">
         target_id,
       </if>
@@ -94,6 +99,9 @@
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="commentId != null">
         #{commentId,jdbcType=BIGINT},
+      </if>
+      <if test="authorId != null">
+        #{authorId,jdbcType=BIGINT},
       </if>
       <if test="targetId != null">
         #{targetId,jdbcType=BIGINT},
@@ -132,6 +140,9 @@
       </if>
       <if test="targetType != null">
         target_type = #{targetType,jdbcType=TINYINT},
+      </if>
+      <if test="isRead != null">
+        is_read = #{isRead,jdbcType=TINYINT},
       </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},

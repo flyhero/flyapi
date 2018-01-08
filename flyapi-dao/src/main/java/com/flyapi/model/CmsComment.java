@@ -18,6 +18,7 @@ public class CmsComment implements Serializable {
      */
     private Long targetId;
 
+    private Long authorId;
     /**
      * 用户id
      */
@@ -33,6 +34,7 @@ public class CmsComment implements Serializable {
      */
     private Byte targetType;
 
+    private Byte isRead;
     /**
      * 发表时间
      */
@@ -68,6 +70,14 @@ public class CmsComment implements Serializable {
         this.targetId = targetId;
     }
 
+    public Long getAuthorId() {
+        return authorId;
+    }
+
+    public void setAuthorId(Long authorId) {
+        this.authorId = authorId;
+    }
+
     public Long getUserId() {
         return userId;
     }
@@ -90,6 +100,14 @@ public class CmsComment implements Serializable {
 
     public void setTargetType(Byte targetType) {
         this.targetType = targetType;
+    }
+
+    public Byte getIsRead() {
+        return isRead;
+    }
+
+    public void setIsRead(Byte isRead) {
+        this.isRead = isRead;
     }
 
     public Date getCreateTime() {
