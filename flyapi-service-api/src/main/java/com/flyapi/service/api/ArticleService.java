@@ -4,6 +4,7 @@ import com.flyapi.core.base.BaseService;
 import com.flyapi.model.CmsArticle;
 import com.flyapi.pojo.vo.ArticleDetailVo;
 import com.flyapi.pojo.vo.ArticleSimpleVo;
+import com.flyapi.pojo.vo.ViewLevelVo;
 
 import java.util.List;
 
@@ -29,4 +30,6 @@ public interface ArticleService extends BaseService<CmsArticle> {
     List<CmsArticle> findArticleBySubjectId(Long subjectId);
 
     List<CmsArticle> findArticleByUserId(Long userId);
+
+    List<ViewLevelVo> findViewLevel(Long userId);
 }

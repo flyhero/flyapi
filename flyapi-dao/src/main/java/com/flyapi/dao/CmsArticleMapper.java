@@ -3,6 +3,7 @@ package com.flyapi.dao;
 import com.flyapi.model.CmsArticle;
 import com.flyapi.pojo.dto.SubjectDto;
 import com.flyapi.pojo.vo.ArticleSimpleVo;
+import com.flyapi.pojo.vo.ViewLevelVo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -32,4 +33,6 @@ public interface CmsArticleMapper {
     List<CmsArticle> findArticleBySubjectId(Long subjectId);
 
     List<CmsArticle> findArticleByUserId(Long userId);
+
+    List<ViewLevelVo> findViewLevel(Long userId);
 }

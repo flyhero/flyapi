@@ -30,6 +30,12 @@
     from cms_article
     where article_id = #{articleId,jdbcType=BIGINT}
   </select>
+  <select id="findViewLevel" parameterType="java.lang.Long" resultType="com.flyapi.pojo.vo.ViewLevelVo">
+    select elt(interval(d.view_num,0, 1000, 5000, 10000), '1k-', '1k+', '5k+', '1w+') as name, count(*) as value
+    from cms_article d
+    WHERE user_id = #{userId}
+    group by name
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from cms_article
     where article_id = #{articleId,jdbcType=BIGINT}

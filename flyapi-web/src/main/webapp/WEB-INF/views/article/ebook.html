@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>电书</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <th:block th:include="common/link::link"></th:block>
+</head>
+
+<body>
+
+<div class="header">
+    <th:block th:include="common/header::header"></th:block>
+</div>
+
+<div class="main layui-clear">
+    <div class="wrap">
+        <div class="content">
+            <ul class="fly-list" id="article-list">
+                <li class="note-list">
+  <!--                  <a class="des-img" href="/p/eb1a0e235e49" target="_blank">
+                        <img src="//upload-images.jianshu.io/upload_images/2263276-65f149645b408224?imageMogr2/auto-orient/strip|imageView2/1/w/375/h/300"
+                             alt="300">
+                    </a>-->
+                    <div>
+                        <div class="author">
+                            <a class="avatar" target="_blank" href="/u/c3d9abd7063b">
+                                <img src="http://www.iflyapi.cn:8080/res/images/avatar/default.png" alt="96">
+                            </a>
+                            <div class="name">
+                                <a class="blue-link" target="_blank" href="/u/c3d9abd7063b">flyhero</a>
+                                <span class="time" data-shared-at="2017-04-05T09:53:58+08:00">&nbsp;5 小时前</span>
+                            </div>
+                        </div>
+                        <h2 class="fly-tip">
+                            <a target="_blank" href="/p/eb1a0e235e49">大话设计模式之工厂模式</a>
+                        </h2>
+
+                        <p class="abstract">
+                            他不是别人 他是张国荣 14年前的今天，一颗巨星陨落。他不是别人 他是张国荣 14年前的今天，一颗巨星陨落。他不是别人 他是张国荣 14年前的今天，一颗巨星陨落。他不是别人 他是张国荣
+                            14年前的今天，一颗巨星陨落。
+                        </p>
+                        <div class="meta">
+                            <a class="collection-tag" target="_blank" href="/c/qQB2Zn">Spring源码分析和实践之详细解析</a>
+                            <a target="_blank" href="/p/eb1a0e235e49">
+                                <i class="fa fa-eye fa-fw" title="阅读"></i> 271
+                            </a>
+                            <a target="_blank" href="/p/eb1a0e235e49#comments">
+                                <i class="fa fa-commenting fa-fw" title="回答"></i> 8
+                            </a> <span><i class="fa fa-thumbs-o-up fa-fw" title="人气"></i> 106</span>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+
+    <div class="edge">
+        <div class="fly-panel leifeng-rank">
+            <h3 class="fly-panel-title">今日名人榜- TOP 8</h3>
+            <dl>
+
+                <dd>
+                    <a href="user/home.html">
+                        <img src="../res/images/avatar/default.png">
+                        <cite>纸飞机</cite>
+                        <i>159次回答</i>
+                    </a>
+                </dd>
+
+            </dl>
+        </div>
+
+        <div class="fly-panel fly-link">
+            <h3 class="fly-panel-title">友情链接</h3>
+            <dl>
+                <dd>
+                    <a href="#" target="_blank">fly****</a>
+                </dd>
+            </dl>
+        </div>
+
+    </div>
+</div>
+<th:block th:replace="common/footer::footer"></th:block>
+
+<script th:inline="javascript">
+
+
+    layui.use(['util', 'element', 'layer','form','laytpl','laypage'], function(){
+        var $ = layui.jquery;
+        var layer = layui.layer;
+        var util = layui.util;
+        var laytpl = layui.laytpl;
+        var form = layui.form;  //表单的依赖
+        var laypage = layui.laypage;//分页的依赖
+        var element = layui.element;//Tab的切换功能，切换事件监听等，需要依赖element模块
+
+        //右下角bar top
+        util.fixbar({
+            bar1: true,
+            click: function(type){
+                console.log(type);
+                if(type === 'bar1'){
+                    alert('点击了bar1')
+                }
+            }
+        });
+    });
+</script>
+</body>
+
+</html>

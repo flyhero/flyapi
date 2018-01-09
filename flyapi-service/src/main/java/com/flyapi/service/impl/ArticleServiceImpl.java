@@ -9,6 +9,7 @@ import com.flyapi.model.CmsArticle;
 import com.flyapi.model.CmsComment;
 import com.flyapi.model.CmsSubject;
 import com.flyapi.model.UcenterUser;
+import com.flyapi.pojo.vo.ViewLevelVo;
 import com.flyapi.service.api.ArticleService;
 import com.flyapi.service.api.SubjectService;
 import com.flyapi.pojo.vo.ArticleDetailVo;
@@ -87,5 +88,9 @@ public class ArticleServiceImpl extends BaseServiceImpl<CmsArticle,CmsArticleMap
 
     public List<CmsArticle> findArticleByUserId(Long userId) {
         return cmsArticleMapper.findArticleByUserId(userId);
+    }
+
+    public List<ViewLevelVo> findViewLevel(Long userId) {
+        return cmsArticleMapper.findViewLevel(userId);
     }
 }

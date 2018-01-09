@@ -16,6 +16,7 @@ import com.flyapi.core.validator.StringValidator;
 import com.flyapi.model.*;
 import com.flyapi.pojo.dto.RegisterDto;
 import com.flyapi.pojo.vo.ActiveVo;
+import com.flyapi.pojo.vo.ViewLevelVo;
 import com.flyapi.service.api.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -276,9 +277,11 @@ public class UserController extends BaseController {
         System.out.println("==========user/set");
         UcenterUser user=userService.selectByPrimaryKey(userId);
         List<ActiveVo> activeVos=userFameService.findActive(userId);
+        List<ViewLevelVo> levelVos = articleService.findViewLevel(userId);
         user.setPassword("");
         mv.addObject("setInfo",user);
         mv.addObject("activeVos",activeVos);
+        mv.addObject("levelVos",levelVos);
         mv.setViewName("/user/home");
         return mv;
     }

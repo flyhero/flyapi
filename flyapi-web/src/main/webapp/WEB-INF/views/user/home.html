@@ -33,9 +33,9 @@
             <div class="fly-home">
                 <img src="http://tp4.sinaimg.cn/1345566427/180/5730976522/0" alt="{{info.username}}">
                 <h1>
-                    flyhero
-                    <i class="iconfont icon-nan"></i>
-                    <!-- <i class="iconfont icon-nv"></i> -->
+                    <span th:text="${setInfo.nickName}"></span>
+      <!--             <i class="iconfont icon-nan"></i>
+                    <i class="iconfont icon-nv"></i> -->
 
                     <span style="color:#c00;">（超级码农）</span>
                     <span style="color:#5FB878;">（活雷锋）</span>
@@ -43,9 +43,16 @@
                 </h1>
                 <p class="fly-home-info">
                     <i class="iconfont icon-zuichun" title="声望"></i><span style="color: #FF7200;">67206</span>
-                    <i class="iconfont icon-chengshi"></i><span>上海</span>
+                    <i class="iconfont icon-chengshi"></i><span th:text="${setInfo.city}">上海</span>
                 </p>
             </div>
+
+<!--            <div class="layui-col-sm6" >
+                <div>wwwwww </div>
+            </div>
+            <div class="layui-col-sm6">
+            </div>-->
+
         </div>
         <div class="layui-col-sm6">
 
@@ -240,9 +247,16 @@ full: true
 </script>
 <script th:inline="javascript">
     var actives = [[${activeVos}]];
+    var levelVos = [[${levelVos}]];
     var bing = echarts.init(document.getElementById('bing'));
     var chart = echarts.init(document.getElementById('echart'));
+/*    for(index in levelVos){//遍历json数组时，这么写p为索引，0,1
 
+        levelData.push([
+            levelVos[index].activeDate,
+            levelVos[index].sumScore
+        ]);
+    }*/
  /*   var hours = ['12a', '1a', '2a', '3a', '4a', '5a', '6a',
         '7a', '8a', '9a', '10a', '11a',
         '12p', '1p', '2p', '3p', '4p', '5p',
@@ -614,7 +628,7 @@ option = {
 
 option1 = {
     title : {
-        text: '某站点用户访问来源',
+        text: '文章阅读量分布',
         subtext: '纯属虚构',
         x:'center'
     },
@@ -626,21 +640,22 @@ option1 = {
         orient: 'vertical',
        /* left: 'left',*/
         bottom: 10,
-        data: ['1k+','邮件营销','联盟广告','视频广告','搜索引擎']
+        data: ['1k-','1k+','5k+','10k+']
     },
     series : [
         {
-            name: '访问来源',
+            name: '阅读分布',
             type: 'pie',
             radius : '55%',
             center: ['50%', '60%'],
-            data:[
+         /*   data:[
                 {value:335, name:'1k+'},
                 {value:310, name:'100+'},
                 {value:234, name:'200+'},
                 {value:135, name:'500+'},
                 {value:1548, name:'50+'}
-            ],
+            ],*/
+            data:levelVos,
             itemStyle: {
                 emphasis: {
                     shadowBlur: 10,
