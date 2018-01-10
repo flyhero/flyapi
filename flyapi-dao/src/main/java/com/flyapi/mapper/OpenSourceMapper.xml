@@ -3,6 +3,7 @@
 <mapper namespace="com.flyapi.dao.OpenSourceMapper">
   <resultMap id="BaseResultMap" type="com.flyapi.model.OpenSource">
     <id column="os_id" jdbcType="BIGINT" property="osId" />
+    <id column="user_id" jdbcType="BIGINT" property="userId" />
     <result column="os_name" jdbcType="VARCHAR" property="osName" />
     <result column="account" jdbcType="VARCHAR" property="account" />
     <result column="os_type" jdbcType="TINYINT" property="osType" />
@@ -10,7 +11,7 @@
     <result column="is_delete" jdbcType="TINYINT" property="isDelete" />
   </resultMap>
   <sql id="Base_Column_List">
-    os_id, os_name, account, os_type, create_time, is_delete
+    os_id,user_id, os_name, account, os_type, create_time, is_delete
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -22,7 +23,7 @@
     select
     <include refid="Base_Column_List" />
     from open_source
-    where is_delete = 0
+    where user_id = #{userId} AND is_delete = 0
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from open_source
@@ -42,6 +43,9 @@
       <if test="osId != null">
         os_id,
       </if>
+      <if test="userId != null">
+        user_id,
+      </if>
       <if test="osName != null">
         os_name,
       </if>
@@ -60,7 +64,10 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="osId != null">
-        #{osId,jdbcType=BIGINT},
+      #{osId,jdbcType=BIGINT},
+    </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
       </if>
       <if test="osName != null">
         #{osName,jdbcType=VARCHAR},

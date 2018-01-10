@@ -9,6 +9,8 @@ import java.util.Date;
 public class OpenSource implements Serializable {
     private Long osId;
 
+    private Long userId;
+
     private String osName;
 
     private String account;
@@ -30,6 +32,14 @@ public class OpenSource implements Serializable {
 
     public void setOsId(Long osId) {
         this.osId = osId;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getOsName() {
