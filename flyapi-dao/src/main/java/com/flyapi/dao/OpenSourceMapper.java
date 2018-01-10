@@ -2,6 +2,8 @@ package com.flyapi.dao;
 
 import com.flyapi.model.OpenSource;
 
+import java.util.List;
+
 public interface OpenSourceMapper {
     int deleteByPrimaryKey(Long osId);
 
@@ -14,4 +16,6 @@ public interface OpenSourceMapper {
     int updateByPrimaryKeySelective(OpenSource record);
 
     int updateByPrimaryKey(OpenSource record);
+
+    List<OpenSource> findAll();
 }

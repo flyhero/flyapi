@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * author: flyhero
  * Date: 2018/1/10 上午12:22
@@ -21,4 +23,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class OpenSourceServiceImpl extends BaseServiceImpl<OpenSource,OpenSourceMapper> implements OpenSourceService {
 
+    @Autowired
+    private OpenSourceMapper openSourceMapper;
+
+    public List<OpenSource> findAll() {
+        return openSourceMapper.findAll();
+    }
 }
