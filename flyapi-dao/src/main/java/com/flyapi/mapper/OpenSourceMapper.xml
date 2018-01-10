@@ -19,7 +19,7 @@
     from open_source
     where os_id = #{osId,jdbcType=BIGINT}
   </select>
-  <select id="findAll" resultMap="BaseResultMap">
+  <select id="findAll" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from open_source

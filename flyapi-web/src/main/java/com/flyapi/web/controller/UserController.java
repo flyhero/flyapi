@@ -48,6 +48,8 @@ public class UserController extends BaseController {
     private CommentService commentService;
     @Autowired
     private ArticleService articleService;
+    @Autowired
+    private OpenSourceService openSourceService;
 
     private Logger logger = LogManager.getLogger(UserController.class);
 
@@ -278,10 +280,12 @@ public class UserController extends BaseController {
         UcenterUser user=userService.selectByPrimaryKey(userId);
         List<ActiveVo> activeVos=userFameService.findActive(userId);
         List<ViewLevelVo> levelVos = articleService.findViewLevel(userId);
+        List<OpenSource> sourceList = openSourceService.findAll(userId);
         user.setPassword("");
         mv.addObject("setInfo",user);
         mv.addObject("activeVos",activeVos);
         mv.addObject("levelVos",levelVos);
+        mv.addObject("sourceList",sourceList);
         mv.setViewName("/user/home");
         return mv;
     }

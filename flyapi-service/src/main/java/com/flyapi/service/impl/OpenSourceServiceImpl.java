@@ -26,7 +26,7 @@ public class OpenSourceServiceImpl extends BaseServiceImpl<OpenSource,OpenSource
     @Autowired
     private OpenSourceMapper openSourceMapper;
 
-    public List<OpenSource> findAll() {
-        return openSourceMapper.findAll();
+    public List<OpenSource> findAll(Long userId) {
+        return openSourceMapper.findAll(userId);
     }
 }

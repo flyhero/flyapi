@@ -34,8 +34,8 @@
                 <img src="http://tp4.sinaimg.cn/1345566427/180/5730976522/0" alt="{{info.username}}">
                 <h1>
                     <span th:text="${setInfo.nickName}"></span>
-      <!--             <i class="iconfont icon-nan"></i>
-                    <i class="iconfont icon-nv"></i> -->
+                    <!--             <i class="iconfont icon-nan"></i>
+                                  <i class="iconfont icon-nv"></i> -->
 
                     <span style="color:#c00;">（超级码农）</span>
                     <span style="color:#5FB878;">（活雷锋）</span>
@@ -47,11 +47,11 @@
                 </p>
             </div>
 
-<!--            <div class="layui-col-sm6" >
-                <div>wwwwww </div>
-            </div>
-            <div class="layui-col-sm6">
-            </div>-->
+            <!--            <div class="layui-col-sm6" >
+                            <div>wwwwww </div>
+                        </div>
+                        <div class="layui-col-sm6">
+                        </div>-->
 
         </div>
         <div class="layui-col-sm6">
@@ -71,8 +71,7 @@
             <div class="content">
 
 
-
-                    <!--<div class="fly-none" style="min-height: 50px; padding:30px 0; height:auto;"><i style="font-size:14px;">没有发表任何求解</i></div>-->
+                <!--<div class="fly-none" style="min-height: 50px; padding:30px 0; height:auto;"><i style="font-size:14px;">没有发表任何求解</i></div>-->
 
 
                 <div class="fly-panel leifeng-rank">
@@ -90,31 +89,32 @@
                             <em>1136阅/27答</em>
                         </li>
                     </ul>
-                    <div class="fly-none" style="min-height: 50px; padding:30px 0; height:auto;"><i style="font-size:14px;">查看更多</i></div>
+                    <div class="fly-none" style="min-height: 50px; padding:30px 0; height:auto;"><i
+                            style="font-size:14px;">查看更多</i></div>
 
                 </div>
                 <div class="fly-panel leifeng-rank">
                     <h3 class="fly-panel-title">全部专题</h3>
-<!--                    <ul class="jie-row">
-                        <li>
-                            <span class="fly-jing">精</span>
-                            <a href="/jie/{{item.id}}.html" class="jie-title">使用 layui 秒搭后台大布局（基本结构）</a>
-                            <i>1天前</i>
-                            <em>1136阅/27答</em>
-                        </li>
-                        <li>
-                            <a href="/jie/{{item.id}}.html" class="jie-title">使用 layui 秒搭后台大布局（基本结构）</a>
-                            <i>1天前</i>
-                            <em>1136阅/27答</em>
-                        </li>
-                    </ul>-->
+                    <!--                    <ul class="jie-row">
+                                            <li>
+                                                <span class="fly-jing">精</span>
+                                                <a href="/jie/{{item.id}}.html" class="jie-title">使用 layui 秒搭后台大布局（基本结构）</a>
+                                                <i>1天前</i>
+                                                <em>1136阅/27答</em>
+                                            </li>
+                                            <li>
+                                                <a href="/jie/{{item.id}}.html" class="jie-title">使用 layui 秒搭后台大布局（基本结构）</a>
+                                                <i>1天前</i>
+                                                <em>1136阅/27答</em>
+                                            </li>
+                                        </ul>-->
 
                     <div class="layui-row">
-                        <div  class="layui-col-md5">
+                        <div class="layui-col-md5">
                             <div id="bing" style="width: 100%;height: 300px;border-right: dashed 1px;"></div>
                         </div>
                         <div class="layui-col-md7">
-                            <div id="echart"  style="width: 100%;height: 300px;"></div>
+                            <div id="echart" style="width: 100%;height: 300px;"></div>
                         </div>
                     </div>
 
@@ -128,10 +128,10 @@
                 <h3 class="fly-panel-title">开源项目</h3>
                 <ul class="jie-row">
                     <li>
-       <!--                 white-space:nowrap;
-                        overflow:hidden;
-                        text-overflow:ellipsis;-->
-                        <a href="#" class="jie-title">flyapi</a>
+                        <!--                 white-space:nowrap;
+                                         overflow:hidden;
+                                         text-overflow:ellipsis;-->
+                        <a href="#" class="jie-title">flyapasdhjaskdjasdlasdasjalsai</a>
                         <em>
                             <iframe style="margin-left: 1px; margin-bottom:-5px;"
                                     frameborder="0" scrolling="0" width="80px" height="20px"
@@ -141,28 +141,36 @@
                                     src="https://ghbtns.com/github-btn.html?user=flyhero&repo=flyapi&type=fork&count=true">
                             </iframe>
                         </em>
+
+
                     </li>
-                    <li>
-                        <a href="#" class="jie-title">spring-cloud-microservice</a>
-                        <em>
-                            <iframe
-                                    style="margin-left: 1px; margin-bottom:-5px;"
-                                    frameborder="0" scrolling="0" width="80px" height="20px"
-                                    src="https://ghbtns.com/github-btn.html?user=flyhero&repo=spring-cloud-microservice&type=star&count=true">
-                            </iframe>
-                            <iframe
-                                    frameborder="0" scrolling="0" width="80px" height="20px"
-                                    src="https://ghbtns.com/github-btn.html?user=flyhero&repo=spring-cloud-microservice&type=fork&count=true">
-                            </iframe>
-                        </em>
-                    </li>
+                    <th:block th:if="${not #lists.isEmpty(sourceList)}">
+                        <th:block th:each="os,index:${sourceList}">
+                            <li>
+                                <a href="#" class="jie-title" th:text="${os.account}">spring-cloud-microservice</a>
+                                <em>
+                                    <iframe style="margin-left: 1px; margin-bottom:-5px;"
+                                            frameborder="0" scrolling="0" width="80px" height="20px"
+                                            th:src="@{'https://ghbtns.com/github-btn.html?user=' + ${os.osName} + '&repo='+ ${os.account}+'&type=star&count=true'}"
+                                            src="https://ghbtns.com/github-btn.html?user=flyhero&repo=spring-cloud-microservice&type=star&count=true">
+                                    </iframe>
+                                    <iframe style="margin-left: 1px; margin-bottom:-5px;"
+                                            frameborder="0" scrolling="0" width="80px" height="20px"
+                                            th:src="@{'https://ghbtns.com/github-btn.html?user=' + ${os.osName} + '&repo='+ ${os.account}+'&type=star&count=true'}"
+                                            src="https://ghbtns.com/github-btn.html?user=flyhero&repo=spring-cloud-microservice&type=fork&count=true">
+                                    </iframe>
+                                </em>
+                            </li>
+                        </th:block>
+                    </th:block>
                 </ul>
             </div>
             <div class="fly-panel fly-link">
                 <h3 class="fly-panel-title">热门阅读</h3>
                 <dl>
                     <dd>
-                        <i class="iconfont icon-shijian"></i><span th:text="'注册于：'+${#dates.format(setInfo.createTime, 'yyyy年MM月dd日')}"> 注册于 2015年09月04日</span>
+                        <i class="iconfont icon-shijian"></i><span
+                            th:text="'注册于：'+${#dates.format(setInfo.createTime, 'yyyy年MM月dd日')}"> 注册于 2015年09月04日</span>
                     </dd>
                     <dd>
                         <a href="http://layim.layui.com/" target="_blank">个人主页被 5.3k 人浏览</a>
@@ -253,315 +261,316 @@ full: true
     var levelVos = [[${levelVos}]];
     var bing = echarts.init(document.getElementById('bing'));
     var chart = echarts.init(document.getElementById('echart'));
-/*    for(index in levelVos){//遍历json数组时，这么写p为索引，0,1
+    /*    for(index in levelVos){//遍历json数组时，这么写p为索引，0,1
 
-        levelData.push([
-            levelVos[index].activeDate,
-            levelVos[index].sumScore
-        ]);
-    }*/
- /*   var hours = ['12a', '1a', '2a', '3a', '4a', '5a', '6a',
-        '7a', '8a', '9a', '10a', '11a',
-        '12p', '1p', '2p', '3p', '4p', '5p',
-        '6p', '7p', '8p', '9p', '10p', '11p'
-    ];
-    var days = ['Sat', 'Fri', 'Thur',
-        'Wed', 'Tues', 'Mon', 'Sun'
-    ];
+            levelData.push([
+                levelVos[index].activeDate,
+                levelVos[index].sumScore
+            ]);
+        }*/
+    /*   var hours = ['12a', '1a', '2a', '3a', '4a', '5a', '6a',
+           '7a', '8a', '9a', '10a', '11a',
+           '12p', '1p', '2p', '3p', '4p', '5p',
+           '6p', '7p', '8p', '9p', '10p', '11p'
+       ];
+       var days = ['Sat', 'Fri', 'Thur',
+           'Wed', 'Tues', 'Mon', 'Sun'
+       ];
 
-    var data = [
-        [0, 0, 5],
-        [0, 1, 1],
-        [0, 2, 0],
-        [0, 3, 0],
-        [0, 4, 0],
-        [0, 5, 0],
-        [0, 6, 0],
-        [0, 7, 0],
-        [0, 8, 0],
-        [0, 9, 0],
-        [0, 10, 0],
-        [0, 11, 2],
-        [0, 12, 4],
-        [0, 13, 1],
-        [0, 14, 1],
-        [0, 15, 3],
-        [0, 16, 4],
-        [0, 17, 6],
-        [0, 18, 4],
-        [0, 19, 4],
-        [0, 20, 3],
-        [0, 21, 3],
-        [0, 22, 2],
-        [0, 23, 5],
-        [1, 0, 7],
-        [1, 1, 0],
-        [1, 2, 0],
-        [1, 3, 0],
-        [1, 4, 0],
-        [1, 5, 0],
-        [1, 6, 0],
-        [1, 7, 0],
-        [1, 8, 0],
-        [1, 9, 0],
-        [1, 10, 5],
-        [1, 11, 2],
-        [1, 12, 2],
-        [1, 13, 6],
-        [1, 14, 9],
-        [1, 15, 11],
-        [1, 16, 6],
-        [1, 17, 7],
-        [1, 18, 8],
-        [1, 19, 12],
-        [1, 20, 5],
-        [1, 21, 5],
-        [1, 22, 7],
-        [1, 23, 2],
-        [2, 0, 1],
-        [2, 1, 1],
-        [2, 2, 0],
-        [2, 3, 0],
-        [2, 4, 0],
-        [2, 5, 0],
-        [2, 6, 0],
-        [2, 7, 0],
-        [2, 8, 0],
-        [2, 9, 0],
-        [2, 10, 3],
-        [2, 11, 2],
-        [2, 12, 1],
-        [2, 13, 9],
-        [2, 14, 8],
-        [2, 15, 10],
-        [2, 16, 6],
-        [2, 17, 5],
-        [2, 18, 5],
-        [2, 19, 5],
-        [2, 20, 7],
-        [2, 21, 4],
-        [2, 22, 2],
-        [2, 23, 4],
-        [3, 0, 7],
-        [3, 1, 3],
-        [3, 2, 0],
-        [3, 3, 0],
-        [3, 4, 0],
-        [3, 5, 0],
-        [3, 6, 0],
-        [3, 7, 0],
-        [3, 8, 1],
-        [3, 9, 0],
-        [3, 10, 5],
-        [3, 11, 4],
-        [3, 12, 7],
-        [3, 13, 14],
-        [3, 14, 13],
-        [3, 15, 12],
-        [3, 16, 9],
-        [3, 17, 5],
-        [3, 18, 5],
-        [3, 19, 10],
-        [3, 20, 6],
-        [3, 21, 4],
-        [3, 22, 4],
-        [3, 23, 1],
-        [4, 0, 1],
-        [4, 1, 3],
-        [4, 2, 0],
-        [4, 3, 0],
-        [4, 4, 0],
-        [4, 5, 1],
-        [4, 6, 0],
-        [4, 7, 0],
-        [4, 8, 0],
-        [4, 9, 2],
-        [4, 10, 4],
-        [4, 11, 4],
-        [4, 12, 2],
-        [4, 13, 4],
-        [4, 14, 4],
-        [4, 15, 14],
-        [4, 16, 12],
-        [4, 17, 1],
-        [4, 18, 8],
-        [4, 19, 5],
-        [4, 20, 3],
-        [4, 21, 7],
-        [4, 22, 3],
-        [4, 23, 0],
-        [5, 0, 2],
-        [5, 1, 1],
-        [5, 2, 0],
-        [5, 3, 3],
-        [5, 4, 0],
-        [5, 5, 0],
-        [5, 6, 0],
-        [5, 7, 0],
-        [5, 8, 2],
-        [5, 9, 0],
-        [5, 10, 4],
-        [5, 11, 1],
-        [5, 12, 5],
-        [5, 13, 10],
-        [5, 14, 5],
-        [5, 15, 7],
-        [5, 16, 11],
-        [5, 17, 6],
-        [5, 18, 0],
-        [5, 19, 5],
-        [5, 20, 3],
-        [5, 21, 4],
-        [5, 22, 2],
-        [5, 23, 0],
-        [6, 0, 1],
-        [6, 1, 0],
-        [6, 2, 0],
-        [6, 3, 0],
-        [6, 4, 0],
-        [6, 5, 0],
-        [6, 6, 0],
-        [6, 7, 0],
-        [6, 8, 0],
-        [6, 9, 0],
-        [6, 10, 1],
-        [6, 11, 0],
-        [6, 12, 2],
-        [6, 13, 1],
-        [6, 14, 3],
-        [6, 15, 4],
-        [6, 16, 0],
-        [6, 17, 0],
-        [6, 18, 0],
-        [6, 19, 0],
-        [6, 20, 1],
-        [6, 21, 2],
-        [6, 22, 2],
-        [6, 23, 6]
-    ];
-    option = {
-        title : {
-            text: '活动图',
-            subtext: '纯属虚构',
-            x:'center'
-        },
-        tooltip: {},
-        visualMap: {
-            max: 20,
-            inRange: {
-                color: ['#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf', '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026']
-            }
-        },
-        xAxis3D: {
-            type: 'category',
-            data: hours
-        },
-        yAxis3D: {
-            type: 'category',
-            data: days
-        },
-        zAxis3D: {
-            type: 'value'
-        },
-        grid3D: {
-            boxWidth: 200,
-            boxDepth: 80,
-            viewControl: {
-                // projection: 'orthographic'
-            },
-            light: {
-                main: {
-                    intensity: 1.2,
-                    shadow: true
-                },
-                ambient: {
-                    intensity: 0.3
-                }
-            }
-        },
-        series: [{
-            type: 'bar3D',
-            data: data.map(function(item) {
-                return {
-                    value: [item[1], item[0], item[2]],
-                }
-            }),
-            shading: 'lambert',
+       var data = [
+           [0, 0, 5],
+           [0, 1, 1],
+           [0, 2, 0],
+           [0, 3, 0],
+           [0, 4, 0],
+           [0, 5, 0],
+           [0, 6, 0],
+           [0, 7, 0],
+           [0, 8, 0],
+           [0, 9, 0],
+           [0, 10, 0],
+           [0, 11, 2],
+           [0, 12, 4],
+           [0, 13, 1],
+           [0, 14, 1],
+           [0, 15, 3],
+           [0, 16, 4],
+           [0, 17, 6],
+           [0, 18, 4],
+           [0, 19, 4],
+           [0, 20, 3],
+           [0, 21, 3],
+           [0, 22, 2],
+           [0, 23, 5],
+           [1, 0, 7],
+           [1, 1, 0],
+           [1, 2, 0],
+           [1, 3, 0],
+           [1, 4, 0],
+           [1, 5, 0],
+           [1, 6, 0],
+           [1, 7, 0],
+           [1, 8, 0],
+           [1, 9, 0],
+           [1, 10, 5],
+           [1, 11, 2],
+           [1, 12, 2],
+           [1, 13, 6],
+           [1, 14, 9],
+           [1, 15, 11],
+           [1, 16, 6],
+           [1, 17, 7],
+           [1, 18, 8],
+           [1, 19, 12],
+           [1, 20, 5],
+           [1, 21, 5],
+           [1, 22, 7],
+           [1, 23, 2],
+           [2, 0, 1],
+           [2, 1, 1],
+           [2, 2, 0],
+           [2, 3, 0],
+           [2, 4, 0],
+           [2, 5, 0],
+           [2, 6, 0],
+           [2, 7, 0],
+           [2, 8, 0],
+           [2, 9, 0],
+           [2, 10, 3],
+           [2, 11, 2],
+           [2, 12, 1],
+           [2, 13, 9],
+           [2, 14, 8],
+           [2, 15, 10],
+           [2, 16, 6],
+           [2, 17, 5],
+           [2, 18, 5],
+           [2, 19, 5],
+           [2, 20, 7],
+           [2, 21, 4],
+           [2, 22, 2],
+           [2, 23, 4],
+           [3, 0, 7],
+           [3, 1, 3],
+           [3, 2, 0],
+           [3, 3, 0],
+           [3, 4, 0],
+           [3, 5, 0],
+           [3, 6, 0],
+           [3, 7, 0],
+           [3, 8, 1],
+           [3, 9, 0],
+           [3, 10, 5],
+           [3, 11, 4],
+           [3, 12, 7],
+           [3, 13, 14],
+           [3, 14, 13],
+           [3, 15, 12],
+           [3, 16, 9],
+           [3, 17, 5],
+           [3, 18, 5],
+           [3, 19, 10],
+           [3, 20, 6],
+           [3, 21, 4],
+           [3, 22, 4],
+           [3, 23, 1],
+           [4, 0, 1],
+           [4, 1, 3],
+           [4, 2, 0],
+           [4, 3, 0],
+           [4, 4, 0],
+           [4, 5, 1],
+           [4, 6, 0],
+           [4, 7, 0],
+           [4, 8, 0],
+           [4, 9, 2],
+           [4, 10, 4],
+           [4, 11, 4],
+           [4, 12, 2],
+           [4, 13, 4],
+           [4, 14, 4],
+           [4, 15, 14],
+           [4, 16, 12],
+           [4, 17, 1],
+           [4, 18, 8],
+           [4, 19, 5],
+           [4, 20, 3],
+           [4, 21, 7],
+           [4, 22, 3],
+           [4, 23, 0],
+           [5, 0, 2],
+           [5, 1, 1],
+           [5, 2, 0],
+           [5, 3, 3],
+           [5, 4, 0],
+           [5, 5, 0],
+           [5, 6, 0],
+           [5, 7, 0],
+           [5, 8, 2],
+           [5, 9, 0],
+           [5, 10, 4],
+           [5, 11, 1],
+           [5, 12, 5],
+           [5, 13, 10],
+           [5, 14, 5],
+           [5, 15, 7],
+           [5, 16, 11],
+           [5, 17, 6],
+           [5, 18, 0],
+           [5, 19, 5],
+           [5, 20, 3],
+           [5, 21, 4],
+           [5, 22, 2],
+           [5, 23, 0],
+           [6, 0, 1],
+           [6, 1, 0],
+           [6, 2, 0],
+           [6, 3, 0],
+           [6, 4, 0],
+           [6, 5, 0],
+           [6, 6, 0],
+           [6, 7, 0],
+           [6, 8, 0],
+           [6, 9, 0],
+           [6, 10, 1],
+           [6, 11, 0],
+           [6, 12, 2],
+           [6, 13, 1],
+           [6, 14, 3],
+           [6, 15, 4],
+           [6, 16, 0],
+           [6, 17, 0],
+           [6, 18, 0],
+           [6, 19, 0],
+           [6, 20, 1],
+           [6, 21, 2],
+           [6, 22, 2],
+           [6, 23, 6]
+       ];
+       option = {
+           title : {
+               text: '活动图',
+               subtext: '纯属虚构',
+               x:'center'
+           },
+           tooltip: {},
+           visualMap: {
+               max: 20,
+               inRange: {
+                   color: ['#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf', '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026']
+               }
+           },
+           xAxis3D: {
+               type: 'category',
+               data: hours
+           },
+           yAxis3D: {
+               type: 'category',
+               data: days
+           },
+           zAxis3D: {
+               type: 'value'
+           },
+           grid3D: {
+               boxWidth: 200,
+               boxDepth: 80,
+               viewControl: {
+                   // projection: 'orthographic'
+               },
+               light: {
+                   main: {
+                       intensity: 1.2,
+                       shadow: true
+                   },
+                   ambient: {
+                       intensity: 0.3
+                   }
+               }
+           },
+           series: [{
+               type: 'bar3D',
+               data: data.map(function(item) {
+                   return {
+                       value: [item[1], item[0], item[2]],
+                   }
+               }),
+               shading: 'lambert',
 
-            label: {
-                textStyle: {
-                    fontSize: 16,
-                    borderWidth: 1
-                }
-            },
+               label: {
+                   textStyle: {
+                       fontSize: 16,
+                       borderWidth: 1
+                   }
+               },
 
-            emphasis: {
-                label: {
-                    textStyle: {
-                        fontSize: 20,
-                        color: '#900'
-                    }
-                },
-                itemStyle: {
-                    color: '#900'
-                }
-            }
-        }]
-    }
+               emphasis: {
+                   label: {
+                       textStyle: {
+                           fontSize: 20,
+                           color: '#900'
+                       }
+                   },
+                   itemStyle: {
+                       color: '#900'
+                   }
+               }
+           }]
+       }
 
-*/
+   */
 
-function dateFormat(date) {
+    function dateFormat(date) {
 
 // 获取当前月份
-    var nowMonth = date.getMonth() + 1;
+        var nowMonth = date.getMonth() + 1;
 
 // 获取当前是几号
-    var strDate = date.getDate();
+        var strDate = date.getDate();
 
 // 添加分隔符“-”
-    var seperator = "/";
+        var seperator = "/";
 
 // 对月份进行处理，1-9月在前面添加一个“0”
-    if (nowMonth >= 1 && nowMonth <= 9) {
-        nowMonth = "0" + nowMonth;
-    }
+        if (nowMonth >= 1 && nowMonth <= 9) {
+            nowMonth = "0" + nowMonth;
+        }
 
 // 对月份进行处理，1-9号在前面添加一个“0”
-    if (strDate >= 0 && strDate <= 9) {
-        strDate = "0" + strDate;
-    }
+        if (strDate >= 0 && strDate <= 9) {
+            strDate = "0" + strDate;
+        }
 
 // 最后拼接字符串，得到一个格式为(yyyy-MM-dd)的日期
-    var nowDate = date.getFullYear() + seperator + nowMonth + seperator + strDate;
-    return nowDate;
-}
-
-function getVirtulData(year) {
-    year = year || '2017';
-    var date = +echarts.number.parseDate(year + '-01-01');
-    var end = +echarts.number.parseDate((+year + 1) + '-01-01');
-    var dayTime = 3600 * 24 * 1000;
-    var data = [];
-    for (var time = date; time < end; time += dayTime) {
-        console.log(time);
-        data.push([
-            echarts.format.formatTime('yyyy-MM-dd', time),
-            Math.floor(Math.random() * 1000)
-        ]);
+        var nowDate = date.getFullYear() + seperator + nowMonth + seperator + strDate;
+        return nowDate;
     }
-    return data;
-}
-function getVirtulData1(startDate,endDate) {
-    var date = +echarts.number.parseDate(startDate);
-    var end = +echarts.number.parseDate(endDate);
-    var dayTime = 3600 * 24 * 1000;
-    var data = [];
-/*
-    for (var time = date; time < end; time += dayTime) {
-*/
 
-        for(index in actives){//遍历json数组时，这么写p为索引，0,1
+    function getVirtulData(year) {
+        year = year || '2017';
+        var date = +echarts.number.parseDate(year + '-01-01');
+        var end = +echarts.number.parseDate((+year + 1) + '-01-01');
+        var dayTime = 3600 * 24 * 1000;
+        var data = [];
+        for (var time = date; time < end; time += dayTime) {
+            console.log(time);
+            data.push([
+                echarts.format.formatTime('yyyy-MM-dd', time),
+                Math.floor(Math.random() * 1000)
+            ]);
+        }
+        return data;
+    }
+
+    function getVirtulData1(startDate, endDate) {
+        var date = +echarts.number.parseDate(startDate);
+        var end = +echarts.number.parseDate(endDate);
+        var dayTime = 3600 * 24 * 1000;
+        var data = [];
+        /*
+            for (var time = date; time < end; time += dayTime) {
+        */
+
+        for (index in actives) {//遍历json数组时，这么写p为索引，0,1
 
             console.log(actives[index].sumScore + " " + actives[index].activeDate);
 
@@ -570,116 +579,114 @@ function getVirtulData1(startDate,endDate) {
                 actives[index].sumScore
             ]);
         }
-    /*        console.log(dateFormat(new Date(time)));
+        /*        console.log(dateFormat(new Date(time)));
 
-            data.push([
-                dateFormat(new Date(time)),
-                Math.floor(Math.random() * 1000)
-            ]);
-        }*/
-    return data;
-}
-var nowDate =  new Date();
-var endDate= dateFormat(nowDate);
-nowDate.setMonth(nowDate.getMonth()-6);
-var startDate= dateFormat(nowDate);
+                data.push([
+                    dateFormat(new Date(time)),
+                    Math.floor(Math.random() * 1000)
+                ]);
+            }*/
+        return data;
+    }
+
+    var nowDate = new Date();
+    var endDate = dateFormat(nowDate);
+    nowDate.setMonth(nowDate.getMonth() - 6);
+    var startDate = dateFormat(nowDate);
 
 
-option = {
-    title: {
-        text: '2016年某人每天的步数',
-        subtext: '数据纯属虚构',
-        left: 'center'
-    },
-    tooltip: {
-        position: 'top',
-        formatter: function (params) {
-            return params.value[0]+' : ' + params.value[1];
-        }
-    },
-    visualMap: {
-        min: 0,
-        max: 1000,
-        calculable: true,
-        orient: 'horizontal',
-        left: 'center',
-        bottom: 30
-    },
-
-    calendar: [
-        {
-            range: [startDate,endDate],
-            cellSize: ['auto', 20],
-            monthLabel: {
-                nameMap: 'cn',
-            },
-            dayLabel: {
-                nameMap: 'cn'
+    option = {
+        title: {
+            text: '2016年某人每天的步数',
+            subtext: '数据纯属虚构',
+            left: 'center'
+        },
+        tooltip: {
+            position: 'top',
+            formatter: function (params) {
+                return params.value[0] + ' : ' + params.value[1];
             }
-        }],
+        },
+        visualMap: {
+            min: 0,
+            max: 1000,
+            calculable: true,
+            orient: 'horizontal',
+            left: 'center',
+            bottom: 30
+        },
 
-    series: [{
-        type: 'heatmap',
-        coordinateSystem: 'calendar',
-        calendarIndex: 0,
-        data: getVirtulData1(startDate,endDate)
-    }]
+        calendar: [
+            {
+                range: [startDate, endDate],
+                cellSize: ['auto', 20],
+                monthLabel: {
+                    nameMap: 'cn',
+                },
+                dayLabel: {
+                    nameMap: 'cn'
+                }
+            }],
 
-};
+        series: [{
+            type: 'heatmap',
+            coordinateSystem: 'calendar',
+            calendarIndex: 0,
+            data: getVirtulData1(startDate, endDate)
+        }]
+
+    };
 
 
-
-option1 = {
-    title : {
-        text: '文章阅读量分布',
-        subtext: '纯属虚构',
-        x:'center'
-    },
-    tooltip : {
-        trigger: 'item',
-        formatter: "{a} <br/>{b} : {c} ({d}%)"
-    },
-    legend: {
-        orient: 'vertical',
-       /* left: 'left',*/
-        bottom: 10,
-        data: ['1k-','1k+','5k+','10k+']
-    },
-    series : [
-        {
-            name: '阅读分布',
-            type: 'pie',
-            radius : '55%',
-            center: ['50%', '60%'],
-         /*   data:[
-                {value:335, name:'1k+'},
-                {value:310, name:'100+'},
-                {value:234, name:'200+'},
-                {value:135, name:'500+'},
-                {value:1548, name:'50+'}
-            ],*/
-            data:levelVos,
-            itemStyle: {
-                emphasis: {
-                    shadowBlur: 10,
-                    shadowOffsetX: 0,
-                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+    option1 = {
+        title: {
+            text: '文章阅读量分布',
+            subtext: '纯属虚构',
+            x: 'center'
+        },
+        tooltip: {
+            trigger: 'item',
+            formatter: "{a} <br/>{b} : {c} ({d}%)"
+        },
+        legend: {
+            orient: 'vertical',
+            /* left: 'left',*/
+            bottom: 10,
+            data: ['1k-', '1k+', '5k+', '10k+']
+        },
+        series: [
+            {
+                name: '阅读分布',
+                type: 'pie',
+                radius: '55%',
+                center: ['50%', '60%'],
+                /*   data:[
+                       {value:335, name:'1k+'},
+                       {value:310, name:'100+'},
+                       {value:234, name:'200+'},
+                       {value:135, name:'500+'},
+                       {value:1548, name:'50+'}
+                   ],*/
+                data: levelVos,
+                itemStyle: {
+                    emphasis: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
                 }
             }
-        }
-    ]
-};
+        ]
+    };
 
 
-
-chart.setOption(option);
-bing.setOption(option1);
+    chart.setOption(option);
+    bing.setOption(option1);
 
     window.addEventListener('resize', function () {
         chart.resize();
         bing.resize();
     });
-
 
 
 </script>

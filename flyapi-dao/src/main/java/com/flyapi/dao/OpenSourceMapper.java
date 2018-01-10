@@ -17,5 +17,5 @@ public interface OpenSourceMapper {
 
     int updateByPrimaryKey(OpenSource record);
 
-    List<OpenSource> findAll();
+    List<OpenSource> findAll(Long userId);
 }

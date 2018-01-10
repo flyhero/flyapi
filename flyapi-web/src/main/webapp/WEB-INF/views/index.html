@@ -22,7 +22,7 @@
             <div class="fly-tab fly-tab-index">
 						<span>
 						  <a href="javascript:void(0)" onclick="homeFn()">首页推荐</a>
-						  <a href="javascript:void(0)" onclick="topicFn()">今日段子</a>
+						  <a href="javascript:void(0)" onclick="topicFn()">周刊</a>
 						</span>
                 <form action="#" class="fly-search">
                     <i class="iconfont icon-sousuo"></i>
@@ -95,7 +95,7 @@
                 <th:block th:if="${not #lists.isEmpty(topList)}">
                     <th:block th:each="top,index:${topList}">
                         <dd>
-                            <a href="user/home.html">
+                            <a href="#" th:href="@{${rootPath} + '/user/'+${top.userId}}">
                                 <img src="" th:src="${top.avatar}">
                                 <cite th:text="${top.nickName}"></cite>
                                 <i th:text="'NO.'+${index.index+1}">NO.1</i>

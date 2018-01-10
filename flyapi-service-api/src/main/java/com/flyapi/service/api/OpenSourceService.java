@@ -14,5 +14,5 @@ import java.util.List;
  */
 public interface OpenSourceService extends BaseService<OpenSource> {
 
-    List<OpenSource> findAll();
+    List<OpenSource> findAll(Long userId);
 }
