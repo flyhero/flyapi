@@ -7,6 +7,103 @@
     <meta name="keywords" content="">
     <meta name="description" content="">
     <th:block th:include="common/link::link"></th:block>
+
+    <style>
+        /* 新版列表 */
+        .ebook-list{padding: 5px 0; background-color: #fff; border-radius: 5px;}
+       /* .ebook-list li:last-child{border-bottom: none;}*/
+
+        .ebook-list .ebook-list-li{position: relative;  margin-top: 0; padding: 10px 0 10px 75px; border-bottom: 1px dotted #E9E9E9;}
+        .ebook-list-li .ebook-list-avatar{position: absolute; left: 15px; top: 10px;}
+        .ebook-list-li h2{line-height: 26px; font-size: 0;}
+        .ebook-list-li h2 *{display: inline-block; *display: inline; *zoom: 1; vertical-align: top;}
+        .ebook-list-li h2 a{max-width: 86%; margin-right: 10px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 16px;}
+        .ebook-list-li h2 span{position: relative; top: 3px; margin-left: 5px;}
+
+        .ebook-list-li a:hover{color: #009E94;}
+        .ebook-list-li p{position: relative; line-height: 20px; font-size: 12px; color: #999;}
+        .ebook-list-li p span{padding-right: 15px;}
+        .ebook-list-li p span a{color: #999;}
+        .ebook-list-avatar img{width: 45px; height: 45px; border-radius: 2px;}
+
+        .ebook-list-hint{position: absolute; right: 0; top: -2px;}
+        .ebook-list-hint i{padding-left: 10px; color: #ccc;}
+
+        .ebook-list-top{margin-bottom: 15px; }
+        .ebook-list-top .ebook-list-li{}
+
+        .e-list{
+            position: relative;;  margin-top: 0; padding: 10px; border-bottom: 1px dotted #E9E9E9;
+        }
+        .e-list .des-img{
+            position: absolute;
+            top: 50%;
+            margin-top: -65px;
+            left: 10px;
+            width: 150px;
+            height: 120px;
+        }
+        .e-list .des-img img {
+            width: 100%;
+            height: 100%;
+            border-radius: 4px;
+            border: 1px solid #f0f0f0;
+        }
+
+/*        .e-list >div {
+            padding-right: 160px;
+        }*/
+        .e-list .author {
+            margin-bottom: 5px;
+            font-size: 13px;
+        }
+
+        .e-list .author .avatar, .e-list  .author .name {
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .e-list .author .avatar {
+            margin: 0 5px 0 0;
+        }
+        .e-list  .author a {
+            color: #333;
+            font-weight: bold;
+        }
+        .right-des {
+            padding-left: 52px;
+        }
+        .e-list .abstract {
+            margin: 0 0 8px;
+            font-size: 13px;
+            line-height: 24px;
+        }
+
+        .e-list .meta {
+            padding-right: 0!important;
+            font-size: 12px;
+            font-weight: 400;
+            line-height: 20px;
+        }
+        .e-list .collection-tag {
+            padding: 2px 6px;
+            color: #ea6f5a!important;
+            border: 1px solid rgba(236,97,73,.7);
+            border-radius: 3px;
+        }
+        .e-list h2{line-height: 26px; font-size: 0;}
+        .ebook-list-li h2 *{display: inline-block; *display: inline; *zoom: 1; vertical-align: top;}
+        .e-list h2 a{max-width: 86%; margin-right: 10px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 16px;font-weight: bold}
+        .e-list .ebook-tip a:hover{color: #009E94;}
+
+        /* Tip标签 */
+        .ebook-tip{position: relative;}
+        .ebook-tip span{display: inline-block; *display: inline; *zoom: 1; vertical-align: top;}
+        .ebook-tip span{height: 20px; line-height: 20px; padding: 0 5px; background-color: #999; color: #fff; font-size: 12px; border-radius: 0;}
+        .ebook-tip .ebook-tip-stick{background-color: #393D49;}
+        .ebook-tip .ebook-tip-jing{background-color: #c00;}
+        .ebook-tip .ebook-tip-jie{background-color: #8FCDA0;}
+
+    </style>
 </head>
 
 <body>
@@ -18,23 +115,17 @@
 <div class="main layui-clear">
     <div class="wrap">
         <div class="content">
-            <ul class="fly-list" id="article-list">
-                <li class="note-list">
+            <ul class="ebook-list">
+                <li class="e-list">
   <!--                  <a class="des-img" href="/p/eb1a0e235e49" target="_blank">
                         <img src="//upload-images.jianshu.io/upload_images/2263276-65f149645b408224?imageMogr2/auto-orient/strip|imageView2/1/w/375/h/300"
                              alt="300">
                     </a>-->
-                    <div>
-                        <div class="author">
-                            <a class="avatar" target="_blank" href="/u/c3d9abd7063b">
-                                <img src="http://www.iflyapi.cn:8080/res/images/avatar/default.png" alt="96">
-                            </a>
-                            <div class="name">
-                                <a class="blue-link" target="_blank" href="/u/c3d9abd7063b">flyhero</a>
-                                <span class="time" data-shared-at="2017-04-05T09:53:58+08:00">&nbsp;5 小时前</span>
-                            </div>
-                        </div>
-                        <h2 class="fly-tip">
+                    <div class="" style="float: left"><!--class="des-img-->
+                        <img style="width: 100px;height: 140px" src="http://img13.360buyimg.com/n1/jfs/t3214/126/2309313357/292133/6c038027/57e09a03Nc57334e1.jpg">
+                    </div>
+                    <div class="" style="float: left"><!--class="right-des-->
+                        <h2 class="ebook-tip">
                             <a target="_blank" href="/p/eb1a0e235e49">大话设计模式之工厂模式</a>
                         </h2>
 
@@ -60,7 +151,7 @@
 
     <div class="edge">
         <div class="fly-panel leifeng-rank">
-            <h3 class="fly-panel-title">今日名人榜- TOP 8</h3>
+            <h3 class="fly-panel-title">今日名人榜- TOP 10</h3>
             <dl>
 
                 <dd>
