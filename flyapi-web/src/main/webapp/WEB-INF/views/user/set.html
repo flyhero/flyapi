@@ -89,10 +89,12 @@
                         <div class="avatar-add">
                             <p>建议尺寸168*168，支持jpg、png、gif，最大不能超过30KB</p>
                             <div class="upload-img">
-                                <input type="file" name="file" id="LAY-file" lay-title="上传头像">
+                                <input type="file" name="file" id="avatar-file" lay-title="上传头像">
                             </div>
                             <img src="http://tp4.sinaimg.cn/1345566427/180/5730976522/0" th:src="${setInfo.avatar}">
                             <span class="loading"></span>
+
+
                         </div>
                     </div>
                 </div>
@@ -272,7 +274,7 @@
         , experience: 83
         , sex: '男'
     };
-    layui.use(['util', 'element', 'layer','form','laytpl','laypage'], function(){
+    layui.use(['util', 'element', 'layer','form','laytpl','laypage','upload'], function(){
         var $ = layui.jquery;
         var layer = layui.layer;
         var util = layui.util;
@@ -291,11 +293,8 @@
                 }
             }
         });
-    });
 
-    layui.use('upload', function() {
-        var $ = layui.jquery,
-            upload = layui.upload;
+        var upload = layui.upload;
 
         //普通图片上传
         var uploadInst = upload.render({
@@ -323,7 +322,21 @@
                 });
             }
         });
+
+
+        //绑定原始文件域
+        upload.render({
+            elem: '#avatar-file',
+            url: '/upload/',
+            done: function(res){
+                console.log(res)
+            }
+        });
+
     });
+
+
+
 
 </script>
 

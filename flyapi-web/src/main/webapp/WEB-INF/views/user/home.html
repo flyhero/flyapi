@@ -31,7 +31,7 @@
     <div class="layui-row">
         <div class="layui-col-sm6">
             <div class="fly-home">
-                <img src="http://tp4.sinaimg.cn/1345566427/180/5730976522/0" alt="{{info.username}}">
+                <img src="http://tp4.sinaimg.cn/1345566427/180/5730976522/0" alt="" th:src="">
                 <h1>
                     <span th:text="${setInfo.nickName}"></span>
                     <!--             <i class="iconfont icon-nan"></i>
@@ -572,7 +572,7 @@ full: true
 
         for (index in actives) {//遍历json数组时，这么写p为索引，0,1
 
-            console.log(actives[index].sumScore + " " + actives[index].activeDate);
+            //console.log(actives[index].sumScore + " " + actives[index].activeDate);
 
             data.push([
                 actives[index].activeDate,
@@ -609,7 +609,7 @@ full: true
         },
         visualMap: {
             min: 0,
-            max: 1000,
+            max: 100,
             calculable: true,
             orient: 'horizontal',
             left: 'center',

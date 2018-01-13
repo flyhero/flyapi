@@ -35,7 +35,7 @@
 
                 </div>
                 <ul class="archive-list"
-                    style="border:none; background:#ffffff;">
+                    style="border:none; background:#ffffff;" id="ebook-list">
 
                     <li class="archive-item" style="display: block;height: 145px; border-bottom: 1px solid #eff2f5">
                         <a href="#"
@@ -83,8 +83,6 @@
 
                                             <a href="detail.html"> <span class="layui-btn layui-btn-mini layui-btn-normal">阅读原文</span></a>
 
-
-
                                         </li>
 
                                     </ul>
@@ -92,8 +90,6 @@
 
                             </div>
                         </div>
-
-
                     </li>
 
 
@@ -134,7 +130,7 @@
 <script th:inline="javascript">
 
 
-    layui.use(['util', 'element', 'layer', 'form', 'laytpl', 'laypage'], function () {
+    layui.use(['util', 'element', 'layer', 'form', 'laytpl', 'laypage','flow'], function () {
         var $ = layui.jquery;
         var layer = layui.layer;
         var util = layui.util;
@@ -153,6 +149,47 @@
                 }
             }
         });
+
+            var flow = layui.flow;
+            var pageCount;
+            var rootPath = [[${rootPath}]];
+            flow.load({
+                elem: '#ebook-list', //流加载容器
+                scrollElem: '#ebook-list', //滚动条所在元素，一般不用填，此处只是演示需要。
+                isAuto: false,
+                isLazyimg: true,
+                done: function (page, next) { //加载下一页
+
+                    //模拟插入
+                    setTimeout(function () {
+                        var lis = [];
+                        $.ajax({
+                            type: 'POST',
+                            url: "../subject/findArticleList",
+                            dataType: "json",
+                            data: {
+                                "pageNum": page,
+                                "pageSize": 6
+                            },
+                            success: function (result) {
+                                pageCount = result.data.pages;
+                                $.each(result.data.list, function (index, simple) {
+                                    lis.push('');
+
+
+                                    next(lis.join(''), page < pageCount);
+                                    lis = [];
+                                });
+                            }
+                        });
+                        // next(lis.join(''), page < pageCount); //假设总页数为 6
+                    }, 500);
+                }
+            });
+
+
+
+
     });
 </script>
 </body>
