@@ -2,9 +2,11 @@ package com.flyapi.service.impl;
 
 import com.flyapi.core.base.BaseServiceImpl;
 import com.flyapi.dao.CmsArticleMapper;
+import com.flyapi.dao.CmsRssMapper;
 import com.flyapi.dao.CmsSubjectMapper;
 import com.flyapi.dao.UcenterUserMapper;
 import com.flyapi.model.CmsArticle;
+import com.flyapi.model.CmsRss;
 import com.flyapi.model.CmsSubject;
 import com.flyapi.model.UcenterUser;
 import com.flyapi.pojo.dto.SubjectDto;
@@ -32,8 +34,10 @@ public class SubjectServiceImpl extends BaseServiceImpl<CmsSubject,CmsSubjectMap
     private CmsArticleMapper cmsArticleMapper;
     @Autowired
     private UcenterUserMapper ucenterUserMapper;
+    @Autowired
+    private CmsRssMapper rssMapper;
 
-    public List<SubjectVo> findSubjectList(SubjectDto subjectDto) {
+    public List<SubjectVo> findSubjectList(SubjectDto subjectDto,Long userId) {
         List<CmsArticle> list=cmsArticleMapper.findArticleListByCount(subjectDto);
         List<SubjectVo> voList = new ArrayList<SubjectVo>();
         for(CmsArticle article:list){
@@ -49,6 +53,23 @@ public class SubjectServiceImpl extends BaseServiceImpl<CmsSubject,CmsSubjectMap
             user.setPassword("");
             user.setPhone("");
             subjectVo.setUcenterUser(user);
+
+
+            CmsRss cmsRss =new CmsRss();
+            cmsRss.setSubjectId(subject.getSubjectId());
+            List<CmsRss> cmsRssList = rssMapper.findByUserIdAndSubjectId(cmsRss);
+            subjectVo.setRssNum(cmsRssList.size());
+
+            if(userId == null || userId == 0){
+                subjectVo.setRss(false);
+            }else {
+                cmsRss.setUserId(userId);
+                List<CmsRss> cmsRsses = rssMapper.findByUserIdAndSubjectId(cmsRss);
+                if(cmsRsses != null && cmsRsses.size() >0){
+                    subjectVo.setRss(true);
+                }
+            }
+
             voList.add(subjectVo);
         }
         return voList;

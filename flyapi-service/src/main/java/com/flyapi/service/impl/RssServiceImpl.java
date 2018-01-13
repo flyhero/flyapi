@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * author: flyhero
  * Date: 2017/6/9 0009 下午 3:58
@@ -21,4 +23,8 @@ public class RssServiceImpl extends BaseServiceImpl<CmsRss,CmsRssMapper> impleme
 
     @Autowired
     private CmsRssMapper cmsRssMapper;
+
+    public List<CmsRss> findByUserIdAndSubjectId(CmsRss cmsRss) {
+        return cmsRssMapper.findByUserIdAndSubjectId(cmsRss);
+    }
 }

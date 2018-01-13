@@ -4,6 +4,7 @@ import com.alibaba.druid.filter.AutoLoad;
 import com.flyapi.core.base.BaseController;
 import com.flyapi.core.constant.JSONResult;
 import com.flyapi.model.CmsSubject;
+import com.flyapi.model.UcenterUser;
 import com.flyapi.pojo.dto.SubjectDto;
 import com.flyapi.pojo.vo.SubjectVo;
 import com.flyapi.service.api.SubjectService;
@@ -45,7 +46,12 @@ public class SubjectController extends BaseController{
         PageInfo<SubjectVo> pageInfo =null;
         PageHelper.startPage(subjectDto.getPageNum(),subjectDto.getPageSize());
         try {
-            List<SubjectVo> list=subjectService.findSubjectList(subjectDto);
+            UcenterUser user = (UcenterUser)currentUser();
+            Long userId = null;
+            if(user != null ){
+                userId = user.getUserId();
+            }
+            List<SubjectVo> list=subjectService.findSubjectList(subjectDto,userId);
             pageInfo=new PageInfo<SubjectVo>(list);
         }catch (Exception e){
             logger.error(e.toString());

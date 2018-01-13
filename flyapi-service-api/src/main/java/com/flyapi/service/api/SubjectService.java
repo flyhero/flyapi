@@ -12,7 +12,7 @@ import java.util.List;
  * Date: 2017/6/9 0009 下午 3:57
  */
 public interface SubjectService extends BaseService<CmsSubject> {
-    List<SubjectVo> findSubjectList(SubjectDto subjectDto);
+    List<SubjectVo> findSubjectList(SubjectDto subjectDto,Long userId);
 
     List<CmsSubject> findUserSubject(Long userId);
 

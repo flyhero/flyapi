@@ -1,266 +1,257 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:th="http://www.thymeleaf.org">
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-		<meta content="ie=edge" http-equiv="x-ua-compatible">
-		<meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport">
-		<meta content="webkit" name="renderer">
-		<link href="" rel="icon">
-		<title>
-			flyapi登录注册
-		</title>
-		<th:block th:include="common/link::link"></th:block>
-		<link rel="stylesheet" media="screen" href="../static/css/application.css" th:href="@{${rootPath} + '/static/css/application.css'}">
-	</head>
+    <meta content="ie=edge" http-equiv="x-ua-compatible">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport">
+    <meta content="webkit" name="renderer">
+    <link href="" rel="icon">
+    <title>
+        flyapi登录注册
+    </title>
+    <th:block th:include="common/link::link"></th:block>
+    <link rel="stylesheet" media="screen" href="../static/css/login.css"
+          th:href="@{${rootPath} + '/static/css/login.css'}">
+</head>
 
-	<body >
+<body>
 
-
-	<div class="layui-fluid" style="margin: 0">
-
-		<div class="layui-row">
-
-			<div class="layui-col-sm8 sign">
-
-					<div  id="web">
-						<div class="login-box">
+<div class="sign">
+    <div id="web">
+        <div class="login-box">
 
 
-							<div class="login-header">
-								<a href="#">
-									<img class="login-logo" src="../static/images/login.png" th:src="@{${rootPath} + '/static/images/login.png'}">
-								</a>
-								<div class="switch-domain">
-									<a href="#">
+            <div class="login-header">
+                <a href="#">
+                    <img class="login-logo" src="../static/images/login.png"
+                         th:src="@{${rootPath} + '/static/images/login.png'}">
+                </a>
+                <div class="switch-domain">
+                    <a href="#">
 								<span>
 									每个人都能写本书
 								</span>
-									</a>
-								</div>
-								<ul class="tab">
-									<li class="active" data-box="#signin-box" id="signin">
-										<a class="btn btn-link" href="#">登录</a>
-									</li>
-									<li data-box="#signup-box" id="signup">
-										<a class="btn btn-link" href="#">注册</a>
-									</li>
-								</ul>
-							</div>
-							<div class="box" id="signin-box">
-								<div class="login-body">
-									<form class="layui-form" id="loginForm">
-										<!--							<th:block th:if="${msg} != null">
-                                                                        <div th:if="${msg} != null" class="form-error">
-                                                                        <span class="form-error-icon">
-                                                                            <i class="fa fa-info-circle"></i>
-                                                                            <span  th:text="${msg}"></span>
-                                                                        </span>
-                                                                        </div>
-                                                                    </th:block>-->
-										<div class="form-group form-group-icon">
-											<input class="input-lg form-input username" name="username" placeholder="用户名">
-											<div class="form-icon">
-												<i class="fa fa-user"></i>
-											</div>
-										</div>
-										<div class="form-group form-group-icon">
-											<input class="input-lg form-input password" name="password" placeholder="密码" type="password">
-											<div class="form-icon">
-												<i class="fa fa-lock"></i>
-											</div>
-										</div>
-										<div class="form-group">
-											<!--								<button class="btn btn-primary btn-block submit" data-style="slide-up" type="submit">
-                                                                                登录
-                                                                            </button>-->
-											<button class="btn btn-primary btn-block submit"  lay-filter="login-btn" lay-submit="">
-												登录
-											</button>
-										</div>
-									</form>
-								</div>
-								<div class="login-footer">
-									<p class="forgot-password">
-										<a href="#">
-											忘记密码？
-										</a>
-									</p>
-									<div class="quick-login">
-										<p class="hr">
-											<span>快捷登录</span>
-										</p>
-										<i class="fa fa-wechat"></i>&nbsp;
-										<i class="fa fa-qq"></i>
-									</div>
-									<div class="divider"></div>
+                    </a>
+                </div>
+                <ul class="tab">
+                    <li class="active" data-box="#signin-box" id="signin">
+                        <a class="btn btn-link" href="#">登录</a>
+                    </li>
+                    <li data-box="#signup-box" id="signup">
+                        <a class="btn btn-link" href="#">注册</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="box" id="signin-box">
+                <div class="login-body">
+                    <form class="layui-form" id="loginForm">
+                        <!--							<th:block th:if="${msg} != null">
+                                                        <div th:if="${msg} != null" class="form-error">
+                                                        <span class="form-error-icon">
+                                                            <i class="fa fa-info-circle"></i>
+                                                            <span  th:text="${msg}"></span>
+                                                        </span>
+                                                        </div>
+                                                    </th:block>-->
+                        <div class="form-group form-group-icon">
+                            <input class="input-lg form-input username" name="username" placeholder="用户名">
+                            <div class="form-icon">
+                                <i class="fa fa-user"></i>
+                            </div>
+                        </div>
+                        <div class="form-group form-group-icon">
+                            <input class="input-lg form-input password" name="password" placeholder="密码"
+                                   type="password">
+                            <div class="form-icon">
+                                <i class="fa fa-lock"></i>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <!--								<button class="btn btn-primary btn-block submit" data-style="slide-up" type="submit">
+                                                                登录
+                                                            </button>-->
+                            <button class="btn btn-primary btn-block submit" lay-filter="login-btn" lay-submit="">
+                                登录
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="login-footer">
+                    <p class="forgot-password">
+                        <a href="#">
+                            忘记密码？
+                        </a>
+                    </p>
+                    <div class="quick-login">
+                        <p class="hr">
+                            <span>快捷登录</span>
+                        </p>
+                        <i class="fa fa-wechat"></i>&nbsp;
+                        <i class="fa fa-qq"></i>
+                    </div>
+                    <div class="divider"></div>
 
-								</div>
-							</div>
-							<div class="box" id="signup-box" style="display: none">
-								<div class="login-body">
-									<!--						<form class="new_user" id="new_user" action="http://www.iflyapi.cn:8090/flyapi-web/user/register"  method="post"><input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="Vp9hwqEtwtnMjSSiWnI7V3NxcutfXRuwXpA+SYI8sYdmruMQQQIYh+aGphKB/kpkai3TDRGs7oGpjmU7VGLEIw==">
-                                                                -->
-									<form class="layui-form" id="registerForm">
-										<div class="form-group form-group-icon">
-											<input class="input-lg form-input name" name="username" placeholder="用户名">
-											<div class="form-icon">
-												<i class="fa fa-user"></i>
-											</div>
-										</div>
-										<div class="form-group form-group-icon">
-											<input class="input-lg form-input email" name="pw" placeholder="密码" type="password">
-											<div class="form-icon">
-												<i class="fa fa-lock"></i>
-											</div>
-										</div>
-										<div class="form-group form-group-icon">
-											<input class="input-lg form-input password" name="confirmPw" placeholder="确认密码" type="password">
-											<div class="form-icon">
-												<i class="fa fa-lock"></i>
-											</div>
-										</div>
-										<div class="form-group">
-											<!--								<button class="btn btn-primary btn-block btn-lg submit" data-style="slide-up" type="submit">
-                                                                            免费注册
-                                                                            </button>-->
-											<button class="btn btn-primary btn-block submit"  lay-filter="register-btn" lay-submit="">
-												免费注册
-											</button>
-										</div>
-									</form>
-								</div>
-								<div class="login-footer">
-									<p class="agree-terms">
-										点击「免费注册」按钮将视为您同意
-										<a class="text-highlight" href="#">使用条款</a>
-									</p>
-									<div class="quick-login">
-										<p class="hr">
-											<span>快捷注册</span>
-										</p>
-										<i class="fa fa-wechat"></i>
-										<i class="fa fa-qq"></i>
-									</div>
-								</div>
-							</div>
-							<div class="box" id="wechat-box" style="display: none">
-								<!--				<div data-appid="wx26bcd6baa41a1f36" data-redirect-uri="https://modao.cc/wechats/sign_callbacks" id="wechat-login"><iframe src="./css/qrconnect.html" frameborder="0" scrolling="no" width="300px" height="400px"></iframe></div>-->
-							</div>
-						</div>
+                </div>
+            </div>
+            <div class="box" id="signup-box" style="display: none">
+                <div class="login-body">
+                    <!--						<form class="new_user" id="new_user" action="http://www.iflyapi.cn:8090/flyapi-web/user/register"  method="post"><input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="Vp9hwqEtwtnMjSSiWnI7V3NxcutfXRuwXpA+SYI8sYdmruMQQQIYh+aGphKB/kpkai3TDRGs7oGpjmU7VGLEIw==">
+                                                -->
+                    <form class="layui-form" id="registerForm">
+                        <div class="form-group form-group-icon">
+                            <input class="input-lg form-input name" name="username" placeholder="用户名">
+                            <div class="form-icon">
+                                <i class="fa fa-user"></i>
+                            </div>
+                        </div>
+                        <div class="form-group form-group-icon">
+                            <input class="input-lg form-input email" name="pw" placeholder="密码" type="password">
+                            <div class="form-icon">
+                                <i class="fa fa-lock"></i>
+                            </div>
+                        </div>
+                        <div class="form-group form-group-icon">
+                            <input class="input-lg form-input password" name="confirmPw" placeholder="确认密码"
+                                   type="password">
+                            <div class="form-icon">
+                                <i class="fa fa-lock"></i>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <!--								<button class="btn btn-primary btn-block btn-lg submit" data-style="slide-up" type="submit">
+                                                            免费注册
+                                                            </button>-->
+                            <button class="btn btn-primary btn-block submit" lay-filter="register-btn" lay-submit="">
+                                免费注册
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="login-footer">
+                    <p class="agree-terms">
+                        点击「免费注册」按钮将视为您同意
+                        <a class="text-highlight" href="#">使用条款</a>
+                    </p>
+                    <div class="quick-login">
+                        <p class="hr">
+                            <span>快捷注册</span>
+                        </p>
+                        <i class="fa fa-wechat"></i>
+                        <i class="fa fa-qq"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="box" id="wechat-box" style="display: none">
+                <!--				<div data-appid="wx26bcd6baa41a1f36" data-redirect-uri="https://modao.cc/wechats/sign_callbacks" id="wechat-login"><iframe src="./css/qrconnect.html" frameborder="0" scrolling="no" width="300px" height="400px"></iframe></div>-->
+            </div>
+        </div>
 
-				</div>
+    </div>
 
-
-			</div>
-			<div class="layui-col-sm4">
-
-				wang
+</div>
 
 
-			</div>
-		</div>
-	</div>
+<script th:inline="javascript">
 
-		<script th:inline="javascript">
+    $(function () {
+        var user = [[${session.user}]];
+        if (user != null && user != "") {//若已经登录，跳转到主页
+            window.location.href = "http://www.iflyapi.cn:8090/index.html"
+        }
 
-				$(function() {
-                    var user=[[${session.user}]];
-                    if (user != null && user !="") {//若已经登录，跳转到主页
-                        window.location.href = "http://www.iflyapi.cn:8090/index.html"
+        var $login;
+        $('ul.tab li').click(function (e) {
+            e.preventDefault();
+            $('ul.tab li').removeClass('active');
+            $(this).addClass('active');
+            $('.box').hide();
+            return $($(this).data('box')).show();
+        });
+        $('.signup-btn').click(function (e) {
+            e.preventDefault();
+            $('#signin').removeClass('active');
+            $('#signup').addClass('active');
+            $('.box').hide();
+            return $('#signup-box').show();
+        });
+        $('.wechat-btn').click(function (e) {
+            e.preventDefault();
+            $('.box').hide();
+            return $('#wechat-box').show();
+        });
+        $('input.email').focus();
+        $login = $('#wechat-login');
+        if (window.WxLogin) {
+            new WxLogin({
+                id: 'wechat-login',
+                appid: $login.data('appid'),
+                scope: 'snsapi_login',
+                href: 'https://' + location.host + '/css/wechat.css',
+                redirect_uri: encodeURIComponent($login.data('redirect-uri'))
+            });
+        }
+        return $login.find('iframe').load(function () {
+            return $login.removeClass('loading');
+        });
+
+
+    });
+
+
+    layui.use('form', function () {
+        var form = layui.form;
+
+
+        function postLogin(data) {
+
+            $.post("../user/login",
+                data,
+                function (result) {
+                    if (result.code == 200) {
+                        location.href = "http://www.iflyapi.cn:8090/index.html";
+                    } else {
+                        layer.alert(result.msg);
                     }
 
-					var $login;
-					$('ul.tab li').click(function(e) {
-						e.preventDefault();
-						$('ul.tab li').removeClass('active');
-						$(this).addClass('active');
-						$('.box').hide();
-						return $($(this).data('box')).show();
-					});
-					$('.signup-btn').click(function(e) {
-						e.preventDefault();
-						$('#signin').removeClass('active');
-						$('#signup').addClass('active');
-						$('.box').hide();
-						return $('#signup-box').show();
-					});
-					$('.wechat-btn').click(function(e) {
-						e.preventDefault();
-						$('.box').hide();
-						return $('#wechat-box').show();
-					});
-					$('input.email').focus();
-					$login = $('#wechat-login');
-					if(window.WxLogin) {
-						new WxLogin({
-							id: 'wechat-login',
-							appid: $login.data('appid'),
-							scope: 'snsapi_login',
-							href: 'https://' + location.host + '/css/wechat.css',
-							redirect_uri: encodeURIComponent($login.data('redirect-uri'))
-						});
-					}
-					return $login.find('iframe').load(function() {
-						return $login.removeClass('loading');
-					});
+                }, "json");
+        }
 
+        function postRegister(data) {
 
-				});
-
-
-                layui.use('form', function () {
-                    var form = layui.form;
-
-
-                    function postLogin(data) {
-
-                        $.post("../user/login",
-                            data,
-                            function(result){
-                                if(result.code==200){
-                                    location.href="http://www.iflyapi.cn:8090/index.html";
-                                }else {
-                                    layer.alert(result.msg);
-								}
-
-                            }, "json");
+            $.post("../user/register",
+                data,
+                function (result) {
+                    if (result.code == 200) {
+                        location.href = "http://www.iflyapi.cn:8090/index.html";
+                    } else {
+                        layer.alert(result.msg);
                     }
 
-                    function postRegister(data) {
+                }, "json");
+        }
 
-                        $.post("../user/register",
-                            data,
-                            function(result){
-                                if(result.code==200){
-                                    location.href="http://www.iflyapi.cn:8090/index.html";
-                                }else {
-                                    layer.alert(result.msg);
-                                }
+        //监听提交
+        form.on('submit(login-btn)', function (data) {
+            /*                        layer.alert(JSON.stringify(data.field), {
+                                        title: '最终的提交信息'
+                                    })*/
+            var jsonText = JSON.stringify(data.field);
+            var jsonOb = JSON.parse(jsonText);
+            postLogin(jsonOb);
+            return false;
+        });
 
-                            }, "json");
-                    }
-                    //监听提交
-                    form.on('submit(login-btn)', function (data) {
-/*                        layer.alert(JSON.stringify(data.field), {
-                            title: '最终的提交信息'
-                        })*/
-						var jsonText=JSON.stringify(data.field);
-                        var jsonOb=JSON.parse(jsonText);
-						postLogin(jsonOb);
-                       return false;
-                    });
+        form.on('submit(register-btn)', function (data) {
+            var jsonText = JSON.stringify(data.field);
+            var jsonOb = JSON.parse(jsonText);
+            postRegister(jsonOb);
+            return false;
+        });
 
-                    form.on('submit(register-btn)', function (data) {
-                        var jsonText=JSON.stringify(data.field);
-                        var jsonOb=JSON.parse(jsonText);
-                        postRegister(jsonOb);
-                        return false;
-                    });
-
-                });
-		</script>
-	</body>
+    });
+</script>
+</body>
 
 </html>

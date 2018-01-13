@@ -2,36 +2,53 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.flyapi.dao.CmsRssMapper">
   <resultMap id="BaseResultMap" type="com.flyapi.model.CmsRss">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="user_id" jdbcType="INTEGER" property="userId" />
-    <result column="subject_id" jdbcType="INTEGER" property="subjectId" />
+    <id column="rss_id" jdbcType="BIGINT" property="rssId" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="subject_id" jdbcType="BIGINT" property="subjectId" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="is_delete" jdbcType="TINYINT" property="isDelete" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, user_id, subject_id, create_time, is_delete
+    rss_id, user_id, subject_id, create_time, update_time, is_delete
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from cms_rss
-    where id = #{id,jdbcType=INTEGER}
+    where rss_id = #{rssId,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <select id="findByUserIdAndSubjectId" parameterType="com.flyapi.model.CmsRss" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from cms_rss
+    <where>
+      is_delete = 0
+      <if test="userId != null">
+        AND user_id = #{userId},
+      </if>
+      <if test="subjectId != null">
+        AND subject_id = #{subjectId}
+      </if>
+    </where>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from cms_rss
-    where id = #{id,jdbcType=INTEGER}
+    where rss_id = #{rssId,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.flyapi.model.CmsRss">
-    insert into cms_rss (id, user_id, subject_id, 
-      create_time, is_delete)
-    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{subjectId,jdbcType=INTEGER}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{isDelete,jdbcType=TINYINT})
+    insert into cms_rss (rss_id, user_id, subject_id, 
+      create_time, update_time, is_delete
+      )
+    values (#{rssId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{subjectId,jdbcType=BIGINT}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{isDelete,jdbcType=TINYINT}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.flyapi.model.CmsRss">
     insert into cms_rss
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
+      <if test="rssId != null">
+        rss_id,
       </if>
       <if test="userId != null">
         user_id,
@@ -42,22 +59,28 @@
       <if test="createTime != null">
         create_time,
       </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
       <if test="isDelete != null">
         is_delete,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
+      <if test="rssId != null">
+        #{rssId,jdbcType=BIGINT},
       </if>
       <if test="userId != null">
-        #{userId,jdbcType=INTEGER},
+        #{userId,jdbcType=BIGINT},
       </if>
       <if test="subjectId != null">
-        #{subjectId,jdbcType=INTEGER},
+        #{subjectId,jdbcType=BIGINT},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
       </if>
       <if test="isDelete != null">
         #{isDelete,jdbcType=TINYINT},
@@ -68,26 +91,30 @@
     update cms_rss
     <set>
       <if test="userId != null">
-        user_id = #{userId,jdbcType=INTEGER},
+        user_id = #{userId,jdbcType=BIGINT},
       </if>
       <if test="subjectId != null">
-        subject_id = #{subjectId,jdbcType=INTEGER},
+        subject_id = #{subjectId,jdbcType=BIGINT},
       </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
       <if test="isDelete != null">
         is_delete = #{isDelete,jdbcType=TINYINT},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where rss_id = #{rssId,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.flyapi.model.CmsRss">
     update cms_rss
-    set user_id = #{userId,jdbcType=INTEGER},
-      subject_id = #{subjectId,jdbcType=INTEGER},
+    set user_id = #{userId,jdbcType=BIGINT},
+      subject_id = #{subjectId,jdbcType=BIGINT},
       create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
       is_delete = #{isDelete,jdbcType=TINYINT}
-    where id = #{id,jdbcType=INTEGER}
+    where rss_id = #{rssId,jdbcType=BIGINT}
   </update>
 </mapper>

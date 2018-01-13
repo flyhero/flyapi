@@ -1,0 +1,405 @@
+:root {
+	box-sizing: border-box
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: inherit
+}
+
+.btn {
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	outline: none;
+	display: inline-block;
+	-webkit-appearance: none;
+	text-align: center;
+	text-decoration: none;
+	white-space: nowrap;
+	color: #f55d54;
+	line-height: 24px;
+	margin: 0 5px;
+	background: none;
+	border: none
+}
+
+.btn.btn-default {
+	color: #f55d54;
+	border: 1px solid #f55d54;
+	background: white;
+	box-shadow: 0px 6px 20px 0px rgba(245, 92, 84, 0.08)
+}
+
+.btn.btn-default:hover {
+	background: #feeeed
+}
+
+.btn.btn-primary {
+	color: white;
+	border: 1px solid transparent;
+	background: #f55d54;
+	box-shadow: 0px 6px 20px 0px rgba(245, 92, 84, 0.16)
+}
+
+.btn.btn-primary:hover {
+	background: #ff7c75
+}
+
+.btn.btn-link {
+	color: rgba(39, 54, 78, 0.6)
+}
+
+.btn.btn-link:hover {
+	color: #27364e
+}
+
+.btn.btn-link.lang {
+	color: rgba(39, 54, 78, 0.6)
+}
+
+.btn.btn-link.active {
+	color: #f55d54
+}
+
+.btn.btn-lg {
+	padding: 0;
+	margin: 0 10px;
+	width: 166px;
+	height: 50px;
+	font-size: 1.6rem;
+	line-height: 48px
+}
+
+.btn.btn-md {
+	width: 120px;
+	height: 40px;
+	font-size: 1.4rem;
+	line-height: 38px
+}
+
+.btn.btn-block {
+	margin: 0;
+	width: 100%;
+	height: 100%
+}
+
+
+.form-group {
+	position: relative;
+	width: 100%;
+	height: 45px
+}
+
+.form-group:not(:last-child) {
+	margin-bottom: 10px
+}
+
+.form-group .form-input {
+	padding-left: 10px;
+	line-height: 16px;
+	width: 100%;
+	height: 100%;
+	outline: none;
+	border: 1px solid #e0e0e0
+}
+
+.form-group .form-input:focus {
+	border: 1px solid #f55d54
+}
+
+.form-group.form-group-icon .form-input {
+	padding-left: 45px
+}
+
+.form-group.form-group-icon .form-input:focus+.form-icon i.fa {
+	color: #f55d54
+}
+
+.form-group.form-group-icon .form-icon {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 45px;
+	height: 100%;
+	font-size: 20px;
+	line-height: 45px;
+	text-align: center;
+	color: #c5c5c5
+}
+
+.form-error {
+	background: rgba(245, 93, 84, 0.1);
+	border: 1px solid rgba(245, 93, 84, 0.2);
+	color: #f55d54;
+	margin: 10px 0;
+	padding: 10px;
+	text-align: left
+}
+.form-input:-webkit-autofill {
+	box-shadow: 0 0 0 5rem white inset
+}
+
+.login-box {
+	text-align: center
+}
+
+.login-box .login-header .login-logo {
+	height: 96px;
+	width: 96px
+}
+
+.login-box .login-header h6 {
+	font-size: 16px;
+	color: rgba(39, 54, 78, 0.8);
+	line-height: 30px
+}
+
+.login-box .btn.submit {
+	margin: 5px 0;
+	line-height: 43px
+}
+
+.login-box .login-header,
+.login-box .login-body {
+	margin: 0 auto;
+	width: 100%
+}
+
+.login-box .login-footer {
+	margin: 20px 0;
+	color: rgba(39, 54, 78, 0.6)
+}
+
+.login-box .login-footer .forgot-password {
+	margin-bottom: 10px
+}
+
+.login-box .login-footer .quick-login {
+	width: 80%;
+	max-width: 260px;
+	margin: 0 auto;
+	margin-top: 20px;
+	color: rgba(39, 54, 78, 0.6)
+}
+
+.login-box .login-footer .quick-login .hr {
+	border-bottom: 1px solid #dedfe1
+}
+
+.login-box .login-footer .quick-login .hr span {
+	display: inline-block;
+	padding: 0 17px;
+	background: white;
+	-webkit-transform: translateY(50%);
+	-ms-transform: translateY(50%);
+	transform: translateY(50%)
+}
+
+.login-box .login-footer .quick-login .fa-wechat  {
+	margin-top: 24px;
+	color: #0abb07;
+	font-size: 32px;
+	cursor: pointer
+}
+.fa-qq  {
+	margin-top: 24px;
+	color: #3580bb;
+	font-size: 32px !important;
+	cursor: pointer
+}
+.login-box .login-footer .switch-domain {
+	width: 80%;
+	margin: 0 auto
+}
+
+.login-box .login-footer .switch-domain a {
+	display: inline-block;
+	width: 100%;
+	padding: 10px;
+	border-top: 1px solid #efefef
+}
+
+.login-box .login-footer .switch-domain a:last-child {
+	border-bottom: 1px solid #efefef
+}
+
+.login-box .login-footer .switch-domain a img,
+.login-box .login-footer .switch-domain a span {
+	vertical-align: middle
+}
+
+
+.wechat-sign {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: column;
+	-ms-flex-direction: column;
+	flex-direction: column;
+	min-height: 100vh;
+	-webkit-box-pack: justify;
+	-webkit-justify-content: space-between;
+	-ms-flex-pack: justify;
+	justify-content: space-between
+}
+
+.wechat-sign #web {
+	-webkit-box-flex: 1;
+	-webkit-flex: 1;
+	-ms-flex: 1;
+	flex: 1;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	-ms-flex-align: center;
+	align-items: center
+}
+
+.wechat-sign #web form {
+	width: 300px
+}
+
+.wechat-sign #web form .login-header img {
+	border-radius: 100%;
+	margin-bottom: 20px
+}
+
+.wechat-sign #web form .wechat-name {
+	font-size: 20px;
+	font-weight: 500;
+	text-align: center;
+	color: #f55d54
+}
+
+.wechat-sign #web form #bind-info {
+	text-align: center;
+	margin: 20px auto
+}
+
+.wechat-sign #web form .bind-btns .form-group {
+	margin: 20px 0
+}
+
+.wechat-sign #web form .bind-btns .form-group .btn {
+	margin: 0;
+	width: 100%
+}
+
+.wechat-sign #web form .new-account,
+.wechat-sign #web form .existing-account {
+	margin-bottom: 2em;
+	display: none
+}
+
+ul.tab {
+	border-bottom: 0;
+	text-align: center
+}
+
+ul.tab li {
+	position: relative;
+	display: inline-block;
+	line-height: 30px
+}
+
+ul.tab li a {
+	display: inline-block
+}
+
+ul.tab li::after {
+	content: "";
+	position: absolute;
+	left: 50%;
+	-webkit-transform: translateX(-50%) scaleX(0);
+	-ms-transform: translateX(-50%) scaleX(0);
+	transform: translateX(-50%) scaleX(0);
+	bottom: calc(50% - 1em);
+	width: calc(100% - 30px);
+	border-bottom: 1px solid #f55d54;
+	-webkit-transition: all 0.2s ease-out;
+	transition: all 0.2s ease-out
+}
+
+ul.tab li.active::after {
+	-webkit-transform: translateX(-50%) scaleX(1);
+	-ms-transform: translateX(-50%) scaleX(1);
+	transform: translateX(-50%) scaleX(1)
+}
+
+ul.tab.dark li::after {
+	border-color: white
+}
+
+
+.sign #web .login-box {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: column;
+	-ms-flex-direction: column;
+	flex-direction: column;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+	height: 100vh;
+	min-height: 700px
+}
+
+.sign #web .login-box .box {
+	min-height: 450px
+}
+
+.sign #web .login-box .login-header {
+	padding-top: 40px;
+	min-height: 240px
+}
+
+.sign #web .login-box .login-header h6,
+.sign #web .login-box .login-header .tab {
+	margin-top: 30px
+}
+
+.sign #web .login-box .login-header h6 a,
+.sign #web .login-box .login-header .tab a {
+	margin: 0 20px 20px
+}
+
+.sign #web .login-box .login-body {
+	margin: 0 auto;
+	width: 80%;
+	max-width: 260px
+}
+
+.sign #web .login-box .switch-domain {
+	width: 80%;
+	max-width: 260px;
+	margin: 20px auto
+}
+
+@media screen and (max-width: 660px) {
+	.sign #web .login-box .box {
+		min-height: initial
+	}
+	.sign #web .login-box .quick-login,
+	.sign #web .login-box .switch-domain {
+		display: none
+	}
+}

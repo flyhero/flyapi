@@ -286,7 +286,7 @@ public class UserController extends BaseController {
         mv.addObject("activeVos",activeVos);
         mv.addObject("levelVos",levelVos);
         mv.addObject("sourceList",sourceList);
-        mv.setViewName("/user/home");
+        mv.setViewName("user/home");
         return mv;
     }
 }

@@ -11,6 +11,8 @@ import com.flyapi.model.UcenterUser;
 public class SubjectVo extends CmsArticle{
     private CmsSubject cmsSubject;
     private UcenterUser ucenterUser;
+    private Integer rssNum;
+    private boolean isRss;
 
     public CmsSubject getCmsSubject() {
         return cmsSubject;
@@ -28,4 +30,19 @@ public class SubjectVo extends CmsArticle{
         this.ucenterUser = ucenterUser;
     }
 
+    public Integer getRssNum() {
+        return rssNum;
+    }
+
+    public void setRssNum(Integer rssNum) {
+        this.rssNum = rssNum;
+    }
+
+    public boolean isRss() {
+        return isRss;
+    }
+
+    public void setRss(boolean rss) {
+        isRss = rss;
+    }
 }
