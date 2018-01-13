@@ -50,14 +50,13 @@
 
                         <div class="archive-text">
                             <div class="archive-detail">
-                                <h3><a href="http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2017/1103/8693.html"
-                                       title="·ÂÐ´Social StepsµÄToolBarÐ§¹û">文章标题</a></h3>
+                                <h3><a href="#" title="文章标题">文章标题</a></h3>
                                 <p>他不是别人 他是张国荣 14年前的今天，一颗巨星陨落。他不是别人 他是张国荣 14年前的今天，一颗巨星陨落他不是别人 他是张国荣 14年前的今天，一颗巨星陨落 </p>
                                 <div class="archive-info clearfix"
                                      style="margin-top: 10px; overflow: hidden;white-space: nowrap; display: flex">
                                     <ul style="padding: 0;">
                                         <li class="list-user">
-                                            <a href="http://www.jcodecraeer.com/member/index.php?uid=jianghejie"
+                                            <a href="#"
                                                target="_blank">
                                                 <img src="../static/images/avatar/flyhero.jpg">
                                                 <span>flyero</span>
@@ -129,8 +128,77 @@
 
 <script th:inline="javascript">
 
+    $(function () {
+        $(".nav a").removeClass("nav-this");
+        $("#subject").addClass("nav-this")
+        getData(1,1,1);
+    });
+    function likeFn() {
+        getData(1,0,0);
+        $("a").removeClass("tab-this")
+        $("#like").addClass("tab-this");
+    };
+    function commentFn() {
+        getData(0,1,0);
+        $("a").removeClass("tab-this")
+        $("#comment").addClass("tab-this");
+    };
+    function viewFn() {
+        getData(0,0,1);
+        $("a").removeClass("tab-this")
+        $("#view").addClass("tab-this");
+    };
+    function allFn() {
+        getData(1,1,1);
+        $("a").removeClass("tab-this")
+        $("#all").addClass("tab-this");
+    };
+    function getData(like,comment,view) {
+        //var rootPath =  [[${rootPath}]].toString();
+        layui.use('flow', function () {
+            var flow = layui.flow;
+            var pageCount;
+            flow.load({
+                elem: '#ebook-list', //流加载容器
+                scrollElem: '#ebook-list', //滚动条所在元素，一般不用填，此处只是演示需要。
+                isAuto: false,
+                isLazyimg: true,
+                done: function (page, next) { //加载下一页
 
-    layui.use(['util', 'element', 'layer', 'form', 'laytpl', 'laypage','flow'], function () {
+                    //模拟插入
+                    setTimeout(function () {
+                        var lis = [];
+                        $.ajax({
+                            type: 'POST',
+                            url: "../subject/findSubjectList",
+                            dataType: "json",
+                            data: {
+                                "pageNum": page,
+                                "pageSize": 6,
+                                "like": like,
+                                "comment": comment,
+                                "view": view
+                            },
+                            success: function (result) {
+                                pageCount = result.data.pages;
+                                $.each(result.data.list, function (index, simple) {
+                                    lis.push('');
+
+                                    next(lis.join(''), page < pageCount);
+                                    lis = [];
+                                });
+                            }
+                        });
+                        // next(lis.join(''), page < pageCount); //假设总页数为 6
+                    }, 500);
+                }
+            });
+
+        });
+    }
+
+
+    layui.use(['util', 'element', 'layer', 'form', 'laytpl', 'laypage'], function () {
         var $ = layui.jquery;
         var layer = layui.layer;
         var util = layui.util;
@@ -149,46 +217,6 @@
                 }
             }
         });
-
-            var flow = layui.flow;
-            var pageCount;
-            var rootPath = [[${rootPath}]];
-            flow.load({
-                elem: '#ebook-list', //流加载容器
-                scrollElem: '#ebook-list', //滚动条所在元素，一般不用填，此处只是演示需要。
-                isAuto: false,
-                isLazyimg: true,
-                done: function (page, next) { //加载下一页
-
-                    //模拟插入
-                    setTimeout(function () {
-                        var lis = [];
-                        $.ajax({
-                            type: 'POST',
-                            url: "../subject/findArticleList",
-                            dataType: "json",
-                            data: {
-                                "pageNum": page,
-                                "pageSize": 6
-                            },
-                            success: function (result) {
-                                pageCount = result.data.pages;
-                                $.each(result.data.list, function (index, simple) {
-                                    lis.push('');
-
-
-                                    next(lis.join(''), page < pageCount);
-                                    lis = [];
-                                });
-                            }
-                        });
-                        // next(lis.join(''), page < pageCount); //假设总页数为 6
-                    }, 500);
-                }
-            });
-
-
-
 
     });
 </script>

@@ -46,6 +46,8 @@ public class SubjectServiceImpl extends BaseServiceImpl<CmsSubject,CmsSubjectMap
             subjectVo.setCmsSubject(subject);
 
             UcenterUser user= ucenterUserMapper.selectByPrimaryKey(article.getUserId());
+            user.setPassword("");
+            user.setPhone("");
             subjectVo.setUcenterUser(user);
             voList.add(subjectVo);
         }
