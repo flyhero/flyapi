@@ -344,8 +344,8 @@
 
                 var jsonText = JSON.stringify(res);
                 console.log("头像上传："+jsonText);
-
-                $.post("/user/info",{"userId":[[${session.user.userId}]],"avatar":res.data},function(result){
+                var userId = new String('[[${session.user.userId}]]');
+                $.post("/user/info",{"userId":userId,"avatar":res.data},function(result){
                     $("#avatar-info").attr("src",res.data);
                 });
             }
