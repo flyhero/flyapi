@@ -25,7 +25,7 @@
     <where>
       is_delete = 0
       <if test="userId != null">
-        AND user_id = #{userId},
+        AND user_id = #{userId}
       </if>
       <if test="subjectId != null">
         AND subject_id = #{subjectId}

@@ -235,7 +235,23 @@ public class UserController extends BaseController {
         CookieUtil.setCookie(response,"isLogin","true");
         return JSONResult.ok();
     }
-
+    /**
+     * 更新用户信息
+     * @title: updateUserInfo
+     * @author flyhero <http://www.iflyapi.cn>
+     * @params [user]
+     * @return com.flyapi.core.constant.JSONResult
+     * @date 2018/1/15 下午11:33
+     */
+    @PostMapping("info")
+    @ResponseBody
+    public JSONResult updateUserInfo(UcenterUser user){
+        int num = userService.updateByPrimaryKeySelective(user);
+        if(num <= 0){
+            JSONResult.error();
+        }
+        return JSONResult.ok();
+    }
     /**
      * 退出
      * Title: logout

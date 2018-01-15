@@ -57,6 +57,7 @@
 
 .archive-detail {
     position: relative;
+    padding-top: 10px;
 }
 
 .archive-detail h3 {

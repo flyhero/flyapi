@@ -597,8 +597,8 @@ full: true
 
     option = {
         title: {
-            text: '2016年某人每天的步数',
-            subtext: '数据纯属虚构',
+            text: '活跃图',
+          /*  subtext: '数据纯属虚构',*/
             left: 'center'
         },
         tooltip: {
@@ -641,18 +641,19 @@ full: true
     option1 = {
         title: {
             text: '文章阅读量分布',
-            subtext: '纯属虚构',
-            x: 'center'
+            /*subtext: '纯属虚构',*/
+            x: 'center',
         },
         tooltip: {
             trigger: 'item',
             formatter: "{a} <br/>{b} : {c} ({d}%)"
         },
         legend: {
-            orient: 'vertical',
-            /* left: 'left',*/
-            bottom: 10,
-            data: ['1k-', '1k+', '5k+', '10k+']
+            // orient: 'vertical',
+            // top: 'middle',
+            bottom: 5,
+            left: 'center',
+            data: ['1k-', '1k+', '2k+', '1w+']
         },
         series: [
             {

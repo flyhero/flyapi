@@ -89,9 +89,9 @@
                         <div class="avatar-add">
                             <p>建议尺寸168*168，支持jpg、png、gif，最大不能超过30KB</p>
                             <div class="upload-img">
-                                <input type="file" name="file" id="avatar-file" lay-title="上传头像">
+                                <input type="file" name="common-image-file" id="avatar-file" lay-title="上传头像">
                             </div>
-                            <img src="http://tp4.sinaimg.cn/1345566427/180/5730976522/0" th:src="${setInfo.avatar}">
+                            <img id="avatar-info" src="http://tp4.sinaimg.cn/1345566427/180/5730976522/0" th:src="${setInfo.avatar}">
                             <span class="loading"></span>
 
 
@@ -261,7 +261,7 @@
     </div>
 </div>
 </div>
-<script>
+<script th:inline="javascript">
 
     $("li").removeClass("layui-this");
     $("#fly-set").addClass("layui-this")
@@ -327,9 +327,27 @@
         //绑定原始文件域
         upload.render({
             elem: '#avatar-file',
-            url: '/upload/',
+            url: '../qiniu/common/upload/',
             done: function(res){
-                console.log(res)
+                res.toJSON = function(key)
+                {
+                    var replacement = new Object();
+                    for (var val in this)
+                    {
+                        if (typeof (this[val]) === 'string')
+                            replacement[val] = this[val].toUpperCase();
+                        else
+                            replacement[val] = this[val]
+                    }
+                    return replacement;
+                };
+
+                var jsonText = JSON.stringify(res);
+                console.log("头像上传："+jsonText);
+
+                $.post("/user/info",{"userId":[[${session.user.userId}]],"avatar":res.data},function(result){
+                    $("#avatar-info").attr("src",res.data);
+                });
             }
         });
 

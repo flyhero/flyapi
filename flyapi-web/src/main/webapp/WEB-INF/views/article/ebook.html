@@ -38,16 +38,12 @@
                     style="border:none; background:#ffffff;" id="ebook-list">
 
                     <li class="archive-item" style="display: block;height: 145px; border-bottom: 1px solid #eff2f5">
-                        <a href="#"
-                           title="标题">
-
+                        <a href="#" title="标题">
                             <div class="covercon">
                                 <img src="https://user-gold-cdn.xitu.io/2017/12/18/160691fc2995dbf9?imageView2/1/w/200/h/280/q/95/format/webp/interlace/1"
                                      class="cover imgloadinglater" style="display: block;">
                             </div>
-
                         </a>
-
                         <div class="archive-text">
                             <div class="archive-detail">
                                 <h3><a href="#" title="文章标题">书籍标题</a></h3>
@@ -60,9 +56,6 @@
                                                 <img src="../static/images/avatar/flyhero.jpg">
                                                 <span>flyero</span>
                                             </a>
-                                            <span aria-hidden="true" style="margin-left: 5px;">阅读 232</span>
-                                            <span aria-hidden="true">评论 0</span>
-                                            <span aria-hidden="true">喜欢 0</span>
                                         </li>
                                     </ul>
 
@@ -75,6 +68,9 @@
                                                 <span class="layui-btn layui-btn-mini layui-btn-normal">订阅本书</span>
                                             </a>
                                             <span aria-hidden="true" style="margin-left: 8px;">已有1002人订阅</span>
+                                            <span aria-hidden="true" style="margin-left: 5px;"><i class="fa fa-eye fa-fw" title="阅读"></i> 271</span>
+                                            <span aria-hidden="true"><i class="fa fa-commenting fa-fw" title="回答"></i> 8</span>
+                                            <span aria-hidden="true"><i class="fa fa-thumbs-o-up fa-fw" title="人气"></i> 106</span>
                                         </li>
 
                                     </ul>
@@ -124,29 +120,34 @@
     $(function () {
         $(".nav a").removeClass("nav-this");
         $("#subject").addClass("nav-this")
-        getData(1,1,1);
+        getData(1, 1, 1);
     });
+
     function likeFn() {
-        getData(1,0,0);
+        getData(1, 0, 0);
         $("a").removeClass("tab-this")
         $("#like").addClass("tab-this");
     };
+
     function commentFn() {
-        getData(0,1,0);
+        getData(0, 1, 0);
         $("a").removeClass("tab-this")
         $("#comment").addClass("tab-this");
     };
+
     function viewFn() {
-        getData(0,0,1);
+        getData(0, 0, 1);
         $("a").removeClass("tab-this")
         $("#view").addClass("tab-this");
     };
+
     function allFn() {
-        getData(1,1,1);
+        getData(1, 1, 1);
         $("a").removeClass("tab-this")
         $("#all").addClass("tab-this");
     };
-    function getData(like,comment,view) {
+
+    function getData(like, comment, view) {
         //var rootPath =  [[${rootPath}]].toString();
         layui.use('flow', function () {
             var flow = layui.flow;
@@ -175,7 +176,48 @@
                             success: function (result) {
                                 pageCount = result.data.pages;
                                 $.each(result.data.list, function (index, simple) {
-                                    lis.push('');
+                                    lis.push(' <li class="archive-item" style="display: block;height: 145px; border-bottom: 1px solid #eff2f5">\n' +
+                                        '                        <a href="#" title="标题">\n' +
+                                        '                            <div class="covercon">\n' +
+                                        '                                <img src="' + simple.cmsSubject.cover + '" class="cover imgloadinglater" style="display: block;">\n' +
+                                        '                            </div>\n' +
+                                        '                        </a>\n' +
+                                        '                        <div class="archive-text">\n' +
+                                        '                            <div class="archive-detail">\n' +
+                                        '                                <h3><a href="#" title="文章标题">' + simple.cmsSubject.subjectTitle + '</a></h3>\n' +
+                                        '                                <p>' + simple.cmsSubject.subjectDes + '</p>\n' +
+                                        '                                <div class="archive-info clearfix"\n' +
+                                        '                                     style="margin-top: 10px; overflow: hidden;white-space: nowrap; display: flex">\n' +
+                                        '                                    <ul style="padding: 0;">\n' +
+                                        '                                        <li class="list-user">\n' +
+                                        '                                            <a href="#" target="_blank">\n' +
+                                        '                                                <img src="' + simple.ucenterUser.avatar + '">\n' +
+                                        '                                                <span>' + simple.ucenterUser.nickName + '</span>\n' +
+                                        '                                            </a>\n' +
+                                        '                                        </li>\n' +
+                                        '                                    </ul>\n' +
+                                        '                                </div>\n' +
+                                        '                                <div class="archive-info clearfix"\n' +
+                                        '                                     style="margin-top: 10px; overflow: hidden;white-space: nowrap; display: flex">\n' +
+                                        '                                    <ul style="padding: 0;">\n' +
+                                        '                                        <li class="list-msg">\n' +
+                                        '                                            <a href="#">\n' );
+                                    if(simple.rss){
+                                        lis.push('<span class="layui-btn layui-btn-mini layui-btn-normal">已订阅</span>');
+                                    }else {
+                                        lis.push('<span class="layui-btn layui-btn-mini layui-btn-normal">订阅本书</span>');
+                                    }
+                                    lis.push('</a>\n' +
+                                        '                                            <span aria-hidden="true" style="margin-left: 8px;">已有' + simple.rssNum + '人订阅</span>\n' +
+                                        '                                            <span aria-hidden="true" style="margin-left: 5px;"><i class="fa fa-eye fa-fw" title="阅读"></i>' + simple.viewNum + '</span>\n' +
+                                        '                                            <span aria-hidden="true"><i class="fa fa-commenting fa-fw" title="回答"></i>' + simple.commentNum + '</span>\n' +
+                                        '                                            <span aria-hidden="true"><i class="fa fa-thumbs-o-up fa-fw" title="人气"></i>' + simple.likeNum + '</span>\n' +
+                                        '                                        </li>\n' +
+                                        '                                    </ul>\n' +
+                                        '                                </div>\n' +
+                                        '                            </div>\n' +
+                                        '                        </div>\n' +
+                                        '                    </li>');
 
                                     next(lis.join(''), page < pageCount);
                                     lis = [];
