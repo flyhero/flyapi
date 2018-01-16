@@ -165,23 +165,40 @@
                     </th:block>
                 </ul>
             </div>
-            <div class="fly-panel fly-link">
+            <div class="fly-panel fly-list-one">
                 <h3 class="fly-panel-title">热门阅读</h3>
                 <dl>
-                    <dd>
-                        <i class="iconfont icon-shijian"></i><span
-                            th:text="'注册于：'+${#dates.format(setInfo.createTime, 'yyyy年MM月dd日')}"> 注册于 2015年09月04日</span>
-                    </dd>
-                    <dd>
-                        <a href="http://layim.layui.com/" target="_blank">个人主页被 5.3k 人浏览</a>
-                    </dd>
+
+                    <th:block th:if="${not #lists.isEmpty(hotArticleList)}">
+                        <th:block th:each="hot,index:${hotArticleList}">
+                            <dd>
+                                <a href="#" th:href="@{${rootPath} + '/article/detail/'+${hot.articleId}}" th:text="${hot.title}">标题</a>
+                                <span><i class="fa fa-eye fa-fw"></i><span th:text="${hot.viewNum}"></span></span>
+                            </dd>
+                        </th:block>
+                    </th:block>
+                </dl>
+            </div>
+            <div class="fly-panel fly-list-one">
+                <h3 class="fly-panel-title">注册与浏览</h3>
+                <dl>
+                    <th:block th:if="${not #lists.isEmpty(lastArticleList)}">
+                        <th:block th:each="last,index:${lastArticleList}">
+                            <dd>
+                                <a href="/#" th:href="@{${rootPath} + '/article/detail/'+${last.articleId}}" th:text="${last.title}">标题</a>
+                                <span><i class="fa fa-clock-o fa-fw"></i> <span th:text="${#dates.format(last.createTime, 'hh:mm')}"></span></span>
+                            </dd>
+                            </dd>
+                        </th:block>
+                    </th:block>
                 </dl>
             </div>
             <div class="fly-panel fly-link">
                 <h3 class="fly-panel-title">注册与浏览</h3>
                 <dl>
                     <dd>
-                        <i class="iconfont icon-shijian"></i><span> 注册于 2015年09月04日</span>
+                        <i class="iconfont icon-shijian"></i><span
+                            th:text="'注册于：'+${#dates.format(setInfo.createTime, 'yyyy年MM月dd日')}"> 注册于 2015年09月04日</span>
                     </dd>
                     <dd>
                         <a href="http://layim.layui.com/" target="_blank">个人主页被 5.3k 人浏览</a>

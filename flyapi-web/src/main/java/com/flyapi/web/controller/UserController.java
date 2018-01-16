@@ -297,11 +297,15 @@ public class UserController extends BaseController {
         List<ActiveVo> activeVos=userFameService.findActive(userId);
         List<ViewLevelVo> levelVos = articleService.findViewLevel(userId);
         List<OpenSource> sourceList = openSourceService.findAll(userId);
+        List<CmsArticle> hotArticleList = articleService.findHotArticlesByUserId(userId);
+        List<CmsArticle> lastArticleList = articleService.findLastUpdateArticlesByUserId(userId);
         user.setPassword("");
         mv.addObject("setInfo",user);
         mv.addObject("activeVos",activeVos);
         mv.addObject("levelVos",levelVos);
         mv.addObject("sourceList",sourceList);
+        mv.addObject("hotArticleList",hotArticleList);
+        mv.addObject("lastArticleList",lastArticleList);
         mv.setViewName("user/home");
         return mv;
     }

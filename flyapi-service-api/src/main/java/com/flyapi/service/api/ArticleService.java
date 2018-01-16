@@ -32,4 +32,8 @@ public interface ArticleService extends BaseService<CmsArticle> {
     List<CmsArticle> findArticleByUserId(Long userId);
 
     List<ViewLevelVo> findViewLevel(Long userId);
+
+    List<CmsArticle> findHotArticlesByUserId(Long userId);
+
+    List<CmsArticle> findLastUpdateArticlesByUserId(Long userId);
 }

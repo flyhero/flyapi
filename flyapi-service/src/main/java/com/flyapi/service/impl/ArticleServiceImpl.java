@@ -93,4 +93,12 @@ public class ArticleServiceImpl extends BaseServiceImpl<CmsArticle,CmsArticleMap
     public List<ViewLevelVo> findViewLevel(Long userId) {
         return cmsArticleMapper.findViewLevel(userId);
     }
+
+    public List<CmsArticle> findHotArticlesByUserId(Long userId) {
+        return cmsArticleMapper.findHotArticlesByUserId(userId);
+    }
+
+    public List<CmsArticle> findLastUpdateArticlesByUserId(Long userId) {
+        return cmsArticleMapper.findLastUpdateArticlesByUserId(userId);
+    }
 }

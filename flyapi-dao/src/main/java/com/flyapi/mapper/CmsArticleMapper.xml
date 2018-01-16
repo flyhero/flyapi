@@ -339,4 +339,37 @@
     ORDER BY create_time DESC
   </select>
 
+  <select id="findHotArticlesByUserId" parameterType="java.lang.Long" resultType="com.flyapi.model.CmsArticle">
+    SELECT
+      article_id articleId,
+      title,
+      create_time createTime,
+      view_num viewNum
+    FROM
+      cms_article
+    WHERE
+      user_id = #{userId}
+      AND is_delete = 0
+      AND permissions = 0
+      AND status = 1
+    ORDER BY view_num DESC
+    LIMIT 6
+  </select>
+  <select id="findLastUpdateArticlesByUserId" parameterType="java.lang.Long" resultType="com.flyapi.model.CmsArticle">
+    SELECT
+    article_id articleId,
+    title,
+    create_time createTime,
+    view_num viewNum
+    FROM
+    cms_article
+    WHERE
+    user_id = #{userId}
+    AND is_delete = 0
+    AND permissions = 0
+    AND status = 1
+    ORDER BY create_time DESC
+    LIMIT 6
+  </select>
+
 </mapper>
