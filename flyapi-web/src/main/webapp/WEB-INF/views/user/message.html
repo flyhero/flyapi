@@ -5,8 +5,8 @@
   <meta charset="utf-8">
   <title>我的消息</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="keywords" content="fly,layui,前端社区">
-  <meta name="description" content="Fly社区是模块化前端UI框架Layui的官网社区，致力于为web开发提供强劲动力">
+  <meta name="keywords" content="">
+  <meta name="description" content="">
   <th:block th:include="common/link::link"></th:block>
 
 </head>
@@ -25,32 +25,8 @@
   <div class="site-mobile-shade"></div>
 
   <div class="fly-panel fly-panel-user" pad20>
-<!--	  <div class="layui-tab layui-tab-brief" lay-filter="user" id="LAY_msg" style="margin-top: 15px;">
-	    <button class="layui-btn layui-btn-danger" id="LAY_delallmsg">清空全部消息</button>
-	    <div  id="LAY_minemsg" style="margin-top: 10px;">
-        &lt;!&ndash;<div class="fly-none">您暂时没有最新消息</div>&ndash;&gt;
-        <ul class="mine-msg">
-          <li data-id="123">
-            <blockquote class="layui-elem-quote">
-              <a href="/jump?username=Absolutely" target="_blank"><cite>Absolutely</cite></a>回答了您的求解<a target="_blank" href="/jie/8153.html/page/0/#item-1489505778669"><cite>layui后台框架</cite></a>
-            </blockquote>
-            <p><span>1小时前</span><a href="javascript:;" class="layui-btn layui-btn-small layui-btn-danger fly-delete">删除</a></p>
-          </li>
-          <li data-id="123">
-            <blockquote class="layui-elem-quote">
-              系统消息：欢迎使用 layui
-            </blockquote>
-            <p><span>1小时前</span><a href="javascript:;" class="layui-btn layui-btn-small layui-btn-danger fly-delete">删除</a></p>
-          </li>
-        </ul>
-      </div>
-	  </div>-->
 
-  <!--  <fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
-      <legend>简洁风格的Tab</legend>
-    </fieldset>-->
-
-    <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+    <div class="layui-tab layui-tab-brief" lay-filter="">
       <ul class="layui-tab-title">
         <li class="layui-this">评论消息</li>
         <li>系统消息<span class="layui-badge-dot"></span></li>
@@ -60,7 +36,7 @@
           <ul class="jie-row">
             <li>
               <span class="fly-jing">飞翔的小子</span>
-              <a href="#" class="jie-title">评论：你好啊，能数一下吗？</a>
+              <a href="#" class="jie-title">评论：你好啊，能数一下吗？你好啊，能数一下吗？你好啊，能数一下吗？你好啊，能数一下吗？你好啊，能数一下吗？你好啊，能数一下吗？你好啊，能数一下吗？</a>
               <i>1天前</i>
               <em>2018-01-08</em>
             </li>
@@ -74,12 +50,17 @@
         </div>
         <div class="layui-tab-item">
           <ul class="jie-row">
-            <li>
-              <span class="fly-jing">飞翔的小子</span>
-              <a href="#" class="jie-title">评论：你好啊，能数一下吗？</a>
-              <i>1天前</i>
-              <em>2018-01-08</em>
-            </li>
+            <th:block th:if="${not #lists.isEmpty(sysNoticeList)}">
+              <th:block th:each="notice,index:${sysNoticeList}">
+                <li>
+                  <span class="fly-jing">系统消息</span>
+                  <a href="#" class="jie-title" th:text="${notice.noticeTitle}">你收到一条系统消息</a>
+                  <i>更多</i>
+                  <em th:text="${#dates.format(notice.createTime,'yyyy-MM-dd HH:mm:ss')}">2018-01-08</em>
+                </li>
+              </th:block>
+            </th:block>
+
             <li>
               <span class="fly-jing">飞翔的小子</span>
               <a href="#" class="jie-title">评论：你好啊，能数一下吗？</a>
@@ -101,15 +82,6 @@
 <script>
     $(".left-menu").removeClass("layui-this");
     $("#fly-message").addClass("layui-this")
-
-layui.cache.page = 'user';
-layui.cache.user = {
-  username: '游客'
-  ,uid: -1
-  ,avatar: '../../res/images/avatar/00.jpg'
-  ,experience: 83
-  ,sex: '男'
-};
 
     layui.use(['util', 'element', 'layer','upload','form','laytpl','laypage'], function(){
         var $ = layui.jquery;

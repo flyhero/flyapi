@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>用户主页</title>
+    <title th:text="${setInfo.nickName}+'的主页'">用户主页</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="keywords" content="">
     <meta name="description" content="">
@@ -31,7 +31,7 @@
     <div class="layui-row">
         <div class="layui-col-sm6">
             <div class="fly-home">
-                <img src="http://tp4.sinaimg.cn/1345566427/180/5730976522/0" alt="ww">
+                <img src="http://tp4.sinaimg.cn/1345566427/180/5730976522/0" th:src="${setInfo.avatar}" alt="ww">
                 <h1>
                     <span th:text="${setInfo.nickName}"></span>
                     <!--             <i class="iconfont icon-nan"></i>
@@ -75,6 +75,20 @@
 
 
                 <div class="fly-panel leifeng-rank">
+                    <h3 class="fly-panel-title">数据展示</h3>
+
+                    <div class="layui-row">
+                        <div class="layui-col-md5">
+                            <div id="bing" style="width: 100%;height: 300px;border-right: dashed 1px;"></div>
+                        </div>
+                        <div class="layui-col-md7">
+                            <div id="echart" style="width: 100%;height: 300px;"></div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="fly-panel leifeng-rank">
                     <h3 class="fly-panel-title">全部文章</h3>
                     <ul class="jie-row">
                         <li>
@@ -91,32 +105,6 @@
                     </ul>
                     <div class="fly-none" style="min-height: 50px; padding:30px 0; height:auto;"><i
                             style="font-size:14px;">查看更多</i></div>
-
-                </div>
-                <div class="fly-panel leifeng-rank">
-                    <h3 class="fly-panel-title">全部专题</h3>
-                    <!--                    <ul class="jie-row">
-                                            <li>
-                                                <span class="fly-jing">精</span>
-                                                <a href="/jie/{{item.id}}.html" class="jie-title">使用 layui 秒搭后台大布局（基本结构）</a>
-                                                <i>1天前</i>
-                                                <em>1136阅/27答</em>
-                                            </li>
-                                            <li>
-                                                <a href="/jie/{{item.id}}.html" class="jie-title">使用 layui 秒搭后台大布局（基本结构）</a>
-                                                <i>1天前</i>
-                                                <em>1136阅/27答</em>
-                                            </li>
-                                        </ul>-->
-
-                    <div class="layui-row">
-                        <div class="layui-col-md5">
-                            <div id="bing" style="width: 100%;height: 300px;border-right: dashed 1px;"></div>
-                        </div>
-                        <div class="layui-col-md7">
-                            <div id="echart" style="width: 100%;height: 300px;"></div>
-                        </div>
-                    </div>
 
                 </div>
 
@@ -198,10 +186,10 @@
                 <dl>
                     <dd>
                         <i class="iconfont icon-shijian"></i><span
-                            th:text="'注册于：'+${#dates.format(setInfo.createTime, 'yyyy年MM月dd日')}"> 注册于 2015年09月04日</span>
+                            th:text="'注册于：'+${#dates.format(setInfo.createTime, 'yyyy年MM月dd日')}"> 注册于 2016年09月04日</span>
                     </dd>
                     <dd>
-                        <a href="http://layim.layui.com/" target="_blank">个人主页被 5.3k 人浏览</a>
+                        <a href="#" target="_blank">个人主页被 5.3k 人浏览</a>
                     </dd>
                 </dl>
             </div>
@@ -262,17 +250,7 @@ full: true
 
 <th:block th:replace="common/footer::footer"></th:block>
 
-<script src="../../../static/layui/layui.js" th:src="@{${rootPath} + '/static/layui/layui.js'}"></script>
-<script>
-    layui.cache.page = 'user';
-    layui.cache.user = {
-        username: '游客',
-        uid: -1,
-        avatar: '../../../static/images/avatar/00.jpg',
-        experience: 83,
-        sex: '男'
-    };
-</script>
+
 <script th:inline="javascript">
     var actives = [[${activeVos}]];
     var levelVos = [[${levelVos}]];

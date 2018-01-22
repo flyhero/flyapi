@@ -50,6 +50,8 @@ public class UserController extends BaseController {
     private ArticleService articleService;
     @Autowired
     private OpenSourceService openSourceService;
+    @Autowired
+    private NoticeService noticeService;
 
     private Logger logger = LogManager.getLogger(UserController.class);
 
@@ -282,10 +284,9 @@ public class UserController extends BaseController {
     public ModelAndView message(){
         System.out.println("==========user/message");
         UcenterUser currentUser = (UcenterUser)currentUser();
-        List<CmsArticle> articles = articleService.findArticleByUserId(currentUser.getUserId());
-/*        List<CmsComment> comments = commentService.findCommentById();
-        mv.addObject("setInfo",user);*/
-        mv.setViewName("/user/set");
+        List<SysNotice> noticeList = noticeService.findNoticeByUserId(currentUser.getUserId());
+        mv.addObject("sysNoticeList",noticeList);
+        mv.setViewName("/user/message");
         return mv;
     }
 
