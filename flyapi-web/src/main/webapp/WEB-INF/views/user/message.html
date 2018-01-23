@@ -39,7 +39,9 @@
               <th:block th:each="comment,index:${commentVoList}">
                 <li>
                   <span class="fly-jing" th:text="${comment.nickName}">评论人</span>
+                  <a>在</a>
                   <span th:text="${comment.title}">哪篇文章</span>
+                  <a>说：</a>
                   <a href="#" class="jie-title" th:text="${comment.content}">评论内容</a>
                   <em th:text="${#dates.format(comment.createTime,'yyyy-MM-dd HH:mm:ss')}">2018-01-08</em>
                 </li>
@@ -47,12 +49,12 @@
             </th:block>
 
 
-            <li>
+<!--            <li>
               <span class="fly-jing">飞翔的小子</span>
               <a href="#" class="jie-title">评论：你好啊，能数一下吗？</a>
               <i>1天前</i>
               <em>2018-01-08</em>
-            </li>
+            </li>-->
           </ul>
         </div>
         <div class="layui-tab-item">
@@ -68,12 +70,6 @@
               </th:block>
             </th:block>
 
-            <li>
-              <span class="fly-jing">飞翔的小子</span>
-              <a href="#" class="jie-title">评论：你好啊，能数一下吗？</a>
-              <i>1天前</i>
-              <em>2018-01-08</em>
-            </li>
           </ul>
         </div>
       </div>

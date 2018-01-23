@@ -131,7 +131,7 @@
                     <button class="layui-btn layui-btn-normal layui-btn-radius">
                         <i class="fa fa-thumbs-o-up fa-fw" title="回答"></i>喜欢
                     </button>
-                    <button class="layui-btn layui-btn-normal layui-btn-radius">
+                    <button class="layui-btn layui-btn-normal layui-btn-radius" id="report">
                         <i class="fa fa-thumbs-o-up fa-fw" title="回答"></i>举报
                     </button>
                 </div>
@@ -315,12 +315,12 @@
         });
     }
 
-    layui.use(['util', 'element', 'layer','form','laytpl','laypage'], function(){
+    layui.use(['util', 'element','form','layer','laytpl','laypage'], function(){
         var $ = layui.jquery;
-        var layer = layui.layer;
         var util = layui.util;
         var laytpl = layui.laytpl;
         var form = layui.form;  //表单的依赖
+        var layer = layui.layer;
         var laypage = layui.laypage;//分页的依赖
         var element = layui.element;//Tab的切换功能，切换事件监听等，需要依赖element模块
 
@@ -338,7 +338,39 @@
                     alert('点击了bar1')
                 }
             }
+        })
+
+        $('#report').click(function(){
+            layer.open({
+                title: '举报',
+                content: '\n' +
+                '<form class="layui-form" action="">\n' +
+                '  <div class="layui-form-item">\n' +
+                '    <label class="layui-form-label">类型</label>\n' +
+                '    <div class="layui-input-block">\n' +
+                '      <input type="radio" name="sex" value="男" title="政治倾向" checked="">\n' +
+                '      <input type="radio" name="sex" value="女" title="色情">\n' +
+                '      <input type="radio" name="sex" value="禁" title="禁用" disabled="">\n' +
+                '    </div>\n' +
+                '  </div>\n' +
+                '  <div class="layui-form-item layui-form-text">\n' +
+                '    <label class="layui-form-label">备注</label>\n' +
+                '    <div class="layui-input-block">\n' +
+                '      <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input">' +
+                '    </div>\n' +
+                '  </div>\n' +
+                '  <div class="layui-form-item">\n' +
+                '    <div class="layui-input-block">\n' +
+                '      <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>\n' +
+                '      <button type="reset" class="layui-btn layui-btn-primary">重置</button>\n' +
+                '    </div>\n' +
+                '  </div>\n' +
+                '</form>\n' +
+                ' '
+            });
         });
+
+
     });
 
 
