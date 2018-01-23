@@ -46,6 +46,21 @@
     where target_id = #{targetId,jdbcType=BIGINT}
   </select>
 
+  <select id="findCommentByAuthorId" parameterType="java.lang.Long" resultType="com.flyapi.pojo.vo.CommentVo">
+    SELECT c.content,
+          c.create_time createTime,
+          c.is_read isRead,
+          c.user_id userId,
+          c.target_id targetId,
+          c.target_type targetType,
+          u.nick_name nickName,
+		  a.title
+    FROM cms_comment c
+    LEFT JOIN ucenter_user u ON c.user_id =u.user_id
+	LEFT JOIN cms_article a ON c.target_id =a.article_id
+    where c.author_id = #{authorId,jdbcType=BIGINT} AND c.is_delete = 0 AND c.target_type =1
+    ORDER BY c.is_read DESC
+  </select>
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 

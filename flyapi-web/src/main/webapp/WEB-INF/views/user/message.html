@@ -34,12 +34,19 @@
       <div class="layui-tab-content" style="height: 100px;">
         <div class="layui-tab-item layui-show">
           <ul class="jie-row">
-            <li>
-              <span class="fly-jing">飞翔的小子</span>
-              <a href="#" class="jie-title">评论：你好啊，能数一下吗？你好啊，能数一下吗？你好啊，能数一下吗？你好啊，能数一下吗？你好啊，能数一下吗？你好啊，能数一下吗？你好啊，能数一下吗？</a>
-              <i>1天前</i>
-              <em>2018-01-08</em>
-            </li>
+
+            <th:block th:if="${not #lists.isEmpty(commentVoList)}">
+              <th:block th:each="comment,index:${commentVoList}">
+                <li>
+                  <span class="fly-jing" th:text="${comment.nickName}">评论人</span>
+                  <span th:text="${comment.title}">哪篇文章</span>
+                  <a href="#" class="jie-title" th:text="${comment.content}">评论内容</a>
+                  <em th:text="${#dates.format(comment.createTime,'yyyy-MM-dd HH:mm:ss')}">2018-01-08</em>
+                </li>
+              </th:block>
+            </th:block>
+
+
             <li>
               <span class="fly-jing">飞翔的小子</span>
               <a href="#" class="jie-title">评论：你好啊，能数一下吗？</a>

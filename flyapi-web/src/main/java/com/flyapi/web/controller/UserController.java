@@ -16,6 +16,7 @@ import com.flyapi.core.validator.StringValidator;
 import com.flyapi.model.*;
 import com.flyapi.pojo.dto.RegisterDto;
 import com.flyapi.pojo.vo.ActiveVo;
+import com.flyapi.pojo.vo.CommentVo;
 import com.flyapi.pojo.vo.ViewLevelVo;
 import com.flyapi.service.api.*;
 import org.apache.logging.log4j.LogManager;
@@ -285,7 +286,11 @@ public class UserController extends BaseController {
         System.out.println("==========user/message");
         UcenterUser currentUser = (UcenterUser)currentUser();
         List<SysNotice> noticeList = noticeService.findNoticeByUserId(currentUser.getUserId());
+
+        List<CommentVo> commentVoList = commentService.findCommentByAuthorId(currentUser.getUserId());
+
         mv.addObject("sysNoticeList",noticeList);
+        mv.addObject("commentVoList",commentVoList);
         mv.setViewName("/user/message");
         return mv;
     }
