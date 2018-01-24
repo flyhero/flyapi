@@ -58,9 +58,9 @@
                         <span class="iconfont" th:text="'阅读 ' +${detailVo.article.viewNum}">阅读 200</span>
                         <span class="iconfont" th:text="'评论 ' +${detailVo.article.commentNum}">评论 200</span>
                         <span class="iconfont" th:text="'喜欢 ' +${detailVo.article.likeNum}">喜欢 200</span>
-                        <span class="layui-btn layui-btn-mini jie-admin " type="collect" data-type="add">收藏</span>
+                        <span class="layui-btn layui-btn-xs jie-admin " type="collect" data-type="add">收藏</span>
 
-                        <a href="detail.html"> <span class="layui-btn layui-btn-mini layui-btn-normal">阅读原文</span></a>
+                        <a href="detail.html"> <span class="layui-btn layui-btn-xs layui-btn-normal">阅读原文</span></a>
 
                     </div>
                 </div>
@@ -315,10 +315,8 @@
         });
     }
 
-    layui.use(['util', 'element','form','layer','laytpl','laypage'], function(){
-        var $ = layui.jquery;
+    layui.use(['util', 'element','form','layer','laypage'], function(){
         var util = layui.util;
-        var laytpl = layui.laytpl;
         var form = layui.form;  //表单的依赖
         var layer = layui.layer;
         var laypage = layui.laypage;//分页的依赖
@@ -346,17 +344,17 @@
                 content: '\n' +
                 '<form class="layui-form" action="">\n' +
                 '  <div class="layui-form-item">\n' +
-                '    <label class="layui-form-label">类型</label>\n' +
-                '    <div class="layui-input-block">\n' +
+                '    <label class="layui-form-label" style="width: 30px">类型</label>\n' +
+                '    <div class="layui-input-block" style="margin-left:68px">\n' +
                 '      <input type="radio" name="sex" value="男" title="政治倾向" checked="">\n' +
                 '      <input type="radio" name="sex" value="女" title="色情">\n' +
                 '      <input type="radio" name="sex" value="禁" title="禁用" disabled="">\n' +
                 '    </div>\n' +
                 '  </div>\n' +
                 '  <div class="layui-form-item layui-form-text">\n' +
-                '    <label class="layui-form-label">备注</label>\n' +
-                '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input">' +
+                '    <label class="layui-form-label" style="width: 30px">备注</label>\n' +
+                '    <div class="layui-input-block" style="margin-left:68px">\n' +
+                '      <input id="tt" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input">' +
                 '    </div>\n' +
                 '  </div>\n' +
                 '  <div class="layui-form-item">\n' +
@@ -365,8 +363,13 @@
                 '      <button type="reset" class="layui-btn layui-btn-primary">重置</button>\n' +
                 '    </div>\n' +
                 '  </div>\n' +
-                '</form>\n' +
-                ' '
+                '</form>\n',
+              yes: function(index, layero){
+                  //do something
+                  var a = $("#tt").val();
+                  layer.msg(a);
+                  layer.close(index); //如果设定了yes回调，需进行手工关闭
+              }
             });
         });
 
