@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="../../static/editor/css/editormd.preview.css"
           th:href="@{${rootPath} + '/static/editor/css/editormd.preview.css'}"/>
     <th:block th:include="common/link::link"></th:block>
-
+    <link href="https://cdn.bootcss.com/KaTeX/0.9.0-beta/katex.min.css" rel="stylesheet">
 </head>
 <body>
 <style>
@@ -322,6 +322,10 @@
         var laypage = layui.laypage;//分页的依赖
         var element = layui.element;//Tab的切换功能，切换事件监听等，需要依赖element模块
 
+        form.on('radio', function(data){
+            console.log(data);
+        });
+
         //监听折叠
         element.on('collapse(test)', function (data) {
             layer.msg('展开状态：' + data.show);
@@ -339,39 +343,49 @@
         })
 
         $('#report').click(function(){
-            layer.open({
+            var index = layer.open({
                 title: '举报',
+                type: 1,
+                skin: 'layui-layer-demo', //样式类名
+                closeBtn: 1, //不显示关闭按钮
+                anim: 2,
+                shadeClose: true, //开启遮罩关闭
                 content: '\n' +
                 '<form class="layui-form" action="">\n' +
                 '  <div class="layui-form-item">\n' +
                 '    <label class="layui-form-label" style="width: 30px">类型</label>\n' +
                 '    <div class="layui-input-block" style="margin-left:68px">\n' +
-                '      <input type="radio" name="sex" value="男" title="政治倾向" checked="">\n' +
-                '      <input type="radio" name="sex" value="女" title="色情">\n' +
-                '      <input type="radio" name="sex" value="禁" title="禁用" disabled="">\n' +
+                '      <input type="radio" name="reportReason" value="1" title="抄袭侵权" checked="">\n' +
+                '      <input type="radio" name="reportReason" value="2" title="色情词汇">\n' +
+                '      <input type="radio" name="reportReason" value="3" title="政治倾向">\n' +
+                '      <input type="radio" name="reportReason" value="4" title="偏激言辞">\n' +
                 '    </div>\n' +
                 '  </div>\n' +
                 '  <div class="layui-form-item layui-form-text">\n' +
                 '    <label class="layui-form-label" style="width: 30px">备注</label>\n' +
                 '    <div class="layui-input-block" style="margin-left:68px">\n' +
-                '      <input id="tt" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input">' +
+                '      <input id="remarks" type="text" name="remarks" lay-verify="title" autocomplete="off" placeholder="抄袭网址或关键词" class="layui-input">' +
                 '    </div>\n' +
                 '  </div>\n' +
                 '  <div class="layui-form-item">\n' +
-                '    <div class="layui-input-block">\n' +
-                '      <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>\n' +
-                '      <button type="reset" class="layui-btn layui-btn-primary">重置</button>\n' +
+                '    <div class="layui-input-block" style="margin-left:68px">\n' +
+                '      <button class="layui-btn" lay-submit="" lay-filter="*">立即提交</button>\n' +
                 '    </div>\n' +
                 '  </div>\n' +
                 '</form>\n',
-              yes: function(index, layero){
-                  //do something
-                  var a = $("#tt").val();
-                  layer.msg(a);
-                  layer.close(index); //如果设定了yes回调，需进行手工关闭
-              }
             });
+            form.render('radio'); //刷新select选择框渲染
+            form.on('submit(*)', function(data){
+                console.log(data.field) //当前容器的全部表单字段，名值对形式：{name: value}
+                $.post("",data.field,function(){
+
+                });
+                layer.close(index);
+                return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+            });
+
         });
+
 
 
     });
