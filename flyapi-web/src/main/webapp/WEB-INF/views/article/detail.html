@@ -342,6 +342,8 @@
             }
         })
 
+        var targetId = '[[${detailVo.article.articleId}]]';
+
         $('#report').click(function(){
             var index = layer.open({
                 title: '举报',
@@ -367,6 +369,8 @@
                 '      <input id="remarks" type="text" name="remarks" lay-verify="title" autocomplete="off" placeholder="抄袭网址或关键词" class="layui-input">' +
                 '    </div>\n' +
                 '  </div>\n' +
+                '<input type="hidden" name="targetId" value="'+targetId+'">'+
+                '<input type="hidden" name="reportType" value="1">'+
                 '  <div class="layui-form-item">\n' +
                 '    <div class="layui-input-block" style="margin-left:68px">\n' +
                 '      <button class="layui-btn" lay-submit="" lay-filter="*">立即提交</button>\n' +
@@ -377,8 +381,9 @@
             form.render('radio'); //刷新select选择框渲染
             form.on('submit(*)', function(data){
                 console.log(data.field) //当前容器的全部表单字段，名值对形式：{name: value}
-                $.post("",data.field,function(){
-
+                $.post("../../report/article",data.field,function(result){
+                    console.log(result.code);
+                    layer.msg(result.msg);
                 });
                 layer.close(index);
                 return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
