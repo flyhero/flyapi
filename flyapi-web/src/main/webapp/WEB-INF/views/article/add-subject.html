@@ -7,102 +7,103 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="keywords" content="">
   <meta name="description" content="">
-  <link rel="stylesheet" href="../../res/layui/css/layui.css" th:href="@{${rootPath} + '/static/layui/css/layui.css'}">
-  <link rel="stylesheet" href="../../res/css/global.css" th:href="@{${rootPath} + '/static/css/global.css'}">
-  <link rel="stylesheet" href="../../res/editor/css/editormd.css" th:href="@{${rootPath} + '/static/editor/css/editormd.css'}"/>
-  <script src="../../res/js/jquery.min.js" th:src="@{${rootPath} + '/static/js/jquery.min.js'}"></script>
+  <th:block th:include="common/link::link"></th:block>
 </head>
 <body>
+<div class="header">
+  <th:block th:include="common/header::header"></th:block>
+</div>
 
-
-<div class="main layui-clear">
-  <div class="fly-panel" pad20>
-    <h2 class="page-title">发表/编辑专题</h2>
-
-<!--     <div class="fly-none">并无权限</div>-->
-
-    <div class="layui-form layui-form-pane">
-      <form class="layui-form">
+<div class="layui-container">
+  <div class="fly-panel">
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+      <legend>新建/编辑主题</legend>
+    </fieldset>
+      <form class="layui-form layui-form-pane1" action="">
         <div class="layui-form-item">
-        <div class="layui-inline">
-          <label for="1" class="layui-form-label">标题</label>
+          <label class="layui-form-label">主题</label>
           <div class="layui-input-block">
-            <input  type="text" id="1" name="title" required lay-verify="required" autocomplete="off" class="layui-input">
+            <input type="text" name="title" lay-verify="required|title" required placeholder="请输入主题" autocomplete="off" class="layui-input">
           </div>
         </div>
-        <div class="layui-inline">
-<!--          <label class="layui-form-label">权限</label>-->
-
+        <div class="layui-form-item" pane>
+          <label class="layui-form-label">权限</label>
           <div class="layui-input-block">
-            <input  value="0" type="checkbox" id="switch" name="switch" lay-filter="permissions" lay-skin="switch" lay-text="公开|私有" checked>
-
+            <input type="checkbox" checked name="open" lay-skin="switch" lay-filter="switchTest" lay-text="公开|私密">
           </div>
         </div>
+        <div class="layui-form-item" pane>
+          <label class="layui-form-label">封面</label>
+          <div class="layui-input-block">
+            <input type="radio" name="coverType" value="0" title="自动生成" checked>
+            <input type="radio" name="coverType" value="1" title="上传" >
+          </div>
         </div>
-      <div class="layui-form-item">
-        <label for="2" class="layui-form-label">描述</label>
-        <div class="layui-input-block">
-          <input type="text" id="2" name="des" required placeholder="让别人对你的文章更感兴趣" lay-verify="required" autocomplete="off" class="layui-input">
+        <div class="layui-form-item" pane>
+          <label class="layui-form-label">图片</label>
+          <div class="layui-input-block">
+            <div class="layui-upload-drag" id="test10">
+              <i class="layui-icon"></i>
+              <p>点击上传，或将文件拖拽到此处</p>
+            </div>
+          </div>
         </div>
-      </div>
-
+        <div class="layui-form-item layui-form-text">
+          <label class="layui-form-label">简介</label>
+          <div class="layui-input-block">
+            <textarea placeholder="请输入内容" class="layui-textarea"></textarea>
+          </div>
+        </div>
         <div class="layui-form-item">
-          <input name="file" class="layui-upload-file" lay-title="添加封面" type="file">
-        </div>
-        <div class="layui-form-item">
-          <button class="layui-btn" lay-filter="*" lay-submit>创建</button>
+          <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="*">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+          </div>
         </div>
       </form>
-    </div>
   </div>
 </div>
 
 
-<script type="text/javascript">
+<script src="../src/layui.js" th:src="@{${rootPath} + '/static/layui/layui.js'}"></script>
 
-    $(function() {
-        layui.use('form', function(){
-            var form = layui.form();
-
-            //各种基于事件的操作，下面会有进一步介绍
-            form.on('switch(permissions)', function(data){
-                if(data.elem.checked){
-                    $("#switch").val(0);
-                }else {
-                    $("#switch").val(1);
-                }
-/*                console.log(data.elem); //得到checkbox原始DOM对象
-                console.log(data.elem.checked); //开关是否开启，true或者false
-                console.log(data.value); //开关value值，也可以通过data.elem.value得到
-                console.log(data.othis); //得到美化后的DOM对象*/
-            });
-
-        });
-    });
-
-</script>
-
-<script src="../../../static/layui/layui.js" th:src="@{${rootPath} + '/static/layui/layui.js'}"></script>
 <script>
-    layui.use('upload', function(){
-        layui.upload({
-            url: '' //上传接口
-            ,success: function(res){ //上传成功后的回调
+
+    layui.use(['form','upload'], function(){
+        var form = layui.form;
+        var upload = layui.upload;
+        //自定义验证规则
+        form.verify({
+            title: function(value){
+                if(value.length < 5){
+                    return '主题也太短了吧';
+                }
+            }
+        });
+
+        form.on('switch', function(data){
+            console.log(data);
+        });
+
+        //监听提交
+        form.on('submit(*)', function(data){
+            console.log(data)
+            return false;
+        });
+
+
+        //拖拽上传
+        upload.render({
+            elem: '#test10'
+            ,url: '/upload/'
+            ,done: function(res){
                 console.log(res)
             }
         });
 
-        layui.upload({
-            url: '/test/upload.json'
-            ,elem: '#test' //指定原始元素，默认直接查找class="layui-upload-file"
-            ,method: 'get' //上传接口的http类型
-            ,success: function(res){
-                LAY_demo_upload.src = res.url;
-            }
-        });
     });
-</script>
 
+</script>
 
 </body>
 </html>

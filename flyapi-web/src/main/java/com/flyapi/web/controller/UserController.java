@@ -53,6 +53,8 @@ public class UserController extends BaseController {
     private OpenSourceService openSourceService;
     @Autowired
     private NoticeService noticeService;
+    @Autowired
+    private SubjectService subjectService;
 
     private Logger logger = LogManager.getLogger(UserController.class);
 
@@ -295,6 +297,27 @@ public class UserController extends BaseController {
         return mv;
     }
 
+    /**
+     *
+     * @title: userIndex
+     * @author flyhero <http://www.iflyapi.cn>
+     * @param
+     * @return org.springframework.web.servlet.ModelAndView
+     * @date 2018/1/30 上午12:10
+     */
+    @GetMapping("index")
+    public ModelAndView userIndex(){
+        UcenterUser currentUser = (UcenterUser)currentUser();
+        List<CmsSubject> subjectList =null;
+        try {
+            subjectList = subjectService.findUserSubject(currentUser.getUserId());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        mv.addObject("subjectList",subjectList);
+        mv.setViewName("/user/index");
+        return mv;
+    }
 
     @GetMapping("{userId}")
     public ModelAndView space(@PathVariable Long userId){
