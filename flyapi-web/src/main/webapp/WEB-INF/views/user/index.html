@@ -7,7 +7,75 @@
     <meta name="keywords" content="">
     <meta name="description" content="">
     <th:block th:include="common/link::link"></th:block>
+    <style>
 
+        .subject-list {
+            margin-top: 15px;
+            font-size: 0;
+        }
+
+        .subject-list li,
+        .layer-ext-ul li {
+            display: inline-block;
+            vertical-align: middle;
+            *display: inline;
+            *zoom: 1;
+            font-size: 14px;
+            background-color: hsl(0, 0%, 97%);
+        }
+
+        .subject-list {
+            width: 110%;
+        }
+
+        .subject-list li {
+            width: 100px;
+            border-radius: 5px;
+            margin: 0 15px 15px 0;
+        }
+
+        .subject-list li:hover {
+            box-shadow: 1px 1px 5px rgba(0, 0, 0, .1);
+        }
+
+        .subject-img {
+            position: relative;
+            display: block;
+        }
+
+        .subject-img img {
+            width: 100px;
+            height: 140px;
+        }
+
+        .subject-list li h2 {
+            padding: 10px 0 5px;
+            line-height: 22px;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        .subject-list li h3 {
+            padding: 10px 0 5px;
+            line-height: 22px;
+            font-size: 16px;
+            text-align: center;
+        }
+
+
+        .subject-info p {
+            height: 24px;
+            line-height: 24px;
+        }
+
+
+        .fly-case-user img {
+            width: 35px;
+            height: 35px;
+            border-radius: 100%;
+        }
+
+    </style>
 </head>
 <body>
 <div class="header">
@@ -35,18 +103,17 @@
                 <li data-type="collection" data-url="/collection/find/" lay-id="collection">我的收藏（<span id="collection-count">0</span>）</li>
                 <li data-type="collection" data-url="/like/find/" lay-id="collection">我的喜欢（<span id="like-count">0</span>）</li>
             </ul>
-            <div class="layui-tab-content" style="padding: 20px 0;">
+            <div class="layui-tab-content" >
                 <div class="layui-tab-item layui-show">
-
-                    <a href="../user/go?html=user/update-sub.html" target="_blank" class="layui-btn layui-btn-radius">创建专题</a>
-                    <hr class="layui-bg-red">
-
-                    <ul class="mine-view jie-row" id="userSubject">
+                    <ul class="subject-list" id="userSubject">
                         <li>
-                            <a class="jie-title" href="/jie/8116.html" target="_blank">LayIM 3.5.0 发布，移动端版本大更新（带演示图）</a>
-                            <i>2017/3/14 上午8:30:00</i>
-                            <a class="mine-edit" href="/jie/edit/8116">编辑</a>
-                            <em>661阅/10答</em>
+                            <a class="subject-img" href="#" target="_blank">
+                                <img src="https://user-gold-cdn.xitu.io/2017/12/18/160691fc2995dbf9?imageView2/1/w/200/h/280/q/95/format/webp/interlace/1"  alt="">
+                            </a>
+                            <div style="margin-top: 5px;">
+                                <a class="layui-btn layui-btn-xs layui-btn-primary" style="margin-left: 5px">编辑</a>
+                                <a class="layui-btn layui-btn-xs layui-btn-primary" >预览</a>
+                            </div>
                         </li>
                     </ul>
                     <div id="LAY_page"></div>

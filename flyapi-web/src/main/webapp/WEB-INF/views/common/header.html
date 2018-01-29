@@ -12,7 +12,7 @@
             <a id="subject" href="../forward/go?html=article/ebook" th:href="@{${rootPath} + '/forward/go?html=article/ebook'}" >
                 <i class="fa fa-map-o fa-fw"></i>主题
             </a>
-            <a id="book" href="../forward/go?html=book/index" th:href="@{${rootPath} + '/forward/go?html=book/index'}">
+<!--            <a id="book" href="../forward/go?html=book/index" th:href="@{${rootPath} + '/forward/go?html=book/index'}">
                 <i class="fa fa-book fa-fw"></i>易书
             </a>
             <a  data-dropdown="#dropdown-other">
@@ -22,10 +22,10 @@
                 <ul>
                     <li><a href="#">理财</a></li>
                     <li><a href="#">数字货币</a></li>
-                    <!--<li class="divider"></li>-->
+                    &lt;!&ndash;<li class="divider"></li>&ndash;&gt;
                     <li><a href="#">反馈</a></li>
                 </ul>
-            </div>
+            </div>-->
         </div>
 
         <div id="login-state">
@@ -39,7 +39,8 @@
             </span>-->
         </div>
         <div class="flyhero-user" th:unless="${session.user} == null">
-            <button class="layui-btn layui-btn-normal layui-btn-radius" style="float: left; margin-top: 12px">发表电书</button>
+            <a class="layui-btn layui-btn-normal layui-btn-radius" style="float: left; margin-top: 12px">写文章</a>
+            <button class="layui-btn layui-btn-normal layui-btn-radius" style="float: left; margin-top: 12px;margin-right: 10px">出主题</button>
             <div class="user-hover" style="width: 80px;height: 65px; float: right " data-dropdown="#dropdown-standard">
                 <a class="avatar dropdown" href="">
                     <img src="../static/images/avatar/flyhero.jpg" th:src="@{${session.user.avatar}}">

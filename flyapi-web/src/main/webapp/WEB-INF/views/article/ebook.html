@@ -65,7 +65,7 @@
                                     <ul style="padding: 0;">
                                         <li class="list-msg">
                                             <a href="#">
-                                                <span class="layui-btn layui-btn-mini layui-btn-normal">订阅本书</span>
+                                                <span class="layui-btn layui-btn-xs layui-btn-normal">订阅本书</span>
                                             </a>
                                             <span aria-hidden="true" style="margin-left: 8px;">已有1002人订阅</span>
                                             <span aria-hidden="true" style="margin-left: 5px;"><i class="fa fa-eye fa-fw" title="阅读"></i> 271</span>
@@ -116,6 +116,8 @@
 <th:block th:replace="common/footer::footer"></th:block>
 
 <script th:inline="javascript">
+
+    var host = [[${rootPath}]];
 
     $(function () {
         $(".nav a").removeClass("nav-this");
@@ -190,7 +192,7 @@
                                         '                                     style="margin-top: 10px; overflow: hidden;white-space: nowrap; display: flex">\n' +
                                         '                                    <ul style="padding: 0;">\n' +
                                         '                                        <li class="list-user">\n' +
-                                        '                                            <a href="#" target="_blank">\n' +
+                                        '                                            <a href="'+host+'/user/'+simple.ucenterUser.userId+'" target="_blank">\n' +
                                         '                                                <img src="' + simple.ucenterUser.avatar + '">\n' +
                                         '                                                <span>' + simple.ucenterUser.nickName + '</span>\n' +
                                         '                                            </a>\n' +
@@ -203,9 +205,9 @@
                                         '                                        <li class="list-msg">\n' +
                                         '                                            <a href="#">\n' );
                                     if(simple.rss){
-                                        lis.push('<span class="layui-btn layui-btn-mini layui-btn-normal">已订阅</span>');
+                                        lis.push('<span class="layui-btn layui-btn-xs layui-btn-normal">已订阅</span>');
                                     }else {
-                                        lis.push('<span class="layui-btn layui-btn-mini layui-btn-normal">订阅本书</span>');
+                                        lis.push('<span class="layui-btn layui-btn-xs layui-btn-normal">订阅本书</span>');
                                     }
                                     lis.push('</a>\n' +
                                         '                                            <span aria-hidden="true" style="margin-left: 8px;">已有' + simple.rssNum + '人订阅</span>\n' +
