@@ -14,8 +14,7 @@
             font-size: 0;
         }
 
-        .subject-list li,
-        .layer-ext-ul li {
+        .subject-list li{
             display: inline-block;
             vertical-align: middle;
             *display: inline;
@@ -48,32 +47,6 @@
             height: 140px;
         }
 
-        .subject-list li h2 {
-            padding: 10px 0 5px;
-            line-height: 22px;
-            font-size: 18px;
-            text-align: center;
-        }
-
-        .subject-list li h3 {
-            padding: 10px 0 5px;
-            line-height: 22px;
-            font-size: 16px;
-            text-align: center;
-        }
-
-
-        .subject-info p {
-            height: 24px;
-            line-height: 24px;
-        }
-
-
-        .fly-case-user img {
-            width: 35px;
-            height: 35px;
-            border-radius: 100%;
-        }
 
     </style>
 </head>
@@ -106,7 +79,7 @@
             <div class="layui-tab-content" >
                 <div class="layui-tab-item layui-show">
                     <ul class="subject-list" id="userSubject">
-                        <li>
+               <!--         <li>
                             <a class="subject-img" href="#" title="点击预览">
                                 <img src="https://user-gold-cdn.xitu.io/2017/12/18/160691fc2995dbf9?imageView2/1/w/200/h/280/q/95/format/webp/interlace/1"  alt="">
                             </a>
@@ -114,7 +87,7 @@
                                 <a class="layui-btn layui-btn-xs layui-btn-primary" style="margin-left: 5px">编辑</a>
                                 <a class="layui-btn layui-btn-xs layui-btn-primary" >删除</a>
                             </div>
-                        </li>
+                        </li>-->
 
                         <th:block th:if="${not #lists.isEmpty(subjectList)}">
                             <th:block th:each="subject,index:${subjectList}">
@@ -171,16 +144,6 @@
     $("li").removeClass("layui-this");
     $("#fly-center").addClass("layui-this")
 
-    layui.cache.page = 'user';
-    layui.cache.user = {
-        username: '游客'
-        , uid: -1
-        , avatar: '../../static/images/avatar/00.jpg'
-        , experience: 83
-        , sex: '男'
-    };
-
-
     layui.use(['util', 'element', 'layer','upload','form','laytpl','laypage'], function(){
         var $ = layui.jquery;
         var layer = layui.layer;
@@ -188,7 +151,6 @@
         var laytpl = layui.laytpl;
         var form = layui.form;
         var laypage = layui.laypage;
-       // var fly = layui.fly;
         var element = layui.element;//Tab的切换功能，切换事件监听等，需要依赖element模块
     });
 

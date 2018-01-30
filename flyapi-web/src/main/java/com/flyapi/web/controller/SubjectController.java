@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.security.auth.Subject;
 import java.util.List;
 
 /**
@@ -33,6 +34,25 @@ public class SubjectController extends BaseController{
     private Logger logger = LogManager.getLogger(SubjectController.class);
     @Autowired
     private SubjectService subjectService;
+
+
+    /**
+     * 前往主题编辑页
+     * @title: editSubject
+     * @author flyhero <http://www.iflyapi.cn>
+     * @param subjectId
+     * @return org.springframework.web.servlet.ModelAndView
+     * @date 2018/1/30 下午11:13
+     */
+    @GetMapping("{subjectId}")
+    public ModelAndView editSubject(@PathVariable Long subjectId){
+        CmsSubject subject = subjectService.selectByPrimaryKey(subjectId);
+        mv.addObject("subject",subject);
+        mv.setViewName("article/add-subject");
+        return mv;
+    }
+
+
     /**
      * Title: findSubjectList
      * params: [subjectDto]
