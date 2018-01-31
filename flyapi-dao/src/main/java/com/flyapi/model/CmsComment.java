@@ -50,6 +50,8 @@ public class CmsComment implements Serializable {
      */
     private String content;
 
+    private UcenterUser ucenterUser;
+
     private List<CmsReply> cmsReplyList;
 
     private static final long serialVersionUID = 1L;
@@ -132,6 +134,14 @@ public class CmsComment implements Serializable {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public UcenterUser getUcenterUser() {
+        return ucenterUser;
+    }
+
+    public void setUcenterUser(UcenterUser ucenterUser) {
+        this.ucenterUser = ucenterUser;
     }
 
     public List<CmsReply> getCmsReplyList() {

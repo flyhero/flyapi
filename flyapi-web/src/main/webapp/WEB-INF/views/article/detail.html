@@ -151,8 +151,8 @@
                                 <div class="layui-colla-item">
                                     <div class="layui-colla-title">
                                         <div style="float:left; text-align:left" class="comment-user">
-                                            <img style="width: 40px;height: 40px;" src="" alt=""/>
-                                            <a href="../add-subject.html" target="_blank">flyhero</a>
+                                            <img style="width: 40px;height: 40px;" src="" th:src="${comment.ucenterUser.avatar}"/>
+                                            <a href="../add-subject.html" target="_blank" th:text="${comment.ucenterUser.nickName}">flyhero</a>
                                             <input type="hidden" value=""/>
                                         </div>
                                         <div style="float:right; text-align:right">
@@ -170,8 +170,8 @@
                                                     <div class="layui-colla-item">
                                                         <div class="layui-colla-title">
                                                             <div style="float:left; text-align:left">
-                                                                <img style="width: 40px;height: 40px;" th:src="" src="http://tp4.sinaimg.cn/1345566427/180/5730976522/0" alt=""/>
-                                                                <a href="../add-subject.html" target="_blank">flyhero</a>
+                                                                <img style="width: 40px;height: 40px;" th:src="${reply.fromUser.avatar}"  src="http://tp4.sinaimg.cn/1345566427/180/5730976522/0" alt=""/>
+                                                                <a href="../add-subject.html" target="_blank" th:text="${reply.fromUser.nickName}">flyhero</a>
                                                             </div>
                                                             <div style="float:right; text-align:right">
                                                                 <span class="layui-badge layui-bg-gray"

@@ -39,8 +39,8 @@
             </span>-->
         </div>
         <div class="flyhero-user" th:unless="${session.user} == null">
-            <a class="layui-btn layui-btn-normal layui-btn-radius" style="float: left; margin-top: 12px">写文章</a>
-            <button class="layui-btn layui-btn-normal layui-btn-radius" style="float: left; margin-top: 12px;margin-right: 10px">出主题</button>
+            <a th:href="@{${rootPath} + '/article/123456'}" class="layui-btn layui-btn-normal layui-btn-radius" style="float: left; margin-top: 12px">写文章</a>
+            <a th:href="@{${rootPath} + '/subject/123456'}" class="layui-btn layui-btn-normal layui-btn-radius" style="float: left; margin-top: 12px;margin-right: 10px">出主题</a>
             <div class="user-hover" style="width: 80px;height: 65px; float: right " data-dropdown="#dropdown-standard">
                 <a class="avatar dropdown" href="">
                     <img src="../static/images/avatar/flyhero.jpg" th:src="@{${session.user.avatar}}">
@@ -51,7 +51,7 @@
                 <ul>
                     <li><a href="../forword/go?html=/user/home" th:href="@{${rootPath} + '/user/'+${session.user.userId}}">主页</a></li>
                     <li><a href="../forword/go?html=/user/set" th:href="@{${rootPath} + '/user/set'}">设置</a></li>
-                    <li><a href="../user/logout">退出</a></li>
+                    <li><a href="../user/logout" th:href="@{${rootPath} + '/user/logout'}">退出</a></li>
                     <!--<li class="divider"></li>-->
                 </ul>
             </div>

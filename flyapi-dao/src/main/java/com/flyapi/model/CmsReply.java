@@ -47,6 +47,8 @@ public class CmsReply implements Serializable {
      */
     private Date createTime;
 
+    private UcenterUser fromUser;
+
     private static final long serialVersionUID = 1L;
 
     public Long getReplyId() {
@@ -111,5 +113,13 @@ public class CmsReply implements Serializable {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public UcenterUser getFromUser() {
+        return fromUser;
+    }
+
+    public void setFromUser(UcenterUser fromUser) {
+        this.fromUser = fromUser;
     }
 }

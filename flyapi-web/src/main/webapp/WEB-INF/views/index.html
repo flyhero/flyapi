@@ -19,7 +19,7 @@
 <div class="main layui-clear">
     <div class="wrap">
         <div class="content">
-            <div class="fly-tab fly-tab-index">
+<!--            <div class="fly-tab fly-tab-index">
 						<span>
 						  <a href="javascript:void(0)" onclick="homeFn()">首页推荐</a>
 						  <a href="javascript:void(0)" onclick="topicFn()">周刊</a>
@@ -29,7 +29,7 @@
                     <input class="layui-input" autocomplete="off" placeholder="搜索内容，回车跳转" type="text" name="q">
                 </form>
                 <a href="../user/go?html=article/add.html" target="_blank" class="layui-btn jie-add">发布文章</a>
-            </div>
+            </div>-->
 
             <div class="layui-carousel" id="carousel-index">
                 <div carousel-item=""  id="cal-list">
@@ -117,7 +117,7 @@
             <th:block th:if="${not #lists.isEmpty(hotList)}">
                 <th:block th:each="hot,index:${hotList}">
                     <dd>
-                        <span class="fly-badge fly-badge-1" th:text="${index.index}"></span>
+                        <span class="fly-badge" th:class="'fly-badge fly-badge-'+${index.index}" th:text="${index.index+1}"></span>
                         <a href="#" th:href="@{${rootPath} + '/article/detail/'+${hot.articleId}}" th:text="${hot.title}">标题</a>
                         <span><i class="fa fa-eye fa-fw"></i>120</span>
                     </dd>

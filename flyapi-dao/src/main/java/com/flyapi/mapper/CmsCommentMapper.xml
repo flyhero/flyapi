@@ -15,6 +15,7 @@
   </resultMap>
 
   <resultMap extends="BaseResultMap" id="ResultMapWithReply" type="com.flyapi.model.CmsComment">
+    <association property="ucenterUser" column="user_id"  select="findUser"/>
     <collection property="cmsReplyList" column="comment_id" ofType="List" select="getReplyByCommentId"/>
   </resultMap>
 
@@ -27,6 +28,12 @@
     <result column="to_user_id" jdbcType="BIGINT" property="toUserId" />
     <result column="reply_type" jdbcType="TINYINT" property="replyType" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <association property="fromUser" column="from_user_id" select="findUser"/>
+  </resultMap>
+
+  <resultMap id="userInfo" type="com.flyapi.model.UcenterUser">
+    <result column="avatar" jdbcType="VARCHAR" property="avatar" />
+    <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
   </resultMap>
 
   <sql id="Base_Column_List">
@@ -37,6 +44,12 @@
     select *
     from cms_reply
     where comment_id = #{commentId,jdbcType=BIGINT}
+  </select>
+
+  <select id="findUser"  resultMap="userInfo">
+    select *
+    from ucenter_user
+    where user_id = #{userId,jdbcType=BIGINT}
   </select>
 
   <select id="findCommentById" parameterType="java.lang.Long" resultMap="ResultMapWithReply">
