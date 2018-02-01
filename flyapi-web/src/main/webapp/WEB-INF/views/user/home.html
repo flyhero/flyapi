@@ -18,6 +18,10 @@
             width: 600px;
             height: 200px;
         }
+        .top-info {
+            width: 1080px;
+            margin: 0 auto 15px;
+        }
     </style>
 </head>
 
@@ -27,34 +31,27 @@
     <th:block th:include="common/header::header"></th:block>
 </div>
 <div class="layui-fluid">
-
-    <div class="layui-row">
-        <div class="layui-col-sm6">
+<div class="top-info layui-clear">
+    <div class="layui-row ">
+        <div class="layui-col-sm3">
             <div class="fly-home">
                 <img src="http://tp4.sinaimg.cn/1345566427/180/5730976522/0" th:src="${setInfo.avatar}" alt="ww">
-                <h1>
+<!--                <h1>
                     <span th:text="${setInfo.nickName}"></span>
-                    <!--             <i class="iconfont icon-nan"></i>
-                                  <i class="iconfont icon-nv"></i> -->
-
-                    <span style="color:#c00;">（超级码农）</span>
-                    <span style="color:#5FB878;">（活雷锋）</span>
-                    <span>（该号已被封）</span>
-                </h1>
+                </h1>-->
                 <p class="fly-home-info">
                     <i class="iconfont icon-zuichun" title="声望"></i><span style="color: #FF7200;">67206</span>
                     <i class="iconfont icon-chengshi"></i><span th:text="${setInfo.city}">上海</span>
                 </p>
             </div>
 
-            <!--            <div class="layui-col-sm6" >
-                            <div>wwwwww </div>
-                        </div>
-                        <div class="layui-col-sm6">
-                        </div>-->
+        </div>
+        <div class="layui-col-sm4">
+
+            wwwww
 
         </div>
-        <div class="layui-col-sm6">
+        <div class="layui-col-sm5">
 
             <fieldset class="layui-elem-field" style="margin-top: 20px; max-width: 540px;min-height: 150px">
                 <legend>自我宣言</legend>
@@ -65,7 +62,7 @@
 
         </div>
     </div>
-
+</div>
     <div class="main layui-clear">
         <div class="wrap">
             <div class="content">
@@ -160,7 +157,8 @@
                     <th:block th:if="${not #lists.isEmpty(hotArticleList)}">
                         <th:block th:each="hot,index:${hotArticleList}">
                             <dd>
-                                <a href="#" th:href="@{${rootPath} + '/article/detail/'+${hot.articleId}}" th:text="${hot.title}">标题</a>
+                                <a href="#" th:href="@{${rootPath} + '/article/detail/'+${hot.articleId}}"
+                                   th:text="${hot.title}">标题</a>
                                 <span><i class="fa fa-eye fa-fw"></i><span th:text="${hot.viewNum}"></span></span>
                             </dd>
                         </th:block>
@@ -173,8 +171,10 @@
                     <th:block th:if="${not #lists.isEmpty(lastArticleList)}">
                         <th:block th:each="last,index:${lastArticleList}">
                             <dd>
-                                <a href="/#" th:href="@{${rootPath} + '/article/detail/'+${last.articleId}}" th:text="${last.title}">标题</a>
-                                <span><i class="fa fa-clock-o fa-fw"></i> <span th:text="${#dates.format(last.createTime, 'hh:mm')}"></span></span>
+                                <a href="/#" th:href="@{${rootPath} + '/article/detail/'+${last.articleId}}"
+                                   th:text="${last.title}">标题</a>
+                                <span><i class="fa fa-clock-o fa-fw"></i> <span
+                                        th:text="${#dates.format(last.createTime, 'hh:mm')}"></span></span>
                             </dd>
                             </dd>
                         </th:block>
@@ -593,7 +593,7 @@ full: true
     option = {
         title: {
             text: '活跃图',
-          /*  subtext: '数据纯属虚构',*/
+            /*  subtext: '数据纯属虚构',*/
             left: 'center'
         },
         tooltip: {

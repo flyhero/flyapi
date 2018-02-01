@@ -4,13 +4,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>创建/修改专题</title>
-    <link rel="stylesheet" href="../../res/layui/css/layui.css" th:href="@{${rootPath} + '/res/layui/css/layui.css'}">
-    <link rel="stylesheet" href="../../res/css/global.css" th:href="@{${rootPath} + '/res/css/global.css'}">
-    <script src="../res/js/jquery.min.js" th:src="@{${rootPath} + '/res/js/jquery.min.js'}"></script>
-    <link rel="stylesheet" href="../../res/css/dropdown.css" th:href="@{${rootPath} + '/res/css/dropdown.css'}"/>
-    <script src="../../res/js/jquery.sweet-dropdown.min.js"
-            th:src="@{${rootPath} + '/res/js/jquery.sweet-dropdown.min.js'}"></script>
-    <script src="../../res/layui/layui.js" th:src="@{${rootPath} + '/res/layui/layui.js'}"></script>
+    <link rel="stylesheet" href="../../static/layui/css/layui.css" th:href="@{${rootPath} + '/static/layui/css/layui.css'}">
+    <link rel="stylesheet" href="../../static/css/global.css" th:href="@{${rootPath} + '/static/css/global.css'}">
+    <script src="../static/js/jquery.min.js" th:src="@{${rootPath} + '/static/js/jquery.min.js'}"></script>
+    <link rel="stylesheet" href="../../static/css/dropdown.css" th:href="@{${rootPath} + '/static/css/dropdown.css'}"/>
+    <script src="../../static/js/jquery.sweet-dropdown.min.js"
+            th:src="@{${rootPath} + '/static/js/jquery.sweet-dropdown.min.js'}"></script>
+    <script src="../../static/layui/layui.js" th:src="@{${rootPath} + '/static/layui/layui.js'}"></script>
     <style>
         .layui-upload-img {
             width: 92px;
@@ -94,7 +94,7 @@
                 <div class="layui-form-item">
                     <div class="layui-input-block">
                         <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
-                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        <button type="staticet" class="layui-btn layui-btn-primary">重置</button>
                     </div>
                 </div>
             </form>
@@ -150,17 +150,17 @@
             , size: 2048 //限制文件大小，单位 KB
             , before: function (obj) {
                 //预读本地文件示例，不支持ie8
-                obj.preview(function (index, file, result) {
-                    $('#demo1').attr('src', result); //图片链接（base64）
+                obj.preview(function (index, file, staticult) {
+                    $('#demo1').attr('src', staticult); //图片链接（base64）
                 });
             }
-            , done: function (res) {
+            , done: function (static) {
                 //如果上传失败
-                if (res.code > 0) {
+                if (static.code > 0) {
                     return layer.msg('上传失败');
                 }
                 //上传成功
-                layer.msg(res.url);
+                layer.msg(static.url);
             }
             , error: function () {
                 //演示失败状态，并实现重传
