@@ -92,7 +92,7 @@
                         <th:block th:if="${not #lists.isEmpty(subjectList)}">
                             <th:block th:each="subject,index:${subjectList}">
                                 <li>
-                                    <a class="subject-img" href="#" title="点击预览">
+                                    <a class="subject-img" href="#" th:href="@{${rootPath}+'/article/list/'+${subject.subjectId}+'/'+${subject.subjectTitle}}" title="点击查看">
                                         <img th:src="${subject.cover}" src="https://user-gold-cdn.xitu.io/2017/12/18/160691fc2995dbf9?imageView2/1/w/200/h/280/q/95/format/webp/interlace/1"  alt="">
                                     </a>
                                     <div style="margin-top: 5px;">
