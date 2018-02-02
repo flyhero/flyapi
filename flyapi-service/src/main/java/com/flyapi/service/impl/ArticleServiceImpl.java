@@ -101,4 +101,8 @@ public class ArticleServiceImpl extends BaseServiceImpl<CmsArticle,CmsArticleMap
     public List<CmsArticle> findLastUpdateArticlesByUserId(Long userId) {
         return cmsArticleMapper.findLastUpdateArticlesByUserId(userId);
     }
+
+    public CmsArticle findArticleSumBySubjectId(Long subjectId) {
+        return cmsArticleMapper.findArticleSumBySubjectId(subjectId);
+    }
 }

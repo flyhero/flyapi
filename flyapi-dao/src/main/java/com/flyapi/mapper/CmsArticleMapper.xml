@@ -1,46 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.flyapi.dao.CmsArticleMapper">
-  <resultMap id="BaseResultMap" type="com.flyapi.model.CmsArticle">
-    <id column="article_id" jdbcType="BIGINT" property="articleId" />
-    <result column="subject_id" jdbcType="BIGINT" property="subjectId" />
-    <result column="user_id" jdbcType="BIGINT" property="userId" />
-    <result column="title" jdbcType="VARCHAR" property="title" />
-    <result column="article_des" jdbcType="VARCHAR" property="articleDes" />
-    <result column="cover" jdbcType="VARCHAR" property="cover" />
-    <result column="original" jdbcType="VARCHAR" property="original" />
-    <result column="view_num" jdbcType="INTEGER" property="viewNum" />
-    <result column="comment_num" jdbcType="INTEGER" property="commentNum" />
-    <result column="like_num" jdbcType="INTEGER" property="likeNum" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
-    <result column="permissions" jdbcType="TINYINT" property="permissions" />
-    <result column="status" jdbcType="TINYINT" property="status" />
-    <result column="is_delete" jdbcType="TINYINT" property="isDelete" />
-    <result column="md_content" jdbcType="LONGVARCHAR" property="mdContent" />
-    <result column="html_content" jdbcType="LONGVARCHAR" property="htmlContent" />
-  </resultMap>
-  <sql id="Base_Column_List">
+    <resultMap id="BaseResultMap" type="com.flyapi.model.CmsArticle">
+        <id column="article_id" jdbcType="BIGINT" property="articleId"/>
+        <result column="subject_id" jdbcType="BIGINT" property="subjectId"/>
+        <result column="user_id" jdbcType="BIGINT" property="userId"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="article_des" jdbcType="VARCHAR" property="articleDes"/>
+        <result column="cover" jdbcType="VARCHAR" property="cover"/>
+        <result column="original" jdbcType="VARCHAR" property="original"/>
+        <result column="view_num" jdbcType="INTEGER" property="viewNum"/>
+        <result column="comment_num" jdbcType="INTEGER" property="commentNum"/>
+        <result column="like_num" jdbcType="INTEGER" property="likeNum"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="permissions" jdbcType="TINYINT" property="permissions"/>
+        <result column="status" jdbcType="TINYINT" property="status"/>
+        <result column="is_delete" jdbcType="TINYINT" property="isDelete"/>
+        <result column="md_content" jdbcType="LONGVARCHAR" property="mdContent"/>
+        <result column="html_content" jdbcType="LONGVARCHAR" property="htmlContent"/>
+    </resultMap>
+    <sql id="Base_Column_List">
     article_id, subject_id,user_id, title, article_des, cover, original, view_num, comment_num,
     like_num, create_time, update_time, permissions,status, is_delete,md_content, html_content
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from cms_article
-    where article_id = #{articleId,jdbcType=BIGINT}
-  </select>
-  <select id="findViewLevel" parameterType="java.lang.Long" resultType="com.flyapi.pojo.vo.ViewLevelVo">
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from cms_article
+        where article_id = #{articleId,jdbcType=BIGINT}
+    </select>
+    <select id="findViewLevel" parameterType="java.lang.Long" resultType="com.flyapi.pojo.vo.ViewLevelVo">
     select elt(interval(d.view_num,0, 1000, 5000, 10000), '1k-', '1k+', '5k+', '1w+') as name, count(*) as value
     from cms_article d
     WHERE user_id = #{userId}
     group by name
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from cms_article
     where article_id = #{articleId,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.flyapi.model.CmsArticle">
+    <insert id="insert" parameterType="com.flyapi.model.CmsArticle">
     insert into cms_article (article_id, subject_id, title, 
       article_des, cover, original, 
       view_num, comment_num, like_num, 
@@ -54,162 +54,162 @@
       #{isDelete,jdbcType=TINYINT}, #{mdContent,jdbcType=LONGVARCHAR}, #{htmlContent,jdbcType=LONGVARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.flyapi.model.CmsArticle">
-    insert into cms_article
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="articleId != null">
-        article_id,
-      </if>
-      <if test="subjectId != null">
-        subject_id,
-      </if>
-      <if test="title != null">
-        title,
-      </if>
-      <if test="articleDes != null">
-        article_des,
-      </if>
-      <if test="cover != null">
-        cover,
-      </if>
-      <if test="original != null">
-        original,
-      </if>
-      <if test="viewNum != null">
-        view_num,
-      </if>
-      <if test="commentNum != null">
-        comment_num,
-      </if>
-      <if test="likeNum != null">
-        like_num,
-      </if>
-      <if test="createTime != null">
-        create_time,
-      </if>
-      <if test="updateTime != null">
-        update_time,
-      </if>
-      <if test="permissions != null">
-        permissions,
-      </if>
-      <if test="status != null">
-        permissions,
-      </if>
-      <if test="isDelete != null">
-        is_delete,
-      </if>
-      <if test="mdContent != null">
-        md_content,
-      </if>
-      <if test="htmlContent != null">
-        html_content,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="articleId != null">
-        #{articleId,jdbcType=BIGINT},
-      </if>
-      <if test="subjectId != null">
-        #{subjectId,jdbcType=BIGINT},
-      </if>
-      <if test="title != null">
-        #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="articleDes != null">
-        #{articleDes,jdbcType=VARCHAR},
-      </if>
-      <if test="cover != null">
-        #{cover,jdbcType=VARCHAR},
-      </if>
-      <if test="original != null">
-        #{original,jdbcType=VARCHAR},
-      </if>
-      <if test="viewNum != null">
-        #{viewNum,jdbcType=INTEGER},
-      </if>
-      <if test="commentNum != null">
-        #{commentNum,jdbcType=INTEGER},
-      </if>
-      <if test="likeNum != null">
-        #{likeNum,jdbcType=INTEGER},
-      </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null">
-        #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="permissions != null">
-        #{permissions,jdbcType=TINYINT},
-      </if>
-      <if test="status != null">
-        #{status,jdbcType=TINYINT},
-      </if>
-      <if test="isDelete != null">
-        #{isDelete,jdbcType=TINYINT},
-      </if>
-      <if test="mdContent != null">
-        #{mdContent,jdbcType=LONGVARCHAR},
-      </if>
-      <if test="htmlContent != null">
-        #{htmlContent,jdbcType=LONGVARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.flyapi.model.CmsArticle">
-    update cms_article
-    <set>
-      <if test="subjectId != null">
-        subject_id = #{subjectId,jdbcType=BIGINT},
-      </if>
-      <if test="title != null">
-        title = #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="articleDes != null">
-        article_des = #{articleDes,jdbcType=VARCHAR},
-      </if>
-      <if test="cover != null">
-        cover = #{cover,jdbcType=VARCHAR},
-      </if>
-      <if test="original != null">
-        original = #{original,jdbcType=VARCHAR},
-      </if>
-      <if test="viewNum != null">
-        view_num = #{viewNum,jdbcType=INTEGER},
-      </if>
-      <if test="commentNum != null">
-        comment_num = #{commentNum,jdbcType=INTEGER},
-      </if>
-      <if test="likeNum != null">
-        like_num = #{likeNum,jdbcType=INTEGER},
-      </if>
-      <if test="createTime != null">
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null">
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="permissions != null">
-        permissions = #{permissions,jdbcType=TINYINT},
-      </if>
-      <if test="status != null">
-        status = #{status,jdbcType=TINYINT},
-      </if>
-      <if test="isDelete != null">
-        is_delete = #{isDelete,jdbcType=TINYINT},
-      </if>
-      <if test="mdContent != null">
-        md_content = #{mdContent,jdbcType=LONGVARCHAR},
-      </if>
-      <if test="htmlContent != null">
-        html_content = #{htmlContent,jdbcType=LONGVARCHAR},
-      </if>
-    </set>
-    where article_id = #{articleId,jdbcType=BIGINT}
-  </update>
+    <insert id="insertSelective" parameterType="com.flyapi.model.CmsArticle">
+        insert into cms_article
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="articleId != null">
+                article_id,
+            </if>
+            <if test="subjectId != null">
+                subject_id,
+            </if>
+            <if test="title != null">
+                title,
+            </if>
+            <if test="articleDes != null">
+                article_des,
+            </if>
+            <if test="cover != null">
+                cover,
+            </if>
+            <if test="original != null">
+                original,
+            </if>
+            <if test="viewNum != null">
+                view_num,
+            </if>
+            <if test="commentNum != null">
+                comment_num,
+            </if>
+            <if test="likeNum != null">
+                like_num,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="permissions != null">
+                permissions,
+            </if>
+            <if test="status != null">
+                permissions,
+            </if>
+            <if test="isDelete != null">
+                is_delete,
+            </if>
+            <if test="mdContent != null">
+                md_content,
+            </if>
+            <if test="htmlContent != null">
+                html_content,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="articleId != null">
+                #{articleId,jdbcType=BIGINT},
+            </if>
+            <if test="subjectId != null">
+                #{subjectId,jdbcType=BIGINT},
+            </if>
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="articleDes != null">
+                #{articleDes,jdbcType=VARCHAR},
+            </if>
+            <if test="cover != null">
+                #{cover,jdbcType=VARCHAR},
+            </if>
+            <if test="original != null">
+                #{original,jdbcType=VARCHAR},
+            </if>
+            <if test="viewNum != null">
+                #{viewNum,jdbcType=INTEGER},
+            </if>
+            <if test="commentNum != null">
+                #{commentNum,jdbcType=INTEGER},
+            </if>
+            <if test="likeNum != null">
+                #{likeNum,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="permissions != null">
+                #{permissions,jdbcType=TINYINT},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=TINYINT},
+            </if>
+            <if test="isDelete != null">
+                #{isDelete,jdbcType=TINYINT},
+            </if>
+            <if test="mdContent != null">
+                #{mdContent,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="htmlContent != null">
+                #{htmlContent,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.flyapi.model.CmsArticle">
+        update cms_article
+        <set>
+            <if test="subjectId != null">
+                subject_id = #{subjectId,jdbcType=BIGINT},
+            </if>
+            <if test="title != null">
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="articleDes != null">
+                article_des = #{articleDes,jdbcType=VARCHAR},
+            </if>
+            <if test="cover != null">
+                cover = #{cover,jdbcType=VARCHAR},
+            </if>
+            <if test="original != null">
+                original = #{original,jdbcType=VARCHAR},
+            </if>
+            <if test="viewNum != null">
+                view_num = #{viewNum,jdbcType=INTEGER},
+            </if>
+            <if test="commentNum != null">
+                comment_num = #{commentNum,jdbcType=INTEGER},
+            </if>
+            <if test="likeNum != null">
+                like_num = #{likeNum,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="permissions != null">
+                permissions = #{permissions,jdbcType=TINYINT},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=TINYINT},
+            </if>
+            <if test="isDelete != null">
+                is_delete = #{isDelete,jdbcType=TINYINT},
+            </if>
+            <if test="mdContent != null">
+                md_content = #{mdContent,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="htmlContent != null">
+                html_content = #{htmlContent,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where article_id = #{articleId,jdbcType=BIGINT}
+    </update>
 
-  <update id="updateByPrimaryKey" parameterType="com.flyapi.model.CmsArticle">
+    <update id="updateByPrimaryKey" parameterType="com.flyapi.model.CmsArticle">
     update cms_article
     set subject_id = #{subjectId,jdbcType=BIGINT},
       title = #{title,jdbcType=VARCHAR},
@@ -225,22 +225,22 @@
       is_delete = #{isDelete,jdbcType=TINYINT}
     where article_id = #{articleId,jdbcType=BIGINT}
   </update>
-  <update id="updateCommentNumOrLikeNumOrViewNum" parameterType="com.flyapi.model.CmsArticle" >
-    update cms_article
-    <set>
-      <if test="viewNum != null">
-        view_num = view_num + 1,
-      </if>
-      <if test="commentNum != null">
-        comment_num = comment_num + 1,
-      </if>
-      <if test="likeNum != null">
-        like_num = like_num + 1,
-      </if>
-    </set>
-    where article_id = #{articleId,jdbcType=BIGINT}
-  </update>
-  <select id="findArticleSimple" resultType="com.flyapi.pojo.vo.ArticleSimpleVo">
+    <update id="updateCommentNumOrLikeNumOrViewNum" parameterType="com.flyapi.model.CmsArticle">
+        update cms_article
+        <set>
+            <if test="viewNum != null">
+                view_num = view_num + 1,
+            </if>
+            <if test="commentNum != null">
+                comment_num = comment_num + 1,
+            </if>
+            <if test="likeNum != null">
+                like_num = like_num + 1,
+            </if>
+        </set>
+        where article_id = #{articleId,jdbcType=BIGINT}
+    </update>
+    <select id="findArticleSimple" resultType="com.flyapi.pojo.vo.ArticleSimpleVo">
     SELECT
         t.article_id articleId,
         t.article_des articleDes,
@@ -274,72 +274,82 @@
     AND t.is_delete = 0
     ORDER BY t.create_time DESC
   </select>
-  <select id="findLastUpdateOrHotArticles" parameterType="int" resultType="com.flyapi.model.CmsArticle">
-    SELECT
+    <select id="findLastUpdateOrHotArticles" parameterType="int" resultType="com.flyapi.model.CmsArticle">
+        SELECT
         article_id articleId,
         title,
         create_time createTime,
         view_num viewNum
-    FROM
+        FROM
         cms_article
-    WHERE
+        WHERE
         is_delete = 0
-    AND permissions = 0
-    AND status = 1
-    <if test="atype == 1">
-      ORDER BY
-      update_time DESC
-    </if>
-    <if test="atype == 2">
-      ORDER BY
-      view_num DESC
-    </if>
-    LIMIT 6
-  </select>
-  <select id="findArticleListByCount" parameterType="com.flyapi.pojo.dto.SubjectDto" resultType="com.flyapi.model.CmsArticle">
-    SELECT
-      user_id userId,
-      subject_id subjectId,
-      sum(view_num) viewNum,
-      sum(comment_num) commentNum,
-      sum(like_num) likeNum
-    FROM
-      cms_article
-    WHERE
-      is_delete = 0
-      AND permissions = 0
-      AND status = 1
-    GROUP BY subjectId,userId
-    ORDER BY
-    <trim suffixOverrides=",">
-    <if test="view != null and view == 1">
-      viewNum DESC,
-    </if>
-    <if test="like != null and like == 1">
-      likeNum DESC,
-    </if>
-    <if test="comment != null and comment == 1">
-      commentNum DESC,
-    </if>
-    </trim>
-  </select>
-  <select id="findArticleBySubjectId" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from cms_article
-    where subject_id = #{subjectId,jdbcType=BIGINT}
-    ORDER BY create_time
-  </select>
+        AND permissions = 0
+        AND status = 1
+        <if test="atype == 1">
+            ORDER BY
+            update_time DESC
+        </if>
+        <if test="atype == 2">
+            ORDER BY
+            view_num DESC
+        </if>
+        LIMIT 6
+    </select>
+    <select id="findArticleListByCount" parameterType="com.flyapi.pojo.dto.SubjectDto"
+            resultType="com.flyapi.model.CmsArticle">
+        SELECT
+        user_id userId,
+        subject_id subjectId,
+        sum(view_num) viewNum,
+        sum(comment_num) commentNum,
+        sum(like_num) likeNum
+        FROM
+        cms_article
+        WHERE
+        is_delete = 0
+        AND permissions = 0
+        AND status = 1
+        GROUP BY subjectId,userId
+        ORDER BY
+        <trim suffixOverrides=",">
+            <if test="view != null and view == 1">
+                viewNum DESC,
+            </if>
+            <if test="like != null and like == 1">
+                likeNum DESC,
+            </if>
+            <if test="comment != null and comment == 1">
+                commentNum DESC,
+            </if>
+        </trim>
+    </select>
+    <select id="findArticleBySubjectId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from cms_article
+        where subject_id = #{subjectId,jdbcType=BIGINT}
+        ORDER BY create_time
+    </select>
+    <select id="findArticleSumBySubjectId" parameterType="java.lang.Long" resultType="com.flyapi.model.CmsArticle">
+        select
+            subject_id subjectId,
+            sum(view_num) viewNum,
+            sum(comment_num) commentNum,
+            sum(like_num) likeNum
+        from cms_article
+        where subject_id = #{subjectId} AND is_delete = 0 AND permissions = 0 AND status = 1
+        GROUP BY subject_id
+    </select>
+    <select id="findArticleByUserId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from cms_article
+        where user_id = #{userId,jdbcType=BIGINT}
+        ORDER BY create_time DESC
+    </select>
 
-  <select id="findArticleByUserId" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from cms_article
-    where user_id = #{userId,jdbcType=BIGINT}
-    ORDER BY create_time DESC
-  </select>
-
-  <select id="findHotArticlesByUserId" parameterType="java.lang.Long" resultType="com.flyapi.model.CmsArticle">
+    <select id="findHotArticlesByUserId" parameterType="java.lang.Long" resultType="com.flyapi.model.CmsArticle">
     SELECT
       article_id articleId,
       title,
@@ -355,7 +365,7 @@
     ORDER BY view_num DESC
     LIMIT 6
   </select>
-  <select id="findLastUpdateArticlesByUserId" parameterType="java.lang.Long" resultType="com.flyapi.model.CmsArticle">
+    <select id="findLastUpdateArticlesByUserId" parameterType="java.lang.Long" resultType="com.flyapi.model.CmsArticle">
     SELECT
     article_id articleId,
     title,

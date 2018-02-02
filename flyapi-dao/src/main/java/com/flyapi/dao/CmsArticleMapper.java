@@ -32,6 +32,8 @@ public interface CmsArticleMapper {
 
     List<CmsArticle> findArticleBySubjectId(Long subjectId);
 
+    CmsArticle findArticleSumBySubjectId(Long subjectId);
+
     List<CmsArticle> findArticleByUserId(Long userId);
 
     List<ViewLevelVo> findViewLevel(Long userId);

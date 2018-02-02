@@ -125,12 +125,21 @@ public class QiniuController extends BaseController {
 
     @PostMapping("common/upload")
     @ResponseBody
-    public JSONResult commonUpload(@RequestParam(value = "common-image-file", required = false) MultipartFile file) {
+    public JSONResult commonUpload(@RequestParam(value = "file", required = true) MultipartFile file) {
+        UcenterUser user = (UcenterUser)currentUser();
+        if(user == null){
+            return JSONResult.error();
+        }
+        String imgUrl = upload(file,user.getUserId());
+        return JSONResult.ok(imgUrl);
+    }
+
+    public String upload(MultipartFile file,Long userId){
 
         String accessKey = "";
         String secretKey = "";
         String bucket = "";
-        Long userId = 1000000L;
+
         String domain = "";
         String imgUrl = "";
 
@@ -138,7 +147,6 @@ public class QiniuController extends BaseController {
         accessKey = "vDuNp0Z4WtB2boJeLQ_mNXxcCdjnTaUeJ4yWOsWT";
         secretKey = "AEbH11WApJIzQtLag7FouMKZNWS3oeJZX16TYUoD";
         bucket = "flyhero";
-        userId = 1000000L;
         domain = "http://7xv6ov.com1.z0.glb.clouddn.com";
 
         //构造一个带指定Zone对象的配置类
@@ -158,11 +166,9 @@ public class QiniuController extends BaseController {
             try {
                 Response response = uploadManager.put(byteInputStream, key, upToken, null, null);
                 //解析上传成功的结果
-                System.out.println("上传成功的结果:" + response.bodyString());
                 DefaultPutRet putRet = JSON.parseObject(response.bodyString(), DefaultPutRet.class);
                 System.out.println(putRet.key);
                 System.out.println(putRet.hash);
-                System.out.println("访问地址：" + domain + "/" + key);
                 imgUrl = domain + "/" + key;
             } catch (QiniuException ex) {
                 Response r = ex.response;
@@ -178,7 +184,7 @@ public class QiniuController extends BaseController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return JSONResult.ok(imgUrl);
+        return "imgUrl";
     }
 
     public static void main(String[] args) {

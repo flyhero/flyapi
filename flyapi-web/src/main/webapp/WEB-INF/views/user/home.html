@@ -12,12 +12,14 @@
     <script src="http://echarts.baidu.com/resource/echarts-gl-latest/dist/echarts-gl.min.js"></script>
     <script src="../../static/js/jquery.min.js"></script>
     <script src="../../static/echarts//dat.gui.js"></script>
+    <link href="../static/eb/subject.css" rel="stylesheet" type="text/css">
     <style>
         #echart {
             position: absolute;
             width: 600px;
             height: 200px;
         }
+
         .top-info {
             width: 1080px;
             margin: 0 auto 15px;
@@ -31,38 +33,38 @@
     <th:block th:include="common/header::header"></th:block>
 </div>
 <div class="layui-fluid">
-<div class="top-info layui-clear">
-    <div class="layui-row ">
-        <div class="layui-col-sm3">
-            <div class="fly-home">
-                <img src="http://tp4.sinaimg.cn/1345566427/180/5730976522/0" th:src="${setInfo.avatar}" alt="ww">
-<!--                <h1>
-                    <span th:text="${setInfo.nickName}"></span>
-                </h1>-->
-                <p class="fly-home-info">
-                    <i class="iconfont icon-zuichun" title="声望"></i><span style="color: #FF7200;">67206</span>
-                    <i class="iconfont icon-chengshi"></i><span th:text="${setInfo.city}">上海</span>
-                </p>
-            </div>
-
-        </div>
-        <div class="layui-col-sm4">
-
-            wwwww
-
-        </div>
-        <div class="layui-col-sm5">
-
-            <fieldset class="layui-elem-field" style="margin-top: 20px; max-width: 540px;min-height: 150px">
-                <legend>自我宣言</legend>
-                <div class="layui-field-box" th:text="${setInfo.sign}">
-                    我们有一种天生的惰性，总想着吃最少的苦，走最短的弯路，获得最大的收益。但是，很多事情，别人可以替你做却无法替你感受，缺少了这一段心路历程，你即使再成功，精神的田地里依然是一片荒芜。
+    <div class="top-info layui-clear">
+        <div class="layui-row ">
+            <div class="layui-col-sm3">
+                <div class="fly-home">
+                    <img src="http://tp4.sinaimg.cn/1345566427/180/5730976522/0" th:src="${setInfo.avatar}" alt="ww">
+                    <!--                <h1>
+                                        <span th:text="${setInfo.nickName}"></span>
+                                    </h1>-->
+                    <p class="fly-home-info">
+                        <i class="iconfont icon-zuichun" title="声望"></i><span style="color: #FF7200;">67206</span>
+                        <i class="iconfont icon-chengshi"></i><span th:text="${setInfo.city}">上海</span>
+                    </p>
                 </div>
-            </fieldset>
 
+            </div>
+            <div class="layui-col-sm4">
+
+                wwwww
+
+            </div>
+            <div class="layui-col-sm5">
+
+                <fieldset class="layui-elem-field" style="margin-top: 20px; max-width: 540px;min-height: 150px">
+                    <legend>自我宣言</legend>
+                    <div class="layui-field-box" th:text="${setInfo.sign}">
+                        我们有一种天生的惰性，总想着吃最少的苦，走最短的弯路，获得最大的收益。但是，很多事情，别人可以替你做却无法替你感受，缺少了这一段心路历程，你即使再成功，精神的田地里依然是一片荒芜。
+                    </div>
+                </fieldset>
+
+            </div>
         </div>
     </div>
-</div>
     <div class="main layui-clear">
         <div class="wrap">
             <div class="content">
@@ -86,20 +88,56 @@
                 </div>
 
                 <div class="fly-panel leifeng-rank">
-                    <h3 class="fly-panel-title">全部文章</h3>
-                    <ul class="jie-row">
-                        <li>
-                            <span class="fly-jing">精</span>
-                            <a href="/jie/{{item.id}}.html" class="jie-title">使用 layui 秒搭后台大布局（基本结构）</a>
-                            <i>1天前</i>
-                            <em>1136阅/27答</em>
-                        </li>
-                        <li>
-                            <a href="/jie/{{item.id}}.html" class="jie-title">使用 layui 秒搭后台大布局（基本结构）</a>
-                            <i>1天前</i>
-                            <em>1136阅/27答</em>
+                    <h3 class="fly-panel-title">排名主题</h3>
+
+                    <ul class="archive-list"
+                        style="border:none; background:#ffffff;" id="ebook-list">
+
+                        <li class="archive-item" style="display: block;height: 145px; border-bottom: 1px solid #eff2f5">
+                            <a href="#" title="标题">
+                                <div class="covercon">
+                                    <img src="https://user-gold-cdn.xitu.io/2017/12/18/160691fc2995dbf9?imageView2/1/w/200/h/280/q/95/format/webp/interlace/1"
+                                         class="cover imgloadinglater" style="display: block;">
+                                </div>
+                            </a>
+                            <div class="archive-text">
+                                <div class="archive-detail">
+                                    <h3><a href="#" title="文章标题">书籍标题</a></h3>
+                                    <p>他不是别人 他是张国荣 14年前的今天，一颗巨星陨落。他不是别人 他是张国荣 14年前的今天，一颗巨星陨落他不是别人 他是张国荣 14年前的今天，一颗巨星陨落 </p>
+                                    <div class="archive-info clearfix"
+                                         style="margin-top: 10px; overflow: hidden;white-space: nowrap; display: flex">
+                                        <ul style="padding: 0;">
+                                            <li class="list-user">
+                                                <a href="#" target="_blank">
+                                                    <img src="../static/images/avatar/flyhero.jpg">
+                                                    <span>flyero</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+
+                                    </div>
+                                    <div class="archive-info clearfix"
+                                         style="margin-top: 10px; overflow: hidden;white-space: nowrap; display: flex">
+                                        <ul style="padding: 0;">
+                                            <li class="list-msg">
+                                                <a href="#">
+                                                    <span class="layui-btn layui-btn-xs layui-btn-normal">订阅本书</span>
+                                                </a>
+                                                <span aria-hidden="true" style="margin-left: 8px;">已有1002人订阅</span>
+                                                <span aria-hidden="true" style="margin-left: 5px;"><i class="fa fa-eye fa-fw" title="阅读"></i> 271</span>
+                                                <span aria-hidden="true"><i class="fa fa-commenting fa-fw" title="回答"></i> 8</span>
+                                                <span aria-hidden="true"><i class="fa fa-thumbs-o-up fa-fw" title="人气"></i> 106</span>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+
+                                </div>
+                            </div>
                         </li>
                     </ul>
+
+
                     <div class="fly-none" style="min-height: 50px; padding:30px 0; height:auto;"><i
                             style="font-size:14px;">查看更多</i></div>
 
@@ -109,47 +147,32 @@
         </div>
 
         <div class="edge">
-            <div class="fly-panel">
-                <h3 class="fly-panel-title">开源项目</h3>
-                <ul class="jie-row">
-                    <li>
-                        <!--                 white-space:nowrap;
-                                         overflow:hidden;
-                                         text-overflow:ellipsis;-->
-                        <a href="#" class="jie-title">flyapasdhjaskdjasdlasdasjalsai</a>
-                        <em>
-                            <iframe style="margin-left: 1px; margin-bottom:-5px;"
-                                    frameborder="0" scrolling="0" width="80px" height="20px"
-                                    src="https://ghbtns.com/github-btn.html?user=flyhero&repo=flyapi&type=star&count=true">
-                            </iframe>
-                            <iframe frameborder="0" scrolling="0" width="80px" height="20px"
-                                    src="https://ghbtns.com/github-btn.html?user=flyhero&repo=flyapi&type=fork&count=true">
-                            </iframe>
-                        </em>
-
-
-                    </li>
-                    <th:block th:if="${not #lists.isEmpty(sourceList)}">
-                        <th:block th:each="os,index:${sourceList}">
-                            <li>
-                                <a href="#" class="jie-title" th:text="${os.account}">spring-cloud-microservice</a>
-                                <em>
-                                    <iframe style="margin-left: 1px; margin-bottom:-5px;"
-                                            frameborder="0" scrolling="0" width="80px" height="20px"
-                                            th:src="@{'https://ghbtns.com/github-btn.html?user=' + ${os.osName} + '&repo='+ ${os.account}+'&type=star&count=true'}"
-                                            src="https://ghbtns.com/github-btn.html?user=flyhero&repo=spring-cloud-microservice&type=star&count=true">
-                                    </iframe>
-                                    <iframe style="margin-left: 1px; margin-bottom:-5px;"
-                                            frameborder="0" scrolling="0" width="80px" height="20px"
-                                            th:src="@{'https://ghbtns.com/github-btn.html?user=' + ${os.osName} + '&repo='+ ${os.account}+'&type=star&count=true'}"
-                                            src="https://ghbtns.com/github-btn.html?user=flyhero&repo=spring-cloud-microservice&type=fork&count=true">
-                                    </iframe>
-                                </em>
-                            </li>
+            <th:block th:if="${not #lists.isEmpty(sourceList)}">
+                <div class="fly-panel">
+                    <h3 class="fly-panel-title">开源项目</h3>
+                    <ul class="jie-row">
+                        <th:block th:if="${not #lists.isEmpty(sourceList)}">
+                            <th:block th:each="os,index:${sourceList}">
+                                <li>
+                                    <a href="#" class="jie-title" th:text="${os.account}">spring-cloud-microservice</a>
+                                    <em>
+                                        <iframe style="margin-left: 1px; margin-bottom:-5px;"
+                                                frameborder="0" scrolling="0" width="80px" height="20px"
+                                                th:src="@{'https://ghbtns.com/github-btn.html?user=' + ${os.osName} + '&repo='+ ${os.account}+'&type=star&count=true'}"
+                                                src="https://ghbtns.com/github-btn.html?user=flyhero&repo=spring-cloud-microservice&type=star&count=true">
+                                        </iframe>
+                                        <iframe style="margin-left: 1px; margin-bottom:-5px;"
+                                                frameborder="0" scrolling="0" width="80px" height="20px"
+                                                th:src="@{'https://ghbtns.com/github-btn.html?user=' + ${os.osName} + '&repo='+ ${os.account}+'&type=star&count=true'}"
+                                                src="https://ghbtns.com/github-btn.html?user=flyhero&repo=spring-cloud-microservice&type=fork&count=true">
+                                        </iframe>
+                                    </em>
+                                </li>
+                            </th:block>
                         </th:block>
-                    </th:block>
-                </ul>
-            </div>
+                    </ul>
+                </div>
+            </th:block>
             <div class="fly-panel fly-list-one">
                 <h3 class="fly-panel-title">热门阅读</h3>
                 <dl>
@@ -195,57 +218,7 @@
             </div>
         </div>
     </div>
-    <!--<div class="main fly-home-main">
-<div class="layui-inline fly-home-jie">
-<div class="fly-panel">
-  <h3 class="fly-panel-title">贤心 最近的提问</h3>
-  <ul class="jie-row">
-    <li>
-      <span class="fly-jing">精</span>
-      <a href="/jie/{{item.id}}.html" class="jie-title">使用 layui 秒搭后台大布局（基本结构）</a>
-      <i>1天前</i>
-      <em>1136阅/27答</em>
-    </li>
-    <li>
-      <a href="/jie/{{item.id}}.html" class="jie-title">使用 layui 秒搭后台大布局（基本结构）</a>
-      <i>1天前</i>
-      <em>1136阅/27答</em>
-    </li>
-  </ul>
-   <div class="fly-none" style="min-height: 50px; padding:30px 0; height:auto;"><i style="font-size:14px;">没有发表任何求解</i></div>
-</div>
-</div>
 
-<div class="layui-inline fly-home-da">
-<div class="fly-panel">
-  <h3 class="fly-panel-title">贤心 最近的回答</h3>
-  <ul class="home-jieda">
-    <li>
-      <p>
-      <span>1分钟前</span>
-      在<a href="" target="_blank">tips能同时渲染多个吗?</a>中回答：
-      </p>
-      <div class="home-dacontent">
-        尝试给layer.photos加上这个属性试试：
-<pre>
-full: true
-</pre>
-        文档没有提及
-      </div>
-    </li>
-    <li>
-      <p>
-      <span>5分钟前</span>
-      在<a href="" target="_blank">在Fly社区用的是什么系统啊?</a>中回答：
-      </p>
-      <div class="home-dacontent">
-        Fly社区采用的是NodeJS。分享出来的只是前端模版
-      </div>
-    </li>
-  </ul>
-</div>
-</div>
--->
 </div>
 
 <th:block th:replace="common/footer::footer"></th:block>
@@ -256,263 +229,6 @@ full: true
     var levelVos = [[${levelVos}]];
     var bing = echarts.init(document.getElementById('bing'));
     var chart = echarts.init(document.getElementById('echart'));
-    /*    for(index in levelVos){//遍历json数组时，这么写p为索引，0,1
-
-            levelData.push([
-                levelVos[index].activeDate,
-                levelVos[index].sumScore
-            ]);
-        }*/
-    /*   var hours = ['12a', '1a', '2a', '3a', '4a', '5a', '6a',
-           '7a', '8a', '9a', '10a', '11a',
-           '12p', '1p', '2p', '3p', '4p', '5p',
-           '6p', '7p', '8p', '9p', '10p', '11p'
-       ];
-       var days = ['Sat', 'Fri', 'Thur',
-           'Wed', 'Tues', 'Mon', 'Sun'
-       ];
-
-       var data = [
-           [0, 0, 5],
-           [0, 1, 1],
-           [0, 2, 0],
-           [0, 3, 0],
-           [0, 4, 0],
-           [0, 5, 0],
-           [0, 6, 0],
-           [0, 7, 0],
-           [0, 8, 0],
-           [0, 9, 0],
-           [0, 10, 0],
-           [0, 11, 2],
-           [0, 12, 4],
-           [0, 13, 1],
-           [0, 14, 1],
-           [0, 15, 3],
-           [0, 16, 4],
-           [0, 17, 6],
-           [0, 18, 4],
-           [0, 19, 4],
-           [0, 20, 3],
-           [0, 21, 3],
-           [0, 22, 2],
-           [0, 23, 5],
-           [1, 0, 7],
-           [1, 1, 0],
-           [1, 2, 0],
-           [1, 3, 0],
-           [1, 4, 0],
-           [1, 5, 0],
-           [1, 6, 0],
-           [1, 7, 0],
-           [1, 8, 0],
-           [1, 9, 0],
-           [1, 10, 5],
-           [1, 11, 2],
-           [1, 12, 2],
-           [1, 13, 6],
-           [1, 14, 9],
-           [1, 15, 11],
-           [1, 16, 6],
-           [1, 17, 7],
-           [1, 18, 8],
-           [1, 19, 12],
-           [1, 20, 5],
-           [1, 21, 5],
-           [1, 22, 7],
-           [1, 23, 2],
-           [2, 0, 1],
-           [2, 1, 1],
-           [2, 2, 0],
-           [2, 3, 0],
-           [2, 4, 0],
-           [2, 5, 0],
-           [2, 6, 0],
-           [2, 7, 0],
-           [2, 8, 0],
-           [2, 9, 0],
-           [2, 10, 3],
-           [2, 11, 2],
-           [2, 12, 1],
-           [2, 13, 9],
-           [2, 14, 8],
-           [2, 15, 10],
-           [2, 16, 6],
-           [2, 17, 5],
-           [2, 18, 5],
-           [2, 19, 5],
-           [2, 20, 7],
-           [2, 21, 4],
-           [2, 22, 2],
-           [2, 23, 4],
-           [3, 0, 7],
-           [3, 1, 3],
-           [3, 2, 0],
-           [3, 3, 0],
-           [3, 4, 0],
-           [3, 5, 0],
-           [3, 6, 0],
-           [3, 7, 0],
-           [3, 8, 1],
-           [3, 9, 0],
-           [3, 10, 5],
-           [3, 11, 4],
-           [3, 12, 7],
-           [3, 13, 14],
-           [3, 14, 13],
-           [3, 15, 12],
-           [3, 16, 9],
-           [3, 17, 5],
-           [3, 18, 5],
-           [3, 19, 10],
-           [3, 20, 6],
-           [3, 21, 4],
-           [3, 22, 4],
-           [3, 23, 1],
-           [4, 0, 1],
-           [4, 1, 3],
-           [4, 2, 0],
-           [4, 3, 0],
-           [4, 4, 0],
-           [4, 5, 1],
-           [4, 6, 0],
-           [4, 7, 0],
-           [4, 8, 0],
-           [4, 9, 2],
-           [4, 10, 4],
-           [4, 11, 4],
-           [4, 12, 2],
-           [4, 13, 4],
-           [4, 14, 4],
-           [4, 15, 14],
-           [4, 16, 12],
-           [4, 17, 1],
-           [4, 18, 8],
-           [4, 19, 5],
-           [4, 20, 3],
-           [4, 21, 7],
-           [4, 22, 3],
-           [4, 23, 0],
-           [5, 0, 2],
-           [5, 1, 1],
-           [5, 2, 0],
-           [5, 3, 3],
-           [5, 4, 0],
-           [5, 5, 0],
-           [5, 6, 0],
-           [5, 7, 0],
-           [5, 8, 2],
-           [5, 9, 0],
-           [5, 10, 4],
-           [5, 11, 1],
-           [5, 12, 5],
-           [5, 13, 10],
-           [5, 14, 5],
-           [5, 15, 7],
-           [5, 16, 11],
-           [5, 17, 6],
-           [5, 18, 0],
-           [5, 19, 5],
-           [5, 20, 3],
-           [5, 21, 4],
-           [5, 22, 2],
-           [5, 23, 0],
-           [6, 0, 1],
-           [6, 1, 0],
-           [6, 2, 0],
-           [6, 3, 0],
-           [6, 4, 0],
-           [6, 5, 0],
-           [6, 6, 0],
-           [6, 7, 0],
-           [6, 8, 0],
-           [6, 9, 0],
-           [6, 10, 1],
-           [6, 11, 0],
-           [6, 12, 2],
-           [6, 13, 1],
-           [6, 14, 3],
-           [6, 15, 4],
-           [6, 16, 0],
-           [6, 17, 0],
-           [6, 18, 0],
-           [6, 19, 0],
-           [6, 20, 1],
-           [6, 21, 2],
-           [6, 22, 2],
-           [6, 23, 6]
-       ];
-       option = {
-           title : {
-               text: '活动图',
-               subtext: '纯属虚构',
-               x:'center'
-           },
-           tooltip: {},
-           visualMap: {
-               max: 20,
-               inRange: {
-                   color: ['#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf', '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026']
-               }
-           },
-           xAxis3D: {
-               type: 'category',
-               data: hours
-           },
-           yAxis3D: {
-               type: 'category',
-               data: days
-           },
-           zAxis3D: {
-               type: 'value'
-           },
-           grid3D: {
-               boxWidth: 200,
-               boxDepth: 80,
-               viewControl: {
-                   // projection: 'orthographic'
-               },
-               light: {
-                   main: {
-                       intensity: 1.2,
-                       shadow: true
-                   },
-                   ambient: {
-                       intensity: 0.3
-                   }
-               }
-           },
-           series: [{
-               type: 'bar3D',
-               data: data.map(function(item) {
-                   return {
-                       value: [item[1], item[0], item[2]],
-                   }
-               }),
-               shading: 'lambert',
-
-               label: {
-                   textStyle: {
-                       fontSize: 16,
-                       borderWidth: 1
-                   }
-               },
-
-               emphasis: {
-                   label: {
-                       textStyle: {
-                           fontSize: 20,
-                           color: '#900'
-                       }
-                   },
-                   itemStyle: {
-                       color: '#900'
-                   }
-               }
-           }]
-       }
-
-   */
 
     function dateFormat(date) {
 
@@ -682,6 +398,71 @@ full: true
     window.addEventListener('resize', function () {
         chart.resize();
         bing.resize();
+    });
+
+    var host = [[${rootPath}]];
+    var userId = '[[${setInfo.userId}]]';
+
+    $.ajax({
+        type: 'GET',
+        url: "../subject/subjects/"+userId,
+        dataType: "json",
+        data: {
+            "pageNum": 1,
+            "pageSize": 6
+        },
+        success: function (result) {
+            $.each(result.data, function (index, simple) {
+                $("#ebook-list").append(' <li class="archive-item" style="display: block;height: 145px; border-bottom: 1px solid #eff2f5">\n' +
+                    '                        <a href="#" title="标题">\n' +
+                    '                            <div class="covercon">\n' +
+                    '                                <img src="' + simple.cover + '" class="cover imgloadinglater" style="display: block;">\n' +
+                    '                            </div>\n' +
+                    '                        </a>\n' +
+                    '                        <div class="archive-text">\n' +
+                    '                            <div class="archive-detail">\n' +
+                    '                                <h3><a href="../article/list/'+simple.subjectId +'/' + simple.subjectTitle + '" title="文章标题">' + simple.subjectTitle + '</a></h3>\n' +
+                    '                                <p>' + simple.subjectDes + '</p>\n' +
+                    '                                <div class="archive-info clearfix"\n' +
+                    '                                     style="margin-top: 10px; overflow: hidden;white-space: nowrap; display: flex">\n' +
+                    '                                    <ul style="padding: 0;">\n' +
+                    '                                        <li class="list-user">\n' +
+                    '                                            <a href="'+host+'/user/'+simple.ucenterUser.userId+'" target="_blank">\n' +
+                    '                                                <img src="' + simple.ucenterUser.avatar + '">\n' +
+                    '                                                <span>' + simple.ucenterUser.nickName + '</span>\n' +
+                    '                                            </a>\n' +
+                    '                                        </li>\n' +
+                    '                                    </ul>\n' +
+                    '                                </div>\n' +
+                    '                                <div class="archive-info clearfix"\n' +
+                    '                                     style="margin-top: 10px; overflow: hidden;white-space: nowrap; display: flex">\n' +
+                    '                                    <ul style="padding: 0;">\n' +
+                    '                                        <li class="list-msg">\n' +
+                    '                                            <a href="#">\n' );
+                if(simple.rss){
+                    $("#ebook-list").append('<span class="layui-btn layui-btn-xs layui-btn-normal">已订阅</span>');
+                }else {
+                    $("#ebook-list").append('<span class="layui-btn layui-btn-xs layui-btn-normal">订阅本书</span>');
+                }
+                $("#ebook-list").append('</a><span aria-hidden="true" style="margin-left: 8px;">已有' + simple.rssNum + '人订阅</span>');
+                if(simple.cmsArticle == null){
+                    $("#ebook-list").append('<span aria-hidden="true" style="margin-left: 5px;"><i class="fa fa-eye fa-fw" title="阅读"></i>0</span>\n' +
+                        '<span aria-hidden="true"><i class="fa fa-commenting fa-fw" title="回答"></i>0</span>\n' +
+                        '<span aria-hidden="true"><i class="fa fa-thumbs-o-up fa-fw" title="人气"></i>0</span>');
+                }else {
+                    $("#ebook-list").append('<span aria-hidden="true" style="margin-left: 5px;"><i class="fa fa-eye fa-fw" title="阅读"></i>' + simple.cmsArticle.viewNum + '</span>\n' +
+                        '<span aria-hidden="true"><i class="fa fa-commenting fa-fw" title="回答"></i>' + simple.cmsArticle.commentNum + '</span>\n' +
+                        '<span aria-hidden="true"><i class="fa fa-thumbs-o-up fa-fw" title="人气"></i>' + simple.cmsArticle.likeNum + '</span>');
+                }
+                $("#ebook-list").append('                   </li>\n' +
+                    '                                    </ul>\n' +
+                    '                                </div>\n' +
+                    '                            </div>\n' +
+                    '                        </div>\n' +
+                    '                    </li>');
+
+            });
+        }
     });
 
 
