@@ -3,6 +3,7 @@ package com.flyapi.web.controller;
 import com.flyapi.core.base.BaseController;
 import com.flyapi.core.constant.JSONResult;
 import com.flyapi.model.CmsArticle;
+import com.flyapi.model.CmsComment;
 import com.flyapi.model.CmsSubject;
 import com.flyapi.model.UcenterUser;
 import com.flyapi.service.api.*;
@@ -54,8 +55,9 @@ public class ArticleController extends BaseController {
             userFameService.addFameValue(user.getUserId(),4);
         }
         ArticleDetailVo detailVo = articleService.findArticleDetail(articleId);
+        List<CmsComment> commentList =commentService.findCommentById(articleId);
         mv.addObject("detailVo",detailVo);
-        mv.addObject("commentList",commentService.findCommentById(articleId));
+        mv.addObject("commentList",commentList);
         mv.setViewName("article/detail");
         return mv;
     }

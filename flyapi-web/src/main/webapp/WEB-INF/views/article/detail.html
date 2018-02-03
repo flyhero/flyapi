@@ -59,8 +59,12 @@
                         <span class="iconfont" th:text="'评论 ' +${detailVo.article.commentNum}">评论 200</span>
                         <span class="iconfont" th:text="'喜欢 ' +${detailVo.article.likeNum}">喜欢 200</span>
                         <span class="layui-btn layui-btn-xs jie-admin " type="collect" data-type="add">收藏</span>
-
-                        <a href="detail.html"> <span class="layui-btn layui-btn-xs layui-btn-normal">阅读原文</span></a>
+                        <th:block th:if="${not #lists.isEmpty(detailVo.article.original)}">
+                            <a th:href="${detailVo.article.original}"> <span class="layui-btn layui-btn-xs layui-btn-normal">阅读原文</span></a>
+                        </th:block>
+                        <th:block th:unless="${not #lists.isEmpty(detailVo.article.original)}">
+                             <span class="layui-btn layui-btn-xs layui-btn-normal">原创</span>
+                        </th:block>
 
                     </div>
                 </div>
@@ -72,10 +76,6 @@
                                       name="test-editormd-markdown-doc">###Hello world!</textarea>
                         </div>
                     </div>
-                    <!-- <script src="js/zepto.min.js"></script>
-                    <script>
-                        var jQuery = Zepto;  // 为了避免修改flowChart.js和sequence-diagram.js的源码，所以使用Zepto.js时想支持flowChart/sequenceDiagram就得加上这一句
-                    </script> -->
                     <script src="../../static/editor/js/jquery.min.js"
                             th:src="@{${rootPath} + '/static/editor/js/jquery.min.js'}"></script>
                     <script src="../../static/editor/lib/marked.min.js"
@@ -151,12 +151,14 @@
                                 <div class="layui-colla-item">
                                     <div class="layui-colla-title">
                                         <div style="float:left; text-align:left" class="comment-user">
-                                            <img style="width: 40px;height: 40px;" src="" th:src="${comment.ucenterUser.avatar}"/>
-                                            <a href="../add-subject.html" target="_blank" th:text="${comment.ucenterUser.nickName}">flyhero</a>
-                                            <input type="hidden" value=""/>
+                                            <img style="width: 40px;height: 40px;border-radius: 100%"
+                                                 th:src="${comment.ucenterUser.avatar}"/>
+                                            <a th:href="@{${rootPath} + '/user/'+${comment.userId}}" target="_blank"
+                                               th:text="${comment.ucenterUser.nickName}">flyhero</a>
+                                            <input type="hidden" th:value="${comment.userId}"/>
                                         </div>
                                         <div style="float:right; text-align:right">
-                                            <span class="layui-badge layui-bg-gray" th:text="${comment.createTime}">2017-06-22 14:30:49</span>
+                                            <span class="layui-badge layui-bg-gray" th:text="${#dates.format(comment.createTime, 'yyyy-MM-dd HH:mm')}">2017-06-22 14:30:49</span>
                                         </div>
                                     </div>
 
@@ -170,20 +172,19 @@
                                                     <div class="layui-colla-item">
                                                         <div class="layui-colla-title">
                                                             <div style="float:left; text-align:left">
-                                                                <img style="width: 40px;height: 40px;" th:src="${reply.fromUser.avatar}"  src="http://tp4.sinaimg.cn/1345566427/180/5730976522/0" alt=""/>
-                                                                <a href="../add-subject.html" target="_blank" th:text="${reply.fromUser.nickName}">flyhero</a>
+                                                                <img style="width: 40px;height: 40px; border-radius: 100%"
+                                                                     th:src="${reply.fromUser.avatar}"
+                                                                     src="http://tp4.sinaimg.cn/1345566427/180/5730976522/0"/>
+                                                                <a th:href="@{${rootPath} + '/user/'+${reply.fromUserId}}" target="_blank"
+                                                                   th:text="${reply.fromUser.nickName}">flyhero</a>
                                                             </div>
                                                             <div style="float:right; text-align:right">
                                                                 <span class="layui-badge layui-bg-gray"
-                                                                      th:text="${reply.createTime}">2017-06-22 14:30:49</span>
+                                                                      th:text="${#dates.format(reply.createTime, 'yyyy-MM-dd HH:mm')}" >2017-06-22 14:30:49</span>
                                                             </div>
-
                                                         </div>
-
                                                         <div class="layui-colla-content layui-show">
-
                                                             <p th:text="${reply.content}"></p>
-
                                                         </div>
                                                     </div>
                                                 </div>
@@ -200,81 +201,37 @@
                             </div>
                         </th:block>
                     </th:block>
-                    <!--                   <div class="layui-collapse" lay-accordion="">
-                                          <div class="layui-colla-item">
-                                              <div class="layui-colla-title">
-                                                  <div style="float:left; text-align:left" class="comment-user">
-                                                      <img style="width: 40px;height: 40px;" src="" alt=""/>
-                                                      <a href="../add-subject.html" target="_blank">flyhero</a>
-                                                      <input type="hidden" value=""/>
-                                                  </div>
-                                              </div>
-                                              <div style="float:right; text-align:right">
-                                                  <span class="layui-badge layui-bg-gray">2017-06-22 14:30:49</span>
-                                              </div>
-                                          </div>
-
-                                         <div class="layui-colla-content layui-show">
-                                              感觉怎么样
-                                              &lt;!&ndash; <div class="layui-collapse" lay-accordion="">
-                                                   <div class="layui-colla-item">
-                                                       <div class="layui-colla-title">
-                                                           <div style="float:left; text-align:left">
-                                                               <img style="width: 40px;height: 40px;"
-                                                                    src="http://tp4.sinaimg.cn/1345566427/180/5730976522/0" alt="">
-                                                               <a>法师</a>
-                                                           </div>
-                                                           <div style="float:right; text-align:right"><span
-                                                                   class="layui-badge layui-bg-gray">2017-06-22 14:30:49</span></div>
-
-                                                       </div>
-
-                                                       <div class="layui-colla-content layui-show">
-
-                                                           还不错啊是覅潍坊市东方闪电安慰法奇偶问问
-
-                                                       </div>
-                                                   </div>
-                                               </div>&ndash;&gt;
-                                              <div class="comment-reply" style="text-align: right; padding-top: 8px">
-                                                  &lt;!&ndash;<a href="javascript:void(0);" id="re_test">回复</a>&ndash;&gt;
-                                                  <span type="reply">
-                                                    回复
-                                                  </span>
-                                              </div>
-
-                                          </div>
-                                      </div>-->
 
                 </div>
             </div>
-            <br>
             <div class="layui-form layui-form-pane">
                 <form action="" method="post">
                     <div class="layui-form-item layui-form-text">
+                        <label class="layui-form-label">说两句吧</label>
                         <div class="layui-input-block">
-                                <textarea id="L_content" name="content" required lay-verify="required"
-                                          placeholder="我要回答" class="layui-textarea fly-editor"
-                                          style="height: 150px;"></textarea>
+                            <textarea id="L_content" name="content" required lay-verify="required"
+                                      placeholder="评论吧" class="layui-textarea fly-editor"></textarea>
                         </div>
                     </div>
+
                     <div class="layui-form-item">
                         <input type="hidden" name="articleId" value="0" th:value="${detailVo.article.articleId}">
                         <input type="hidden" name="commentId" value="0">
                         <button class="layui-btn" lay-filter="*" lay-submit>提交回答</button>
                     </div>
+
                 </form>
             </div>
         </div>
     </div>
 
 
-<div class="edge">
-    <div id="sidebar">
-        <center><h1>目录</h1></center>
-        <div class="markdown-body editormd-preview-container" id="custom-toc-container">#custom-toc-container</div>
+    <div class="edge">
+        <div id="sidebar">
+            <center><h1>目录</h1></center>
+            <div class="markdown-body editormd-preview-container" id="custom-toc-container">#custom-toc-container</div>
+        </div>
     </div>
-</div>
 
 </div>
 <th:block th:replace="common/footer::footer"></th:block>
@@ -315,28 +272,23 @@
         });
     }
 
-    layui.use(['util', 'element','form','layer','laypage'], function(){
+    layui.use(['util', 'element', 'form', 'layer', 'laypage'], function () {
         var util = layui.util;
         var form = layui.form;  //表单的依赖
         var layer = layui.layer;
         var laypage = layui.laypage;//分页的依赖
         var element = layui.element;//Tab的切换功能，切换事件监听等，需要依赖element模块
 
-        form.on('radio', function(data){
+        form.on('radio', function (data) {
             console.log(data);
-        });
-
-        //监听折叠
-        element.on('collapse(test)', function (data) {
-            layer.msg('展开状态：' + data.show);
         });
 
         //右下角bar top
         util.fixbar({
             bar1: true,
-            click: function(type){
+            click: function (type) {
                 console.log(type);
-                if(type === 'bar1'){
+                if (type === 'bar1') {
                     alert('点击了bar1')
                 }
             }
@@ -344,7 +296,7 @@
 
         var targetId = '[[${detailVo.article.articleId}]]';
 
-        $('#report').click(function(){
+        $('#report').click(function () {
             var index = layer.open({
                 title: '举报',
                 type: 1,
@@ -369,8 +321,8 @@
                 '      <input id="remarks" type="text" name="remarks" lay-verify="title" autocomplete="off" placeholder="抄袭网址或关键词" class="layui-input">' +
                 '    </div>\n' +
                 '  </div>\n' +
-                '<input type="hidden" name="targetId" value="'+targetId+'">'+
-                '<input type="hidden" name="reportType" value="1">'+
+                '<input type="hidden" name="targetId" value="' + targetId + '">' +
+                '<input type="hidden" name="reportType" value="1">' +
                 '  <div class="layui-form-item">\n' +
                 '    <div class="layui-input-block" style="margin-left:68px">\n' +
                 '      <button class="layui-btn" lay-submit="" lay-filter="*">立即提交</button>\n' +
@@ -379,9 +331,9 @@
                 '</form>\n',
             });
             form.render('radio'); //刷新select选择框渲染
-            form.on('submit(*)', function(data){
+            form.on('submit(*)', function (data) {
                 console.log(data.field) //当前容器的全部表单字段，名值对形式：{name: value}
-                $.post("../../report/article",data.field,function(result){
+                $.post("../../report/article", data.field, function (result) {
                     console.log(result.code);
                     layer.msg(result.msg);
                 });
@@ -392,9 +344,7 @@
         });
 
 
-
     });
-
 
 
     /*

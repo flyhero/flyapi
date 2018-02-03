@@ -33,7 +33,7 @@
                     <div class="layui-col-md3">
                         <label class="layui-form-label">主题</label>
                         <div class="layui-input-block">
-                            <select lay-verify="required" name="subjectId" lay-filter="column">
+                            <select lay-verify="required" name="subjectId">
                                 <option></option>
                                 <th:block th:if="not ${#lists.isEmpty(subjectList)}">
                                     <th:block th:each="subject,index:${subjectList}">

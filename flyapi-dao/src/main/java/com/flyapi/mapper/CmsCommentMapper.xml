@@ -32,6 +32,7 @@
   </resultMap>
 
   <resultMap id="userInfo" type="com.flyapi.model.UcenterUser">
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
     <result column="avatar" jdbcType="VARCHAR" property="avatar" />
     <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
   </resultMap>
