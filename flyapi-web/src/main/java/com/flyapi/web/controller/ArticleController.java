@@ -144,13 +144,33 @@ public class ArticleController extends BaseController {
         return JSONResult.ok(pageInfo);
     }
 
+    /**
+     * 前往添加编辑页
+     * @title: gotoAddPage
+     * @author qfwang
+     * @param articleId
+     * @return org.springframework.web.servlet.ModelAndView
+     * @date 2018/2/3 下午2:35
+     */
+    @GetMapping("{articleId}")
+    public ModelAndView gotoAddPage(@PathVariable Long articleId){
 
-    @GetMapping("add")
-    public ModelAndView pageAdd(){
+
+        mv.setViewName("article/add");
+
         UcenterUser user = (UcenterUser) currentUser();
         List<CmsSubject> subjectList = subjectService.findUserSubject(user.getUserId());
+        if(subjectList == null || subjectList.size() == 0){
+            mv.addObject("tip","请先创建主题,再写文章哦");
+            return mv;
+        }
+
         mv.addObject("subjectList",subjectList);
-        mv.setViewName("article/add");
+
+        CmsArticle article = articleService.selectByPrimaryKey(articleId);
+        mv.addObject("article",article);
+
+
         return mv;
 
     }

@@ -184,7 +184,7 @@ public class QiniuController extends BaseController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return "imgUrl";
+        return imgUrl;
     }
 
     public static void main(String[] args) {

@@ -116,9 +116,13 @@
 
         upload.render({
             elem: '#test10',
-            url: '/upload/',
+            accept:'images',
+            field:'file',
+            size: 5120,
+            url: '../qiniu/common/upload',
             done: function(res){
-                console.log(res)
+                $(".flyapi-upload-img").attr("src",res.data);
+                console.log(res);
             }
         });
 
