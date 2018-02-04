@@ -189,7 +189,7 @@
                 </dl>
             </div>
             <div class="fly-panel fly-list-one">
-                <h3 class="fly-panel-title">注册与浏览</h3>
+                <h3 class="fly-panel-title">最新文章</h3>
                 <dl>
                     <th:block th:if="${not #lists.isEmpty(lastArticleList)}">
                         <th:block th:each="last,index:${lastArticleList}">
@@ -198,7 +198,6 @@
                                    th:text="${last.title}">标题</a>
                                 <span><i class="fa fa-clock-o fa-fw"></i> <span
                                         th:text="${#dates.format(last.createTime, 'hh:mm')}"></span></span>
-                            </dd>
                             </dd>
                         </th:block>
                     </th:block>

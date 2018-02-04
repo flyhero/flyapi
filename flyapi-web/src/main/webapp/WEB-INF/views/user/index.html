@@ -96,7 +96,7 @@
                                         <img th:src="${subject.cover}" src="https://user-gold-cdn.xitu.io/2017/12/18/160691fc2995dbf9?imageView2/1/w/200/h/280/q/95/format/webp/interlace/1"  alt="">
                                     </a>
                                     <div style="margin-top: 5px;">
-                                        <a class="layui-btn layui-btn-xs layui-btn-primary" style="margin-left: 5px">编辑</a>
+                                        <a th:href="@{${rootPath}+'/subject/'+${subject.subjectId}}" class="layui-btn layui-btn-xs layui-btn-primary" style="margin-left: 5px">编辑</a>
                                         <a class="layui-btn layui-btn-xs layui-btn-primary" >删除</a>
                                     </div>
                                 </li>

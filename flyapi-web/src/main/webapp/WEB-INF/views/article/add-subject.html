@@ -42,13 +42,15 @@
           <div class="layui-form-item">
             <label class="layui-form-label">主题</label>
             <div class="layui-input-block">
-              <input type="text" name="title" lay-verify="required|title" required placeholder="请输入主题" autocomplete="off" class="layui-input">
+              <input type="hidden" name="subjectId" th:value="${subject.subjectId}">
+              <input type="text" th:value="${subject.subjectTitle}" name="subjectTitle" lay-verify="required|title" required placeholder="请输入主题" autocomplete="off" class="layui-input">
             </div>
           </div>
           <div class="layui-form-item" pane>
             <label class="layui-form-label">权限</label>
-            <div class="layui-input-block">
-              <input type="checkbox" checked name="open" lay-skin="switch" lay-filter="switchTest" lay-text="公开|私密">
+            <div class="layui-input-block" th:switch="${subject.permissions}">
+              <input type="checkbox" th:case="1"  name="permissions" lay-skin="switch" lay-filter="switchTest" lay-text="公开|私密">
+              <input type="checkbox" th:case="0" checked  name="permissions" lay-skin="switch" lay-filter="switchTest" lay-text="公开|私密">
             </div>
           </div>
           <div class="layui-form-item" pane>
@@ -63,7 +65,8 @@
             <div class="layui-input-block">
               <div class="layui-upload">
                 <div class="layui-upload-list">
-                  <img class="flyapi-upload-img">
+                  <input type="hidden" id="cover">
+                  <img class="flyapi-upload-img" th:src="${subject.cover}">
                   <a>建议尺寸：100px * 140px</a>
                 </div>
               </div>
@@ -72,7 +75,7 @@
           <div class="layui-form-item layui-form-text">
             <label class="layui-form-label">简介</label>
             <div class="layui-input-block">
-              <textarea placeholder="请输入内容" class="layui-textarea"></textarea>
+              <textarea placeholder="请输入内容" th:text="${subject.subjectDes}" class="layui-textarea"></textarea>
             </div>
           </div>
           <div class="layui-form-item">
@@ -122,7 +125,7 @@
             url: '../qiniu/common/upload',
             done: function(res){
                 $(".flyapi-upload-img").attr("src",res.data);
-                console.log(res);
+                $("#cover").val(res.data);
             }
         });
 
