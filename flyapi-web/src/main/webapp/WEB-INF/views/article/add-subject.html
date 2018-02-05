@@ -1,9 +1,8 @@
-
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="utf-8">
-  <title>创建专题</title>
+  <title>创建主题</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="keywords" content="">
   <meta name="description" content="">
@@ -42,22 +41,22 @@
           <div class="layui-form-item">
             <label class="layui-form-label">主题</label>
             <div class="layui-input-block">
-              <input type="hidden" name="subjectId" th:value="${subject.subjectId}">
-              <input type="text" th:value="${subject.subjectTitle}" name="subjectTitle" lay-verify="required|title" required placeholder="请输入主题" autocomplete="off" class="layui-input">
+              <input type="hidden" name="subjectId" th:value="${subject} ? ${subject.subjectTitle}:''">
+              <input type="text" th:value="${subject} ? ${subject.subjectTitle}:''" name="subjectTitle" lay-verify="required|title" required placeholder="请输入主题" autocomplete="off" class="layui-input">
             </div>
           </div>
           <div class="layui-form-item" pane>
             <label class="layui-form-label">权限</label>
-            <div class="layui-input-block" th:switch="${subject.permissions}">
-              <input type="checkbox" th:case="1"  name="permissions" lay-skin="switch" lay-filter="switchTest" lay-text="公开|私密">
-              <input type="checkbox" th:case="0" checked  name="permissions" lay-skin="switch" lay-filter="switchTest" lay-text="公开|私密">
+            <div class="layui-input-block" th:switch="${subject} ? ${subject.permissions} : '0'">
+              <input type="checkbox" th:case="1" value="1" name="permissions" lay-skin="switch" lay-filter="switchTest" lay-text="公开|私密">
+              <input type="checkbox" th:case="0" value="0" checked  name="permissions" lay-skin="switch" lay-filter="switchTest" lay-text="公开|私密">
             </div>
           </div>
           <div class="layui-form-item" pane>
             <label class="layui-form-label">封面</label>
             <div class="layui-input-block">
               <a class="layui-btn layui-btn-primary layui-btn-radius">自动生成</a>
-              <a class="layui-btn layui-btn-primary layui-btn-radius" id="test10">上传</a>
+              <a class="layui-btn layui-btn-primary layui-btn-radius" id="upload-btn">上传</a>
             </div>
           </div>
           <div class="layui-form-item" pane>
@@ -66,7 +65,7 @@
               <div class="layui-upload">
                 <div class="layui-upload-list">
                   <input type="hidden" id="cover">
-                  <img class="flyapi-upload-img" th:src="${subject.cover}">
+                  <img class="flyapi-upload-img" th:src="${subject} ? ${subject.cover} : ''">
                   <a>建议尺寸：100px * 140px</a>
                 </div>
               </div>
@@ -75,7 +74,7 @@
           <div class="layui-form-item layui-form-text">
             <label class="layui-form-label">简介</label>
             <div class="layui-input-block">
-              <textarea placeholder="请输入内容" th:text="${subject.subjectDes}" class="layui-textarea"></textarea>
+              <textarea placeholder="请输入内容" th:text="${subject} ? ${subject.subjectDes} : ''" class="layui-textarea"></textarea>
             </div>
           </div>
           <div class="layui-form-item">
@@ -88,8 +87,6 @@
         </form>
       </div>
     </div>
-
-
 
   </div>
 </div>
@@ -116,9 +113,8 @@
             return false;
         });
 
-
         upload.render({
-            elem: '#test10',
+            elem: '#upload-btn',
             accept:'images',
             field:'file',
             size: 5120,

@@ -103,7 +103,8 @@
                             <div class="archive-text">
                                 <div class="archive-detail">
                                     <h3><a href="#" title="文章标题">书籍标题</a></h3>
-                                    <p>他不是别人 他是张国荣 14年前的今天，一颗巨星陨落。他不是别人 他是张国荣 14年前的今天，一颗巨星陨落他不是别人 他是张国荣 14年前的今天，一颗巨星陨落 </p>
+                                    <p>他不是别人 他是张国荣 14年前的今天，一颗巨星陨落。他不是别人 他是张国荣 14年前的今天，一颗巨星陨落他不是别人 他是张国荣
+                                        14年前的今天，一颗巨星陨落 </p>
                                     <div class="archive-info clearfix"
                                          style="margin-top: 10px; overflow: hidden;white-space: nowrap; display: flex">
                                         <ul style="padding: 0;">
@@ -124,9 +125,12 @@
                                                     <span class="layui-btn layui-btn-xs layui-btn-normal">订阅本书</span>
                                                 </a>
                                                 <span aria-hidden="true" style="margin-left: 8px;">已有1002人订阅</span>
-                                                <span aria-hidden="true" style="margin-left: 5px;"><i class="fa fa-eye fa-fw" title="阅读"></i> 271</span>
-                                                <span aria-hidden="true"><i class="fa fa-commenting fa-fw" title="回答"></i> 8</span>
-                                                <span aria-hidden="true"><i class="fa fa-thumbs-o-up fa-fw" title="人气"></i> 106</span>
+                                                <span aria-hidden="true" style="margin-left: 5px;"><i
+                                                        class="fa fa-eye fa-fw" title="阅读"></i> 271</span>
+                                                <span aria-hidden="true"><i class="fa fa-commenting fa-fw"
+                                                                            title="回答"></i> 8</span>
+                                                <span aria-hidden="true"><i class="fa fa-thumbs-o-up fa-fw"
+                                                                            title="人气"></i> 106</span>
                                             </li>
 
                                         </ul>
@@ -404,7 +408,7 @@
 
     $.ajax({
         type: 'GET',
-        url: "../subject/subjects/"+userId,
+        url: "../subject/subjects/" + userId,
         dataType: "json",
         data: {
             "pageNum": 1,
@@ -412,6 +416,13 @@
         },
         success: function (result) {
             $.each(result.data, function (index, simple) {
+                var viewNum = simple.cmsArticle == null ? 0 : simple.cmsArticle.viewNum;
+                var commentNum = simple.cmsArticle == null ? 0 : simple.cmsArticle.commentNum;
+                var likeNum = simple.cmsArticle == null ? 0 : simple.cmsArticle.likeNum;
+                var sub = "订阅本书";
+                if (simple.rss) {
+                    sub = "已订阅";
+                }
                 $("#ebook-list").append(' <li class="archive-item" style="display: block;height: 145px; border-bottom: 1px solid #eff2f5">\n' +
                     '                        <a href="#" title="标题">\n' +
                     '                            <div class="covercon">\n' +
@@ -420,13 +431,13 @@
                     '                        </a>\n' +
                     '                        <div class="archive-text">\n' +
                     '                            <div class="archive-detail">\n' +
-                    '                                <h3><a href="../article/list/'+simple.subjectId +'/' + simple.subjectTitle + '" title="文章标题">' + simple.subjectTitle + '</a></h3>\n' +
+                    '                                <h3><a href="../article/list/' + simple.subjectId + '/' + simple.subjectTitle + '" title="文章标题">' + simple.subjectTitle + '</a></h3>\n' +
                     '                                <p>' + simple.subjectDes + '</p>\n' +
                     '                                <div class="archive-info clearfix"\n' +
                     '                                     style="margin-top: 10px; overflow: hidden;white-space: nowrap; display: flex">\n' +
                     '                                    <ul style="padding: 0;">\n' +
                     '                                        <li class="list-user">\n' +
-                    '                                            <a href="'+host+'/user/'+simple.ucenterUser.userId+'" target="_blank">\n' +
+                    '                                            <a href="' + host + '/user/' + simple.ucenterUser.userId + '" target="_blank">\n' +
                     '                                                <img src="' + simple.ucenterUser.avatar + '">\n' +
                     '                                                <span>' + simple.ucenterUser.nickName + '</span>\n' +
                     '                                            </a>\n' +
@@ -434,31 +445,12 @@
                     '                                    </ul>\n' +
                     '                                </div>\n' +
                     '                                <div class="archive-info clearfix"\n' +
-                    '                                     style="margin-top: 10px; overflow: hidden;white-space: nowrap; display: flex">\n' +
-                    '                                    <ul style="padding: 0;">\n' +
-                    '                                        <li class="list-msg">\n' +
-                    '                                            <a href="#">\n' );
-                if(simple.rss){
-                    $("#ebook-list").append('<span class="layui-btn layui-btn-xs layui-btn-normal">已订阅</span>');
-                }else {
-                    $("#ebook-list").append('<span class="layui-btn layui-btn-xs layui-btn-normal">订阅本书</span>');
-                }
-                $("#ebook-list").append('</a><span aria-hidden="true" style="margin-left: 8px;">已有' + simple.rssNum + '人订阅</span>');
-                if(simple.cmsArticle == null){
-                    $("#ebook-list").append('<span aria-hidden="true" style="margin-left: 5px;"><i class="fa fa-eye fa-fw" title="阅读"></i>0</span>\n' +
-                        '<span aria-hidden="true"><i class="fa fa-commenting fa-fw" title="回答"></i>0</span>\n' +
-                        '<span aria-hidden="true"><i class="fa fa-thumbs-o-up fa-fw" title="人气"></i>0</span>');
-                }else {
-                    $("#ebook-list").append('<span aria-hidden="true" style="margin-left: 5px;"><i class="fa fa-eye fa-fw" title="阅读"></i>' + simple.cmsArticle.viewNum + '</span>\n' +
-                        '<span aria-hidden="true"><i class="fa fa-commenting fa-fw" title="回答"></i>' + simple.cmsArticle.commentNum + '</span>\n' +
-                        '<span aria-hidden="true"><i class="fa fa-thumbs-o-up fa-fw" title="人气"></i>' + simple.cmsArticle.likeNum + '</span>');
-                }
-                $("#ebook-list").append('                   </li>\n' +
-                    '                                    </ul>\n' +
-                    '                                </div>\n' +
-                    '                            </div>\n' +
-                    '                        </div>\n' +
-                    '                    </li>');
+                    '                                     style="margin-top: 10px; overflow: hidden;white-space: nowrap; display: flex">' +
+                    '<ul style="padding: 0;"><li class="list-msg"><a href="#"><span class="layui-btn layui-btn-xs layui-btn-normal">' + sub + '</span></a>' +
+                    '<span aria-hidden="true" style="margin-left: 8px;">已有' + simple.rssNum + '人订阅</span>' +
+                    '                        <span aria-hidden="true" style="margin-left: 5px;"><i class="fa fa-eye fa-fw" title="阅读"></i>' + viewNum + '</span>' +
+                    '                        <span aria-hidden="true"><i class="fa fa-commenting fa-fw" title="回答"></i>' + commentNum + '</span>' +
+                    '                        <span aria-hidden="true"><i class="fa fa-thumbs-o-up fa-fw" title="人气"></i>' + likeNum + '</span></li></ul></div></div></div></li>');
 
             });
         }

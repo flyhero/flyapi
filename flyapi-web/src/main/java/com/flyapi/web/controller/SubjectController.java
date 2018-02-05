@@ -3,6 +3,7 @@ package com.flyapi.web.controller;
 import com.alibaba.druid.filter.AutoLoad;
 import com.flyapi.core.base.BaseController;
 import com.flyapi.core.constant.JSONResult;
+import com.flyapi.core.id.SnowflakeIdWorker;
 import com.flyapi.model.CmsArticle;
 import com.flyapi.model.CmsRss;
 import com.flyapi.model.CmsSubject;
@@ -22,10 +23,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.security.auth.Subject;
@@ -48,6 +46,8 @@ public class SubjectController extends BaseController {
     private UserService userService;
     @Autowired
     private RssService rssService;
+    @Autowired
+    private SnowflakeIdWorker snowflakeIdWorker;
 
     /**
      * 前往主题编辑页
@@ -66,6 +66,25 @@ public class SubjectController extends BaseController {
         return mv;
     }
 
+    /**
+     * 订阅主题
+     * @title: rssSubject
+     * @author flyhero <http://www.iflyapi.cn>
+     * @param subjectId
+     * @return com.flyapi.core.constant.JSONResult
+     * @date 2018/2/5 下午11:18
+     */
+    @PostMapping("rss/{subjectId}")
+    @ResponseBody
+    public JSONResult rssSubject(@PathVariable Long subjectId){
+        UcenterUser user = (UcenterUser) currentUser();
+        CmsRss rss = new CmsRss();
+        rss.setRssId(snowflakeIdWorker.nextId());
+        rss.setSubjectId(subjectId);
+        rss.setUserId(user.getUserId());
+        rssService.insertSelective(rss);
+        return JSONResult.ok();
+    }
 
     /**
      * Title: findSubjectList

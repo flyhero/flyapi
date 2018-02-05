@@ -56,9 +56,7 @@
       <if test="subjectId != null">
         subject_id,
       </if>
-      <if test="createTime != null">
         create_time,
-      </if>
       <if test="updateTime != null">
         update_time,
       </if>
@@ -76,9 +74,7 @@
       <if test="subjectId != null">
         #{subjectId,jdbcType=BIGINT},
       </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
+        now(),
       <if test="updateTime != null">
         #{updateTime,jdbcType=TIMESTAMP},
       </if>
