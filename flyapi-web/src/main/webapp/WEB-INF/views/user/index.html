@@ -71,7 +71,7 @@
 
         <div class="layui-tab layui-tab-brief" lay-filter="user">
             <ul class="layui-tab-title" id="LAY_mine">
-                <li data-type="mine-jie" lay-id="index" class="layui-this">我的专题（<span id="sub-count">0</span>）</li>
+                <li data-type="mine-jie" lay-id="index" class="layui-this">我的主题（<span id="sub-count">0</span>）</li>
                 <li data-type="collection" data-url="/collection/find/" lay-id="article">我的文章（<span id="article-count">0</span>）</li>
                 <li data-type="collection" data-url="/collection/find/" lay-id="collection">我的收藏（<span id="collection-count">0</span>）</li>
                 <li data-type="collection" data-url="/like/find/" lay-id="collection">我的喜欢（<span id="like-count">0</span>）</li>
@@ -79,16 +79,6 @@
             <div class="layui-tab-content" >
                 <div class="layui-tab-item layui-show">
                     <ul class="subject-list" id="userSubject">
-               <!--         <li>
-                            <a class="subject-img" href="#" title="点击预览">
-                                <img src="https://user-gold-cdn.xitu.io/2017/12/18/160691fc2995dbf9?imageView2/1/w/200/h/280/q/95/format/webp/interlace/1"  alt="">
-                            </a>
-                            <div style="margin-top: 5px;">
-                                <a class="layui-btn layui-btn-xs layui-btn-primary" style="margin-left: 5px">编辑</a>
-                                <a class="layui-btn layui-btn-xs layui-btn-primary" >删除</a>
-                            </div>
-                        </li>-->
-
                         <th:block th:if="${not #lists.isEmpty(subjectList)}">
                             <th:block th:each="subject,index:${subjectList}">
                                 <li>
@@ -258,8 +248,33 @@
 
     });
 
+    var dataCount = 0;
+    $.getJSON("../book/count",{},function (result) {
+        dataCount = result.data;
+
+        layui.use(['laypage', 'layer'], function(){
+            var laypage = layui.laypage,layer = layui.layer;
+            //完整功能
+            laypage.render({
+                elem: 'pageInfo',
+                count: dataCount,
+                layout: ['count', 'prev', 'page', 'next', 'limit', 'skip'],
+                jump: function(obj){
+                    //obj.curr,obj.limit
+                    console.log(obj.curr)
+                    $.getJSON("../article/findArticleListByUserId/",{"pageNum":obj.curr,"pageSize":obj.limit},function (result) {
+                        $(".fly-case-list").empty();
+                        $.each(result.data.list,function(index,book){
+                            $(".fly-case-list").append('');
+                        });
+                    });
+                }
+            });
+
+        });
 
 
+    });
 
 </script>
 

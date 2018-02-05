@@ -68,21 +68,22 @@ public class SubjectController extends BaseController {
 
     /**
      * 订阅主题
-     * @title: rssSubject
-     * @author flyhero <http://www.iflyapi.cn>
+     *
      * @param subjectId
      * @return com.flyapi.core.constant.JSONResult
+     * @title: rssSubject
+     * @author flyhero <http://www.iflyapi.cn>
      * @date 2018/2/5 下午11:18
      */
     @PostMapping("rss/{subjectId}")
     @ResponseBody
-    public JSONResult rssSubject(@PathVariable Long subjectId){
+    public JSONResult rssSubject(@PathVariable Long subjectId) {
         UcenterUser user = (UcenterUser) currentUser();
         CmsRss rss = new CmsRss();
         rss.setRssId(snowflakeIdWorker.nextId());
         rss.setSubjectId(subjectId);
         rss.setUserId(user.getUserId());
-        rssService.insertSelective(rss);
+        int num = rssService.insertSelective(rss);
         return JSONResult.ok();
     }
 
@@ -126,7 +127,7 @@ public class SubjectController extends BaseController {
     public JSONResult findSubjectByUserId(@PathVariable Long userId, int pageNum, int pageSize) {
         PageInfo<CmsSubject> pageInfo = null;
         List<UserSubjectVo> subjectVoList = null;
-                PageHelper.startPage(pageNum, pageSize);
+        PageHelper.startPage(pageNum, pageSize);
         try {
             List<CmsSubject> list = subjectService.findUserSubject(userId);
             if (list == null || list.isEmpty()) {

@@ -37,10 +37,7 @@
         <div class="layui-row ">
             <div class="layui-col-sm3">
                 <div class="fly-home">
-                    <img src="http://tp4.sinaimg.cn/1345566427/180/5730976522/0" th:src="${setInfo.avatar}" alt="ww">
-                    <!--                <h1>
-                                        <span th:text="${setInfo.nickName}"></span>
-                                    </h1>-->
+                    <img th:src="${setInfo.avatar}" alt="ww">
                     <p class="fly-home-info">
                         <i class="iconfont icon-zuichun" title="声望"></i><span style="color: #FF7200;">67206</span>
                         <i class="iconfont icon-chengshi"></i><span th:text="${setInfo.city}">上海</span>
@@ -49,8 +46,10 @@
 
             </div>
             <div class="layui-col-sm4">
-
-                wwwww
+                <h1>
+                    <i class="iconfont icon-chengshi"></i><span th:text="${setInfo.city}">上海</span>
+                    <span th:text="${setInfo.nickName}"></span>
+                </h1>
 
             </div>
             <div class="layui-col-sm5">
@@ -225,7 +224,6 @@
 </div>
 
 <th:block th:replace="common/footer::footer"></th:block>
-
 
 <script th:inline="javascript">
     var actives = [[${activeVos}]];
@@ -406,6 +404,35 @@
     var host = [[${rootPath}]];
     var userId = '[[${setInfo.userId}]]';
 
+    var currentUser = [[${session.user}]];
+    var currentId = '';
+    if(currentUser != null){
+        currentId = currentUser.userId;
+    }
+    function rssFn(rssHost,author) {
+        if(currentId == ""){
+            layer.msg('请登录');
+            return false;
+        }
+        if(currentId == author){
+            layer.msg("不能订阅自己的主题");
+            return false;
+        }
+        if(rssHost == ''){
+            return false;
+        }else {
+            $.post(rssHost,{},function(data){
+                if(data.code == 200){
+                    layer.msg("订阅成功");
+                }else {
+                    layer.msg("订阅失败");
+                }
+            });
+        }
+
+    }
+
+
     $.ajax({
         type: 'GET',
         url: "../subject/subjects/" + userId,
@@ -419,9 +446,13 @@
                 var viewNum = simple.cmsArticle == null ? 0 : simple.cmsArticle.viewNum;
                 var commentNum = simple.cmsArticle == null ? 0 : simple.cmsArticle.commentNum;
                 var likeNum = simple.cmsArticle == null ? 0 : simple.cmsArticle.likeNum;
+                var authorId = simple.ucenterUser.userId+'';
                 var sub = "订阅本书";
+                var rssHost = "";
                 if (simple.rss) {
                     sub = "已订阅";
+                }else {
+                    rssHost = "'"+host + "/subject/rss/"+ simple.subjectId+"'";
                 }
                 $("#ebook-list").append(' <li class="archive-item" style="display: block;height: 145px; border-bottom: 1px solid #eff2f5">\n' +
                     '                        <a href="#" title="标题">\n' +
@@ -437,7 +468,7 @@
                     '                                     style="margin-top: 10px; overflow: hidden;white-space: nowrap; display: flex">\n' +
                     '                                    <ul style="padding: 0;">\n' +
                     '                                        <li class="list-user">\n' +
-                    '                                            <a href="' + host + '/user/' + simple.ucenterUser.userId + '" target="_blank">\n' +
+                    '                                            <a href="' + host + '/user/' + authorId + '" target="_blank">\n' +
                     '                                                <img src="' + simple.ucenterUser.avatar + '">\n' +
                     '                                                <span>' + simple.ucenterUser.nickName + '</span>\n' +
                     '                                            </a>\n' +
@@ -446,7 +477,7 @@
                     '                                </div>\n' +
                     '                                <div class="archive-info clearfix"\n' +
                     '                                     style="margin-top: 10px; overflow: hidden;white-space: nowrap; display: flex">' +
-                    '<ul style="padding: 0;"><li class="list-msg"><a href="#"><span class="layui-btn layui-btn-xs layui-btn-normal">' + sub + '</span></a>' +
+                    '<ul style="padding: 0;"><li class="list-msg"><a href="javascript:void(0)" onclick="rssFn('+rssHost+','+authorId+');"><span class="layui-btn layui-btn-xs layui-btn-normal">' + sub + '</span></a>' +
                     '<span aria-hidden="true" style="margin-left: 8px;">已有' + simple.rssNum + '人订阅</span>' +
                     '                        <span aria-hidden="true" style="margin-left: 5px;"><i class="fa fa-eye fa-fw" title="阅读"></i>' + viewNum + '</span>' +
                     '                        <span aria-hidden="true"><i class="fa fa-commenting fa-fw" title="回答"></i>' + commentNum + '</span>' +
@@ -454,6 +485,23 @@
 
             });
         }
+    });
+
+    layui.use(['util', 'element', 'layer'], function(){
+        var $ = layui.jquery;
+        var layer = layui.layer;
+        var util = layui.util;
+
+        //右下角bar top
+        util.fixbar({
+            bar1: true,
+            click: function(type){
+                console.log(type);
+                if(type === 'bar1'){
+                    alert('点击了bar1')
+                }
+            }
+        });
     });
 
 

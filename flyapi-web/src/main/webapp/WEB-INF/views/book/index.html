@@ -49,25 +49,10 @@
 
     $("a").removeClass("nav-this");
     $("#book").addClass("nav-this")
-/*    layui.cache.page = '';
-    layui.cache.user = {
-        username: '游客',
-        uid: -1,
-        avatar: '../../static/images/avatar/00.jpg',
-        experience: 83,
-        sex: '男'
-    };*/
-    layui.config({
-        version: "2.0.0",
-        base: '../../../static/mods/'
-    }).extend({
-        fly: 'index'
-    }).use('fly');
 
     var dataCount = 0;
     $.getJSON("../book/count",{},function (result) {
         dataCount = result.data;
-
 
         layui.use(['laypage', 'layer'], function(){
             var laypage = layui.laypage,layer = layui.layer;
@@ -75,7 +60,6 @@
             laypage.render({
                 elem: 'pageInfo',
                 count: dataCount,
-                //,groups: 0
                 layout: ['count', 'prev', 'page', 'next', 'limit', 'skip'],
                 jump: function(obj){
                     //obj.curr,obj.limit
