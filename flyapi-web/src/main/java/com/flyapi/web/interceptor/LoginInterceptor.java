@@ -50,6 +50,7 @@ public class LoginInterceptor implements HandlerInterceptor {
             return true;
         }
         String requestUri = request.getRequestURI();
+        logger.info("请求URI"+requestUri);
         request.setAttribute("rootPath", "http://www.iflyapi.cn:8090");
         for (String url : excludedUrls) {
             if (requestUri.contains(url)) {
@@ -57,12 +58,12 @@ public class LoginInterceptor implements HandlerInterceptor {
             }
         }
         logger.info(request.getSession().getId());
-/*        HttpSession session = request.getSession();
+        HttpSession session = request.getSession();
         UcenterUser login = (UcenterUser) session.getAttribute("user");
         if (login == null) {
-            //System.out.println(request.getContextPath());
+            logger.info(request.getContextPath());
             response.sendRedirect(request.getContextPath());
-        }*/
+        }
 
 /*        Cookie[] cookies = request.getCookies();
         if(null == cookies){

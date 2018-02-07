@@ -74,14 +74,14 @@
                 <div class="layui-form-item">
                     <label for="articleDes" class="layui-form-label">摘要</label>
                     <div class="layui-input-block">
-                        <input type="input" th:value="${article.articleDes}" id="articleDes" name="articleDes" required lay-verify="required" autocomplete="off"
+                        <input type="input" th:value="${article} ? ${article.articleDes}" id="articleDes" name="articleDes" required lay-verify="required" autocomplete="off"
                                class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item layui-form-text">
                     <div class="layui-input-block ">
                         <div id="editormd-text">
-                            <textarea style="display:none;" th:text="${article.mdContent}"></textarea>
+                            <textarea style="display:none;" th:text="${article} ? ${article.mdContent}"></textarea>
                         </div>
                     </div>
                 </div>

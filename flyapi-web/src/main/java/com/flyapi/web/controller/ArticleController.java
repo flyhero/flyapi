@@ -6,6 +6,7 @@ import com.flyapi.model.CmsArticle;
 import com.flyapi.model.CmsComment;
 import com.flyapi.model.CmsSubject;
 import com.flyapi.model.UcenterUser;
+import com.flyapi.pojo.dto.AddArticleRequest;
 import com.flyapi.service.api.*;
 import com.flyapi.pojo.vo.ArticleDetailVo;
 import com.flyapi.pojo.vo.ArticleSimpleVo;
@@ -13,6 +14,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +27,6 @@ import java.util.List;
  * Date: 2017/6/19 0019 下午 2:17
  */
 @Controller
-@RequestMapping("article")
 public class ArticleController extends BaseController {
 
     private Logger logger = LogManager.getLogger(ArticleController.class);
@@ -47,7 +48,7 @@ public class ArticleController extends BaseController {
      * author: flyhero(http://www.iflyapi.cn)
      * date: 2017/6/22 0022 上午 11:35
      */
-    @RequestMapping(value = "detail/{articleId}",method = RequestMethod.GET)
+    @RequestMapping(value = "article/detail/{articleId}",method = RequestMethod.GET)
     public ModelAndView findArticleDetail(@PathVariable("articleId")Long articleId){
 
         if(isLogin()){
@@ -69,7 +70,7 @@ public class ArticleController extends BaseController {
      * author: flyhero(http://www.iflyapi.cn)
      * date: 2017/6/22 0022 上午 11:35
      */
-    @GetMapping("list/{subjectId}/{title}")
+    @GetMapping("article/list/{subjectId}/{title}")
     public ModelAndView findArticleBySubjectId(@PathVariable Long subjectId,@PathVariable String title){
         List<CmsArticle> list = articleService.findArticleBySubjectId(subjectId);
 
@@ -87,7 +88,7 @@ public class ArticleController extends BaseController {
      * date: 2017/6/22 0022 上午 11:10
      */
     @ResponseBody
-    @RequestMapping("findArticleList")
+    @RequestMapping("article/findArticleList")
     public JSONResult findArticleList(int pageNum,int pageSize){
         PageInfo<ArticleSimpleVo> pageInfo = null;
         PageHelper.startPage(pageNum, pageSize);
@@ -109,7 +110,7 @@ public class ArticleController extends BaseController {
      * date: 2017/6/22 0022 下午 6:11
      */
     @ResponseBody
-    @RequestMapping("findLastUpdateOrHotArticles")
+    @RequestMapping("article/findLastUpdateOrHotArticles")
     public JSONResult findLastUpdateOrHotArticles(int type){
         logger.info("接收值："+type);
         List<CmsArticle> list =null;
@@ -130,7 +131,7 @@ public class ArticleController extends BaseController {
      * date: 2017/9/23 0022 下午 1:53
      */
     @ResponseBody
-    @RequestMapping("findArticleListByUserId/{userId}")
+    @RequestMapping("article/findArticleListByUserId/{userId}")
     public JSONResult findArticleListByUserId(@PathVariable long userId,int pageNum,int pageSize){
         PageInfo<CmsArticle> pageInfo = null;
         PageHelper.startPage(pageNum, pageSize);
@@ -154,7 +155,7 @@ public class ArticleController extends BaseController {
      * @return org.springframework.web.servlet.ModelAndView
      * @date 2018/2/3 下午2:35
      */
-    @GetMapping("{articleId}")
+    @GetMapping("article/{articleId}")
     public ModelAndView gotoAddPage(@PathVariable Long articleId){
 
 
@@ -172,15 +173,16 @@ public class ArticleController extends BaseController {
         CmsArticle article = articleService.selectByPrimaryKey(articleId);
         mv.addObject("article",article);
 
-
         return mv;
 
     }
 
+    @PostMapping("article")
     @ResponseBody
-    @PostMapping("add")
-    public JSONResult addArticle(){
-
+    public JSONResult addArticle(AddArticleRequest addArticleRequest){
+        CmsArticle cmsArticle = new CmsArticle();
+        BeanUtils.copyProperties(addArticleRequest,cmsArticle);
+        articleService.insertSelective(cmsArticle);
         return JSONResult.ok();
     }
 
