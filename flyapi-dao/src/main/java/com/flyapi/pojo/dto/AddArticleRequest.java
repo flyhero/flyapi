@@ -6,16 +6,25 @@ package com.flyapi.pojo.dto;
  */
 public class AddArticleRequest {
 
+    private Long articleId;
     private String title;
     private String articleDes;
     private String cover;
     private String mdContent;
     private String htmlContent;
-    private String subjectId;
+    private Long subjectId;
     private String original;
-    private String permissions;
-    private String apply;
-    private String status;
+    private Byte permissions;
+    private Byte apply;
+    private Byte status;
+
+    public Long getArticleId() {
+        return articleId;
+    }
+
+    public void setArticleId(Long articleId) {
+        this.articleId = articleId;
+    }
 
     public String getTitle() {
         return title;
@@ -57,11 +66,11 @@ public class AddArticleRequest {
         this.htmlContent = htmlContent;
     }
 
-    public String getSubjectId() {
+    public Long getSubjectId() {
         return subjectId;
     }
 
-    public void setSubjectId(String subjectId) {
+    public void setSubjectId(Long subjectId) {
         this.subjectId = subjectId;
     }
 
@@ -73,27 +82,27 @@ public class AddArticleRequest {
         this.original = original;
     }
 
-    public String getPermissions() {
+    public Byte getPermissions() {
         return permissions;
     }
 
-    public void setPermissions(String permissions) {
+    public void setPermissions(Byte permissions) {
         this.permissions = permissions;
     }
 
-    public String getApply() {
+    public Byte getApply() {
         return apply;
     }
 
-    public void setApply(String apply) {
+    public void setApply(Byte apply) {
         this.apply = apply;
     }
 
-    public String getStatus() {
+    public Byte getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Byte status) {
         this.status = status;
     }
 }

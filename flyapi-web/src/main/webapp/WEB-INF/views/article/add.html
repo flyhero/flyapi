@@ -28,6 +28,7 @@
                         <div class="layui-input-block">
                             <input th:value="${article} ? ${article.title} :''" type="input" id="title" name="title" required
                                    lay-verify="required" autocomplete="off" class="layui-input">
+                            <input type="hidden" id="articleId" name="articleId" th:value="${article} ? ${article.articleId} : 0">
                         </div>
                     </div>
                     <div class="layui-col-md3">
@@ -62,7 +63,7 @@
                         <div class="layui-form-item" pane="" style="margin-bottom: -8px">
                             <label class="layui-form-label">权限</label>
                             <div class="layui-input-block">
-                                <input th:value="${article} ? ${article.permissions} :''" value="0" type="checkbox"
+                                <input th:value="${article} ? ${article.permissions} :'0'"  type="checkbox"
                                        id="permissions" name="permissions" lay-filter="permissions" lay-skin="switch" lay-text="公开|私有"
                                        checked>
                             </div>
@@ -81,7 +82,7 @@
                 <div class="layui-form-item layui-form-text">
                     <div class="layui-input-block ">
                         <div id="editormd-text">
-                            <textarea style="display:none;" th:text="${article} ? ${article.mdContent}"></textarea>
+                            <textarea style="display:none;" th:text="${article} ? ${article.mdContent}" required></textarea>
                         </div>
                     </div>
                 </div>
@@ -91,8 +92,7 @@
                     <div class="layui-col-md6">
                         <label class="layui-form-label">原文链接</label>
                         <div class="layui-input-block">
-                            <input th:value="${article} ? ${article.original} :''" type="text" id="original" name="original"
-                                   lay-verify="url" placeholder="为空既原创" autocomplete="off" class="layui-input">
+                            <input th:value="${article} ? ${article.original} :''" type="text" id="original" name="original" placeholder="为空既原创" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-col-md6">
@@ -100,8 +100,8 @@
                     </div>
                 </div>
                 <div class="layui-form-item">
-                    <button class="layui-btn" lay-filter="pub" lay-submit="">立即发布</button>
-                    <button class="layui-btn " lay-filter="draft" lay-submit="">保存草稿</button>
+                    <button class="layui-btn layui-btn-radius layui-btn-normal" lay-filter="pub" lay-submit>立即发布</button>
+                    <button class="layui-btn layui-btn-radius " lay-filter="draft" lay-submit>保存草稿</button>
 
                 </div>
             </form>
@@ -196,11 +196,12 @@
             function postArticle(status) {
                 var coverHtml = testEditor.getHTML();
                 //var pa=new RegExp("<img[^>]*>");
-                var pa=new RegExp("<img src=\"(.+?)\"");
+                var pa=new RegExp("<img src=\"(.+?)\">");
                 var cover = pa.exec(coverHtml)[0];
                 console.log(cover);
-                $.post("../article/add",
+                $.post("../article",
                     {
+                        "articleId":$("#articleId").val(),
                         "title":$("#title").val(),
                         "articleDes":$("#articleDes").val(),
                         "cover": cover,
@@ -213,15 +214,18 @@
                         "status":status
                     },
                     function(result){
-                        if(result.code==200){
+                    /*    if(result.code==200){
                             location.href="";
-                        }
+                        }*/
 
                     }, "json");
             }
             //监听提交
             form.on('submit(pub)', function (data) {
+                console.log(data.field);
+                alert(JSON.stringify(data.field));
                 postArticle(1);
+                return false;
             });
             form.on('submit(draft)', function (data) {
 /*                layer.alert(JSON.stringify(data.field), {
