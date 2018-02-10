@@ -64,8 +64,8 @@
             <div class="layui-input-block">
               <div class="layui-upload">
                 <div class="layui-upload-list">
-                  <input type="hidden" id="cover">
-                  <img class="flyapi-upload-img" th:src="${subject} ? ${subject.cover} : ''">
+                  <input type="hidden" id="cover" lay-verify="required|cover">
+                  <img class="flyapi-upload-img"  th:src="${subject} ? ${subject.cover} : ''">
                   <a>建议尺寸：100px * 140px</a>
                 </div>
               </div>
@@ -74,24 +74,20 @@
           <div class="layui-form-item layui-form-text">
             <label class="layui-form-label">简介</label>
             <div class="layui-input-block">
-              <textarea placeholder="请输入内容" th:text="${subject} ? ${subject.subjectDes} : ''" class="layui-textarea"></textarea>
+              <textarea placeholder="请输入内容" th:text="${subject} ? ${subject.subjectDes} : ''" lay-verify="required|subjectDes" class="layui-textarea"></textarea>
             </div>
           </div>
           <div class="layui-form-item">
             <div class="layui-input-block">
-              <button class="layui-btn layui-btn-primary layui-btn-radius">原始按钮</button>
-              <button class="layui-btn" lay-submit lay-filter="*">立即提交</button>
+              <button class="layui-btn layui-btn-primary layui-btn-radius" lay-submit lay-filter="*">立即提交</button>
               <button type="reset" class="layui-btn layui-btn-primary">重置</button>
             </div>
           </div>
         </form>
       </div>
     </div>
-
   </div>
 </div>
-
-
 
 <script>
 
@@ -109,7 +105,27 @@
 
         //监听提交
         form.on('submit(*)', function(data){
-            console.log(data)
+            alert(JSON.stringify(data.field));
+            console.log(data);
+
+       /*     $.post("../article",
+                {
+                    "articleId":$("#articleId").val(),
+                    "title":$("#title").val(),
+                    "articleDes":$("#articleDes").val(),
+                    "cover": cover,
+                    "mdContent":testEditor.getMarkdown(),
+                    "htmlContent":coverHtml,
+                    "subjectId":$("#subjectId").val(),
+                    "original":$("#original").val(),
+                    "permissions":$("#permissions").val(),
+                    "apply": $("#apply").val(),
+                    "status":status
+                },
+                function(result){
+
+                }, "json");*/
+
             return false;
         });
 

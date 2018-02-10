@@ -13,6 +13,23 @@
     <script src="../../static/js/jquery.min.js"></script>
     <script src="../../static/echarts//dat.gui.js"></script>
     <link href="../static/eb/subject.css" rel="stylesheet" type="text/css">
+    <script src="../../static/iconfont/social.js"></script>
+
+    <style type="text/css">
+        .icon {
+            /* 通过设置 font-size 来改变图标大小 */
+            width: 22px;
+            height: 22px;
+            /* 图标和文字相邻时，垂直对齐 */
+            vertical-align: -0.15em;
+            /* 通过设置 color 来改变 SVG 的颜色/fill */
+            fill: currentColor;
+            /* path 和 stroke 溢出 viewBox 部分在 IE 下会显示
+               normalize.css 中也包含这行 */
+            overflow: hidden;
+        }
+
+    </style>
     <style>
         #echart {
             position: absolute;
@@ -37,19 +54,64 @@
         <div class="layui-row ">
             <div class="layui-col-sm3">
                 <div class="fly-home">
-                    <img th:src="${setInfo.avatar}" alt="ww">
-                    <p class="fly-home-info">
-                        <i class="iconfont icon-zuichun" title="声望"></i><span style="color: #FF7200;">67206</span>
-                        <i class="iconfont icon-chengshi"></i><span th:text="${setInfo.city}">上海</span>
+                    <img th:src="${setInfo.avatar}" th:alt="${setInfo.nickName}">
+                    <p class="fly-home-info" style="margin-top: 5px">
+                    <span>
+                        <svg class="icon" aria-hidden="true">
+                            <use xlink:href="#icon-GitHub"></use>
+                        </svg>
+                    </span>
+                        <span>
+                        <svg class="icon" aria-hidden="true">
+                            <use xlink:href="#icon-zhihu"></use>
+                        </svg>
+                    </span>
+                        <span>
+                        <svg class="icon" aria-hidden="true">
+                            <use xlink:href="#icon-weibo"></use>
+                        </svg>
+                    </span>
+                        <span>
+                        <svg class="icon" aria-hidden="true">
+                            <use xlink:href="#icon-linkedin"></use>
+                        </svg>
+                    </span>
+
+                        <!-- <i class="iconfont icon-zuichun" title="声望"></i><span style="color: #FF7200;">67206</span>
+                         <i class="iconfont icon-chengshi"></i><span th:text="${setInfo.city}">上海</span>-->
                     </p>
                 </div>
 
             </div>
             <div class="layui-col-sm4">
-                <h1>
-                    <i class="iconfont icon-chengshi"></i><span th:text="${setInfo.city}">上海</span>
-                    <span th:text="${setInfo.nickName}"></span>
-                </h1>
+                <ul style="padding-top: 20px">
+                    <li>
+                        <span>
+                            <svg class="icon" aria-hidden="true">
+                                <use xlink:href="#icon-linkedin"></use>
+                            </svg>
+                        </span>
+                        <span th:text="${setInfo.nickName}"></span>
+                    </li>
+                    <li>
+                        <span>
+                            <svg class="icon" aria-hidden="true">
+                                <use xlink:href="#icon-linkedin"></use>
+                            </svg>
+                        </span>
+                        <span th:text="${setInfo.city}">wwdas</span>
+                    </li>
+                    <li>
+ <span>
+                        <svg class="icon" aria-hidden="true">
+                            <use xlink:href="#icon-linkedin"></use>
+                        </svg>
+                    </span>
+                    </li>
+                    <li>
+
+                    </li>
+                </ul>
 
             </div>
             <div class="layui-col-sm5">
@@ -92,52 +154,6 @@
                     <ul class="archive-list"
                         style="border:none; background:#ffffff;" id="ebook-list">
 
-                        <li class="archive-item" style="display: block;height: 145px; border-bottom: 1px solid #eff2f5">
-                            <a href="#" title="标题">
-                                <div class="covercon">
-                                    <img src="https://user-gold-cdn.xitu.io/2017/12/18/160691fc2995dbf9?imageView2/1/w/200/h/280/q/95/format/webp/interlace/1"
-                                         class="cover imgloadinglater" style="display: block;">
-                                </div>
-                            </a>
-                            <div class="archive-text">
-                                <div class="archive-detail">
-                                    <h3><a href="#" title="文章标题">书籍标题</a></h3>
-                                    <p>他不是别人 他是张国荣 14年前的今天，一颗巨星陨落。他不是别人 他是张国荣 14年前的今天，一颗巨星陨落他不是别人 他是张国荣
-                                        14年前的今天，一颗巨星陨落 </p>
-                                    <div class="archive-info clearfix"
-                                         style="margin-top: 10px; overflow: hidden;white-space: nowrap; display: flex">
-                                        <ul style="padding: 0;">
-                                            <li class="list-user">
-                                                <a href="#" target="_blank">
-                                                    <img src="../static/images/avatar/flyhero.jpg">
-                                                    <span>flyero</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-
-                                    </div>
-                                    <div class="archive-info clearfix"
-                                         style="margin-top: 10px; overflow: hidden;white-space: nowrap; display: flex">
-                                        <ul style="padding: 0;">
-                                            <li class="list-msg">
-                                                <a href="#">
-                                                    <span class="layui-btn layui-btn-xs layui-btn-normal">订阅本书</span>
-                                                </a>
-                                                <span aria-hidden="true" style="margin-left: 8px;">已有1002人订阅</span>
-                                                <span aria-hidden="true" style="margin-left: 5px;"><i
-                                                        class="fa fa-eye fa-fw" title="阅读"></i> 271</span>
-                                                <span aria-hidden="true"><i class="fa fa-commenting fa-fw"
-                                                                            title="回答"></i> 8</span>
-                                                <span aria-hidden="true"><i class="fa fa-thumbs-o-up fa-fw"
-                                                                            title="人气"></i> 106</span>
-                                            </li>
-
-                                        </ul>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </li>
                     </ul>
 
 
@@ -406,25 +422,26 @@
 
     var currentUser = [[${session.user}]];
     var currentId = '';
-    if(currentUser != null){
+    if (currentUser != null) {
         currentId = currentUser.userId;
     }
-    function rssFn(rssHost,author) {
-        if(currentId == ""){
+
+    function rssFn(rssHost, author) {
+        if (currentId == "") {
             layer.msg('请登录');
             return false;
         }
-        if(currentId == author){
+        if (currentId == author) {
             layer.msg("不能订阅自己的主题");
             return false;
         }
-        if(rssHost == ''){
+        if (rssHost == '') {
             return false;
-        }else {
-            $.post(rssHost,{},function(data){
-                if(data.code == 200){
+        } else {
+            $.post(rssHost, {}, function (data) {
+                if (data.code == 200) {
                     layer.msg("订阅成功");
-                }else {
+                } else {
                     layer.msg("订阅失败");
                 }
             });
@@ -446,13 +463,13 @@
                 var viewNum = simple.cmsArticle == null ? 0 : simple.cmsArticle.viewNum;
                 var commentNum = simple.cmsArticle == null ? 0 : simple.cmsArticle.commentNum;
                 var likeNum = simple.cmsArticle == null ? 0 : simple.cmsArticle.likeNum;
-                var authorId = simple.ucenterUser.userId+'';
+                var authorId = simple.ucenterUser.userId + '';
                 var sub = "订阅本书";
                 var rssHost = "";
                 if (simple.rss) {
                     sub = "已订阅";
-                }else {
-                    rssHost = "'"+host + "/subject/rss/"+ simple.subjectId+"'";
+                } else {
+                    rssHost = "'" + host + "/subject/rss/" + simple.subjectId + "'";
                 }
                 $("#ebook-list").append(' <li class="archive-item" style="display: block;height: 145px; border-bottom: 1px solid #eff2f5">\n' +
                     '                        <a href="#" title="标题">\n' +
@@ -477,7 +494,7 @@
                     '                                </div>\n' +
                     '                                <div class="archive-info clearfix"\n' +
                     '                                     style="margin-top: 10px; overflow: hidden;white-space: nowrap; display: flex">' +
-                    '<ul style="padding: 0;"><li class="list-msg"><a href="javascript:void(0)" onclick="rssFn('+rssHost+','+authorId+');"><span class="layui-btn layui-btn-xs layui-btn-normal">' + sub + '</span></a>' +
+                    '<ul style="padding: 0;"><li class="list-msg"><a href="javascript:void(0)" onclick="rssFn(' + rssHost + ',' + authorId + ');"><span class="layui-btn layui-btn-xs layui-btn-normal">' + sub + '</span></a>' +
                     '<span aria-hidden="true" style="margin-left: 8px;">已有' + simple.rssNum + '人订阅</span>' +
                     '                        <span aria-hidden="true" style="margin-left: 5px;"><i class="fa fa-eye fa-fw" title="阅读"></i>' + viewNum + '</span>' +
                     '                        <span aria-hidden="true"><i class="fa fa-commenting fa-fw" title="回答"></i>' + commentNum + '</span>' +
@@ -487,7 +504,7 @@
         }
     });
 
-    layui.use(['util', 'element', 'layer'], function(){
+    layui.use(['util', 'element', 'layer'], function () {
         var $ = layui.jquery;
         var layer = layui.layer;
         var util = layui.util;
@@ -495,9 +512,9 @@
         //右下角bar top
         util.fixbar({
             bar1: true,
-            click: function(type){
+            click: function (type) {
                 console.log(type);
-                if(type === 'bar1'){
+                if (type === 'bar1') {
                     alert('点击了bar1')
                 }
             }

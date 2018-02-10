@@ -149,7 +149,6 @@ public class SubjectController extends BaseController {
                 user.setPhone("");
                 userSubjectVo.setUcenterUser(user);
 
-
                 CmsRss cmsRss = new CmsRss();
                 cmsRss.setSubjectId(subject.getSubjectId());
                 List<CmsRss> cmsRssList = rssService.findByUserIdAndSubjectId(cmsRss);
@@ -193,7 +192,7 @@ public class SubjectController extends BaseController {
             logger.error(e.toString());
         }
         mv.addObject("cmsSubject", cmsSubject);
-        mv.setViewName("html/user/update-sub");
+        mv.setViewName("user/update-sub");
         return mv;
     }
 }
