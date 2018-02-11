@@ -1,14 +1,14 @@
 package com.flyapi.core.util;
 
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
+import java.awt.*;
+import java.awt.font.TextAttribute;
 import java.awt.image.BufferedImage;
 import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.AttributedCharacterIterator;
+import java.text.AttributedString;
 
 import com.sun.image.codec.jpeg.JPEGCodec;
 import com.sun.image.codec.jpeg.JPEGImageEncoder;
@@ -105,13 +105,23 @@ public class ChartGraphics {
         tip.drawString("正在返回商家主页", 100, tip_2_top+(H_tip)/2+10);
 */
 
-
+                       /* --------对要显示的文字进行处理-------------- */
+        AttributedString ats = new AttributedString(name);
+        Font font = new Font("宋体", Font.BOLD, 14);
+        tip.setFont(font);
+                         /* 消除java.awt.Font字体的锯齿 */
+        tip.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+                RenderingHints.VALUE_ANTIALIAS_ON);
+                          /* 消除java.awt.Font字体的锯齿 */
+        // font = g.getFont().deriveFont(30.0f);
+        ats.addAttribute(TextAttribute.FONT, font, 0, name.length());
+        AttributedCharacterIterator iter = ats.getIterator();
 
         //***********************设置下面的按钮块
         //设置字体颜色，先设置颜色，再填充内容
         tip.setColor(Color.black);
         tip.drawString("您可以选择的操作：", 20, 80);
-        tip.drawString("下面的小图标：", 20, shops_2_top);
+        tip.drawString("下面的小图标："+iter, 20, shops_2_top);
         //***********************按钮
 /*        Font btnFont = new Font("宋体", Font.BOLD, 14);
         Graphics2D btn1 = image.createGraphics();
@@ -143,7 +153,7 @@ public class ChartGraphics {
     public static void main(String[] args) {
         ChartGraphics cg = new ChartGraphics();
         try {
-            cg.graphicsGeneration("ewew", "1", "12", "/Users/qfwang/Desktop/1.jpg");
+            cg.graphicsGeneration("这是不一样的", "1", "12", "/Users/qfwang/Desktop/1.jpg");
         } catch (Exception e) {
             e.printStackTrace();
         }

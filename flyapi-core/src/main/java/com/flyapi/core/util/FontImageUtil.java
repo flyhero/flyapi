@@ -80,8 +80,8 @@ public class FontImageUtil {
 //        ArrayList<int[]> rgbs = getRGB();
         int[] ranRGB = getRanRGB();
         boolean isQian=isQianRGB(ranRGB);
-        int width=120;
-        int height=120;
+        int width=650;
+        int height=910;
 
         //创建图片
         BufferedImage image=new BufferedImage(width,height, BufferedImage.TYPE_INT_BGR);
@@ -176,5 +176,13 @@ public class FontImageUtil {
             return true;
         }
         return false;
+    }
+
+    public static void main(String[] args) {
+        try {
+            createImage("测试用途hahahhahahahhahahhahhh你好",new File("/Users/qfwang/Desktop/t.png"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

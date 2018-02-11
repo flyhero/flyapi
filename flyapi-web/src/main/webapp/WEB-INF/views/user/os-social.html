@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <title>开源社交</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <th:block th:include="common/link::link"></th:block>
+
+</head>
+<body>
+
+<div class="header">
+  <th:block th:include="common/header::header"></th:block>
+</div>
+
+<div class="main fly-user-main layui-clear">
+  <th:block th:include="common/left::left"></th:block>
+  
+  <div class="site-tree-mobile layui-hide">
+    <i class="layui-icon">&#xe602;</i>
+  </div>
+  <div class="site-mobile-shade"></div>
+
+  <div class="fly-panel fly-panel-user" pad20>
+
+    <div class="layui-tab layui-tab-brief" lay-filter="">
+      <ul class="layui-tab-title">
+        <li class="layui-this">评论消息</li>
+        <li>系统消息<span class="layui-badge-dot"></span></li>
+      </ul>
+      <div class="layui-tab-content" style="height: 100px;">
+        <div class="layui-tab-item layui-show">
+          <ul class="jie-row">
+
+
+
+<!--            <li>
+              <span class="fly-jing">飞翔的小子</span>
+              <a href="#" class="jie-title">评论：你好啊，能数一下吗？</a>
+              <i>1天前</i>
+              <em>2018-01-08</em>
+            </li>-->
+          </ul>
+        </div>
+        <div class="layui-tab-item">
+          <ul class="jie-row">
+
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+</div>
+
+
+
+<script>
+    $(".left-menu").removeClass("layui-this");
+    $("#fly-message").addClass("layui-this")
+
+    layui.use(['util', 'element', 'layer','upload','form','laytpl','laypage'], function(){
+        var $ = layui.jquery;
+        var layer = layui.layer;
+        var util = layui.util;
+        var laytpl = layui.laytpl;
+        var form = layui.form;
+        var upload = layui.upload;
+        var laypage = layui.laypage;
+        var element = layui.element;//Tab的切换功能，切换事件监听等，需要依赖element模块
+    });
+
+
+
+</script>
+
+</body>
+</html>

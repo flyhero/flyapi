@@ -3,10 +3,13 @@ package com.flyapi.core.util;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.color.ColorSpace;
+import java.awt.font.TextAttribute;
 import java.awt.geom.AffineTransform;
 import java.awt.image.*;
 import java.io.File;
 import java.io.IOException;
+import java.text.AttributedCharacterIterator;
+import java.text.AttributedString;
 
 /**
  * 图片处理工具类：<br>
@@ -295,12 +298,7 @@ public class ImageUtil {
 			int height = src.getHeight(null);
 			BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 			Graphics2D g = image.createGraphics();
-			g.drawImage(src, 0, 0, width, height, null);
-			g.setColor(color);
-			g.setFont(new Font(fontName, fontStyle, fontSize));
-			g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_ATOP, alpha));
-			// 在指定坐标绘制水印文字
-			g.drawString(pressText, (width - (getLength(pressText) * fontSize)) / 2 + x, (height - fontSize) / 2 + y);
+			drawString(g,pressText,(width - (getLength(pressText) * fontSize)) / 2 + x, (height - fontSize) / 2 + y,new Font(fontName, fontStyle, fontSize),color,alpha);
 			g.dispose();
 			ImageIO.write((BufferedImage) image, IMAGE_TYPE_JPEG, destImageFile);// 输出到文件流
 		} catch (IOException e) {
@@ -340,6 +338,25 @@ public class ImageUtil {
 		}
 	}
 
+	public final static String createImage(String subjectTitle,String nickName,File pressImgFile, File srcImageFile, File destImageFile){
+		try {
+			Font font = new Font("宋体",Font.BOLD,50);
+
+			Image src = ImageIO.read(srcImageFile);
+			int wideth = src.getWidth(null);
+			int height = src.getHeight(null);
+			BufferedImage image = new BufferedImage(wideth, height, BufferedImage.TYPE_INT_RGB);
+			Graphics2D g = image.createGraphics();
+//			drawString(g,pressText,(width - (getLength(subjectTitle) * fontSize)) / 2 + x, (height - fontSize) / 2 + y,font,color,alpha);
+
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return "";
+    }
+
 	//---------------------------------------------------------------------------------------------------------------- Private method start
 	/**
 	 * 计算text的长度（一个中文算两个字符）
@@ -359,4 +376,31 @@ public class ImageUtil {
 		return length / 2;
 	}
 	//---------------------------------------------------------------------------------------------------------------- Private method end
+
+	private final static void drawString(Graphics2D g,String text,int x,int y,Font font,Color color,float alpha){
+		g.setColor(color);
+		g.setFont(font);
+		g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_ATOP, alpha));
+		// 在指定坐标绘制水印文字
+		g.drawString(text, x,y);
+	}
+	private final static void drawImage(Graphics2D g,File pressImgFile,int x,int y,float alpha){
+
+		try {
+			// 水印文件
+			Image pressImg = ImageIO.read(pressImgFile);
+			int pressImgWidth = pressImg.getWidth(null);
+			int pressImgHeight = pressImg.getHeight(null);
+			g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_ATOP, alpha));
+			g.drawImage(pressImg, x, y, pressImgWidth, pressImgHeight, null);
+			// 水印文件结束
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void main(String[] args) {
+//		pressText("主题标题",new File("/Users/qfwang/Desktop/t.png"),new File("/Users/qfwang/Desktop/t1.png"),"宋体",1,Color.PINK,50,0,0,0.4f);
+		pressImage(new File("/Users/qfwang/Desktop/jinshi.png"),new File("/Users/qfwang/Desktop/t.png"),new File("/Users/qfwang/Desktop/t2.png"),0,0,1.0f);
+	}
 }
