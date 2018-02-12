@@ -18,6 +18,14 @@
     from cms_like
     where id = #{id,jdbcType=BIGINT}
   </select>
+
+  <select id="findLikeArticleByUserId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from cms_like
+    where user_id = #{userId,jdbcType=BIGINT} and is_delete = 0 and target_type = 1
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from cms_like
     where id = #{id,jdbcType=BIGINT}

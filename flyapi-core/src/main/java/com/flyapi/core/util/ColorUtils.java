@@ -51,8 +51,8 @@ public class ColorUtils {
         int index = RandomUtil.randomInt(0,startList.size());
         int[] sint = startList.get(index);
         int[] eint = endList.get(index);
-        Color start = new Color(sint[0],sint[1],sint[3]);
-        Color end = new Color(eint[0],eint[1],eint[3]);
+        Color start = new Color(sint[0],sint[1],sint[2]);
+        Color end = new Color(eint[0],eint[1],eint[2]);
         map.put("start",start);
         map.put("end",end);
         return map;

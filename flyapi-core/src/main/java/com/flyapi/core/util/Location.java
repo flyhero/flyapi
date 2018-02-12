@@ -15,6 +15,7 @@ public class Location {
 
     public void init(int width,int heigth){
         subjectTitleX = width;
+        subjectTitleY = heigth;
     }
 
 }

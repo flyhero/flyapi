@@ -1,7 +1,10 @@
 package com.flyapi.service.api;
 
 import com.flyapi.core.base.BaseService;
+import com.flyapi.model.CmsArticle;
 import com.flyapi.model.CmsCollectArticle;
+
+import java.util.List;
 
 /**
  * author: flyhero
@@ -9,4 +12,5 @@ import com.flyapi.model.CmsCollectArticle;
  */
 public interface CollectArticleService extends BaseService<CmsCollectArticle> {
 
+    List<CmsCollectArticle> findArticleByUserId(Long userId);
 }

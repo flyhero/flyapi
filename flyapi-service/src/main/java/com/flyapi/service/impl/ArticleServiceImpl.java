@@ -90,6 +90,11 @@ public class ArticleServiceImpl extends BaseServiceImpl<CmsArticle,CmsArticleMap
         return cmsArticleMapper.findArticleByUserId(userId);
     }
 
+    @Override
+    public int findArticleCountByUserId(Long userId) {
+        return cmsArticleMapper.findArticleCountByUserId(userId);
+    }
+
     public List<ViewLevelVo> findViewLevel(Long userId) {
         return cmsArticleMapper.findViewLevel(userId);
     }

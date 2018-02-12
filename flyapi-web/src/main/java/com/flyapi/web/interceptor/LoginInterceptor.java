@@ -62,7 +62,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         UcenterUser login = (UcenterUser) session.getAttribute("user");
         if (login == null) {
             logger.info("request.getContextPath():"+request.getContextPath());
-            response.sendRedirect(request.getContextPath());
+            response.sendRedirect("http://www.iflyapi.cn:8090");
         }
 
 /*        Cookie[] cookies = request.getCookies();

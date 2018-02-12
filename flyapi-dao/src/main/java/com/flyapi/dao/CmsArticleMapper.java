@@ -36,6 +36,8 @@ public interface CmsArticleMapper {
 
     List<CmsArticle> findArticleByUserId(Long userId);
 
+    int findArticleCountByUserId(Long userId);
+
     List<ViewLevelVo> findViewLevel(Long userId);
 
     List<CmsArticle> findHotArticlesByUserId(Long userId);

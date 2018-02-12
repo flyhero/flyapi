@@ -341,7 +341,7 @@ public class ImageUtil {
 
 	public final static String createImage(String subjectTitle,String nickName,File pressImgFile, File destImageFile){
 		try {
-			Font font = new Font("宋体",Font.BOLD,50);
+			Font font = new Font("华文宋体",Font.BOLD,40);
 
 			int width=650;
 			int height=910;
@@ -349,12 +349,29 @@ public class ImageUtil {
 			Graphics2D g = image.createGraphics();
 			Map map = ColorUtils.intColor();
 			GradientPaint grad = new GradientPaint(0, 0, (Color) map.get("start"), width, height, (Color) map.get("end")); //从左上到右下渐变;
-//			g.setPaint(grad);
+			g.setPaint(grad);
+			g.fillRect(0, 0, width, height);//先用颜色填充背景
+			Color color = (Color) map.get("end");
+			boolean isBlack = isQianRGB(new int[]{color.getRed(),color.getGreen(),color.getBlue()});
+			System.out.println(isBlack);
 
+			int length = getLength(subjectTitle);
+			System.out.println(length);
+			int count = length%8 > 0 ? length/8+1 : length/8 ;
 
+			for (int i = 0; i < count; i++) {
+				if(i == count-1){
+					drawString(g,subjectTitle.substring(i*8,length),0, 300 + 45*i,font,Color.WHITE,1.0f);
+				}else {
+					drawString(g,subjectTitle.substring(i*8,i*8+8),0, 300 + 45*i,font,Color.WHITE,1.0f);
 
-//			drawString(g,pressText,(width - (getLength(subjectTitle) * fontSize)) / 2 + x, (height - fontSize) / 2 + y,font,color,alpha);
+				}
+			}
+			drawImage(g,pressImgFile,0,0,1.0f);
 
+			g.dispose();
+			//输出png图片
+			ImageIO.write(image, "png", destImageFile);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -398,6 +415,7 @@ public class ImageUtil {
 	//---------------------------------------------------------------------------------------------------------------- Private method end
 
 	private final static void drawString(Graphics2D g,String text,int x,int y,Font font,Color color,float alpha){
+
 		g.setColor(color);
 		g.setFont(font);
 		g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_ATOP, alpha));
@@ -421,6 +439,7 @@ public class ImageUtil {
 
 	public static void main(String[] args) {
 //		pressText("主题标题",new File("/Users/qfwang/Desktop/t.png"),new File("/Users/qfwang/Desktop/t1.png"),"宋体",1,Color.PINK,50,0,0,0.4f);
-		pressImage(new File("/Users/qfwang/Desktop/jinshi.png"),new File("/Users/qfwang/Desktop/t.png"),new File("/Users/qfwang/Desktop/t2.png"),0,0,1.0f);
+//		pressImage(new File("/Users/qfwang/Desktop/jinshi.png"),new File("/Users/qfwang/Desktop/t.png"),new File("/Users/qfwang/Desktop/t2.png"),0,0,1.0f);
+		createImage("这里是长度过长要分段截取的","",new File("/Users/qfwang/Desktop/jinshi.png"),new File("/Users/qfwang/Desktop/test.png"));
 	}
 }

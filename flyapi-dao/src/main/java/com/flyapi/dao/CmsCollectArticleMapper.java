@@ -2,6 +2,8 @@ package com.flyapi.dao;
 
 import com.flyapi.model.CmsCollectArticle;
 
+import java.util.List;
+
 public interface CmsCollectArticleMapper {
     int deleteByPrimaryKey(Long id);
 
@@ -14,4 +16,6 @@ public interface CmsCollectArticleMapper {
     int updateByPrimaryKeySelective(CmsCollectArticle record);
 
     int updateByPrimaryKey(CmsCollectArticle record);
-}
+
+    List<CmsCollectArticle> findArticleByUserId(Long articleId);
+ }

@@ -142,12 +142,13 @@ public class ArticleController extends BaseController {
      * date: 2017/9/23 0022 下午 1:53
      */
     @ResponseBody
-    @RequestMapping("article/findArticleListByUserId/{userId}")
-    public JSONResult findArticleListByUserId(@PathVariable long userId, int pageNum, int pageSize) {
+    @GetMapping("article/user")
+    public JSONResult findArticleListByUserId( int pageNum, int pageSize) {
         PageInfo<CmsArticle> pageInfo = null;
         PageHelper.startPage(pageNum, pageSize);
         try {
-            List<CmsArticle> list = articleService.findArticleByUserId(userId);
+            UcenterUser user = (UcenterUser) currentUser();
+            List<CmsArticle> list = articleService.findArticleByUserId(user.getUserId());
             if (list == null || list.isEmpty()) {
                 return JSONResult.error();
             }
@@ -158,6 +159,13 @@ public class ArticleController extends BaseController {
         return JSONResult.ok(pageInfo);
     }
 
+    @ResponseBody
+    @GetMapping("article/count")
+    public JSONResult findArticleCountByUserId(){
+        UcenterUser user = (UcenterUser) currentUser();
+        int num= articleService.findArticleCountByUserId(user.getUserId());
+        return JSONResult.ok(num);
+    }
     /**
      * 前往添加编辑页
      *
