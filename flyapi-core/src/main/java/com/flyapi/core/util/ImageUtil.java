@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.AttributedCharacterIterator;
 import java.text.AttributedString;
+import java.util.Map;
 
 /**
  * 图片处理工具类：<br>
@@ -338,19 +339,24 @@ public class ImageUtil {
 		}
 	}
 
-	public final static String createImage(String subjectTitle,String nickName,File pressImgFile, File srcImageFile, File destImageFile){
+	public final static String createImage(String subjectTitle,String nickName,File pressImgFile, File destImageFile){
 		try {
 			Font font = new Font("宋体",Font.BOLD,50);
 
-			Image src = ImageIO.read(srcImageFile);
-			int wideth = src.getWidth(null);
-			int height = src.getHeight(null);
-			BufferedImage image = new BufferedImage(wideth, height, BufferedImage.TYPE_INT_RGB);
+			int width=650;
+			int height=910;
+			BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 			Graphics2D g = image.createGraphics();
+			Map map = ColorUtils.intColor();
+			GradientPaint grad = new GradientPaint(0, 0, (Color) map.get("start"), width, height, (Color) map.get("end")); //从左上到右下渐变;
+//			g.setPaint(grad);
+
+
+
 //			drawString(g,pressText,(width - (getLength(subjectTitle) * fontSize)) / 2 + x, (height - fontSize) / 2 + y,font,color,alpha);
 
 
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
@@ -375,6 +381,20 @@ public class ImageUtil {
 		}
 		return length / 2;
 	}
+
+	/**
+	 * 判断是不是浅颜色
+	 * @param colors
+	 * @return 是否是浅颜色
+	 */
+	private static boolean isQianRGB(int[] colors){
+		int grayLevel = (int) (colors[0] * 0.299 + colors[1] * 0.587 + colors[2] * 0.114);
+		if(grayLevel>=192){
+			return true;
+		}
+		return false;
+	}
+
 	//---------------------------------------------------------------------------------------------------------------- Private method end
 
 	private final static void drawString(Graphics2D g,String text,int x,int y,Font font,Color color,float alpha){

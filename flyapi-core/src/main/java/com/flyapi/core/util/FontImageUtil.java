@@ -86,6 +86,9 @@ public class FontImageUtil {
         //创建图片
         BufferedImage image=new BufferedImage(width,height, BufferedImage.TYPE_INT_BGR);
         Graphics2D g=image.createGraphics();
+
+
+
         g.setColor(new Color(ranRGB[0],ranRGB[1],ranRGB[2]));//　一个未知颜色
         g.fillRect(0, 0, width, height);//先用颜色填充背景
         //判断是浅颜色还是深颜色
@@ -180,7 +183,7 @@ public class FontImageUtil {
 
     public static void main(String[] args) {
         try {
-            createImage("测试用途hahahhahahahhahahhahhh你好",new File("/Users/qfwang/Desktop/t.png"));
+            createImage("测试用途hah你好",new File("/Users/qfwang/Desktop/t5.png"));
         } catch (Exception e) {
             e.printStackTrace();
         }
