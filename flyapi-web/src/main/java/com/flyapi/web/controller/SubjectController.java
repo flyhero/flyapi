@@ -8,6 +8,7 @@ import com.flyapi.model.CmsArticle;
 import com.flyapi.model.CmsRss;
 import com.flyapi.model.CmsSubject;
 import com.flyapi.model.UcenterUser;
+import com.flyapi.pojo.dto.AddSubjectRequest;
 import com.flyapi.pojo.dto.SubjectDto;
 import com.flyapi.pojo.vo.SubjectVo;
 import com.flyapi.pojo.vo.UserSubjectVo;
@@ -34,7 +35,6 @@ import java.util.List;
  * Created by qfwang on 2017/6/24.
  */
 @Controller
-@RequestMapping("subject")
 public class SubjectController extends BaseController {
 
     private Logger logger = LogManager.getLogger(SubjectController.class);
@@ -50,6 +50,25 @@ public class SubjectController extends BaseController {
     private SnowflakeIdWorker snowflakeIdWorker;
 
     /**
+     * 添加主题
+     * @title: addSubject
+     * @param addSubjectRequest
+     * @return com.flyapi.core.constant.JSONResult
+     * @date 2018/2/23 下午9:47
+     */
+    @PostMapping("subject")
+    @ResponseBody
+    public JSONResult saveOrUpdateSubject(AddSubjectRequest addSubjectRequest){
+
+        UcenterUser user = (UcenterUser) currentUser();
+        if(user == null){
+            return JSONResult.error();
+        }
+        int num = subjectService.saveOrUpdateSubject(addSubjectRequest,user.getUserId());
+        return JSONResult.ok();
+    }
+
+    /**
      * 前往主题编辑页
      *
      * @param subjectId
@@ -58,7 +77,7 @@ public class SubjectController extends BaseController {
      * @author flyhero <http://www.iflyapi.cn>
      * @date 2018/1/30 下午11:13
      */
-    @GetMapping("{subjectId}")
+    @GetMapping("subject/{subjectId}")
     public ModelAndView editSubject(@PathVariable Long subjectId) {
         CmsSubject subject = subjectService.selectByPrimaryKey(subjectId);
         mv.addObject("subject", subject);
@@ -75,7 +94,7 @@ public class SubjectController extends BaseController {
      * @author flyhero <http://www.iflyapi.cn>
      * @date 2018/2/5 下午11:18
      */
-    @PostMapping("rss/{subjectId}")
+    @PostMapping("subject/rss/{subjectId}")
     @ResponseBody
     public JSONResult rssSubject(@PathVariable Long subjectId) {
         UcenterUser user = (UcenterUser) currentUser();
@@ -95,7 +114,7 @@ public class SubjectController extends BaseController {
      * date: 2017/6/27 0027 下午 2:29
      */
     @ResponseBody
-    @RequestMapping("findSubjectList")
+    @RequestMapping("subject/findSubjectList")
     public JSONResult findSubjectList(SubjectDto subjectDto) {
         PageInfo<SubjectVo> pageInfo = null;
         PageHelper.startPage(subjectDto.getPageNum(), subjectDto.getPageSize());
@@ -123,7 +142,7 @@ public class SubjectController extends BaseController {
      * date: 2017/9/23 0027 下午 1:42
      */
     @ResponseBody
-    @GetMapping("subjects/{userId}")
+    @GetMapping("subject/subjects/{userId}")
     public JSONResult findSubjectByUserId(@PathVariable Long userId, int pageNum, int pageSize) {
         PageInfo<CmsSubject> pageInfo = null;
         List<UserSubjectVo> subjectVoList = null;
@@ -183,7 +202,7 @@ public class SubjectController extends BaseController {
      * date: 2017/9/23 0027 下午 2:57
      */
     @ResponseBody
-    @GetMapping("goUpdateSubject/{subjectId}")
+    @GetMapping("subject/goUpdateSubject/{subjectId}")
     public ModelAndView goUpdateSubject(@PathVariable Long subjectId) {
         CmsSubject cmsSubject = null;
         try {

@@ -38,6 +38,12 @@
       <if test="subjectId != null">
         subject_id,
       </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="cover != null">
+        cover,
+      </if>
       <if test="subjectTitle != null">
         subject_title,
       </if>
@@ -47,9 +53,7 @@
       <if test="permissions != null">
         permissions,
       </if>
-      <if test="createTime != null">
         create_time,
-      </if>
       <if test="isDelete != null">
         is_delete,
       </if>
@@ -57,6 +61,12 @@
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="subjectId != null">
         #{subjectId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="cover != null">
+        #{cover,jdbcType=VARCHAR},
       </if>
       <if test="subjectTitle != null">
         #{subjectTitle,jdbcType=VARCHAR},
@@ -67,9 +77,7 @@
       <if test="permissions != null">
         #{permissions,jdbcType=TINYINT},
       </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
+      now(),
       <if test="isDelete != null">
         #{isDelete,jdbcType=TINYINT},
       </if>
@@ -78,6 +86,12 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.flyapi.model.CmsSubject">
     update cms_subject
     <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="cover != null">
+        cover = #{cover,jdbcType=VARCHAR},
+      </if>
       <if test="subjectTitle != null">
         subject_title = #{subjectTitle,jdbcType=VARCHAR},
       </if>

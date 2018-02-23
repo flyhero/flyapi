@@ -1,6 +1,7 @@
 package com.flyapi.service.impl;
 
 import com.flyapi.core.base.BaseServiceImpl;
+import com.flyapi.core.id.SnowflakeIdWorker;
 import com.flyapi.dao.CmsArticleMapper;
 import com.flyapi.dao.CmsRssMapper;
 import com.flyapi.dao.CmsSubjectMapper;
@@ -9,10 +10,12 @@ import com.flyapi.model.CmsArticle;
 import com.flyapi.model.CmsRss;
 import com.flyapi.model.CmsSubject;
 import com.flyapi.model.UcenterUser;
+import com.flyapi.pojo.dto.AddSubjectRequest;
 import com.flyapi.pojo.dto.SubjectDto;
 import com.flyapi.pojo.vo.SubjectVo;
 import com.flyapi.service.api.SubjectService;
 import com.flyapi.service.api.UserService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,6 +39,8 @@ public class SubjectServiceImpl extends BaseServiceImpl<CmsSubject,CmsSubjectMap
     private UcenterUserMapper ucenterUserMapper;
     @Autowired
     private CmsRssMapper rssMapper;
+    @Autowired
+    private SnowflakeIdWorker snowflakeIdWorker;
 
     public List<SubjectVo> findSubjectList(SubjectDto subjectDto,Long userId) {
         List<CmsArticle> list=cmsArticleMapper.findArticleListByCount(subjectDto);
@@ -78,5 +83,18 @@ public class SubjectServiceImpl extends BaseServiceImpl<CmsSubject,CmsSubjectMap
     public List<CmsSubject> findUserSubject(Long userId) {
         List<CmsSubject> list = cmsSubjectMapper.findUserSubject(userId);
         return list;
+    }
+
+    @Override
+    public int saveOrUpdateSubject(AddSubjectRequest addSubjectRequest, Long userId) {
+        CmsSubject isSubject = cmsSubjectMapper.selectByPrimaryKey(addSubjectRequest.getSubjectId());
+        CmsSubject cmsSubject = new CmsSubject();
+        BeanUtils.copyProperties(addSubjectRequest,cmsSubject);
+        if(isSubject == null){
+            cmsSubject.setSubjectId(snowflakeIdWorker.nextId());
+            cmsSubject.setUserId(userId);
+            return cmsSubjectMapper.insertSelective(cmsSubject);
+        }
+        return cmsSubjectMapper.updateByPrimaryKey(cmsSubject);
     }
 }

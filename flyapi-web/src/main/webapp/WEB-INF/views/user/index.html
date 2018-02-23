@@ -14,7 +14,7 @@
             font-size: 0;
         }
 
-        .subject-list li{
+        .subject-list li {
             display: inline-block;
             vertical-align: middle;
             *display: inline;
@@ -72,22 +72,34 @@
         <div class="layui-tab layui-tab-brief" lay-filter="user">
             <ul class="layui-tab-title" id="LAY_mine">
                 <li data-type="mine-jie" lay-id="index" class="layui-this">我的主题（<span id="sub-count">0</span>）</li>
-                <li data-type="collection" data-url="/collection/find/" lay-id="article">我的文章（<span id="article-count">0</span>）</li>
-                <li data-type="collection" data-url="/collection/find/" lay-id="collection">我的收藏（<span id="collection-count">0</span>）</li>
-                <li data-type="collection" data-url="/like/find/" lay-id="collection">我的喜欢（<span id="like-count">0</span>）</li>
+                <li data-type="collection" data-url="/collection/find/" lay-id="article">我的文章（<span
+                        id="article-count">0</span>）
+                </li>
+                <li data-type="collection" data-url="/collection/find/" lay-id="collection">我的收藏（<span
+                        id="collection-count">0</span>）
+                </li>
+                <li data-type="collection" data-url="/like/find/" lay-id="collection">我的喜欢（<span
+                        id="like-count">0</span>）
+                </li>
             </ul>
-            <div class="layui-tab-content" >
+            <div class="layui-tab-content">
                 <div class="layui-tab-item layui-show">
                     <ul class="subject-list" id="userSubject">
                         <th:block th:if="${not #lists.isEmpty(subjectList)}">
                             <th:block th:each="subject,index:${subjectList}">
                                 <li>
-                                    <a class="subject-img" href="#" th:href="@{${rootPath}+'/article/list/'+${subject.subjectId}+'/'+${subject.subjectTitle}}" title="点击查看">
-                                        <img th:src="${subject.cover}" src="https://user-gold-cdn.xitu.io/2017/12/18/160691fc2995dbf9?imageView2/1/w/200/h/280/q/95/format/webp/interlace/1"  alt="">
+                                    <a class="subject-img" href="#"
+                                       th:href="@{${rootPath}+'/article/list/'+${subject.subjectId}+'/'+${subject.subjectTitle}}"
+                                       title="点击查看">
+                                        <img th:src="${subject.cover}"
+                                             src="https://user-gold-cdn.xitu.io/2017/12/18/160691fc2995dbf9?imageView2/1/w/200/h/280/q/95/format/webp/interlace/1"
+                                             alt="">
                                     </a>
                                     <div style="margin-top: 5px;">
-                                        <a th:href="@{${rootPath}+'/subject/'+${subject.subjectId}}" class="layui-btn layui-btn-xs layui-btn-primary" style="margin-left: 5px">编辑</a>
-                                        <a class="layui-btn layui-btn-xs layui-btn-primary" >删除</a>
+                                        <a th:href="@{${rootPath}+'/subject/'+${subject.subjectId}}"
+                                           class="layui-btn layui-btn-xs layui-btn-primary"
+                                           style="margin-left: 5px">编辑</a>
+                                        <a class="layui-btn layui-btn-xs layui-btn-primary">删除</a>
                                     </div>
                                 </li>
                             </th:block>
@@ -110,10 +122,10 @@
                 <div class="layui-tab-item">
                     <ul class="mine-view jie-row">
                         <li>
-                            <a class="jie-title" href="http://fly.layui.com/jie/5366.html" target="_blank">asdasdasd</a>
+                            <a class="jie-title" href="#" target="_blank">asdasdasd</a>
                             <i>收藏于23小时前</i></li>
                     </ul>
-                    <div id="sad"></div>
+                    <div id="collect-page"></div>
                 </div>
                 <div class="layui-tab-item">
                     <ul class="mine-view jie-row">
@@ -134,11 +146,10 @@
     $("li").removeClass("layui-this");
     $("#fly-center").addClass("layui-this")
 
-    layui.use(['util', 'element', 'layer','upload','form','laytpl','laypage'], function(){
+    layui.use(['util', 'element', 'layer', 'form', 'laypage'], function () {
         var $ = layui.jquery;
         var layer = layui.layer;
         var util = layui.util;
-        var laytpl = layui.laytpl;
         var form = layui.form;
         var laypage = layui.laypage;
         var element = layui.element;//Tab的切换功能，切换事件监听等，需要依赖element模块
@@ -146,167 +157,61 @@
 
 
     var dataCount = 0;
-    $.getJSON("../article/count",{},function (result) {
+    $.getJSON("../article/count", {}, function (result) {
         dataCount = result.data;
-        layui.use(['laypage', 'layer'], function(){
-            var laypage = layui.laypage,layer = layui.layer;
+        layui.use(['laypage', 'layer'], function () {
+            var laypage = layui.laypage, layer = layui.layer;
             //完整功能
             laypage.render({
                 elem: 'article-page',
                 count: dataCount,
                 layout: ['count', 'prev', 'page', 'next', 'limit', 'skip'],
-                jump: function(obj){
+                jump: function (obj) {
                     //obj.curr,obj.limit
                     console.log(obj.curr)
-                    $.getJSON("../article/user",{"pageNum":obj.curr,"pageSize":obj.limit},function (result) {
+                    $.getJSON("../article/user", {"pageNum": obj.curr, "pageSize": obj.limit}, function (result) {
                         $("#userArticle").empty();
-                        $.each(result.data.list,function(index,simple){
+                        $.each(result.data.list, function (index, simple) {
                             $("#userArticle").append('<li>' +
-                            '        <a class="jie-title" href="#" target="_blank" >' + simple.title + '</a>' +
-                            '        <i>' + simple.createTime + '</i>' +
-                            '        <a class="mine-edit" href="../article/'+simple.articleId+'">编辑</a>' +
-                            '        <em>'+simple.viewNum+'/'+simple.commentNum+'/'+simple.likeNum+'</em>' +
-                            '     </li>');
+                                '        <a class="jie-title" href="#" target="_blank" >' + simple.title + '</a>' +
+                                '        <i>' + simple.createTime + '</i>' +
+                                '        <a class="mine-edit" href="../article/' + simple.articleId + '">编辑</a>' +
+                                '        <em>' + simple.viewNum + '/' + simple.commentNum + '/' + simple.likeNum + '</em>' +
+                                '     </li>');
                         });
                     });
                 }
             });
-
         });
-
-
     });
 
-    layui.use('flow', function () {
-        var flow = layui.flow;
-/*
-        flow.load({
-            elem: '#userSubject', //流加载容器
-            scrollElem: '#userSubject', //滚动条所在元素，一般不用填，此处只是演示需要。
-            isAuto: false,
-            isLazyimg: true,
-            done: function (page, next) { //加载下一页
-
-                //模拟插入
-                setTimeout(function () {
-                    var lis = [];
-                    var pageCount;
-                    $.ajax({
-                        type: 'GET',
-                        url: "../subject/findSubjectByUserId/",
-                        dataType: "json",
-                        data: {
-                            "pageNum": page,
-                            "pageSize": 6
-                        },
-                        success: function (result) {
-
-                            if(result.success){
-                                pageCount = result.data.pages;
-                                $("#sub-count").text(result.data.total);
-                                $.each(result.data.list, function (index, simple) {
-
-                                    lis.push('<li>\n' +
-                                        '        <a class="jie-title" href="#" target="_blank" >' + simple.subjectTitle + '</a>\n' +
-                                        '        <i>' + simple.createTime + '</i>\n' +
-                                        '        <a class="mine-edit" target="_blank" href="../subject/goUpdateSubject/'+simple.subjectId+'">编辑</a>\n' +
-                                        '        <em>661阅/10答</em>\n' +
-                                        '     </li>');
-
-                                    next(lis.join(''), page < pageCount);
-                                    lis = [];
-                                });
-                            }else {
-                                next(lis.join(''), page < pageCount);
-                                lis = [];
-                            }
-
-
-                        }
-
-                    });
-                }, 500);
-            }
-        });*/
-
-/*
-        flow.load({
-            elem: '#userArticle', //流加载容器
-            scrollElem: '#userArticle', //滚动条所在元素，一般不用填，此处只是演示需要。
-            isAuto: false,
-            isLazyimg: true,
-            done: function (page, next) { //加载下一页
-
-                //模拟插入
-                setTimeout(function () {
-                    var lis = [];
-                    var pageCount;
-                    $.ajax({
-                        type: 'GET',
-                        url: "../article/findArticleListByUserId/",
-                        dataType: "json",
-                        data: {
-                            "pageNum": page,
-                            "pageSize": 6
-                        },
-                        success: function (result) {
-                            if(result.success){
-                                pageCount = result.data.pages;
-                                $("#article-count").text(result.data.total);
-                                $.each(result.data.list, function (index, simple) {
-
-                                    lis.push('<li>\n' +
-                                        '        <a class="jie-title" href="#" target="_blank" >' + simple.title + '</a>\n' +
-                                        '        <i>' + simple.createTime + '</i>\n' +
-                                        '        <a class="mine-edit" href="../subject/goUpdateSubject/'+simple.subjectId+'">编辑</a>\n' +
-                                        '        <em>661阅/10答</em>\n' +
-                                        '     </li>');
-
-                                    next(lis.join(''), page < pageCount);
-                                    lis = [];
-                                });
-                            }else {
-                                next(lis.join(''), page < pageCount);
-                                lis = [];
-                            }
-
-
-                        }
-
-                    });
-                }, 500);
-            }
-        });*/
-
-
-    });
-
-    var dataCount = 0;
-    $.getJSON("../book/count",{},function (result) {
-        dataCount = result.data;
-
-        layui.use(['laypage', 'layer'], function(){
-            var laypage = layui.laypage,layer = layui.layer;
+    var collectCount = 0;
+    $.getJSON("../article/count", {}, function (result) {
+        collectCount = result.data;
+        layui.use(['laypage', 'layer'], function () {
+            var laypage = layui.laypage, layer = layui.layer;
             //完整功能
             laypage.render({
-                elem: 'pageInfo',
-                count: dataCount,
+                elem: 'article-page',
+                count: collectCount,
                 layout: ['count', 'prev', 'page', 'next', 'limit', 'skip'],
-                jump: function(obj){
+                jump: function (obj) {
                     //obj.curr,obj.limit
                     console.log(obj.curr)
-                    $.getJSON("../article/findArticleListByUserId/",{"pageNum":obj.curr,"pageSize":obj.limit},function (result) {
-                        $(".fly-case-list").empty();
-                        $.each(result.data.list,function(index,book){
-                            $(".fly-case-list").append('');
+                    $.getJSON("../article/user", {"pageNum": obj.curr, "pageSize": obj.limit}, function (result) {
+                        $("#userArticle").empty();
+                        $.each(result.data.list, function (index, simple) {
+                            $("#userArticle").append('<li>' +
+                                '        <a class="jie-title" href="#" target="_blank" >' + simple.title + '</a>' +
+                                '        <i>' + simple.createTime + '</i>' +
+                                '        <a class="mine-edit" href="../article/' + simple.articleId + '">编辑</a>' +
+                                '        <em>' + simple.viewNum + '/' + simple.commentNum + '/' + simple.likeNum + '</em>' +
+                                '     </li>');
                         });
                     });
                 }
             });
-
         });
-
-
     });
 
 </script>

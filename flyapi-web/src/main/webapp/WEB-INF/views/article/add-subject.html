@@ -64,7 +64,7 @@
             <div class="layui-input-block">
               <div class="layui-upload">
                 <div class="layui-upload-list">
-                  <input type="hidden" id="cover" lay-verify="required|cover">
+                  <input type="hidden" id="cover" name="cover" lay-verify="required|cover">
                   <img class="flyapi-upload-img"  th:src="${subject} ? ${subject.cover} : ''">
                   <a>建议尺寸：1 : 1.4</a>
                 </div>
@@ -74,7 +74,7 @@
           <div class="layui-form-item layui-form-text">
             <label class="layui-form-label">简介</label>
             <div class="layui-input-block">
-              <textarea placeholder="请输入内容" th:text="${subject} ? ${subject.subjectDes} : ''" lay-verify="required|subjectDes" class="layui-textarea"></textarea>
+              <textarea placeholder="请输入内容" name="subjectDes" th:text="${subject} ? ${subject.subjectDes} : ''" lay-verify="required|subjectDes" class="layui-textarea"></textarea>
             </div>
           </div>
           <div class="layui-form-item">
@@ -108,23 +108,10 @@
             alert(JSON.stringify(data.field));
             console.log(data);
 
-       /*     $.post("../article",
-                {
-                    "articleId":$("#articleId").val(),
-                    "title":$("#title").val(),
-                    "articleDes":$("#articleDes").val(),
-                    "cover": cover,
-                    "mdContent":testEditor.getMarkdown(),
-                    "htmlContent":coverHtml,
-                    "subjectId":$("#subjectId").val(),
-                    "original":$("#original").val(),
-                    "permissions":$("#permissions").val(),
-                    "apply": $("#apply").val(),
-                    "status":status
-                },
+            $.post("../subject", jQuery.parseJSON(JSON.stringify(data.field)),
                 function(result){
-
-                }, "json");*/
+                    alert(result);
+                }, "json");
 
             return false;
         });

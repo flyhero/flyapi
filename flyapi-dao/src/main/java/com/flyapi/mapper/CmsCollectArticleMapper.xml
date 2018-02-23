@@ -8,6 +8,7 @@
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="is_delete" jdbcType="TINYINT" property="isDelete" />
   </resultMap>
+
   <sql id="Base_Column_List">
     id, user_id, article_id, create_time, is_delete
   </sql>
