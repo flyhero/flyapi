@@ -110,20 +110,21 @@
                 </div>
                 <div class="layui-tab-item">
                     <ul class="mine-view jie-row" id="userArticle">
-                        <li>
+                       <!-- <li>
                             <a class="jie-title" href="/jie/8116.html" target="_blank">LayIM 3.5.0 发布，移动端版本大更新（带演示图）</a>
                             <i>2017/3/14 上午8:30:00</i>
                             <a class="mine-edit" href="/jie/edit/8116">编辑</a>
                             <em>661阅/10答</em>
-                        </li>
+                        </li>-->
                     </ul>
                     <div id="article-page"></div>
                 </div>
                 <div class="layui-tab-item">
-                    <ul class="mine-view jie-row">
+                    <ul class="mine-view jie-row" id="userCollection">
                         <li>
                             <a class="jie-title" href="#" target="_blank">asdasdasd</a>
-                            <i>收藏于23小时前</i></li>
+                            <i>收藏于23小时前</i>
+                        </li>
                     </ul>
                     <div id="collect-page"></div>
                 </div>
@@ -174,7 +175,7 @@
                         $.each(result.data.list, function (index, simple) {
                             $("#userArticle").append('<li>' +
                                 '        <a class="jie-title" href="#" target="_blank" >' + simple.title + '</a>' +
-                                '        <i>' + simple.createTime + '</i>' +
+                                '        <i>' + getMyDate(simple.createTime) + '</i>' +
                                 '        <a class="mine-edit" href="../article/' + simple.articleId + '">编辑</a>' +
                                 '        <em>' + simple.viewNum + '/' + simple.commentNum + '/' + simple.likeNum + '</em>' +
                                 '     </li>');
@@ -186,27 +187,25 @@
     });
 
     var collectCount = 0;
-    $.getJSON("../article/count", {}, function (result) {
+    $.getJSON("../article/collection/count", {}, function (result) {
         collectCount = result.data;
         layui.use(['laypage', 'layer'], function () {
             var laypage = layui.laypage, layer = layui.layer;
             //完整功能
             laypage.render({
-                elem: 'article-page',
+                elem: 'collect-page',
                 count: collectCount,
                 layout: ['count', 'prev', 'page', 'next', 'limit', 'skip'],
                 jump: function (obj) {
                     //obj.curr,obj.limit
                     console.log(obj.curr)
-                    $.getJSON("../article/user", {"pageNum": obj.curr, "pageSize": obj.limit}, function (result) {
-                        $("#userArticle").empty();
+                    $.getJSON("../article/collection", {"pageNum": obj.curr, "pageSize": obj.limit}, function (result) {
+                        $("#userCollection").empty();
                         $.each(result.data.list, function (index, simple) {
-                            $("#userArticle").append('<li>' +
-                                '        <a class="jie-title" href="#" target="_blank" >' + simple.title + '</a>' +
-                                '        <i>' + simple.createTime + '</i>' +
-                                '        <a class="mine-edit" href="../article/' + simple.articleId + '">编辑</a>' +
-                                '        <em>' + simple.viewNum + '/' + simple.commentNum + '/' + simple.likeNum + '</em>' +
-                                '     </li>');
+                            $("#userCollection").append('<li>\n' +
+                                '                            <a class="jie-title" href="#" target="_blank">' + simple.cmsArticle.title + '</a>' +
+                                '                            <i>' + timeAgo(getMyDate(simple.createTime)) + '</i>\n' +
+                                '                        </li>');
                         });
                     });
                 }

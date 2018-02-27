@@ -14,7 +14,7 @@
   </sql>
   
   <resultMap id="CollectArticleDetail" extends="BaseResultMap" type="com.flyapi.pojo.vo.ArticleCollectVo">
-    <association property="cmsArticle" select="findArticleByArticleId" column="article_id"></association>
+    <association property="cmsArticle" select="com.flyapi.dao.CmsArticleMapper.findSimpleByArticleId" column="article_id"></association>
   </resultMap>
   
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
@@ -34,12 +34,6 @@
     <include refid="Base_Column_List" />
     from cms_collect_article
     where user_id = #{userId,jdbcType=BIGINT} and is_delete = 0
-  </select>
-  <select id="findArticleByArticleId" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select
-      title
-    from cms_article
-    where article_id = #{articleId,jdbcType=BIGINT} and is_delete = 0
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from cms_collect_article
