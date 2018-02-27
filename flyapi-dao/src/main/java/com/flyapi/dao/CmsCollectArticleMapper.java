@@ -1,6 +1,7 @@
 package com.flyapi.dao;
 
 import com.flyapi.model.CmsCollectArticle;
+import com.flyapi.pojo.vo.ArticleCollectVo;
 
 import java.util.List;
 
@@ -17,5 +18,5 @@ public interface CmsCollectArticleMapper {
 
     int updateByPrimaryKey(CmsCollectArticle record);
 
-    List<CmsCollectArticle> findArticleByUserId(Long articleId);
+    List<ArticleCollectVo> findArticleByUserId(Long articleId);
  }

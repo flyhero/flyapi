@@ -5,6 +5,7 @@ import com.flyapi.dao.CmsArticleMapper;
 import com.flyapi.dao.CmsCollectArticleMapper;
 import com.flyapi.model.CmsArticle;
 import com.flyapi.model.CmsCollectArticle;
+import com.flyapi.pojo.vo.ArticleCollectVo;
 import com.flyapi.service.api.ArticleService;
 import com.flyapi.service.api.CollectArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class CllectArticleServiceImpl extends BaseServiceImpl<CmsCollectArticle,
     private CmsCollectArticleMapper cmsCollectArticleMapper;
 
     @Override
-    public List<CmsCollectArticle> findArticleByUserId(Long userId) {
+    public List<ArticleCollectVo> findArticleByUserId(Long userId) {
         return cmsCollectArticleMapper.findArticleByUserId(userId);
     }
 }

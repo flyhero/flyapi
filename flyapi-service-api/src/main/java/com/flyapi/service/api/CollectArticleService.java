@@ -3,6 +3,7 @@ package com.flyapi.service.api;
 import com.flyapi.core.base.BaseService;
 import com.flyapi.model.CmsArticle;
 import com.flyapi.model.CmsCollectArticle;
+import com.flyapi.pojo.vo.ArticleCollectVo;
 
 import java.util.List;
 
@@ -12,5 +13,5 @@ import java.util.List;
  */
 public interface CollectArticleService extends BaseService<CmsCollectArticle> {
 
-    List<CmsCollectArticle> findArticleByUserId(Long userId);
+    List<ArticleCollectVo> findArticleByUserId(Long userId);
 }
