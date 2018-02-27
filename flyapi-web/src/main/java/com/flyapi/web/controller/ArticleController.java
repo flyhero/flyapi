@@ -4,11 +4,13 @@ import com.baidu.unbiz.fluentvalidator.FluentValidator;
 import com.baidu.unbiz.fluentvalidator.Result;
 import com.flyapi.core.base.BaseController;
 import com.flyapi.core.constant.JSONResult;
+import com.flyapi.core.constant.TipsEnum;
 import com.flyapi.core.id.SnowflakeIdWorker;
 import com.flyapi.core.validator.NumberValidator;
 import com.flyapi.core.validator.StringValidator;
 import com.flyapi.model.*;
 import com.flyapi.pojo.dto.AddArticleRequest;
+import com.flyapi.pojo.vo.ArticleCollectVo;
 import com.flyapi.service.api.*;
 import com.flyapi.pojo.vo.ArticleDetailVo;
 import com.flyapi.pojo.vo.ArticleSimpleVo;
@@ -51,6 +53,8 @@ public class ArticleController extends BaseController {
     private HomepageApplyService homepageApplyService;
     @Autowired
     private SnowflakeIdWorker snowflakeIdWorker;
+    @Autowired
+    private CollectArticleService collectArticleService;
     /**
      * Title: findArticleDetail
      * params: [articleId]
@@ -237,4 +241,32 @@ public class ArticleController extends BaseController {
         return JSONResult.ok();
     }
 
+    /**
+     * 获取收藏的文章
+     * @title: findCollectArticle
+     * @param pageNum
+     * @param pageSize
+     * @return com.flyapi.core.constant.JSONResult
+     * @date 2018/2/27 下午10:53
+     */
+    @ResponseBody
+    @GetMapping("article/collection")
+    public JSONResult findCollectArticle(int pageNum, int pageSize){
+        PageInfo<ArticleCollectVo> pageInfo = null;
+        PageHelper.startPage(pageNum, pageSize);
+        UcenterUser user = (UcenterUser) currentUser();
+        if(user == null){
+            return JSONResult.error(TipsEnum.NOT_LOGIN);
+        }
+        List<ArticleCollectVo> articleCollectVoList = collectArticleService.findArticleByUserId(user.getUserId());
+        pageInfo = new PageInfo<ArticleCollectVo>(articleCollectVoList);
+        return JSONResult.ok(pageInfo);
+    }
+    @ResponseBody
+    @GetMapping("article/collection/count")
+    public JSONResult findCollectArticleCount(){
+        UcenterUser user = (UcenterUser) currentUser();
+        int num= collectArticleService.findCollectionCount(user.getUserId());
+        return JSONResult.ok(num);
+    }
 }

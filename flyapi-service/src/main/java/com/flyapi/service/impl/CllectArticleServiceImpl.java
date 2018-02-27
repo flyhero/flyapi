@@ -29,4 +29,9 @@ public class CllectArticleServiceImpl extends BaseServiceImpl<CmsCollectArticle,
     public List<ArticleCollectVo> findArticleByUserId(Long userId) {
         return cmsCollectArticleMapper.findArticleByUserId(userId);
     }
+
+    @Override
+    public int findCollectionCount(Long userId) {
+        return cmsCollectArticleMapper.findCollectionCount(userId);
+    }
 }

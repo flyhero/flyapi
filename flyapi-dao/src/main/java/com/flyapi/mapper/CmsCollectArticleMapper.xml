@@ -23,6 +23,12 @@
     from cms_collect_article
     where id = #{id,jdbcType=BIGINT}
   </select>
+  <select id="findCollectionCount" parameterType="java.lang.Long" resultType="int">
+    select
+      count(*)
+    from cms_collect_article
+    where user_id = #{userId,jdbcType=BIGINT} and is_delete = 0
+  </select>
    <select id="findArticleByUserId" parameterType="java.lang.Long" resultMap="CollectArticleDetail">
     select
     <include refid="Base_Column_List" />

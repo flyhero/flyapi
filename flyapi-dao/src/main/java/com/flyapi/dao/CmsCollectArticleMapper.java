@@ -18,5 +18,7 @@ public interface CmsCollectArticleMapper {
 
     int updateByPrimaryKey(CmsCollectArticle record);
 
-    List<ArticleCollectVo> findArticleByUserId(Long articleId);
+    List<ArticleCollectVo> findArticleByUserId(Long userId);
+
+    int findCollectionCount(Long userId);
  }

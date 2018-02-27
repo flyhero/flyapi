@@ -8,7 +8,8 @@ public enum TipsEnum {
 
     OK(200,"成功"),
     ERROR(500,"失败"),
-    USER_NAME_ERROR(3,"用户名错误");
+    USER_NAME_ERROR(3,"用户名错误"),
+    NOT_LOGIN(404,"未登录");
     public int code;
     public String msg;
     private TipsEnum(int code, String msg) {
