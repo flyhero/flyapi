@@ -63,11 +63,11 @@ public class QiniuController extends BaseController {
         store.setVip(1);
         if (store != null) {
             if (store.getVip() != 0) { //已赞助
-                accessKey = "vDuNp0Z4WtB2boJeLQ_mNXxcCdjnTaUeJ4yWOsWT";
-                secretKey = "AEbH11WApJIzQtLag7FouMKZNWS3oeJZX16TYUoD";
+                accessKey = "";
+                secretKey = "";
                 bucket = "flyhero";
                 userId = 1000000L;
-                domain = "http://7xv6ov.com1.z0.glb.clouddn.com";
+                domain = "";
             } else {
                 if (!StringUtils.isEmpty(store.getAk()) && !StringUtils.isEmpty(store.getSk())
                         && !StringUtils.isEmpty(store.getDomain()) && !StringUtils.isEmpty(store.getBucket())) {
