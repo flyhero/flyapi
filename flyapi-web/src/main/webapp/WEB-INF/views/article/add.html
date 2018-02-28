@@ -126,7 +126,7 @@
 <script type="text/javascript">
 
     $(function () {
-
+        var host = '[[${rootPath}]]';
         var testEditor = editormd("editormd-text", {
             width: "100%",
             height: 740,
@@ -195,11 +195,13 @@
 
             function postArticle(status) {
                 var coverHtml = testEditor.getHTML();
-                //var pa=new RegExp("<img[^>]*>");
                 var pa=new RegExp("<img src=\"(.+?)\">");
-                var cover = pa.exec(coverHtml)[0];
-                console.log(cover);
-                $.post("../article",
+                var result = pa.exec(coverHtml);
+                var cover = '';
+                if(null != result){
+                    cover = result[0];
+                }
+                $.post(host+"/article",
                     {
                         "articleId":$("#articleId").val(),
                         "title":$("#title").val(),
@@ -223,7 +225,7 @@
             //监听提交
             form.on('submit(pub)', function (data) {
                 console.log(data.field);
-                alert(JSON.stringify(data.field));
+                //alert(JSON.stringify(data.field));
                 postArticle(1);
                 return false;
             });

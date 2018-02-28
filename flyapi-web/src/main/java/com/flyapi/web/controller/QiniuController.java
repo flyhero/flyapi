@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.baidu.unbiz.fluentvalidator.FluentValidator;
 import com.flyapi.core.base.BaseController;
 import com.flyapi.core.constant.JSONResult;
+import com.flyapi.core.exception.UploadException;
 import com.flyapi.model.SettingStore;
 import com.flyapi.model.UcenterUser;
 import com.flyapi.service.api.SettingStoreService;
@@ -17,10 +18,7 @@ import com.qiniu.util.Auth;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
@@ -30,7 +28,7 @@ import java.io.*;
  * author: flyhero
  * Date: 2017/6/21 0021 下午 6:47
  */
-@Controller
+@RestController
 @RequestMapping("qiniu")
 public class QiniuController extends BaseController {
 
@@ -47,10 +45,20 @@ public class QiniuController extends BaseController {
      * @date 2017/11/16 下午1:59
      */
     @PostMapping("upload")
-    @ResponseBody
     public JSONResult uploadImage(@RequestParam(value = "editormd-image-file", required = false) MultipartFile file) {
+        UcenterUser user = (UcenterUser) currentUser();
+        if (user == null) {
+            return JSONResult.error();
+        }
+        String imgUrl = null;
+        try {
+            imgUrl = upload(file, user.getUserId());
+        } catch (Exception e) {
 
-        String accessKey = "";
+            return JSONResult.error("上传失败", 401, "");
+        }
+        return JSONResult.ok(imgUrl);
+       /* String accessKey = "";
         String secretKey = "";
         String bucket = "";
         Long userId = 1000000L;
@@ -109,21 +117,25 @@ public class QiniuController extends BaseController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return JSONResult.ok(imgUrl);
+        return JSONResult.ok(imgUrl);*/
     }
 
     @PostMapping("common/upload")
-    @ResponseBody
     public JSONResult commonUpload(@RequestParam(value = "file", required = true) MultipartFile file) {
         UcenterUser user = (UcenterUser) currentUser();
         if (user == null) {
             return JSONResult.error();
         }
-        String imgUrl = upload(file, user.getUserId());
+        String imgUrl = null;
+        try {
+            imgUrl = upload(file, user.getUserId());
+        } catch (Exception e) {
+            return JSONResult.error("上传失败", 401, "");
+        }
         return JSONResult.ok(imgUrl);
     }
 
-    public String upload(MultipartFile file, Long userId) {
+    private String upload(MultipartFile file, Long userId) {
 
         String accessKey = "";
         String secretKey = "";
@@ -132,7 +144,19 @@ public class QiniuController extends BaseController {
         String domain = "";
         String imgUrl = "";
 
-
+        SettingStore store = settingStoreService.selectByPrimaryKey(userId);
+        if (store != null) {
+            if (store.getVip() == 0) {
+                throw new UploadException("请设置图片存储或赞助");
+            } else {
+                domain = store.getDomain();
+                accessKey = store.getAk();
+                secretKey = store.getSk();
+                bucket = store.getBucket();
+            }
+        } else {
+            throw new UploadException("未知错误，请联系管理员");
+        }
         //构造一个带指定Zone对象的配置类
         Configuration cfg = new Configuration(Zone.zone0());
         //...其他参数参考类注释
