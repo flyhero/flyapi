@@ -88,9 +88,10 @@ public class ArticleController extends BaseController {
     @GetMapping("article/list/{subjectId}/{title}")
     public ModelAndView findArticleBySubjectId(@PathVariable Long subjectId, @PathVariable String title) {
         List<CmsArticle> list = articleService.findArticleBySubjectId(subjectId);
-
+        CmsSubject subject = subjectService.selectByPrimaryKey(subjectId);
         mv.addObject("articleList", list);
         mv.addObject("title", title);
+        mv.addObject("subject", subject);
         mv.setViewName("article/sub-timeline");
         return mv;
     }

@@ -78,9 +78,9 @@
                 <li data-type="collection" data-url="/collection/find/" lay-id="collection">我的收藏（<span
                         id="collection-count">0</span>）
                 </li>
-                <li data-type="collection" data-url="/like/find/" lay-id="collection">我的喜欢（<span
+<!--                <li data-type="collection" data-url="/like/find/" lay-id="collection">我的喜欢（<span
                         id="like-count">0</span>）
-                </li>
+                </li>-->
             </ul>
             <div class="layui-tab-content">
                 <div class="layui-tab-item layui-show">
@@ -121,20 +121,12 @@
                 </div>
                 <div class="layui-tab-item">
                     <ul class="mine-view jie-row" id="userCollection">
-                        <li>
+                       <!-- <li>
                             <a class="jie-title" href="#" target="_blank">asdasdasd</a>
                             <i>收藏于23小时前</i>
-                        </li>
+                        </li>-->
                     </ul>
                     <div id="collect-page"></div>
-                </div>
-                <div class="layui-tab-item">
-                    <ul class="mine-view jie-row">
-                        <li>
-                            <a class="jie-title" href="http://fly.layui.com/jie/5366.html" target="_blank">asdasdasd</a>
-                            <i>收藏于23小时前</i></li>
-                    </ul>
-                    <div id="sad"></div>
                 </div>
             </div>
         </div>
@@ -198,7 +190,6 @@
                 layout: ['count', 'prev', 'page', 'next', 'limit', 'skip'],
                 jump: function (obj) {
                     //obj.curr,obj.limit
-                    console.log(obj.curr)
                     $.getJSON("../article/collection", {"pageNum": obj.curr, "pageSize": obj.limit}, function (result) {
                         $("#userCollection").empty();
                         $.each(result.data.list, function (index, simple) {

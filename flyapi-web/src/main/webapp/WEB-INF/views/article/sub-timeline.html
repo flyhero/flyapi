@@ -16,7 +16,7 @@
             <div sign-v-2="" sign-v-3="" class="book-info-view">
                 <div sign-v-2="" sign-v-3="" class="book-box">
                     <div sign-v-2="" sign-v-3="" class="book-content">
-                        <div sign-v-2="" sign-v-3="" class="book-content-head" th:text="${title}">小书内容</div>
+                        <div sign-v-2="" sign-v-3="" class="book-content-head" th:text="${subject.subjectTitle}">小书内容</div>
                         <div sign-v-1="" sign-v-2=""
                              class="section-menu section-of-info book-conte-directory" sign-v-3="">
                             <div sign-v-1="" class="section section-link">
@@ -110,7 +110,7 @@
                             <fieldset class="layui-elem-field layui-field-title">
                                 <legend>主题简介</legend>
                             </fieldset>
-                            markdown小书介绍
+                            <p th:text="${subject.subjectDes}">介绍</p>
                         </div>
                     </div>
                 </div>
