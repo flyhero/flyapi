@@ -57,28 +57,17 @@ public class QiniuController extends BaseController {
         String domain = "";
         String imgUrl = "";
 
-        UcenterUser ucenterUser = (UcenterUser) session.getAttribute("user");
-        //SettingStore store = settingStoreService.selectByPrimaryKey(ucenterUser.getUserId());
-        SettingStore store = new SettingStore();
-        store.setVip(1);
+        UcenterUser ucenterUser = (UcenterUser) currentUser();
+        SettingStore store = settingStoreService.selectByPrimaryKey(ucenterUser.getUserId());
         if (store != null) {
-            if (store.getVip() != 0) { //已赞助
-                accessKey = "";
-                secretKey = "";
-                bucket = "flyhero";
-                userId = 1000000L;
-                domain = "";
+            if (store.getVip() == 0) { //已赞助
+                return JSONResult.error("请设置图片存储或赞助", 401, "");
             } else {
-                if (!StringUtils.isEmpty(store.getAk()) && !StringUtils.isEmpty(store.getSk())
-                        && !StringUtils.isEmpty(store.getDomain()) && !StringUtils.isEmpty(store.getBucket())) {
-                    domain = store.getDomain();
-                    accessKey = store.getAk();
-                    secretKey = store.getSk();
-                    bucket = store.getBucket();
-                    userId = ucenterUser.getUserId();
-                } else {
-                    return JSONResult.error("请设置图片存储或赞助", 401, "");
-                }
+                domain = store.getDomain();
+                accessKey = store.getAk();
+                secretKey = store.getSk();
+                bucket = store.getBucket();
+                userId = ucenterUser.getUserId();
             }
         } else {
             return JSONResult.error("未知错误，请联系管理员", 401, "");
@@ -126,15 +115,15 @@ public class QiniuController extends BaseController {
     @PostMapping("common/upload")
     @ResponseBody
     public JSONResult commonUpload(@RequestParam(value = "file", required = true) MultipartFile file) {
-        UcenterUser user = (UcenterUser)currentUser();
-        if(user == null){
+        UcenterUser user = (UcenterUser) currentUser();
+        if (user == null) {
             return JSONResult.error();
         }
-        String imgUrl = upload(file,user.getUserId());
+        String imgUrl = upload(file, user.getUserId());
         return JSONResult.ok(imgUrl);
     }
 
-    public String upload(MultipartFile file,Long userId){
+    public String upload(MultipartFile file, Long userId) {
 
         String accessKey = "";
         String secretKey = "";
@@ -143,11 +132,6 @@ public class QiniuController extends BaseController {
         String domain = "";
         String imgUrl = "";
 
-
-        accessKey = "vDuNp0Z4WtB2boJeLQ_mNXxcCdjnTaUeJ4yWOsWT";
-        secretKey = "AEbH11WApJIzQtLag7FouMKZNWS3oeJZX16TYUoD";
-        bucket = "flyhero";
-        domain = "http://7xv6ov.com1.z0.glb.clouddn.com";
 
         //构造一个带指定Zone对象的配置类
         Configuration cfg = new Configuration(Zone.zone0());
