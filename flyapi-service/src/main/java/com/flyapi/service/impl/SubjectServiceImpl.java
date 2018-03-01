@@ -95,6 +95,6 @@ public class SubjectServiceImpl extends BaseServiceImpl<CmsSubject,CmsSubjectMap
             cmsSubject.setUserId(userId);
             return cmsSubjectMapper.insertSelective(cmsSubject);
         }
-        return cmsSubjectMapper.updateByPrimaryKey(cmsSubject);
+        return cmsSubjectMapper.updateByPrimaryKeySelective(cmsSubject);
     }
 }

@@ -101,9 +101,6 @@
       <if test="permissions != null">
         permissions = #{permissions,jdbcType=TINYINT},
       </if>
-      <if test="createTime != null">
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
       <if test="isDelete != null">
         is_delete = #{isDelete,jdbcType=TINYINT},
       </if>
