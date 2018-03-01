@@ -106,11 +106,11 @@
         //监听提交
         form.on('submit(*)', function(data){
             alert(JSON.stringify(data.field));
-            console.log(data);
-
             $.post("../subject", jQuery.parseJSON(JSON.stringify(data.field)),
                 function(result){
-                    alert(result);
+                    if(result.success){
+                        layer.info("修改成功");
+                    }
                 }, "json");
 
             return false;

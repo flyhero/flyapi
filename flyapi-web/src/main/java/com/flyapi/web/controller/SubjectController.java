@@ -68,6 +68,16 @@ public class SubjectController extends BaseController {
         return JSONResult.ok();
     }
 
+    @DeleteMapping("subject/{subjectId}")
+    @ResponseBody
+    public JSONResult deleteSubject(@PathVariable Long subjectId){
+        CmsSubject subject = new CmsSubject();
+        subject.setSubjectId(subjectId);
+        subject.setIsDelete((byte)1);
+        int num = subjectService.updateByPrimaryKeySelective(subject);
+        return JSONResult.ok();
+    }
+
     /**
      * 前往主题编辑页
      *

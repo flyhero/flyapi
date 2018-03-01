@@ -99,7 +99,7 @@
                                         <a th:href="@{${rootPath}+'/subject/'+${subject.subjectId}}"
                                            class="layui-btn layui-btn-xs layui-btn-primary"
                                            style="margin-left: 5px">编辑</a>
-                                        <a class="layui-btn layui-btn-xs layui-btn-primary">删除</a>
+                                        <a href="javascript:void(0)" th:onclick="'javascript:deleteSubject(\''+${subject.subjectId}+'\')'" class="layui-btn layui-btn-xs layui-btn-primary">删除</a>
                                     </div>
                                 </li>
                             </th:block>
@@ -148,6 +148,24 @@
         var element = layui.element;//Tab的切换功能，切换事件监听等，需要依赖element模块
     });
 
+    function deleteSubject(subjectId) {
+        layer.msg(subjectId);
+        //询问框
+        layer.confirm('确定删除吗 ？', {
+            btn: ['删除','取消'] //按钮
+        }, function(){
+            $.ajax({
+                type: "DELETE",
+                url: "../subject/"+subjectId,
+                success: function(data){
+                    layer.msg('删除成功', {icon: 1});
+                }
+            });
+
+        }, function(index, layero){
+            layer.close(index);
+        });
+    }
 
     var dataCount = 0;
     $.getJSON("../article/count", {}, function (result) {
