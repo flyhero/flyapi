@@ -55,9 +55,7 @@
       <if test="osType != null">
         os_type,
       </if>
-      <if test="createTime != null">
         create_time,
-      </if>
       <if test="isDelete != null">
         is_delete,
       </if>
@@ -78,9 +76,7 @@
       <if test="osType != null">
         #{osType,jdbcType=TINYINT},
       </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
+        now(),
       <if test="isDelete != null">
         #{isDelete,jdbcType=TINYINT},
       </if>

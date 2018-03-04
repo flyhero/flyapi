@@ -32,24 +32,62 @@
         <li>社交<span class="layui-badge-dot"></span></li>
       </ul>
       <div class="layui-tab-content" style="height: 100px;">
-        <div class="layui-tab-item layui-show">
-          <ul class="jie-row">
+        <div class="layui-tab-item layui-form-pane layui-show">
+            <button class="layui-btn layui-btn-radius" onclick="os('','','','')">
+                <i class="layui-icon">&#xe608;</i> 添加
+            </button>
+            <hr>
+            <ul class="mine-view jie-row">
+                <th:block th:if="${not #lists.isEmpty(openSourceList)}">
+                    <th:block th:each="os,index:${openSourceList}">
+                        <li>
+                            <a><i style="font-size: 18px" class="fa fa-github fa-fw"></i></a>
+                            <a class="jie-title" href="" th:text="${os.account}">flyapi</a>
+                            <i th:text="'by '+${os.osName}">by flyhero</i>
+                            <a class="mine-edit" href="#" th:onclick="'javascript:os(\''+${os.osId}+'\',\''+${os.osName}+'\',\''+${os.account}+'\',\''+${os.osType}+'\')'">编辑</a>
+                            <a class="os-delete" href="#">删除</a>
+                            <em th:text="${#dates.format(os.createTime,'yyyy-MM-dd HH:mm:ss')}">2018/03/03</em>
+                        </li>
+                    </th:block>
+                </th:block>
+            </ul>
 
-
-
-<!--            <li>
-              <span class="fly-jing">飞翔的小子</span>
-              <a href="#" class="jie-title">评论：你好啊，能数一下吗？</a>
-              <i>1天前</i>
-              <em>2018-01-08</em>
-            </li>-->
-          </ul>
         </div>
-        <div class="layui-tab-item">
-          <ul class="jie-row">
+          <div class="layui-form layui-form-pane layui-tab-item">
+            <form class="layui-form" action="">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">github</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="title"  autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">知乎</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="title"  autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">linkIn</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="title"  autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">微博</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="title"  autocomplete="off" class="layui-input">
+                    </div>
+                </div>
 
-          </ul>
-        </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                    </div>
+                </div>
+            </form>
+          </div>
       </div>
     </div>
 
@@ -75,6 +113,65 @@
         var element = layui.element;//Tab的切换功能，切换事件监听等，需要依赖element模块
     });
 
+    function os(osId,osName,account,osType) {
+
+        layui.use(['layer','form'], function(){
+            var $ = layui.jquery;
+            var layer = layui.layer;
+            var form = layui.form;
+
+            var index = layer.open({
+                title: '开源',
+                type: 1,
+                skin: 'layui-layer-demo', //样式类名
+                closeBtn: 1, //不显示关闭按钮
+                anim: 2,
+                area: ['500px', '300px'],
+                shadeClose: true, //开启遮罩关闭
+                content: '<br><form class="layui-form">\n' +
+                '                <input type="hidden" name="osId" value="'+osId+'">\n' +
+                '                <div class="layui-form-item">\n' +
+                '                    <label class="layui-form-label">账号</label>\n' +
+                '                    <div class="layui-input-block">\n' +
+                '                        <input type="text" name="osName" required  lay-verify="required" value="'+osName+'" class="layui-input">\n' +
+                '                    </div>\n' +
+                '                </div>\n' +
+                '                <div class="layui-form-item">\n' +
+                '                    <label class="layui-form-label">仓库</label>\n' +
+                '                    <div class="layui-input-block">\n' +
+                '                        <input type="text" name="account" required  lay-verify="required" value="'+account+'" class="layui-input">\n' +
+                '                    </div>\n' +
+                '                </div>\n' +
+                '                <div class="layui-form-item">\n' +
+                '                    <label class="layui-form-label">平台</label>\n' +
+                '                    <div class="layui-input-block">\n' +
+                '                        <select name="osType" lay-verify="required">\n' +
+                '                            <option value="1">Github</option>\n' +
+                '                        </select>\n' +
+                '                    </div>\n' +
+                '                </div>\n' +
+                '                <div class="layui-form-item">\n' +
+                '                    <div class="layui-input-block">\n' +
+                '                        <button class="layui-btn" lay-submit lay-filter="submit-os">立即提交</button>\n' +
+                '                    </div>\n' +
+                '                </div>\n' +
+                '            </form>',
+            });
+            form.render('select'); //刷新select选择框渲染
+            form.on('submit(submit-os)', function (data) {
+                console.log(data.field) //当前容器的全部表单字段，名值对形式：{name: value}
+                $.post("../../os", data.field, function (result) {
+                    console.log(result.code);
+                    layer.msg(result.msg);
+                },"json");
+                layer.close(index);
+                return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+            });
+
+        });
+
+
+    }
 
 
 </script>

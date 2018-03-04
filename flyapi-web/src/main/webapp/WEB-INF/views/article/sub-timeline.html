@@ -46,7 +46,7 @@
                                                     </span>
                                                     <span sign-v-1="" class="duration" >
                                                         <i class="fa fa-clock-o fa-fw" title="时间"></i>
-                                                        <th:block th:text="${article.createTime}"></th:block>
+                                                        <th:block th:text="${#dates.format(article.createTime,'yyyy-MM-dd HH:mm:ss')}"></th:block>
                                                     </span>
                                                 </div>
                                             </div>

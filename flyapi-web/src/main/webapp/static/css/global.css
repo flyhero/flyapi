@@ -1364,6 +1364,15 @@ body .fly-user-main {
     background-color: #8FCDA0;
     color: #fff;
     font-size: 12px;
+    border-radius: 2px;
+}
+.jie-row li .os-delete {
+    margin-left: 5px;
+    padding: 0 6px;
+    background-color: #FF5722;
+    color: #fff;
+    font-size: 12px;
+    border-radius: 2px;
 }
 
 .jie-row li em {
