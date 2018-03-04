@@ -14,6 +14,7 @@ import com.flyapi.core.util.AESUtil;
 import com.flyapi.core.util.CookieUtil;
 import com.flyapi.core.validator.StringValidator;
 import com.flyapi.model.*;
+import com.flyapi.pojo.dto.PasswordDto;
 import com.flyapi.pojo.dto.RegisterDto;
 import com.flyapi.pojo.vo.ActiveVo;
 import com.flyapi.pojo.vo.CommentVo;
@@ -242,20 +243,43 @@ public class UserController extends BaseController {
     }
     /**
      * 更新用户信息
-     * @title: updateUserInfo
+     * @title: updateUser
      * @author flyhero <http://www.iflyapi.cn>
      * @params [user]
      * @return com.flyapi.core.constant.JSONResult
      * @date 2018/1/15 下午11:33
      */
-    @PostMapping("info")
+    @PutMapping("info")
     @ResponseBody
-    public JSONResult updateUserInfo(UcenterUser user){
-        int num = userService.updateByPrimaryKeySelective(user);
-        if(num <= 0){
-            JSONResult.error();
+    public JSONResult updateUser(UcenterUser user){
+        UcenterUser user1 = (UcenterUser) currentUser();
+        if(user1 == null){
+            return JSONResult.error("用户未登录");
         }
-        return JSONResult.ok();
+        user.setUserId(user1.getUserId());
+        int num = userService.updateByPrimaryKeySelective(user);
+        return num > 0 ? JSONResult.ok() : JSONResult.error();
+    }
+
+    /**
+     * 修改密码
+     * @title: updateUserPassword
+     * @param passwordDto
+     * @return com.flyapi.core.constant.JSONResult
+     * @date 2018/3/4 下午1:08
+     */
+    @PutMapping("pass")
+    @ResponseBody
+    public JSONResult updateUserPassword(PasswordDto passwordDto){
+        UcenterUser user = (UcenterUser) currentUser();
+        if(user == null || !user.getPassword().equals(AESUtil.AESEncode(passwordDto.getNowpass().trim()))){
+            return JSONResult.error("密码不正确");
+        }
+        UcenterUser user1 = new UcenterUser();
+        user1.setUserId(user.getUserId());
+        user1.setPassword(AESUtil.AESEncode(passwordDto.getNowpass().trim()));
+        int num = userService.updateByPrimaryKeySelective(user1);
+        return num > 0 ? JSONResult.ok() : JSONResult.error();
     }
     /**
      * 退出
@@ -338,4 +362,6 @@ public class UserController extends BaseController {
         mv.setViewName("user/home");
         return mv;
     }
+
+
 }
