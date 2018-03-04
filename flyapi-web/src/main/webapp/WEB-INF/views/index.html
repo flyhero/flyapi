@@ -154,10 +154,14 @@
                         success: function (result) {
                             pageCount = result.data.pages;
                             $.each(result.data.list, function (index, simple) {
-                                lis.push('<li class="note-list">' +
-                                    '<a class="des-img" href="#" target="_blank">' +
-                                    '<img src="' + simple.cover + '" alt="300">' +
-                                    '</a>' +
+                                var cover = '<a class="des-img">' +
+                                    '<img src="' + simple.cover + '">' +
+                                    '</a>';
+                                if(simple.cover == null || simple.cover == ''){
+                                    cover = '';
+                                }
+
+                                lis.push('<li class="note-list">' +cover +
                                     '<div><div class="author">' +
                                     '<a class="avatar" target="_blank" href="#">' +
                                     '<img src="'+simple.avatar+'">' +

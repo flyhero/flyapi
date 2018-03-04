@@ -95,9 +95,11 @@
                             <input th:value="${article} ? ${article.original} :''" type="text" id="original" name="original" placeholder="为空既原创" class="layui-input">
                         </div>
                     </div>
-                    <div class="layui-col-md6">
+                    <th:block th:if="${article} == null">
+                        <div class="layui-col-md6">
                             <input type="checkbox" name="apply" value="0" id="apply" lay-filter="apply" title="首页投稿" checked>
-                    </div>
+                        </div>
+                    </th:block>
                 </div>
                 <div class="layui-form-item">
                     <button class="layui-btn layui-btn-radius layui-btn-normal" lay-filter="pub" lay-submit>立即发布</button>
@@ -178,10 +180,6 @@
                 } else {
                     $("#permissions").val(1);
                 }
-                /*                console.log(data.elem); //得到checkbox原始DOM对象
-                                console.log(data.elem.checked); //开关是否开启，true或者false
-                                console.log(data.value); //开关value值，也可以通过data.elem.value得到
-                                console.log(data.othis); //得到美化后的DOM对象*/
             });
 
             form.on('checkbox(apply)', function (data) {
@@ -199,7 +197,8 @@
                 var result = pa.exec(coverHtml);
                 var cover = '';
                 if(null != result){
-                    cover = result[0];
+                    var num = result[1].indexOf('"');
+                    cover = result[1].substring(0,num);
                 }
                 $.post(host+"/article",
                     {
@@ -216,9 +215,9 @@
                         "status":status
                     },
                     function(result){
-                    /*    if(result.code==200){
-                            location.href="";
-                        }*/
+                        if(result.success){
+                            layer.msg("成功");
+                        }
 
                     }, "json");
             }
