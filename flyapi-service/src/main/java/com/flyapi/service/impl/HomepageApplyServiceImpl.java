@@ -20,4 +20,9 @@ import org.springframework.transaction.annotation.Transactional;
 public class HomepageApplyServiceImpl extends BaseServiceImpl<CmsHomepageApply,CmsHomepageApplyMapper> implements HomepageApplyService {
     @Autowired
     private CmsHomepageApplyMapper cmsHomepageApplyMapper;
+
+    @Override
+    public CmsHomepageApply findByArticleId(Long articleId) {
+        return cmsHomepageApplyMapper.findByArticleId(articleId);
+    }
 }

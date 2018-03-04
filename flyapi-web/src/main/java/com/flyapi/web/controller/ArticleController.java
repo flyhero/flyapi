@@ -241,9 +241,16 @@ public class ArticleController extends BaseController {
             return mv;
         }
 
+        CmsHomepageApply apply = homepageApplyService.findByArticleId(articleId);
         mv.addObject("subjectList", subjectList);
 
         CmsArticle article = articleService.selectByPrimaryKey(articleId);
+        if(article != null && apply != null){
+            mv.addObject("isApply",false);
+        }else {
+            mv.addObject("isApply",true);
+        }
+
         mv.addObject("article", article);
 
         return mv;

@@ -14,4 +14,6 @@ public interface CmsHomepageApplyMapper {
     int updateByPrimaryKeySelective(CmsHomepageApply record);
 
     int updateByPrimaryKey(CmsHomepageApply record);
+
+    CmsHomepageApply findByArticleId(Long articleId);
 }

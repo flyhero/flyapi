@@ -10,4 +10,5 @@ import com.flyapi.model.UcenterUser;
  */
 public interface HomepageApplyService extends BaseService<CmsHomepageApply> {
 
+    CmsHomepageApply findByArticleId(Long articleId);
 }

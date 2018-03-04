@@ -95,7 +95,7 @@
                             <input th:value="${article} ? ${article.original} :''" type="text" id="original" name="original" placeholder="为空既原创" class="layui-input">
                         </div>
                     </div>
-                    <th:block th:if="${article} == null">
+                    <th:block th:if="${isApply} == true">
                         <div class="layui-col-md6">
                             <input type="checkbox" name="apply" value="0" id="apply" lay-filter="apply" title="首页投稿" checked>
                         </div>
