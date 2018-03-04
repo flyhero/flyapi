@@ -1,5 +1,7 @@
 # flyapi
 ## 项目简介
+![flyapi](flyapi-doc/images/flyapi-logo.png)
+
 [![Version](https://img.shields.io/badge/license-Apache2.0-blue.svg)](https://github.com/flyhero/flyapi)
 
 [![Version](https://img.shields.io/badge/version-1.0-green.svg)](https://github.com/flyhero/flyapi)
