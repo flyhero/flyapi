@@ -52,7 +52,7 @@
                         <div class="layui-form-item">
                             <label for="L_email" class="layui-form-label">邮箱</label>
                             <div class="layui-input-inline">
-                                <input type="text" id="L_email" name="email"  lay-verify="email"
+                                <input type="text" id="L_email" name="email" lay-verify="email"
                                        autocomplete="off" th:value="${setInfo.email}" class="layui-input">
                             </div>
                             <div class="layui-form-mid layui-word-aux">如果您在邮箱已激活的情况下，变更了邮箱，需
@@ -69,13 +69,16 @@
                         <div class="layui-form-item">
                             <label for="company" class="layui-form-label">公司</label>
                             <div class="layui-input-inline">
-                                <input type="text" id="company" name="company" autocomplete="off" th:value="${setInfo.company}" class="layui-input">
+                                <input type="text" id="company" name="company" autocomplete="off"
+                                       th:value="${setInfo.company}" class="layui-input">
                             </div>
                         </div>
                         <div class="layui-form-item layui-form-text">
                             <label for="L_sign" class="layui-form-label">签名</label>
                             <div class="layui-input-block">
-                                <textarea placeholder="随便写些什么刷下存在感" id="L_sign" name="sign" autocomplete="off" th:text="${setInfo.sign}" class="layui-textarea" style="height: 80px;"></textarea>
+                                <textarea placeholder="随便写些什么刷下存在感" id="L_sign" name="sign" autocomplete="off"
+                                          th:text="${setInfo.sign}" class="layui-textarea"
+                                          style="height: 80px;"></textarea>
                             </div>
                         </div>
                         <div class="layui-form-item">
@@ -91,7 +94,8 @@
                             <div class="upload-img">
                                 <input type="file" name="file" id="avatar-file" lay-title="上传头像">
                             </div>
-                            <img id="avatar-info" src="http://tp4.sinaimg.cn/1345566427/180/5730976522/0" th:src="${setInfo.avatar}">
+                            <img id="avatar-info" src="http://tp4.sinaimg.cn/1345566427/180/5730976522/0"
+                                 th:src="${setInfo.avatar}">
                             <span class="loading"></span>
 
 
@@ -102,7 +106,7 @@
                 <div class="layui-form layui-form-pane layui-tab-item">
                     <form action="/user/repass" method="post">
                         <div class="layui-form-item">
-                            <label  class="layui-form-label">当前密码</label>
+                            <label class="layui-form-label">当前密码</label>
                             <div class="layui-input-inline">
                                 <input type="password" name="nowpass" required lay-verify="required"
                                        autocomplete="off" class="layui-input">
@@ -129,44 +133,48 @@
                     </form>
                 </div>
 
-<!--                <div class="layui-form layui-form-pane layui-tab-item">
-                    <ul class="app-bind">
-                        <li class="fly-msg app-havebind">
-                            <i class="iconfont icon-qq"></i>
-                            <span>已成功绑定，您可以使用QQ帐号直接登录</span>
-                            <a href="javascript:;" class="acc-unbind" type="qq_id">解除绑定</a>
+                <!--                <div class="layui-form layui-form-pane layui-tab-item">
+                                    <ul class="app-bind">
+                                        <li class="fly-msg app-havebind">
+                                            <i class="iconfont icon-qq"></i>
+                                            <span>已成功绑定，您可以使用QQ帐号直接登录</span>
+                                            <a href="javascript:;" class="acc-unbind" type="qq_id">解除绑定</a>
 
-                            &lt;!&ndash; <a href="" onclick="layer.msg('正在绑定微博QQ', {icon:16, shade: 0.1, time:0})" class="acc-bind" type="qq_id">立即绑定</a>
-                            <span>，即可使用QQ帐号登录Fly社区</span> &ndash;&gt;
-                        </li>
-                        <li class="fly-msg">
-                            <i class="iconfont icon-weibo"></i>
-                            &lt;!&ndash; <span>已成功绑定，您可以使用微博直接登录Fly社区，当然，您也可以</span>
-                            <a href="javascript:;" class="acc-unbind" type="weibo_id">解除绑定</a> &ndash;&gt;
+                                            &lt;!&ndash; <a href="" onclick="layer.msg('正在绑定微博QQ', {icon:16, shade: 0.1, time:0})" class="acc-bind" type="qq_id">立即绑定</a>
+                                            <span>，即可使用QQ帐号登录Fly社区</span> &ndash;&gt;
+                                        </li>
+                                        <li class="fly-msg">
+                                            <i class="iconfont icon-weibo"></i>
+                                            &lt;!&ndash; <span>已成功绑定，您可以使用微博直接登录Fly社区，当然，您也可以</span>
+                                            <a href="javascript:;" class="acc-unbind" type="weibo_id">解除绑定</a> &ndash;&gt;
 
-                            <a href="" class="acc-weibo" type="weibo_id"
-                               onclick="layer.msg('正在绑定微博', {icon:16, shade: 0.1, time:0})">立即绑定</a>
-                            <span>，即可</span>
-                        </li>
-                    </ul>
-                </div>-->
+                                            <a href="" class="acc-weibo" type="weibo_id"
+                                               onclick="layer.msg('正在绑定微博', {icon:16, shade: 0.1, time:0})">立即绑定</a>
+                                            <span>，即可</span>
+                                        </li>
+                                    </ul>
+                                </div>-->
 
                 <div class="layui-form layui-form-pane layui-tab-item">
                     <form action="" method="post">
                         <div class="layui-form-item">
                             <label for="supportWord" class="layui-form-label">赞赏语</label>
                             <div class="layui-input-inline">
-                                <input type="text" id="supportWord" name="supportWord" required lay-verify="required" th:value="${setInfo.supportWord}"
+                                <input type="text" id="supportWord" name="supportWord" required lay-verify="required"
+                                       th:value="${setInfo.supportWord}"
                                        autocomplete="off" class="layui-input">
                             </div>
                         </div>
-                            <div class="layui-upload">
-                                <button type="button" class="layui-btn layui-btn-primary" id="qrcode">上传二维码</button>
-                                <div class="layui-upload-list">
-                                    <img class="layui-upload-img" id="demo1" height="300px" width="300px" th:src="${setInfo.supportQrcode}">
-                                    <p id="demoText"></p>
-                                </div>
+                        <div class="layui-upload">
+                            <button type="button" class="layui-btn layui-btn-primary" id="qrcode">上传二维码</button>
+                            <div class="layui-upload-list">
+                                <input type="hidden" id="supportQrcode" name="supportQrcode"
+                                       th:value="${setInfo.supportQrcode}">
+                                <img class="layui-upload-img" id="demo1" height="300px" width="300px"
+                                     th:src="${setInfo.supportQrcode}">
+                                <p id="demoText"></p>
                             </div>
+                        </div>
 
                         <div class="layui-form-item">
                             <button class="layui-btn" key="set-mine" lay-filter="upload-qrcode" lay-submit>保存</button>
@@ -181,14 +189,16 @@
                                 <div class="layui-form-item">
                                     <label for="accessKey" class="layui-form-label">accessKey</label>
                                     <div class="layui-input-inline">
-                                        <input type="password" id="accessKey" name="accessKey" required lay-verify="required"
+                                        <input type="password" id="accessKey" name="accessKey" required
+                                               lay-verify="required"
                                                autocomplete="off" class="layui-input">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label for="L_repass" class="layui-form-label">secretKey</label>
                                     <div class="layui-input-inline">
-                                        <input type="password" id="secretKey" name="secretKey" required lay-verify="required"
+                                        <input type="password" id="secretKey" name="secretKey" required
+                                               lay-verify="required"
                                                autocomplete="off" class="layui-input">
                                     </div>
                                 </div>
@@ -242,8 +252,12 @@
                                     <div class="layui-timeline-content layui-text">
                                         <h3 class="layui-timeline-title">方式二</h3>
                                         <ul>
-                                            <li><img src="http://www.iflyapi.cn:8090/static/images/qiniu/qiniu-step1.png" width="400px" height="300px"/></li>
-                                            <li><img src="http://www.iflyapi.cn:8090/static/images/qiniu/qiniu-step2.png" width="400px" height="300px"/></li>
+                                            <li><img
+                                                    src="http://www.iflyapi.cn:8090/static/images/qiniu/qiniu-step1.png"
+                                                    width="400px" height="300px"/></li>
+                                            <li><img
+                                                    src="http://www.iflyapi.cn:8090/static/images/qiniu/qiniu-step2.png"
+                                                    width="400px" height="300px"/></li>
                                         </ul>
                                     </div>
                                 </li>
@@ -264,7 +278,7 @@
     $("li").removeClass("layui-this");
     $("#fly-set").addClass("layui-this")
 
-    layui.use(['util', 'element', 'layer','form','laytpl','laypage','upload'], function(){
+    layui.use(['util', 'element', 'layer', 'form', 'laytpl', 'laypage', 'upload'], function () {
         var $ = layui.jquery;
         var layer = layui.layer;
         var util = layui.util;
@@ -276,26 +290,26 @@
         //右下角bar top
         util.fixbar({
             bar1: true,
-            click: function(type){
+            click: function (type) {
                 console.log(type);
-                if(type === 'bar1'){
+                if (type === 'bar1') {
                     alert('点击了bar1')
                 }
             }
         });
 
 
-        form.on('submit(base-info)', function(data){
-            console.log(data.field) //当前容器的全部表单字段，名值对形式：{name: value}
+        form.on('submit(base-info)', function (data) {
+            update(jQuery.parseJSON(JSON.stringify(data.field)));
             return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
         });
-        form.on('submit(new-password)', function(data){
+        form.on('submit(new-password)', function (data) {
             console.log(data.field) //当前容器的全部表单字段，名值对形式：{name: value}
-            return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+            return false;
         });
-        form.on('submit(upload-qrcode)', function(data){
-            console.log(data.field) //当前容器的全部表单字段，名值对形式：{name: value}
-            return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+        form.on('submit(upload-qrcode)', function (data) {
+            update(jQuery.parseJSON(JSON.stringify(data.field)));
+            return false;
         });
 
         //普通图片上传
@@ -313,6 +327,7 @@
                 //上传成功
                 if (res.code == 200) {
                     layer.msg("上传成功啊");
+                    $("#supportQrcode").val(res.data);
                 }
             },
             error: function () {
@@ -330,12 +345,10 @@
         upload.render({
             elem: '#avatar-file',
             url: '../local/upload/',
-            done: function(res){
-                res.toJSON = function(key)
-                {
+            done: function (res) {
+                res.toJSON = function (key) {
                     var replacement = new Object();
-                    for (var val in this)
-                    {
+                    for (var val in this) {
                         if (typeof (this[val]) === 'string')
                             replacement[val] = this[val].toUpperCase();
                         else
@@ -345,17 +358,29 @@
                 };
 
                 var jsonText = JSON.stringify(res);
-                console.log("头像上传："+jsonText);
+                console.log("头像上传：" + jsonText);
                 var userId = new String('[[${session.user.userId}]]');
-                $.post("/user/info",{"userId":userId,"avatar":res.data},function(result){
-                    $("#avatar-info").attr("src",res.data);
+                $.post("/user/info", {"userId": userId, "avatar": res.data}, function (result) {
+                    $("#avatar-info").attr("src", res.data);
                 });
             }
         });
 
     });
 
-
+    function update(field) {
+        $.ajax({
+            url: "../user/info", //处理页面的路径
+            data: field, //要提交的数据是一个JSON
+            type: "POST", //提交方式
+            dataType: "json", //返回数据的类型
+            success: function (data) { //回调函数 ,成功时返回的数据存在形参data里
+               if(data.code == 200){
+                   layer.msg("修改成功");
+               }
+            }
+        });
+    }
 
 
 </script>

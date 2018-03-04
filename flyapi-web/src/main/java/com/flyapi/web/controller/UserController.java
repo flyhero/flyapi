@@ -249,7 +249,7 @@ public class UserController extends BaseController {
      * @return com.flyapi.core.constant.JSONResult
      * @date 2018/1/15 下午11:33
      */
-    @PutMapping("info")
+    @PostMapping("info")
     @ResponseBody
     public JSONResult updateUser(UcenterUser user){
         UcenterUser user1 = (UcenterUser) currentUser();
@@ -268,7 +268,7 @@ public class UserController extends BaseController {
      * @return com.flyapi.core.constant.JSONResult
      * @date 2018/3/4 下午1:08
      */
-    @PutMapping("pass")
+    @PostMapping("pass")
     @ResponseBody
     public JSONResult updateUserPassword(PasswordDto passwordDto){
         UcenterUser user = (UcenterUser) currentUser();
