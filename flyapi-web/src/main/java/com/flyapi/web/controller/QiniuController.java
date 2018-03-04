@@ -8,6 +8,8 @@ import com.flyapi.core.exception.UploadException;
 import com.flyapi.model.SettingStore;
 import com.flyapi.model.UcenterUser;
 import com.flyapi.service.api.SettingStoreService;
+import com.flyapi.service.impl.file.LocalFileUploadServiceImpl;
+import com.flyapi.service.impl.file.QiniuFileUploadServiceImpl;
 import com.qiniu.common.QiniuException;
 import com.qiniu.common.Zone;
 import com.qiniu.http.Response;
@@ -20,6 +22,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import java.io.*;
 
@@ -29,12 +32,15 @@ import java.io.*;
  * Date: 2017/6/21 0021 下午 6:47
  */
 @RestController
-@RequestMapping("qiniu")
 public class QiniuController extends BaseController {
 
     @Autowired
     private SettingStoreService settingStoreService;
 
+    @Autowired
+    private QiniuFileUploadServiceImpl qiniuFileUploadService;
+    @Autowired
+    private LocalFileUploadServiceImpl localFileUploadService;
     /**
      * 上传图片到七牛
      *
@@ -44,7 +50,7 @@ public class QiniuController extends BaseController {
      * @params [file]
      * @date 2017/11/16 下午1:59
      */
-    @PostMapping("upload")
+    @PostMapping("qiniu/upload")
     public JSONResult uploadImage(@RequestParam(value = "editormd-image-file", required = false) MultipartFile file) {
         UcenterUser user = (UcenterUser) currentUser();
         if (user == null) {
@@ -52,75 +58,15 @@ public class QiniuController extends BaseController {
         }
         String imgUrl = null;
         try {
-            imgUrl = upload(file, user.getUserId());
+            imgUrl = qiniuFileUploadService.upload(file, user.getUserId());
         } catch (Exception e) {
 
             return JSONResult.error("上传失败", 401, "");
         }
         return JSONResult.ok(imgUrl);
-       /* String accessKey = "";
-        String secretKey = "";
-        String bucket = "";
-        Long userId = 1000000L;
-        String domain = "";
-        String imgUrl = "";
-
-        UcenterUser ucenterUser = (UcenterUser) currentUser();
-        SettingStore store = settingStoreService.selectByPrimaryKey(ucenterUser.getUserId());
-        if (store != null) {
-            if (store.getVip() == 0) { //已赞助
-                return JSONResult.error("请设置图片存储或赞助", 401, "");
-            } else {
-                domain = store.getDomain();
-                accessKey = store.getAk();
-                secretKey = store.getSk();
-                bucket = store.getBucket();
-                userId = ucenterUser.getUserId();
-            }
-        } else {
-            return JSONResult.error("未知错误，请联系管理员", 401, "");
-        }
-        //构造一个带指定Zone对象的配置类
-        Configuration cfg = new Configuration(Zone.zone0());
-        //...其他参数参考类注释
-        UploadManager uploadManager = new UploadManager(cfg);
-        //...生成上传凭证，然后准备上传
-
-        System.out.println(file.getOriginalFilename());
-        //默认不指定key的情况下，以文件内容的hash值作为文件名
-        String key = userId + "/" + file.getOriginalFilename();
-        try {
-            byte[] uploadBytes = file.getBytes();
-            ByteArrayInputStream byteInputStream = new ByteArrayInputStream(uploadBytes);
-            Auth auth = Auth.create(accessKey, secretKey);
-            String upToken = auth.uploadToken(bucket);
-            try {
-                Response response = uploadManager.put(byteInputStream, key, upToken, null, null);
-                //解析上传成功的结果
-                System.out.println("上传成功的结果:" + response.bodyString());
-                DefaultPutRet putRet = JSON.parseObject(response.bodyString(), DefaultPutRet.class);
-                System.out.println(putRet.key);
-                System.out.println(putRet.hash);
-                System.out.println("访问地址：" + domain + "/" + key);
-                imgUrl = domain + "/" + key;
-            } catch (QiniuException ex) {
-                Response r = ex.response;
-                System.err.println(r.toString());
-                try {
-                    System.err.println(r.bodyString());
-                } catch (QiniuException ex2) {
-                    //ignore
-                }
-            }
-        } catch (UnsupportedEncodingException ex) {
-            //ignore
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return JSONResult.ok(imgUrl);*/
     }
 
-    @PostMapping("common/upload")
+    @PostMapping("qiniu/common/upload")
     public JSONResult commonUpload(@RequestParam(value = "file", required = true) MultipartFile file) {
         UcenterUser user = (UcenterUser) currentUser();
         if (user == null) {
@@ -128,71 +74,33 @@ public class QiniuController extends BaseController {
         }
         String imgUrl = null;
         try {
-            imgUrl = upload(file, user.getUserId());
+            imgUrl = qiniuFileUploadService.upload(file, user.getUserId());
         } catch (Exception e) {
             return JSONResult.error("上传失败", 401, "");
         }
         return JSONResult.ok(imgUrl);
     }
+    /**
+     * 上传到本地服务器
+     * @title: localUpload
+     * @param file
+     * @return com.flyapi.core.constant.JSONResult
+     * @date 2018/3/4 上午11:58
+     */
+    @PostMapping("local/upload")
+    public JSONResult localUpload(@RequestParam(value = "file", required = true) CommonsMultipartFile file) {
 
-    private String upload(MultipartFile file, Long userId) {
-
-        String accessKey = "";
-        String secretKey = "";
-        String bucket = "";
-
-        String domain = "";
-        String imgUrl = "";
-
-        SettingStore store = settingStoreService.selectByPrimaryKey(userId);
-        if (store != null) {
-            if (store.getVip() == 0) {
-                throw new UploadException("请设置图片存储或赞助");
-            } else {
-                domain = store.getDomain();
-                accessKey = store.getAk();
-                secretKey = store.getSk();
-                bucket = store.getBucket();
-            }
-        } else {
-            throw new UploadException("未知错误，请联系管理员");
+        UcenterUser user = (UcenterUser) currentUser();
+        if (user == null) {
+            return JSONResult.error();
         }
-        //构造一个带指定Zone对象的配置类
-        Configuration cfg = new Configuration(Zone.zone0());
-        //...其他参数参考类注释
-        UploadManager uploadManager = new UploadManager(cfg);
-        //...生成上传凭证，然后准备上传
-
-        System.out.println(file.getOriginalFilename());
-        //默认不指定key的情况下，以文件内容的hash值作为文件名
-        String key = userId + "/" + file.getOriginalFilename();
+        String imgUrl = null;
         try {
-            byte[] uploadBytes = file.getBytes();
-            ByteArrayInputStream byteInputStream = new ByteArrayInputStream(uploadBytes);
-            Auth auth = Auth.create(accessKey, secretKey);
-            String upToken = auth.uploadToken(bucket);
-            try {
-                Response response = uploadManager.put(byteInputStream, key, upToken, null, null);
-                //解析上传成功的结果
-                DefaultPutRet putRet = JSON.parseObject(response.bodyString(), DefaultPutRet.class);
-                System.out.println(putRet.key);
-                System.out.println(putRet.hash);
-                imgUrl = domain + "/" + key;
-            } catch (QiniuException ex) {
-                Response r = ex.response;
-                System.err.println(r.toString());
-                try {
-                    System.err.println(r.bodyString());
-                } catch (QiniuException ex2) {
-                    //ignore
-                }
-            }
-        } catch (UnsupportedEncodingException ex) {
-            //ignore
-        } catch (IOException e) {
-            e.printStackTrace();
+            imgUrl = localFileUploadService.upload(file, user.getUserId());
+        } catch (Exception e) {
+            return JSONResult.error("上传失败", 401, "");
         }
-        return imgUrl;
+        return JSONResult.ok(imgUrl);
     }
 
     public static void main(String[] args) {
