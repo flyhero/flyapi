@@ -10,4 +10,5 @@ import com.flyapi.model.Report;
  */
 public interface ReportService extends BaseService<Report> {
 
+    int countReportToday(String ip);
 }

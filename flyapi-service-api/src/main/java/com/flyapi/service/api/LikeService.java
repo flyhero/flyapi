@@ -12,4 +12,6 @@ import java.util.List;
 public interface LikeService extends BaseService<CmsLike> {
 
     List<CmsLike> findLikeArticleByUserId(Long userId);
+
+    CmsLike findByUserIdAndTargetId(CmsLike like);
 }

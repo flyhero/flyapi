@@ -27,4 +27,9 @@ public class LikeServiceImpl extends BaseServiceImpl<CmsLike,CmsLikeMapper> impl
     public List<CmsLike> findLikeArticleByUserId(Long userId) {
         return cmsLikeMapper.findLikeArticleByUserId(userId);
     }
+
+    @Override
+    public CmsLike findByUserIdAndTargetId(CmsLike like) {
+        return cmsLikeMapper.findByUserIdAndTargetId(like);
+    }
 }

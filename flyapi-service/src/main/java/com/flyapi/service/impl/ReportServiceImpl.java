@@ -20,4 +20,9 @@ import org.springframework.transaction.annotation.Transactional;
 public class ReportServiceImpl extends BaseServiceImpl<Report,ReportMapper> implements ReportService {
     @Autowired
     private ReportMapper reportMapper;
+
+    @Override
+    public int countReportToday(String ip) {
+        return reportMapper.findCountByIP(ip);
+    }
 }

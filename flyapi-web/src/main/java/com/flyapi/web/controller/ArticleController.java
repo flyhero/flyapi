@@ -55,6 +55,8 @@ public class ArticleController extends BaseController {
     private SnowflakeIdWorker snowflakeIdWorker;
     @Autowired
     private CollectArticleService collectArticleService;
+    @Autowired
+    private LikeService likeService;
     /**
      * Title: findArticleDetail
      * params: [articleId]
@@ -65,18 +67,64 @@ public class ArticleController extends BaseController {
     @RequestMapping(value = "article/detail/{articleId}", method = RequestMethod.GET)
     public ModelAndView findArticleDetail(@PathVariable("articleId") Long articleId) {
 
+        boolean isLike = false;
         if (isLogin()) {
             UcenterUser user = (UcenterUser) currentUser();
             userFameService.addFameValue(user.getUserId(), 4);
+            CmsLike requestLike = new CmsLike();
+            requestLike.setUserId(user.getUserId());
+            requestLike.setTargetId(articleId);
+            requestLike.setTargetType((byte)1);
+            CmsLike like = likeService.findByUserIdAndTargetId(requestLike);
+            if(like != null && like.getIsDelete() == 0){
+                isLike = true;
+            }
+
         }
         ArticleDetailVo detailVo = articleService.findArticleDetail(articleId);
         List<CmsComment> commentList = commentService.findCommentById(articleId);
+
         mv.addObject("detailVo", detailVo);
         mv.addObject("commentList", commentList);
+        mv.addObject("isLike", isLike);
         mv.setViewName("article/detail");
         return mv;
     }
-
+    /**
+     * 点赞
+     * @title: doLike
+     * @param articleId
+     * @return com.flyapi.core.constant.JSONResult
+     * @date 2018/3/4 下午4:18
+     */
+    @PostMapping("article/{articleId}/like")
+    @ResponseBody
+    public JSONResult doLike(@PathVariable Long articleId){
+        boolean isLike = false;
+        UcenterUser user = (UcenterUser) currentUser();
+        if (user == null) {
+            return JSONResult.error("未登录");
+        }
+        CmsLike like = new CmsLike();
+        like.setId(snowflakeIdWorker.nextId());
+        like.setUserId(user.getUserId());
+        like.setTargetType((byte)1);
+        like.setTargetId(articleId);
+        CmsLike like1 = likeService.findByUserIdAndTargetId(like);
+        if(like1 == null){
+            likeService.insertSelective(like);
+            isLike = true;
+        }else {
+            if(like1.getIsDelete() == 0){
+                like1.setIsDelete((byte)1);
+                isLike = true;
+            }else {
+                like1.setIsDelete((byte)0);
+            }
+            likeService.updateByPrimaryKeySelective(like1);
+        }
+        return JSONResult.ok(isLike);
+    }
     /**
      * 根据专题获取文章列表
      * Title: findArticleBySubjectId

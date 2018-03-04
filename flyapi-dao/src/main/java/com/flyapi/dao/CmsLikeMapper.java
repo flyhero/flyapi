@@ -18,4 +18,6 @@ public interface CmsLikeMapper {
     int updateByPrimaryKey(CmsLike record);
 
     List<CmsLike> findLikeArticleByUserId(Long userId);
+
+    CmsLike findByUserIdAndTargetId(CmsLike like);
 }

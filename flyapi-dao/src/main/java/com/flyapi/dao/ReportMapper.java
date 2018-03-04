@@ -14,4 +14,6 @@ public interface ReportMapper {
     int updateByPrimaryKeySelective(Report record);
 
     int updateByPrimaryKey(Report record);
+
+    int findCountByIP(String ip);
 }

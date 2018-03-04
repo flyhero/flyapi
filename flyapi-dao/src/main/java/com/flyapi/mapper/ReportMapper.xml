@@ -22,6 +22,11 @@
     from sys_report
     where report_id = #{reportId,jdbcType=BIGINT}
   </select>
+  <select id="findCountByIP" parameterType="java.lang.String" resultType="int">
+    select count(*)
+    from sys_report
+    where reporter_ip = #{reporterIp} and is_delete = 0
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from sys_report
     where report_id = #{reportId,jdbcType=BIGINT}
