@@ -23,6 +23,8 @@ import java.util.Date;
 @RequestMapping("report")
 public class ReportController extends BaseController{
 
+    //今日举报上限
+    private static final int REPORT_LIMIT_TODAY = 10;
     @Autowired
     private ReportService reportService;
     @Autowired
@@ -40,9 +42,13 @@ public class ReportController extends BaseController{
     @ResponseBody
     public JSONResult report(Report report){
 
-        //待增加：今天相同ip举报次数有限制
+        //TODO：今天相同ip举报次数有限制
 
         String ip = IPUtil.getIP(request);
+        int count = reportService.countReportToday(ip);
+        if(count > REPORT_LIMIT_TODAY){
+            return JSONResult.error();
+        }
         report.setReportId(snowflakeIdWorker.nextId());
         report.setReporterIp(ip);
         report.setCreateTime(new Date());
