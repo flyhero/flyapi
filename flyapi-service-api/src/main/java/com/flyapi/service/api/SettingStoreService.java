@@ -10,4 +10,5 @@ import com.flyapi.model.SettingStore;
  */
 public interface SettingStoreService extends BaseService<SettingStore> {
 
+    int updateByUserId(SettingStore store);
 }

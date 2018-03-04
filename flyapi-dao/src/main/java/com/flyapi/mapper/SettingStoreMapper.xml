@@ -95,25 +95,48 @@
     update setting_store
     <set>
       <if test="ak != null">
-        #{ak,jdbcType=VARCHAR},
+        ak = #{ak,jdbcType=VARCHAR},
       </if>
       <if test="sk != null">
-        #{sk,jdbcType=VARCHAR},
+        sk = #{sk,jdbcType=VARCHAR},
       </if>
       <if test="bucket != null">
-        #{bucket,jdbcType=VARCHAR},
+        bucket = #{bucket,jdbcType=VARCHAR},
       </if>
       <if test="domain != null">
-        #{domain,jdbcType=VARCHAR},
+        domain = #{domain,jdbcType=VARCHAR},
       </if>
       <if test="storeType != null">
-        #{storeType,jdbcType=VARCHAR},
+        store_type = #{storeType,jdbcType=VARCHAR},
       </if>
-      now(),
       <if test="isDelete != null">
-        #{isDelete,jdbcType=TINYINT},
+        is_delete = #{isDelete,jdbcType=TINYINT},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByUserId" parameterType="com.flyapi.model.SettingStore">
+    update setting_store
+    <set>
+      <if test="ak != null">
+        ak = #{ak,jdbcType=VARCHAR},
+      </if>
+      <if test="sk != null">
+        sk = #{sk,jdbcType=VARCHAR},
+      </if>
+      <if test="bucket != null">
+        bucket = #{bucket,jdbcType=VARCHAR},
+      </if>
+      <if test="domain != null">
+        domain = #{domain,jdbcType=VARCHAR},
+      </if>
+      <if test="storeType != null">
+        store_type = #{storeType,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null">
+        is_delete = #{isDelete,jdbcType=TINYINT},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=BIGINT}
   </update>
 </mapper>

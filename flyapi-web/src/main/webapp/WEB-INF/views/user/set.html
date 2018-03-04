@@ -185,35 +185,35 @@
                 <div class="layui-form layui-form-pane layui-tab-item">
                     <div class="layui-row">
                         <div class="layui-col-md6">
-                            <form action="/user/repass" method="post">
+                            <form>
                                 <div class="layui-form-item">
-                                    <label for="accessKey" class="layui-form-label">accessKey</label>
+                                    <label for="ak" class="layui-form-label">accessKey</label>
                                     <div class="layui-input-inline">
-                                        <input type="password" id="accessKey" name="accessKey" required
-                                               lay-verify="required"
+                                        <input type="password" id="ak" name="ak" required
+                                               lay-verify="required" th:value="${settingStore} ? ${settingStore.ak} : ''"
                                                autocomplete="off" class="layui-input">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
-                                    <label for="L_repass" class="layui-form-label">secretKey</label>
+                                    <label for="sk" class="layui-form-label">secretKey</label>
                                     <div class="layui-input-inline">
-                                        <input type="password" id="secretKey" name="secretKey" required
-                                               lay-verify="required"
+                                        <input type="password" id="sk" name="sk" required
+                                               lay-verify="required" th:value="${settingStore} ? ${settingStore.sk} : ''"
                                                autocomplete="off" class="layui-input">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
-                                    <label for="L_repass" class="layui-form-label">bucket</label>
+                                    <label for="bucket" class="layui-form-label">bucket</label>
                                     <div class="layui-input-inline">
-                                        <input type="password" id="bucket" name="bucket" required lay-verify="required"
-                                               autocomplete="off" class="layui-input">
+                                        <input type="text" id="bucket" name="bucket" required lay-verify="required"
+                                               autocomplete="off" class="layui-input" th:value="${settingStore} ? ${settingStore.bucket} : ''">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
-                                    <label for="L_repass" class="layui-form-label">domain</label>
+                                    <label for="domain" class="layui-form-label">domain</label>
                                     <div class="layui-input-inline">
-                                        <input type="password" id="domain" name="domain" required lay-verify="required"
-                                               autocomplete="off" class="layui-input">
+                                        <input type="text" id="domain" name="domain" required lay-verify="required"
+                                               autocomplete="off" class="layui-input" th:value="${settingStore} ? ${settingStore.domain} : ''">
                                     </div>
                                 </div>
 
@@ -221,15 +221,14 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">平台</label>
                                     <div class="layui-input-inline">
-                                        <select name="quiz1">
-                                            <option value="">请选择</option>
-                                            <option value="0" selected="">七牛</option>
+                                        <select name="store_type" required>
+                                            <option value="七牛" selected="">七牛</option>
                                         </select>
                                     </div>
                                 </div>
 
                                 <div class="layui-form-item">
-                                    <button class="layui-btn" key="set-mine" lay-filter="*" lay-submit>确认</button>
+                                    <button class="layui-btn" key="set-mine" lay-filter="img-bed" lay-submit>确认</button>
                                 </div>
                             </form>
                         </div>
@@ -300,15 +299,21 @@
 
 
         form.on('submit(base-info)', function (data) {
-            update(jQuery.parseJSON(JSON.stringify(data.field)));
+            update(jQuery.parseJSON(JSON.stringify(data.field)),"../user/info");
             return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
         });
         form.on('submit(new-password)', function (data) {
-            console.log(data.field) //当前容器的全部表单字段，名值对形式：{name: value}
+            console.log(data.field);//当前容器的全部表单字段，名值对形式：{name: value}
+            update(jQuery.parseJSON(JSON.stringify(data.field)),"../user/pass");
             return false;
         });
         form.on('submit(upload-qrcode)', function (data) {
-            update(jQuery.parseJSON(JSON.stringify(data.field)));
+            update(jQuery.parseJSON(JSON.stringify(data.field)),"../user/info");
+            return false;
+        });
+        form.on('submit(img-bed)', function (data) {
+            console.log(data.field);
+            update(jQuery.parseJSON(JSON.stringify(data.field)),"../setting/store");
             return false;
         });
 
@@ -368,9 +373,9 @@
 
     });
 
-    function update(field) {
+    function update(field,url) {
         $.ajax({
-            url: "../user/info", //处理页面的路径
+            url: url,
             data: field, //要提交的数据是一个JSON
             type: "POST", //提交方式
             dataType: "json", //返回数据的类型

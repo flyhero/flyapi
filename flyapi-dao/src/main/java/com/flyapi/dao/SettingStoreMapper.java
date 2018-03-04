@@ -12,4 +12,5 @@ public interface SettingStoreMapper {
 
     int updateByPrimaryKeySelective(SettingStore record);
 
+    int updateByUserId(SettingStore store);
 }

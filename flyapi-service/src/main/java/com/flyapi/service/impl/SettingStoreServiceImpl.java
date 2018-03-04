@@ -20,4 +20,9 @@ import org.springframework.transaction.annotation.Transactional;
 public class SettingStoreServiceImpl extends BaseServiceImpl<SettingStore,SettingStoreMapper> implements SettingStoreService {
     @Autowired
     private SettingStoreMapper settingStoreMapper;
+
+    @Override
+    public int updateByUserId(SettingStore store) {
+        return settingStoreMapper.updateByUserId(store);
+    }
 }

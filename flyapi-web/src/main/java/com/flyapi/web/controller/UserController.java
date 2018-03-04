@@ -302,8 +302,10 @@ public class UserController extends BaseController {
         System.out.println("==========user/set");
         UcenterUser currentUser = (UcenterUser)currentUser();
         UcenterUser user=userService.selectByPrimaryKey(currentUser.getUserId());
+        SettingStore settingStore = settingStoreService.selectByPrimaryKey(currentUser.getUserId());
         user.setPassword("");
         mv.addObject("setInfo",user);
+        mv.addObject("settingStore",settingStore);
         mv.setViewName("/user/set");
         return mv;
     }
