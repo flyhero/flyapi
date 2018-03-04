@@ -92,9 +92,20 @@ http://  用户名：   密码：
 ### 个人中心
 
 
-## 待办事项
+## 待办事项To Do List
+增加类似github贡献 图表，以活跃度
+1. 直播文字[有弹幕]
+2. 加入需求调查问卷，数据分析
+3. 二维码生成器
+4. 捐助榜
+5. 增加招聘页
+6. 在线简历页，github登录后生成贡献报告【https://github.com/ecmadao/hacknical】
+7. 第三方登录【QQ，微信，github】
+8. 成长图谱
+9. 头像自动生成
+10. 情景对话式段子（自选对话人物）
 
-## 更新日志
+## 更新日志CHANGELOG
 V1.0.1(2016/12/03 )
 - 列表
 - 列表2
@@ -104,22 +115,15 @@ V1.0.1(2016/12/03 )
 2. 每个页面都是一个资源，可单独请求
 ## Contributing
 
-我们欢迎反馈，缺陷报告和提交请求！
+We welcome feedback, bug reports, and pull requests!
 
+For pull requests, please stick to the following guidelines:
 
-对于提交请求，请坚持下面的方针：
+- Add tests for any new features and bug fixes. Ideally, each PR should increase the test coverage.
+- Follow the existing code style (e.g., indents). A PEP8 code linting target is included in the Makefile.
+- Put a reasonable amount of comments into the code.
+- Separate unrelated changes into multiple pull requests.
+Please note that we need to collect a signed Contributors License Agreement from each individual developer who contributes code to this repository. Please refer to the following links:
 
-
-
-## 版权声明
-本软件使用 Apache License 2.0 协议，请严格遵照协议内容：
-
-
-- [功能描述]：主要描述一下这个项目的主要功能列表。
-- [开发环境]：罗列使用本工程项目所需要安装的开发环境及配置，以及所需软件的版本说明和对应的下载链接。
-- [项目结构简介]：简单介绍项目模块结构目录树，对用户可以修改的文件做重点说明。
-- [测试DEMO]：此处可以简单介绍一下DEMO程序的思路，具体实现代码放在example文件夹中。
-- [作者列表]：对于多人合作的项目，可以在这里简单介绍并感谢所有参与开发的研发人员。
-- [更新链接]：提供后续更新的代码链接。
-- [历史版本]：对历史版本更改 记录做个简单的罗列，让用户直观的了解到哪些版本解决了哪些问题。
-- [联系方式]：可以提供微信、邮箱等联系方式，其他人对这个工程不明白的地方可以通过该联系方式与你联系。
+- https://
+- https://
