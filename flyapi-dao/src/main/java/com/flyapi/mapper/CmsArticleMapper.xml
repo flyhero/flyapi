@@ -242,6 +242,23 @@
         </set>
         where article_id = #{articleId,jdbcType=BIGINT}
     </update>
+    <update id="updateLikeNum" parameterType="com.flyapi.model.CmsArticle">
+        update cms_article
+        <set>
+            <if test="likeNum == 1">
+                like_num = like_num + 1
+            </if>
+            <if test="likeNum == 0">
+                like_num = like_num - 1
+            </if>
+        </set>
+        <where>
+            article_id = #{articleId,jdbcType=BIGINT}
+            <if test="likeNum == 0">
+                and like_num &gt; 0
+            </if>
+        </where>
+    </update>
     <select id="findArticleSimple" resultType="com.flyapi.pojo.vo.ArticleSimpleVo">
     SELECT
         t.article_id articleId,

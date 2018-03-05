@@ -40,4 +40,6 @@ public interface ArticleService extends BaseService<CmsArticle> {
     List<CmsArticle> findLastUpdateArticlesByUserId(Long userId);
 
     CmsArticle findArticleSumBySubjectId(Long subjectId);
+
+    int updateLikeNum(CmsArticle article);
 }

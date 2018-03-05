@@ -292,7 +292,7 @@ public class UserController extends BaseController {
     @RequestMapping("logout")
     public ModelAndView logout(){
         session.removeAttribute("user");
-        CookieUtil.delCookie(response,"isLogin");
+//        CookieUtil.delCookie(response,"isLogin");
         mv.setViewName("index");
         return mv;
     }

@@ -111,18 +111,31 @@ public class ArticleController extends BaseController {
         like.setTargetType((byte)1);
         like.setTargetId(articleId);
         CmsLike like1 = likeService.findByUserIdAndTargetId(like);
+
+        CmsArticle article = new CmsArticle();
+        article.setArticleId(articleId);
+
         if(like1 == null){
             likeService.insertSelective(like);
             isLike = true;
+            // 文章点赞数加1
+            article.setLikeNum(1);
         }else {
             if(like1.getIsDelete() == 0){
                 like1.setIsDelete((byte)1);
-                isLike = true;
+                isLike = false;
+                // 文章点赞数减1
+                article.setLikeNum(0);
             }else {
                 like1.setIsDelete((byte)0);
+                isLike = true;
+                // 文章点赞数加1
+                article.setLikeNum(1);
             }
             likeService.updateByPrimaryKeySelective(like1);
+
         }
+        articleService.updateLikeNum(article);
         return JSONResult.ok(isLike);
     }
     /**

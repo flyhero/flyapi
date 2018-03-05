@@ -110,4 +110,9 @@ public class ArticleServiceImpl extends BaseServiceImpl<CmsArticle,CmsArticleMap
     public CmsArticle findArticleSumBySubjectId(Long subjectId) {
         return cmsArticleMapper.findArticleSumBySubjectId(subjectId);
     }
+
+    @Override
+    public int updateLikeNum(CmsArticle article) {
+        return cmsArticleMapper.updateLikeNum(article);
+    }
 }

@@ -45,4 +45,6 @@ public interface CmsArticleMapper {
     List<CmsArticle> findLastUpdateArticlesByUserId(Long userId);
 
     CmsArticle findSimpleByArticleId(Long articleId);
+
+    int updateLikeNum(CmsArticle article);
 }
