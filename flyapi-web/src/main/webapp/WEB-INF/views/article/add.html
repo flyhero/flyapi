@@ -8,6 +8,7 @@
           th:href="@{${rootPath} + '/static/editor/css/editormd.css'}"/>
     <th:block th:include="common/link::link"></th:block>
     <style>
+        /*为了解决layui.css和 editormd.css的冲突*/
         .editormd-code-toolbar > select{
             display: inline-block;
         }
