@@ -20,4 +20,9 @@ import org.springframework.transaction.annotation.Transactional;
 public class FameServiceImpl extends BaseServiceImpl<UcenterFame,UcenterFameMapper> implements FameService {
     @Autowired
     private UcenterFameMapper ucenterFameMapper;
+
+    @Override
+    public UcenterFame findByFameValue(int fameValue) {
+        return ucenterFameMapper.findByFameValue(fameValue);
+    }
 }

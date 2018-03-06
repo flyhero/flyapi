@@ -9,4 +9,5 @@ import com.flyapi.model.UcenterFame;
  */
 public interface FameService extends BaseService<UcenterFame> {
 
+    UcenterFame findByFameValue(int fameValue);
 }

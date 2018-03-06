@@ -43,6 +43,8 @@ public class UserController extends BaseController {
     @Autowired
     private UserFameService userFameService;
     @Autowired
+    private FameService fameService;
+    @Autowired
     private SnowflakeIdWorker snowflakeIdWorker;
     @Autowired
     private SettingStoreService settingStoreService;
@@ -349,12 +351,14 @@ public class UserController extends BaseController {
     public ModelAndView space(@PathVariable Long userId){
         System.out.println("==========user/set");
         UcenterUser user=userService.selectByPrimaryKey(userId);
+        UcenterFame fame =fameService.findByFameValue(user.getFameValue());
         List<ActiveVo> activeVos=userFameService.findActive(userId);
         List<ViewLevelVo> levelVos = articleService.findViewLevel(userId);
         List<OpenSource> sourceList = openSourceService.findAll(userId);
         List<CmsArticle> hotArticleList = articleService.findHotArticlesByUserId(userId);
         List<CmsArticle> lastArticleList = articleService.findLastUpdateArticlesByUserId(userId);
         user.setPassword("");
+        mv.addObject("fame",fame);
         mv.addObject("setInfo",user);
         mv.addObject("activeVos",activeVos);
         mv.addObject("levelVos",levelVos);

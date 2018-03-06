@@ -19,6 +19,12 @@
     from ucenter_fame
     where fame_id = #{fameId,jdbcType=BIGINT}
   </select>
+  <select id="findByFameValue" parameterType="int" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from ucenter_fame
+    where start_value &lt;= #{fameValue} and end_value &gt;= #{fameValue} and is_delete = 0
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from ucenter_fame
     where fame_id = #{fameId,jdbcType=BIGINT}

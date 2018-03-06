@@ -14,4 +14,6 @@ public interface UcenterFameMapper {
     int updateByPrimaryKeySelective(UcenterFame record);
 
     int updateByPrimaryKey(UcenterFame record);
+
+    UcenterFame findByFameValue(int fameValue);
 }
