@@ -87,7 +87,7 @@
                 <ul style="padding-top: 20px">
                     <li>
                         <i class="fa fa-user-o fa-fw"></i>
-                        <span th:text="${setInfo.nickName}"></span>
+                        <span style="font-size: 20px;" th:text="${setInfo.nickName}"></span>
                     </li>
                     <li>
                         <i class="fa fa-diamond fa-fw"></i>
@@ -97,9 +97,13 @@
                         <i class="fa fa-map-marker fa-fw"></i>
                         <span th:text="${setInfo.city}">wwdas</span>
                     </li>
-                    <li>
+                    <th:block th:unless="${#strings.isEmpty(setInfo.company)}">
+                        <li>
+                            <i class="fa fa-building fa-fw"></i>
+                            <span th:text="${setInfo.company}">wwdas</span>
+                        </li>
+                    </th:block>
 
-                    </li>
                 </ul>
 
             </div>

@@ -47,7 +47,7 @@
                         <div class="archive-text">
                             <div class="archive-detail">
                                 <h3><a href="#" title="文章标题">书籍标题</a></h3>
-                                <p>他不是别人 他是张国荣 14年前的今天，一颗巨星陨落。他不是别人 他是张国荣 14年前的今天，一颗巨星陨落他不是别人 他是张国荣 14年前的今天，一颗巨星陨落 </p>
+                                <p>这是介绍内容</p>
                                 <div class="archive-info clearfix"
                                      style="margin-top: 10px; overflow: hidden;white-space: nowrap; display: flex">
                                     <ul style="padding: 0;">
@@ -104,30 +104,35 @@
     var host = [[${rootPath}]];
 
     $(function () {
+        $("#ebook-list").empty();
         $(".nav a").removeClass("nav-this");
         $("#subject").addClass("nav-this")
         getData(1, 1, 1);
     });
 
     function likeFn() {
+        $("#ebook-list").empty();
         getData(1, 0, 0);
         $("a").removeClass("tab-this")
         $("#like").addClass("tab-this");
     };
 
     function commentFn() {
+        $("#ebook-list").empty();
         getData(0, 1, 0);
         $("a").removeClass("tab-this")
         $("#comment").addClass("tab-this");
     };
 
     function viewFn() {
+        $("#ebook-list").empty();
         getData(0, 0, 1);
         $("a").removeClass("tab-this")
         $("#view").addClass("tab-this");
     };
 
     function allFn() {
+        $("#ebook-list").empty();
         getData(1, 1, 1);
         $("a").removeClass("tab-this")
         $("#all").addClass("tab-this");
