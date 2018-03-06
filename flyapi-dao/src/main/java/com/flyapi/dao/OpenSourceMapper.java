@@ -18,4 +18,6 @@ public interface OpenSourceMapper {
     int updateByPrimaryKey(OpenSource record);
 
     List<OpenSource> findAll(Long userId);
+
+    int removeByOsId(Long osId);
 }

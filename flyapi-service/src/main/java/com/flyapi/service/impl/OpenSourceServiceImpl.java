@@ -1,6 +1,8 @@
 package com.flyapi.service.impl;
 
 import com.flyapi.core.base.BaseServiceImpl;
+import com.flyapi.core.exception.DenyOperationException;
+import com.flyapi.core.exception.TargetNotFoundException;
 import com.flyapi.dao.OpenSourceMapper;
 import com.flyapi.dao.SettingStoreMapper;
 import com.flyapi.dao.UcenterUserMapper;
@@ -28,5 +30,17 @@ public class OpenSourceServiceImpl extends BaseServiceImpl<OpenSource,OpenSource
 
     public List<OpenSource> findAll(Long userId) {
         return openSourceMapper.findAll(userId);
+    }
+
+    @Override
+    public int removeByOsId(Long osId,Long userId) {
+        OpenSource openSource = openSourceMapper.selectByPrimaryKey(osId);
+        if(null == openSource){
+            throw new TargetNotFoundException("开源项目不存在");
+        }
+        if(openSource.getUserId() != userId){
+            throw new DenyOperationException("你没有权限操作");
+        }
+        return openSourceMapper.removeByOsId(osId);
     }
 }

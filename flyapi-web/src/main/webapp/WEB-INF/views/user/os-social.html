@@ -45,7 +45,7 @@
                             <a class="jie-title" href="" th:text="${os.account}">flyapi</a>
                             <i th:text="'by '+${os.osName}">by flyhero</i>
                             <a class="mine-edit" href="#" th:onclick="'javascript:os(\''+${os.osId}+'\',\''+${os.osName}+'\',\''+${os.account}+'\',\''+${os.osType}+'\')'">编辑</a>
-                            <a class="os-delete" href="#">删除</a>
+                            <a class="os-delete" href="#" th:onclick="'javascript:osDelete(\''+${os.osId}+'\')'">删除</a>
                             <em th:text="${#dates.format(os.createTime,'yyyy-MM-dd HH:mm:ss')}">2018/03/03</em>
                         </li>
                     </th:block>
@@ -113,6 +113,22 @@
         var element = layui.element;//Tab的切换功能，切换事件监听等，需要依赖element模块
     });
 
+    function osDelete(osId) {
+        layer.confirm('确定删除吗 ？', {
+            btn: ['删除','取消'] //按钮
+        }, function(){
+            $.ajax({
+                type: "DELETE",
+                url: "../os/"+osId,
+                success: function(data){
+                    layer.msg('删除成功', {icon: 1});
+                }
+            });
+
+        }, function(index, layero){
+            layer.close(index);
+        });
+    }
     function os(osId,osName,account,osType) {
 
         layui.use(['layer','form'], function(){

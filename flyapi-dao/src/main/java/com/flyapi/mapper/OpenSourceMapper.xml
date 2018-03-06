@@ -82,6 +82,11 @@
       </if>
     </trim>
   </insert>
+  <update id="removeByOsId" parameterType="java.lang.Long">
+    update open_source
+    set is_delete = #{isDelete,jdbcType=TINYINT},
+    where os_id = #{osId,jdbcType=BIGINT}
+  </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.flyapi.model.OpenSource">
     update open_source
     <set>

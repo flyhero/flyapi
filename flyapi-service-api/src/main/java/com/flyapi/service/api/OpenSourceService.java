@@ -15,4 +15,6 @@ import java.util.List;
 public interface OpenSourceService extends BaseService<OpenSource> {
 
     List<OpenSource> findAll(Long userId);
+
+    int removeByOsId(Long osId,Long userId);
 }
