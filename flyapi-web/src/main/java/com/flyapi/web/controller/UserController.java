@@ -9,6 +9,7 @@ import static com.baidu.unbiz.fluentvalidator.ResultCollectors.toComplex2;
 import com.baidu.unbiz.fluentvalidator.Result;
 import com.flyapi.core.base.BaseController;
 import com.flyapi.core.constant.JSONResult;
+import com.flyapi.core.exception.UploadException;
 import com.flyapi.core.id.SnowflakeIdWorker;
 import com.flyapi.core.util.AESUtil;
 import com.flyapi.core.util.CookieUtil;

@@ -25,6 +25,8 @@ public class JSONResult implements Serializable{
      */
     private Object data;
 
+    public JSONResult() {
+    }
 
     public JSONResult(boolean success, String msg, Integer code, Object data) {
         super();

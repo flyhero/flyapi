@@ -29,9 +29,9 @@
                          th:src="@{${rootPath} + '/static/images/login.png'}">
                 </a>
                 <div class="switch-domain">
-                    <a href="#">
+                    <a>
 								<span>
-									每个人都能写本书
+									精准阅读，专注写作。
 								</span>
                     </a>
                 </div>
@@ -47,14 +47,6 @@
             <div class="box" id="signin-box">
                 <div class="login-body">
                     <form class="layui-form" id="loginForm">
-                        <!--							<th:block th:if="${msg} != null">
-                                                        <div th:if="${msg} != null" class="form-error">
-                                                        <span class="form-error-icon">
-                                                            <i class="fa fa-info-circle"></i>
-                                                            <span  th:text="${msg}"></span>
-                                                        </span>
-                                                        </div>
-                                                    </th:block>-->
                         <div class="form-group form-group-icon">
                             <input class="input-lg form-input username" name="username" placeholder="用户名">
                             <div class="form-icon">
@@ -78,7 +70,7 @@
                         </div>
                     </form>
                 </div>
-                <div class="login-footer">
+<!--                <div class="login-footer">
                     <p class="forgot-password">
                         <a href="#">
                             忘记密码？
@@ -92,8 +84,7 @@
                         <i class="fa fa-qq"></i>
                     </div>
                     <div class="divider"></div>
-
-                </div>
+                </div>-->
             </div>
             <div class="box" id="signup-box" style="display: none">
                 <div class="login-body">
@@ -120,9 +111,6 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <!--								<button class="btn btn-primary btn-block btn-lg submit" data-style="slide-up" type="submit">
-                                                            免费注册
-                                                            </button>-->
                             <button class="btn btn-primary btn-block submit" lay-filter="register-btn" lay-submit="">
                                 免费注册
                             </button>
@@ -134,13 +122,13 @@
                         点击「免费注册」按钮将视为您同意
                         <a class="text-highlight" href="#">使用条款</a>
                     </p>
-                    <div class="quick-login">
+       <!--             <div class="quick-login">
                         <p class="hr">
                             <span>快捷注册</span>
                         </p>
                         <i class="fa fa-wechat"></i>
                         <i class="fa fa-qq"></i>
-                    </div>
+                    </div>-->
                 </div>
             </div>
             <div class="box" id="wechat-box" style="display: none">
