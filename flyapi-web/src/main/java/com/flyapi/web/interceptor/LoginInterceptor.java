@@ -23,6 +23,8 @@ public class LoginInterceptor implements HandlerInterceptor {
 
     private Logger logger = LogManager.getLogger(LoginInterceptor.class);
 
+    private static final String url = "http://www.iflyapi.cn:8090";
+
     /**
      * 在DispatcherServlet完全处理完请求后被调用
      * 当拦截器抛出异常时,依然会从当前拦截器往回执行所的拦截器的afterCompletion()
@@ -51,7 +53,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         }
         String requestUri = request.getRequestURI();
         logger.info("请求URI"+requestUri);
-        request.setAttribute("rootPath", "http://www.iflyapi.cn:8090");
+        request.setAttribute("rootPath", url);
         for (String url : excludedUrls) {
             if (requestUri.contains(url)) {
                 return true;
@@ -62,7 +64,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         UcenterUser login = (UcenterUser) session.getAttribute("user");
         if (login == null) {
             logger.info("request.getContextPath():"+request.getContextPath());
-            response.sendRedirect("http://www.iflyapi.cn:8090");
+            response.sendRedirect(url);
         }
 
 /*        Cookie[] cookies = request.getCookies();

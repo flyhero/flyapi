@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8" />
+        <title>服务条款</title>
+        <link rel="stylesheet" href="../../static/editor/css/editormd.preview.css"
+              th:href="@{${rootPath} + '/static/editor/css/editormd.preview.css'}"/>
+        <th:block th:include="common/link::link"></th:block>
+        <style>
+            .editormd-html-preview {
+                width: 90%;
+                margin: 0 auto;
+            }
+            ul>li{
+                list-style: disc;
+            }
+            ol>li{
+                list-style: decimal;
+            }
+        </style>
+    </head>
+    <body>
+    <div class="header">
+        <th:block th:include="common/header::header"></th:block>
+    </div>
+    <div class="main">
+        <div id="test-editormd-view">
+            <textarea style="display:none;" name="test-editormd-markdown-doc">###Hello world!</textarea>
+        </div>
+    </div>
+
+    <th:block th:replace="common/footer::footer"></th:block>
+
+        <script src="../../static/editor/js/jquery.min.js"
+                th:src="@{${rootPath} + '/static/editor/js/jquery.min.js'}"></script>
+        <script src="../../static/editor/lib/marked.min.js"
+                th:src="@{${rootPath} + '/static/editor/lib/marked.min.js'}"></script>
+        <script src="../../static/editor/lib/prettify.min.js"
+                th:src="@{${rootPath} + '/static/editor/lib/prettify.min.js'}"></script>
+
+        <script src="../../static/editor/lib/raphael.min.js"
+                th:src="@{${rootPath} + '/static/editor/lib/raphael.min.js'}"></script>
+        <script src="../../static/editor/lib/underscore.min.js"
+                th:src="@{${rootPath} + '/static/editor/lib/underscore.min.js'}"></script>
+        <script src="../../static/editor/lib/sequence-diagram.min.js"
+                th:src="@{${rootPath} + '/static/editor/lib/sequence-diagram.min.js'}"></script>
+        <script src="../../static/editor/lib/flowchart.min.js"
+                th:src="@{${rootPath} + '/static/editor/lib/flowchart.min.js'}"></script>
+        <script src="../../static/editor/lib/jquery.flowchart.min.js"
+                th:src="@{${rootPath} + '/static/editor/lib/jquery.flowchart.min.js'}"></script>
+
+        <script src="../../static/editor/js/editormd.js"
+                th:src="@{${rootPath} + '/static/editor/js/editormd.js'}"></script>
+        <script type="text/javascript" th:inline="javascript">
+            $(function() {
+                var rootPath = [[${rootPath}]];
+                $.get(rootPath+"/static/md/terms-of-service.md", function(markdown) {
+				    editormd.markdownToHTML("test-editormd-view", {
+                        markdown        : markdown ,//+ "\r\n" + $("#append-test").text(),
+                        htmlDecode      : "style,script,iframe",  // you can filter tags decode
+                        tocm            : true,    // Using [TOCM]
+                        emoji           : true,
+                        taskList        : true,
+                        tex             : true,  // 默认不解析
+                        flowChart       : true,  // 默认不解析
+                        sequenceDiagram : true,  // 默认不解析
+                    });
+                    
+                });
+
+            });
+        </script>
+    </body>
+</html>

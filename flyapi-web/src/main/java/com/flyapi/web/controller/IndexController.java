@@ -15,6 +15,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -68,6 +69,12 @@ public class IndexController extends BaseController{
         mv.addObject("updateList",updateList);
         mv.addObject("hotList",hotList);
         mv.addObject("topList",topList);
+        return mv;
+    }
+
+    @GetMapping("terms-of-service.html")
+    public ModelAndView termsOfService(){
+        mv.setViewName("terms-of-service");
         return mv;
     }
 }

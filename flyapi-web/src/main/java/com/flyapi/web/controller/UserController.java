@@ -208,7 +208,7 @@ public class UserController extends BaseController {
         //CookieUtil.setCookie(response,"isLogin",String.valueOf(userLogin.getUserId()));
         userLogin.setPassword("");
         session.setAttribute("user",userLogin);
-        CookieUtil.setCookie(response,"isLogin","true");
+//        CookieUtil.setCookie(response,"isLogin","true");
         mv.setViewName("index");
         return mv;
     }
@@ -296,7 +296,7 @@ public class UserController extends BaseController {
     public ModelAndView logout(){
         session.removeAttribute("user");
 //        CookieUtil.delCookie(response,"isLogin");
-        mv.setViewName("index");
+        mv.setViewName("login");
         return mv;
     }
 
