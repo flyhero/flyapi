@@ -21,18 +21,16 @@
 <div class="sign">
     <div id="web">
         <div class="login-box">
-
-
             <div class="login-header">
-                <a href="#">
+                <a href="../../index.html">
                     <img class="login-logo" src="../static/images/login.png"
                          th:src="@{${rootPath} + '/static/images/login.png'}">
                 </a>
                 <div class="switch-domain">
                     <a>
-								<span>
-									精准阅读，专注写作。
-								</span>
+						<span>
+						    精准阅读，专注写作。
+						</span>
                     </a>
                 </div>
                 <ul class="tab">
@@ -70,21 +68,21 @@
                         </div>
                     </form>
                 </div>
-<!--                <div class="login-footer">
-                    <p class="forgot-password">
-                        <a href="#">
-                            忘记密码？
-                        </a>
-                    </p>
-                    <div class="quick-login">
-                        <p class="hr">
-                            <span>快捷登录</span>
-                        </p>
-                        <i class="fa fa-wechat"></i>&nbsp;
-                        <i class="fa fa-qq"></i>
-                    </div>
-                    <div class="divider"></div>
-                </div>-->
+                <!--                <div class="login-footer">
+                                    <p class="forgot-password">
+                                        <a href="#">
+                                            忘记密码？
+                                        </a>
+                                    </p>
+                                    <div class="quick-login">
+                                        <p class="hr">
+                                            <span>快捷登录</span>
+                                        </p>
+                                        <i class="fa fa-wechat"></i>&nbsp;
+                                        <i class="fa fa-qq"></i>
+                                    </div>
+                                    <div class="divider"></div>
+                                </div>-->
             </div>
             <div class="box" id="signup-box" style="display: none">
                 <div class="login-body">
@@ -92,7 +90,7 @@
                                                 -->
                     <form class="layui-form" id="registerForm">
                         <div class="form-group form-group-icon">
-                            <input class="input-lg form-input name" name="username" placeholder="用户名">
+                            <input class="input-lg form-input name" name="username" placeholder="用户名/手机号/邮箱">
                             <div class="form-icon">
                                 <i class="fa fa-user"></i>
                             </div>
@@ -122,17 +120,14 @@
                         点击「免费注册」按钮将视为您同意
                         <a class="text-highlight" th:href="@{${rootPath} + '/terms-of-service.html'}">使用条款</a>
                     </p>
-       <!--             <div class="quick-login">
-                        <p class="hr">
-                            <span>快捷注册</span>
-                        </p>
-                        <i class="fa fa-wechat"></i>
-                        <i class="fa fa-qq"></i>
-                    </div>-->
+                    <!--             <div class="quick-login">
+                                     <p class="hr">
+                                         <span>快捷注册</span>
+                                     </p>
+                                     <i class="fa fa-wechat"></i>
+                                     <i class="fa fa-qq"></i>
+                                 </div>-->
                 </div>
-            </div>
-            <div class="box" id="wechat-box" style="display: none">
-                <!--				<div data-appid="wx26bcd6baa41a1f36" data-redirect-uri="https://modao.cc/wechats/sign_callbacks" id="wechat-login"><iframe src="./css/qrconnect.html" frameborder="0" scrolling="no" width="300px" height="400px"></iframe></div>-->
             </div>
         </div>
 
@@ -145,8 +140,9 @@
 
     $(function () {
         var user = [[${session.user}]];
+        var rootPath = [[${rootPath}]];
         if (user != null && user != "") {//若已经登录，跳转到主页
-            window.location.href = "http://www.iflyapi.cn:8090/index.html"
+            window.location.href = rootPath + "/index.html"
         }
 
         var $login;
@@ -183,8 +179,6 @@
         return $login.find('iframe').load(function () {
             return $login.removeClass('loading');
         });
-
-
     });
 
 
@@ -198,7 +192,7 @@
                 data,
                 function (result) {
                     if (result.code == 200) {
-                        location.href = "http://www.iflyapi.cn:8090/index.html";
+                        location.href = rootPath + "/index.html";
                     } else {
                         layer.alert(result.msg);
                     }
@@ -212,7 +206,7 @@
                 data,
                 function (result) {
                     if (result.code == 200) {
-                        location.href = "http://www.iflyapi.cn:8090/index.html";
+                        location.href = rootPath + "/index.html";
                     } else {
                         layer.alert(result.msg);
                     }
@@ -222,9 +216,6 @@
 
         //监听提交
         form.on('submit(login-btn)', function (data) {
-            /*                        layer.alert(JSON.stringify(data.field), {
-                                        title: '最终的提交信息'
-                                    })*/
             var jsonText = JSON.stringify(data.field);
             var jsonOb = JSON.parse(jsonText);
             postLogin(jsonOb);
