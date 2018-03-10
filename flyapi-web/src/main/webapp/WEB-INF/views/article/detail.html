@@ -60,8 +60,9 @@
                         <span class="iconfont" th:text="'喜欢 ' +${detailVo.article.likeNum}">喜欢 200</span>
                         <span class="layui-btn layui-btn-xs jie-admin ">收藏</span>
                         <th:block th:if="${not #lists.isEmpty(detailVo.article.original)}">
-                            <a th:href="${detailVo.article.original}"> <span
-                                    class="layui-btn layui-btn-xs layui-btn-normal">阅读原文</span></a>
+                            <a th:href="${detailVo.article.original}" target="_blank">
+                                <span class="layui-btn layui-btn-xs layui-btn-normal">阅读原文</span>
+                            </a>
                         </th:block>
                         <th:block th:unless="${not #lists.isEmpty(detailVo.article.original)}">
                             <span class="layui-btn layui-btn-xs layui-btn-normal">原创</span>
@@ -132,16 +133,6 @@
                         <button id="user-like" th:class="${isLike} == false ? 'layui-btn layui-btn-primary layui-btn-radius' : 'layui-btn layui-btn-danger layui-btn-radius'" onclick="doLike()">
                             <i class="fa fa-thumbs-o-up fa-fw" title="喜欢"></i>喜欢
                         </button>
-                       <!-- <th:block th:if="${isLike} == false">
-                            <button id="user-like" class="layui-btn layui-btn-primary layui-btn-radius" onclick="doLike()">
-                                <i class="fa fa-thumbs-o-up fa-fw" title="回答"></i>喜欢
-                            </button>
-                        </th:block>
-                        <th:block th:if="${isLike} == true">
-                            <button id="user-like" class="layui-btn layui-btn-danger layui-btn-radius" onclick="doLike()">
-                                <i class="fa fa-thumbs-o-up fa-fw" title="回答"></i>喜欢
-                            </button>
-                        </th:block>-->
 
                         <button class="layui-btn layui-btn-warm layui-btn-radius" id="report">
                             <i class="fa fa-exclamation-circle fa-fw" title="回答"></i>举报
