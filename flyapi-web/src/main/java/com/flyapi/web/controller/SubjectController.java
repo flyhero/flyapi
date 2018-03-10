@@ -1,6 +1,5 @@
 package com.flyapi.web.controller;
 
-import com.alibaba.druid.filter.AutoLoad;
 import com.flyapi.core.base.BaseController;
 import com.flyapi.core.constant.JSONResult;
 import com.flyapi.core.id.SnowflakeIdWorker;
@@ -16,7 +15,6 @@ import com.flyapi.service.api.ArticleService;
 import com.flyapi.service.api.RssService;
 import com.flyapi.service.api.SubjectService;
 import com.flyapi.service.api.UserService;
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.apache.logging.log4j.LogManager;
@@ -27,7 +25,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.security.auth.Subject;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -145,6 +142,7 @@ public class SubjectController extends BaseController {
     }
 
     /**
+     * 用户主题
      * Title: findSubjectByUserId
      * params: Long userId,int pageNum,int pageSize
      * return: com.flyapi.core.constant.JSONResult
@@ -162,10 +160,10 @@ public class SubjectController extends BaseController {
             if (list == null || list.isEmpty()) {
                 return JSONResult.error();
             }
-            pageInfo = new PageInfo<CmsSubject>(list);
+            pageInfo = new PageInfo<>(list);
             List<CmsSubject> pageInfoList = pageInfo.getList();
 
-            subjectVoList = new ArrayList<UserSubjectVo>();
+            subjectVoList = new ArrayList<>();
             for (CmsSubject subject : pageInfoList) {
                 UserSubjectVo userSubjectVo = new UserSubjectVo();
                 BeanUtils.copyProperties(subject, userSubjectVo);

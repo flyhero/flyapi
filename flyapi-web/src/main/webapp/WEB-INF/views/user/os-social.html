@@ -54,36 +54,34 @@
 
         </div>
           <div class="layui-form layui-form-pane layui-tab-item">
-            <form class="layui-form" action="">
+            <form class="layui-form">
                 <div class="layui-form-item">
                     <label class="layui-form-label">github</label>
                     <div class="layui-input-block">
-                        <input type="text" name="title"  autocomplete="off" class="layui-input">
+                        <input type="text" name="socialType"  class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">知乎</label>
                     <div class="layui-input-block">
-                        <input type="text" name="title"  autocomplete="off" class="layui-input">
+                        <input type="text" name="socialType" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">linkIn</label>
                     <div class="layui-input-block">
-                        <input type="text" name="title"  autocomplete="off" class="layui-input">
+                        <input type="text" name="socialType" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">微博</label>
                     <div class="layui-input-block">
-                        <input type="text" name="title"  autocomplete="off" class="layui-input">
+                        <input type="text" name="socialType" class="layui-input">
                     </div>
                 </div>
-
                 <div class="layui-form-item">
                     <div class="layui-input-block">
-                        <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
-                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        <button class="layui-btn" lay-filter="social" lay>立即提交</button>
                     </div>
                 </div>
             </form>
@@ -102,16 +100,17 @@
     $(".left-menu").removeClass("layui-this");
     $("#fly-openSocial").addClass("layui-this")
 
-    layui.use(['util', 'element', 'layer','upload','form','laytpl','laypage'], function(){
+    layui.use(['util', 'element', 'layer','form','laytpl'], function(){
         var $ = layui.jquery;
-        var layer = layui.layer;
+        var ayer = layui.layer;
         var util = layui.util;
         var laytpl = layui.laytpl;
         var form = layui.form;
-        var upload = layui.upload;
-        var laypage = layui.laypage;
         var element = layui.element;//Tab的切换功能，切换事件监听等，需要依赖element模块
+
     });
+
+
 
     function osDelete(osId) {
         layer.confirm('确定删除吗 ？', {
@@ -129,6 +128,7 @@
             layer.close(index);
         });
     }
+
     function os(osId,osName,account,osType) {
 
         layui.use(['layer','form'], function(){

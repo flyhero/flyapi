@@ -142,17 +142,12 @@
                 </div>
 
                 <div class="fly-panel leifeng-rank">
-                    <h3 class="fly-panel-title">排名主题</h3>
+                    <h3 class="fly-panel-title">作者主题</h3>
 
                     <ul class="archive-list"
                         style="border:none; background:#ffffff;" id="ebook-list">
 
                     </ul>
-
-
-                    <div class="fly-none" style="min-height: 50px; padding:30px 0; height:auto;"><i
-                            style="font-size:14px;">查看更多</i></div>
-
                 </div>
 
             </div>
@@ -443,59 +438,87 @@
     }
 
 
-    $.ajax({
-        type: 'GET',
-        url: "../subject/subjects/" + userId,
-        dataType: "json",
-        data: {
-            "pageNum": 1,
-            "pageSize": 6
-        },
-        success: function (result) {
-            $.each(result.data, function (index, simple) {
-                var viewNum = simple.cmsArticle == null ? 0 : simple.cmsArticle.viewNum;
-                var commentNum = simple.cmsArticle == null ? 0 : simple.cmsArticle.commentNum;
-                var likeNum = simple.cmsArticle == null ? 0 : simple.cmsArticle.likeNum;
-                var authorId = simple.ucenterUser.userId + '';
-                var sub = "订阅本书";
-                var rssHost = "";
-                if (simple.rss) {
-                    sub = "已订阅";
-                } else {
-                    rssHost = "'" + host + "/subject/rss/" + simple.subjectId + "'";
-                }
-                $("#ebook-list").append(' <li class="archive-item" style="display: block;height: 145px; border-bottom: 1px solid #eff2f5">\n' +
-                    '                        <a href="#" title="标题">\n' +
-                    '                            <div class="covercon">\n' +
-                    '                                <img src="' + simple.cover + '" class="cover imgloadinglater" style="display: block;">\n' +
-                    '                            </div>\n' +
-                    '                        </a>\n' +
-                    '                        <div class="archive-text">\n' +
-                    '                            <div class="archive-detail">\n' +
-                    '                                <h3><a href="../article/list/' + simple.subjectId + '/' + simple.subjectTitle + '" title="文章标题">' + simple.subjectTitle + '</a></h3>\n' +
-                    '                                <p>' + simple.subjectDes + '</p>\n' +
-                    '                                <div class="archive-info clearfix"\n' +
-                    '                                     style="margin-top: 10px; overflow: hidden;white-space: nowrap; display: flex">\n' +
-                    '                                    <ul style="padding: 0;">\n' +
-                    '                                        <li class="list-user">\n' +
-                    '                                            <a href="' + host + '/user/' + authorId + '" target="_blank">\n' +
-                    '                                                <img src="' + simple.ucenterUser.avatar + '">\n' +
-                    '                                                <span>' + simple.ucenterUser.nickName + '</span>\n' +
-                    '                                            </a>\n' +
-                    '                                        </li>\n' +
-                    '                                    </ul>\n' +
-                    '                                </div>\n' +
-                    '                                <div class="archive-info clearfix"\n' +
-                    '                                     style="margin-top: 10px; overflow: hidden;white-space: nowrap; display: flex">' +
-                    '<ul style="padding: 0;"><li class="list-msg"><a href="javascript:void(0)" onclick="rssFn(' + rssHost + ',' + authorId + ');"><span class="layui-btn layui-btn-xs layui-btn-normal">' + sub + '</span></a>' +
-                    '<span aria-hidden="true" style="margin-left: 8px;">已有' + simple.rssNum + '人订阅</span>' +
-                    '                        <span aria-hidden="true" style="margin-left: 5px;"><i class="fa fa-eye fa-fw" title="阅读"></i>' + viewNum + '</span>' +
-                    '                        <span aria-hidden="true"><i class="fa fa-commenting fa-fw" title="回答"></i>' + commentNum + '</span>' +
-                    '                        <span aria-hidden="true"><i class="fa fa-thumbs-o-up fa-fw" title="人气"></i>' + likeNum + '</span></li></ul></div></div></div></li>');
+    layui.use('flow', function () {
+        var flow = layui.flow;
+        var pageCount;
+        var rootPath = [[${rootPath}]];
+        flow.load({
+            elem: '#ebook-list', //流加载容器
+            scrollElem: '#ebook-list', //滚动条所在元素，一般不用填，此处只是演示需要。
+            isAuto: false,
+            isLazyimg: true,
+            done: function (page, next) { //加载下一页
 
-            });
-        }
+                //模拟插入
+                setTimeout(function () {
+                    var lis = [];
+                    $.ajax({
+                        type: 'GET',
+                        url: "../subject/subjects/" + userId,
+                        dataType: "json",
+                        data: {
+                            "pageNum": page,
+                            "pageSize": 6
+                        },
+                        success: function (result) {
+                            pageCount = result.data.pages;
+                            $.each(result.data, function (index, simple) {
+                                var viewNum = simple.cmsArticle == null ? 0 : simple.cmsArticle.viewNum;
+                                var commentNum = simple.cmsArticle == null ? 0 : simple.cmsArticle.commentNum;
+                                var likeNum = simple.cmsArticle == null ? 0 : simple.cmsArticle.likeNum;
+                                var authorId = simple.ucenterUser.userId + '';
+                                var sub = "订阅本书";
+                                var rssHost = "";
+                                if (simple.rss) {
+                                    sub = "已订阅";
+                                } else {
+                                    rssHost = "'" + host + "/subject/rss/" + simple.subjectId + "'";
+                                }
+                                lis.push(' <li class="archive-item" style="display: block;height: 145px; border-bottom: 1px solid #eff2f5">\n' +
+                                    '                        <a href="#" title="标题">\n' +
+                                    '                            <div class="covercon">\n' +
+                                    '                                <img src="' + simple.cover + '" class="cover imgloadinglater" style="display: block;">\n' +
+                                    '                            </div>\n' +
+                                    '                        </a>\n' +
+                                    '                        <div class="archive-text">\n' +
+                                    '                            <div class="archive-detail">\n' +
+                                    '                                <h3><a href="../article/list/' + simple.subjectId + '/' + simple.subjectTitle + '" title="文章标题">' + simple.subjectTitle + '</a></h3>\n' +
+                                    '                                <p>' + simple.subjectDes + '</p>\n' +
+                                    '                                <div class="archive-info clearfix"\n' +
+                                    '                                     style="margin-top: 10px; overflow: hidden;white-space: nowrap; display: flex">\n' +
+                                    '                                    <ul style="padding: 0;">\n' +
+                                    '                                        <li class="list-user">\n' +
+                                    '                                            <a href="' + host + '/user/' + authorId + '" target="_blank">\n' +
+                                    '                                                <img src="' + simple.ucenterUser.avatar + '">\n' +
+                                    '                                                <span>' + simple.ucenterUser.nickName + '</span>\n' +
+                                    '                                            </a>\n' +
+                                    '                                        </li>\n' +
+                                    '                                    </ul>\n' +
+                                    '                                </div>\n' +
+                                    '                                <div class="archive-info clearfix"\n' +
+                                    '                                     style="margin-top: 10px; overflow: hidden;white-space: nowrap; display: flex">' +
+                                    '<ul style="padding: 0;"><li class="list-msg"><a href="javascript:void(0)" onclick="rssFn(' + rssHost + ',' + authorId + ');"><span class="layui-btn layui-btn-xs layui-btn-normal">' + sub + '</span></a>' +
+                                    '<span aria-hidden="true" style="margin-left: 8px;">已有' + simple.rssNum + '人订阅</span>' +
+                                    '                        <span aria-hidden="true" style="margin-left: 5px;"><i class="fa fa-eye fa-fw" title="阅读"></i>' + viewNum + '</span>' +
+                                    '                        <span aria-hidden="true"><i class="fa fa-commenting fa-fw" title="回答"></i>' + commentNum + '</span>' +
+                                    '                        <span aria-hidden="true"><i class="fa fa-thumbs-o-up fa-fw" title="人气"></i>' + likeNum + '</span></li></ul></div></div></div></li>');
+                                next(lis.join(''), page < pageCount);
+                                lis = [];
+                            });
+                        }
+                    });
+
+
+
+
+
+
+                    // next(lis.join(''), page < pageCount); //假设总页数为 6
+                }, 500);
+            }
+        });
     });
+
 
     layui.use(['util', 'element', 'layer'], function () {
         var $ = layui.jquery;

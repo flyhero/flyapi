@@ -361,14 +361,14 @@ public class ImageUtil {
 
 			for (int i = 0; i < count; i++) {
 				if(i == count-1){
-					drawString(g,subjectTitle.substring(i*8,length),0, 300 + 45*i,font,Color.WHITE,1.0f);
+					drawString(g,subjectTitle.substring(i*8,length),150, 210 + 45*i,font,Color.WHITE,1.0f);
 				}else {
-					drawString(g,subjectTitle.substring(i*8,i*8+8),0, 300 + 45*i,font,Color.WHITE,1.0f);
-
+					drawString(g,subjectTitle.substring(i*8,i*8+8),150, 210 + 45*i,font,Color.WHITE,1.0f);
 				}
 			}
-			drawImage(g,pressImgFile,0,0,1.0f);
-
+			drawImage(g,pressImgFile,150,300,1.0f);
+			drawString(g,"著: "+nickName,150, 650,font,Color.WHITE,0.8f);
+			drawString(g,"@flyapi 出品",400, 850,font,Color.WHITE,0.6f);
 			g.dispose();
 			//输出png图片
 			ImageIO.write(image, "png", destImageFile);
@@ -440,6 +440,6 @@ public class ImageUtil {
 	public static void main(String[] args) {
 //		pressText("主题标题",new File("/Users/qfwang/Desktop/t.png"),new File("/Users/qfwang/Desktop/t1.png"),"宋体",1,Color.PINK,50,0,0,0.4f);
 //		pressImage(new File("/Users/qfwang/Desktop/jinshi.png"),new File("/Users/qfwang/Desktop/t.png"),new File("/Users/qfwang/Desktop/t2.png"),0,0,1.0f);
-		createImage("这里是长度过长要分段截取的","",new File("/Users/qfwang/Desktop/jinshi.png"),new File("/Users/qfwang/Desktop/test.png"));
+		createImage("Spring aop详解","flyapi",new File("/Users/qfwang/Desktop/flyapi用途/jinshi.png"),new File("/Users/qfwang/Desktop/test.png"));
 	}
 }
