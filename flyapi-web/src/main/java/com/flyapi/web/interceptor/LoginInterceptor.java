@@ -54,11 +54,11 @@ public class LoginInterceptor implements HandlerInterceptor {
         String requestUri = request.getRequestURI();
         logger.info("请求URI"+requestUri);
         request.setAttribute("rootPath", url);
-/*        for (String url : excludedUrls) {
+        for (String url : excludedUrls) {
             if (requestUri.contains(url)) {
                 return true;
             }
-        }*/
+        }
         logger.info(request.getSession().getId());
         HttpSession session = request.getSession();
         UcenterUser login = (UcenterUser) session.getAttribute("user");

@@ -2,6 +2,8 @@ package com.flyapi.web.controller;
 
 import com.flyapi.core.base.BaseController;
 import com.flyapi.core.constant.JSONResult;
+import com.flyapi.core.enums.ImagePath;
+import com.flyapi.core.util.ImageUtil;
 import com.flyapi.model.CmsArticle;
 import com.flyapi.model.CmsSubject;
 import com.flyapi.model.SettingCarousel;
@@ -19,6 +21,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -37,7 +41,6 @@ public class IndexController extends BaseController{
     private ArticleService articleService;
     @Autowired
     private UserFameService userFameService;
-
 
 
     @RequestMapping("index.html")
@@ -76,5 +79,19 @@ public class IndexController extends BaseController{
     public ModelAndView termsOfService(){
         mv.setViewName("terms-of-service");
         return mv;
+    }
+    /**
+     * 自动生成图片
+     * @title: createImg
+     * @param subjectTitle
+     * @return com.flyapi.core.constant.JSONResult
+     * @date 2018/3/10 下午11:40
+     */
+    @GetMapping("image")
+    public JSONResult createImg(String subjectTitle){
+        UcenterUser user = (UcenterUser)currentUser();
+        String pathName = "";
+        ImageUtil.createImage(subjectTitle,user.getNickName(),new File(ImagePath.randomPath()),new File(pathName));
+        return JSONResult.ok();
     }
 }

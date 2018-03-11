@@ -1,106 +1,106 @@
-
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="utf-8">
-  <title>开源社交</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="keywords" content="">
-  <meta name="description" content="">
-  <th:block th:include="common/link::link"></th:block>
+    <meta charset="utf-8">
+    <title>开源社交</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <th:block th:include="common/link::link"></th:block>
 
 </head>
 <body>
 
 <div class="header">
-  <th:block th:include="common/header::header"></th:block>
+    <th:block th:include="common/header::header"></th:block>
 </div>
 
 <div class="main fly-user-main layui-clear">
-  <th:block th:include="common/left::left"></th:block>
-  
-  <div class="site-tree-mobile layui-hide">
-    <i class="layui-icon">&#xe602;</i>
-  </div>
-  <div class="site-mobile-shade"></div>
+    <th:block th:include="common/left::left"></th:block>
 
-  <div class="fly-panel fly-panel-user" pad20>
+    <div class="site-tree-mobile layui-hide">
+        <i class="layui-icon">&#xe602;</i>
+    </div>
+    <div class="site-mobile-shade"></div>
 
-    <div class="layui-tab layui-tab-brief" lay-filter="">
-      <ul class="layui-tab-title">
-        <li class="layui-this">开源项目</li>
-        <li>社交<span class="layui-badge-dot"></span></li>
-      </ul>
-      <div class="layui-tab-content" style="height: 100px;">
-        <div class="layui-tab-item layui-form-pane layui-show">
-            <button class="layui-btn layui-btn-radius" onclick="os('','','','')">
-                <i class="layui-icon">&#xe608;</i> 添加
-            </button>
-            <hr>
-            <ul class="mine-view jie-row">
-                <th:block th:if="${not #lists.isEmpty(openSourceList)}">
-                    <th:block th:each="os,index:${openSourceList}">
-                        <li>
-                            <a><i style="font-size: 18px" class="fa fa-github fa-fw"></i></a>
-                            <a class="jie-title" href="" th:text="${os.account}">flyapi</a>
-                            <i th:text="'by '+${os.osName}">by flyhero</i>
-                            <a class="mine-edit" href="#" th:onclick="'javascript:os(\''+${os.osId}+'\',\''+${os.osName}+'\',\''+${os.account}+'\',\''+${os.osType}+'\')'">编辑</a>
-                            <a class="os-delete" href="#" th:onclick="'javascript:osDelete(\''+${os.osId}+'\')'">删除</a>
-                            <em th:text="${#dates.format(os.createTime,'yyyy-MM-dd HH:mm:ss')}">2018/03/03</em>
-                        </li>
-                    </th:block>
-                </th:block>
+    <div class="fly-panel fly-panel-user" pad20>
+
+        <div class="layui-tab layui-tab-brief" lay-filter="">
+            <ul class="layui-tab-title">
+                <li class="layui-this">开源项目</li>
+                <li>社交<span class="layui-badge-dot"></span></li>
             </ul>
+            <div class="layui-tab-content" style="height: 100px;">
+                <div class="layui-tab-item layui-form-pane layui-show">
+                    <button class="layui-btn layui-btn-radius" onclick="os('','','','')">
+                        <i class="layui-icon">&#xe608;</i> 添加
+                    </button>
+                    <hr>
+                    <ul class="mine-view jie-row">
+                        <th:block th:if="${not #lists.isEmpty(openSourceList)}">
+                            <th:block th:each="os,index:${openSourceList}">
+                                <li>
+                                    <a><i style="font-size: 18px" class="fa fa-github fa-fw"></i></a>
+                                    <a class="jie-title" href="" th:text="${os.account}">flyapi</a>
+                                    <i th:text="'by '+${os.osName}">by flyhero</i>
+                                    <a class="mine-edit" href="#"
+                                       th:onclick="'javascript:os(\''+${os.osId}+'\',\''+${os.osName}+'\',\''+${os.account}+'\',\''+${os.osType}+'\')'">编辑</a>
+                                    <a class="os-delete" href="#"
+                                       th:onclick="'javascript:osDelete(\''+${os.osId}+'\')'">删除</a>
+                                    <em th:text="${#dates.format(os.createTime,'yyyy-MM-dd HH:mm:ss')}">2018/03/03</em>
+                                </li>
+                            </th:block>
+                        </th:block>
+                    </ul>
 
+                </div>
+                <div class="layui-form layui-form-pane layui-tab-item">
+                    <form class="layui-form">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">github</label>
+                            <div class="layui-input-block">
+                                <input type="text" id="github" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">知乎</label>
+                            <div class="layui-input-block">
+                                <input type="text" id="zhihu" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">linkIn</label>
+                            <div class="layui-input-block">
+                                <input type="text" id="linkin" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">微博</label>
+                            <div class="layui-input-block">
+                                <input type="text" id="weibo" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <button class="layui-btn" onclick="s">立即提交</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-          <div class="layui-form layui-form-pane layui-tab-item">
-            <form class="layui-form">
-                <div class="layui-form-item">
-                    <label class="layui-form-label">github</label>
-                    <div class="layui-input-block">
-                        <input type="text" name="socialType"  class="layui-input">
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">知乎</label>
-                    <div class="layui-input-block">
-                        <input type="text" name="socialType" class="layui-input">
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">linkIn</label>
-                    <div class="layui-input-block">
-                        <input type="text" name="socialType" class="layui-input">
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">微博</label>
-                    <div class="layui-input-block">
-                        <input type="text" name="socialType" class="layui-input">
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <div class="layui-input-block">
-                        <button class="layui-btn" lay-filter="social" lay>立即提交</button>
-                    </div>
-                </div>
-            </form>
-          </div>
-      </div>
+
+
     </div>
 
-
-  </div>
-
 </div>
-
 
 
 <script>
     $(".left-menu").removeClass("layui-this");
     $("#fly-openSocial").addClass("layui-this")
 
-    layui.use(['util', 'element', 'layer','form','laytpl'], function(){
+    layui.use(['util', 'element', 'layer', 'form', 'laytpl'], function () {
         var $ = layui.jquery;
         var ayer = layui.layer;
         var util = layui.util;
@@ -110,28 +110,44 @@
 
     });
 
+    function social() {
+        var github = $("#github").val();
+        var zhihu = $("#zhihu").val();
+        var linkin = $("#linkin").val();
+        var weibo = $("#weibo").val();
 
+        var data = [{socialType: 1, socialUrl: github}, {socialType: 2, socialUrl: zhihu}, {
+            socialType: 4,
+            socialUrl: linkin
+        }, {socialType: 3, socialUrl: weibo}];
+
+        $.post("../user/login",
+            data,
+            function (result) {
+                layer.alert(result.msg);
+            }, "json");
+    }
 
     function osDelete(osId) {
         layer.confirm('确定删除吗 ？', {
-            btn: ['删除','取消'] //按钮
-        }, function(){
+            btn: ['删除', '取消'] //按钮
+        }, function () {
             $.ajax({
                 type: "DELETE",
-                url: "../os/"+osId,
-                success: function(data){
+                url: "../os/" + osId,
+                success: function (data) {
                     layer.msg('删除成功', {icon: 1});
                 }
             });
 
-        }, function(index, layero){
+        }, function (index, layero) {
             layer.close(index);
         });
     }
 
-    function os(osId,osName,account,osType) {
+    function os(osId, osName, account, osType) {
 
-        layui.use(['layer','form'], function(){
+        layui.use(['layer', 'form'], function () {
             var $ = layui.jquery;
             var layer = layui.layer;
             var form = layui.form;
@@ -145,17 +161,17 @@
                 area: ['500px', '300px'],
                 shadeClose: true, //开启遮罩关闭
                 content: '<br><form class="layui-form">\n' +
-                '                <input type="hidden" name="osId" value="'+osId+'">\n' +
+                '                <input type="hidden" name="osId" value="' + osId + '">\n' +
                 '                <div class="layui-form-item">\n' +
                 '                    <label class="layui-form-label">账号</label>\n' +
                 '                    <div class="layui-input-block">\n' +
-                '                        <input type="text" name="osName" required  lay-verify="required" value="'+osName+'" class="layui-input">\n' +
+                '                        <input type="text" name="osName" required  lay-verify="required" value="' + osName + '" class="layui-input">\n' +
                 '                    </div>\n' +
                 '                </div>\n' +
                 '                <div class="layui-form-item">\n' +
                 '                    <label class="layui-form-label">仓库</label>\n' +
                 '                    <div class="layui-input-block">\n' +
-                '                        <input type="text" name="account" required  lay-verify="required" value="'+account+'" class="layui-input">\n' +
+                '                        <input type="text" name="account" required  lay-verify="required" value="' + account + '" class="layui-input">\n' +
                 '                    </div>\n' +
                 '                </div>\n' +
                 '                <div class="layui-form-item">\n' +
@@ -179,7 +195,7 @@
                 $.post("../../os", data.field, function (result) {
                     console.log(result.code);
                     layer.msg(result.msg);
-                },"json");
+                }, "json");
                 layer.close(index);
                 return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
             });

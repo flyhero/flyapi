@@ -1,12 +1,15 @@
 package com.flyapi.web.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.flyapi.core.base.BaseController;
 import com.flyapi.core.constant.JSONResult;
 import com.flyapi.core.constant.TipsEnum;
 import com.flyapi.core.id.SnowflakeIdWorker;
 import com.flyapi.model.OpenSource;
+import com.flyapi.model.UcenterSocial;
 import com.flyapi.model.UcenterUser;
 import com.flyapi.service.api.OpenSourceService;
+import com.flyapi.service.api.SocialService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +25,8 @@ import java.util.List;
 public class OpenSourceSocialController extends BaseController {
     @Autowired
     private OpenSourceService openSourceService;
-
+    @Autowired
+    private SocialService socialService;
     @Autowired
     private SnowflakeIdWorker snowflakeIdWorker;
 
@@ -68,6 +72,31 @@ public class OpenSourceSocialController extends BaseController {
             return JSONResult.error();
         }
         openSourceService.removeByOsId(osId,user.getUserId());
+        return JSONResult.ok();
+    }
+
+    /**
+     * 保存或更新社交
+     * @title: saveOrUpdateSocial
+     * @param socialList
+     * @return com.flyapi.core.constant.JSONResult
+     * @date 2018/3/11 下午12:34
+     */
+    @PostMapping("social")
+    @ResponseBody
+    public JSONResult saveOrUpdateSocial(@RequestBody String socialList) {
+
+        UcenterUser user = (UcenterUser) currentUser();
+        if (user == null) {
+            return JSONResult.error(TipsEnum.NOT_LOGIN);
+        }
+        List<UcenterSocial> socials = null;
+        try {
+            socials = JSON.parseArray(socialList, UcenterSocial.class);
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
+        socialService.saveOrUpdate(socials,user.getUserId());
         return JSONResult.ok();
     }
 }
