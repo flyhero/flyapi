@@ -25,6 +25,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -59,6 +60,8 @@ public class UserController extends BaseController {
     private NoticeService noticeService;
     @Autowired
     private SubjectService subjectService;
+    @Autowired
+    private SocialService socialService;
 
     private Logger logger = LogManager.getLogger(UserController.class);
 
@@ -359,6 +362,22 @@ public class UserController extends BaseController {
         List<CmsArticle> hotArticleList = articleService.findHotArticlesByUserId(userId);
         List<CmsArticle> lastArticleList = articleService.findLastUpdateArticlesByUserId(userId);
         user.setPassword("");
+
+        List<UcenterSocial> socialList = socialService.findAllSocial(user.getUserId());
+        socialList.forEach(ucenterSocial -> {
+            if(!StringUtils.isEmpty(ucenterSocial.getSocialUrl())){
+                if (ucenterSocial.getSocialType() == 1) {
+                    mv.addObject("github", ucenterSocial);
+                } else if (ucenterSocial.getSocialType() == 2) {
+                    mv.addObject("zhihu", ucenterSocial);
+                } else if (ucenterSocial.getSocialType() == 3) {
+                    mv.addObject("weibo", ucenterSocial);
+                } else if (ucenterSocial.getSocialType() == 4) {
+                    mv.addObject("linkin", ucenterSocial);
+                }
+            }
+        });
+
         mv.addObject("fame",fame);
         mv.addObject("setInfo",user);
         mv.addObject("activeVos",activeVos);

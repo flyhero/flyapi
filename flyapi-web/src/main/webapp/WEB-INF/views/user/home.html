@@ -56,26 +56,33 @@
                 <div class="fly-home">
                     <img th:src="${setInfo.avatar}" th:alt="${setInfo.nickName}">
                     <p class="fly-home-info" style="margin-top: 5px">
-                    <span>
-                        <svg class="icon" aria-hidden="true">
-                            <use xlink:href="#icon-GitHub"></use>
-                        </svg>
-                    </span>
-                        <span>
-                        <svg class="icon" aria-hidden="true">
-                            <use xlink:href="#icon-zhihu"></use>
-                        </svg>
-                    </span>
-                        <span>
-                        <svg class="icon" aria-hidden="true">
-                            <use xlink:href="#icon-weibo"></use>
-                        </svg>
-                    </span>
-                        <span>
-                        <svg class="icon" aria-hidden="true">
-                            <use xlink:href="#icon-linkedin"></use>
-                        </svg>
-                    </span>
+                        <a th:href="${github} ? ${github.socialUrl} : '#'">
+                            <svg class="icon" aria-hidden="true">
+                                <use xlink:href="#icon-GitHub"></use>
+                            </svg>
+                        </a>
+                        <th:block th:if="${zhihu}">
+                            <a>
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-zhihu"></use>
+                                </svg>
+                            </a>
+                        </th:block>
+                        <th:block th:if="${weibo}">
+                            <a>
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-weibo"></use>
+                                </svg>
+                            </a>
+                        </th:block>
+                        <th:block th:if="${linkin}">
+                            <a>
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-linkedin"></use>
+                                </svg>
+                            </a>
+                        </th:block>
+
 
                         <!-- <i class="iconfont icon-zuichun" title="声望"></i><span style="color: #FF7200;">67206</span>
                          <i class="iconfont icon-chengshi"></i><span th:text="${setInfo.city}">上海</span>-->
@@ -507,10 +514,6 @@
                             });
                         }
                     });
-
-
-
-
 
 
                     // next(lis.join(''), page < pageCount); //假设总页数为 6
