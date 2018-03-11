@@ -45,4 +45,13 @@ public class SocialServiceImpl extends BaseServiceImpl<UcenterSocial,UcenterSoci
             }
         });
     }
+
+    @Override
+    public List<UcenterSocial> findAllSocial(Long userId) {
+        UcenterSocialExample example = new UcenterSocialExample();
+        UcenterSocialExample.Criteria criteria = example.createCriteria();
+        criteria.andUserIdEqualTo(userId);
+        criteria.andIsDeleteEqualTo((byte)0);
+        return socialMapper.selectByExample(example);
+    }
 }

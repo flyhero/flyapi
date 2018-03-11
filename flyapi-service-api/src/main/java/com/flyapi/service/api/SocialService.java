@@ -13,4 +13,6 @@ import java.util.List;
 public interface SocialService extends BaseService<UcenterSocial> {
 
     void saveOrUpdate(List<UcenterSocial> socialList,Long userId);
+
+    List<UcenterSocial> findAllSocial(Long userId);
 }

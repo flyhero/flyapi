@@ -55,34 +55,38 @@
 
                 </div>
                 <div class="layui-form layui-form-pane layui-tab-item">
-                    <form class="layui-form">
+                    <form class="layui-form" onsubmit="return social()">
                         <div class="layui-form-item">
                             <label class="layui-form-label">github</label>
                             <div class="layui-input-block">
-                                <input type="text" id="github" class="layui-input">
+                                <input type="text" id="github" th:value="${github} ? ${github.socialUrl} : ''"
+                                       class="layui-input">
                             </div>
                         </div>
                         <div class="layui-form-item">
                             <label class="layui-form-label">知乎</label>
                             <div class="layui-input-block">
-                                <input type="text" id="zhihu" class="layui-input">
+                                <input type="text" id="zhihu" th:value="${zhihu} ? ${zhihu.socialUrl} : ''"
+                                       class="layui-input">
                             </div>
                         </div>
                         <div class="layui-form-item">
                             <label class="layui-form-label">linkIn</label>
                             <div class="layui-input-block">
-                                <input type="text" id="linkin" class="layui-input">
+                                <input type="text" id="linkin" th:value="${linkin} ? ${linkin.socialUrl} : ''"
+                                       class="layui-input">
                             </div>
                         </div>
                         <div class="layui-form-item">
                             <label class="layui-form-label">微博</label>
                             <div class="layui-input-block">
-                                <input type="text" id="weibo" class="layui-input">
+                                <input type="text" id="weibo" th:value="${weibo} ? ${weibo.socialUrl} : ''"
+                                       class="layui-input">
                             </div>
                         </div>
                         <div class="layui-form-item">
                             <div class="layui-input-block">
-                                <button class="layui-btn" onclick="s">立即提交</button>
+                                <button class="layui-btn">立即提交</button>
                             </div>
                         </div>
                     </form>
@@ -100,12 +104,11 @@
     $(".left-menu").removeClass("layui-this");
     $("#fly-openSocial").addClass("layui-this")
 
-    layui.use(['util', 'element', 'layer', 'form', 'laytpl'], function () {
+    layui.use(['util', 'element', 'layer', 'laytpl'], function () {
         var $ = layui.jquery;
-        var ayer = layui.layer;
+        var layer = layui.layer;
         var util = layui.util;
         var laytpl = layui.laytpl;
-        var form = layui.form;
         var element = layui.element;//Tab的切换功能，切换事件监听等，需要依赖element模块
 
     });
@@ -120,12 +123,21 @@
             socialType: 4,
             socialUrl: linkin
         }, {socialType: 3, socialUrl: weibo}];
-
-        $.post("../user/login",
-            data,
-            function (result) {
-                layer.alert(result.msg);
-            }, "json");
+        $.ajax({
+            type: "POST",
+            url: "../social",
+            dataType: "json",
+            contentType: "application/json",
+            data: JSON.stringify(data),
+            success: function (data) {
+                if (data.success) {
+                    layer.msg('成功', {icon: 1});
+                }else {
+                    layer.msg('失败', {icon: 2});
+                }
+            }
+        });
+        return false;
     }
 
     function osDelete(osId) {

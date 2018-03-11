@@ -7,6 +7,7 @@ import com.flyapi.core.constant.TipsEnum;
 import com.flyapi.core.id.SnowflakeIdWorker;
 import com.flyapi.model.OpenSource;
 import com.flyapi.model.UcenterSocial;
+import com.flyapi.model.UcenterSocialExample;
 import com.flyapi.model.UcenterUser;
 import com.flyapi.service.api.OpenSourceService;
 import com.flyapi.service.api.SocialService;
@@ -34,8 +35,21 @@ public class OpenSourceSocialController extends BaseController {
     public ModelAndView osso() {
         UcenterUser user = (UcenterUser) currentUser();
         List<OpenSource> openSourceList = openSourceService.findAll(user.getUserId());
+        List<UcenterSocial> socialList = socialService.findAllSocial(user.getUserId());
+        socialList.forEach(ucenterSocial -> {
+            if (ucenterSocial.getSocialType() == 1) {
+                mv.addObject("github", ucenterSocial);
+            } else if (ucenterSocial.getSocialType() == 2) {
+                mv.addObject("zhihu", ucenterSocial);
+            } else if (ucenterSocial.getSocialType() == 3) {
+                mv.addObject("weibo", ucenterSocial);
+            } else if (ucenterSocial.getSocialType() == 4) {
+                mv.addObject("linkin", ucenterSocial);
+            }
+        });
         mv.setViewName("user/os-social");
-        mv.addObject("openSourceList",openSourceList);
+        mv.addObject("openSourceList", openSourceList);
+
         return mv;
     }
 
@@ -58,9 +72,10 @@ public class OpenSourceSocialController extends BaseController {
 
     /**
      * 删除开源项目
-     * @title: removeOS
+     *
      * @param osId
      * @return com.flyapi.core.constant.JSONResult
+     * @title: removeOS
      * @date 2018/3/7 上午12:27
      */
     @DeleteMapping("os/{osId}")
@@ -68,18 +83,19 @@ public class OpenSourceSocialController extends BaseController {
     public JSONResult removeOS(@PathVariable Long osId) {
 
         UcenterUser user = (UcenterUser) currentUser();
-        if(null == user){
+        if (null == user) {
             return JSONResult.error();
         }
-        openSourceService.removeByOsId(osId,user.getUserId());
+        openSourceService.removeByOsId(osId, user.getUserId());
         return JSONResult.ok();
     }
 
     /**
      * 保存或更新社交
-     * @title: saveOrUpdateSocial
+     *
      * @param socialList
      * @return com.flyapi.core.constant.JSONResult
+     * @title: saveOrUpdateSocial
      * @date 2018/3/11 下午12:34
      */
     @PostMapping("social")
@@ -96,7 +112,7 @@ public class OpenSourceSocialController extends BaseController {
         } catch (Exception e) {
             System.out.println(e.toString());
         }
-        socialService.saveOrUpdate(socials,user.getUserId());
+        socialService.saveOrUpdate(socials, user.getUserId());
         return JSONResult.ok();
     }
 }
