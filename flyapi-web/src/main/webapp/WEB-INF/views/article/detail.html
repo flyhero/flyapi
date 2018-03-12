@@ -198,9 +198,9 @@
                                         </th:block>
 
                                         <div class="comment-reply" style="text-align: right; padding-top: 8px">
-                                            <span type="reply">
+                                            <a type="reply" style="cursor: pointer;" th:onclick="'javascript:replyFn(\''+${comment.ucenterUser.nickName}+'\',\''+${comment.ucenterUser.userId}+'\')'">
                                                 回复
-                                            </span>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
@@ -211,7 +211,7 @@
                 </div>
             </div>
             <div class="layui-form layui-form-pane">
-                <form action="" method="post">
+                <form>
                     <div class="layui-form-item layui-form-text">
                         <label class="layui-form-label">神评论：</label>
                         <div class="layui-input-block">
@@ -262,21 +262,15 @@
     var gather = {}, dom = {
         content: $('#L_content')
     };
-
-    gather.commentActive = {
-        reply: function (li) { //回复
-            var val = dom.content.val();
-            var aite = '@' + li.find('.comment-user a').text().replace(/\s/g, '');
-            dom.content.focus()
-            if (val.indexOf(aite) !== -1) return;
-            dom.content.val(aite + ' ' + val);
-        }
-
-    };
-    $('.comment-reply span').on('click', function () {
-        var othis = $(this), type = othis.attr('type');
-        gather.commentActive[type].call(this, othis.parents('.comment-area'));
-    });
+    
+    function replyFn(nickName,userId) {
+        dom.content.focus();
+        var val = dom.content.val();
+        var aite = '@'+nickName;
+        if (val.indexOf(aite) !== -1) return;
+        dom.content.val(aite + ' ' + val);
+        return false;
+    }
 
     var t = timeAgo(getMyDate([[${detailVo.article.createTime}]]));
     $("#pub-time").text(t);
@@ -302,8 +296,11 @@
         var laypage = layui.laypage;//分页的依赖
         var element = layui.element;//Tab的切换功能，切换事件监听等，需要依赖element模块
 
-        form.on('radio', function (data) {
+        //TODO 是评论还是回复？ 以是否有评论ID为标志
+        form.on('submit(pub-comment)', function (data) {
+            alert(JSON.stringify(data.field));
             console.log(data);
+            return false;
         });
 
         //右下角bar top

@@ -4,6 +4,7 @@ import com.flyapi.core.base.BaseController;
 import com.flyapi.core.constant.JSONResult;
 import com.flyapi.core.enums.ImagePath;
 import com.flyapi.core.util.ImageUtil;
+import com.flyapi.core.util.RandomUtil;
 import com.flyapi.model.CmsArticle;
 import com.flyapi.model.CmsSubject;
 import com.flyapi.model.SettingCarousel;
@@ -90,7 +91,7 @@ public class IndexController extends BaseController{
     @GetMapping("image")
     public JSONResult createImg(String subjectTitle){
         UcenterUser user = (UcenterUser)currentUser();
-        String pathName = "";
+        String pathName = "/flyapi/cover/"+System.currentTimeMillis()+ RandomUtil.randomNumStr(5)+".png";
         ImageUtil.createImage(subjectTitle,user.getNickName(),new File(ImagePath.randomPath()),new File(pathName));
         return JSONResult.ok();
     }

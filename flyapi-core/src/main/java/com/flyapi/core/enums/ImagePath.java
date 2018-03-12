@@ -14,10 +14,9 @@ public class ImagePath {
     private static List<String> imgList = new ArrayList<>();
 
     static {
-        imgList.add("/flyapi/jin.png");
-        imgList.add("");
-        imgList.add("");
-        imgList.add("");
+        imgList.add("/flyapi/base/jinshi.png");
+        imgList.add("/flyapi/base/wuya.png");
+        imgList.add("/flyapi/base/duwa.png");
     }
 
     public static String randomPath(){
