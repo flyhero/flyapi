@@ -14,7 +14,7 @@
 	http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
 	<!-- 配置SpringMVC -->
 	<!-- 扫描web相关的bean -->
-	<context:component-scan base-package="com.flyapi.admin" />
+	<context:component-scan base-package="cn.flyapi.admin" />
 	<!-- 1.开启SpringMVC注解模式 -->
 	<!-- 简化配置： 
 		(1)自动注册DefaultAnootationHandlerMapping,AnotationMethodHandlerAdapter 
@@ -24,7 +24,7 @@
 	<!--启动对@AspectJ注解的支持 , proxy-target-class设置为true表示通知spring使用cglib而不是jdk的来生成代理方法，这样AOP可以拦截到Controller -->
 	<aop:aspectj-autoproxy proxy-target-class="true" />
 
-	<mvc:view-controller path="/" view-name="redirect:/index.html" />
+<!--	<mvc:view-controller path="/" view-name="redirect:/index.html" />-->
 
 	<!--id生成器-->
 	<bean id="SnowflakeIdWorker" class="com.flyapi.core.id.SnowflakeIdWorker">
