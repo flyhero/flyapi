@@ -56,27 +56,29 @@
                 <div class="fly-home">
                     <img th:src="${setInfo.avatar}" th:alt="${setInfo.nickName}">
                     <p class="fly-home-info" style="margin-top: 5px">
-                        <a th:href="${github} ? ${github.socialUrl} : '#'">
-                            <svg class="icon" aria-hidden="true">
-                                <use xlink:href="#icon-GitHub"></use>
-                            </svg>
-                        </a>
+                        <th:block th:if="${github}">
+                            <a th:href="${github.socialUrl}">
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-GitHub"></use>
+                                </svg>
+                            </a>
+                        </th:block>
                         <th:block th:if="${zhihu}">
-                            <a>
+                            <a th:href="${zhihu.socialUrl}">
                                 <svg class="icon" aria-hidden="true">
                                     <use xlink:href="#icon-zhihu"></use>
                                 </svg>
                             </a>
                         </th:block>
                         <th:block th:if="${weibo}">
-                            <a>
+                            <a th:href="${weibo.socialUrl}">
                                 <svg class="icon" aria-hidden="true">
                                     <use xlink:href="#icon-weibo"></use>
                                 </svg>
                             </a>
                         </th:block>
                         <th:block th:if="${linkin}">
-                            <a>
+                            <a th:href="${linkin.socialUrl}">
                                 <svg class="icon" aria-hidden="true">
                                     <use xlink:href="#icon-linkedin"></use>
                                 </svg>
@@ -224,9 +226,9 @@
                         <i class="iconfont icon-shijian"></i><span
                             th:text="'注册于：'+${#dates.format(setInfo.createTime, 'yyyy年MM月dd日')}"> 注册于 2016年09月04日</span>
                     </dd>
-                    <dd>
+                    <!--<dd>
                         <a href="#" target="_blank">个人主页被 5.3k 人浏览</a>
-                    </dd>
+                    </dd>-->
                 </dl>
             </div>
         </div>
