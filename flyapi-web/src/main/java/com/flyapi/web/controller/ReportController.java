@@ -42,7 +42,7 @@ public class ReportController extends BaseController{
     @ResponseBody
     public JSONResult report(Report report){
 
-        //TODO：今天相同ip举报次数有限制
+        //今天相同ip举报次数有限制
 
         String ip = IPUtil.getIP(request);
         int count = reportService.countReportToday(ip);
