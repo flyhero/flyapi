@@ -298,11 +298,17 @@
         var laypage = layui.laypage;//分页的依赖
         var element = layui.element;//Tab的切换功能，切换事件监听等，需要依赖element模块
 
-        //TODO 是评论还是回复？ 以是否有评论ID为标志
         form.on('submit(pub-comment)', function (data) {
             alert(JSON.stringify(data.field));
-            console.log(data);
-            $.post("../../report/article", data.field, function (result) {
+            console.log(data.field.content);
+            var val =  data.field.content;
+            if (val.indexOf('@') !== -1){
+                //nothing
+            }else {
+                data.field.commentId=0;
+            }
+
+            $.post("../../comment", data.field, function (result) {
                 console.log(result.code);
                 layer.msg(result.msg);
             },"json");
