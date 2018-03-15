@@ -3,6 +3,7 @@ package com.flyapi.service.api;
 import com.flyapi.core.base.BaseService;
 import com.flyapi.model.CmsComment;
 import com.flyapi.model.UcenterUser;
+import com.flyapi.pojo.dto.CommentDto;
 import com.flyapi.pojo.vo.CommentVo;
 
 import java.util.List;
@@ -17,4 +18,5 @@ public interface CommentService extends BaseService<CmsComment> {
 
     List<CommentVo> findCommentByAuthorId(Long authorId);
 
+    int comment(CommentDto commentDto,Long userId);
 }

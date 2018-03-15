@@ -198,7 +198,7 @@
                                         </th:block>
 
                                         <div class="comment-reply" style="text-align: right; padding-top: 8px">
-                                            <a type="reply" style="cursor: pointer;" th:onclick="'javascript:replyFn(\''+${comment.ucenterUser.nickName}+'\',\''+${comment.ucenterUser.userId}+'\')'">
+                                            <a type="reply" style="cursor: pointer;" th:onclick="'javascript:replyFn(\''+${comment.ucenterUser.nickName}+'\',\''+${comment.commentId}+'\')'">
                                                 回复
                                             </a>
                                         </div>
@@ -222,7 +222,8 @@
 
                     <div class="layui-form-item">
                         <input type="hidden" name="articleId" value="0" th:value="${detailVo.article.articleId}">
-                        <input type="hidden" name="commentId" value="0">
+                        <input type="hidden" name="authorId" value="0" th:value="${detailVo.user.userId}">
+                        <input type="hidden" name="commentId" id="commentId" value="0">
                         <button class="layui-btn" lay-filter="pub-comment" lay-submit>提交回答</button>
                     </div>
 
@@ -263,12 +264,13 @@
         content: $('#L_content')
     };
     
-    function replyFn(nickName,userId) {
+    function replyFn(nickName,commentId) {
         dom.content.focus();
         var val = dom.content.val();
         var aite = '@'+nickName;
         if (val.indexOf(aite) !== -1) return;
         dom.content.val(aite + ' ' + val);
+        $("#commentId").val(commentId);
         return false;
     }
 
@@ -300,6 +302,10 @@
         form.on('submit(pub-comment)', function (data) {
             alert(JSON.stringify(data.field));
             console.log(data);
+            $.post("../../report/article", data.field, function (result) {
+                console.log(result.code);
+                layer.msg(result.msg);
+            },"json");
             return false;
         });
 

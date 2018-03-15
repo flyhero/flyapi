@@ -1,16 +1,16 @@
 package com.flyapi.web.controller;
 
+import com.flyapi.core.base.BaseController;
 import com.flyapi.core.constant.JSONResult;
 import com.flyapi.model.CmsComment;
+import com.flyapi.model.UcenterUser;
+import com.flyapi.pojo.dto.CommentDto;
 import com.flyapi.service.api.CommentService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,7 +19,7 @@ import java.util.List;
  * Date: 2017-11-1 上午11:13
  */
 @Controller
-public class CommentController {
+public class CommentController extends BaseController{
     @Autowired
     private CommentService commentService;
 
@@ -46,8 +46,22 @@ public class CommentController {
 
         return JSONResult.ok(pageInfo);
     }
-
-    public JSONResult addComment(){
-        return JSONResult.error();
+    /**
+     * 发表评论或回复
+     * @title: addComment
+     * @author flyhero <http://www.iflyapi.cn>
+     * @param commentDto
+     * @return com.flyapi.core.constant.JSONResult
+     * @date 2018/3/15 下午11:49
+     */
+    @ResponseBody
+    @PostMapping("comment")
+    public JSONResult addComment(CommentDto commentDto){
+        UcenterUser user = (UcenterUser) currentUser();
+        if(user == null){
+            return JSONResult.error();
+        }
+        int num = commentService.comment(commentDto,user.getUserId());
+        return num >0 ? JSONResult.ok() : JSONResult.error();
     }
 }
