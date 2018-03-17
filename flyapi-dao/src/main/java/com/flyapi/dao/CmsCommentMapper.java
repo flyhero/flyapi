@@ -23,4 +23,6 @@ public interface CmsCommentMapper {
     List<CmsComment> findCommentById(long targetId);
 
     List<CommentVo> findCommentByAuthorId(Long authorId);
+
+    int updateRead(CmsComment cmsComment);
 }

@@ -64,4 +64,24 @@ public class CommentController extends BaseController{
         int num = commentService.comment(commentDto,user.getUserId());
         return num >0 ? JSONResult.ok() : JSONResult.error();
     }
+
+    /**
+     * 标记为已读
+     * @title: updateComment
+     * @author flyhero <http://www.iflyapi.cn>
+     * @param commentId （0 表示全部）
+     * @return com.flyapi.core.constant.JSONResult
+     * @date 2018/3/18 上午12:17
+     */
+    @PutMapping("comment/read/{commentId}")
+    public JSONResult updateComment(@PathVariable Long commentId){
+
+        UcenterUser user = (UcenterUser) currentUser();
+        if(user == null){
+            return JSONResult.error();
+        }
+        //TODO bug,不能标记自己的评论为已读，而是别人评论我的
+        boolean flag = commentService.readComment(commentId,user.getUserId());
+        return flag ? JSONResult.ok():JSONResult.error();
+    }
 }

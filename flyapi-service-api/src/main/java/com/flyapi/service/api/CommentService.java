@@ -19,4 +19,6 @@ public interface CommentService extends BaseService<CmsComment> {
     List<CommentVo> findCommentByAuthorId(Long authorId);
 
     int comment(CommentDto commentDto,Long userId);
+
+    boolean readComment(Long commentId,Long userId);
 }

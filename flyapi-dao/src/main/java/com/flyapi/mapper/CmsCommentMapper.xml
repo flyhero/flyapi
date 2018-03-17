@@ -76,6 +76,23 @@
     ORDER BY c.is_read DESC
   </select>
 
+  <update id="updateRead" parameterType="com.flyapi.model.CmsComment">
+    update cms_comment
+    <set>
+        is_read = 1
+    </set>
+    <where>
+      is_delete = 0
+      <if test="commentId">
+        and comment_id = #{commentId,jdbcType=BIGINT}
+      </if>
+      <if test="userId">
+        and user_id = #{userId}
+      </if>
+    </where>
+    where
+  </update>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

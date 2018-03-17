@@ -67,4 +67,15 @@ public class CommentServiceImpl extends BaseServiceImpl<CmsComment,CmsCommentMap
         }
         return num;
     }
+
+    @Override
+    public boolean readComment(Long commentId,Long userId) {
+        CmsComment cmsComment = new CmsComment();
+        if(commentId != null && commentId != 0){
+            cmsComment.setCommentId(commentId);
+        }
+        cmsComment.setUserId(userId);
+        int num = cmsCommentMapper.updateRead(cmsComment);
+        return num>0 ? true:false;
+    }
 }

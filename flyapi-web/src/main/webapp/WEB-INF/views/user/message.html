@@ -33,8 +33,11 @@
       </ul>
       <div class="layui-tab-content" style="height: 100px;">
         <div class="layui-tab-item layui-show">
+          <button class="layui-btn layui-btn-radius" onclick="os('','','','')">
+            <i class="layui-icon">&#xe608;</i> 标记所有为已读
+          </button>
+          <hr>
           <ul class="jie-row">
-
             <th:block th:if="${not #lists.isEmpty(commentVoList)}">
               <th:block th:each="comment,index:${commentVoList}">
                 <li>
