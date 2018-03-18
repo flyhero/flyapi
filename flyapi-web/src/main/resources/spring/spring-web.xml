@@ -104,9 +104,13 @@
 		        <bean class="com.flyapi.web.interceptor.LoginInterceptor">
 		            <property name="excludedUrls">
 		                <list>
-	 	                    <value>/</value>
+	 	                    <value>/index.html</value>
+	 	                    <value>/forward/</value>
 	 	                    <value>/login</value>
 							<value>/static/</value>
+							<value>/user/</value>
+							<value>/article/detail/</value>
+							<value>/article/list/</value>
 		                </list>
 		            </property>
 		        </bean>

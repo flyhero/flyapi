@@ -64,7 +64,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         UcenterUser login = (UcenterUser) session.getAttribute("user");
         if (login == null) {
             logger.info("request.getContextPath():"+request.getContextPath());
-            response.sendRedirect(url);
+            response.sendRedirect(url+"index.html");
         }
 
 /*        Cookie[] cookies = request.getCookies();
