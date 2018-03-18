@@ -23,7 +23,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 
     private Logger logger = LogManager.getLogger(LoginInterceptor.class);
 
-    private static final String url = "http://www.iflyapi.cn:8090";
+    private static final String url = "http://www.iflyapi.cn:8090/flyapi/";
 
     /**
      * 在DispatcherServlet完全处理完请求后被调用

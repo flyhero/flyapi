@@ -74,13 +74,13 @@ public class CommentController extends BaseController{
      * @date 2018/3/18 上午12:17
      */
     @PutMapping("comment/read/{commentId}")
+    @ResponseBody
     public JSONResult updateComment(@PathVariable Long commentId){
 
         UcenterUser user = (UcenterUser) currentUser();
         if(user == null){
             return JSONResult.error();
         }
-        //TODO bug,不能标记自己的评论为已读，而是别人评论我的
         boolean flag = commentService.readComment(commentId,user.getUserId());
         return flag ? JSONResult.ok():JSONResult.error();
     }

@@ -86,11 +86,10 @@
       <if test="commentId">
         and comment_id = #{commentId,jdbcType=BIGINT}
       </if>
-      <if test="userId">
-        and user_id = #{userId}
+      <if test="authorId">
+        and author_id = #{authorId}
       </if>
     </where>
-    where
   </update>
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">

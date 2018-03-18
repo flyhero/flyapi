@@ -33,8 +33,8 @@
       </ul>
       <div class="layui-tab-content" style="height: 100px;">
         <div class="layui-tab-item layui-show">
-          <button class="layui-btn layui-btn-radius" onclick="os('','','','')">
-            <i class="layui-icon">&#xe608;</i> 标记所有为已读
+          <button class="layui-btn layui-btn-radius" onclick="read(0)">
+             标记所有为已读
           </button>
           <hr>
           <ul class="jie-row">
@@ -99,7 +99,22 @@
         var laypage = layui.laypage;
         var element = layui.element;//Tab的切换功能，切换事件监听等，需要依赖element模块
     });
-
+  
+    function read(commentId) {
+        $.ajax({
+            type: 'PUT',
+            url: "../comment/read/" + commentId,
+            dataType: "json",
+            data: {},
+            success: function (result) {
+                if(result.success){
+                    layer.msg("标记成功");
+                }else {
+                    layer.msg("标记失败");
+                }
+            }
+        });
+    }
 
 
 </script>
