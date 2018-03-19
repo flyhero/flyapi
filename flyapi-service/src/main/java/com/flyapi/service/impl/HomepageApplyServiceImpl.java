@@ -1,17 +1,24 @@
 package com.flyapi.service.impl;
 
 import com.flyapi.core.base.BaseServiceImpl;
-import com.flyapi.dao.CmsHomepageApplyMapper;
-import com.flyapi.dao.CmsReplyMapper;
-import com.flyapi.model.CmsHomepageApply;
-import com.flyapi.model.CmsReply;
+import com.flyapi.core.enums.ApplyStatus;
+import com.flyapi.dao.CmsApplyMapper;
+import com.flyapi.dao.CmsArticleMapper;
+import com.flyapi.dao.UcenterUserMapper;
+import com.flyapi.model.CmsApply;
+import com.flyapi.model.CmsApplyExample;
+import com.flyapi.model.CmsArticle;
+import com.flyapi.model.UcenterUser;
+import com.flyapi.pojo.vo.ArticleCollectVo;
 import com.flyapi.pojo.vo.HomePageVo;
 import com.flyapi.service.api.HomepageApplyService;
-import com.flyapi.service.api.ReplyService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,18 +27,48 @@ import java.util.List;
  */
 @Service
 @Transactional
-public class HomepageApplyServiceImpl extends BaseServiceImpl<CmsHomepageApply,CmsHomepageApplyMapper> implements HomepageApplyService {
+public class HomepageApplyServiceImpl extends BaseServiceImpl<CmsApply, CmsApplyMapper> implements HomepageApplyService {
     @Autowired
-    private CmsHomepageApplyMapper cmsHomepageApplyMapper;
+    private CmsApplyMapper cmsApplyMapper;
+    @Autowired
+    private CmsArticleMapper articleMapper;
+    @Autowired
+    private UcenterUserMapper ucenterUserMapper;
 
     @Override
-    public CmsHomepageApply findByArticleId(Long articleId) {
-        return cmsHomepageApplyMapper.findByArticleId(articleId);
+    public CmsApply findByArticleId(Long articleId) {
+        CmsApplyExample example = new CmsApplyExample();
+        example.createCriteria().andArticleIdEqualTo(articleId).andIsDeleteEqualTo((byte) 0);
+        return cmsApplyMapper.selectByExample(example).get(0);
     }
 
-    //TODO 实现根据条件查询首页申请
     @Override
-    public List<HomePageVo> findListByExample(int pageSize, int pageNum, int status) {
-        return null;
+    public PageInfo<HomePageVo> findListByExample(int pageSize, int pageNum, int status) {
+
+        List<HomePageVo> homePageVoList = new ArrayList<>();
+
+        PageInfo<HomePageVo> pageInfo = null;
+        PageHelper.startPage(pageNum, pageSize);
+        CmsApplyExample example = new CmsApplyExample();
+        if (status != ApplyStatus.UNKNOW.getValue()) {
+            example.createCriteria().andApplyStatusEqualTo((byte) status).andIsDeleteEqualTo((byte) 0);
+        }
+        example.createCriteria().andIsDeleteEqualTo((byte) 0);
+        example.setOrderByClause("create_time DESC");
+        example.setLimit(100);
+        List<CmsApply> applyList = cmsApplyMapper.selectByExample(example);
+        applyList.forEach(cmsApply -> {
+            HomePageVo homePageVo = new HomePageVo();
+            homePageVo.setApplyStatus(cmsApply.getApplyStatus());
+            homePageVo.setArticleId(cmsApply.getArticleId());
+            homePageVo.setCreateTime(cmsApply.getCreateTime());
+            CmsArticle article = articleMapper.selectByPrimaryKey(cmsApply.getArticleId());
+            homePageVo.setTitle(article.getTitle());
+            UcenterUser user = ucenterUserMapper.selectByPrimaryKey(article.getUserId());
+            homePageVo.setNickName(user.getNickName());
+            homePageVoList.add(homePageVo);
+        });
+        pageInfo = new PageInfo<HomePageVo>(homePageVoList);
+        return pageInfo;
     }
 }

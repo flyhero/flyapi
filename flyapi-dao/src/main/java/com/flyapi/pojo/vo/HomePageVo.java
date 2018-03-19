@@ -11,6 +11,7 @@ public class HomePageVo {
     private Long articleId;
     private String title;
     private Date createTime;
+    private String nickName;
 
     public byte getApplyStatus() {
         return applyStatus;
@@ -42,5 +43,13 @@ public class HomePageVo {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
     }
 }

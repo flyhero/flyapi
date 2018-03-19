@@ -1,9 +1,9 @@
 package com.flyapi.service.api;
 
 import com.flyapi.core.base.BaseService;
-import com.flyapi.model.CmsHomepageApply;
-import com.flyapi.model.UcenterUser;
+import com.flyapi.model.CmsApply;
 import com.flyapi.pojo.vo.HomePageVo;
+import com.github.pagehelper.PageInfo;
 
 import java.util.List;
 
@@ -11,9 +11,9 @@ import java.util.List;
  * author: flyhero
  * Date: 2017/6/9 0009 下午 3:57
  */
-public interface HomepageApplyService extends BaseService<CmsHomepageApply> {
+public interface HomepageApplyService extends BaseService<CmsApply> {
 
-    CmsHomepageApply findByArticleId(Long articleId);
+    CmsApply findByArticleId(Long articleId);
 
-    List<HomePageVo> findListByExample(int pageSize,int pageNum,int status);
+    PageInfo<HomePageVo> findListByExample(int pageSize, int pageNum, int status);
 }

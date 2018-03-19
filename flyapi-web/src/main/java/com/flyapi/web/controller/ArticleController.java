@@ -254,7 +254,7 @@ public class ArticleController extends BaseController {
             return mv;
         }
 
-        CmsHomepageApply apply = homepageApplyService.findByArticleId(articleId);
+        CmsApply apply = homepageApplyService.findByArticleId(articleId);
         mv.addObject("subjectList", subjectList);
 
         CmsArticle article = articleService.selectByPrimaryKey(articleId);
@@ -295,7 +295,7 @@ public class ArticleController extends BaseController {
             //插入
             int num = articleService.insertSelective(cmsArticle);
             if (num > 0 && addArticleRequest.getStatus() !=0 && addArticleRequest.getApply() == 0) {
-                CmsHomepageApply apply = new CmsHomepageApply();
+                CmsApply apply = new CmsApply();
                 apply.setArticleId(cmsArticle.getArticleId());
                 apply.setId(snowflakeIdWorker.nextId());
                 apply.setCreateTime(new Date());
