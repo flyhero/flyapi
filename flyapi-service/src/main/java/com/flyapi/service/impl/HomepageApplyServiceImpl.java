@@ -71,4 +71,26 @@ public class HomepageApplyServiceImpl extends BaseServiceImpl<CmsApply, CmsApply
         pageInfo = new PageInfo<HomePageVo>(homePageVoList);
         return pageInfo;
     }
+
+    @Override
+    public boolean pass(Long applyId) {
+        return update(applyId,ApplyStatus.PASS.getValue());
+    }
+
+    @Override
+    public boolean unPass(Long applyId) {
+        return update(applyId,ApplyStatus.UNPASS.getValue());
+    }
+
+    @Override
+    public boolean update(Long applyId, int status) {
+        CmsApply apply = new CmsApply();
+        apply.setApplyStatus((byte) status);
+
+        CmsApplyExample example = new CmsApplyExample();
+        example.createCriteria().andIdEqualTo(applyId);
+
+        int num = cmsApplyMapper.updateByExampleSelective(apply, example);
+        return num > 0;
+    }
 }

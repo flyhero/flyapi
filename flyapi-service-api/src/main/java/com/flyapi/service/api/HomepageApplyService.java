@@ -15,5 +15,28 @@ public interface HomepageApplyService extends BaseService<CmsApply> {
 
     CmsApply findByArticleId(Long articleId);
 
+    /**
+     * 获取首页申请
+     * @param pageSize
+     * @param pageNum
+     * @param status
+     * @return
+     */
     PageInfo<HomePageVo> findListByExample(int pageSize, int pageNum, int status);
+
+    /**
+     * 通过审核
+     * @param applyId
+     * @return
+     */
+    boolean pass(Long applyId);
+
+    /**
+     * 不通过审核
+     * @param applyId
+     * @return
+     */
+    boolean unPass(Long applyId);
+
+    boolean update(Long applyId,int status);
 }

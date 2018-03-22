@@ -67,6 +67,8 @@ public class UserServiceImpl extends BaseServiceImpl<UcenterUser,UcenterUserMapp
         Long nowCount = ucenterUserMapper.countByExample(example);
         map.put("todayCount",nowCount);
 
-        return null;
+
+
+        return map;
     }
 }

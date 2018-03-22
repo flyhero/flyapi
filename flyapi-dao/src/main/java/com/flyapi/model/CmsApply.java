@@ -18,7 +18,7 @@ public class CmsApply implements Serializable {
     private Long articleId;
 
     /**
-     * 0申请中1通过2未通过
+     * 1申请中 2通过 3未通过
      */
     private Byte applyStatus;
 

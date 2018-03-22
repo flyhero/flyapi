@@ -8,9 +8,7 @@ import com.flyapi.service.api.SysNoticeService;
 import org.omg.CORBA.PUBLIC_MEMBER;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -46,6 +44,30 @@ public class AdminController extends BaseController{
     public JSONResult findApply(int pageSize, int pageNum, int status){
         return JSONResult.ok(homepageApplyService.findListByExample(pageSize,pageNum,status));
     }
+
+    /**
+     * 审核通过
+     * @param applyId
+     * @return
+     */
+    @PutMapping("admin/apply/{applyId}/pass")
+    @ResponseBody
+    public JSONResult pass(@PathVariable Long applyId){
+        return JSONResult.ok(homepageApplyService.pass(applyId));
+    }
+
+    /**
+     * 审核不通过
+     * @param applyId
+     * @return
+     */
+    @PutMapping("admin/apply/{applyId}/unpass")
+    @ResponseBody
+    public JSONResult unpass(@PathVariable Long applyId){
+        return JSONResult.ok(homepageApplyService.unPass(applyId));
+    }
+
+
 
     @PostMapping("admin/notice")
     @ResponseBody
