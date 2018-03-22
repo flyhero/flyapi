@@ -24,6 +24,8 @@ public interface HomepageApplyService extends BaseService<CmsApply> {
      */
     PageInfo<HomePageVo> findListByExample(int pageSize, int pageNum, int status);
 
+    List<HomePageVo> findListByStatus(int status);
+
     /**
      * 通过审核
      * @param applyId

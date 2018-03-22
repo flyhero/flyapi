@@ -2,9 +2,12 @@ package cn.flyapi.admin.controller;
 
 import com.flyapi.core.base.BaseController;
 import com.flyapi.core.constant.JSONResult;
+import com.flyapi.core.util.AESUtil;
+import com.flyapi.model.UcenterUser;
 import com.flyapi.pojo.dto.AddNoticeDto;
 import com.flyapi.service.api.HomepageApplyService;
 import com.flyapi.service.api.SysNoticeService;
+import com.flyapi.service.api.UserService;
 import org.omg.CORBA.PUBLIC_MEMBER;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,9 +27,38 @@ public class AdminController extends BaseController{
     @Autowired
     private SysNoticeService sysNoticeService;
 
+    @Autowired
+    private UserService userService;
+
     @GetMapping("go")
     public ModelAndView go(String html){
         mv.setViewName(html);
+        return mv;
+    }
+
+    @PostMapping("login")
+    @ResponseBody
+    public JSONResult userLogin(UcenterUser user){
+
+        if(userService.findUserByUsername(user.getUsername()) !=1){
+            return JSONResult.error("用户名不存在",300,null);
+        }
+        user.setPassword(AESUtil.AESEncode(user.getPassword()));
+        UcenterUser userLogin = userService.login(user);
+        if(userLogin == null){
+            return JSONResult.error("用户名或密码错误！",300,null);
+        }
+
+        userLogin.setPassword("");
+        session.setAttribute("user",userLogin);
+
+        return JSONResult.ok();
+    }
+
+    @GetMapping("/go/apply")
+    public ModelAndView goApplyView(int status){
+        mv.addObject("applyList",homepageApplyService.findListByStatus(status));
+        mv.setViewName("apply");
         return mv;
     }
     /**
@@ -50,7 +82,7 @@ public class AdminController extends BaseController{
      * @param applyId
      * @return
      */
-    @PutMapping("admin/apply/{applyId}/pass")
+    @PutMapping("apply/{applyId}/pass")
     @ResponseBody
     public JSONResult pass(@PathVariable Long applyId){
         return JSONResult.ok(homepageApplyService.pass(applyId));
@@ -61,7 +93,7 @@ public class AdminController extends BaseController{
      * @param applyId
      * @return
      */
-    @PutMapping("admin/apply/{applyId}/unpass")
+    @PutMapping("apply/{applyId}/unpass")
     @ResponseBody
     public JSONResult unpass(@PathVariable Long applyId){
         return JSONResult.ok(homepageApplyService.unPass(applyId));

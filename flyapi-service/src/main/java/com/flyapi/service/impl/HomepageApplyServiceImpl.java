@@ -44,11 +44,14 @@ public class HomepageApplyServiceImpl extends BaseServiceImpl<CmsApply, CmsApply
 
     @Override
     public PageInfo<HomePageVo> findListByExample(int pageSize, int pageNum, int status) {
-
-        List<HomePageVo> homePageVoList = new ArrayList<>();
-
         PageInfo<HomePageVo> pageInfo = null;
         PageHelper.startPage(pageNum, pageSize);
+        pageInfo = new PageInfo<HomePageVo>(findListByStatus(status));
+        return pageInfo;
+    }
+
+    public List<HomePageVo> findListByStatus(int status){
+        List<HomePageVo> homePageVoList = new ArrayList<>();
         CmsApplyExample example = new CmsApplyExample();
         if (status != ApplyStatus.UNKNOW.getValue()) {
             example.createCriteria().andApplyStatusEqualTo((byte) status).andIsDeleteEqualTo((byte) 0);
@@ -68,8 +71,7 @@ public class HomepageApplyServiceImpl extends BaseServiceImpl<CmsApply, CmsApply
             homePageVo.setNickName(user.getNickName());
             homePageVoList.add(homePageVo);
         });
-        pageInfo = new PageInfo<HomePageVo>(homePageVoList);
-        return pageInfo;
+        return homePageVoList;
     }
 
     @Override

@@ -49,6 +49,22 @@
   <script src="../../static/js/jquery.min.js"></script>
   <script src="../../static/js/amazeui.min.js"></script>
   <script src="../../static/js/app.js"></script>
+<script>
+    function postLogin(data) {
+
+        $.post("../login",
+            data,
+            function (result) {
+                if (result.code == 200) {
+                    location.href = rootPath + "/index.html";
+                } else {
+                    layer.alert(result.msg);
+                }
+
+            }, "json");
+    }
+</script>
+
 </body>
 
 </html>
