@@ -9,24 +9,24 @@ import com.flyapi.model.UcenterUser;
  * Date: 2017/6/27 0027 下午 2:07
  */
 public class SubjectVo extends CmsArticle{
-    private CmsSubject cmsSubject;
-    private UcenterUser ucenterUser;
+    private ShowSubjectVo cmsSubject;
+    private ShowSubjectUserVo ucenterUser;
     private Integer rssNum;
     private boolean isRss;
 
-    public CmsSubject getCmsSubject() {
+    public ShowSubjectVo getCmsSubject() {
         return cmsSubject;
     }
 
-    public void setCmsSubject(CmsSubject cmsSubject) {
+    public void setCmsSubject(ShowSubjectVo cmsSubject) {
         this.cmsSubject = cmsSubject;
     }
 
-    public UcenterUser getUcenterUser() {
+    public ShowSubjectUserVo getUcenterUser() {
         return ucenterUser;
     }
 
-    public void setUcenterUser(UcenterUser ucenterUser) {
+    public void setUcenterUser(ShowSubjectUserVo ucenterUser) {
         this.ucenterUser = ucenterUser;
     }
 

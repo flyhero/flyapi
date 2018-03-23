@@ -1,5 +1,8 @@
 package com.flyapi.core.util;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.color.ColorSpace;
@@ -19,6 +22,8 @@ import java.util.Map;
  * @author Looly
  */
 public class ImageUtil {
+
+	private static final Logger logger = LoggerFactory.getLogger(ImageUtil.class);
 
 	public static String IMAGE_TYPE_GIF = "gif";// 图形交换格式
 	public static String IMAGE_TYPE_JPG = "jpg";// 联合照片专家组
@@ -303,7 +308,7 @@ public class ImageUtil {
 			g.dispose();
 			ImageIO.write((BufferedImage) image, IMAGE_TYPE_JPEG, destImageFile);// 输出到文件流
 		} catch (IOException e) {
-
+			logger.error(e.toString());
 		}
 	}
 

@@ -45,10 +45,10 @@
                 <h1 th:text="${detailVo.article.title}">文章标题</h1>
                 <div class="detail-about">
                     <a class="jie-user" href="">
-                        <img src="http://tp4.sinaimg.cn/1345566427/180/5730976522/0" alt="">
+                        <img src="../../../static/images/avatar/default.png" th:src="${detailVo.user.avatar}">
                         <cite>
                             <i th:text="${detailVo.user.nickName}">纸飞机</i>
-                            <em>(金牌会员)</em>
+                            <em th:text="${fame.fameName}">(金牌会员)</em>
                             <em style="color:#5FB878" id="pub-time">1分钟前发布</em>
                             <!-- <em style="color:#FF9E3F">（活雷锋）</em>
                              <em style="color:#999">（该号已被封）</em> -->
@@ -157,9 +157,9 @@
                                         <div style="float:left; text-align:left" class="comment-user">
                                             <img style="width: 40px;height: 40px;border-radius: 100%"
                                                  th:src="${comment.ucenterUser.avatar}"/>
-                                            <a th:href="@{${rootPath} + '/user/'+${comment.userId}}" target="_blank"
+                                            <a th:href="@{${rootPath} + '/user/'+${comment.ucenterUser.userId}}" target="_blank"
                                                th:text="${comment.ucenterUser.nickName}">flyhero</a>
-                                            <input type="hidden" th:value="${comment.userId}"/>
+                                            <input type="hidden" th:value="${comment.ucenterUser.userId}"/>
                                         </div>
                                         <div style="float:right; text-align:right">
                                             <span class="layui-badge layui-bg-gray"

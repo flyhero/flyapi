@@ -81,7 +81,8 @@
 <th:block th:replace="common/footer::footer"></th:block>
 
 <script>
-    var rootPath = [[${rootPath}]];
+    var rootPath = '[[${rootPath}]]';
+
     function divClick(articleId) {
         location.href=rootPath+"article/detail/"+articleId;
     };

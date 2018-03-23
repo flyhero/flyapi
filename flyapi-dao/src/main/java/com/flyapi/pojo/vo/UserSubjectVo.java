@@ -8,9 +8,9 @@ import com.flyapi.model.UcenterUser;
  * author: flyhero
  * Date: 2017/6/27 0027 下午 2:07
  */
-public class UserSubjectVo extends CmsSubject{
+public class UserSubjectVo extends ShowSubjectVo{
     private CmsArticle cmsArticle;
-    private UcenterUser ucenterUser;
+    private ShowSubjectUserVo ucenterUser;
     private Integer rssNum;
     private boolean isRss;
 
@@ -22,11 +22,11 @@ public class UserSubjectVo extends CmsSubject{
         this.cmsArticle = cmsArticle;
     }
 
-    public UcenterUser getUcenterUser() {
+    public ShowSubjectUserVo getUcenterUser() {
         return ucenterUser;
     }
 
-    public void setUcenterUser(UcenterUser ucenterUser) {
+    public void setUcenterUser(ShowSubjectUserVo ucenterUser) {
         this.ucenterUser = ucenterUser;
     }
 

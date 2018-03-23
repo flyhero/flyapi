@@ -7,9 +7,9 @@ import java.util.Date;
  * Date: 2017/6/22 0022 下午 1:37
  */
 public class ArticleSimpleVo {
-    private Long articleId;
-    private Long subjectId;
-    private Long userId;
+    private String articleId;
+    private String subjectId;
+    private String userId;
     private String articleDes;
     private String title;
     private String cover;
@@ -21,27 +21,27 @@ public class ArticleSimpleVo {
     private String avatar;
     private String nickName;
 
-    public Long getArticleId() {
+    public String getArticleId() {
         return articleId;
     }
 
-    public void setArticleId(Long articleId) {
+    public void setArticleId(String articleId) {
         this.articleId = articleId;
     }
 
-    public Long getSubjectId() {
+    public String getSubjectId() {
         return subjectId;
     }
 
-    public void setSubjectId(Long subjectId) {
+    public void setSubjectId(String subjectId) {
         this.subjectId = subjectId;
     }
 
-    public Long getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 

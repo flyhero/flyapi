@@ -12,6 +12,8 @@ import com.flyapi.model.CmsSubject;
 import com.flyapi.model.UcenterUser;
 import com.flyapi.pojo.dto.AddSubjectRequest;
 import com.flyapi.pojo.dto.SubjectDto;
+import com.flyapi.pojo.vo.ShowSubjectUserVo;
+import com.flyapi.pojo.vo.ShowSubjectVo;
 import com.flyapi.pojo.vo.SubjectVo;
 import com.flyapi.service.api.SubjectService;
 import com.flyapi.service.api.UserService;
@@ -52,12 +54,16 @@ public class SubjectServiceImpl extends BaseServiceImpl<CmsSubject,CmsSubjectMap
             subjectVo.setCommentNum(article.getCommentNum());
 
             CmsSubject subject = cmsSubjectMapper.selectByPrimaryKey(article.getSubjectId());
-            subjectVo.setCmsSubject(subject);
+            ShowSubjectVo showSubjectVo = new ShowSubjectVo();
+            BeanUtils.copyProperties(subject,showSubjectVo);
+            showSubjectVo.setSubjectId(String.valueOf(subject.getSubjectId()));
+            subjectVo.setCmsSubject(showSubjectVo);
 
             UcenterUser user= ucenterUserMapper.selectByPrimaryKey(article.getUserId());
-            user.setPassword("");
-            user.setPhone("");
-            subjectVo.setUcenterUser(user);
+            ShowSubjectUserVo showSubjectUserVo = new ShowSubjectUserVo();
+            BeanUtils.copyProperties(user,showSubjectUserVo);
+            showSubjectUserVo.setUserId(String.valueOf(user.getUserId()));
+            subjectVo.setUcenterUser(showSubjectUserVo);
 
 
             CmsRss cmsRss =new CmsRss();
@@ -85,7 +91,6 @@ public class SubjectServiceImpl extends BaseServiceImpl<CmsSubject,CmsSubjectMap
         return list;
     }
 
-    @Override
     public int saveOrUpdateSubject(AddSubjectRequest addSubjectRequest, Long userId) {
         CmsSubject isSubject = cmsSubjectMapper.selectByPrimaryKey(addSubjectRequest.getSubjectId());
         CmsSubject cmsSubject = new CmsSubject();

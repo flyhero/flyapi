@@ -21,6 +21,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -57,6 +58,8 @@ public class ArticleController extends BaseController {
     private CollectArticleService collectArticleService;
     @Autowired
     private LikeService likeService;
+    @Autowired
+    private FameService fameService;
     /**
      * Title: findArticleDetail
      * params: [articleId]
@@ -83,10 +86,11 @@ public class ArticleController extends BaseController {
         }
         ArticleDetailVo detailVo = articleService.findArticleDetail(articleId);
         List<CmsComment> commentList = commentService.findCommentById(articleId);
-
+        UcenterFame fame =fameService.findByFameValue(detailVo.getUser().getFameValue());
         mv.addObject("detailVo", detailVo);
         mv.addObject("commentList", commentList);
         mv.addObject("isLike", isLike);
+        mv.addObject("fame", fame);
         mv.setViewName("article/detail");
         return mv;
     }
