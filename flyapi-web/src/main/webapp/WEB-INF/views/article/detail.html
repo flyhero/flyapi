@@ -48,7 +48,7 @@
                         <img src="../../../static/images/avatar/default.png" th:src="${detailVo.user.avatar}">
                         <cite>
                             <i th:text="${detailVo.user.nickName}">纸飞机</i>
-                            <em th:text="${fame.fameName}">(金牌会员)</em>
+                            <em th:text="'('+${fame.fameName}+')'">(金牌会员)</em>
                             <em style="color:#5FB878" id="pub-time">1分钟前发布</em>
                             <!-- <em style="color:#FF9E3F">（活雷锋）</em>
                              <em style="color:#999">（该号已被封）</em> -->
@@ -216,7 +216,7 @@
                         <label class="layui-form-label">神评论：</label>
                         <div class="layui-input-block">
                             <textarea id="L_content" name="content" required lay-verify="required"
-                                      placeholder="评论吧" class="layui-textarea fly-editor"></textarea>
+                                       class="layui-textarea fly-editor"></textarea>
                         </div>
                     </div>
 

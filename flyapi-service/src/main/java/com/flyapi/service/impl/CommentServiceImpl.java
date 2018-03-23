@@ -10,6 +10,7 @@ import com.flyapi.model.CmsComment;
 import com.flyapi.model.CmsReply;
 import com.flyapi.pojo.dto.CommentDto;
 import com.flyapi.pojo.vo.CommentVo;
+import com.flyapi.pojo.vo.ShowCommentVo;
 import com.flyapi.service.api.ArticleService;
 import com.flyapi.service.api.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,7 @@ public class CommentServiceImpl extends BaseServiceImpl<CmsComment,CmsCommentMap
     private SnowflakeIdWorker idWorker;
 
 
-    public List<CmsComment> findCommentById(long targetId) {
+    public List<ShowCommentVo> findCommentById(long targetId) {
         return cmsCommentMapper.findCommentById(targetId);
     }
 

@@ -11,6 +11,7 @@ import com.flyapi.core.validator.StringValidator;
 import com.flyapi.model.*;
 import com.flyapi.pojo.dto.AddArticleRequest;
 import com.flyapi.pojo.vo.ArticleCollectVo;
+import com.flyapi.pojo.vo.ShowCommentVo;
 import com.flyapi.service.api.*;
 import com.flyapi.pojo.vo.ArticleDetailVo;
 import com.flyapi.pojo.vo.ArticleSimpleVo;
@@ -85,7 +86,7 @@ public class ArticleController extends BaseController {
 
         }
         ArticleDetailVo detailVo = articleService.findArticleDetail(articleId);
-        List<CmsComment> commentList = commentService.findCommentById(articleId);
+        List<ShowCommentVo> commentList = commentService.findCommentById(articleId);
         UcenterFame fame =fameService.findByFameValue(detailVo.getUser().getFameValue());
         mv.addObject("detailVo", detailVo);
         mv.addObject("commentList", commentList);

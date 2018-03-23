@@ -4,7 +4,7 @@ package com.flyapi.pojo.vo;
  * Author: qfwang
  * Date: 2018-03-23 下午4:32
  */
-public class ShowSubjectUserVo {
+public class ShowUserVo {
 
     private String userId;
     private String avatar;

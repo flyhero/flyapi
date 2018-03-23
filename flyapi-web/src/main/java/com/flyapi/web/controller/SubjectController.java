@@ -9,7 +9,7 @@ import com.flyapi.model.CmsSubject;
 import com.flyapi.model.UcenterUser;
 import com.flyapi.pojo.dto.AddSubjectRequest;
 import com.flyapi.pojo.dto.SubjectDto;
-import com.flyapi.pojo.vo.ShowSubjectUserVo;
+import com.flyapi.pojo.vo.ShowUserVo;
 import com.flyapi.pojo.vo.SubjectVo;
 import com.flyapi.pojo.vo.UserSubjectVo;
 import com.flyapi.service.api.ArticleService;
@@ -173,10 +173,10 @@ public class SubjectController extends BaseController {
                 userSubjectVo.setCmsArticle(article);
 
                 UcenterUser user = userService.selectByPrimaryKey(subject.getUserId());
-                ShowSubjectUserVo showSubjectUserVo = new ShowSubjectUserVo();
-                BeanUtils.copyProperties(user,showSubjectUserVo);
-                showSubjectUserVo.setUserId(String.valueOf(user.getUserId()));
-                userSubjectVo.setUcenterUser(showSubjectUserVo);
+                ShowUserVo showUserVo = new ShowUserVo();
+                BeanUtils.copyProperties(user, showUserVo);
+                showUserVo.setUserId(String.valueOf(user.getUserId()));
+                userSubjectVo.setUcenterUser(showUserVo);
 
                 CmsRss cmsRss = new CmsRss();
                 cmsRss.setSubjectId(subject.getSubjectId());

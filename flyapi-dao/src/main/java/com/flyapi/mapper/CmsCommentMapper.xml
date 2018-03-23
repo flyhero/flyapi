@@ -14,24 +14,24 @@
     <result column="content" jdbcType="LONGVARCHAR" property="content" />
   </resultMap>
 
-  <resultMap extends="BaseResultMap" id="ResultMapWithReply" type="com.flyapi.model.CmsComment">
+  <resultMap id="ResultMapWithReply" type="com.flyapi.pojo.vo.ShowCommentVo">
+    <id column="comment_id" jdbcType="BIGINT" property="commentId" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <association property="ucenterUser" column="user_id"  select="findUser"/>
     <collection property="cmsReplyList" column="comment_id" ofType="List" select="getReplyByCommentId"/>
   </resultMap>
 
-  <resultMap id="replyMap" type="com.flyapi.model.CmsReply">
+  <resultMap id="replyMap" type="com.flyapi.pojo.vo.ShowReplyVo">
     <id column="reply_id" jdbcType="BIGINT" property="replyId" />
-    <result column="comment_id" jdbcType="BIGINT" property="commentId" />
-    <result column="re_reply_id" jdbcType="BIGINT" property="reReplyId" />
     <result column="content" jdbcType="VARCHAR" property="content" />
     <result column="from_user_id" jdbcType="BIGINT" property="fromUserId" />
-    <result column="to_user_id" jdbcType="BIGINT" property="toUserId" />
-    <result column="reply_type" jdbcType="TINYINT" property="replyType" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <association property="fromUser" column="from_user_id" select="findUser"/>
   </resultMap>
 
-  <resultMap id="userInfo" type="com.flyapi.model.UcenterUser">
+  <resultMap id="userInfo" type="com.flyapi.pojo.vo.ShowUserVo">
     <result column="user_id" jdbcType="BIGINT" property="userId" />
     <result column="avatar" jdbcType="VARCHAR" property="avatar" />
     <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
@@ -55,7 +55,7 @@
 
   <select id="findCommentById" parameterType="java.lang.Long" resultMap="ResultMapWithReply">
     select
-    <include refid="Base_Column_List" />
+      comment_id,create_time,content,user_id
     from cms_comment
     where target_id = #{targetId,jdbcType=BIGINT}
   </select>

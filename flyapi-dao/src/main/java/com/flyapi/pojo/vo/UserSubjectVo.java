@@ -1,8 +1,6 @@
 package com.flyapi.pojo.vo;
 
 import com.flyapi.model.CmsArticle;
-import com.flyapi.model.CmsSubject;
-import com.flyapi.model.UcenterUser;
 
 /**
  * author: flyhero
@@ -10,7 +8,7 @@ import com.flyapi.model.UcenterUser;
  */
 public class UserSubjectVo extends ShowSubjectVo{
     private CmsArticle cmsArticle;
-    private ShowSubjectUserVo ucenterUser;
+    private ShowUserVo ucenterUser;
     private Integer rssNum;
     private boolean isRss;
 
@@ -22,11 +20,11 @@ public class UserSubjectVo extends ShowSubjectVo{
         this.cmsArticle = cmsArticle;
     }
 
-    public ShowSubjectUserVo getUcenterUser() {
+    public ShowUserVo getUcenterUser() {
         return ucenterUser;
     }
 
-    public void setUcenterUser(ShowSubjectUserVo ucenterUser) {
+    public void setUcenterUser(ShowUserVo ucenterUser) {
         this.ucenterUser = ucenterUser;
     }
 

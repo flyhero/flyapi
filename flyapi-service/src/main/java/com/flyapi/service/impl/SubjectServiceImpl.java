@@ -12,11 +12,10 @@ import com.flyapi.model.CmsSubject;
 import com.flyapi.model.UcenterUser;
 import com.flyapi.pojo.dto.AddSubjectRequest;
 import com.flyapi.pojo.dto.SubjectDto;
-import com.flyapi.pojo.vo.ShowSubjectUserVo;
+import com.flyapi.pojo.vo.ShowUserVo;
 import com.flyapi.pojo.vo.ShowSubjectVo;
 import com.flyapi.pojo.vo.SubjectVo;
 import com.flyapi.service.api.SubjectService;
-import com.flyapi.service.api.UserService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -60,10 +59,10 @@ public class SubjectServiceImpl extends BaseServiceImpl<CmsSubject,CmsSubjectMap
             subjectVo.setCmsSubject(showSubjectVo);
 
             UcenterUser user= ucenterUserMapper.selectByPrimaryKey(article.getUserId());
-            ShowSubjectUserVo showSubjectUserVo = new ShowSubjectUserVo();
-            BeanUtils.copyProperties(user,showSubjectUserVo);
-            showSubjectUserVo.setUserId(String.valueOf(user.getUserId()));
-            subjectVo.setUcenterUser(showSubjectUserVo);
+            ShowUserVo showUserVo = new ShowUserVo();
+            BeanUtils.copyProperties(user, showUserVo);
+            showUserVo.setUserId(String.valueOf(user.getUserId()));
+            subjectVo.setUcenterUser(showUserVo);
 
 
             CmsRss cmsRss =new CmsRss();

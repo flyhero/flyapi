@@ -2,6 +2,7 @@ package com.flyapi.dao;
 
 import com.flyapi.model.CmsComment;
 import com.flyapi.pojo.vo.CommentVo;
+import com.flyapi.pojo.vo.ShowCommentVo;
 
 import java.util.List;
 
@@ -20,7 +21,7 @@ public interface CmsCommentMapper {
 
     int updateByPrimaryKey(CmsComment record);
 
-    List<CmsComment> findCommentById(long targetId);
+    List<ShowCommentVo> findCommentById(long targetId);
 
     List<CommentVo> findCommentByAuthorId(Long authorId);
 

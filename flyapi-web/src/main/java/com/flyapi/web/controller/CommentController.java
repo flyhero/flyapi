@@ -5,6 +5,7 @@ import com.flyapi.core.constant.JSONResult;
 import com.flyapi.model.CmsComment;
 import com.flyapi.model.UcenterUser;
 import com.flyapi.pojo.dto.CommentDto;
+import com.flyapi.pojo.vo.ShowCommentVo;
 import com.flyapi.service.api.CommentService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -35,11 +36,11 @@ public class CommentController extends BaseController{
     @GetMapping("comment/{articleId}")
     public JSONResult findCommentList(int pageNum, int pageSize, @PathVariable long articleId){
 
-        PageInfo<CmsComment> pageInfo = null;
+        PageInfo<ShowCommentVo> pageInfo = null;
         PageHelper.startPage(pageNum, pageSize);
         try{
-            List<CmsComment> list = commentService.findCommentById(articleId);
-            pageInfo = new PageInfo<CmsComment>(list);
+            List<ShowCommentVo> list = commentService.findCommentById(articleId);
+            pageInfo = new PageInfo<ShowCommentVo>(list);
         }catch (Exception ex){
             return JSONResult.error();
         }
