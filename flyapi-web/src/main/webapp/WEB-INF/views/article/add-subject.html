@@ -55,7 +55,7 @@
           <div class="layui-form-item" pane>
             <label class="layui-form-label">封面</label>
             <div class="layui-input-block">
-              <a class="layui-btn layui-btn-primary layui-btn-radius" onclick="">自动生成</a>
+              <a class="layui-btn layui-btn-primary layui-btn-radius" href="javascript:void(0)" onclick="createCover()">自动生成</a>
               <a class="layui-btn layui-btn-primary layui-btn-radius" id="upload-btn">上传</a>
             </div>
           </div>
@@ -90,11 +90,13 @@
 </div>
 
 <script>
-  function createImg() {
+  function createCover() {
     var title = $("#subjectTitle").val();
-      $.getJSON("../image", {"subjectTitle":title}, function (result) {
-
-      });
+      $.getJSON("../img/cover", {"subjectTitle":title}, function (result) {
+          layer.msg(result.msg);
+          $(".flyapi-upload-img").attr("src",result.data);
+          $("#cover").val(result.data);
+      },"json");
   }
 
     layui.use(['form','upload'], function(){

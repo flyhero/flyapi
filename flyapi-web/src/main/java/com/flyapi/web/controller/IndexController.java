@@ -1,6 +1,7 @@
 package com.flyapi.web.controller;
 
 import com.flyapi.core.base.BaseController;
+import com.flyapi.core.constant.Constant;
 import com.flyapi.core.constant.JSONResult;
 import com.flyapi.core.enums.ImagePath;
 import com.flyapi.core.util.ImageUtil;
@@ -20,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.File;
@@ -88,11 +90,13 @@ public class IndexController extends BaseController{
      * @return com.flyapi.core.constant.JSONResult
      * @date 2018/3/10 下午11:40
      */
-    @GetMapping("image")
+    @GetMapping("img/cover")
+    @ResponseBody
     public JSONResult createImg(String subjectTitle){
         UcenterUser user = (UcenterUser)currentUser();
-        String pathName = "/flyapi/cover/"+System.currentTimeMillis()+ RandomUtil.randomNumStr(5)+".png";
+        String realPath = "/"+user.getUserId()+"/cover/"+System.currentTimeMillis()+ RandomUtil.randomNumStr(5)+".png";
+        String pathName = "/flyapi"+realPath;
         ImageUtil.createImage(subjectTitle,user.getNickName(),new File(ImagePath.randomPath()),new File(pathName));
-        return JSONResult.ok();
+        return JSONResult.ok(Constant.FILE_BASE_PATH+realPath);
     }
 }
