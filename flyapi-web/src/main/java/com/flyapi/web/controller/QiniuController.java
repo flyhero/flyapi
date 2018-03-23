@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.baidu.unbiz.fluentvalidator.FluentValidator;
 import com.flyapi.core.base.BaseController;
 import com.flyapi.core.constant.JSONResult;
+import com.flyapi.core.enums.PathEnum;
 import com.flyapi.core.exception.UploadException;
 import com.flyapi.model.SettingStore;
 import com.flyapi.model.UcenterUser;
@@ -58,7 +59,7 @@ public class QiniuController extends BaseController {
         }
         String imgUrl = null;
         try {
-            imgUrl = qiniuFileUploadService.upload(file, user.getUserId());
+            imgUrl = qiniuFileUploadService.upload(file, user.getUserId(),PathEnum.ARTICLE);
         } catch (Exception e) {
 
             return JSONResult.error("上传失败", 401, "");
@@ -74,7 +75,7 @@ public class QiniuController extends BaseController {
         }
         String imgUrl = null;
         try {
-            imgUrl = qiniuFileUploadService.upload(file, user.getUserId());
+            imgUrl = qiniuFileUploadService.upload(file, user.getUserId(), PathEnum.ARTICLE);
         } catch (Exception e) {
             return JSONResult.error("上传失败", 401, "");
         }
@@ -88,7 +89,7 @@ public class QiniuController extends BaseController {
      * @date 2018/3/4 上午11:58
      */
     @PostMapping("local/upload")
-    public JSONResult localUpload(@RequestParam(value = "file", required = true) CommonsMultipartFile file) {
+    public JSONResult localUpload(@RequestParam(value = "file", required = true) CommonsMultipartFile file,int type) {
 
         UcenterUser user = (UcenterUser) currentUser();
         if (user == null) {
@@ -96,7 +97,13 @@ public class QiniuController extends BaseController {
         }
         String imgUrl = null;
         try {
-            imgUrl = localFileUploadService.upload(file, user.getUserId());
+            if(type != 0 && type == PathEnum.HEADER.getType()){
+                imgUrl = localFileUploadService.upload(file, user.getUserId(),PathEnum.HEADER);
+            }
+            if(type != 0 && type == PathEnum.COVER.getType()){
+                imgUrl = localFileUploadService.upload(file, user.getUserId(),PathEnum.COVER);
+            }
+
         } catch (Exception e) {
             return JSONResult.error("上传失败", 401, "");
         }

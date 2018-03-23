@@ -1,5 +1,7 @@
 package com.flyapi.service.impl.file;
 
+import com.flyapi.core.constant.Constant;
+import com.flyapi.core.enums.PathEnum;
 import com.flyapi.service.api.file.FileUploadService;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,10 +17,11 @@ import java.util.Date;
  */
 @Service
 public class LocalFileUploadServiceImpl implements FileUploadService{
-    @Override
-    public String upload(MultipartFile file,Long userId) {
 
-        String folderPath = "/flyapi/"+userId+File.separator;
+    @Override
+    public String upload(MultipartFile file,Long userId, PathEnum pathEnum) {
+
+        String folderPath = "/flyapi"+File.separator+userId+File.separator+pathEnum.getPath()+File.separator;
         File folder = new File(folderPath);
         if(!folder.exists()){
             folder.mkdirs();
@@ -38,6 +41,6 @@ public class LocalFileUploadServiceImpl implements FileUploadService{
             System.out.println(e.toString());
             e.printStackTrace();
         }
-        return "http://www.iflyapi.cn/img"+path;
+        return Constant.FILE_BASE_PATH+path;
     }
 }

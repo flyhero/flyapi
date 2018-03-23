@@ -440,6 +440,6 @@ public class ImageUtil {
 	public static void main(String[] args) {
 //		pressText("主题标题",new File("/Users/qfwang/Desktop/t.png"),new File("/Users/qfwang/Desktop/t1.png"),"宋体",1,Color.PINK,50,0,0,0.4f);
 //		pressImage(new File("/Users/qfwang/Desktop/jinshi.png"),new File("/Users/qfwang/Desktop/t.png"),new File("/Users/qfwang/Desktop/t2.png"),0,0,1.0f);
-		createImage("Spring aop详解","flyapi",new File("/Users/qfwang/Desktop/flyapi用途/jinshi.png"),new File("/Users/qfwang/Desktop/test.png"));
+		createImage("Springaop详解","flyapi",new File("/Users/qfwang/Desktop/flyapi用途/jinshi.png"),new File("/flyapi/cover/test.png"));
 	}
 }

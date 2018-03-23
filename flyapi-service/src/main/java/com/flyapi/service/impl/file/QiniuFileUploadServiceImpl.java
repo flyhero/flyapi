@@ -1,6 +1,7 @@
 package com.flyapi.service.impl.file;
 
 import com.alibaba.fastjson.JSON;
+import com.flyapi.core.enums.PathEnum;
 import com.flyapi.core.exception.UploadException;
 import com.flyapi.dao.SettingStoreMapper;
 import com.flyapi.model.SettingStore;
@@ -31,7 +32,7 @@ public class QiniuFileUploadServiceImpl implements FileUploadService{
     private SettingStoreMapper settingStoreMapper;
 
     @Override
-    public String upload(MultipartFile file,Long userId) {
+    public String upload(MultipartFile file,Long userId, PathEnum pathEnum) {
 
         String accessKey = "";
         String secretKey = "";

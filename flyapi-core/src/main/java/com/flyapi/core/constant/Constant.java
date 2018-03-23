@@ -47,4 +47,6 @@ public class Constant {
      */
     public static final String STATUS_RUNNING = "1";
     public static final String STATUS_NOT_RUNNING = "0";
+
+    public static final String FILE_BASE_PATH = "http://file.iflyapi.cn";
 }
