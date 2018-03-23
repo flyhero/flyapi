@@ -5,8 +5,8 @@
   <meta charset="utf-8">
   <title>提示页面</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="keywords" content="fly,layui,前端社区">
-  <meta name="description" content="Fly社区是模块化前端UI框架Layui的官网社区，致力于为web开发提供强劲动力">
+  <meta name="keywords" content="">
+  <meta name="description" content="">
   <th:block th:include="common/link::link"></th:block>
 </head>
 <body>
@@ -15,27 +15,11 @@
   <div class="fly-panel">
     <div class="fly-none">
       <h2><i class="iconfont icon-tishilian"></i></h2>
-      <p>这是一个基于 layui 的轻量级问答社区页面模版</p>
+      <p>wang</p>
     </div>
   </div>
 </div>
 
-<div class="footer">
-  <p><a href="http://fly.layui.com/">Fly社区</a> 2017 &copy; <a href="http://www.layui.com/">layui.com</a></p>
-  <p>
-    <a href="http://fly.layui.com/auth/get" target="_blank">产品授权</a>
-    <a href="http://fly.layui.com/jie/8157.html" target="_blank">获取Fly社区模版</a>
-    <a href="http://fly.layui.com/jie/2461.html" target="_blank">微信公众号</a>
-  </p>
-</div>
-<script>
-layui.config({
-  version: "2.0.0"
-  ,base: '../res/mods/'
-}).extend({
-  fly: 'index'
-}).use('fly');
-</script>
-
+<th:block th:replace="common/footer::footer"></th:block>
 </body>
 </html>

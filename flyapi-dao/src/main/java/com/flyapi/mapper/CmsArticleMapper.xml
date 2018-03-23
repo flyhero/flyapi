@@ -279,7 +279,7 @@
             SELECT
                 article_id
             FROM
-                cms_homepage_apply
+                cms_apply
             WHERE
                 apply_status = 1
             AND is_delete = 0

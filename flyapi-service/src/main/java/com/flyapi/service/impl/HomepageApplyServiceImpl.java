@@ -17,6 +17,7 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +40,8 @@ public class HomepageApplyServiceImpl extends BaseServiceImpl<CmsApply, CmsApply
     public CmsApply findByArticleId(Long articleId) {
         CmsApplyExample example = new CmsApplyExample();
         example.createCriteria().andArticleIdEqualTo(articleId).andIsDeleteEqualTo((byte) 0);
-        return cmsApplyMapper.selectByExample(example).get(0);
+        List<CmsApply> applyList = cmsApplyMapper.selectByExample(example);
+        return CollectionUtils.isEmpty(applyList) ? null : applyList.get(0);
     }
 
     @Override

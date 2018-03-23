@@ -65,7 +65,7 @@
               <div class="layui-upload">
                 <div class="layui-upload-list">
                   <input type="hidden" id="cover" name="cover" th:value="${subject} ? ${subject.cover} : ''" lay-verify="required|cover">
-                  <img class="flyapi-upload-img" src="../../../static/images/default/cover-default.png"  th:src="${subject} ? ${subject.cover} : '../../../static/images/default/cover-default.png'">
+                  <img class="flyapi-upload-img" src="../../static/images/default/cover-default.png"  th:src="${subject} ? ${subject.cover} : '../../static/images/default/cover-default.png'">
                   <a>建议尺寸：1 : 1.4</a>
                 </div>
               </div>
