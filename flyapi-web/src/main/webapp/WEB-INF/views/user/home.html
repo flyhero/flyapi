@@ -167,33 +167,31 @@
                 <div class="fly-panel">
                     <h3 class="fly-panel-title">开源项目</h3>
                     <ul class="jie-row">
-                        <th:block th:if="${not #lists.isEmpty(sourceList)}">
-                            <th:block th:each="os,index:${sourceList}">
-                                <li>
-                                    <a href="#" class="jie-title" th:text="${os.account}">spring-cloud-microservice</a>
-                                    <em>
-                                        <iframe style="margin-left: 1px; margin-bottom:-5px;"
-                                                frameborder="0" scrolling="0" width="80px" height="20px"
-                                                th:src="@{'https://ghbtns.com/github-btn.html?user=' + ${os.osName} + '&repo='+ ${os.account}+'&type=star&count=true'}"
-                                                src="https://ghbtns.com/github-btn.html?user=flyhero&repo=spring-cloud-microservice&type=star&count=true">
-                                        </iframe>
-                                        <iframe style="margin-left: 1px; margin-bottom:-5px;"
-                                                frameborder="0" scrolling="0" width="80px" height="20px"
-                                                th:src="@{'https://ghbtns.com/github-btn.html?user=' + ${os.osName} + '&repo='+ ${os.account}+'&type=fork&count=true'}"
-                                                src="https://ghbtns.com/github-btn.html?user=flyhero&repo=spring-cloud-microservice&type=fork&count=true">
-                                        </iframe>
-                                    </em>
-                                </li>
-                            </th:block>
+                        <th:block th:each="os,index:${sourceList}">
+                            <li>
+                                <a href="#" class="jie-title" th:text="${os.account}">spring-cloud-microservice</a>
+                                <em>
+                                    <iframe style="margin-left: 1px; margin-bottom:-5px;"
+                                            frameborder="0" scrolling="0" width="80px" height="20px"
+                                            th:src="@{'https://ghbtns.com/github-btn.html?user=' + ${os.osName} + '&repo='+ ${os.account}+'&type=star&count=true'}"
+                                            src="https://ghbtns.com/github-btn.html?user=flyhero&repo=spring-cloud-microservice&type=star&count=true">
+                                    </iframe>
+                                    <iframe style="margin-left: 1px; margin-bottom:-5px;"
+                                            frameborder="0" scrolling="0" width="80px" height="20px"
+                                            th:src="@{'https://ghbtns.com/github-btn.html?user=' + ${os.osName} + '&repo='+ ${os.account}+'&type=fork&count=true'}"
+                                            src="https://ghbtns.com/github-btn.html?user=flyhero&repo=spring-cloud-microservice&type=fork&count=true">
+                                    </iframe>
+                                </em>
+                            </li>
                         </th:block>
                     </ul>
                 </div>
             </th:block>
-            <div class="fly-panel fly-list-one">
-                <h3 class="fly-panel-title">热门阅读</h3>
-                <dl>
+            <th:block th:if="${not #lists.isEmpty(hotArticleList)}">
+                <div class="fly-panel fly-list-one">
+                    <h3 class="fly-panel-title">热门阅读</h3>
+                    <dl>
 
-                    <th:block th:if="${not #lists.isEmpty(hotArticleList)}">
                         <th:block th:each="hot,index:${hotArticleList}">
                             <dd>
                                 <a href="#" th:href="@{${rootPath} + '/article/detail/'+${hot.articleId}}"
@@ -201,13 +199,13 @@
                                 <span><i class="fa fa-eye fa-fw"></i><span th:text="${hot.viewNum}"></span></span>
                             </dd>
                         </th:block>
-                    </th:block>
-                </dl>
-            </div>
-            <div class="fly-panel fly-list-one">
-                <h3 class="fly-panel-title">最新文章</h3>
-                <dl>
-                    <th:block th:if="${not #lists.isEmpty(lastArticleList)}">
+                    </dl>
+                </div>
+            </th:block>
+            <th:block th:if="${not #lists.isEmpty(lastArticleList)}">
+                <div class="fly-panel fly-list-one">
+                    <h3 class="fly-panel-title">最新文章</h3>
+                    <dl>
                         <th:block th:each="last,index:${lastArticleList}">
                             <dd>
                                 <a href="/#" th:href="@{${rootPath} + '/article/detail/'+${last.articleId}}"
@@ -216,9 +214,9 @@
                                         th:text="${#dates.format(last.createTime, 'hh:mm')}"></span></span>
                             </dd>
                         </th:block>
-                    </th:block>
-                </dl>
-            </div>
+                    </dl>
+                </div>
+            </th:block>
             <div class="fly-panel fly-link">
                 <h3 class="fly-panel-title">注册与浏览</h3>
                 <dl>
@@ -241,6 +239,12 @@
 <script th:inline="javascript">
     var actives = [[${activeVos}]];
     var levelVos = [[${levelVos}]];
+    if(levelVos.length == 0){
+        levelVos =[
+            {value:0, name:'1k-'}
+        ]
+    }
+
     var bing = echarts.init(document.getElementById('bing'));
     var chart = echarts.init(document.getElementById('echart'));
 
@@ -449,8 +453,7 @@
 
     layui.use('flow', function () {
         var flow = layui.flow;
-        var pageCount;
-        var rootPath = [[${rootPath}]];
+        var pageCount = 0;
         flow.load({
             elem: '#ebook-list', //流加载容器
             scrollElem: '#ebook-list', //滚动条所在元素，一般不用填，此处只是演示需要。
@@ -470,50 +473,55 @@
                             "pageSize": 6
                         },
                         success: function (result) {
-                            pageCount = result.data.pages;
-                            $.each(result.data, function (index, simple) {
-                                var viewNum = simple.cmsArticle == null ? 0 : simple.cmsArticle.viewNum;
-                                var commentNum = simple.cmsArticle == null ? 0 : simple.cmsArticle.commentNum;
-                                var likeNum = simple.cmsArticle == null ? 0 : simple.cmsArticle.likeNum;
-                                var authorId = simple.ucenterUser.userId + '';
-                                var sub = "订阅本书";
-                                var rssHost = "";
-                                if (simple.rss) {
-                                    sub = "已订阅";
-                                } else {
-                                    rssHost = "'" + host + "/subject/rss/" + simple.subjectId + "'";
-                                }
-                                lis.push(' <li class="archive-item" style="display: block;height: 145px; border-bottom: 1px solid #eff2f5">\n' +
-                                    '                        <a href="#" title="标题">\n' +
-                                    '                            <div class="covercon">\n' +
-                                    '                                <img src="' + simple.cover + '" class="cover imgloadinglater" style="display: block;">\n' +
-                                    '                            </div>\n' +
-                                    '                        </a>\n' +
-                                    '                        <div class="archive-text">\n' +
-                                    '                            <div class="archive-detail">\n' +
-                                    '                                <h3><a href="../article/list/' + simple.subjectId + '/' + simple.subjectTitle + '" title="文章标题">' + simple.subjectTitle + '</a></h3>\n' +
-                                    '                                <p>' + simple.subjectDes + '</p>\n' +
-                                    '                                <div class="archive-info clearfix"\n' +
-                                    '                                     style="margin-top: 10px; overflow: hidden;white-space: nowrap; display: flex">\n' +
-                                    '                                    <ul style="padding: 0;">\n' +
-                                    '                                        <li class="list-user">\n' +
-                                    '                                            <a href="' + host + '/user/' + authorId + '" target="_blank">\n' +
-                                    '                                                <img src="' + simple.ucenterUser.avatar + '">\n' +
-                                    '                                                <span>' + simple.ucenterUser.nickName + '</span>\n' +
-                                    '                                            </a>\n' +
-                                    '                                        </li>\n' +
-                                    '                                    </ul>\n' +
-                                    '                                </div>\n' +
-                                    '                                <div class="archive-info clearfix"\n' +
-                                    '                                     style="margin-top: 10px; overflow: hidden;white-space: nowrap; display: flex">' +
-                                    '<ul style="padding: 0;"><li class="list-msg"><a href="javascript:void(0)" onclick="rssFn(' + rssHost + ',' + authorId + ');"><span class="layui-btn layui-btn-xs layui-btn-normal">' + sub + '</span></a>' +
-                                    '<span aria-hidden="true" style="margin-left: 8px;">已有' + simple.rssNum + '人订阅</span>' +
-                                    '                        <span aria-hidden="true" style="margin-left: 5px;"><i class="fa fa-eye fa-fw" title="阅读"></i>' + viewNum + '</span>' +
-                                    '                        <span aria-hidden="true"><i class="fa fa-commenting fa-fw" title="回答"></i>' + commentNum + '</span>' +
-                                    '                        <span aria-hidden="true"><i class="fa fa-thumbs-o-up fa-fw" title="人气"></i>' + likeNum + '</span></li></ul></div></div></div></li>');
+                            if (result.code == 200) {
+                                pageCount = result.data.pages;
+                                $.each(result.data, function (index, simple) {
+                                    var viewNum = simple.cmsArticle == null ? 0 : simple.cmsArticle.viewNum;
+                                    var commentNum = simple.cmsArticle == null ? 0 : simple.cmsArticle.commentNum;
+                                    var likeNum = simple.cmsArticle == null ? 0 : simple.cmsArticle.likeNum;
+                                    var authorId = simple.ucenterUser.userId + '';
+                                    var sub = "订阅本书";
+                                    var rssHost = "";
+                                    if (simple.rss) {
+                                        sub = "已订阅";
+                                    } else {
+                                        rssHost = "'" + host + "/subject/rss/" + simple.subjectId + "'";
+                                    }
+                                    lis.push(' <li class="archive-item" style="display: block;height: 145px; border-bottom: 1px solid #eff2f5">\n' +
+                                        '                        <a href="#" title="标题">\n' +
+                                        '                            <div class="covercon">\n' +
+                                        '                                <img src="' + simple.cover + '" class="cover imgloadinglater" style="display: block;">\n' +
+                                        '                            </div>\n' +
+                                        '                        </a>\n' +
+                                        '                        <div class="archive-text">\n' +
+                                        '                            <div class="archive-detail">\n' +
+                                        '                                <h3><a href="../article/list/' + simple.subjectId + '/' + simple.subjectTitle + '" title="文章标题">' + simple.subjectTitle + '</a></h3>\n' +
+                                        '                                <p>' + simple.subjectDes + '</p>\n' +
+                                        '                                <div class="archive-info clearfix"\n' +
+                                        '                                     style="margin-top: 10px; overflow: hidden;white-space: nowrap; display: flex">\n' +
+                                        '                                    <ul style="padding: 0;">\n' +
+                                        '                                        <li class="list-user">\n' +
+                                        '                                            <a href="' + host + '/user/' + authorId + '" target="_blank">\n' +
+                                        '                                                <img src="' + simple.ucenterUser.avatar + '">\n' +
+                                        '                                                <span>' + simple.ucenterUser.nickName + '</span>\n' +
+                                        '                                            </a>\n' +
+                                        '                                        </li>\n' +
+                                        '                                    </ul>\n' +
+                                        '                                </div>\n' +
+                                        '                                <div class="archive-info clearfix"\n' +
+                                        '                                     style="margin-top: 10px; overflow: hidden;white-space: nowrap; display: flex">' +
+                                        '<ul style="padding: 0;"><li class="list-msg"><a href="javascript:void(0)" onclick="rssFn(' + rssHost + ',' + authorId + ');"><span class="layui-btn layui-btn-xs layui-btn-normal">' + sub + '</span></a>' +
+                                        '<span aria-hidden="true" style="margin-left: 8px;">已有' + simple.rssNum + '人订阅</span>' +
+                                        '                        <span aria-hidden="true" style="margin-left: 5px;"><i class="fa fa-eye fa-fw" title="阅读"></i>' + viewNum + '</span>' +
+                                        '                        <span aria-hidden="true"><i class="fa fa-commenting fa-fw" title="回答"></i>' + commentNum + '</span>' +
+                                        '                        <span aria-hidden="true"><i class="fa fa-thumbs-o-up fa-fw" title="人气"></i>' + likeNum + '</span></li></ul></div></div></div></li>');
+                                    next(lis.join(''), page < pageCount);
+                                    lis = [];
+                                });
+                            }else {
                                 next(lis.join(''), page < pageCount);
-                                lis = [];
-                            });
+                            }
+
                         }
                     });
 

@@ -32,7 +32,7 @@
 
         </div>
         <div class="nav-user" th:if="${session.user} == null">
-            <a class="unlogin" href=""><i class="fa fa-user-circle-o fa-2x"></i></a>
+            <a class="unlogin"><i class="fa fa-user-circle-o fa-2x"></i></a>
             <a class="layui-btn layui-btn-primary layui-btn-radius" th:href="@{${rootPath} + '/forward/go?html=login'}">登录/注册</a>
 <!--            <span>
                 <a href="#" th:href="@{${rootPath} + '/forward/go?html=login'}" class="layui-btn layui-btn-normal layui-btn-radius" >登录/注册</a>
@@ -42,8 +42,8 @@
             <a th:href="@{${rootPath} + '/article/123456'}" class="layui-btn layui-btn-normal layui-btn-radius" style="float: left; margin-top: 12px">写文章</a>
             <a th:href="@{${rootPath} + '/subject/123456'}" class="layui-btn layui-btn-normal layui-btn-radius" style="float: left; margin-top: 12px;margin-right: 10px">出主题</a>
             <div class="user-hover" style="width: 80px;height: 65px; float: right " data-dropdown="#dropdown-standard">
-                <a class="avatar dropdown" href="">
-                    <img src="../static/images/avatar/flyhero.jpg" th:src="@{${session.user.avatar}}">
+                <a class="avatar dropdown">
+                    <img src="../static/images/avatar/flyhero.jpg" th:src="${session.user.avatar}">
                 </a>
             </div>
 
