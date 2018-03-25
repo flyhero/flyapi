@@ -103,7 +103,7 @@
     <welcome-file>index.jsp</welcome-file>
     <welcome-file>default.html</welcome-file>
     <welcome-file>default.htm</welcome-file>-->
-    <welcome-file>views/index.html</welcome-file>
+    <welcome-file>index.html</welcome-file>
   </welcome-file-list>
   <!-- 错误跳转页面 -->
 <!--  <error-page>

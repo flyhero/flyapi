@@ -9,7 +9,8 @@ public enum PathEnum {
 
     HEADER(1,"/header"),
     COVER(2,"/cover"),
-    ARTICLE(3,"/article");
+    ARTICLE(3,"/article"),
+    QRCODE(4,"/qrcode");
 
 
     private int type;

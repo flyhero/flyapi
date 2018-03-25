@@ -20,7 +20,8 @@
 	text-align: center;
 	text-decoration: none;
 	white-space: nowrap;
-	color: #f55d54;
+	/*color: #5FB878;*/
+	color: #5FB878;
 	line-height: 24px;
 	margin: 0 5px;
 	background: none;
@@ -28,8 +29,8 @@
 }
 
 .btn.btn-default {
-	color: #f55d54;
-	border: 1px solid #f55d54;
+	color: #5FB878;
+	border: 1px solid #5FB878;
 	background: white;
 	box-shadow: 0px 6px 20px 0px rgba(245, 92, 84, 0.08)
 }
@@ -41,7 +42,7 @@
 .btn.btn-primary {
 	color: white;
 	border: 1px solid transparent;
-	background: #f55d54;
+	background: #5FB878;
 	box-shadow: 0px 6px 20px 0px rgba(245, 92, 84, 0.16)
 }
 
@@ -62,7 +63,7 @@
 }
 
 .btn.btn-link.active {
-	color: #f55d54
+	color: #5FB878
 }
 
 .btn.btn-lg {
@@ -108,7 +109,7 @@
 }
 
 .form-group .form-input:focus {
-	border: 1px solid #f55d54
+	border: 1px solid #5FB878
 }
 
 .form-group.form-group-icon .form-input {
@@ -116,7 +117,7 @@
 }
 
 .form-group.form-group-icon .form-input:focus+.form-icon i.fa {
-	color: #f55d54
+	color: #5FB878
 }
 
 .form-group.form-group-icon .form-icon {
@@ -134,7 +135,7 @@
 .form-error {
 	background: rgba(245, 93, 84, 0.1);
 	border: 1px solid rgba(245, 93, 84, 0.2);
-	color: #f55d54;
+	color: #5FB878;
 	margin: 10px 0;
 	padding: 10px;
 	text-align: left
@@ -282,7 +283,7 @@
 	font-size: 20px;
 	font-weight: 500;
 	text-align: center;
-	color: #f55d54
+	color: #5FB878
 }
 
 .wechat-sign #web form #bind-info {
@@ -329,7 +330,7 @@ ul.tab li::after {
 	transform: translateX(-50%) scaleX(0);
 	bottom: calc(50% - 1em);
 	width: calc(100% - 30px);
-	border-bottom: 1px solid #f55d54;
+	border-bottom: 1px solid #5FB878;
 	-webkit-transition: all 0.2s ease-out;
 	transition: all 0.2s ease-out
 }

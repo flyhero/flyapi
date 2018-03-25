@@ -4,15 +4,18 @@ import com.flyapi.core.base.BaseController;
 import com.flyapi.core.constant.JSONResult;
 import com.flyapi.model.CmsComment;
 import com.flyapi.model.UcenterUser;
+import com.flyapi.pojo.dto.AddNoticeDto;
 import com.flyapi.pojo.dto.CommentDto;
 import com.flyapi.pojo.vo.ShowCommentVo;
 import com.flyapi.service.api.CommentService;
+import com.flyapi.service.api.SysNoticeService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -24,6 +27,8 @@ public class CommentController extends BaseController{
     @Autowired
     private CommentService commentService;
 
+    @Autowired
+    private SysNoticeService sysNoticeService;
     /**
      * 获取评论列表
      * @title: findCommentList
@@ -63,6 +68,11 @@ public class CommentController extends BaseController{
             return JSONResult.error();
         }
         int num = commentService.comment(commentDto,user.getUserId());
+    /*    AddNoticeDto addNoticeDto =new AddNoticeDto();
+        addNoticeDto.setIds(Arrays.asList(commentDto.getAuthorId()));
+        addNoticeDto.setContent(commentDto.getContent());
+        addNoticeDto.setTitle(commentDto.getContent().substring(0,15));
+        sysNoticeService.sendMsg(addNoticeDto);*/
         return num >0 ? JSONResult.ok() : JSONResult.error();
     }
 

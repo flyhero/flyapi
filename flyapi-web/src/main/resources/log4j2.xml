@@ -17,6 +17,10 @@
         </RollingFile>
     </appenders>
     <loggers>
+        <root level="INFO">
+            <appender-ref ref="Console"/>
+            <appender-ref ref="log"/>
+        </root>
         <root level="DEBUG">
             <appender-ref ref="Console"/>
             <appender-ref ref="log"/>

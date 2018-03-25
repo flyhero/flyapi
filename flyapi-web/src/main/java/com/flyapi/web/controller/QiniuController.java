@@ -103,6 +103,9 @@ public class QiniuController extends BaseController {
             if(type != 0 && type == PathEnum.COVER.getType()){
                 imgUrl = localFileUploadService.upload(file, user.getUserId(),PathEnum.COVER);
             }
+            if(type != 0 && type == PathEnum.QRCODE.getType()){
+                imgUrl = localFileUploadService.upload(file, user.getUserId(),PathEnum.QRCODE);
+            }
 
         } catch (Exception e) {
             return JSONResult.error("上传失败", 401, "");

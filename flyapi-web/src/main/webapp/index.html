@@ -7,65 +7,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="keywords" content="">
     <meta name="description" content="">
-    <th:block th:include="WEB-INF/views/common/link::link"></th:block>
+    <th:block th:include="common/link::link"></th:block>
 </head>
 
 <body>
 
 <div class="header">
-    <th:block th:include="WEB-INF/views/common/header::header"></th:block>
+    <th:block th:include="common/header::header"></th:block>
 </div>
 
 <div class="main layui-clear">
     <div class="wrap">
         <div class="content">
-            <div class="fly-tab fly-tab-index">
-						<span>
-						  <a href="javascript:void(0)" onclick="homeFn()">首页推荐</a>
-						  <a href="javascript:void(0)" onclick="topicFn()">今日段子</a>
-						</span>
-                <form action="#" class="fly-search">
-                    <i class="iconfont icon-sousuo"></i>
-                    <input class="layui-input" autocomplete="off" placeholder="搜索内容，回车跳转" type="text" name="q">
-                </form>
-                <a href="../user/go?html=article/add.html" target="_blank" class="layui-btn jie-add">发布文章</a>
-            </div>
+            <!--            <div class="fly-tab fly-tab-index">
+                                    <span>
+                                      <a href="javascript:void(0)" onclick="homeFn()">首页推荐</a>
+                                      <a href="javascript:void(0)" onclick="topicFn()">周刊</a>
+                                    </span>
+                            <form action="#" class="fly-search">
+                                <i class="iconfont icon-sousuo"></i>
+                                <input class="layui-input" autocomplete="off" placeholder="搜索内容，回车跳转" type="text" name="q">
+                            </form>
+                            <a href="" target="_blank" class="layui-btn jie-add">发布文章</a>
+                        </div>-->
 
             <div class="layui-carousel" id="carousel-index">
                 <div carousel-item=""  id="cal-list">
+                    <th:block th:if="${not #lists.isEmpty(carouselList)}">
+                        <th:block th:each="carousel,index:${carouselList}">
+                            <div><a href="#" th:href="${carousel.detailUrl}"><img src="'#" title="轮播图" th:src="${carousel.imgUrl}" th:title="${carousel.title}"/></a></div>
+                        </th:block>
+                    </th:block>
                 </div>
             </div>
             <ul class="fly-list" id="article-list">
-                <li class="note-list">
-                    <div>
-                        <div class="author">
-                            <a class="avatar" target="_blank" href="/u/c3d9abd7063b">
-                                <img src="http://www.iflyapi.cn:8080/res/images/avatar/default.png" alt="96">
-                            </a>
-                            <div class="name">
-                                <a class="blue-link" target="_blank" href="/u/c3d9abd7063b">flyhero</a>
-                                <span class="time" data-shared-at="2017-04-05T09:53:58+08:00">&nbsp;5 小时前</span>
-                            </div>
-                        </div>
-                        <h2 class="fly-tip">
-                            <a target="_blank" href="/p/eb1a0e235e49">大话设计模式之工厂模式</a>
-                        </h2>
-
-                        <p class="abstract">
-                            他不是别人 他是张国荣 14年前的今天，一颗巨星陨落。他不是别人 他是张国荣 14年前的今天，一颗巨星陨落。他不是别人 他是张国荣 14年前的今天，一颗巨星陨落。他不是别人 他是张国荣
-                            14年前的今天，一颗巨星陨落。
-                        </p>
-                        <div class="meta">
-                            <a class="collection-tag" target="_blank" href="/c/qQB2Zn">Spring源码分析和实践之详细解析</a>
-                            <a target="_blank" href="/p/eb1a0e235e49">
-                                <i class="fa fa-eye fa-fw" title="阅读"></i> 271
-                            </a>
-                            <a target="_blank" href="/p/eb1a0e235e49#comments">
-                                <i class="fa fa-commenting fa-fw" title="回答"></i> 8
-                            </a> <span><i class="fa fa-thumbs-o-up fa-fw" title="人气"></i> 106</span>
-                        </div>
-                    </div>
-                </li>
             </ul>
 
         </div>
@@ -73,92 +48,83 @@
 
     <div class="edge">
         <div class="fly-panel leifeng-rank">
-            <h3 class="fly-panel-title">今日名人榜- TOP 12</h3>
+            <h3 class="fly-panel-title">今日名人榜- TOP 8</h3>
             <dl>
-                <dd>
-                    <a href="user/home.html">
-                        <img src="../res/images/avatar/default.png">
-                        <cite>纸飞机</cite>
-                        <i>159次回答</i>
-                    </a>
-                </dd>
-                <dd>
-                    <a href="user/home.html">
-                        <img src="../res/images/avatar/default.png">
-                        <cite>纸飞机</cite>
-                        <i>159次回答</i>
-                    </a>
-                </dd>
-
+                <th:block th:if="${not #lists.isEmpty(topList)}">
+                    <th:block th:each="top,index:${topList}">
+                        <dd>
+                            <a href="#" th:href="@{${rootPath} + '/user/'+${top.userId}}">
+                                <img src="" th:src="${top.avatar}">
+                                <cite th:text="${top.nickName}"></cite>
+                                <i th:text="'NO.'+${index.index+1}">NO.1</i>
+                            </a>
+                        </dd>
+                    </th:block>
+                </th:block>
 
             </dl>
         </div>
 
         <dl class="fly-panel fly-list-one" id="hot-article">
             <dt class="fly-panel-title">今日热门</dt>
-            <dd>
-                <a href="jie/detail.html">使用 layui 秒搭后台大布局（基本结构）</a>
-                <span><i class="fa fa-eye fa-fw"></i> 6087</span>
-            </dd>
+            <th:block th:if="${not #lists.isEmpty(hotList)}">
+                <th:block th:each="hot,index:${hotList}">
+                    <dd>
+                        <span class="fly-badge" th:class="'fly-badge fly-badge-'+${index.index}" th:text="${index.index+1}"></span>
+                        <a href="#" th:href="@{${rootPath} + '/article/detail/'+${hot.articleId}}" th:text="${hot.title}">标题</a>
+                        <span><i class="fa fa-eye fa-fw"></i>120</span>
+                    </dd>
+                </th:block>
+            </th:block>
         </dl>
 
         <dl class="fly-panel fly-list-one" id="last-update">
             <dt class="fly-panel-title">最近更新</dt>
-            <dd>
-                <a href="jie/detail.html">使用 layui 秒搭后台大布局之基本结构</a>
-            </dd>
+            <th:block th:if="${not #lists.isEmpty(updateList)}">
+                <th:block th:each="update,index:${updateList}">
+                    <dd>
+                        <a href="/#" th:href="@{${rootPath} + '/article/detail/'+${update.articleId}}" th:text="${update.title}">标题</a>
+                        <span><i class="fa fa-clock-o fa-fw"></i> <span th:text="${#dates.format(update.createTime, 'hh:mm')}"></span></span>
+                    </dd>
+                    </dd>
+                </th:block>
+            </th:block>
         </dl>
-
-        <div class="fly-panel fly-link">
-            <h3 class="fly-panel-title">友情链接</h3>
-            <dl>
-                <dd>
-                    <a href="#" target="_blank">fly****</a>
-                </dd>
-            </dl>
-        </div>
 
     </div>
 </div>
-
-<th:block th:replace="WEB-INF/views/common/footer::footer"></th:block>
-
-<script src="../static/layui/layui.js" th:src="@{${rootPath} + '/static/layui/layui.js'}"></script>
-<script src="../../static/js/date-util.js" th:src="@{${rootPath} + '/static/js/date-util.js'}"></script>
-
-
+<th:block th:replace="common/footer::footer"></th:block>
 <script>
 
     $("a").removeClass("nav-this");
     $("#home").addClass("nav-this")
 
-    $.getJSON("../setting/carousel", {}, function (result) {
-        $.each(result.data, function (index, carousel) {
-            $("#cal-list").append('<div><a href="index.html" ><img src="'+carousel.imgUrl+'" title="'+carousel.title+'"/></a></div>');
-        });
-    });
-    $.ajax({
-        type: 'POST',
-        url: "../article/findLastUpdateOrHotArticles",
-        dataType: "json",
-        data: {"type": 1},
-        success: function (result) {
-            $.each(result.data, function (index, last) {
-                $("#last-update").append('<dd><a href="/article/detail.html/' + last.articleId + '">' + last.title + '</a><span><i class="fa fa-clock-o fa-fw"></i> ' + timeAgo(getMyDate(last.createTime)) + '</span></dd>');
+    /*    $.getJSON("../setting/carousel", {}, function (result) {
+            $.each(result.data, function (index, carousel) {
+                $("#cal-list").append('<div><a href="index.html" ><img src="'+carousel.imgUrl+'" title="'+carousel.title+'"/></a></div>');
             });
-        }
-    });
-    $.getJSON("../article/findLastUpdateOrHotArticles", {"type": 2}, function (result) {
-        $.each(result.data, function (index, hot) {
-            $("#hot-article").append('<dd><a href="/article/detail.html/' + hot.articleId + '">' + hot.title + '</a><span><i class="fa fa-eye fa-fw"></i> ' + hot.viewNum + '</span></dd>');
+        });*/
+    /*    $.ajax({
+            type: 'POST',
+            url: "../article/findLastUpdateOrHotArticles",
+            dataType: "json",
+            data: {"type": 1},
+            success: function (result) {
+                $.each(result.data, function (index, last) {
+                    $("#last-update").append('<dd><a href="/article/detail.html/' + last.articleId + '">' + last.title + '</a><span><i class="fa fa-clock-o fa-fw"></i> ' + timeAgo(getMyDate(last.createTime)) + '</span></dd>');
+                });
+            }
         });
-    });
+        $.getJSON("../article/findLastUpdateOrHotArticles", {"type": 2}, function (result) {
+            $.each(result.data, function (index, hot) {
+                $("#hot-article").append('<dd><span class="fly-badge fly-badge-'+index+'">'+index+'</span><a href="/article/detail.html/' + hot.articleId + '">' + hot.title + '</a><span><i class="fa fa-eye fa-fw"></i> ' + hot.viewNum + '</span></dd>');
+            });
+        });*/
 
 </script>
 <script th:inline="javascript">
 
     function likeFn() {
-        getData(1,0,0);
         $("a").removeClass("tab-this")
         $("#like").addClass("tab-this");
     };
@@ -179,7 +145,7 @@
                     var lis = [];
                     $.ajax({
                         type: 'POST',
-                        url: "../article/findArticleList",
+                        url: rootPath+"article/findArticleList",
                         dataType: "json",
                         data: {
                             "pageNum": page,
@@ -188,21 +154,25 @@
                         success: function (result) {
                             pageCount = result.data.pages;
                             $.each(result.data.list, function (index, simple) {
-                                lis.push('<li class="note-list">' +
-                                    '<a class="des-img" href="#" target="_blank">' +
-                                    '<img src="' + simple.cover + '" alt="300">' +
-                                    '</a>' +
+                                var cover = '<a class="des-img">' +
+                                    '<img src="' + simple.cover + '">' +
+                                    '</a>';
+                                if(simple.cover == null || simple.cover == ''){
+                                    cover = '';
+                                }
+
+                                lis.push('<li class="note-list">' +cover +
                                     '<div><div class="author">' +
-                                    '<a class="avatar" target="_blank" href="#">' +
-                                    '<img src="'+rootPath+simple.avatar+'">' +
+                                    '<a class="avatar" target="_blank" href="user/'+simple.userId+'">' +
+                                    '<img src="'+simple.avatar+'">' +
                                     '</a><div class="name">' +
                                     '<a class="blue-link" target="_blank" href="#">' + simple.nickName + '</a>' +
                                     '<span class="time" data-shared-at="2017-04-05T09:53:58+08:00">&nbsp;&nbsp;&nbsp;' + timeAgo(getMyDate(simple.createTime)) + '</span></div></div>' +
-                                    '<h2 class="fly-tip"><a target="_blank" href="../article/detail/' + simple.articleId + '">' + simple.title + '</a></h2>' +
+                                    '<h2 class="fly-tip"><a target="_blank" href="article/detail/' + simple.articleId + '">' + simple.title + '</a></h2>' +
                                     '<p class="abstract">' + simple.articleDes + '</p>' +
-                                    '<div class="meta"><a class="collection-tag" target="_blank" href="/c/qQB2Zn">' + simple.subjectTitle + '</a>' +
-                                    '<span><i class="fa fa-eye fa-fw" title="阅读"></i> ' + simple.viewNum + '</span>' +
-                                    '<a target="_blank" href="#"><i class="fa fa-commenting fa-fw" title="回答"></i>' + simple.commentNum + '</a> ' +
+                                    '<div class="meta"><a class="collection-tag" target="_blank" href="/article/list/'+simple.subjectId+'/'+simple.subjectTitle+'">' + simple.subjectTitle + '</a>' +
+                                    '&nbsp;<span><i class="fa fa-eye fa-fw" title="阅读"></i> ' + simple.viewNum + '</span>&nbsp;' +
+                                    '<span><i class="fa fa-commenting fa-fw" title="回答"></i>' + simple.commentNum + '</span>&nbsp; ' +
                                     '<span><i class="fa fa-thumbs-o-up fa-fw" title="人气"></i> ' + simple.likeNum + '</span></div></div></li>');
                                 //alert("qian"+lis)
                                 next(lis.join(''), page < pageCount);
@@ -226,7 +196,27 @@
             arrow: 'always' //始终显示箭头
             //,anim: 'updown' //切换动画方式
         });
+    });
 
+    layui.use(['util', 'element', 'layer','form','laytpl','laypage'], function(){
+        var $ = layui.jquery;
+        var layer = layui.layer;
+        var util = layui.util;
+        var laytpl = layui.laytpl;
+        var form = layui.form;  //表单的依赖
+        var laypage = layui.laypage;//分页的依赖
+        var element = layui.element;//Tab的切换功能，切换事件监听等，需要依赖element模块
+
+        //右下角bar top
+        util.fixbar({
+            bar1: true,
+            click: function(type){
+                console.log(type);
+                if(type === 'bar1'){
+//                    alert('点击了bar1')
+                }
+            }
+        });
     });
 </script>
 </body>

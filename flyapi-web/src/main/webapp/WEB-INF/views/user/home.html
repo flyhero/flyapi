@@ -102,11 +102,14 @@
                         <i class="fa fa-diamond fa-fw"></i>
                         <span th:text="${fame.fameName}">wwdas</span>
                     </li>
-                    <li>
-                        <i class="fa fa-map-marker fa-fw"></i>
-                        <span th:text="${setInfo.city}">wwdas</span>
-                    </li>
-                    <th:block th:unless="${#strings.isEmpty(setInfo.company)}">
+                    <th:block th:if="${not #strings.isEmpty(setInfo.city)}">
+                        <li>
+                            <i class="fa fa-map-marker fa-fw"></i>
+                            <span th:text="${setInfo.city}">上海</span>
+                        </li>
+                    </th:block>
+
+                    <th:block th:if="${not #strings.isEmpty(setInfo.company)}">
                         <li>
                             <i class="fa fa-building fa-fw"></i>
                             <span th:text="${setInfo.company}">wwdas</span>
