@@ -35,10 +35,10 @@
     from cms_collect_article
     where user_id = #{userId,jdbcType=BIGINT} and is_delete = 0
   </select>
-  <select id="findIsCollectionByArticleId" parameterType="java.lang.Long" resultType="int">
+  <select id="findIsCollectionByArticleId" parameterType="com.flyapi.model.CmsCollectArticle" resultType="int">
     select COUNT(*)
     from cms_collect_article
-    where article_id = #{articleId,jdbcType=BIGINT} and is_delete = 0
+    where article_id = #{articleId,jdbcType=BIGINT} and user_id = #{userId} and is_delete = 0
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from cms_collect_article

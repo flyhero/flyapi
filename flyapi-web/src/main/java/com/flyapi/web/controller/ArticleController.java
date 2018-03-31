@@ -11,10 +11,10 @@ import com.flyapi.core.validator.StringValidator;
 import com.flyapi.model.*;
 import com.flyapi.pojo.dto.AddArticleRequest;
 import com.flyapi.pojo.vo.ArticleCollectVo;
-import com.flyapi.pojo.vo.ShowCommentVo;
-import com.flyapi.service.api.*;
 import com.flyapi.pojo.vo.ArticleDetailVo;
 import com.flyapi.pojo.vo.ArticleSimpleVo;
+import com.flyapi.pojo.vo.ShowCommentVo;
+import com.flyapi.service.api.*;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.apache.logging.log4j.LogManager;
@@ -22,7 +22,6 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -72,6 +71,7 @@ public class ArticleController extends BaseController {
     public ModelAndView findArticleDetail(@PathVariable("articleId") Long articleId) {
 
         boolean isLike = false;
+        int isCollection = 0;
         if (isLogin()) {
             UcenterUser user = (UcenterUser) currentUser();
             userFameService.addFameValue(user.getUserId(), 4);
@@ -80,6 +80,7 @@ public class ArticleController extends BaseController {
             requestLike.setTargetId(articleId);
             requestLike.setTargetType((byte)1);
             CmsLike like = likeService.findByUserIdAndTargetId(requestLike);
+            isCollection = collectArticleService.findIsCollectionByArticleId(articleId,user.getUserId());
             if(like != null && like.getIsDelete() == 0){
                 isLike = true;
             }
@@ -88,7 +89,7 @@ public class ArticleController extends BaseController {
         ArticleDetailVo detailVo = articleService.findArticleDetail(articleId);
         List<ShowCommentVo> commentList = commentService.findCommentById(articleId);
         UcenterFame fame =fameService.findByFameValue(detailVo.getUser().getFameValue());
-        int isCollection = collectArticleService.findIsCollectionByArticleId(articleId);
+
         mv.addObject("detailVo", detailVo);
         mv.addObject("commentList", commentList);
         mv.addObject("isLike", isLike);

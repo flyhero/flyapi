@@ -36,7 +36,10 @@ public class CllectArticleServiceImpl extends BaseServiceImpl<CmsCollectArticle,
     }
 
     @Override
-    public int findIsCollectionByArticleId(Long articleId) {
-        return cmsCollectArticleMapper.findIsCollectionByArticleId(articleId);
+    public int findIsCollectionByArticleId(Long articleId, Long userId) {
+        CmsCollectArticle cmsCollectArticle = new CmsCollectArticle();
+        cmsCollectArticle.setArticleId(articleId);
+        cmsCollectArticle.setUserId(userId);
+        return cmsCollectArticleMapper.findIsCollectionByArticleId(cmsCollectArticle);
     }
 }

@@ -20,7 +20,7 @@ public interface CmsCollectArticleMapper {
 
     List<ArticleCollectVo> findArticleByUserId(Long userId);
 
-    int findIsCollectionByArticleId(Long articleId);
+    int findIsCollectionByArticleId(CmsCollectArticle cmsCollectArticle);
 
     int findCollectionCount(Long userId);
- }
+}
