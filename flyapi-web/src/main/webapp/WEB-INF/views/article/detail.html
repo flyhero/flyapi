@@ -263,8 +263,13 @@
     var gather = {}, dom = {
         content: $('#L_content')
     };
-    
+    var user = [[${session.user}]];
     function replyFn(nickName,commentId) {
+        if (user == null || user == "") {
+            layer.msg("请登录");
+            return false;
+        }
+
         dom.content.focus();
         var val = dom.content.val();
         var aite = '@'+nickName;
@@ -299,8 +304,10 @@
         var element = layui.element;//Tab的切换功能，切换事件监听等，需要依赖element模块
 
         form.on('submit(pub-comment)', function (data) {
-            alert(JSON.stringify(data.field));
-            console.log(data.field.content);
+            if (user == null || user == "") {
+                layer.msg("请登录");
+                return false;
+            }
             var val =  data.field.content;
             if (val.indexOf('@') !== -1){
                 //nothing
@@ -321,7 +328,7 @@
             click: function (type) {
                 console.log(type);
                 if (type === 'bar1') {
-                    alert('点击了bar1')
+
                 }
             }
         })

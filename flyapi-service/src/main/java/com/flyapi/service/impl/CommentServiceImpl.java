@@ -5,6 +5,7 @@ import com.flyapi.core.id.SnowflakeIdWorker;
 import com.flyapi.dao.CmsArticleMapper;
 import com.flyapi.dao.CmsCommentMapper;
 import com.flyapi.dao.CmsReplyMapper;
+import com.flyapi.dao.UcenterUserMapper;
 import com.flyapi.model.CmsArticle;
 import com.flyapi.model.CmsComment;
 import com.flyapi.model.CmsReply;
@@ -33,6 +34,8 @@ public class CommentServiceImpl extends BaseServiceImpl<CmsComment,CmsCommentMap
     @Autowired
     private CmsReplyMapper cmsReplyMapper;
     @Autowired
+    private CmsArticleMapper cmsArticleMapper;
+    @Autowired
     private SnowflakeIdWorker idWorker;
 
 
@@ -57,6 +60,13 @@ public class CommentServiceImpl extends BaseServiceImpl<CmsComment,CmsCommentMap
             cmsComment.setContent(commentDto.getContent());
             cmsComment.setCreateTime(new Date());
             num = cmsCommentMapper.insertSelective(cmsComment);
+            if(num > 0){
+                CmsArticle cmsArticle = new CmsArticle();
+                cmsArticle.setArticleId(commentDto.getArticleId());
+                cmsArticle.setCommentNum(1);
+                cmsArticleMapper.updateCommentNumOrLikeNumOrViewNum(cmsArticle);
+            }
+
         }else {
             CmsReply reply = new CmsReply();
             reply.setReplyId(idWorker.nextId());
