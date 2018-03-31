@@ -2,9 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
-    <title>文章详细</title>
+    <title th:title="${detailVo.article.title}">文章详细</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="keywords" content="">
+    <meta name="keywords" content="" th:content="${detailVo.article.title}">
     <meta name="description" content="" th:content="${detailVo.article.articleDes}">
     <link rel="stylesheet" href="../../static/editor/css/editormd.preview.css"
           th:href="@{${rootPath} + '/static/editor/css/editormd.preview.css'}"/>
@@ -178,8 +178,6 @@
 
                                     <div class="layui-colla-content layui-show">
                                         <p th:text="${comment.content}"></p>
-
-
                                         <th:block th:if="${not #lists.isEmpty(comment.cmsReplyList)}">
                                             <th:block th:each="reply,index:${comment.cmsReplyList}">
                                                 <div class="layui-collapse" lay-accordion="">
