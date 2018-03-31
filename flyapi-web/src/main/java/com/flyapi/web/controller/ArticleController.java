@@ -297,6 +297,11 @@ public class ArticleController extends BaseController {
         BeanUtils.copyProperties(addArticleRequest, cmsArticle);
         if(Objects.isNull(isExist)){
             cmsArticle.setArticleId(snowflakeIdWorker.nextId());
+            UcenterUser user = (UcenterUser) currentUser();
+            if(user == null){
+                return JSONResult.error("请登录");
+            }
+            cmsArticle.setUserId(user.getUserId());
             //插入
             int num = articleService.insertSelective(cmsArticle);
             if (num > 0 && addArticleRequest.getStatus() !=0 && addArticleRequest.getApply() == 0) {

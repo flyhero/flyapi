@@ -69,6 +69,9 @@
             <if test="subjectId != null">
                 subject_id,
             </if>
+            <if test="userId != null">
+                user_id,
+            </if>
             <if test="title != null">
                 title,
             </if>
@@ -98,7 +101,7 @@
                 permissions,
             </if>
             <if test="status != null">
-                permissions,
+                status,
             </if>
             <if test="isDelete != null">
                 is_delete,
@@ -116,6 +119,9 @@
             </if>
             <if test="subjectId != null">
                 #{subjectId,jdbcType=BIGINT},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=BIGINT},
             </if>
             <if test="title != null">
                 #{title,jdbcType=VARCHAR},
