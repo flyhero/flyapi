@@ -34,4 +34,9 @@ public class CllectArticleServiceImpl extends BaseServiceImpl<CmsCollectArticle,
     public int findCollectionCount(Long userId) {
         return cmsCollectArticleMapper.findCollectionCount(userId);
     }
+
+    @Override
+    public int findIsCollectionByArticleId(Long articleId) {
+        return cmsCollectArticleMapper.findIsCollectionByArticleId(articleId);
+    }
 }

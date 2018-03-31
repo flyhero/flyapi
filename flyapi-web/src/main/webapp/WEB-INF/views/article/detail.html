@@ -58,7 +58,13 @@
                         <span class="iconfont" th:text="'阅读 ' +${detailVo.article.viewNum}">阅读 200</span>
                         <span class="iconfont" th:text="'评论 ' +${detailVo.article.commentNum}">评论 200</span>
                         <span class="iconfont" th:text="'喜欢 ' +${detailVo.article.likeNum}">喜欢 200</span>
-                        <span class="layui-btn layui-btn-xs jie-admin ">收藏</span>
+                        <th:block th:if="${isCollection == 0}">
+                            <span class="layui-btn layui-btn-xs jie-admin "
+                                  th:onclick="'javascript:collectionFn(\''+${detailVo.article.articleId}+'\')'">收藏</span>
+                        </th:block>
+                        <th:block th:unless="${isCollection == 0}">
+                            <span class="layui-btn layui-btn-xs jie-admin">已收藏</span>
+                        </th:block>
                         <th:block th:if="${not #lists.isEmpty(detailVo.article.original)}">
                             <a th:href="${detailVo.article.original}" target="_blank">
                                 <span class="layui-btn layui-btn-xs layui-btn-normal">阅读原文</span>
@@ -130,7 +136,9 @@
                 <hr>
                 <div>
                     <center>
-                        <button id="user-like" th:class="${isLike} == false ? 'layui-btn layui-btn-primary layui-btn-radius' : 'layui-btn layui-btn-danger layui-btn-radius'" onclick="doLike()">
+                        <button id="user-like"
+                                th:class="${isLike} == false ? 'layui-btn layui-btn-primary layui-btn-radius' : 'layui-btn layui-btn-danger layui-btn-radius'"
+                                onclick="doLike()">
                             <i class="fa fa-thumbs-o-up fa-fw" title="喜欢"></i>喜欢
                         </button>
 
@@ -157,7 +165,8 @@
                                         <div style="float:left; text-align:left" class="comment-user">
                                             <img style="width: 40px;height: 40px;border-radius: 100%"
                                                  th:src="${comment.ucenterUser.avatar}"/>
-                                            <a th:href="@{${rootPath} + '/user/'+${comment.ucenterUser.userId}}" target="_blank"
+                                            <a th:href="@{${rootPath} + '/user/'+${comment.ucenterUser.userId}}"
+                                               target="_blank"
                                                th:text="${comment.ucenterUser.nickName}">flyhero</a>
                                             <input type="hidden" th:value="${comment.ucenterUser.userId}"/>
                                         </div>
@@ -198,7 +207,8 @@
                                         </th:block>
 
                                         <div class="comment-reply" style="text-align: right; padding-top: 8px">
-                                            <a type="reply" style="cursor: pointer;" th:onclick="'javascript:replyFn(\''+${comment.ucenterUser.nickName}+'\',\''+${comment.commentId}+'\')'">
+                                            <a type="reply" style="cursor: pointer;"
+                                               th:onclick="'javascript:replyFn(\''+${comment.ucenterUser.nickName}+'\',\''+${comment.commentId}+'\')'">
                                                 回复
                                             </a>
                                         </div>
@@ -216,7 +226,7 @@
                         <label class="layui-form-label">神评论：</label>
                         <div class="layui-input-block">
                             <textarea id="L_content" name="content" required lay-verify="required"
-                                       class="layui-textarea fly-editor"></textarea>
+                                      class="layui-textarea fly-editor"></textarea>
                         </div>
                     </div>
 
@@ -249,9 +259,9 @@
     function doLike() {
         $.post("../../article/" + targetId + "/like", {}, function (result) {
             if (result.success) {
-                if(result.data){
+                if (result.data) {
                     $("#user-like").removeClass("layui-btn-primary").addClass("layui-btn-danger");
-                }else {
+                } else {
                     $("#user-like").removeClass("layui-btn-danger").addClass("layui-btn-primary");
                 }
             } else {
@@ -264,7 +274,8 @@
         content: $('#L_content')
     };
     var user = [[${session.user}]];
-    function replyFn(nickName,commentId) {
+
+    function replyFn(nickName, commentId) {
         if (user == null || user == "") {
             layer.msg("请登录");
             return false;
@@ -272,7 +283,7 @@
 
         dom.content.focus();
         var val = dom.content.val();
-        var aite = '@'+nickName;
+        var aite = '@' + nickName;
         if (val.indexOf(aite) !== -1) return;
         dom.content.val(aite + ' ' + val);
         $("#commentId").val(commentId);
@@ -284,6 +295,7 @@
 
     //显示赞赏二维码
     var qrcode = [[${detailVo.user.supportQrcode}]];
+
     function showQrcode() {
         layer.open({
             type: 1,
@@ -294,6 +306,19 @@
             shadeClose: true,
             content: '<img src="' + qrcode + '" alt="谢谢赞赏">'
         });
+    }
+
+    function collectionFn(articleId) {
+        if (user == null || user == "") {
+            layer.msg("请登录");
+            return false;
+        }
+        $.post("../../article/collection", {"articleId": articleId}, function (result) {
+            if (result.success) {
+                layer.msg("收藏成功");
+            }
+
+        }, "json");
     }
 
     layui.use(['util', 'element', 'form', 'layer', 'laypage'], function () {
@@ -308,17 +333,17 @@
                 layer.msg("请登录");
                 return false;
             }
-            var val =  data.field.content;
-            if (val.indexOf('@') !== -1){
+            var val = data.field.content;
+            if (val.indexOf('@') !== -1) {
                 //nothing
-            }else {
-                data.field.commentId=0;
+            } else {
+                data.field.commentId = 0;
             }
 
             $.post("../../comment", data.field, function (result) {
                 console.log(result.code);
                 layer.msg(result.msg);
-            },"json");
+            }, "json");
             return false;
         });
 
@@ -374,7 +399,7 @@
                 $.post("../../report/article", data.field, function (result) {
                     console.log(result.code);
                     layer.msg(result.msg);
-                },"json");
+                }, "json");
                 layer.close(index);
                 return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
             });

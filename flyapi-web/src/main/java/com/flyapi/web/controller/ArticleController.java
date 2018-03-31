@@ -88,9 +88,11 @@ public class ArticleController extends BaseController {
         ArticleDetailVo detailVo = articleService.findArticleDetail(articleId);
         List<ShowCommentVo> commentList = commentService.findCommentById(articleId);
         UcenterFame fame =fameService.findByFameValue(detailVo.getUser().getFameValue());
+        int isCollection = collectArticleService.findIsCollectionByArticleId(articleId);
         mv.addObject("detailVo", detailVo);
         mv.addObject("commentList", commentList);
         mv.addObject("isLike", isLike);
+        mv.addObject("isCollection", isCollection);
         mv.addObject("fame", fame);
         mv.setViewName("article/detail");
         return mv;
@@ -347,5 +349,26 @@ public class ArticleController extends BaseController {
         UcenterUser user = (UcenterUser) currentUser();
         int num= collectArticleService.findCollectionCount(user.getUserId());
         return JSONResult.ok(num);
+    }
+
+    /**
+     * 收藏文章
+     * @param articleId
+     * @return
+     */
+    @ResponseBody
+    @PostMapping("article/collection")
+    public JSONResult addCollectArticle(Long articleId){
+        CmsCollectArticle cmsCollectArticle = new CmsCollectArticle();
+        UcenterUser user = (UcenterUser) currentUser();
+        if(null == user){
+            return JSONResult.error(TipsEnum.NOT_LOGIN);
+        }
+        cmsCollectArticle.setArticleId(articleId);
+        cmsCollectArticle.setUserId(user.getUserId());
+        cmsCollectArticle.setId(snowflakeIdWorker.nextId());
+        cmsCollectArticle.setCreateTime(new Date());
+        collectArticleService.insertSelective(cmsCollectArticle);
+        return JSONResult.ok();
     }
 }

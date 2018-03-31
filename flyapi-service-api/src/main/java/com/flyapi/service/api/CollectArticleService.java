@@ -15,4 +15,5 @@ public interface CollectArticleService extends BaseService<CmsCollectArticle> {
 
     List<ArticleCollectVo> findArticleByUserId(Long userId);
     int findCollectionCount(Long userId);
+    int findIsCollectionByArticleId(Long articleId);
 }
