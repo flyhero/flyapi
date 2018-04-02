@@ -251,10 +251,16 @@
 </div>
 
 <script th:inline="javascript">
+    var user = [[${session.user}]];
     var targetId = '[[${detailVo.article.articleId}]]';
 
     //点赞功能
     function doLike() {
+        if (user == null || user == "") {
+            layer.msg("请登录");
+            return false;
+        }
+
         $.post("../../article/" + targetId + "/like", {}, function (result) {
             if (result.success) {
                 if (result.data) {
@@ -271,7 +277,6 @@
     var gather = {}, dom = {
         content: $('#L_content')
     };
-    var user = [[${session.user}]];
 
     function replyFn(nickName, commentId) {
         if (user == null || user == "") {
