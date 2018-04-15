@@ -23,8 +23,8 @@ public class LoginInterceptor implements HandlerInterceptor {
 
     private Logger logger = LogManager.getLogger(LoginInterceptor.class);
 
-    private static final String url = "http://www.iflyapi.cn:8090/flyapi/";
-//    private static final String url = "http://www.iflyapi.cn/";
+//    private static final String url = "http://www.iflyapi.cn:8090/flyapi/";
+    private static final String url = "http://www.iflyapi.cn";
 
     /**
      * 在DispatcherServlet完全处理完请求后被调用
@@ -65,7 +65,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         UcenterUser login = (UcenterUser) session.getAttribute("user");
         if (login == null) {
             logger.info("request.getContextPath():"+request.getContextPath());
-            response.sendRedirect(url+"index.html");
+            response.sendRedirect(url+"/index.html");
         }
 
 /*        Cookie[] cookies = request.getCookies();

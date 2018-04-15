@@ -20,6 +20,7 @@ import com.github.pagehelper.PageInfo;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -69,7 +70,7 @@ public class ArticleController extends BaseController {
      */
     @RequestMapping(value = "article/detail/{articleId}", method = RequestMethod.GET)
     public ModelAndView findArticleDetail(@PathVariable("articleId") Long articleId) {
-
+        logger.info("findArticleDetail|查询文章详情，articleId={}",articleId);
         boolean isLike = false;
         int isCollection = 0;
         if (isLogin()) {
@@ -292,32 +293,40 @@ public class ArticleController extends BaseController {
         Result result = FluentValidator.checkAll().on(addArticleRequest.getTitle(), new StringValidator(5, 15, "title"))
                 .on(addArticleRequest.getApply().intValue(), new NumberValidator("申请"))
                 .on(addArticleRequest.getMdContent(), new StringValidator("文章内容")).doValidate().result(toSimple());
-        logger.info(result.toString());
+        logger.info("addArticle|参数：{}",addArticleRequest.toString());
 
-        CmsArticle isExist = articleService.selectByPrimaryKey(addArticleRequest.getArticleId());
-        CmsArticle cmsArticle = new CmsArticle();
+        try {
+            CmsArticle isExist = articleService.selectByPrimaryKey(addArticleRequest.getArticleId());
+            CmsArticle cmsArticle = new CmsArticle();
 
-        BeanUtils.copyProperties(addArticleRequest, cmsArticle);
-        if(Objects.isNull(isExist)){
-            cmsArticle.setArticleId(snowflakeIdWorker.nextId());
-            UcenterUser user = (UcenterUser) currentUser();
-            if(user == null){
-                return JSONResult.error("请登录");
+            BeanUtils.copyProperties(addArticleRequest, cmsArticle);
+            if(Objects.isNull(isExist)){
+                cmsArticle.setArticleId(snowflakeIdWorker.nextId());
+                UcenterUser user = (UcenterUser) currentUser();
+                if(user == null){
+                    return JSONResult.error("请登录");
+                }
+                cmsArticle.setUserId(user.getUserId());
+                //插入
+                int num = articleService.insertSelective(cmsArticle);
+                if (num > 0 && addArticleRequest.getStatus() !=0 && addArticleRequest.getApply() == 0) {
+                    logger.info("addArticle|发布文章成功");
+                    CmsApply apply = new CmsApply();
+                    apply.setArticleId(cmsArticle.getArticleId());
+                    apply.setId(snowflakeIdWorker.nextId());
+                    apply.setCreateTime(new Date());
+                    homepageApplyService.insertSelective(apply);
+                }
+
+            }else {
+                logger.info("addArticle|已存在文章，进行更新");
+                //更新
+                articleService.updateByPrimaryKeySelective(cmsArticle);
             }
-            cmsArticle.setUserId(user.getUserId());
-            //插入
-            int num = articleService.insertSelective(cmsArticle);
-            if (num > 0 && addArticleRequest.getStatus() !=0 && addArticleRequest.getApply() == 0) {
-                CmsApply apply = new CmsApply();
-                apply.setArticleId(cmsArticle.getArticleId());
-                apply.setId(snowflakeIdWorker.nextId());
-                apply.setCreateTime(new Date());
-                homepageApplyService.insertSelective(apply);
-            }
-
-        }else {
-            //更新
-            articleService.updateByPrimaryKeySelective(cmsArticle);
+        } catch (Exception e) {
+            System.out.println("addArticle|异常："+e.toString());
+            logger.error("addArticle|异常：{}",e.toString());
+            e.printStackTrace();
         }
 
         return JSONResult.ok();

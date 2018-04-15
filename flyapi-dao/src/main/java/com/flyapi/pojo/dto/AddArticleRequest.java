@@ -105,4 +105,19 @@ public class AddArticleRequest {
     public void setStatus(Byte status) {
         this.status = status;
     }
+
+    @Override
+    public String toString() {
+        return "AddArticleRequest{" +
+                "articleId=" + articleId +
+                ", title='" + title + '\'' +
+                ", articleDes='" + articleDes + '\'' +
+                ", cover='" + cover + '\'' +
+                ", subjectId=" + subjectId +
+                ", original='" + original + '\'' +
+                ", permissions=" + permissions +
+                ", apply=" + apply +
+                ", status=" + status +
+                '}';
+    }
 }

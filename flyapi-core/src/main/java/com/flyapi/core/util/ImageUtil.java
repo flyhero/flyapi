@@ -382,6 +382,7 @@ public class ImageUtil {
 			g.dispose();
 			//输出png图片
 			ImageIO.write(image, "png", destImageFile);
+			destImageFile.setReadable(true);
 
 		} catch (Exception e) {
 			e.printStackTrace();

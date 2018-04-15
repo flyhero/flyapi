@@ -45,6 +45,6 @@ public class LocalFileUploadServiceImpl implements FileUploadService{
         } catch (IOException e) {
             logger.error(e.toString());
         }
-        return Constant.FILE_BASE_PATH+path;
+        return Constant.FILE_BASE_PATH+folderPath;
     }
 }

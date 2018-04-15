@@ -93,10 +93,12 @@ public class IndexController extends BaseController{
     @GetMapping("img/cover")
     @ResponseBody
     public JSONResult createImg(String subjectTitle){
+        logger.info("createImg|生成封面，主题：{}",subjectTitle);
         UcenterUser user = (UcenterUser)currentUser();
         String realPath = "/"+user.getUserId()+"/cover/"+System.currentTimeMillis()+ RandomUtil.randomNumStr(5)+".png";
         String pathName = "/flyapi"+realPath;
         ImageUtil.createImage(subjectTitle,user.getNickName(),new File(ImagePath.randomPath()),new File(pathName));
+        logger.info("createImg|生成封面，地址：{}",Constant.FILE_BASE_PATH+realPath);
         return JSONResult.ok(Constant.FILE_BASE_PATH+realPath);
     }
 }
