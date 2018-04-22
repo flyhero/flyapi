@@ -380,9 +380,12 @@ public class ImageUtil {
 			drawString(g,"著: "+nickName,150, 650,font,Color.WHITE,0.8f);
 			drawString(g,"@flyapi 出品",400, 850,font,Color.WHITE,0.6f);
 			g.dispose();
+
+			destImageFile.setReadable(true);
+			destImageFile.setWritable(true);
+			destImageFile.setExecutable(true);
 			//输出png图片
 			ImageIO.write(image, "png", destImageFile);
-			destImageFile.setReadable(true);
 
 		} catch (Exception e) {
 			e.printStackTrace();
