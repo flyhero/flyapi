@@ -11,9 +11,15 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.*;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.attribute.PosixFilePermission;
 import java.text.AttributedCharacterIterator;
 import java.text.AttributedString;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * 图片处理工具类：<br>
@@ -381,8 +387,12 @@ public class ImageUtil {
 			drawString(g,"@flyapi 出品",400, 850,font,Color.WHITE,0.6f);
 			g.dispose();
 
+			changeFolderPermission(pressImgFile);
 			//输出png图片
 			ImageIO.write(image, "png", destImageFile);
+
+			changeFolderPermission(destImageFile);
+
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -423,6 +433,30 @@ public class ImageUtil {
 		return false;
 	}
 
+	/**
+	 * 更改文件权限
+	 * @param dirFile
+	 */
+	private final static void changeFolderPermission(File dirFile) {
+		Set<PosixFilePermission> perms = new HashSet<PosixFilePermission>();
+		perms.add(PosixFilePermission.OWNER_READ);
+		perms.add(PosixFilePermission.OWNER_WRITE);
+		perms.add(PosixFilePermission.OWNER_EXECUTE);
+		//add group permissions
+		perms.add(PosixFilePermission.GROUP_READ);
+		perms.add(PosixFilePermission.GROUP_WRITE);
+		perms.add(PosixFilePermission.GROUP_EXECUTE);
+		//add others permissions
+		perms.add(PosixFilePermission.OTHERS_READ);
+		perms.add(PosixFilePermission.OTHERS_WRITE);
+		perms.add(PosixFilePermission.OTHERS_EXECUTE);
+		try {
+			Path path = Paths.get(dirFile.getAbsolutePath());
+			Files.setPosixFilePermissions(path, perms);
+		} catch (IOException e) {
+			logger.error("Change folder " + dirFile.getAbsolutePath() + " permission failed.");
+		}
+	}
 	//---------------------------------------------------------------------------------------------------------------- Private method end
 
 	private final static void drawString(Graphics2D g,String text,int x,int y,Font font,Color color,float alpha){

@@ -105,24 +105,8 @@ public class IndexController extends BaseController{
         String realPath = "/"+user.getUserId()+"/cover/"+System.currentTimeMillis()+ RandomUtil.randomNumStr(5)+".png";
         String pathName = "/flyapi"+realPath;
         File file = new File(pathName);
-        changeFolderPermission(file);
-        ImageUtil.createImage(subjectTitle,user.getNickName(),new File(ImagePath.randomPath()),new File(pathName));
+        ImageUtil.createImage(subjectTitle,user.getNickName(),new File(ImagePath.randomPath()),file);
         logger.info("createImg|生成封面，地址：{}",Constant.FILE_BASE_PATH+realPath);
         return JSONResult.ok(Constant.FILE_BASE_PATH+realPath);
-    }
-    private void changeFolderPermission(File dirFile) {
-        Set<PosixFilePermission> perms = new HashSet<PosixFilePermission>();
-        perms.add(PosixFilePermission.OWNER_READ);
-        perms.add(PosixFilePermission.OWNER_WRITE);
-        perms.add(PosixFilePermission.OWNER_EXECUTE);
-        perms.add(PosixFilePermission.GROUP_READ);
-        perms.add(PosixFilePermission.GROUP_WRITE);
-        perms.add(PosixFilePermission.GROUP_EXECUTE);
-        try {
-            Path path = Paths.get(dirFile.getAbsolutePath());
-            Files.setPosixFilePermissions(path, perms);
-        } catch (IOException e) {
-            logger.info("Change folder " + dirFile.getAbsolutePath() + " permission failed.");
-        }
     }
 }
