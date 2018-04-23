@@ -31,11 +31,11 @@
                             <a href="" target="_blank" class="layui-btn jie-add">发布文章</a>
                         </div>-->
 
-            <div class="layui-carousel" id="carousel-index">
+            <div class="layui-carousel" id="carousel-index" >
                 <div carousel-item=""  id="cal-list">
                     <th:block th:if="${not #lists.isEmpty(carouselList)}">
                         <th:block th:each="carousel,index:${carouselList}">
-                            <div><a href="#" th:href="${carousel.detailUrl}"><img src="'#" title="轮播图" th:src="${carousel.imgUrl}" th:title="${carousel.title}"/></a></div>
+                            <div><a href="#" th:href="${carousel.detailUrl}"><img style="border-radius: 5px" src="'#" title="轮播图" th:src="${carousel.imgUrl}" th:title="${carousel.title}"/></a></div>
                         </th:block>
                     </th:block>
                 </div>
@@ -72,7 +72,7 @@
                     <dd>
                         <span class="fly-badge" th:class="'fly-badge fly-badge-'+${index.index}" th:text="${index.index+1}"></span>
                         <a href="#" th:href="@{${rootPath} + '/article/detail/'+${hot.articleId}}" th:text="${hot.title}">标题</a>
-                        <span><i class="fa fa-eye fa-fw"></i>120</span>
+                        <span><i class="fa fa-eye fa-fw"></i> <span th:text="${hot.viewNum}"></span></span>
                     </dd>
                 </th:block>
             </th:block>
@@ -145,7 +145,7 @@
                     var lis = [];
                     $.ajax({
                         type: 'POST',
-                        url: rootPath+"article/findArticleList",
+                        url: rootPath+"/article/findArticleList",
                         dataType: "json",
                         data: {
                             "pageNum": page,

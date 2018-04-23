@@ -381,9 +381,6 @@ public class ImageUtil {
 			drawString(g,"@flyapi 出品",400, 850,font,Color.WHITE,0.6f);
 			g.dispose();
 
-			destImageFile.setReadable(true);
-			destImageFile.setWritable(true);
-			destImageFile.setExecutable(true);
 			//输出png图片
 			ImageIO.write(image, "png", destImageFile);
 
