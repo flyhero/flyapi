@@ -352,6 +352,7 @@ public class ImageUtil {
 
 	public final static String createImage(String subjectTitle,String nickName,File pressImgFile, File destImageFile){
 		try {
+			Font fontTitle = new Font("华文宋体",Font.BOLD,45);
 			Font font = new Font("华文宋体",Font.BOLD,40);
 
 			int width=650;
@@ -373,9 +374,9 @@ public class ImageUtil {
 
 				for (int i = 0; i < count; i++) {
 					if(i == count-1){
-						drawString(g,subjectTitle.substring(i*8,length),150, 210 + 45*i,font,Color.WHITE,1.0f);
+						drawString(g,subjectTitle.substring(i*8,length),150, 210 + 45*i,fontTitle,Color.WHITE,1.0f);
 					}else {
-						drawString(g,subjectTitle.substring(i*8,i*8+8),150, 210 + 45*i,font,Color.WHITE,1.0f);
+						drawString(g,subjectTitle.substring(i*8,i*8+8),150, 210 + 45*i,fontTitle,Color.WHITE,1.0f);
 					}
 				}
 			}else {
