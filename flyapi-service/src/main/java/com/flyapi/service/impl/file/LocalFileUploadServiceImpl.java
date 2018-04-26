@@ -2,6 +2,7 @@ package com.flyapi.service.impl.file;
 
 import com.flyapi.core.constant.Constant;
 import com.flyapi.core.enums.PathEnum;
+import com.flyapi.core.util.ImageUtil;
 import com.flyapi.service.api.file.FileUploadService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +27,7 @@ public class LocalFileUploadServiceImpl implements FileUploadService{
         String folderPath = File.separator+userId+pathEnum.getPath()+File.separator;
         File folder = new File("/flyapi"+folderPath);
         if(!folder.exists()){
-            folder.setWritable(true, false);
+            ImageUtil.changeFolderPermission(folder);
             boolean f = folder.mkdirs();
             logger.debug("创建文件夹：{},{}",folder,f);
         }
@@ -39,7 +40,7 @@ public class LocalFileUploadServiceImpl implements FileUploadService{
         String path=folderPath+str;
         File newFile=new File(path);
         try {
-            newFile.setWritable(true,false);
+            ImageUtil.changeFolderPermission(newFile);
             //通过CommonsMultipartFile的方法直接写文件（注意这个时候）
             file.transferTo(newFile);
         } catch (IOException e) {

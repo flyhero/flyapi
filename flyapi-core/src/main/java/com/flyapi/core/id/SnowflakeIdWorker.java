@@ -1,5 +1,7 @@
 package com.flyapi.core.id;
 
+import com.flyapi.core.util.RandomUtil;
+
 /**
  * Twitter_Snowflake<br>
  * SnowFlake的结构如下(每部分用-分开):<br>
@@ -80,7 +82,7 @@ public class SnowflakeIdWorker {
      * 获得下一个ID (该方法是线程安全的)
      * @return SnowflakeId
      */
-    public synchronized long nextId() {
+    public synchronized long nextId2() {
         long timestamp = timeGen();
 
         //如果当前时间小于上一次ID生成的时间戳，说明系统时钟回退过这个时候应当抛出异常
@@ -113,6 +115,12 @@ public class SnowflakeIdWorker {
                 | sequence;
     }
 
+    public long nextId(){
+        long time = timeGen();
+        String s = RandomUtil.randomNum(2);
+        return Long.valueOf(time+s);
+    }
+
     /**
      * 阻塞到下一个毫秒，直到获得新的时间戳
      * @param lastTimestamp 上次生成ID的时间截
@@ -137,12 +145,13 @@ public class SnowflakeIdWorker {
     //==============================Test=============================================
     /** 测试 */
     public static void main(String[] args) {
-        SnowflakeIdWorker idWorker = new SnowflakeIdWorker(0, 0);
+        System.out.println(System.currentTimeMillis());
+/*        SnowflakeIdWorker idWorker = new SnowflakeIdWorker(0, 0);
         for (int i = 0; i < 1; i++) {
             long id = idWorker.nextId();
             System.out.println(Long.toBinaryString(id));
             System.out.println(id);
             System.out.println(String.valueOf(id).length());
-        }
+        }*/
     }
 }

@@ -179,7 +179,7 @@
                         $("#userArticle").empty();
                         $.each(result.data.list, function (index, simple) {
                             $("#userArticle").append('<li>' +
-                                '        <a class="jie-title" href="#" target="_blank" >' + simple.title + '</a>' +
+                                '        <a class="jie-title" href="../article/detail/'+ simple.articleId +'" target="_blank" >' + simple.title + '</a>' +
                                 '        <i>' + getMyDate(simple.createTime) + '</i>' +
                                 '        <a class="mine-edit" href="../article/' + simple.articleId + '">编辑</a>' +
                                 '        <em>' + simple.viewNum + '/' + simple.commentNum + '/' + simple.likeNum + '</em>' +

@@ -438,7 +438,7 @@ public class ImageUtil {
 	 * 更改文件权限
 	 * @param dirFile
 	 */
-	private final static void changeFolderPermission(File dirFile) {
+	public final static void changeFolderPermission(File dirFile) {
 		Set<PosixFilePermission> perms = new HashSet<PosixFilePermission>();
 		perms.add(PosixFilePermission.OWNER_READ);
 		perms.add(PosixFilePermission.OWNER_WRITE);
