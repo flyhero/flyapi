@@ -90,6 +90,9 @@
 </div>
 
 <script>
+
+    var rootPath = '[[${rootPath}]]';
+
   function createCover() {
     var title = $("#subjectTitle").val();
       $.getJSON("../img/cover", {"subjectTitle":title}, function (result) {
@@ -113,11 +116,11 @@
 
         //监听提交
         form.on('submit(*)', function(data){
-            alert(JSON.stringify(data.field));
             $.post("../subject", jQuery.parseJSON(JSON.stringify(data.field)),
                 function(result){
                     if(result.success){
-                        layer.info("修改成功");
+                        layer.msg(result.msg);
+                        location.href = rootPath + "/index.html";
                     }
                 }, "json");
 

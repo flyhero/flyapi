@@ -43,17 +43,16 @@ public class LocalFileUploadServiceImpl implements FileUploadService{
         String[] s=picture.split("\\.");
         str=str+"."+s[1];
 
-        String path=folderPath+str;
+        String path=folder.getAbsolutePath()+str;
         File newFile=new File(path);
+        changeFolderPermission(newFile);
         try {
             if(!newFile.exists()){
                 newFile.createNewFile();
             }
-
-
             //通过CommonsMultipartFile的方法直接写文件（注意这个时候）
             file.transferTo(newFile);
-            changeFolderPermission(newFile);
+
         } catch (IOException e) {
             logger.error(e.toString());
         }
