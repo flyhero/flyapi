@@ -31,25 +31,21 @@ public class LocalFileUploadServiceImpl implements FileUploadService{
     @Override
     public String upload(MultipartFile file,Long userId, PathEnum pathEnum) {
         String folderPath = File.separator+userId+pathEnum.getPath()+File.separator;
-        File folder = new File("/flyapi"+folderPath);
-        if(!folder.exists()){
-            boolean f = folder.mkdirs();
-            changeFolderPermission(folder);
-            logger.debug("创建文件夹：{},{}",folder,f);
-        }
+        String fullPath= "/flyapi"+folderPath;
 
         String str = (new SimpleDateFormat("yyyyMMddHHmmss")).format(new Date());
         String picture=file.getOriginalFilename();
         String[] s=picture.split("\\.");
         str=str+"."+s[1];
 
-        String path=folder.getAbsolutePath()+str;
-        File newFile=new File(path);
-        changeFolderPermission(newFile);
+        File newFile=new File(fullPath+str);
+
         try {
             if(!newFile.exists()){
-                newFile.createNewFile();
+                newFile.getParentFile().mkdirs();
             }
+            newFile.createNewFile();
+            changeFolderPermission(newFile);
             //通过CommonsMultipartFile的方法直接写文件（注意这个时候）
             file.transferTo(newFile);
 

@@ -26,6 +26,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.*;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,31 +51,81 @@ public class SubjectController extends BaseController {
 
     /**
      * 添加主题
-     * @title: addSubject
+     *
      * @param addSubjectRequest
      * @return com.flyapi.core.constant.JSONResult
+     * @title: addSubject
      * @date 2018/2/23 下午9:47
      */
     @PostMapping("subject")
     @ResponseBody
-    public JSONResult saveOrUpdateSubject(AddSubjectRequest addSubjectRequest){
+    public JSONResult saveOrUpdateSubject(AddSubjectRequest addSubjectRequest) {
 
         UcenterUser user = (UcenterUser) currentUser();
-        if(user == null){
+        if (user == null) {
             return JSONResult.error();
         }
-        int num = subjectService.saveOrUpdateSubject(addSubjectRequest,user.getUserId());
+        int num = subjectService.saveOrUpdateSubject(addSubjectRequest, user.getUserId());
         return JSONResult.ok();
     }
 
     @DeleteMapping("subject/{subjectId}")
     @ResponseBody
-    public JSONResult deleteSubject(@PathVariable Long subjectId){
+    public JSONResult deleteSubject(@PathVariable Long subjectId) {
         CmsSubject subject = new CmsSubject();
         subject.setSubjectId(subjectId);
-        subject.setIsDelete((byte)1);
+        subject.setIsDelete((byte) 1);
         int num = subjectService.updateByPrimaryKeySelective(subject);
         return JSONResult.ok();
+    }
+
+    @GetMapping("subject/{subjectId}/md")
+    public void exportSubject(@PathVariable Long subjectId) {
+        List<CmsArticle> articleList = articleService.findArticleBySubjectId(subjectId);
+        CmsSubject subject = subjectService.selectByPrimaryKey(subjectId);
+
+        String path = "/flyapi/md/" + subjectId + "/" + subject.getSubjectTitle() + ".md";
+        File file = new File(path);
+        if (!file.exists()) {
+            file.getParentFile().mkdirs();
+        }
+        try {
+            file.createNewFile();
+            FileWriter fw = new FileWriter(file, true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            for (CmsArticle article : articleList) {
+                bw.write(article.getMdContent() + "\n");
+            }
+            bw.flush();
+            bw.close();
+            fw.close();
+
+            //以下载方式打开
+            response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(file.getName(), "UTF-8"));
+
+            //创建刘对象
+            FileReader reader = new FileReader(file);
+            //写出
+            PrintWriter out = response.getWriter();
+            //定义读取缓冲区
+            char buffer[] = new char[1024];
+            //定义读取长度
+            int len = 1024;
+            //循环读取
+            while ((len = reader.read(buffer)) != -1) {
+                out.write(buffer, 0, len);
+            }
+
+            //释放资源
+            reader.close();
+            out.flush();
+            out.close();
+
+        } catch (IOException e) {
+            logger.error(e.getMessage());
+        }finally {
+            file.delete();
+        }
     }
 
     /**
