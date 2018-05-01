@@ -79,6 +79,10 @@ public class SubjectController extends BaseController {
         return JSONResult.ok();
     }
 
+    /**
+     * 导出md
+     * @param subjectId
+     */
     @GetMapping("subject/{subjectId}/md")
     public void exportSubject(@PathVariable Long subjectId) {
         List<CmsArticle> articleList = articleService.findArticleBySubjectId(subjectId);
@@ -94,7 +98,7 @@ public class SubjectController extends BaseController {
             FileWriter fw = new FileWriter(file, true);
             BufferedWriter bw = new BufferedWriter(fw);
             for (CmsArticle article : articleList) {
-                bw.write(article.getMdContent() + "\n");
+                bw.write("# "+article.getTitle()+"\n"+article.getMdContent() + "\n");
             }
             bw.flush();
             bw.close();
