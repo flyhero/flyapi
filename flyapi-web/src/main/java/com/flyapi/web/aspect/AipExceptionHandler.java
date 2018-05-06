@@ -15,12 +15,12 @@ import javax.servlet.http.HttpServletResponse;
  * Author: qfwang
  * Date: 2018-03-06 下午11:45
  */
-@ControllerAdvice(annotations = Controller.class)
+//@ControllerAdvice(annotations = Controller.class)
 public class AipExceptionHandler {
 
 
-    @ExceptionHandler(value = Exception.class)
-    @ResponseBody
+//    @ExceptionHandler(value = Exception.class)
+//    @ResponseBody
     public ResponseEntity exception(Exception e, HttpServletResponse response){
         JSONResult jsonResult = new JSONResult();
         if(e instanceof UploadException){

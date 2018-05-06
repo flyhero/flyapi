@@ -292,7 +292,6 @@ public class ArticleController extends BaseController {
     @ResponseBody
     public JSONResult addArticle(AddArticleRequest addArticleRequest) {
         Result result = FluentValidator.checkAll().on(addArticleRequest.getTitle(), new StringValidator(5, 15, "title"))
-                .on(addArticleRequest.getApply().intValue(), new NumberValidator("申请"))
                 .on(addArticleRequest.getMdContent(), new StringValidator("文章内容")).doValidate().result(toSimple());
         logger.info("addArticle|参数：{}",addArticleRequest.toString());
 
@@ -325,7 +324,6 @@ public class ArticleController extends BaseController {
                 articleService.updateByPrimaryKeySelective(cmsArticle);
             }
         } catch (Exception e) {
-            System.out.println("addArticle|异常："+e.toString());
             logger.error("addArticle|异常：{}",e.toString());
             e.printStackTrace();
         }

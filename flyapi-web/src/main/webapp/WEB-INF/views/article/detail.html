@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
-    <title th:title="${detailVo.article.title}">文章详细</title>
+    <title th:text="${detailVo.article.title}">文章详细</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="keywords" content="" th:content="${detailVo.article.title}">
     <meta name="description" content="" th:content="${detailVo.article.articleDes}">
@@ -35,6 +35,9 @@
 
     .markdown-body ul li{
         list-style: disc;
+    }
+    .markdown-body ol li{
+        list-style: decimal;
     }
 </style>
 

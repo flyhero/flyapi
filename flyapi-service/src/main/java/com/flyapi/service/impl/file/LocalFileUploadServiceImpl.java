@@ -45,10 +45,10 @@ public class LocalFileUploadServiceImpl implements FileUploadService{
                 newFile.getParentFile().mkdirs();
             }
             newFile.createNewFile();
-            changeFolderPermission(newFile);
+
             //通过CommonsMultipartFile的方法直接写文件（注意这个时候）
             file.transferTo(newFile);
-
+            changeFolderPermission(newFile);
         } catch (IOException e) {
             logger.error(e.toString());
         }
