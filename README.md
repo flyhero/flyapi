@@ -6,6 +6,8 @@
 
 [![Version](https://img.shields.io/badge/version-1.0-green.svg)](https://github.com/flyhero/flyapi)
 
+由于领取的阿里云试用的服务器到期了，网站现在暂停下来了。
+
 源于 2016年10月 接口管理系统 基于SSM+Maven的多模块项目
 后因其它相关系统比较完善，遂放弃继续开发。
 
@@ -85,14 +87,25 @@ http://  用户名：   密码：
 ![flyapi架构](flyapi-doc/images/login.png)
 
 ### 首页面
-
+![flyapi首页](flyapi-doc/images/首页.png)
 
 ### 主题页面
+![flyapi主题](flyapi-doc/images/主题.png)
+
+### 主题详情
+![flyapi主题](flyapi-doc/images/主题内容.png)
 
 ### 设置
+![flyapi设置](flyapi-doc/images/基本设置.png)
 
 ### 个人中心
+![flyapi个人中心](flyapi-doc/images/主页.png)
 
+### 文章详情
+![flyapi文章详情](flyapi-doc/images/文章详情.png)
+
+### 评论
+![flyapi文章详情](flyapi-doc/images/评论.png)
 
 ## 待办事项
 
