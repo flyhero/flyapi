@@ -56,7 +56,7 @@ public class JwtUtils {
 
 /*    public static void main(String[] args) {
         Map<String, Object> map = new HashMap<>();
-        map.put("userName", "qfwang");
+        map.put("userName", "flyhero");
         try {
             String t = getToken(map);
             Thread.sleep(10000);
