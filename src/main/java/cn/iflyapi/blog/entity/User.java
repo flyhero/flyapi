@@ -10,8 +10,8 @@ import javax.persistence.Table;
 import java.util.Date;
 
 /**
- * @author: qfwang
- * @date: 2018-12-13 9:38 AM
+ * author: flyhero
+ * date: 2018-12-13 9:38 AM
  */
 @Data
 @Entity
@@ -93,7 +93,7 @@ public class User {
     /**
      * 注册来源
      */
-    private String platform;
+    private Integer platform;
 
     /**
      * 声望值

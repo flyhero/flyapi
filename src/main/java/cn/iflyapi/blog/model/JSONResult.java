@@ -5,8 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * @author: qfwang
- * @date: 2018-12-13 9:56 AM
+ * author: flyhero
+ * date: 2018-12-13 9:56 AM
  */
 @Getter
 @Setter
@@ -40,8 +40,8 @@ public class JSONResult {
         return ok(CodeMsgEnum.OK, null);
     }
 
-    public static JSONResult fail(int code, String msg, Object data) {
-        return new JSONResult(code, msg, false, data);
+    public static JSONResult fail(int code, String msg) {
+        return new JSONResult(code, msg, false, null);
     }
 
     public static JSONResult fail(CodeMsgEnum codeMsgEnum, Object data) {

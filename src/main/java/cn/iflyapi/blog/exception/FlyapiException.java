@@ -3,22 +3,41 @@ package cn.iflyapi.blog.exception;
 import cn.iflyapi.blog.enums.CodeMsgEnum;
 
 /**
- * @author: qfwang
- * @date: 2018-12-13 11:08 AM
+ * author: flyhero
+ * date: 2018-12-13 11:08 AM
  */
 public class FlyapiException extends RuntimeException {
 
-    private CodeMsgEnum codeMsgEnum;
+    private int code = -1;
+    private String msg;
 
     public FlyapiException(CodeMsgEnum codeMsgEnum) {
-        this.codeMsgEnum = codeMsgEnum;
+        this.code = codeMsgEnum.getCode();
+        this.msg = codeMsgEnum.getMsg();
     }
 
-    public CodeMsgEnum getCodeMsgEnum() {
-        return codeMsgEnum;
+    public FlyapiException(int code, String msg) {
+        this.code = code;
+        this.msg = msg;
     }
 
-    public void setCodeMsgEnum(CodeMsgEnum codeMsgEnum) {
-        this.codeMsgEnum = codeMsgEnum;
+    public FlyapiException(String msg) {
+        this.msg = msg;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
 }
