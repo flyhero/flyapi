@@ -2,6 +2,7 @@ package cn.iflyapi.blog.controller;
 
 import cn.iflyapi.blog.dao.UserDao;
 import cn.iflyapi.blog.model.JSONResult;
+import cn.iflyapi.blog.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,10 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController extends BaseController {
 
     @Autowired
-    private UserDao userDao;
+    private UserService userService;
 
     @GetMapping("/users")
     public JSONResult findUser() {
-        return JSONResult.ok(userDao.findAll());
+        return JSONResult.ok(userService.findAllUser());
     }
 }

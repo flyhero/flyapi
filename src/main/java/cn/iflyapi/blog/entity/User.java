@@ -117,5 +117,7 @@ public class User {
     /**
      * 0正常1注销
      */
-    private Byte isDelete;
+    private Boolean isDelete;
+
+    private Boolean isDisable;
 }

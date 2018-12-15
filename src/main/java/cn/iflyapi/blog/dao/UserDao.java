@@ -14,4 +14,7 @@ import java.util.List;
 @Repository
 public interface UserDao extends JpaRepository<User,Long> {
 
+    List<User> findAllByIsDeleteEquals(Boolean isDelete);
+
+    User findByUsernameAndPassword(String username, String password);
 }
