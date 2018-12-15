@@ -36,7 +36,7 @@ public class SwaggerConfig {
                 .apiInfo(apiInfo())
                 .select()
                 // 自行修改为自己的包路径
-                .apis(RequestHandlerSelectors.basePackage("cn.iflyapi.bolg.controller"))
+                .apis(RequestHandlerSelectors.basePackage("cn.iflyapi.blog.controller"))
                 .paths(PathSelectors.any())
                 .build()
                 .globalOperationParameters(pars);
@@ -45,9 +45,9 @@ public class SwaggerConfig {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("api文档")
-                .description("restfun 风格接口")
+                .description("restfull 风格接口")
                 //服务条款网址
-                //.termsOfServiceUrl("http://blog.csdn.net/forezp")
+//                .termsOfServiceUrl("http://")
                 .version("1.0")
                 .build();
     }

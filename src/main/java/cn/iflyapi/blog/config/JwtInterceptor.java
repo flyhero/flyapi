@@ -1,10 +1,15 @@
 package cn.iflyapi.blog.config;
 
 import cn.iflyapi.blog.entity.User;
+import cn.iflyapi.blog.model.JSONResult;
 import cn.iflyapi.blog.util.JwtUtils;
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.auth0.jwt.interfaces.Claim;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -62,11 +67,10 @@ public class JwtInterceptor implements HandlerInterceptor {
      * @param response
      */
     private boolean setNoAuth(HttpServletResponse response) throws IOException {
-/*        JSONResult result = new JSONResult(ErrorTypes.NEED_LOGIN.name(), HttpStatus.UNAUTHORIZED.value());
         response.setHeader("Content-Type", MediaType.APPLICATION_JSON_UTF8_VALUE);
         response.setHeader("Access-Control-Allow-Origin", "*");
         response.setHeader("Access-Control-Allow-Credentials", "true");
-        response.getWriter().write(JSONObject.toJSONString(result, SerializerFeature.WriteMapNullValue));*/
+        response.getWriter().write(JSONObject.toJSONString(JSONResult.fail(HttpStatus.UNAUTHORIZED.value(),HttpStatus.UNAUTHORIZED.getReasonPhrase()), SerializerFeature.WriteMapNullValue));
         return false;
     }
 
