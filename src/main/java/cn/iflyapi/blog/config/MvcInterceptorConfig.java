@@ -7,23 +7,18 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
 /**
- * @author: qfwang
- * @date: 2018-12-14 5:27 PM
+ * author: flyhero
+ * date: 2018-12-14 5:27 PM
  */
 @Configuration
 public class MvcInterceptorConfig extends WebMvcConfigurationSupport {
 
         private final static String[] EXCLUDED_PATH_PATTERNS = new String[] {
-            "/account/**",
             "/webjars/**",
             "/swagger-resources/**",
             "/v2/api-docs",
             "/error",
-            "/health/**",
-            "/device/pad/**",
-            "/ledSetting/colors",
             "/swagger-ui.html",
-            "/upload/**",
             "/api/**"
     };
 

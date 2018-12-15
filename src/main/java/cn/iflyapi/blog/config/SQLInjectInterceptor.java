@@ -9,7 +9,7 @@ import java.util.Enumeration;
 
 /**
  * 防御CSRF,XSS,SQL
- * Author: qfwang
+ * Author: flyhero
  * Date: 2018-03-21 上午11:45
  */
 public class SQLInjectInterceptor implements HandlerInterceptor {
