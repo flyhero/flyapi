@@ -2,6 +2,7 @@ package cn.iflyapi.blog.controller;
 
 import cn.iflyapi.blog.model.JSONResult;
 import cn.iflyapi.blog.service.UserService;
+import cn.iflyapi.blog.util.IPUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,9 +34,9 @@ public class UserController extends BaseController {
     @ApiOperation(value = "用户注册")
     @PostMapping("/users")
     public JSONResult login(String username, String password, Integer platform) {
-        return JSONResult.ok(userService.register(username, password, platform));
+        String ip = IPUtils.getIP(request);
+        return JSONResult.ok(userService.register(username, password, platform, ip));
     }
-
 
     @ApiOperation(value = "用户登录")
     @PostMapping("/users/login")

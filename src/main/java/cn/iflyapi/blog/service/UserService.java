@@ -31,11 +31,23 @@ public class UserService {
         return userDao.findAllByIsDeleteEquals(false);
     }
 
-    public Cookie register(String username, String password, Integer platform) {
+    /**
+     * @param username
+     * @param password
+     * @param platform
+     * @param ip
+     * @return Cookie
+     * @date 2018/12/15 5:43 PM
+     */
+    public Cookie register(String username, String password, Integer platform, String ip) {
         FastValidator.doit().notEmpty(username, "username")
                 .notEmpty(password, "passwd")
                 .onMax(username, 11, "username")
                 .onMin(password, 6, "passwd");
+
+        //TODO 相同ip每24h只能注册一次，防止恶意注册或接口调用
+
+
         boolean isEmail = FormatValidUtils.isEmail(username);
         boolean isPhoneNumber = FormatValidUtils.isPhoneNumber(username);
         if (!isEmail && !isPhoneNumber) {
