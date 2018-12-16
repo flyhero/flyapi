@@ -16,7 +16,9 @@ public class MvcInterceptorConfig extends WebMvcConfigurationSupport {
             "/swagger-resources/**",
             "/v2/api-docs",
             "/error",
-            "/swagger-ui.html/**"
+            "/swagger-ui.html/**",
+            "/users",
+            "/users/login"
     };
 
     /**
@@ -30,7 +32,7 @@ public class MvcInterceptorConfig extends WebMvcConfigurationSupport {
      * 所以一旦我们自己写的配置类继承了WebMvcConfigurationSupport，相当于容器中已经有了WebMvcConfigurationSupport，
      * 所有默认配置都不会生效，都得自己在配置文件中配置。
      * 二：继承WebMvcConfigurer接口，这里采用此方法 网上有人说使用该方法会导致date编译等问题，可能在配置文件中得到解决，
-     * 本人没有碰到，不多做解释
+     *
      */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {

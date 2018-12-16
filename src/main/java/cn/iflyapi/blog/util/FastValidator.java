@@ -2,9 +2,6 @@ package cn.iflyapi.blog.util;
 
 import cn.iflyapi.blog.exception.FlyapiException;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 /**
  * author: flyhero
  * date: 2018-12-15 10:49 AM
@@ -15,6 +12,13 @@ public class FastValidator {
         return new FastValidator();
     }
 
+    /**
+     * 校验参数不为空
+     *
+     * @param o
+     * @param paramName
+     * @return
+     */
     public FastValidator notEmpty(Object o, String paramName) {
         if (null == o) {
             throw new FlyapiException("参数[" + paramName + "]不能为空");
@@ -71,6 +75,20 @@ public class FastValidator {
                 throw new FlyapiException("参数[" + paramName + "]最小不能少于[" + min + "]");
             }
         }
+        return this;
+    }
+
+    /**
+     * 如果参数不为空判断长度
+     *
+     * @param o         待校验的参数
+     * @param max       最大长度
+     * @param paramName 待验证参数名称
+     * @return
+     */
+    public FastValidator ifNotEmptyOnMax(Object o, int max, String paramName) {
+        notEmpty(o, paramName);
+        onMax(o, max, paramName);
         return this;
     }
 

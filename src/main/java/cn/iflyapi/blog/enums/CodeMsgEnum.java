@@ -10,6 +10,11 @@ public enum CodeMsgEnum {
     USERNAME_OR_PASSWD_INVALID(40000, "用户名或密码不正确"),
     USERNAME_EXIST(40001, "用户名已存在"),
     USERNAME_MUST_MAIL_OR_PHONE(40002, "用户名必须是邮箱或手机号"),
+
+    RESOURCE_FORBIDDEN(40300, "你没有查看该资源的权限"),
+
+    RESOURCE_NOT_EXIST(40400, "你查询的资源不存在"),
+
     USER_IS_DISABLED(50000, "用户已被禁用");
 
 

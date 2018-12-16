@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * @author: qfwang
+ * @author: flyhero
  * @date: 2018-12-16 4:41 PM
  */
 @Service
@@ -20,9 +20,13 @@ public class SubjectService {
     @Autowired
     private SubjectDao subjectDao;
 
-    public List<Subject> listSubject(Long userId) {
-        return subjectDao.findSubjectsByUserIdAndIsDelete(userId, false);
+    public List<Subject> listSubject(Long userId, Long currentUserId) {
+        if (userId.equals(currentUserId)) {
+            return subjectDao.findSubjectsByUserIdAndIsDelete(userId, false);
+        }
+        return subjectDao.findSubjectsByUserIdAndIsDeleteAndIsPrivate(userId, false, false);
     }
+
 
     public Subject save(Subject subject) {
         FastValidator.doit().notEmpty(subject.getUserId(), "userId")

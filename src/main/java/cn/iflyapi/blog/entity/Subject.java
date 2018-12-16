@@ -1,7 +1,6 @@
 package cn.iflyapi.blog.entity;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.ser.std.StringSerializer;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import lombok.Data;
 
@@ -11,7 +10,7 @@ import javax.persistence.Table;
 import java.util.Date;
 
 /**
- * @author: qfwang
+ * @author: flyhero
  * @date: 2018-12-16 4:38 PM
  */
 @Data
@@ -28,6 +27,7 @@ public class Subject {
     /**
      * 作者id
      */
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long userId;
 
     /**
@@ -48,7 +48,7 @@ public class Subject {
     /**
      * 权限0公开1私有
      */
-    private Integer permissions;
+    private Boolean isPrivate;
 
     /**
      * 创建时间

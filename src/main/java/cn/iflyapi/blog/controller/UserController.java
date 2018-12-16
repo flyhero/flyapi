@@ -1,15 +1,13 @@
 package cn.iflyapi.blog.controller;
 
+import cn.iflyapi.blog.entity.User;
 import cn.iflyapi.blog.model.JSONResult;
 import cn.iflyapi.blog.service.UserService;
 import cn.iflyapi.blog.util.IPUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * author: flyhero
@@ -31,7 +29,7 @@ public class UserController extends BaseController {
     }
 
 
-    @ApiOperation(value = "用户注册")
+    @ApiOperation(value = "用户注册", notes = "platform 1:web 2:mobile")
     @PostMapping("/users")
     public JSONResult login(String username, String password, Integer platform) {
         String ip = IPUtils.getIP(request);
@@ -43,4 +41,5 @@ public class UserController extends BaseController {
     public JSONResult login(String username, String password) {
         return JSONResult.ok(userService.login(username, password));
     }
+
 }
