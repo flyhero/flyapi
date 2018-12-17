@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -15,9 +16,10 @@ import java.util.List;
 @Repository
 public interface SubjectDao extends JpaRepository<Subject, Long> {
 
+    @Transactional
     @Modifying
     @Query("update Subject set isDelete = 1 where subjectId = ?1")
-    boolean remove(Long subjectId);
+    int remove(Long subjectId);
 
     List<Subject> findSubjectsByUserIdAndIsDelete(Long userId, boolean isDelete);
 

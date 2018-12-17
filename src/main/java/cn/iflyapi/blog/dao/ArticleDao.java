@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -15,6 +16,7 @@ import java.util.List;
 @Repository
 public interface ArticleDao extends JpaRepository<Article, Long> {
 
+    @Transactional
     @Modifying
     @Query("update Article set isDelete = 1 where articleId = ?1")
     boolean remove(Long articleId);
