@@ -8,11 +8,13 @@ import cn.iflyapi.blog.exception.FlyapiException;
 import cn.iflyapi.blog.model.Cookie;
 import cn.iflyapi.blog.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 /**
  * author: flyhero
@@ -26,6 +28,9 @@ public class UserService {
 
     @Autowired
     private SnowflakeIdWorker idWorker;
+
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     public List<User> findAllUser() {
         return userDao.findAllByIsDeleteEquals(false);
@@ -45,8 +50,13 @@ public class UserService {
                 .onMax(username, 11, "username")
                 .onMin(password, 6, "passwd");
 
-        //TODO 相同ip每24h只能注册一次，防止恶意注册或接口调用
-
+        //相同ip每24h只能注册一次，防止恶意注册或接口调用
+        Object key = redisTemplate.opsForValue().get(ip + "-register");
+        if (Objects.isNull(key)) {
+            redisTemplate.opsForValue().set(ip + "-register", "1", 24, TimeUnit.HOURS);
+        } else {
+            throw new FlyapiException(CodeMsgEnum.USER_ALREADY_REGISTER);
+        }
 
         boolean isEmail = FormatValidUtils.isEmail(username);
         boolean isPhoneNumber = FormatValidUtils.isPhoneNumber(username);
