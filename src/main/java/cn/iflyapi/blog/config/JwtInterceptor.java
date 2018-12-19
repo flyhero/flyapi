@@ -1,6 +1,5 @@
 package cn.iflyapi.blog.config;
 
-import cn.iflyapi.blog.entity.User;
 import cn.iflyapi.blog.model.JSONResult;
 import cn.iflyapi.blog.util.JwtUtils;
 import com.alibaba.fastjson.JSONObject;
@@ -27,8 +26,6 @@ public class JwtInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
 
-        User userInfo = null;
-
         try {
             //过滤 OPTIONS 请求
             if ("OPTIONS".equals(httpServletRequest.getMethod())) {
@@ -39,13 +36,6 @@ public class JwtInterceptor implements HandlerInterceptor {
 
             if (StringUtils.isEmpty(token)) {
                 logger.error("token validate failed, no auth info in http header");
-                return setNoAuth(httpServletResponse);
-            }
-
-            String[] codes = token.split("\\.");
-
-            if (null == codes || codes.length < 2) {
-                logger.error("token validate failed, format error");
                 return setNoAuth(httpServletResponse);
             }
 
@@ -70,7 +60,7 @@ public class JwtInterceptor implements HandlerInterceptor {
         response.setHeader("Content-Type", MediaType.APPLICATION_JSON_UTF8_VALUE);
         response.setHeader("Access-Control-Allow-Origin", "*");
         response.setHeader("Access-Control-Allow-Credentials", "true");
-        response.getWriter().write(JSONObject.toJSONString(JSONResult.fail(HttpStatus.UNAUTHORIZED.value(),HttpStatus.UNAUTHORIZED.getReasonPhrase()), SerializerFeature.WriteMapNullValue));
+        response.getWriter().write(JSONObject.toJSONString(JSONResult.fail(HttpStatus.UNAUTHORIZED.value(), HttpStatus.UNAUTHORIZED.getReasonPhrase()), SerializerFeature.WriteMapNullValue));
         return false;
     }
 

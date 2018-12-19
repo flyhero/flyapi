@@ -9,11 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * 
  * @author flyhero
  * @date 2018/12/16 7:39 PM
  */
-@Api(value = "UserController", tags = "小书接口")
+@Api(value = "SubjectController", tags = "小书接口")
 @RestController
 public class SubjectController extends BaseController {
 
@@ -23,7 +22,7 @@ public class SubjectController extends BaseController {
     @ApiOperation("查询指定用户的小书")
     @GetMapping("/users/{userId}/subjects")
     public JSONResult find(@PathVariable Long userId) {
-        return JSONResult.ok(subjectService.listSubject(userId, getUserId()));
+        return JSONResult.ok(subjectService.listSubjects(userId, getUserId()));
     }
 
     @ApiOperation("增加小书")

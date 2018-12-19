@@ -1,7 +1,8 @@
 package cn.iflyapi.blog.service;
 
-import cn.iflyapi.blog.dao.UserDao;
+import cn.iflyapi.blog.dao.UserMapper;
 import cn.iflyapi.blog.entity.User;
+import cn.iflyapi.blog.entity.UserExample;
 import cn.iflyapi.blog.enums.CodeMsgEnum;
 import cn.iflyapi.blog.enums.PlatFormEnum;
 import cn.iflyapi.blog.exception.FlyapiException;
@@ -10,6 +11,7 @@ import cn.iflyapi.blog.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.DigestUtils;
 
 import java.util.List;
@@ -24,7 +26,7 @@ import java.util.concurrent.TimeUnit;
 public class UserService {
 
     @Autowired
-    private UserDao userDao;
+    private UserMapper userMapper;
 
     @Autowired
     private SnowflakeIdWorker idWorker;
@@ -33,7 +35,9 @@ public class UserService {
     private RedisTemplate redisTemplate;
 
     public List<User> findAllUser() {
-        return userDao.findAllByIsDeleteEquals(false);
+        UserExample userExample = new UserExample();
+        userExample.createCriteria().andIsDeleteEqualTo(false);
+        return userMapper.selectByExample(userExample);
     }
 
     /**
@@ -64,7 +68,9 @@ public class UserService {
             throw new FlyapiException(CodeMsgEnum.USERNAME_MUST_MAIL_OR_PHONE);
         }
         String encryptPasswd = DigestUtils.md5DigestAsHex(password.getBytes());
-        boolean isExist = userDao.existsUserByUsernameAndIsDelete(username, false);
+        UserExample userExample = new UserExample();
+        userExample.createCriteria().andUsernameEqualTo(username).andIsDeleteEqualTo(false);
+        boolean isExist = userMapper.countByExample(userExample) > 0;
         if (isExist) {
             throw new FlyapiException(CodeMsgEnum.USERNAME_EXIST);
         }
@@ -81,17 +87,17 @@ public class UserService {
         user.setPlatform(PlatFormEnum.isExistCode(platform) ? platform : 0);
 
 
-        User saveUser = userDao.save(user);
+        userMapper.insertSelective(user);
         String token = null;
         try {
-            token = JwtUtils.getToken(saveUser.getUserId(), saveUser.getNickName());
+            token = JwtUtils.getToken(user.getUserId(), user.getNickName());
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         Cookie cookie = new Cookie();
-        cookie.setUserId(saveUser.getUserId().toString());
-        cookie.setNickName(saveUser.getNickName());
+        cookie.setUserId(user.getUserId().toString());
+        cookie.setNickName(user.getNickName());
         cookie.setToken(token);
         return cookie;
     }
@@ -100,28 +106,31 @@ public class UserService {
         //1. 验证参数
         FastValidator.doit().notEmpty(username, "username").notEmpty(password, "passwd");
         //2. 业务判断
-        User user = userDao.findByUsernameAndPassword(username, password);
-        if (Objects.isNull(user)) {
+        String encryptPasswd = DigestUtils.md5DigestAsHex(password.getBytes());
+        UserExample userExample = new UserExample();
+        userExample.createCriteria().andUsernameEqualTo(username).andPasswordEqualTo(encryptPasswd);
+        List<User> userList = userMapper.selectByExample(userExample);
+        if (CollectionUtils.isEmpty(userList)) {
             throw new FlyapiException(CodeMsgEnum.USERNAME_OR_PASSWD_INVALID);
         }
-        if (user.getIsDisable()) {
+        if (userList.get(0).getIsDisable()) {
             throw new FlyapiException(CodeMsgEnum.USER_IS_DISABLED);
         }
         String token = null;
         try {
-            token = JwtUtils.getToken(user.getUserId(), user.getNickName());
+            token = JwtUtils.getToken(userList.get(0).getUserId(), userList.get(0).getNickName());
         } catch (Exception e) {
             e.printStackTrace();
         }
         Cookie cookie = new Cookie();
-        cookie.setUserId(user.getUserId().toString());
-        cookie.setNickName(user.getNickName());
+        cookie.setUserId(userList.get(0).getUserId().toString());
+        cookie.setNickName(userList.get(0).getNickName());
         cookie.setToken(token);
         return cookie;
     }
 
     public User findOne(Long userId) {
-        return userDao.getOne(userId);
+        return userMapper.selectByPrimaryKey(userId);
     }
 
 

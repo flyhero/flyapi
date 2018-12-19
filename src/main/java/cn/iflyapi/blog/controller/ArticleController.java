@@ -1,5 +1,7 @@
 package cn.iflyapi.blog.controller;
 
+import cn.iflyapi.blog.entity.Article;
+import cn.iflyapi.blog.entity.ArticleWithBLOBs;
 import cn.iflyapi.blog.model.JSONResult;
 import cn.iflyapi.blog.service.ArticleService;
 import io.swagger.annotations.Api;
@@ -25,4 +27,29 @@ public class ArticleController extends BaseController {
     public JSONResult findSubjectAticle(@PathVariable Long subjectId) {
         return JSONResult.ok(articleService.listArticle(subjectId, getUserId()));
     }
+
+    @ApiOperation("查询指定文章详情")
+    @GetMapping("/articles/{articleId}")
+    public JSONResult findAticle(@PathVariable Long articleId) {
+        ArticleWithBLOBs article = articleService.findArticle(articleId);
+        //TODO 记录用户查看的文章 用户分析推荐
+
+        return JSONResult.ok(article);
+    }
+
+
+    /**
+     *
+     * @param title
+     * @param orderby {@link cn.iflyapi.blog.enums.OrderbyEnum}
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    @ApiOperation(value = "查询文章列表", notes = "1.根据日期倒序 2.根据评论，点赞等 3.根据用户喜好")
+    @GetMapping("/articles")
+    public JSONResult findAticles(String title, int orderby, int pageNum, int pageSize) {
+        return JSONResult.ok(articleService.listPageAticles(title, orderby, pageNum, pageSize));
+    }
+
 }

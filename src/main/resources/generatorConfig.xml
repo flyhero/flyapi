@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+
+    <!-- Note that you have to specify the driver place here. The tool does
+        not appear to use the Eclipse classpath or the project classpath -->
+
+    <context id="context1" targetRuntime="MyBatis3">
+        <!--注释控制-->
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+        <!-- Where to pull the data from -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/flyapi?autoCommit=true" userId="root"
+                        password="123456"/>
+
+        <!-- Note that the targetProject refers to the name of the project in your
+            Eclipse IDE (not the name of the Maven project). If run outside of the IDE
+            you can specify a path instead, but there doesn't seem to be a nice way to
+            specify a single path for both usage scenarios. -->
+
+        <!-- Generates the model (the objects that hold the data) -->
+        <javaModelGenerator targetPackage="cn.iflyapi.blog.entity" targetProject="./src/main/java"/>
+        <!-- sql map -->
+        <sqlMapGenerator targetPackage="mapper" targetProject="./src/main/resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+        <!-- Generates the interfaces used to retrieve data -->
+        <javaClientGenerator targetPackage="cn.iflyapi.blog.dao"
+                             targetProject="./src/main/java"
+                             type="XMLMAPPER"/>
+
+        <table tableName="ucenter_user" domainObjectName="User">
+            <generatedKey column="user_id" sqlStatement="MySql" identity="true"/>
+            <columnOverride column="sex" javaType="java.lang.Integer"/>
+            <columnOverride column="platform" javaType="java.lang.Integer"/>
+            <columnOverride column="is_disable" javaType="java.lang.Boolean"/>
+            <columnOverride column="is_delete" javaType="java.lang.Boolean"/>
+        </table>
+
+        <table tableName="cms_subject" domainObjectName="Subject">
+            <generatedKey column="subject_id" sqlStatement="MySql" identity="true"/>
+            <columnOverride column="is_private" javaType="java.lang.Boolean"/>
+            <columnOverride column="is_delete" javaType="java.lang.Boolean"/>
+        </table>
+
+        <table tableName="cms_article" domainObjectName="Article">
+            <generatedKey column="article_id" sqlStatement="MySql" identity="true"/>
+            <columnOverride column="status" javaType="java.lang.Integer"/>
+            <columnOverride column="is_delete" javaType="java.lang.Boolean"/>
+        </table>
+
+    </context>
+</generatorConfiguration>

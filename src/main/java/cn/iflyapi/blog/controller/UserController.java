@@ -1,6 +1,5 @@
 package cn.iflyapi.blog.controller;
 
-import cn.iflyapi.blog.entity.User;
 import cn.iflyapi.blog.model.JSONResult;
 import cn.iflyapi.blog.service.UserService;
 import cn.iflyapi.blog.util.IPUtils;

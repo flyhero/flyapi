@@ -41,7 +41,7 @@ public abstract class BaseController {
      */
     protected Long getUserId() {
         Map<String, Claim> map = getStringClaimMap();
-        if (CollectionUtils.isEmpty(map)) {
+        if (CollectionUtils.isEmpty(map) || null == map.get("userId")) {
             return null;
         }
         return Long.valueOf(map.get("userId").asString());
@@ -54,7 +54,7 @@ public abstract class BaseController {
      */
     protected Long getNickName() {
         Map<String, Claim> map = getStringClaimMap();
-        if (CollectionUtils.isEmpty(map)) {
+        if (CollectionUtils.isEmpty(map)  || null == map.get("nickName")) {
             return null;
         }
         return Long.valueOf(map.get("nickName").asString());

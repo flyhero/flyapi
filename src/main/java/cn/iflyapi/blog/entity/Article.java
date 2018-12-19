@@ -1,103 +1,145 @@
 package cn.iflyapi.blog.entity;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
-import lombok.Data;
-
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import java.util.Date;
 
-/**
- * author flyhero
- * date 2018/12/16 6:46 PM
- */
-@Data
-@Entity
-@Table(name = "cms_article")
 public class Article {
-    /**
-     * 文章id
-     */
-    @Id
-    @JsonSerialize(using = ToStringSerializer.class)
     private Long articleId;
 
-    /**
-     * 专题id
-     */
-    @JsonSerialize(using = ToStringSerializer.class)
     private Long subjectId;
 
-    /**
-     * 作者id
-     */
-    @JsonSerialize(using = ToStringSerializer.class)
     private Long userId;
 
-    /**
-     * 标题
-     */
     private String title;
 
-    /**
-     * 摘要
-     */
     private String articleDes;
 
-    /**
-     * 封面
-     */
     private String cover;
 
-    /**
-     * 原文链接
-     */
     private String original;
 
-    /**
-     * 阅读数
-     */
     private Integer viewNum;
 
-    /**
-     * 评论数
-     */
     private Integer commentNum;
 
-    /**
-     * 喜欢数
-     */
     private Integer likeNum;
 
-    /**
-     * 创建时间
-     */
     private Date createTime;
 
-    /**
-     * 修改时间
-     */
     private Date updateTime;
 
-    /**
-     * 0草稿1发布
-     */
     private Integer status;
 
-    /**
-     * 0显示1删除
-     */
     private Boolean isDelete;
 
-    /**
-     * md内容
-     */
-    private String mdContent;
+    public Long getArticleId() {
+        return articleId;
+    }
 
-    /**
-     * html内容
-     */
-    private String htmlContent;
+    public void setArticleId(Long articleId) {
+        this.articleId = articleId;
+    }
+
+    public Long getSubjectId() {
+        return subjectId;
+    }
+
+    public void setSubjectId(Long subjectId) {
+        this.subjectId = subjectId;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getArticleDes() {
+        return articleDes;
+    }
+
+    public void setArticleDes(String articleDes) {
+        this.articleDes = articleDes;
+    }
+
+    public String getCover() {
+        return cover;
+    }
+
+    public void setCover(String cover) {
+        this.cover = cover;
+    }
+
+    public String getOriginal() {
+        return original;
+    }
+
+    public void setOriginal(String original) {
+        this.original = original;
+    }
+
+    public Integer getViewNum() {
+        return viewNum;
+    }
+
+    public void setViewNum(Integer viewNum) {
+        this.viewNum = viewNum;
+    }
+
+    public Integer getCommentNum() {
+        return commentNum;
+    }
+
+    public void setCommentNum(Integer commentNum) {
+        this.commentNum = commentNum;
+    }
+
+    public Integer getLikeNum() {
+        return likeNum;
+    }
+
+    public void setLikeNum(Integer likeNum) {
+        this.likeNum = likeNum;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public Boolean getIsDelete() {
+        return isDelete;
+    }
+
+    public void setIsDelete(Boolean isDelete) {
+        this.isDelete = isDelete;
+    }
 }

@@ -1,45 +1,81 @@
 package cn.iflyapi.blog.service;
 
-import cn.iflyapi.blog.dao.ArticleDao;
-import cn.iflyapi.blog.dao.SubjectDao;
-import cn.iflyapi.blog.entity.Article;
-import cn.iflyapi.blog.entity.Subject;
+import cn.iflyapi.blog.dao.ArticleMapper;
+import cn.iflyapi.blog.dao.SubjectMapper;
+import cn.iflyapi.blog.entity.*;
 import cn.iflyapi.blog.enums.CodeMsgEnum;
+import cn.iflyapi.blog.enums.OrderbyEnum;
 import cn.iflyapi.blog.exception.FlyapiException;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.Objects;
 
 /**
- * author flyhero
- * date 2018/12/16 6:52 PM
+ * @author flyhero
+ * @date 2018/12/16 6:52 PM
  */
 @Service
 public class ArticleService {
 
     @Autowired
-    private ArticleDao articleDao;
+    private ArticleMapper articleMapper;
 
     @Autowired
-    private SubjectDao subjectDao;
+    private SubjectMapper subjectMapper;
 
     public List<Article> listArticle(Long subjectId, Long userId) {
-        boolean isOwn = subjectDao.existsSubjectBySubjectIdAndUserId(subjectId, userId);
+        SubjectExample subjectExample = new SubjectExample();
+        subjectExample.createCriteria().andSubjectIdEqualTo(subjectId).andUserIdEqualTo(userId);
+        boolean isOwn = subjectMapper.countByExample(subjectExample) > 0;
         if (!isOwn) {
-            Subject subject = subjectDao.getOne(subjectId);
-            if (Objects.isNull(subject)) {
+            Subject subject = subjectMapper.selectByPrimaryKey(subjectId);
+            if (Objects.isNull(subject) || subject.getIsDelete()) {
                 throw new FlyapiException(CodeMsgEnum.RESOURCE_NOT_EXIST);
             }
             if (subject.getIsPrivate()) {
                 throw new FlyapiException(CodeMsgEnum.RESOURCE_FORBIDDEN);
             }
         }
-        return articleDao.findArticlesBySubjectIdAndIsDelete(subjectId, false);
+        ArticleExample articleExample = new ArticleExample();
+        articleExample.createCriteria().andSubjectIdEqualTo(subjectId).andIsDeleteEqualTo(false);
+        return articleMapper.selectByExample(articleExample);
+    }
+
+    public ArticleWithBLOBs findArticle(Long articleId) {
+        ArticleWithBLOBs articleWithBLOBs = articleMapper.selectByPrimaryKey(articleId);
+        if (Objects.isNull(articleWithBLOBs) || articleWithBLOBs.getIsDelete()) {
+            throw new FlyapiException(CodeMsgEnum.RESOURCE_NOT_EXIST);
+        }
+        return articleWithBLOBs;
+    }
+
+    public Page<Article> listPageAticles(String title, int orderby, int pageNum, int pageSize) {
+        ArticleExample articleExample = new ArticleExample();
+        if (!StringUtils.isEmpty(title)) {
+            articleExample.createCriteria().andTitleLike("%" + title + "%").andIsDeleteEqualTo(false);
+            articleExample.setOrderByClause("create_time desc");
+        } else {
+            if (OrderbyEnum.CREATETIME.getCode() == orderby) {
+                articleExample.setOrderByClause("create_time desc");
+            } else if (OrderbyEnum.HOT.getCode() == orderby) {
+                articleExample.setOrderByClause("like_num,comment_num,view_num desc");
+            } else if (OrderbyEnum.PREDICTION.getCode() == orderby) {
+
+            }
+        }
+        return PageHelper.startPage(pageNum, pageSize)
+                .doSelectPage(() -> articleMapper.selectByExample(articleExample));
     }
 
     public boolean remove(Long articleId) {
-        return articleDao.remove(articleId);
+        ArticleWithBLOBs article = new ArticleWithBLOBs();
+        article.setArticleId(articleId);
+        article.setIsDelete(true);
+        return articleMapper.updateByPrimaryKeySelective(article) > 0;
     }
 }
