@@ -54,7 +54,7 @@ public class MvcInterceptorConfig extends WebMvcConfigurationSupport {
     @Override
     protected void addInterceptors(InterceptorRegistry registry) {
         // 注册拦截器
-        InterceptorRegistration ir = registry.addInterceptor(new JwtInterceptor());
+        InterceptorRegistration ir = registry.addInterceptor(jwtInterceptor());
         // 配置拦截的路径
         ir.addPathPatterns("/**");
         // 配置不拦截的路径
