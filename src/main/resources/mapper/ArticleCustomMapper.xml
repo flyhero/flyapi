@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.iflyapi.blog.dao.custom.ArticleCustomMapper">
+
+    <update id="addNum" parameterType="cn.iflyapi.blog.pojo.po.ArticleStats">
+        update cms_article
+        set
+        <if test="num == 1">
+            view_num = #{viewNum,jdbcType=INTEGER}
+        </if>
+        <if test="num == 2">
+            comment_num = #{commentNum,jdbcType=INTEGER}
+        </if>
+        <if test="num == 3">
+            like_num = #{likeNum,jdbcType=INTEGER}
+        </if>
+        where article_id = #{articleId,jdbcType=BIGINT}
+    </update>
+
+</mapper>

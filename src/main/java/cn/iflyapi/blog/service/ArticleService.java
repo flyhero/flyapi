@@ -1,11 +1,15 @@
 package cn.iflyapi.blog.service;
 
+import cn.iflyapi.blog.annotation.OpLog;
 import cn.iflyapi.blog.dao.ArticleMapper;
 import cn.iflyapi.blog.dao.SubjectMapper;
+import cn.iflyapi.blog.dao.custom.ArticleCustomMapper;
 import cn.iflyapi.blog.entity.*;
 import cn.iflyapi.blog.enums.CodeMsgEnum;
+import cn.iflyapi.blog.enums.OperationEnum;
 import cn.iflyapi.blog.enums.OrderbyEnum;
 import cn.iflyapi.blog.exception.FlyapiException;
+import cn.iflyapi.blog.pojo.po.ArticleStats;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +32,9 @@ public class ArticleService {
     @Autowired
     private SubjectMapper subjectMapper;
 
+    @Autowired
+    private ArticleCustomMapper articleCustomMapper;
+
     public List<Article> listArticle(Long subjectId, Long userId) {
         SubjectExample subjectExample = new SubjectExample();
         subjectExample.createCriteria().andSubjectIdEqualTo(subjectId).andUserIdEqualTo(userId);
@@ -46,11 +53,13 @@ public class ArticleService {
         return articleMapper.selectByExample(articleExample);
     }
 
+    @OpLog(op = OperationEnum.ARTICLE_READ, score = 2)
     public ArticleWithBLOBs findArticle(Long articleId) {
         ArticleWithBLOBs articleWithBLOBs = articleMapper.selectByPrimaryKey(articleId);
         if (Objects.isNull(articleWithBLOBs) || articleWithBLOBs.getIsDelete()) {
             throw new FlyapiException(CodeMsgEnum.RESOURCE_NOT_EXIST);
         }
+        articleCustomMapper.addNum(ArticleStats.view(articleId));
         return articleWithBLOBs;
     }
 
