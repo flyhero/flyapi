@@ -12,6 +12,8 @@ public enum CodeMsgEnum {
     USERNAME_MUST_MAIL_OR_PHONE(40002, "用户名必须是邮箱或手机号"),
     USER_ALREADY_REGISTER(40003, "你已经注册过了"),
 
+    IMG_BED_MUST_BE_SET(40010, "你必须设置你的图床或赞助使用我们提供的图床"),
+
     RESOURCE_FORBIDDEN(40300, "你没有查看该资源的权限"),
 
     RESOURCE_NOT_EXIST(40400, "你查询的资源不存在"),

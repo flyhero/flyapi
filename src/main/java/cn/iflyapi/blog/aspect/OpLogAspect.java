@@ -66,6 +66,7 @@ public class OpLogAspect {
         userLog.setOpType(operationEnum.getCode());
         userLog.setScore(score);
         userLog.setUserAgent(request.getHeader("User-Agent"));
+        userLog.setUserIp(userIp);
 
         if (null != map) {
             userLog.setUserId(Long.valueOf(map.get("userId").asString()));

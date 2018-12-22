@@ -2,6 +2,7 @@ package cn.iflyapi.blog.service;
 
 import cn.iflyapi.blog.annotation.OpLog;
 import cn.iflyapi.blog.dao.UserMapper;
+import cn.iflyapi.blog.entity.Store;
 import cn.iflyapi.blog.entity.User;
 import cn.iflyapi.blog.entity.UserExample;
 import cn.iflyapi.blog.enums.CodeMsgEnum;
@@ -35,6 +36,9 @@ public class UserService {
 
     @Autowired
     private RedisTemplate redisTemplate;
+
+    @Autowired
+    private StoreService storeService;
 
     public List<User> findAllUser() {
         UserExample userExample = new UserExample();
@@ -89,6 +93,13 @@ public class UserService {
         user.setPlatform(PlatFormEnum.isExistCode(platform) ? platform : 0);
 
         userMapper.insertSelective(user);
+
+        //默认图床设置
+        Store store = new Store();
+        store.setId(idWorker.nextId());
+        store.setUserId(user.getUserId());
+        storeService.save(store);
+
         String token = null;
         try {
             token = JwtUtils.getToken(user.getUserId(), user.getNickName());
