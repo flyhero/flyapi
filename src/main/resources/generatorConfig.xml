@@ -33,7 +33,7 @@
                              targetProject="./src/main/java"
                              type="XMLMAPPER"/>
 
-        <table tableName="ucenter_user" domainObjectName="User">
+<!--        <table tableName="ucenter_user" domainObjectName="User">
             <generatedKey column="user_id" sqlStatement="MySql" identity="true"/>
             <columnOverride column="sex" javaType="java.lang.Integer"/>
             <columnOverride column="platform" javaType="java.lang.Integer"/>
@@ -51,7 +51,12 @@
             <generatedKey column="article_id" sqlStatement="MySql" identity="true"/>
             <columnOverride column="status" javaType="java.lang.Integer"/>
             <columnOverride column="is_delete" javaType="java.lang.Boolean"/>
-        </table>
+        </table>-->
+
+<!--        <table tableName="ucenter_user_log" domainObjectName="UserLog">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+            <columnOverride column="op_type" javaType="java.lang.Integer"/>
+        </table>-->
 
     </context>
 </generatorConfiguration>

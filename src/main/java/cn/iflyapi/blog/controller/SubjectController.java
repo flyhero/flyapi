@@ -1,5 +1,6 @@
 package cn.iflyapi.blog.controller;
 
+import cn.iflyapi.blog.annotation.OpenApi;
 import cn.iflyapi.blog.entity.Subject;
 import cn.iflyapi.blog.model.JSONResult;
 import cn.iflyapi.blog.service.SubjectService;
@@ -19,6 +20,7 @@ public class SubjectController extends BaseController {
     @Autowired
     private SubjectService subjectService;
 
+    @OpenApi("/users/*/subjects")
     @ApiOperation("查询指定用户的小书")
     @GetMapping("/users/{userId}/subjects")
     public JSONResult find(@PathVariable Long userId) {
@@ -29,5 +31,18 @@ public class SubjectController extends BaseController {
     @PostMapping("/subjects")
     public JSONResult add(@RequestBody Subject subject) {
         return JSONResult.ok(subjectService.save(subject));
+    }
+
+    @ApiOperation("更改小书")
+    @PatchMapping("/subjects/{subjectId}")
+    public JSONResult update(@PathVariable Long subjectId,@RequestBody Subject subject) {
+        subject.setSubjectId(subjectId);
+        return JSONResult.ok(subjectService.update(subject));
+    }
+
+    @ApiOperation("删除小书")
+    @DeleteMapping("/subjects/{subjectId}")
+    public JSONResult remove(@PathVariable Long subjectId) {
+        return JSONResult.ok(subjectService.remove(subjectId));
     }
 }

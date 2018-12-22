@@ -14,7 +14,7 @@ import static cn.iflyapi.blog.util.StrUtils.EMPTY_JSON;
  *
  * @author xiaoleilu
  */
-public class HtmlUtil {
+public class HtmlUtils {
     public static final String NBSP = StrUtils.HTML_NBSP;
     public static final String AMP = StrUtils.HTML_AMP;
     public static final String QUOTE = StrUtils.HTML_QUOTE;

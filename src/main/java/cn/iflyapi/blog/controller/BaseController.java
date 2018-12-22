@@ -52,12 +52,12 @@ public abstract class BaseController {
      *
      * @return
      */
-    protected Long getNickName() {
+    protected String getNickName() {
         Map<String, Claim> map = getStringClaimMap();
         if (CollectionUtils.isEmpty(map)  || null == map.get("nickName")) {
             return null;
         }
-        return Long.valueOf(map.get("nickName").asString());
+        return map.get("nickName").asString();
     }
 
     private Map<String, Claim> getStringClaimMap() {

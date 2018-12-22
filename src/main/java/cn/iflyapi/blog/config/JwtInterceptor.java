@@ -101,10 +101,19 @@ public class JwtInterceptor implements HandlerInterceptor {
                 return true;
             }
         } else {
-            String suffixPath = current.substring(index);
-            if (suffixPath.split("/").length == 1) {
+            String[] targets = target.split("/");
+            String[] currents = current.split("/");
+            if (targets.length == currents.length) {
+                for (int i = 0; i < targets.length; i++) {
+                    if (!targets[i].equals("*")) {
+                        if (!targets[i].equals(currents[i])) {
+                            return false;
+                        }
+                    }
+                }
                 return true;
             }
+
         }
 
         return false;
@@ -114,12 +123,16 @@ public class JwtInterceptor implements HandlerInterceptor {
         String s = "/users/*";
         System.out.println(s.indexOf("*"));
         System.out.println(s.substring(0, s.indexOf("*")));
-        System.out.println(s.substring(s.indexOf("*")));
+        System.out.println(s.substring(s.indexOf("*")+1).equals(""));
         System.out.println(s.contains("**"));
+        System.out.println(s.split("/").length);
 
         String p = "users";
         System.out.println(p.split("/").length);
         System.out.println(p.split("/")[0]);
+
+        String m = "/users/*/subjects";
+        System.out.println();
     }
 
     @Override

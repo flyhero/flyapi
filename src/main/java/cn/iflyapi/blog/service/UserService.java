@@ -1,9 +1,11 @@
 package cn.iflyapi.blog.service;
 
+import cn.iflyapi.blog.annotation.OpLog;
 import cn.iflyapi.blog.dao.UserMapper;
 import cn.iflyapi.blog.entity.User;
 import cn.iflyapi.blog.entity.UserExample;
 import cn.iflyapi.blog.enums.CodeMsgEnum;
+import cn.iflyapi.blog.enums.OperationEnum;
 import cn.iflyapi.blog.enums.PlatFormEnum;
 import cn.iflyapi.blog.exception.FlyapiException;
 import cn.iflyapi.blog.model.Cookie;
@@ -86,7 +88,6 @@ public class UserService {
         }
         user.setPlatform(PlatFormEnum.isExistCode(platform) ? platform : 0);
 
-
         userMapper.insertSelective(user);
         String token = null;
         try {
@@ -102,6 +103,7 @@ public class UserService {
         return cookie;
     }
 
+    @OpLog(op = OperationEnum.USER_LOGIN, score = 2)
     public Cookie login(String username, String password) {
         //1. 验证参数
         FastValidator.doit().notEmpty(username, "username").notEmpty(password, "passwd");
@@ -130,7 +132,11 @@ public class UserService {
     }
 
     public User findOne(Long userId) {
-        return userMapper.selectByPrimaryKey(userId);
+        User user = userMapper.selectByPrimaryKey(userId);
+        if (Objects.isNull(user)) {
+            throw new FlyapiException(CodeMsgEnum.RESOURCE_NOT_EXIST);
+        }
+        return user;
     }
 
 

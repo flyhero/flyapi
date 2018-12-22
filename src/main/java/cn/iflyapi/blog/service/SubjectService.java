@@ -48,6 +48,14 @@ public class SubjectService {
         return subjectMapper.selectByPrimaryKey(subject.getSubjectId());
     }
 
+    public boolean update(Subject subject) {
+        FastValidator.doit().notEmpty(subject.getUserId(), "userId")
+                .notEmpty(subject.getSubjectTitle(), "subjectTitle")
+                .onMax(subject.getSubjectTitle(), 20, "subjectTitle");
+
+        return subjectMapper.updateByPrimaryKeySelective(subject) > 0;
+    }
+
     public boolean remove(Long subjectId) {
         Subject subject = new Subject();
         subject.setSubjectId(subjectId);

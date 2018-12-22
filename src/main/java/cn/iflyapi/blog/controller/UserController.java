@@ -1,6 +1,9 @@
 package cn.iflyapi.blog.controller;
 
+import cn.iflyapi.blog.annotation.OpenApi;
+import cn.iflyapi.blog.entity.User;
 import cn.iflyapi.blog.model.JSONResult;
+import cn.iflyapi.blog.pojo.dto.LoginDto;
 import cn.iflyapi.blog.service.UserService;
 import cn.iflyapi.blog.util.IPUtils;
 import io.swagger.annotations.Api;
@@ -27,18 +30,25 @@ public class UserController extends BaseController {
         return JSONResult.ok(userService.findOne(userId));
     }
 
-
+    @OpenApi("/users")
     @ApiOperation(value = "用户注册", notes = "platform 1:web 2:mobile")
     @PostMapping("/users")
-    public JSONResult login(String username, String password, Integer platform) {
+    public JSONResult register(@RequestBody LoginDto loginDto) {
         String ip = IPUtils.getIP(request);
-        return JSONResult.ok(userService.register(username, password, platform, ip));
+        return JSONResult.ok(userService.register(loginDto.getUsername(), loginDto.getPassword(), loginDto.getPlatform(), ip));
     }
 
+    @OpenApi("/users/login")
     @ApiOperation(value = "用户登录")
     @PostMapping("/users/login")
-    public JSONResult login(String username, String password) {
-        return JSONResult.ok(userService.login(username, password));
+    public JSONResult login(@RequestBody LoginDto loginDto) {
+        return JSONResult.ok(userService.login(loginDto.getUsername(), loginDto.getPassword()));
+    }
+
+    @ApiOperation(value = "用户信息修改")
+    @PatchMapping("/users/{userId}")
+    public JSONResult update(@RequestBody User user, @PathVariable Long userId) {
+        return JSONResult.ok();
     }
 
 }
