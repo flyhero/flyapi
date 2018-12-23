@@ -104,22 +104,19 @@
     </if>
   </delete>
   <insert id="insert" parameterType="cn.iflyapi.blog.entity.Subject">
-    <selectKey keyProperty="subjectId" order="AFTER" resultType="java.lang.Long">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into cms_subject (user_id, cover, subject_title, 
-      subject_des, is_private, create_time, 
-      is_delete)
-    values (#{userId,jdbcType=BIGINT}, #{cover,jdbcType=VARCHAR}, #{subjectTitle,jdbcType=VARCHAR}, 
-      #{subjectDes,jdbcType=VARCHAR}, #{isPrivate,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{isDelete,jdbcType=BIT})
+    insert into cms_subject (subject_id, user_id, cover, 
+      subject_title, subject_des, is_private, 
+      create_time, is_delete)
+    values (#{subjectId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{cover,jdbcType=VARCHAR}, 
+      #{subjectTitle,jdbcType=VARCHAR}, #{subjectDes,jdbcType=VARCHAR}, #{isPrivate,jdbcType=BIT}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{isDelete,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="cn.iflyapi.blog.entity.Subject">
-    <selectKey keyProperty="subjectId" order="AFTER" resultType="java.lang.Long">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
     insert into cms_subject
     <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="subjectId != null">
+        subject_id,
+      </if>
       <if test="userId != null">
         user_id,
       </if>
@@ -143,6 +140,9 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="subjectId != null">
+        #{subjectId,jdbcType=BIGINT},
+      </if>
       <if test="userId != null">
         #{userId,jdbcType=BIGINT},
       </if>

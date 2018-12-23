@@ -33,43 +33,36 @@
                              targetProject="./src/main/java"
                              type="XMLMAPPER"/>
 
-        <!--        <table tableName="ucenter_user" domainObjectName="User">
-                    <generatedKey column="user_id" sqlStatement="MySql" identity="true"/>
-                    <columnOverride column="sex" javaType="java.lang.Integer"/>
-                    <columnOverride column="platform" javaType="java.lang.Integer"/>
-                    <columnOverride column="is_disable" javaType="java.lang.Boolean"/>
-                    <columnOverride column="is_delete" javaType="java.lang.Boolean"/>
-                </table>
+    <!--    <table tableName="ucenter_user" domainObjectName="User">
+            <columnOverride column="sex" javaType="java.lang.Integer"/>
+            <columnOverride column="platform" javaType="java.lang.Integer"/>
+            <columnOverride column="is_disable" javaType="java.lang.Boolean"/>
+            <columnOverride column="is_delete" javaType="java.lang.Boolean"/>
+        </table>
 
-                <table tableName="cms_subject" domainObjectName="Subject">
-                    <generatedKey column="subject_id" sqlStatement="MySql" identity="true"/>
-                    <columnOverride column="is_private" javaType="java.lang.Boolean"/>
-                    <columnOverride column="is_delete" javaType="java.lang.Boolean"/>
-                </table>
+        <table tableName="cms_subject" domainObjectName="Subject">
+            <columnOverride column="is_private" javaType="java.lang.Boolean"/>
+            <columnOverride column="is_delete" javaType="java.lang.Boolean"/>
+        </table>
 
-                <table tableName="cms_article" domainObjectName="Article">
-                    <generatedKey column="article_id" sqlStatement="MySql" identity="true"/>
-                    <columnOverride column="status" javaType="java.lang.Integer"/>
-                    <columnOverride column="is_delete" javaType="java.lang.Boolean"/>
-                </table>-->
+        <table tableName="cms_article" domainObjectName="Article">
+            <columnOverride column="status" javaType="java.lang.Integer"/>
+            <columnOverride column="is_delete" javaType="java.lang.Boolean"/>
+        </table>
 
-        <!--        <table tableName="ucenter_user_log" domainObjectName="UserLog">
-                    <generatedKey column="id" sqlStatement="MySql" identity="true"/>
-                    <columnOverride column="op_type" javaType="java.lang.Integer"/>
-                </table>-->
-        <!--        <table tableName="setting_store" domainObjectName="Store">
-                    <generatedKey column="id" sqlStatement="MySql" identity="true"/>
-                    <columnOverride column="is_delete" javaType="java.lang.Boolean"/>
-                    <columnOverride column="vip" javaType="java.lang.Integer"/>
-                </table>-->
+        <table tableName="ucenter_user_log" domainObjectName="UserLog">
+            <columnOverride column="op_type" javaType="java.lang.Integer"/>
+        </table>
+        <table tableName="setting_store" domainObjectName="Store">
+            <columnOverride column="is_delete" javaType="java.lang.Boolean"/>
+            <columnOverride column="vip" javaType="java.lang.Integer"/>
+        </table>
 
-        <!--        <table tableName="ucenter_user_file" domainObjectName="UserFile">
-                    <generatedKey column="id" sqlStatement="MySql" identity="true"/>
-                    <columnOverride column="is_delete" javaType="java.lang.Boolean"/>
-                </table>-->
+        <table tableName="ucenter_user_file" domainObjectName="UserFile">
+            <columnOverride column="is_delete" javaType="java.lang.Boolean"/>
+        </table>
 
-<!--        <table tableName="setting_carousel" domainObjectName="Carousel">
-            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        <table tableName="setting_carousel" domainObjectName="Carousel">
             <columnOverride column="sort" javaType="java.lang.Integer"/>
             <columnOverride column="is_delete" javaType="java.lang.Boolean"/>
         </table>-->

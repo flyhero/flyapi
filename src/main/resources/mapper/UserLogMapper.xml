@@ -104,22 +104,21 @@
     </if>
   </delete>
   <insert id="insert" parameterType="cn.iflyapi.blog.entity.UserLog">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into ucenter_user_log (user_id, user_nick_name, score, 
-      op_type, content, user_agent, 
-      user_ip, create_time)
-    values (#{userId,jdbcType=BIGINT}, #{userNickName,jdbcType=VARCHAR}, #{score,jdbcType=INTEGER}, 
-      #{opType,jdbcType=TINYINT}, #{content,jdbcType=VARCHAR}, #{userAgent,jdbcType=VARCHAR}, 
-      #{userIp,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
+    insert into ucenter_user_log (id, user_id, user_nick_name, 
+      score, op_type, content, 
+      user_agent, user_ip, create_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{userNickName,jdbcType=VARCHAR}, 
+      #{score,jdbcType=INTEGER}, #{opType,jdbcType=TINYINT}, #{content,jdbcType=VARCHAR}, 
+      #{userAgent,jdbcType=VARCHAR}, #{userIp,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="cn.iflyapi.blog.entity.UserLog">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
     insert into ucenter_user_log
     <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
       <if test="userId != null">
         user_id,
       </if>
@@ -146,6 +145,9 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
       <if test="userId != null">
         #{userId,jdbcType=BIGINT},
       </if>

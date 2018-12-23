@@ -7,6 +7,7 @@
     <result column="user_id" jdbcType="BIGINT" property="userId" />
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="article_des" jdbcType="VARCHAR" property="articleDes" />
+    <result column="tags" jdbcType="VARCHAR" property="tags" />
     <result column="cover" jdbcType="VARCHAR" property="cover" />
     <result column="original" jdbcType="VARCHAR" property="original" />
     <result column="view_num" jdbcType="INTEGER" property="viewNum" />
@@ -80,8 +81,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    article_id, subject_id, user_id, title, article_des, cover, original, view_num, comment_num, 
-    like_num, create_time, update_time, status, is_delete
+    article_id, subject_id, user_id, title, article_des, tags, cover, original, view_num, 
+    comment_num, like_num, create_time, update_time, status, is_delete
   </sql>
   <sql id="Blob_Column_List">
     md_content, html_content
@@ -135,28 +136,25 @@
     </if>
   </delete>
   <insert id="insert" parameterType="cn.iflyapi.blog.entity.ArticleWithBLOBs">
-    <selectKey keyProperty="articleId" order="AFTER" resultType="java.lang.Long">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into cms_article (subject_id, user_id, title, 
-      article_des, cover, original, 
-      view_num, comment_num, like_num, 
-      create_time, update_time, status, 
-      is_delete, md_content, html_content
-      )
-    values (#{subjectId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, 
-      #{articleDes,jdbcType=VARCHAR}, #{cover,jdbcType=VARCHAR}, #{original,jdbcType=VARCHAR}, 
-      #{viewNum,jdbcType=INTEGER}, #{commentNum,jdbcType=INTEGER}, #{likeNum,jdbcType=INTEGER}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT}, 
-      #{isDelete,jdbcType=BIT}, #{mdContent,jdbcType=LONGVARCHAR}, #{htmlContent,jdbcType=LONGVARCHAR}
-      )
+    insert into cms_article (article_id, subject_id, user_id, 
+      title, article_des, tags, 
+      cover, original, view_num, 
+      comment_num, like_num, create_time, 
+      update_time, status, is_delete, 
+      md_content, html_content)
+    values (#{articleId,jdbcType=BIGINT}, #{subjectId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, 
+      #{title,jdbcType=VARCHAR}, #{articleDes,jdbcType=VARCHAR}, #{tags,jdbcType=VARCHAR}, 
+      #{cover,jdbcType=VARCHAR}, #{original,jdbcType=VARCHAR}, #{viewNum,jdbcType=INTEGER}, 
+      #{commentNum,jdbcType=INTEGER}, #{likeNum,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT}, #{isDelete,jdbcType=BIT}, 
+      #{mdContent,jdbcType=LONGVARCHAR}, #{htmlContent,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.iflyapi.blog.entity.ArticleWithBLOBs">
-    <selectKey keyProperty="articleId" order="AFTER" resultType="java.lang.Long">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
     insert into cms_article
     <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="articleId != null">
+        article_id,
+      </if>
       <if test="subjectId != null">
         subject_id,
       </if>
@@ -168,6 +166,9 @@
       </if>
       <if test="articleDes != null">
         article_des,
+      </if>
+      <if test="tags != null">
+        tags,
       </if>
       <if test="cover != null">
         cover,
@@ -204,6 +205,9 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="articleId != null">
+        #{articleId,jdbcType=BIGINT},
+      </if>
       <if test="subjectId != null">
         #{subjectId,jdbcType=BIGINT},
       </if>
@@ -215,6 +219,9 @@
       </if>
       <if test="articleDes != null">
         #{articleDes,jdbcType=VARCHAR},
+      </if>
+      <if test="tags != null">
+        #{tags,jdbcType=VARCHAR},
       </if>
       <if test="cover != null">
         #{cover,jdbcType=VARCHAR},
@@ -275,6 +282,9 @@
       <if test="record.articleDes != null">
         article_des = #{record.articleDes,jdbcType=VARCHAR},
       </if>
+      <if test="record.tags != null">
+        tags = #{record.tags,jdbcType=VARCHAR},
+      </if>
       <if test="record.cover != null">
         cover = #{record.cover,jdbcType=VARCHAR},
       </if>
@@ -320,6 +330,7 @@
       user_id = #{record.userId,jdbcType=BIGINT},
       title = #{record.title,jdbcType=VARCHAR},
       article_des = #{record.articleDes,jdbcType=VARCHAR},
+      tags = #{record.tags,jdbcType=VARCHAR},
       cover = #{record.cover,jdbcType=VARCHAR},
       original = #{record.original,jdbcType=VARCHAR},
       view_num = #{record.viewNum,jdbcType=INTEGER},
@@ -342,6 +353,7 @@
       user_id = #{record.userId,jdbcType=BIGINT},
       title = #{record.title,jdbcType=VARCHAR},
       article_des = #{record.articleDes,jdbcType=VARCHAR},
+      tags = #{record.tags,jdbcType=VARCHAR},
       cover = #{record.cover,jdbcType=VARCHAR},
       original = #{record.original,jdbcType=VARCHAR},
       view_num = #{record.viewNum,jdbcType=INTEGER},
@@ -369,6 +381,9 @@
       </if>
       <if test="articleDes != null">
         article_des = #{articleDes,jdbcType=VARCHAR},
+      </if>
+      <if test="tags != null">
+        tags = #{tags,jdbcType=VARCHAR},
       </if>
       <if test="cover != null">
         cover = #{cover,jdbcType=VARCHAR},
@@ -412,6 +427,7 @@
       user_id = #{userId,jdbcType=BIGINT},
       title = #{title,jdbcType=VARCHAR},
       article_des = #{articleDes,jdbcType=VARCHAR},
+      tags = #{tags,jdbcType=VARCHAR},
       cover = #{cover,jdbcType=VARCHAR},
       original = #{original,jdbcType=VARCHAR},
       view_num = #{viewNum,jdbcType=INTEGER},
@@ -431,6 +447,7 @@
       user_id = #{userId,jdbcType=BIGINT},
       title = #{title,jdbcType=VARCHAR},
       article_des = #{articleDes,jdbcType=VARCHAR},
+      tags = #{tags,jdbcType=VARCHAR},
       cover = #{cover,jdbcType=VARCHAR},
       original = #{original,jdbcType=VARCHAR},
       view_num = #{viewNum,jdbcType=INTEGER},

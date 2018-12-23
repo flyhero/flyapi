@@ -3,6 +3,7 @@ package cn.iflyapi.blog.aspect;
 import cn.iflyapi.blog.annotation.OpLog;
 import cn.iflyapi.blog.dao.UserLogMapper;
 import cn.iflyapi.blog.dao.custom.UserCustomMapper;
+import cn.iflyapi.blog.entity.ArticleWithBLOBs;
 import cn.iflyapi.blog.entity.UserLog;
 import cn.iflyapi.blog.enums.OperationEnum;
 import cn.iflyapi.blog.pojo.po.UserFame;
@@ -10,7 +11,9 @@ import cn.iflyapi.blog.util.IPUtils;
 import cn.iflyapi.blog.util.JwtUtils;
 import cn.iflyapi.blog.util.SnowflakeIdWorker;
 import com.auth0.jwt.interfaces.Claim;
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
@@ -48,25 +51,40 @@ public class OpLogAspect {
 
     @Around("pointcut()")
     public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
-        //记录http请求
-        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        HttpServletRequest request = attributes.getRequest();
-        String userIp = IPUtils.getIP(request);
+
 
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         Method method = signature.getMethod();
         OpLog annotation = method.getAnnotation(OpLog.class);
         //TODO 根据操作限制每日最高分
         OperationEnum operationEnum = annotation.op();
+        if (operationEnum.equals(OperationEnum.ARTICLE_READ)) {
+            return joinPoint.proceed();
+        }
+        recordLog(annotation, "");
+
+        return joinPoint.proceed();
+    }
+
+    private void recordLog(OpLog annotation, String content) {
+        //记录http请求
+        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        HttpServletRequest request = attributes.getRequest();
+        String userIp = IPUtils.getIP(request);
+
         int score = annotation.score();
         Map<String, Claim> map = getStringClaimMap(request);
 
         UserLog userLog = new UserLog();
         userLog.setId(idWorker.nextId());
-        userLog.setOpType(operationEnum.getCode());
+        userLog.setOpType(annotation.op().getCode());
         userLog.setScore(score);
         userLog.setUserAgent(request.getHeader("User-Agent"));
         userLog.setUserIp(userIp);
+
+        if (StringUtils.isEmpty(content)) {
+            userLog.setContent(content);
+        }
 
         if (null != map) {
             userLog.setUserId(Long.valueOf(map.get("userId").asString()));
@@ -77,8 +95,20 @@ public class OpLogAspect {
             userCustomMapper.countUserFameVal(userFame);
         }
         userLogMapper.insertSelective(userLog);
+    }
 
-        return joinPoint.proceed();
+
+    @AfterReturning(pointcut = "pointcut()", returning = "returnValue")
+    public void log(JoinPoint point, Object returnValue) {
+        System.out.println("@AfterReturning：返回值为：" + returnValue);
+        MethodSignature signature = (MethodSignature) point.getSignature();
+        Method method = signature.getMethod();
+        OpLog annotation = method.getAnnotation(OpLog.class);
+        //TODO 根据操作限制每日最高分
+
+        ArticleWithBLOBs articleWithBLOBs = (ArticleWithBLOBs) returnValue;
+        recordLog(annotation, articleWithBLOBs.getTags());
+
     }
 
     private Map<String, Claim> getStringClaimMap(HttpServletRequest request) {

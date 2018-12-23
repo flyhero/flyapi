@@ -17,8 +17,8 @@ public class MvcInterceptorConfig extends WebMvcConfigurationSupport {
             "/v2/api-docs",
             "/error",
             "/swagger-ui.html/**",
-            "/users",
-            "/users/login"
+            "/static/**",
+            "/templates/**"
     };
 
     /**

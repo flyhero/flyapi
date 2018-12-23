@@ -102,22 +102,19 @@
     </if>
   </delete>
   <insert id="insert" parameterType="cn.iflyapi.blog.entity.Carousel">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into setting_carousel (title, img_url, detail_url, 
-      sort, create_time, is_delete
-      )
-    values (#{title,jdbcType=VARCHAR}, #{imgUrl,jdbcType=VARCHAR}, #{detailUrl,jdbcType=VARCHAR}, 
-      #{sort,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, #{isDelete,jdbcType=BIT}
-      )
+    insert into setting_carousel (id, title, img_url, 
+      detail_url, sort, create_time, 
+      is_delete)
+    values (#{id,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{imgUrl,jdbcType=VARCHAR}, 
+      #{detailUrl,jdbcType=VARCHAR}, #{sort,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{isDelete,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="cn.iflyapi.blog.entity.Carousel">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
     insert into setting_carousel
     <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
       <if test="title != null">
         title,
       </if>
@@ -138,6 +135,9 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
       <if test="title != null">
         #{title,jdbcType=VARCHAR},
       </if>

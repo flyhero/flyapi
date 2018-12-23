@@ -61,12 +61,12 @@ public class UserService {
                 .onMin(password, 6, "passwd");
 
         //相同ip每24h只能注册一次，防止恶意注册或接口调用
-        Object key = redisTemplate.opsForValue().get(ip + "-register");
+/*        Object key = redisTemplate.opsForValue().get(ip + "-register");
         if (Objects.isNull(key)) {
             redisTemplate.opsForValue().set(ip + "-register", "1", 24, TimeUnit.HOURS);
         } else {
             throw new FlyapiException(CodeMsgEnum.USER_ALREADY_REGISTER);
-        }
+        }*/
 
         boolean isEmail = FormatValidUtils.isEmail(username);
         boolean isPhoneNumber = FormatValidUtils.isPhoneNumber(username);

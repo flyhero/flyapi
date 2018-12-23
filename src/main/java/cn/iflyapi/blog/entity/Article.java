@@ -13,6 +13,8 @@ public class Article {
 
     private String articleDes;
 
+    private String tags;
+
     private String cover;
 
     private String original;
@@ -69,6 +71,14 @@ public class Article {
 
     public void setArticleDes(String articleDes) {
         this.articleDes = articleDes;
+    }
+
+    public String getTags() {
+        return tags;
+    }
+
+    public void setTags(String tags) {
+        this.tags = tags;
     }
 
     public String getCover() {
