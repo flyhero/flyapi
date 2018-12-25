@@ -62,4 +62,12 @@ public class MvcInterceptorConfig extends WebMvcConfigurationSupport {
         // 还可以在这里注册其它的拦截器
         registry.addInterceptor(new SQLInjectInterceptor()).addPathPatterns("/**");
     }
+
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+                .allowedHeaders("*")
+                .allowedMethods("*")
+                .allowedOrigins("*");
+    }
 }
