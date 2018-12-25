@@ -9,15 +9,22 @@ import cn.iflyapi.blog.enums.CodeMsgEnum;
 import cn.iflyapi.blog.enums.OperationEnum;
 import cn.iflyapi.blog.enums.OrderbyEnum;
 import cn.iflyapi.blog.exception.FlyapiException;
+import cn.iflyapi.blog.pojo.dto.ArticleDto;
 import cn.iflyapi.blog.pojo.po.ArticleStats;
+import cn.iflyapi.blog.util.HtmlUtils;
+import cn.iflyapi.blog.util.SnowflakeIdWorker;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import org.apdplat.word.WordSegmenter;
+import org.apdplat.word.segmentation.Word;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * @author flyhero
@@ -26,6 +33,7 @@ import java.util.Objects;
 @Service
 public class ArticleService {
 
+    public static final int DESC_LIMIT = 50;
     @Autowired
     private ArticleMapper articleMapper;
 
@@ -34,6 +42,9 @@ public class ArticleService {
 
     @Autowired
     private ArticleCustomMapper articleCustomMapper;
+
+    @Autowired
+    private SnowflakeIdWorker idWorker;
 
     public List<Article> listArticle(Long subjectId, Long userId) {
         SubjectExample subjectExample = new SubjectExample();
@@ -95,4 +106,29 @@ public class ArticleService {
         article.setIsDelete(true);
         return articleMapper.updateByPrimaryKeySelective(article) > 0;
     }
+
+    @OpLog(op = OperationEnum.ARTICLE_WRITE, score = 5)
+    public boolean save(ArticleDto articleDto, Long userId) {
+        ArticleWithBLOBs article = new ArticleWithBLOBs();
+        article.setArticleId(idWorker.nextId());
+        article.setUserId(userId);
+        article.setCreateTime(new Date());
+        article.setMdContent(articleDto.getMdContent());
+        article.setHtmlContent(articleDto.getHtmlContent());
+        article.setSubjectId(articleDto.getSubjectId());
+        article.setTitle(articleDto.getTitle());
+
+        List<Word> words = WordSegmenter.seg(articleDto.getTitle());
+        article.setTags(words.stream().map(word -> word.getText()).collect(Collectors.joining(",")));
+
+        String desc = HtmlUtils.cleanHtmlTag(articleDto.getHtmlContent());
+        if (desc.length() > DESC_LIMIT) {
+            article.setArticleDes(desc.substring(0, DESC_LIMIT));
+        } else {
+            article.setArticleDes(desc.substring(0, desc.length() - 1));
+        }
+
+        return articleMapper.insertSelective(article) > 0;
+    }
+
 }

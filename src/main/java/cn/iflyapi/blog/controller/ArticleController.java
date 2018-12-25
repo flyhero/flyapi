@@ -3,6 +3,7 @@ package cn.iflyapi.blog.controller;
 import cn.iflyapi.blog.annotation.OpenApi;
 import cn.iflyapi.blog.entity.ArticleWithBLOBs;
 import cn.iflyapi.blog.model.JSONResult;
+import cn.iflyapi.blog.pojo.dto.ArticleDto;
 import cn.iflyapi.blog.service.ArticleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -57,8 +58,10 @@ public class ArticleController extends BaseController {
         return JSONResult.ok(articleService.listPageAticles(title, orderby, pageNum, pageSize));
     }
 
+    @ApiOperation("保存文章")
     @PostMapping("/articles")
-    public JSONResult save() {
+    public JSONResult save(@RequestBody ArticleDto articleDto) {
+        articleService.save(articleDto, getUserId());
         return JSONResult.ok();
     }
 }
