@@ -36,13 +36,20 @@ public class ArticleController extends BaseController {
         return JSONResult.ok(article);
     }
 
+    @ApiOperation("删除文章")
+    @DeleteMapping("/articles/{articleId}")
+    public JSONResult remove(@PathVariable Long articleId) {
+        articleService.remove(articleId);
+        return JSONResult.ok();
+    }
+
+
     @ApiOperation("点赞文章")
     @PatchMapping("/articles/{articleId}/likes")
     public JSONResult like(@PathVariable Long articleId) {
         articleService.countLike(articleId);
         return JSONResult.ok();
     }
-
 
     /**
      * @param title
@@ -55,7 +62,7 @@ public class ArticleController extends BaseController {
     @ApiOperation(value = "查询文章列表", notes = "1.根据日期倒序 2.根据评论，点赞等 3.根据用户喜好")
     @GetMapping("/articles")
     public JSONResult findAticles(String title, int orderby, int pageNum, int pageSize) {
-        return JSONResult.ok(articleService.listPageAticles(title, orderby, pageNum, pageSize));
+        return JSONResult.ok(articleService.listPageAticles(title, orderby, getUserId(), pageNum, pageSize));
     }
 
     @ApiOperation("保存文章")

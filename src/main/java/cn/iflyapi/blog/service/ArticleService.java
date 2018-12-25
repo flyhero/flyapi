@@ -13,6 +13,7 @@ import cn.iflyapi.blog.pojo.dto.ArticleDto;
 import cn.iflyapi.blog.pojo.po.ArticleStats;
 import cn.iflyapi.blog.util.HtmlUtils;
 import cn.iflyapi.blog.util.SnowflakeIdWorker;
+import cn.iflyapi.blog.util.WordUtils;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import org.apdplat.word.WordSegmenter;
@@ -45,6 +46,9 @@ public class ArticleService {
 
     @Autowired
     private SnowflakeIdWorker idWorker;
+
+    @Autowired
+    private OperationService operationService;
 
     public List<Article> listArticle(Long subjectId, Long userId) {
         SubjectExample subjectExample = new SubjectExample();
@@ -82,10 +86,11 @@ public class ArticleService {
         articleCustomMapper.addNum(ArticleStats.comment(articleId));
     }
 
-    public Page<Article> listPageAticles(String title, int orderby, int pageNum, int pageSize) {
+    public Page<Article> listPageAticles(String title, int orderby, Long userId, int pageNum, int pageSize) {
         ArticleExample articleExample = new ArticleExample();
+        ArticleExample.Criteria criteria = articleExample.createCriteria();
         if (!StringUtils.isEmpty(title)) {
-            articleExample.createCriteria().andTitleLike("%" + title + "%").andIsDeleteEqualTo(false);
+            criteria.andTitleLike("%" + title + "%").andIsDeleteEqualTo(false);
             articleExample.setOrderByClause("create_time desc");
         } else {
             if (OrderbyEnum.CREATETIME.getCode() == orderby) {
@@ -93,7 +98,17 @@ public class ArticleService {
             } else if (OrderbyEnum.HOT.getCode() == orderby) {
                 articleExample.setOrderByClause("like_num,comment_num,view_num desc");
             } else if (OrderbyEnum.PREDICTION.getCode() == orderby) {
-
+                if (Objects.isNull(userId)) {
+                    throw new FlyapiException(CodeMsgEnum.USER_NOT_LOGIN);
+                }
+                String tags = operationService.tagsArticleReadOpLog(userId);
+                if (!StringUtils.isEmpty(tags)) {
+                    List<String> wordCount = WordUtils.wordCount(userId, tags);
+                    for (String tag : wordCount) {
+                        articleExample.or(articleExample.createCriteria().andTitleLike("%" + tag + "%").andIsDeleteEqualTo(false));
+                    }
+                }
+                articleExample.setOrderByClause("create_time desc");
             }
         }
         return PageHelper.startPage(pageNum, pageSize)
@@ -119,7 +134,7 @@ public class ArticleService {
         article.setTitle(articleDto.getTitle());
 
         List<Word> words = WordSegmenter.seg(articleDto.getTitle());
-        article.setTags(words.stream().map(word -> word.getText()).collect(Collectors.joining(",")));
+        article.setTags(words.stream().map(Word::getText).collect(Collectors.joining(",")));
 
         String desc = HtmlUtils.cleanHtmlTag(articleDto.getHtmlContent());
         if (desc.length() > DESC_LIMIT) {

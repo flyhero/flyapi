@@ -6,10 +6,12 @@ import cn.iflyapi.blog.dao.custom.UserCustomMapper;
 import cn.iflyapi.blog.entity.ArticleWithBLOBs;
 import cn.iflyapi.blog.entity.UserLog;
 import cn.iflyapi.blog.enums.OperationEnum;
+import cn.iflyapi.blog.model.OpLogArticle;
 import cn.iflyapi.blog.pojo.po.UserFame;
 import cn.iflyapi.blog.util.IPUtils;
 import cn.iflyapi.blog.util.JwtUtils;
 import cn.iflyapi.blog.util.SnowflakeIdWorker;
+import com.alibaba.fastjson.JSON;
 import com.auth0.jwt.interfaces.Claim;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
@@ -76,7 +78,8 @@ public class OpLogAspect {
         ArticleWithBLOBs articleWithBLOBs = (ArticleWithBLOBs) returnValue;
         OperationEnum operationEnum = annotation.op();
         if (operationEnum.equals(OperationEnum.ARTICLE_READ)) {
-            recordLog(annotation, articleWithBLOBs.getTags());
+            OpLogArticle opLogArticle = OpLogArticle.valueOf(articleWithBLOBs.getArticleId(), articleWithBLOBs.getTitle(), articleWithBLOBs.getTags());
+            recordLog(annotation, JSON.toJSONString(opLogArticle));
         } else {
             recordLog(annotation, "");
         }

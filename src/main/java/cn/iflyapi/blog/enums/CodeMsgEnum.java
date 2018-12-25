@@ -11,6 +11,7 @@ public enum CodeMsgEnum {
     USERNAME_EXIST(40001, "用户名已存在"),
     USERNAME_MUST_MAIL_OR_PHONE(40002, "用户名必须是邮箱或手机号"),
     USER_ALREADY_REGISTER(40003, "你已经注册过了"),
+    USER_NOT_LOGIN(40004, "你还没有登录"),
 
     IMG_BED_MUST_BE_SET(40010, "你必须设置你的图床或赞助使用我们提供的图床"),
 
