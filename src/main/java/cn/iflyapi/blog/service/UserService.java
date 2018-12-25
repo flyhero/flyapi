@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.DigestUtils;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
@@ -84,6 +85,7 @@ public class UserService {
         user.setUserId(idWorker.nextId());
         user.setUsername(username);
         user.setPassword(encryptPasswd);
+        user.setCreateTime(new Date());
         user.setNickName(Constant.DEFAULT_NICKNAME[RandomUtils.randomInt(0, Constant.DEFAULT_NICKNAME.length - 1)]);
         if (isEmail) {
             user.setEmail(username);

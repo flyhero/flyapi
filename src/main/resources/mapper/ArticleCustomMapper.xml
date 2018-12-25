@@ -16,5 +16,13 @@
         </if>
         where article_id = #{articleId,jdbcType=BIGINT}
     </update>
+    
+    <select id="countArticlePerMonth" parameterType="cn.iflyapi.blog.pojo.po.IdAndMonth" resultType="cn.iflyapi.blog.pojo.vo.MonthArticle">
+        select DATE_FORMAT(create_time,'%Y-%m') month,count(*) total
+        from cms_article
+        where DATE_FORMAT(create_time,'%Y-%m') > DATE_FORMAT(date_sub(curdate(), interval ${month} month),'%Y-%m')
+        and user_id= #{id}
+        group by month
+    </select>
 
 </mapper>

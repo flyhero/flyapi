@@ -12,9 +12,7 @@ import cn.iflyapi.blog.util.JwtUtils;
 import cn.iflyapi.blog.util.SnowflakeIdWorker;
 import com.auth0.jwt.interfaces.Claim;
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
@@ -48,7 +46,7 @@ public class OpLogAspect {
     @Pointcut("@annotation(cn.iflyapi.blog.annotation.OpLog)")
     public void pointcut() {
     }
-
+/*
     @Around("pointcut()")
     public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
 
@@ -64,8 +62,34 @@ public class OpLogAspect {
         recordLog(annotation, "");
 
         return joinPoint.proceed();
+    }*/
+
+
+    @AfterReturning(pointcut = "pointcut()", returning = "returnValue")
+    public void log(JoinPoint point, Object returnValue) {
+        System.out.println("@AfterReturning：返回值为：" + returnValue);
+        MethodSignature signature = (MethodSignature) point.getSignature();
+        Method method = signature.getMethod();
+        OpLog annotation = method.getAnnotation(OpLog.class);
+        //TODO 根据操作限制每日最高分
+
+        ArticleWithBLOBs articleWithBLOBs = (ArticleWithBLOBs) returnValue;
+        OperationEnum operationEnum = annotation.op();
+        if (operationEnum.equals(OperationEnum.ARTICLE_READ)) {
+            recordLog(annotation, articleWithBLOBs.getTags());
+        } else {
+            recordLog(annotation, "");
+        }
+
+
     }
 
+    /**
+     * 记录日志
+     *
+     * @param annotation
+     * @param content
+     */
     private void recordLog(OpLog annotation, String content) {
         //记录http请求
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
@@ -95,20 +119,6 @@ public class OpLogAspect {
             userCustomMapper.countUserFameVal(userFame);
         }
         userLogMapper.insertSelective(userLog);
-    }
-
-
-    @AfterReturning(pointcut = "pointcut()", returning = "returnValue")
-    public void log(JoinPoint point, Object returnValue) {
-        System.out.println("@AfterReturning：返回值为：" + returnValue);
-        MethodSignature signature = (MethodSignature) point.getSignature();
-        Method method = signature.getMethod();
-        OpLog annotation = method.getAnnotation(OpLog.class);
-        //TODO 根据操作限制每日最高分
-
-        ArticleWithBLOBs articleWithBLOBs = (ArticleWithBLOBs) returnValue;
-        recordLog(annotation, articleWithBLOBs.getTags());
-
     }
 
     private Map<String, Claim> getStringClaimMap(HttpServletRequest request) {

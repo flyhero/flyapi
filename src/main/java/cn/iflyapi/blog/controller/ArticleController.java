@@ -1,16 +1,13 @@
 package cn.iflyapi.blog.controller;
 
 import cn.iflyapi.blog.annotation.OpenApi;
-import cn.iflyapi.blog.entity.Article;
 import cn.iflyapi.blog.entity.ArticleWithBLOBs;
 import cn.iflyapi.blog.model.JSONResult;
 import cn.iflyapi.blog.service.ArticleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author flyhero
@@ -34,17 +31,21 @@ public class ArticleController extends BaseController {
     @ApiOperation("查询指定文章详情")
     @GetMapping("/articles/{articleId}")
     public JSONResult findAticle(@PathVariable Long articleId) {
-        ArticleWithBLOBs article = articleService.findArticle(articleId);
-        //TODO 记录用户查看的文章 用户分析推荐
-
+        ArticleWithBLOBs article = articleService.readArticle(articleId);
         return JSONResult.ok(article);
+    }
+
+    @ApiOperation("点赞文章")
+    @PatchMapping("/articles/{articleId}/likes")
+    public JSONResult like(@PathVariable Long articleId) {
+        articleService.countLike(articleId);
+        return JSONResult.ok();
     }
 
 
     /**
-     *
      * @param title
-     * @param orderby {@link cn.iflyapi.blog.enums.OrderbyEnum}
+     * @param orderby  {@link cn.iflyapi.blog.enums.OrderbyEnum}
      * @param pageNum
      * @param pageSize
      * @return
@@ -56,4 +57,8 @@ public class ArticleController extends BaseController {
         return JSONResult.ok(articleService.listPageAticles(title, orderby, pageNum, pageSize));
     }
 
+    @PostMapping("/articles")
+    public JSONResult save() {
+        return JSONResult.ok();
+    }
 }

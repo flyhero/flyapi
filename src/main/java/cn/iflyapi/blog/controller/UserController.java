@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
  * date: 2018-12-13 9:55 AM
  */
 
-@Api(value = "UserController", tags = "用户接口模块")
+@Api(value = "UserController", tags = "用户接口")
 @RestController
 public class UserController extends BaseController {
 

@@ -54,13 +54,21 @@ public class ArticleService {
     }
 
     @OpLog(op = OperationEnum.ARTICLE_READ, score = 2)
-    public ArticleWithBLOBs findArticle(Long articleId) {
+    public ArticleWithBLOBs readArticle(Long articleId) {
         ArticleWithBLOBs articleWithBLOBs = articleMapper.selectByPrimaryKey(articleId);
         if (Objects.isNull(articleWithBLOBs) || articleWithBLOBs.getIsDelete()) {
             throw new FlyapiException(CodeMsgEnum.RESOURCE_NOT_EXIST);
         }
         articleCustomMapper.addNum(ArticleStats.view(articleId));
         return articleWithBLOBs;
+    }
+
+    public void countLike(Long articleId) {
+        articleCustomMapper.addNum(ArticleStats.like(articleId));
+    }
+
+    public void countComment(Long articleId) {
+        articleCustomMapper.addNum(ArticleStats.comment(articleId));
     }
 
     public Page<Article> listPageAticles(String title, int orderby, int pageNum, int pageSize) {
