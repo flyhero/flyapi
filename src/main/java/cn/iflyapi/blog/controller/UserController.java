@@ -24,6 +24,7 @@ public class UserController extends BaseController {
     private UserService userService;
 
 
+    @OpenApi("/users/*")
     @ApiOperation(value = "获取指定用户信息")
     @GetMapping("/users/{userId}")
     public JSONResult findUser(@PathVariable Long userId) {
@@ -48,6 +49,14 @@ public class UserController extends BaseController {
     @ApiOperation(value = "用户信息修改")
     @PatchMapping("/users/{userId}")
     public JSONResult update(@RequestBody User user, @PathVariable Long userId) {
+        return JSONResult.ok();
+    }
+
+    @OpenApi("/users/*/view")
+    @ApiOperation(value = "用户主页浏览")
+    @PatchMapping("/users/{userId}/view")
+    public JSONResult view(@PathVariable Long userId) {
+        userService.viewHomePage(userId);
         return JSONResult.ok();
     }
 

@@ -7,4 +7,9 @@
         set fame_value = fame_value + #{score,jdbcType=INTEGER}
         where user_id = #{userId,jdbcType=BIGINT}
       </update>
+    <update id="viewHomePage" parameterType="long">
+        update ucenter_user
+        set view_num = view_num + 1
+        where user_id = #{userId,jdbcType=BIGINT}
+      </update>
 </mapper>

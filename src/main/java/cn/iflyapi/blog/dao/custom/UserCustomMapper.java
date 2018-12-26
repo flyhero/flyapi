@@ -5,4 +5,6 @@ import cn.iflyapi.blog.pojo.po.UserFame;
 public interface UserCustomMapper {
 
     int countUserFameVal(UserFame userFame);
+
+    int viewHomePage(Long userId);
 }

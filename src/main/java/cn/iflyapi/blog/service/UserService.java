@@ -2,6 +2,7 @@ package cn.iflyapi.blog.service;
 
 import cn.iflyapi.blog.annotation.OpLog;
 import cn.iflyapi.blog.dao.UserMapper;
+import cn.iflyapi.blog.dao.custom.UserCustomMapper;
 import cn.iflyapi.blog.entity.Store;
 import cn.iflyapi.blog.entity.User;
 import cn.iflyapi.blog.entity.UserExample;
@@ -20,7 +21,6 @@ import org.springframework.util.DigestUtils;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
-import java.util.concurrent.TimeUnit;
 
 /**
  * author: flyhero
@@ -31,6 +31,9 @@ public class UserService {
 
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private UserCustomMapper userCustomMapper;
 
     @Autowired
     private SnowflakeIdWorker idWorker;
@@ -150,6 +153,10 @@ public class UserService {
             throw new FlyapiException(CodeMsgEnum.RESOURCE_NOT_EXIST);
         }
         return user;
+    }
+
+    public void viewHomePage(Long userId) {
+        userCustomMapper.viewHomePage(userId);
     }
 
 

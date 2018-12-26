@@ -35,6 +35,8 @@ public class User {
 
     private Integer fameValue;
 
+    private Integer viewNum;
+
     private String supportWord;
 
     private String supportQrcode;
@@ -173,6 +175,14 @@ public class User {
 
     public void setFameValue(Integer fameValue) {
         this.fameValue = fameValue;
+    }
+
+    public Integer getViewNum() {
+        return viewNum;
+    }
+
+    public void setViewNum(Integer viewNum) {
+        this.viewNum = viewNum;
     }
 
     public String getSupportWord() {

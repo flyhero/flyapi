@@ -18,6 +18,7 @@
     <result column="city" jdbcType="VARCHAR" property="city" />
     <result column="platform" jdbcType="TINYINT" property="platform" />
     <result column="fame_value" jdbcType="INTEGER" property="fameValue" />
+    <result column="view_num" jdbcType="INTEGER" property="viewNum" />
     <result column="support_word" jdbcType="VARCHAR" property="supportWord" />
     <result column="support_qrcode" jdbcType="VARCHAR" property="supportQrcode" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
@@ -85,7 +86,7 @@
   </sql>
   <sql id="Base_Column_List">
     user_id, username, password, nick_name, avatar, phone, email, sex, sign, company, 
-    country, area, province, city, platform, fame_value, support_word, support_qrcode, 
+    country, area, province, city, platform, fame_value, view_num, support_word, support_qrcode, 
     create_time, update_time, is_disable, is_delete
   </sql>
   <select id="selectByExample" parameterType="cn.iflyapi.blog.entity.UserExample" resultMap="BaseResultMap">
@@ -124,17 +125,17 @@
       email, sex, sign, company, 
       country, area, province, 
       city, platform, fame_value, 
-      support_word, support_qrcode, create_time, 
-      update_time, is_disable, is_delete
-      )
+      view_num, support_word, support_qrcode, 
+      create_time, update_time, is_disable, 
+      is_delete)
     values (#{userId,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{nickName,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
       #{email,jdbcType=VARCHAR}, #{sex,jdbcType=TINYINT}, #{sign,jdbcType=VARCHAR}, #{company,jdbcType=VARCHAR}, 
       #{country,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, 
       #{city,jdbcType=VARCHAR}, #{platform,jdbcType=TINYINT}, #{fameValue,jdbcType=INTEGER}, 
-      #{supportWord,jdbcType=VARCHAR}, #{supportQrcode,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updateTime,jdbcType=TIMESTAMP}, #{isDisable,jdbcType=BIT}, #{isDelete,jdbcType=BIT}
-      )
+      #{viewNum,jdbcType=INTEGER}, #{supportWord,jdbcType=VARCHAR}, #{supportQrcode,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{isDisable,jdbcType=BIT}, 
+      #{isDelete,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="cn.iflyapi.blog.entity.User">
     insert into ucenter_user
@@ -186,6 +187,9 @@
       </if>
       <if test="fameValue != null">
         fame_value,
+      </if>
+      <if test="viewNum != null">
+        view_num,
       </if>
       <if test="supportWord != null">
         support_word,
@@ -254,6 +258,9 @@
       </if>
       <if test="fameValue != null">
         #{fameValue,jdbcType=INTEGER},
+      </if>
+      <if test="viewNum != null">
+        #{viewNum,jdbcType=INTEGER},
       </if>
       <if test="supportWord != null">
         #{supportWord,jdbcType=VARCHAR},
@@ -332,6 +339,9 @@
       <if test="record.fameValue != null">
         fame_value = #{record.fameValue,jdbcType=INTEGER},
       </if>
+      <if test="record.viewNum != null">
+        view_num = #{record.viewNum,jdbcType=INTEGER},
+      </if>
       <if test="record.supportWord != null">
         support_word = #{record.supportWord,jdbcType=VARCHAR},
       </if>
@@ -373,6 +383,7 @@
       city = #{record.city,jdbcType=VARCHAR},
       platform = #{record.platform,jdbcType=TINYINT},
       fame_value = #{record.fameValue,jdbcType=INTEGER},
+      view_num = #{record.viewNum,jdbcType=INTEGER},
       support_word = #{record.supportWord,jdbcType=VARCHAR},
       support_qrcode = #{record.supportQrcode,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
@@ -431,6 +442,9 @@
       <if test="fameValue != null">
         fame_value = #{fameValue,jdbcType=INTEGER},
       </if>
+      <if test="viewNum != null">
+        view_num = #{viewNum,jdbcType=INTEGER},
+      </if>
       <if test="supportWord != null">
         support_word = #{supportWord,jdbcType=VARCHAR},
       </if>
@@ -469,6 +483,7 @@
       city = #{city,jdbcType=VARCHAR},
       platform = #{platform,jdbcType=TINYINT},
       fame_value = #{fameValue,jdbcType=INTEGER},
+      view_num = #{viewNum,jdbcType=INTEGER},
       support_word = #{supportWord,jdbcType=VARCHAR},
       support_qrcode = #{supportQrcode,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},

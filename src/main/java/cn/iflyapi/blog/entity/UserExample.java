@@ -1185,6 +1185,66 @@ public class UserExample {
             return (Criteria) this;
         }
 
+        public Criteria andViewNumIsNull() {
+            addCriterion("view_num is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andViewNumIsNotNull() {
+            addCriterion("view_num is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andViewNumEqualTo(Integer value) {
+            addCriterion("view_num =", value, "viewNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andViewNumNotEqualTo(Integer value) {
+            addCriterion("view_num <>", value, "viewNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andViewNumGreaterThan(Integer value) {
+            addCriterion("view_num >", value, "viewNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andViewNumGreaterThanOrEqualTo(Integer value) {
+            addCriterion("view_num >=", value, "viewNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andViewNumLessThan(Integer value) {
+            addCriterion("view_num <", value, "viewNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andViewNumLessThanOrEqualTo(Integer value) {
+            addCriterion("view_num <=", value, "viewNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andViewNumIn(List<Integer> values) {
+            addCriterion("view_num in", values, "viewNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andViewNumNotIn(List<Integer> values) {
+            addCriterion("view_num not in", values, "viewNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andViewNumBetween(Integer value1, Integer value2) {
+            addCriterion("view_num between", value1, value2, "viewNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andViewNumNotBetween(Integer value1, Integer value2) {
+            addCriterion("view_num not between", value1, value2, "viewNum");
+            return (Criteria) this;
+        }
+
         public Criteria andSupportWordIsNull() {
             addCriterion("support_word is null");
             return (Criteria) this;
