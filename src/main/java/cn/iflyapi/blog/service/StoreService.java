@@ -2,10 +2,13 @@ package cn.iflyapi.blog.service;
 
 import cn.iflyapi.blog.dao.StoreMapper;
 import cn.iflyapi.blog.entity.Store;
+import cn.iflyapi.blog.entity.StoreExample;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author qfwang
@@ -16,6 +19,16 @@ public class StoreService {
 
     @Autowired
     private StoreMapper storeMapper;
+
+    public Store get(Long userId) {
+        StoreExample storeExample = new StoreExample();
+        storeExample.createCriteria().andUserIdEqualTo(userId).andIsDeleteEqualTo(false);
+        List<Store> storeList = storeMapper.selectByExample(storeExample);
+        if (CollectionUtils.isEmpty(storeList)) {
+            return null;
+        }
+        return storeList.get(0);
+    }
 
     public boolean save(Store store) {
         store.setCreateTime(new Date());

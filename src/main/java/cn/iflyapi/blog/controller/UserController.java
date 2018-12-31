@@ -5,6 +5,8 @@ import cn.iflyapi.blog.entity.User;
 import cn.iflyapi.blog.model.JSONResult;
 import cn.iflyapi.blog.pojo.dto.LoginDto;
 import cn.iflyapi.blog.pojo.dto.ResetPwDto;
+import cn.iflyapi.blog.pojo.dto.Support;
+import cn.iflyapi.blog.pojo.dto.UserBaseDto;
 import cn.iflyapi.blog.service.UserService;
 import cn.iflyapi.blog.util.IPUtils;
 import io.swagger.annotations.Api;
@@ -13,8 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * author: flyhero
- * date: 2018-12-13 9:55 AM
+ * @author flyhero
+ * @date 2018-12-13 9:55 AM
  */
 
 @Api(value = "UserController", tags = "用户接口")
@@ -29,7 +31,10 @@ public class UserController extends BaseController {
     @ApiOperation(value = "获取指定用户信息")
     @GetMapping("/users/{userId}")
     public JSONResult findUser(@PathVariable Long userId) {
-        return JSONResult.ok(userService.findOne(userId));
+        User user = userService.findOne(userId);
+        user.setUsername("");
+        user.setPassword("");
+        return JSONResult.ok();
     }
 
     @OpenApi("/users")
@@ -49,7 +54,8 @@ public class UserController extends BaseController {
 
     @ApiOperation(value = "用户信息修改")
     @PatchMapping("/users/{userId}")
-    public JSONResult update(@RequestBody User user, @PathVariable Long userId) {
+    public JSONResult update(@RequestBody UserBaseDto user, @PathVariable Long userId) {
+        userService.update(user, getUserId());
         return JSONResult.ok();
     }
 
@@ -65,6 +71,13 @@ public class UserController extends BaseController {
     @PatchMapping("/users/password")
     public JSONResult resetPw(@RequestBody ResetPwDto resetPwDto) {
         userService.resetPassword(resetPwDto.getOldPassword(), resetPwDto.getNewPassword(), getUserId());
+        return JSONResult.ok();
+    }
+
+    @ApiOperation("修改赞赏")
+    @PatchMapping("/users/support")
+    public JSONResult update(@RequestBody Support support) {
+        userService.updateSupport(support, getUserId());
         return JSONResult.ok();
     }
 

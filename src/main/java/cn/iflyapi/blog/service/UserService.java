@@ -11,7 +11,10 @@ import cn.iflyapi.blog.enums.OperationEnum;
 import cn.iflyapi.blog.enums.PlatFormEnum;
 import cn.iflyapi.blog.exception.FlyapiException;
 import cn.iflyapi.blog.model.Cookie;
+import cn.iflyapi.blog.pojo.dto.Support;
+import cn.iflyapi.blog.pojo.dto.UserBaseDto;
 import cn.iflyapi.blog.util.*;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -172,6 +175,22 @@ public class UserService {
         saveUser.setUserId(userId);
         saveUser.setPassword(newPwd);
         userMapper.updateByPrimaryKeySelective(saveUser);
+    }
+
+    public void updateSupport(Support support, Long userId) {
+        FastValidator.doit().notEmpty(support.getSupportWord(), support.getSupportQrcode());
+        User user = new User();
+        BeanUtils.copyProperties(support, user);
+        user.setUserId(userId);
+        userMapper.updateByPrimaryKeySelective(user);
+    }
+
+
+    public void update(UserBaseDto support, Long userId) {
+        User user = new User();
+        BeanUtils.copyProperties(support, user);
+        user.setUserId(userId);
+        userMapper.updateByPrimaryKeySelective(user);
     }
 
 
