@@ -69,5 +69,9 @@
                <columnOverride column="sort" javaType="java.lang.Integer"/>
                <columnOverride column="is_delete" javaType="java.lang.Boolean"/>
            </table>-->
+<!--        <table tableName="ucenter_social" domainObjectName="Social">
+            <columnOverride column="social_type" javaType="java.lang.Integer"/>
+            <columnOverride column="is_delete" javaType="java.lang.Boolean"/>
+        </table>-->
     </context>
 </generatorConfiguration>

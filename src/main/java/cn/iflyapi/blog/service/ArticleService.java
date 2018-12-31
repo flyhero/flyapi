@@ -25,6 +25,8 @@ import org.springframework.util.StringUtils;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 /**
@@ -130,6 +132,8 @@ public class ArticleService {
         article.setCreateTime(new Date());
         article.setMdContent(articleDto.getMdContent());
         article.setHtmlContent(articleDto.getHtmlContent());
+        article.setCover(getImg(articleDto.getHtmlContent()));
+
         article.setSubjectId(articleDto.getSubjectId());
         article.setTitle(articleDto.getTitle());
 
@@ -144,6 +148,21 @@ public class ArticleService {
         }
 
         return articleMapper.insertSelective(article) > 0;
+    }
+
+    private static final Pattern patternSrc = Pattern.compile("src\\s*=\\s*\"?(.*?)(\"|>|\\s+)");
+    private String getImg(String content) {
+        String regEx = "(<img.*src\\s*=\\s*(.*?)[^>]*?>)";
+        Pattern pattern = Pattern.compile(regEx, Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(content);
+        while (matcher.find()) {
+            String img = matcher.group();
+            final Matcher m = patternSrc.matcher(img);
+            if (m.find()) {
+                return m.group(1);
+            }
+        }
+        return "";
     }
 
 }
