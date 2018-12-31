@@ -635,6 +635,66 @@ public class StoreExample {
             return (Criteria) this;
         }
 
+        public Criteria andIsTryIsNull() {
+            addCriterion("is_try is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsTryIsNotNull() {
+            addCriterion("is_try is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsTryEqualTo(Boolean value) {
+            addCriterion("is_try =", value, "isTry");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsTryNotEqualTo(Boolean value) {
+            addCriterion("is_try <>", value, "isTry");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsTryGreaterThan(Boolean value) {
+            addCriterion("is_try >", value, "isTry");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsTryGreaterThanOrEqualTo(Boolean value) {
+            addCriterion("is_try >=", value, "isTry");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsTryLessThan(Boolean value) {
+            addCriterion("is_try <", value, "isTry");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsTryLessThanOrEqualTo(Boolean value) {
+            addCriterion("is_try <=", value, "isTry");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsTryIn(List<Boolean> values) {
+            addCriterion("is_try in", values, "isTry");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsTryNotIn(List<Boolean> values) {
+            addCriterion("is_try not in", values, "isTry");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsTryBetween(Boolean value1, Boolean value2) {
+            addCriterion("is_try between", value1, value2, "isTry");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsTryNotBetween(Boolean value1, Boolean value2) {
+            addCriterion("is_try not between", value1, value2, "isTry");
+            return (Criteria) this;
+        }
+
         public Criteria andCreateTimeIsNull() {
             addCriterion("create_time is null");
             return (Criteria) this;

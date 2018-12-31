@@ -14,6 +14,7 @@ public enum CodeMsgEnum {
     USER_NOT_LOGIN(40004, "你还没有登录"),
 
     IMG_BED_MUST_BE_SET(40010, "你必须设置你的图床或赞助使用我们提供的图床"),
+    IMG_FILE_ALREADY_100M(40010, "由于空间有限，目前仅能提供100M免费存储，你可自行设置图床或赞助我们继续使用"),
 
     RESOURCE_FORBIDDEN(40300, "你没有查看该资源的权限"),
 

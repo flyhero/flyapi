@@ -19,6 +19,8 @@ public class Store {
 
     private String storeType;
 
+    private Boolean isTry;
+
     private Date createTime;
 
     private Date updateTime;
@@ -87,6 +89,14 @@ public class Store {
 
     public void setStoreType(String storeType) {
         this.storeType = storeType;
+    }
+
+    public Boolean getIsTry() {
+        return isTry;
+    }
+
+    public void setIsTry(Boolean isTry) {
+        this.isTry = isTry;
     }
 
     public Date getCreateTime() {

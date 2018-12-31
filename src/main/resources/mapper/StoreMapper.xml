@@ -10,6 +10,7 @@
     <result column="domain" jdbcType="VARCHAR" property="domain" />
     <result column="vip" jdbcType="TINYINT" property="vip" />
     <result column="store_type" jdbcType="VARCHAR" property="storeType" />
+    <result column="is_try" jdbcType="BIT" property="isTry" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="is_delete" jdbcType="BIT" property="isDelete" />
@@ -73,7 +74,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, user_id, ak, sk, bucket, domain, vip, store_type, create_time, update_time, is_delete
+    id, user_id, ak, sk, bucket, domain, vip, store_type, is_try, create_time, update_time, 
+    is_delete
   </sql>
   <select id="selectByExample" parameterType="cn.iflyapi.blog.entity.StoreExample" resultMap="BaseResultMap">
     select
@@ -108,12 +110,14 @@
   <insert id="insert" parameterType="cn.iflyapi.blog.entity.Store">
     insert into setting_store (id, user_id, ak, 
       sk, bucket, domain, 
-      vip, store_type, create_time, 
-      update_time, is_delete)
+      vip, store_type, is_try, 
+      create_time, update_time, is_delete
+      )
     values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{ak,jdbcType=VARCHAR}, 
       #{sk,jdbcType=VARCHAR}, #{bucket,jdbcType=VARCHAR}, #{domain,jdbcType=VARCHAR}, 
-      #{vip,jdbcType=TINYINT}, #{storeType,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updateTime,jdbcType=TIMESTAMP}, #{isDelete,jdbcType=BIT})
+      #{vip,jdbcType=TINYINT}, #{storeType,jdbcType=VARCHAR}, #{isTry,jdbcType=BIT}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{isDelete,jdbcType=BIT}
+      )
   </insert>
   <insert id="insertSelective" parameterType="cn.iflyapi.blog.entity.Store">
     insert into setting_store
@@ -141,6 +145,9 @@
       </if>
       <if test="storeType != null">
         store_type,
+      </if>
+      <if test="isTry != null">
+        is_try,
       </if>
       <if test="createTime != null">
         create_time,
@@ -176,6 +183,9 @@
       </if>
       <if test="storeType != null">
         #{storeType,jdbcType=VARCHAR},
+      </if>
+      <if test="isTry != null">
+        #{isTry,jdbcType=BIT},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -221,6 +231,9 @@
       <if test="record.storeType != null">
         store_type = #{record.storeType,jdbcType=VARCHAR},
       </if>
+      <if test="record.isTry != null">
+        is_try = #{record.isTry,jdbcType=BIT},
+      </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
@@ -245,6 +258,7 @@
       domain = #{record.domain,jdbcType=VARCHAR},
       vip = #{record.vip,jdbcType=TINYINT},
       store_type = #{record.storeType,jdbcType=VARCHAR},
+      is_try = #{record.isTry,jdbcType=BIT},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP},
       is_delete = #{record.isDelete,jdbcType=BIT}
@@ -276,6 +290,9 @@
       <if test="storeType != null">
         store_type = #{storeType,jdbcType=VARCHAR},
       </if>
+      <if test="isTry != null">
+        is_try = #{isTry,jdbcType=BIT},
+      </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
@@ -297,6 +314,7 @@
       domain = #{domain,jdbcType=VARCHAR},
       vip = #{vip,jdbcType=TINYINT},
       store_type = #{storeType,jdbcType=VARCHAR},
+      is_try = #{isTry,jdbcType=BIT},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       is_delete = #{isDelete,jdbcType=BIT}

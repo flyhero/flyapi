@@ -2,6 +2,7 @@ package cn.iflyapi.blog.service;
 
 import cn.iflyapi.blog.dao.StoreMapper;
 import cn.iflyapi.blog.dao.UserFileMapper;
+import cn.iflyapi.blog.dao.custom.FileCustomMapper;
 import cn.iflyapi.blog.entity.Store;
 import cn.iflyapi.blog.entity.UserFile;
 import cn.iflyapi.blog.enums.CodeMsgEnum;
@@ -32,6 +33,7 @@ import java.io.UnsupportedEncodingException;
 @Service("qiniu")
 public class QiniuFileServiceImpl implements IFileService {
 
+    public static final int LIMIT_STORE = 100;
     @Autowired
     private StoreMapper storeMapper;
 
@@ -40,6 +42,9 @@ public class QiniuFileServiceImpl implements IFileService {
 
     @Autowired
     private UserFileMapper userFileMapper;
+
+    @Autowired
+    private FileCustomMapper fileCustomMapper;
 
     @Transactional
     @Override
@@ -54,14 +59,23 @@ public class QiniuFileServiceImpl implements IFileService {
 
         Store store = storeMapper.selectByPrimaryKey(userId);
         if (store != null && !store.getIsDelete()) {
-            if (store.getVip() == 0) {
-                throw new FlyapiException(CodeMsgEnum.IMG_BED_MUST_BE_SET);
+            if (store.getIsTry()) {
+                long size = fileCustomMapper.sumFileSize(userId) / 1048576;
+                if (size > LIMIT_STORE) {
+                    fileCustomMapper.endTry(userId);
+                    throw new FlyapiException(CodeMsgEnum.IMG_FILE_ALREADY_100M);
+                }
+
             } else {
-                domain = store.getDomain();
-                accessKey = store.getAk();
-                secretKey = store.getSk();
-                bucket = store.getBucket();
+                if (store.getVip() == 0) {
+                    throw new FlyapiException(CodeMsgEnum.IMG_BED_MUST_BE_SET);
+                }
             }
+            domain = store.getDomain();
+            accessKey = store.getAk();
+            secretKey = store.getSk();
+            bucket = store.getBucket();
+
         } else {
             throw new FlyapiException(CodeMsgEnum.IMG_BED_MUST_BE_SET);
         }

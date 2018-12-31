@@ -52,13 +52,16 @@
 
            <table tableName="ucenter_user_log" domainObjectName="UserLog">
                <columnOverride column="op_type" javaType="java.lang.Integer"/>
-           </table>
+           </table>-->
+<!--
            <table tableName="setting_store" domainObjectName="Store">
                <columnOverride column="is_delete" javaType="java.lang.Boolean"/>
+               <columnOverride column="is_try" javaType="java.lang.Boolean"/>
                <columnOverride column="vip" javaType="java.lang.Integer"/>
            </table>
+-->
 
-           <table tableName="ucenter_user_file" domainObjectName="UserFile">
+<!--           <table tableName="ucenter_user_file" domainObjectName="UserFile">
                <columnOverride column="is_delete" javaType="java.lang.Boolean"/>
            </table>
 
