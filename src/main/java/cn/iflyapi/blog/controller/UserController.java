@@ -4,6 +4,7 @@ import cn.iflyapi.blog.annotation.OpenApi;
 import cn.iflyapi.blog.entity.User;
 import cn.iflyapi.blog.model.JSONResult;
 import cn.iflyapi.blog.pojo.dto.LoginDto;
+import cn.iflyapi.blog.pojo.dto.ResetPwDto;
 import cn.iflyapi.blog.service.UserService;
 import cn.iflyapi.blog.util.IPUtils;
 import io.swagger.annotations.Api;
@@ -57,6 +58,13 @@ public class UserController extends BaseController {
     @PatchMapping("/users/{userId}/view")
     public JSONResult view(@PathVariable Long userId) {
         userService.viewHomePage(userId);
+        return JSONResult.ok();
+    }
+
+    @ApiOperation(value = "重置密码")
+    @PatchMapping("/users/password")
+    public JSONResult resetPw(@RequestBody ResetPwDto resetPwDto) {
+        userService.resetPassword(resetPwDto.getOldPassword(), resetPwDto.getNewPassword(), getUserId());
         return JSONResult.ok();
     }
 

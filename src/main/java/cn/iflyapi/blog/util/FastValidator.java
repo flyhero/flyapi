@@ -86,9 +86,15 @@ public class FastValidator {
      * @param paramName 待验证参数名称
      * @return
      */
-    public FastValidator ifNotEmptyOnMax(Object o, int max, String paramName) {
+    public FastValidator notEmptyAndOnMax(Object o, int max, String paramName) {
         notEmpty(o, paramName);
         onMax(o, max, paramName);
+        return this;
+    }
+
+    public FastValidator notEmptyAndOnMin(Object o, int min, String paramName) {
+        notEmpty(o, paramName);
+        onMin(o, min, paramName);
         return this;
     }
 

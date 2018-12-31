@@ -103,6 +103,7 @@ public class UserService {
         Store store = new Store();
         store.setId(idWorker.nextId());
         store.setUserId(user.getUserId());
+        store.setIsTry(true);
         storeService.save(store);
 
         String token = null;
@@ -157,6 +158,20 @@ public class UserService {
 
     public void viewHomePage(Long userId) {
         userCustomMapper.viewHomePage(userId);
+    }
+
+    public void resetPassword(String oldPassword, String newPassword, Long userId) {
+        String encryptPasswd = DigestUtils.md5DigestAsHex(oldPassword.getBytes());
+        User user = findOne(userId);
+        if (!user.getPassword().equals(encryptPasswd)) {
+            throw new FlyapiException(CodeMsgEnum.USERNAME_OR_PASSWD_INVALID);
+        }
+        FastValidator.doit().notEmptyAndOnMin(newPassword, 6, "newPassword");
+        String newPwd = DigestUtils.md5DigestAsHex(newPassword.getBytes());
+        User saveUser = new User();
+        saveUser.setUserId(userId);
+        saveUser.setPassword(newPwd);
+        userMapper.updateByPrimaryKeySelective(saveUser);
     }
 
 
