@@ -48,23 +48,6 @@ public class OpLogAspect {
     @Pointcut("@annotation(cn.iflyapi.blog.annotation.OpLog)")
     public void pointcut() {
     }
-/*
-    @Around("pointcut()")
-    public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
-
-
-        MethodSignature signature = (MethodSignature) joinPoint.getSignature();
-        Method method = signature.getMethod();
-        OpLog annotation = method.getAnnotation(OpLog.class);
-        //TODO 根据操作限制每日最高分
-        OperationEnum operationEnum = annotation.op();
-        if (operationEnum.equals(OperationEnum.ARTICLE_READ)) {
-            return joinPoint.proceed();
-        }
-        recordLog(annotation, "");
-
-        return joinPoint.proceed();
-    }*/
 
 
     @AfterReturning(pointcut = "pointcut()", returning = "returnValue")
@@ -75,15 +58,15 @@ public class OpLogAspect {
         OpLog annotation = method.getAnnotation(OpLog.class);
         //TODO 根据操作限制每日最高分
 
-        ArticleWithBLOBs articleWithBLOBs = (ArticleWithBLOBs) returnValue;
+
         OperationEnum operationEnum = annotation.op();
         if (operationEnum.equals(OperationEnum.ARTICLE_READ)) {
+            ArticleWithBLOBs articleWithBLOBs = (ArticleWithBLOBs) returnValue;
             OpLogArticle opLogArticle = OpLogArticle.valueOf(articleWithBLOBs.getArticleId(), articleWithBLOBs.getTitle(), articleWithBLOBs.getTags());
             recordLog(annotation, JSON.toJSONString(opLogArticle));
         } else {
             recordLog(annotation, "");
         }
-
 
     }
 
@@ -131,4 +114,5 @@ public class OpLogAspect {
         }
         return JwtUtils.verify(token);
     }
+
 }
