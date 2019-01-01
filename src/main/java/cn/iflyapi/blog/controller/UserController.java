@@ -34,7 +34,13 @@ public class UserController extends BaseController {
         User user = userService.findOne(userId);
         user.setUsername("");
         user.setPassword("");
-        return JSONResult.ok();
+        return JSONResult.ok(user);
+    }
+
+    @ApiOperation(value = "查询排行榜", notes = "0日排行 1周排行")
+    @GetMapping("/users/rank")
+    public JSONResult find(int type) {
+        return JSONResult.ok(userService.rank(type));
     }
 
     @OpenApi("/users")

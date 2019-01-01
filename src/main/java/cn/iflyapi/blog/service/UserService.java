@@ -13,6 +13,7 @@ import cn.iflyapi.blog.exception.FlyapiException;
 import cn.iflyapi.blog.model.Cookie;
 import cn.iflyapi.blog.pojo.dto.Support;
 import cn.iflyapi.blog.pojo.dto.UserBaseDto;
+import cn.iflyapi.blog.pojo.vo.RankFameVo;
 import cn.iflyapi.blog.util.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -193,5 +194,14 @@ public class UserService {
         userMapper.updateByPrimaryKeySelective(user);
     }
 
+    public List<RankFameVo> rank(int type){
+        if (type == 0) {
+            return userCustomMapper.rankDay();
+        }
+        if (type == 1) {
+            return userCustomMapper.rankWeek();
+        }
+        return null;
+    }
 
 }

@@ -12,4 +12,21 @@
         set view_num = view_num + 1
         where user_id = #{userId,jdbcType=BIGINT}
       </update>
+
+    <select id="rankDay" resultType="cn.iflyapi.blog.pojo.vo.RankFameVo">
+        select l.user_id userId,u.nick_name nickName,u.avatar,sum(l.score) total
+        from ucenter_user_log l left join ucenter_user u on l.user_id=u.user_id
+        where  TO_DAYS(l.create_time)= TO_DAYS(now()) and l.user_id is not NULL
+        group by l.user_id
+        order by total desc
+        limit 6
+    </select>
+    <select id="rankWeek" resultType="cn.iflyapi.blog.pojo.vo.RankFameVo">
+        select l.user_id userId,u.nick_name nickName,u.avatar,sum(l.score) total
+        from ucenter_user_log l left join ucenter_user u on l.user_id=u.user_id
+        where  DATE(l.create_time)>DATE_SUB(CURDATE(), INTERVAL 7 DAY) and l.user_id is not NULL
+        group by l.user_id
+        order by total desc
+        limit 6
+    </select>
 </mapper>
