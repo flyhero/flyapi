@@ -24,14 +24,21 @@ public class ArticleController extends BaseController {
     @OpenApi("/subjects/*/articles")
     @ApiOperation("查询指定小书下所有文章")
     @GetMapping("/subjects/{subjectId}/articles")
-    public JSONResult findSubjectAticle(@PathVariable Long subjectId) {
+    public JSONResult findSubjectArticle(@PathVariable Long subjectId) {
         return JSONResult.ok(articleService.listArticle(subjectId, getUserId()));
+    }
+
+    @OpenApi("/user/*/articles/rank")
+    @ApiOperation("查询指定用户的文章排行")
+    @GetMapping("/users/{userId}/articles/rank")
+    public JSONResult findUserArticle(@PathVariable Long userId, int type) {
+        return JSONResult.ok();
     }
 
     @OpenApi("/articles/*")
     @ApiOperation("查询指定文章详情")
     @GetMapping("/articles/{articleId}")
-    public JSONResult findAticle(@PathVariable Long articleId) {
+    public JSONResult findArticle(@PathVariable Long articleId) {
         ArticleWithBLOBs article = articleService.readArticle(articleId);
         return JSONResult.ok(article);
     }
@@ -61,7 +68,7 @@ public class ArticleController extends BaseController {
     @OpenApi("/articles")
     @ApiOperation(value = "查询文章列表", notes = "1.根据日期倒序 2.根据评论，点赞等 3.根据用户喜好")
     @GetMapping("/articles")
-    public JSONResult findAticles(String title, int orderby, int pageNum, int pageSize) {
+    public JSONResult findArticles(String title, int orderby, int pageNum, int pageSize) {
         return JSONResult.ok(articleService.listPageAticles(title, orderby, getUserId(), pageNum, pageSize));
     }
 

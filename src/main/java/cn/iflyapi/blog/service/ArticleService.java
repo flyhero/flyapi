@@ -10,6 +10,7 @@ import cn.iflyapi.blog.enums.OperationEnum;
 import cn.iflyapi.blog.enums.OrderbyEnum;
 import cn.iflyapi.blog.exception.FlyapiException;
 import cn.iflyapi.blog.pojo.dto.ArticleDto;
+import cn.iflyapi.blog.pojo.dto.RankArticleDto;
 import cn.iflyapi.blog.pojo.po.ArticleStats;
 import cn.iflyapi.blog.util.HtmlUtils;
 import cn.iflyapi.blog.util.SnowflakeIdWorker;
@@ -151,6 +152,7 @@ public class ArticleService {
     }
 
     private static final Pattern patternSrc = Pattern.compile("src\\s*=\\s*\"?(.*?)(\"|>|\\s+)");
+
     private String getImg(String content) {
         String regEx = "(<img.*src\\s*=\\s*(.*?)[^>]*?>)";
         Pattern pattern = Pattern.compile(regEx, Pattern.CASE_INSENSITIVE);
@@ -165,4 +167,12 @@ public class ArticleService {
         return "";
     }
 
+
+    public List<Article> rank(int type, int offset, Long userId) {
+        RankArticleDto rankArticleDto = new RankArticleDto();
+        rankArticleDto.setUserId(userId);
+        rankArticleDto.setType(type);
+        rankArticleDto.setOffset(offset);
+        return articleCustomMapper.rank(rankArticleDto);
+    }
 }

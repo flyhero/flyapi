@@ -2,6 +2,25 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.iflyapi.blog.dao.custom.ArticleCustomMapper">
 
+    <resultMap id="BaseResultMap" type="cn.iflyapi.blog.entity.Article">
+        <id column="article_id" jdbcType="BIGINT" property="articleId" />
+        <result column="subject_id" jdbcType="BIGINT" property="subjectId" />
+        <result column="user_id" jdbcType="BIGINT" property="userId" />
+        <result column="title" jdbcType="VARCHAR" property="title" />
+        <result column="article_des" jdbcType="VARCHAR" property="articleDes" />
+        <result column="tags" jdbcType="VARCHAR" property="tags" />
+        <result column="cover" jdbcType="VARCHAR" property="cover" />
+        <result column="original" jdbcType="VARCHAR" property="original" />
+        <result column="view_num" jdbcType="INTEGER" property="viewNum" />
+        <result column="comment_num" jdbcType="INTEGER" property="commentNum" />
+        <result column="like_num" jdbcType="INTEGER" property="likeNum" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    article_id, subject_id, user_id, title, article_des, tags, cover, original, view_num,
+    comment_num, like_num
+  </sql>
+
     <update id="addNum" parameterType="cn.iflyapi.blog.pojo.po.ArticleStats">
         update cms_article
         set
@@ -23,6 +42,26 @@
         where DATE_FORMAT(create_time,'%Y-%m') > DATE_FORMAT(date_sub(curdate(), interval ${month} month),'%Y-%m')
         and user_id= #{id}
         group by month
+    </select>
+
+    <select id="rank" parameterType="cn.iflyapi.blog.pojo.dto.RankArticleDto" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from cms_article
+        where user_id = #{userId,jdbcType=BIGINT} and status = 1
+        <if test="type == 0">
+            order by view_num
+        </if>
+        <if test="type == 1">
+            order by comment_num
+        </if>
+        <if test="type == 2">
+            order by like_num
+        </if>
+        <if test="type == 3">
+            order by view_num,comment_num,like_num desc
+        </if>
+        limit #{offset}
     </select>
 
 </mapper>
